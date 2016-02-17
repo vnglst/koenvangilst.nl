@@ -1,5 +1,6 @@
 body {
   margin: 30px auto;
+  max-width: 1400px;
   color: #3a3a3a;
   font-family: 'Palatino', Georgia, serif;
   font-size: 16pt;
