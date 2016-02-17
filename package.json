@@ -1,0 +1,24 @@
+{
+  "name": "koenvangilst.nl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start --server --files='**/*'",
+    "chrome-local": "open -a Google\\ Chrome http:127.0.0.1:8080",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "surge -d koenvangilst.nl -p ./ && npm run chrome-prod",
+    "chrome-prod": "open -a Google\\ Chrome http://koenvangilst.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vnglst/koenvangilst.nl.git"
+  },
+  "keywords": [],
+  "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vnglst/koenvangilst.nl/issues"
+  },
+  "homepage": "https://github.com/vnglst/koenvangilst.nl#readme"
+}
