@@ -1,8 +1,7 @@
 {
   "name": "koenvangilst.nl",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "start": "browser-sync start --server --files='**/*'",
     "chrome-local": "open -a Google\\ Chrome http:127.0.0.1:8080",
@@ -20,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/vnglst/koenvangilst.nl/issues"
   },
-  "homepage": "https://github.com/vnglst/koenvangilst.nl#readme"
+  "homepage": "https://github.com/vnglst/koenvangilst.nl#readme",
+  "description": ""
 }
