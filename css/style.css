@@ -50,6 +50,9 @@ a:hover i{
   color: rgb(22, 160, 133);
 }
 
+ul {
+  padding-left: 20px;
+}
 li {
   margin-bottom: 15px;
 }
