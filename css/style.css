@@ -84,3 +84,26 @@ li {
   width: 60%;
   padding: 0 20%;
 }
+
+@media (max-width: 768px) {
+  h1, h2, h3 {
+    margin-top: 20px;
+  }
+  h1 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  body {
+    margin: 20px auto;
+    font-size: 11pt;
+    line-height: 160%;
+  }
+  .header {
+    height: 20px;
+  }
+  .content {
+    width: 80%;
+    padding: 0 10%;
+  }
+}
