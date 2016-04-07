@@ -88,7 +88,7 @@ li {
   padding: 0 20%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 450px) {
   h1, h2, h3 {
     margin-top: 20px;
   }
