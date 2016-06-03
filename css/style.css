@@ -57,6 +57,15 @@ li {
   margin-bottom: 15px;
 }
 
+.name {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.keywords {
+  display: inline-block;
+}
+
 .centerdiv {
   padding-top: 20px;
   margin: 0 auto;
