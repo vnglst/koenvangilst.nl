@@ -1,27 +1,20 @@
 {
-  "name": "koenvangilst.nl",
+  "name": "personal-website",
   "version": "1.0.0",
-  "main": "index.html",
-  "scripts": {
-    "start": "browser-sync start --server --files='**/*'",
-    "chrome-local": "open -a Google\\ Chrome http:127.0.0.1:8080",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "surge -d koenvangilst.nl -p ./ && npm run chrome-prod",
-    "chrome-prod": "open -a Google\\ Chrome http://koenvangilst.nl"
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^3.0.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vnglst/koenvangilst.nl.git"
+  "scripts": {
+    "dev": "next",
+    "build": "next build && next export",
+    "stage": "yarn build && now --static --public deploy ./out",
+    "start": "next start"
   },
   "keywords": [],
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vnglst/koenvangilst.nl/issues"
-  },
-  "homepage": "https://github.com/vnglst/koenvangilst.nl#readme",
-  "description": "",
-  "dependencies": {
-    "browser-sync": "^2.18.8"
-  }
+  "license": "MIT"
 }
