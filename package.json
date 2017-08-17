@@ -1,6 +1,6 @@
 {
   "name": "personal-website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -10,8 +10,9 @@
   },
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
+    "build": "next build && next export && cp -R static-root/* out/ ",
     "stage": "yarn build && now --static --public deploy ./out",
+    "deploy": "yarn build && surge -p ./out -d personal.koenvangilst.nl",
     "start": "next start"
   },
   "keywords": [],
