@@ -4,13 +4,14 @@ export default () =>
   <Layout>
     <section className='creations'>
       <div className='wrapper'>
-        <div className='project project--double'>
+        <div className='project'>
           <h1>Profile</h1>
           <p>
-            Entrepreneurial and enthousiastic JavaScript developer based in Utrecht (NL).
-            Specializes in Node and modern front end using React and Webpack.
-            Always looking for new challenging freelance work and particularly
-            interested in creating innovative web apps with the latest technologies.
+            Entrepreneurial and enthousiastic JavaScript developer based in
+            Utrecht (NL). Specializes in Node and modern front end using React
+            and Webpack. Always looking for new challenging freelance work and
+            particularly interested in creating innovative web apps with the
+            latest technologies.
           </p>
           <p>
             You can find me on
@@ -22,6 +23,7 @@ export default () =>
             </a>.
           </p>
         </div>
+        <div className='project project--profile' />
 
         <div className='project project--double'>
           <h1>Skills</h1>

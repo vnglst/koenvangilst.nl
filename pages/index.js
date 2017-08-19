@@ -8,7 +8,7 @@ export default () =>
         <div className='project project--double'>
           <h1>Hi there!</h1>
           <p>
-            My name is Koen van Gilst and I'm a JavaScript developer who loves
+            My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who loves
             creating funny Twitter bots, handy web apps for translators and
             stunning movie intro's in css.
           </p>
@@ -42,7 +42,7 @@ export default () =>
             <a href='https:/ / github.com / vnglst / starwars '>source</a>
             <br />
             <a href='http://starwars.koenvangilst.nl'> Star Wars </a> +{' '}
-            <a href='https:/ / github.com / vnglst / startrek '>source</a>
+            <a href='https://github.com/vnglst/startrek '>source</a>
           </span>
         </div>
         <div className='project'>

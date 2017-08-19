@@ -29,11 +29,12 @@ export default ({ children, title = 'Koen van Gilst' }) =>
               </a>
             </Link>
           </span>
-          <span className='name'>
-            <Link href='/profile'>
-              <a>
-                <h1>Koen van Gilst</h1>
-              </a>
+          <span className='nav-links'>
+            <Link prefetch href='/'>
+              <a>Home </a>
+            </Link>
+            <Link prefetch href='/profile'>
+              <a>&nbsp; Profile</a>
             </Link>
           </span>
         </div>
@@ -76,11 +77,14 @@ export default ({ children, title = 'Koen van Gilst' }) =>
         </a>
       </span>
       <span className='attibution'>
-        Website design inspired by the awesome <a
+        Website design inspired by the awesome{' '}
+        <a
           target='_blank'
           href='https://twitter.com/twholman'
           title='Awesome Tim Holman'
-        >@twholman</a>.
+        >
+          @twholman
+        </a>.
       </span>
     </footer>
   </div>
