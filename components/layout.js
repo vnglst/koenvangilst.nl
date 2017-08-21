@@ -47,47 +47,49 @@ export default ({ children, title = 'Koen van Gilst' }) =>
     {children}
 
     <footer>
-      <span className='social-links'>
-        <a
-          target='_blank'
-          href='https://twitter.com/vnglst'
-          title='Follow me on Twitter'
+      <div className='footer-content'>
+        <span className='social-links'>
+          <a
+            target='_blank'
+            href='https://twitter.com/vnglst'
+            title='Follow me on Twitter'
         >
-          <i
-            className='fa fa-lg fa-twitter'
-            style={{ color: '#4099FF' }}
+            <i
+              className='fa fa-lg fa-twitter'
+              style={{ color: '#4099FF' }}
           />&nbsp; Twitter
         </a>
-        <a
-          target='_blank'
-          href='https://github.com/vnglst'
-          title='View code samples on GitHub'
+          <a
+            target='_blank'
+            href='https://github.com/vnglst'
+            title='View code samples on GitHub'
         >
-          <i
-            className='fa fa-lg fa-github'
-            style={{ color: '#36382E' }}
+            <i
+              className='fa fa-lg fa-github'
+              style={{ color: '#36382E' }}
           />&nbsp; GitHub
         </a>
-        <a
-          target='_blank'
-          href='https://www.linkedin.com/in/vangilst/'
-          title='View my resume on LinkedIn'
+          <a
+            target='_blank'
+            href='https://www.linkedin.com/in/vangilst/'
+            title='View my resume on LinkedIn'
         >
-          <i
-            className='fa fa-lg fa-linkedin'
-            style={{ color: '#007BB6' }}
+            <i
+              className='fa fa-lg fa-linkedin'
+              style={{ color: '#007BB6' }}
           />&nbsp; LinkedIn
         </a>
-      </span>
-      <span className='attibution'>
+        </span>
+        <span className='attibution'>
         Website design inspired by the awesome{' '}
-        <a
-          target='_blank'
-          href='https://twitter.com/twholman'
-          title='Awesome Tim Holman'
+          <a
+            target='_blank'
+            href='https://twitter.com/twholman'
+            title='Awesome Tim Holman'
         >
           @twholman
         </a>.
       </span>
+      </div>
     </footer>
   </div>
