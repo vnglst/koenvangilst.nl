@@ -34,7 +34,7 @@ export default ({ children, title = 'Koen van Gilst' }) =>
               <a>Home </a>
             </Link>
             <Link prefetch href='/profile'>
-              <a>&nbsp; Profile</a>
+              <a>&nbsp; Profile </a>
             </Link>
             <Link prefetch href='/blog'>
               <a>&nbsp; Blog</a>
@@ -46,7 +46,7 @@ export default ({ children, title = 'Koen van Gilst' }) =>
 
     {children}
 
-    <footer className='footer-wrapper'>
+    <footer>
       <span className='social-links'>
         <a
           target='_blank'
