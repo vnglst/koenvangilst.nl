@@ -150,6 +150,9 @@ ul li {
     .creations .project {
         min-height: unset;
     }
+    .project.project--profile {
+        height: 175px;
+    }
     .creations .project.project--double {
         min-width: unset;
     }
@@ -179,6 +182,10 @@ footer {
 .social-links a {
     padding: 10px 20px 10px 0;
     color: #777777;
+}
+
+.social-links i {
+    margin-right: 10px;
 }
 
 
