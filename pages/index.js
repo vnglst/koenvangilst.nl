@@ -2,7 +2,7 @@ import Layout from '../components/layout'
 import Link from 'next/link'
 
 export default () =>
-  <Layout>
+  <Layout title='JavaScript Labs | Koen van Gilst' menu='home' >
     <section className='creations'>
       <div className='wrapper'>
         <div className='project project--double'>
