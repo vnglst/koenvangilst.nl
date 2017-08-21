@@ -14,9 +14,9 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
         content='LRaILkORB_X4mP7mG-Qfct597xXWzzzqfMG0XK6LXWI'
       />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
-      <link rel='stylesheet' href='static/css/normalize.css' />
-      <link rel='stylesheet' href='static/css/font-awesome.min.css' />
-      <link rel='stylesheet' href='static/css/main.css' />
+      <link rel='stylesheet' href='/static/css/normalize.css' />
+      <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
+      <link rel='stylesheet' href='/static/css/main.css' />
     </Head>
 
     <header>
@@ -81,13 +81,12 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
           </a>
         </span>
         <span className='attibution'>
-          Website design inspired by the awesome{' '}
-          <a
+          Design inspired by <a
             target='_blank'
-            href='https://twitter.com/twholman'
+            href='http://tholman.com/'
             title='Awesome Tim Holman'
           >
-            @twholman
+            Tim Holman
           </a>
         </span>
       </div>

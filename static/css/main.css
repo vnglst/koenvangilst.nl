@@ -17,7 +17,7 @@ html {
 body {
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     text-rendering: geometricPrecision;
-    background: #f9f9f9;
+    background: white;
     color: #36382e;
     font-size: 13px;
     line-height: 20px;
@@ -36,7 +36,7 @@ nav {
     border-bottom: 1px dashed #36382E;
 }
 
-nav .nav-wrapper {
+.nav-wrapper {
     max-width: 1000px;
     display: block;
     margin: 0 auto;
@@ -78,6 +78,7 @@ ul li {
     display: block;
     margin: 0 auto;
     padding: 40px 10px 60px 10px;
+    background: #f9f9f9;
 }
 
 .creations h1 {
@@ -158,7 +159,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 20px;
+    box-sizing: border-box;
 }
 
 .footer-content {
