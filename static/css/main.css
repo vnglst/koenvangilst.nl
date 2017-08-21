@@ -105,7 +105,6 @@ ul li {
     margin: 0 15px 20px 15px;
     padding: 20px;
     border: 1px dashed #36382E;
-    border-radius: 10px;
     background-color: white;
 }
 
@@ -146,20 +145,24 @@ ul li {
 }
 
 footer {
-    padding: 10px 20px 10px 20px;
+    padding: 10px 15px 10px 15px;
     background-color: white;
     border-top: 1px dashed #36382E;
     line-height: 24px;
     font-family: 'Open Sans', 'Helvetica-Neue', Helvetica, sans-serif;
     font-size: 13px;
     color: #777777;
-    display: flex;
-    justify-content: space-between;
-    margin: 0px auto;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 40px;
+    height: 20px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px auto;
 }
 
 .social-links a {
@@ -246,9 +249,4 @@ footer {
         -webkit-transform: rotate(2deg);
         transform: rotate(2deg);
     }
-}
-
-.bounce-top {
-    -webkit-animation: bounce-top 0.9s both;
-    animation: bounce-top 0.9s both;
 }
