@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default ({ children, title = 'Koen van Gilst' }) =>
+export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
   <div>
     <Head>
       <meta charset='utf-8' />
@@ -31,13 +31,13 @@ export default ({ children, title = 'Koen van Gilst' }) =>
           </span>
           <span className='nav-links'>
             <Link prefetch href='/'>
-              <a>Home </a>
+              <a className={menu === 'home' ? 'active' : null}>Home</a>
             </Link>
             <Link prefetch href='/profile'>
-              <a>&nbsp; Profile </a>
+              <a className={menu === 'profile' ? 'active' : null}>Profile</a>
             </Link>
             <Link prefetch href='/blog'>
-              <a>&nbsp; Blog</a>
+              <a className={menu === 'blog' ? 'active' : null}>Blog</a>
             </Link>
           </span>
         </div>
@@ -53,43 +53,43 @@ export default ({ children, title = 'Koen van Gilst' }) =>
             target='_blank'
             href='https://twitter.com/vnglst'
             title='Follow me on Twitter'
-        >
+          >
             <i
               className='fa fa-lg fa-twitter'
               style={{ color: '#4099FF' }}
-          />&nbsp; Twitter
-        </a>
+            />&nbsp; Twitter
+          </a>
           <a
             target='_blank'
             href='https://github.com/vnglst'
             title='View code samples on GitHub'
-        >
+          >
             <i
               className='fa fa-lg fa-github'
               style={{ color: '#36382E' }}
-          />&nbsp; GitHub
-        </a>
+            />&nbsp; GitHub
+          </a>
           <a
             target='_blank'
             href='https://www.linkedin.com/in/vangilst/'
             title='View my resume on LinkedIn'
-        >
+          >
             <i
               className='fa fa-lg fa-linkedin'
               style={{ color: '#007BB6' }}
-          />&nbsp; LinkedIn
-        </a>
+            />&nbsp; LinkedIn
+          </a>
         </span>
         <span className='attibution'>
-        Website design inspired by the awesome{' '}
+          Website design inspired by the awesome{' '}
           <a
             target='_blank'
             href='https://twitter.com/twholman'
             title='Awesome Tim Holman'
-        >
-          @twholman
-        </a>.
-      </span>
+          >
+            @twholman
+          </a>
+        </span>
       </div>
     </footer>
   </div>

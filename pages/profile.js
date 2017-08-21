@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 
 export default () =>
-  <Layout>
+  <Layout title='Profile | Koen van Gilst' menu='profile' >
     <section className='creations'>
       <div className='wrapper'>
         <div className='project project--double'>

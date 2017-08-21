@@ -68,6 +68,11 @@ ul li {
     font-size: 13px;
     text-transform: uppercase;
     color: #4C4F40;
+    margin-right: 10px;
+}
+
+.nav-links a.active {
+    border-bottom: 2px solid #F06449;
 }
 
 .creations {
