@@ -36,6 +36,9 @@ export default ({ children, title = 'Koen van Gilst' }) =>
             <Link prefetch href='/profile'>
               <a>&nbsp; Profile</a>
             </Link>
+            <Link prefetch href='/blog'>
+              <a>&nbsp; Blog</a>
+            </Link>
           </span>
         </div>
       </nav>

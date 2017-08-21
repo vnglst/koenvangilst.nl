@@ -18,7 +18,8 @@ html {
 
 body {
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-    background: #fafafa;
+    text-rendering: geometricPrecision;
+    background: #f9f9f9;
     color: #36382e;
     font-size: 13px;
     line-height: 20px;
@@ -125,6 +126,15 @@ ul li {
     min-width: 650px;
 }
 
+.project.project--profile {
+    width: 320px;
+    height: 255px;
+    background-image: url('../img/koen-groot.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @media only screen and (max-width: 760px) {
     .creations .project .links {
         position: initial;
@@ -135,15 +145,6 @@ ul li {
     .creations .project.project--double {
         min-width: unset;
     }
-}
-
-.project.project--profile {
-    width: 320px;
-    height: 255px;
-    background-image: url('../img/koen-groot.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
 footer {
