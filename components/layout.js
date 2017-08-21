@@ -44,7 +44,9 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
       </nav>
     </header>
 
-    {children}
+    <div className='content'>
+      {children}
+    </div>
 
     <footer>
       <div className='footer-content'>

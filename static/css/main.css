@@ -73,12 +73,15 @@ ul li {
     border-bottom: 2px solid #F06449;
 }
 
+.content {
+    background: #f9f9f9;
+}
+
 .creations {
     max-width: 1000px;
     display: block;
     margin: 0 auto;
     padding: 40px 10px 60px 10px;
-    background: #f9f9f9;
 }
 
 .creations h1 {
@@ -110,6 +113,10 @@ ul li {
     padding: 20px;
     border: 1px dashed #36382E;
     background-color: white;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
 }
 
 .creations .project .links {
@@ -130,7 +137,7 @@ ul li {
 .project.project--profile {
     width: 320px;
     height: 255px;
-    background-image: url('../img/koen-groot.jpg');
+    background-image: url('../img/koen-kleiner.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
