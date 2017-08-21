@@ -4,7 +4,7 @@ export default () =>
   <Layout>
     <section className='creations'>
       <div className='wrapper'>
-        <div className='project'>
+        <div className='project project--double'>
           <h1>Profile</h1>
           <p>
             Entrepreneurial and enthousiastic JavaScript developer based in
@@ -17,13 +17,18 @@ export default () =>
             You can find me on
             <a href='https://github.com/vnglst'> Github</a>,
             <a href='http://nl.linkedin.com/in/vangilst/'> LinkedIn</a> and
-            <a href='http://www.twitter.com/vnglst'> Twitter</a>. Or send me an{' '}
+            <a href='http://www.twitter.com/vnglst'> Twitter</a>.
+
+          </p>
+          <span className='links'>
+            Or send me an{' '}
             <a href='&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;'>
               email
             </a>.
-          </p>
+            </span>
+
         </div>
-        <div className='project project--profile' />
+        {/* <div className='project project--profile' /> */}
 
         <div className='project project--double'>
           <h1>Skills</h1>
