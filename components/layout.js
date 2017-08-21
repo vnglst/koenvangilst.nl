@@ -59,7 +59,7 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
             <i
               className='fa fa-lg fa-twitter'
               style={{ color: '#4099FF' }}
-            />&nbsp; Twitter
+            />Twitter
           </a>
           <a
             target='_blank'
@@ -69,7 +69,7 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
             <i
               className='fa fa-lg fa-github'
               style={{ color: '#36382E' }}
-            />&nbsp; GitHub
+            />GitHub
           </a>
           <a
             target='_blank'
@@ -79,10 +79,10 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
             <i
               className='fa fa-lg fa-linkedin'
               style={{ color: '#007BB6' }}
-            />&nbsp; LinkedIn
+            />LinkedIn
           </a>
         </span>
-        <span className='attibution'>
+        <span className='attribution'>
           Design inspired by <a
             target='_blank'
             href='http://tholman.com/'
