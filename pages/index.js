@@ -9,8 +9,8 @@ export default () =>
           <h1>Hi there!</h1>
           <p>
             My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who loves
-            creating funny Twitter bots, handy web apps for translators and
-            stunning movie intro's in css.
+            creating funny Twitter bots, useful web apps for translators and
+            other creative stuff.
           </p>
           <p>
             Have a look at my{' '}
