@@ -8,10 +8,7 @@ export default () =>
           <h1>Profile</h1>
           <p>
             Entrepreneurial and enthousiastic JavaScript developer based in
-            Utrecht (NL). Specializes in Node and modern front end using React
-            and Webpack. Always looking for new challenging freelance work and
-            particularly interested in creating innovative web apps with the
-            latest technologies.
+            Utrecht (The Netherlands). I'm specialized in Node.js and modern front end using React and Webpack. I'm always looking for new challenging freelance work and particularly interested in creating innovative web apps for inspiring companies.
           </p>
           <p>
             You can find me on <a href='https://github.com/vnglst'>Github</a>, <a href='http://nl.linkedin.com/in/vangilst/'>LinkedIn</a> and <a href='http://www.twitter.com/vnglst'>Twitter</a> or send me an{' '}
