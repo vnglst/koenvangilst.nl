@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Analytics from './analytics'
 
 export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
   <div>
@@ -17,7 +18,11 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
       <link rel='stylesheet' href='/static/css/normalize.css' />
       <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
       <link rel='stylesheet' href='/static/css/main.css' />
-      <link rel='shortcut icon' type='image/png' href='/static/img/favicon.ico' />
+      <link
+        rel='shortcut icon'
+        type='image/png'
+        href='/static/img/favicon.ico'
+      />
     </Head>
 
     <header>
@@ -95,4 +100,5 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
         </span>
       </div>
     </footer>
+    <Analytics />
   </div>
