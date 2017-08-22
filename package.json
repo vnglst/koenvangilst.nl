@@ -10,9 +10,10 @@
   },
   "scripts": {
     "dev": "next",
-    "build": "next build && next export && cp -R static-root out",
+    "build": "next build && next export && cp -R static-root/* out/",
     "stage": "yarn build && surge -p ./out -d personal.koenvangilst.nl",
     "deploy": "yarn build && surge -p ./out -d koenvangilst.nl",
+    "netlify": "yarn build && netlify deploy out/",
     "start": "next start"
   },
   "keywords": [],
