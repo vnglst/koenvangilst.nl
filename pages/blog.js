@@ -7,8 +7,7 @@ export default () =>
         <div className='project project--double'>
           <h1>Coming soon...</h1>
           <p>
-            Read my articles on
-            <a href='https://medium.com/@vnglst/latest'> Medium</a> until then.
+            But you can read my articles on <a href='https://medium.com/@vnglst/latest'>Medium</a> until then!
           </p>
         </div>
       </div>
