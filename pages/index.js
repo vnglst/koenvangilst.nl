@@ -34,14 +34,14 @@ export default () =>
         <div className='project'>
           <h1>Star Wars or Star Trek?</h1>
           <p>
-            Why not both? Using just CSS and some JavaScript I recreated these
-            classic science fictions intro's. [<b>2017</b>]
+            Why not both? Using just CSS and a bit of JavaScript I recreated these
+            classic science fiction intro's. [<b>2017</b>]
           </p>
           <span className='links'>
-            <a href='http://startrek.koenvangilst.nl'> Star Trek </a> +{' '}
+            <a href='http://startrek.koenvangilst.nl'> Star Trek</a> +{' '}
             <a href='https:/ / github.com / vnglst / starwars '>source</a>
             <br />
-            <a href='http://starwars.koenvangilst.nl'> Star Wars </a> +{' '}
+            <a href='http://starwars.koenvangilst.nl'> Star Wars</a> +{' '}
             <a href='https://github.com/vnglst/startrek '>source</a>
           </span>
         </div>
@@ -62,7 +62,7 @@ export default () =>
           <h1>Generating PDF's with Node</h1>
           <p>
             A fun little Node tutorial I wrote on how to generate PDF's from a
-            web form using Express and Node. And how to deploy this using Now.
+            web form using Express and Node. You can easily deploy it with Now.
             Appeared in
             <a href='http://nodeweekly.com/issues/163'> Node Weekly </a> on
             November 10th [<b>2016</b>].
@@ -96,7 +96,7 @@ export default () =>
           <b>2016</b>]
         </div> */}
         <div className='project'>
-          <h1>Traffic jams</h1>
+          <h1>Rush hour timelapse</h1>
           <p>
             A Twitter bot that creates daily timelapse videos of the traffic
             jams in The Netherlands. No longer active, but you can still see
