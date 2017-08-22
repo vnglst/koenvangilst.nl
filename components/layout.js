@@ -12,14 +12,13 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
     <Head>
       <meta charset='utf-8' />
       <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
-      <title>
-        {title}
-      </title>
+      <title>{title}</title>
       <meta
         name='google-site-verification'
         content='LRaILkORB_X4mP7mG-Qfct597xXWzzzqfMG0XK6LXWI'
       />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css' />
       {/* <link rel="stylesheet" href="/static/css/font-awesome.min.css" /> */}
       <link
         rel='stylesheet'
