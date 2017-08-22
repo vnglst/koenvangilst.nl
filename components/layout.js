@@ -17,6 +17,7 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
       <link rel='stylesheet' href='/static/css/normalize.css' />
       <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
       <link rel='stylesheet' href='/static/css/main.css' />
+      <link rel='shortcut icon' type='image/png' href='/static/img/favicon.ico' />
     </Head>
 
     <header>
@@ -83,7 +84,8 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
           </a>
         </span>
         <span className='attribution'>
-          Design inspired by <a
+          Design inspired by{' '}
+          <a
             target='_blank'
             href='http://tholman.com/'
             title='Awesome Tim Holman'
