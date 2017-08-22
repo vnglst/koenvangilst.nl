@@ -3,8 +3,7 @@ module.exports = {
     return {
       '/': { page: '/' },
       '/blog': { page: '/blog' },
-      '/profile': { page: '/profile' },
-      '/dedicon': { page: '/dedicon' }
+      '/profile': { page: '/profile' }
     }
   },
   webpack: function (config, { dev }) {
