@@ -29,10 +29,8 @@ export const footer = `footer {
     margin-right: 10px;
 }`
 
-export const global = `
-
-
 /*
+
 Colors: https://coolors.co/f06449-ede6e3-dadad9-36382e-5bc3eb
 
 tomato: #F06449
@@ -40,10 +38,12 @@ platinum: #EDE6E3
 gainsboro: #DADAD9
 jet: #36382E
 blue jeans: #5BC3EB
-    
+
 Website inspired by http://tholman.com/
+
 */
 
+export const global = `
 html {
     height: 100%;
 }
