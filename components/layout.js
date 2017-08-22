@@ -16,7 +16,11 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) =>
       />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <link rel='stylesheet' href='/static/css/normalize.css' />
-      <link rel='stylesheet' href='/static/css/font-awesome.min.css' />
+      {/* <link rel="stylesheet" href="/static/css/font-awesome.min.css" /> */}
+      <link
+        rel='stylesheet'
+        href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+      />
       <link rel='stylesheet' href='/static/css/main.css' />
       <link
         rel='shortcut icon'
