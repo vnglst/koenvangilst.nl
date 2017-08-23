@@ -38,11 +38,11 @@ export default () =>
             classic science fiction intro's. [<b>2017</b>]
           </p>
           <span className='links'>
-            <a href='http://startrek.koenvangilst.nl'> Star Trek</a> +{' '}
-            <a href='https:/ / github.com / vnglst / starwars '>source</a>
-            <br />
-            <a href='http://starwars.koenvangilst.nl'> Star Wars</a> +{' '}
+            <a href='http://startrek.koenvangilst.nl'>Star Trek</a> +{' '}
             <a href='https://github.com/vnglst/startrek '>source</a>
+            <br />
+            <a href='http://starwars.koenvangilst.nl'>Star Wars</a> +{' '}
+            <a href='https://github.com/vnglst/starwars'>source</a>
           </span>
         </div>
         <div className='project'>
