@@ -31,13 +31,14 @@ export default () =>
             Hierbij opent de OLP het boek "Harry Potter en het vervloekte kind"
             in de audiomodus.
           </p>
-          <br />
+          <span className='links'>
           <a
             target='_blank'
             href='https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/harry-potter/ncc.html'
           >
             Harry Potter en het vervloekte kind
           </a>
+          </span>
         </div>
 
         <div className='project'>
@@ -46,13 +47,14 @@ export default () =>
             Hierbij opent de OLP het boek "Geel Gras" in de combimodus, waarbij
             de tekst en het woord wordt gemarkeerd.
           </p>
-          <br />
+          <span className='links'>
           <a
             target='_blank'
             href='https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/geel-gras/ncc.html'
           >
             Geel Gras
           </a>
+          </span>
         </div>
       </div>
     </section>
