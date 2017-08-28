@@ -9,10 +9,10 @@ import { fontAwesome } from './font-awesome'
 export default ({ children, title = "Koen van Gilst", menu = "home" }) =>
   <div>
     <style jsx global>
-      {fontAwesome}
+      {normalize}
     </style>
     <style jsx global>
-      {normalize}
+      {fontAwesome}
     </style>
     <style jsx global>
       {global}
@@ -28,11 +28,6 @@ export default ({ children, title = "Koen van Gilst", menu = "home" }) =>
         content="LRaILkORB_X4mP7mG-Qfct597xXWzzzqfMG0XK6LXWI"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      {/* <link rel="stylesheet" href="/static/css/font-awesome.min.css" /> */}
-      {/* <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      /> */}
       <link
         rel="shortcut icon"
         type="image/png"
