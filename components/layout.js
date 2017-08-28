@@ -4,9 +4,13 @@ import Analytics from './analytics'
 import Footer from './footer'
 import { global } from './styles'
 import { normalize } from './normalize'
+import { fontAwesome } from './font-awesome'
 
 export default ({ children, title = "Koen van Gilst", menu = "home" }) =>
   <div>
+    <style jsx global>
+      {fontAwesome}
+    </style>
     <style jsx global>
       {normalize}
     </style>
@@ -25,10 +29,10 @@ export default ({ children, title = "Koen van Gilst", menu = "home" }) =>
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* <link rel="stylesheet" href="/static/css/font-awesome.min.css" /> */}
-      <link
+      {/* <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      />
+      /> */}
       <link
         rel="shortcut icon"
         type="image/png"
