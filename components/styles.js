@@ -57,6 +57,7 @@ body {
     line-height: 20px;
     min-height: 100%;
     position: relative;
+    background: #f9f9f9;
 }
 
 a {
@@ -105,10 +106,6 @@ ul li {
 
 .nav-links a.active {
     border-bottom: 2px solid #F06449;
-}
-
-.content {
-    background: #f9f9f9;
 }
 
 .creations {
