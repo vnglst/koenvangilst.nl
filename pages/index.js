@@ -36,14 +36,15 @@ export default () => (
           <p>
             I created this fun little PWA for my daughter Nora to help her spell
             her name. She loved it, hope you do too!
-            <ul>
-              <li>
-                🚀 <code>create-react-app</code> + TypeScript
-              </li>
-              <li>⛺ full offline support</li>
-              <li>🎺 web audio for sounds</li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              🚀 <code>create-react-app</code> + TypeScript
+            </li>
+            <li>⛺ full offline support</li>
+            <li>🎺 web audio for sounds</li>
+          </ul>
+
           <span className="links">
             <a href="https://nora.now.sh">Play</a> +{' '}
             <a href="https://github.com/vnglst/finding-nora">Source</a> [<b>
