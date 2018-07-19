@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 
 export default () => (
-  <Layout>
+  <Layout title="Dedicon | Koen van Gilst" menu="dedicon">
     <section className="creations">
       <div className="wrapper">
         <div className="project project--double">
