@@ -76,7 +76,10 @@ export default () => (
             currently being read for children with dyslexia.
           </p>
           <span className="links">
-            <a href="/dedicon">Demo page (in Dutch)</a> [<b>2017</b>]
+            <Link prefetch href="/dedicon">
+              <a>Demo page (in Dutch)</a>
+            </Link>{' '}
+            [<b>2017</b>]
           </span>
         </div>
         <div className="project">
