@@ -13,10 +13,10 @@ export default () => (
             and other creative stuff.
           </p>
           <p>
-            Have a look at my{" "}
+            Have a look at my{' '}
             <Link prefetch href="/profile">
               <a>profile</a>
-            </Link>{" "}
+            </Link>{' '}
             if you're interested in working with me. Or else feel free to browse
             through my experiments, projects and tutorials below.
           </p>
@@ -24,7 +24,7 @@ export default () => (
             You can also find me on
             <a href="https://github.com/vnglst"> Github</a>,
             <a href="http://nl.linkedin.com/in/vangilst/"> LinkedIn</a> and
-            <a href="http://www.twitter.com/vnglst"> Twitter</a>. Or send me an{" "}
+            <a href="http://www.twitter.com/vnglst"> Twitter</a>. Or send me an{' '}
             <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;">
               email
             </a>.
@@ -34,11 +34,26 @@ export default () => (
         <div className="project">
           <h1>Faster Than Max</h1>
           <p>
-            Are you faster than Max Verstappen? Test your reaction speed with this iPhone app. Simple React Native iOS app. [<b>2017</b>]
+            Are you faster than Max Verstappen? Test your reaction speed with
+            this iPhone app. Simple React Native iOS app. [<b>2017</b>]
           </p>
           <span className="links">
-            <a href="https://itunes.apple.com/nl/app/faster-than-max/id1279729114?mt=8">Open in App Store</a> +{" "}
-            <a href="https://github.com/vnglst/sneller-dan-max">source</a>
+            <a href="https://itunes.apple.com/nl/app/faster-than-max/id1279729114?mt=8">
+              Open in App Store
+            </a>{' '}
+            + <a href="https://github.com/vnglst/sneller-dan-max">source</a>
+          </span>
+        </div>
+        <div className="project">
+          <h1>Online Audio Player</h1>
+          <p>
+            For Dedicon I created an audio player for ebooks, designed
+            specifically for users with visual impairments. The player also has
+            a 'karaoke' function that highlights the text currently being read,
+            for children with dyslexia. [<b>2017</b>]
+          </p>
+          <span className="links">
+            <a href="/dedicon">Demo page (in Dutch)</a>
           </span>
         </div>
         <div className="project">
@@ -48,10 +63,10 @@ export default () => (
             these classic science fiction intro's. [<b>2017</b>]
           </p>
           <span className="links">
-            <a href="http://startrek.koenvangilst.nl">Star Trek</a> +{" "}
+            <a href="http://startrek.koenvangilst.nl">Star Trek</a> +{' '}
             <a href="https://github.com/vnglst/startrek ">source</a>
             <br />
-            <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}
+            <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{' '}
             <a href="https://github.com/vnglst/starwars">source</a>
           </span>
         </div>
@@ -60,7 +75,9 @@ export default () => (
           <p>
             Jest is a great JavaScript testing framework by Facebook. It’s often
             used for testing React components, but it’s also a pretty good
-            general purpose testing framework. Appeared in Hackernoon [<b>2017</b>].
+            general purpose testing framework. Appeared in Hackernoon [<b>
+              2017
+            </b>].
           </p>
           <span className="links">
             <a href="https://hackernoon.com/api-testing-with-jest-d1ab74005c0a#.8yd4cfvvg">
@@ -89,7 +106,7 @@ export default () => (
             Quickly learn the 10 most commonly used keyboard shortcuts for the
             translation CAT tool MemoQ. Weekend project using React.
             <a href="https://github.com/vnglst/shortcut-trainer">
-              {" "}
+              {' '}
               Source code
             </a>. [<b>2016</b>]
           </p>
@@ -114,7 +131,7 @@ export default () => (
             some of the old timelapses. [<b>2016</b>]
           </p>
           <span className="links">
-            <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{" "}
+            <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{' '}
             <a href="https://github.com/vnglst/spitsuur">source</a>
           </span>
         </div>
@@ -126,7 +143,7 @@ export default () => (
           </p>
           <p>Technologies: NodeJS, Express, MongoDB, Loopback, ReactJS.</p>
           <span className="links">
-            <a href="https://term-search.nl/">Visit website</a> +{" "}
+            <a href="https://term-search.nl/">Visit website</a> +{' '}
             <a href="https://github.com/TermSearch">source</a>
           </span>
         </div>
@@ -138,7 +155,7 @@ export default () => (
           </p>
           <p>Technologies used: Express, MongoDB.</p>
           <span className="links">
-            <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{" "}
+            <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{' '}
             <a href="https://github.com/vnglst/HelpTerence">source</a>
           </span>
         </div>
@@ -149,7 +166,7 @@ export default () => (
             price per standard line (55 characters). [<b>2016</b>]
           </p>
           <span className="links">
-            <a href="http://converter.vangilst.de/">Visit the app</a> +{" "}
+            <a href="http://converter.vangilst.de/">Visit the app</a> +{' '}
             <a href="https://github.com/vnglst/converter2">source</a>
           </span>
         </div>
@@ -162,13 +179,13 @@ export default () => (
         <div className="project">
           <h1>Wikipedia edits by the Dutch government</h1>
           <p>
-            Twitter bot inspired by{" "}
+            Twitter bot inspired by{' '}
             <a href="https://twitter.com/congressedits">@congressedits</a> that
             monitors and Tweets any edits made to Wikipedia by the Dutch
             government. [<b>2013</b>]
           </p>
           <span className="links">
-            <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{" "}
+            <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{' '}
             <a href="https://github.com/vnglst/OverheidEdits">source</a>
           </span>
         </div>
@@ -181,7 +198,9 @@ export default () => (
           <h1>Dawkins' Trees</h1>
           <p>
             For this web app I've tried to recreate (in part) the program
-            Richard Dawkins describes in his book The Blind Watchmaker. [<b>2013</b>]
+            Richard Dawkins describes in his book The Blind Watchmaker. [<b>
+              2013
+            </b>]
           </p>
           <span className="links">
             <a href="http://dawkins.koenvangilst.nl/">Demo</a>

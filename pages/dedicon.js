@@ -1,10 +1,10 @@
 import Layout from '../components/layout'
 
-export default () =>
+export default () => (
   <Layout>
-    <section className='creations'>
-      <div className='wrapper'>
-        <div className='project project--double'>
+    <section className="creations">
+      <div className="wrapper">
+        <div className="project project--double">
           <h1>
             Project Online Player <span>[OLP]</span>
           </h1>
@@ -25,37 +25,38 @@ export default () =>
           </p>
         </div>
 
-        <div className='project'>
+        <div className="project">
           <h1>Voorbeeld audioboek</h1>
           <p>
             Hierbij opent de OLP het boek "Harry Potter en het vervloekte kind"
             in de audiomodus.
           </p>
-          <span className='links'>
-          <a
-            target='_blank'
-            href='https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/harry-potter/ncc.html'
-          >
-            Harry Potter en het vervloekte kind
-          </a>
+          <span className="links">
+            <a
+              target="_blank"
+              href="https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/harry-potter/ncc.html"
+            >
+              Harry Potter en het vervloekte kind (fragment)
+            </a>
           </span>
         </div>
 
-        <div className='project'>
+        <div className="project">
           <h1>Voorbeeld combiboek</h1>
           <p>
             Hierbij opent de OLP het boek "Geel Gras" in de combimodus, waarbij
             de tekst en het woord wordt gemarkeerd.
           </p>
-          <span className='links'>
-          <a
-            target='_blank'
-            href='https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/geel-gras/ncc.html'
-          >
-            Geel Gras
-          </a>
+          <span className="links">
+            <a
+              target="_blank"
+              href="https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/geel-gras/ncc.html"
+            >
+              Geel Gras (fragment)
+            </a>
           </span>
         </div>
       </div>
     </section>
   </Layout>
+)
