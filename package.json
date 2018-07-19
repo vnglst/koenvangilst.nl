@@ -17,9 +17,5 @@
   },
   "keywords": [],
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
-  "license": "MIT",
-  "devDependencies": {
-    "preact": "^8.2.1",
-    "preact-compat": "^3.17.0"
-  }
+  "license": "MIT"
 }
