@@ -55,39 +55,42 @@ export default () => (
           <h1>Faster Than Max</h1>
           <p>
             Are you faster than Max Verstappen? Test your reaction speed with
-            this iPhone app. Simple React Native iOS app. [<b>2017</b>]
+            this iPhone app. Simple React Native iOS app.
           </p>
           <span className="links">
             <a href="https://itunes.apple.com/nl/app/faster-than-max/id1279729114?mt=8">
               Open in App Store
             </a>{' '}
-            + <a href="https://github.com/vnglst/sneller-dan-max">source</a>
+            + <a href="https://github.com/vnglst/sneller-dan-max">Source</a> [<b
+            >
+              2017
+            </b>]
           </span>
         </div>
         <div className="project">
-          <h1>Online Audio Player</h1>
+          <h1>Audio Books Player</h1>
           <p>
-            For Dedicon I created an audio player for ebooks, designed
-            specifically for users with visual impairments. The player also has
-            a 'karaoke' function that highlights the text currently being read,
-            for children with dyslexia. [<b>2017</b>]
+            For Dedicon I created a player for their audio books collections,
+            it's designed specifically for users with visual impairments. The
+            player also has a karaoke function that highlights the text
+            currently being read for children with dyslexia.
           </p>
           <span className="links">
-            <a href="/dedicon">Demo page (in Dutch)</a>
+            <a href="/dedicon">Demo page (in Dutch)</a> [<b>2017</b>]
           </span>
         </div>
         <div className="project">
           <h1>Star Wars or Star Trek?</h1>
           <p>
             Why not both? Using just CSS and a bit of JavaScript I recreated
-            these classic science fiction intro's. [<b>2017</b>]
+            these classic science fiction intro's.
           </p>
           <span className="links">
             <a href="http://startrek.koenvangilst.nl">Star Trek</a> +{' '}
-            <a href="https://github.com/vnglst/startrek ">source</a>
+            <a href="https://github.com/vnglst/startrek ">Source</a>
             <br />
             <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{' '}
-            <a href="https://github.com/vnglst/starwars">source</a>
+            <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
           </span>
         </div>
         <div className="project">
@@ -95,14 +98,13 @@ export default () => (
           <p>
             Jest is a great JavaScript testing framework by Facebook. It’s often
             used for testing React components, but it’s also a pretty good
-            general purpose testing framework. Appeared in Hackernoon [<b>
-              2017
-            </b>].
+            general purpose testing framework. Appeared in Hackernoon.
           </p>
           <span className="links">
             <a href="https://hackernoon.com/api-testing-with-jest-d1ab74005c0a#.8yd4cfvvg">
               Read it here
-            </a>
+            </a>{' '}
+            [<b>2017</b>]
           </span>
         </div>
         <div className="project">
@@ -112,12 +114,13 @@ export default () => (
             web form using Express and Node. You can easily deploy it with Now.
             Appeared in
             <a href="http://nodeweekly.com/issues/163"> Node Weekly </a> on
-            November 10th [<b>2016</b>].
+            November 10th.
           </p>
           <span className="links">
             <a href="https://edgecoders.com/generating-a-pdf-with-express-in-node-js-d3ff5107dff1#.xrky44qvu">
               Read it here
-            </a>
+            </a>{' '}
+            [<b>2016</b>].
           </span>
         </div>
         <div className="project">
@@ -125,69 +128,74 @@ export default () => (
           <p>
             Quickly learn the 10 most commonly used keyboard shortcuts for the
             translation CAT tool MemoQ. Weekend project using React.
-            <a href="https://github.com/vnglst/shortcut-trainer">
-              {' '}
-              Source code
-            </a>. [<b>2016</b>]
           </p>
           <span className="links">
-            <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a>
+            <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a> +{' '}
+            <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [<b>
+              2016
+            </b>]
           </span>
         </div>
-        {/* <div className='project'>
+        <div className="project">
           <h1>LaTeX Letters</h1>
           <p>
             Creating beautiful PDF letters using LaTeX in a Docker container on
             a server.
           </p>
-          <a href='https://github.com/vnglst/latex-letter'>Source code</a>. [
-          <b>2016</b>]
-        </div> */}
+          <span className="links">
+            <a href="https://github.com/vnglst/latex-letter">Source code</a> [
+            <b>2016</b>]
+          </span>
+        </div>
         <div className="project">
           <h1>Rush hour timelapse</h1>
           <p>
             A Twitter bot that creates daily timelapse videos of the traffic
             jams in The Netherlands. No longer active, but you can still see
-            some of the old timelapses. [<b>2016</b>]
+            some of the old timelapses.
           </p>
           <span className="links">
             <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{' '}
-            <a href="https://github.com/vnglst/spitsuur">source</a>
+            <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
           </span>
         </div>
         <div className="project">
           <h1>Term Search</h1>
           <p>
             A terminology search engine for translators. Currently only
-            German-Dutch terms. Work in progress. [<b>2016</b>]
+            German-Dutch terms. Work in progress.
           </p>
           <p>Technologies: NodeJS, Express, MongoDB, Loopback, ReactJS.</p>
           <span className="links">
             <a href="https://term-search.nl/">Visit website</a> +{' '}
-            <a href="https://github.com/TermSearch">source</a>
+            <a href="https://github.com/TermSearch">Source</a> [<b>2016</b>]
           </span>
         </div>
         <div className="project">
           <h1>Help Terence!</h1>
           <p>
             A Twitter bot raising emoji money for his trip around the world. Fun
-            little experiment with social media and Twitter bots. [<b>2016</b>]
+            little experiment with social media and Twitter bots.
           </p>
           <p>Technologies used: Express, MongoDB.</p>
           <span className="links">
             <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{' '}
-            <a href="https://github.com/vnglst/HelpTerence">source</a>
+            <a href="https://github.com/vnglst/HelpTerence">Source</a> [<b>
+              2016
+            </b>]
           </span>
         </div>
         <div className="project">
           <h1>Word to Line Prices</h1>
           <p>
             A simple web app for translators that converts a price per word to a
-            price per standard line (55 characters). [<b>2016</b>]
+            price per standard line (55 characters).
           </p>
           <span className="links">
             <a href="http://converter.vangilst.de/">Visit the app</a> +{' '}
-            <a href="https://github.com/vnglst/converter2">source</a>
+            <a href="https://github.com/vnglst/converter2">Source</a> [<b>
+              2016
+            </b>]
           </span>
         </div>
         {/* <div className='project'>
@@ -202,11 +210,13 @@ export default () => (
             Twitter bot inspired by{' '}
             <a href="https://twitter.com/congressedits">@congressedits</a> that
             monitors and Tweets any edits made to Wikipedia by the Dutch
-            government. [<b>2013</b>]
+            government.
           </p>
           <span className="links">
             <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{' '}
-            <a href="https://github.com/vnglst/OverheidEdits">source</a>
+            <a href="https://github.com/vnglst/OverheidEdits">Source</a> [<b>
+              2013
+            </b>]
           </span>
         </div>
         {/* <div className='project'>
@@ -218,12 +228,10 @@ export default () => (
           <h1>Dawkins' Trees</h1>
           <p>
             For this web app I've tried to recreate (in part) the program
-            Richard Dawkins describes in his book The Blind Watchmaker. [<b>
-              2013
-            </b>]
+            Richard Dawkins describes in his book The Blind Watchmaker.
           </p>
           <span className="links">
-            <a href="http://dawkins.koenvangilst.nl/">Demo</a>
+            <a href="http://dawkins.koenvangilst.nl/">Demo</a> [<b>2013</b>]
           </span>
         </div>
       </div>
