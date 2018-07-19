@@ -32,6 +32,26 @@ export default () => (
           <span className="links">Have fun!</span>
         </div>
         <div className="project">
+          <h1>Finding Nora</h1>
+          <p>
+            I created this fun little PWA for my daughter Nora to help her spell
+            her name. She loved it, hope you do too!
+            <ul>
+              <li>
+                🚀 <code>create-react-app</code> + TypeScript
+              </li>
+              <li>⛺ full offline support</li>
+              <li>🎺 web audio for sounds</li>
+            </ul>
+          </p>
+          <span className="links">
+            <a href="https://nora.now.sh">Play</a> +{' '}
+            <a href="https://github.com/vnglst/finding-nora">Source</a> [<b>
+              2018
+            </b>]
+          </span>
+        </div>
+        <div className="project">
           <h1>Faster Than Max</h1>
           <p>
             Are you faster than Max Verstappen? Test your reaction speed with
