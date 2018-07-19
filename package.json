@@ -20,7 +20,6 @@
   "license": "MIT",
   "devDependencies": {
     "preact": "^8.2.1",
-    "preact-compat": "^3.17.0",
-    "react-ga": "^2.2.0"
+    "preact-compat": "^3.17.0"
   }
 }
