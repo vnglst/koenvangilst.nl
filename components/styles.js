@@ -268,6 +268,4 @@ ul li {
         transform: rotate(2deg);
     }
 }
-
-
 `
