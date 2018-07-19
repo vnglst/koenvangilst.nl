@@ -56,6 +56,25 @@ export default () => (
             </a>
           </span>
         </div>
+
+        <div className="project">
+          <img src="/static/screenshots/dedicon1.png" />
+        </div>
+        <div className="project">
+          <img src="/static/screenshots/dedicon2.png" />
+        </div>
+        <div className="project">
+          <img src="/static/screenshots/dedicon3.png" />
+        </div>
+        <div className="project">
+          <img src="/static/screenshots/dedicon5.png" />
+        </div>
+        <div className="project project--double">
+          <img src="/static/screenshots/dedicon6.png" />
+        </div>
+        <div className="project project--double">
+          <img src="/static/screenshots/dedicon7.png" />
+        </div>
       </div>
     </section>
   </Layout>

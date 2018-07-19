@@ -180,6 +180,11 @@ export const global = css`
     background-position: center;
   }
 
+  .project img {
+    width: 100%;
+    height: 100%;
+  }
+
   @media only screen and (max-width: 760px) {
     .creations .project .links {
       position: initial;
