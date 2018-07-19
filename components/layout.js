@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Footer from './footer'
-import { global } from './styles'
-import { normalize } from './normalize'
-import { fontAwesome } from './font-awesome'
+import { global } from './styling/styles'
+import { normalize } from './styling/normalize'
+import { fontAwesome } from './styling/font-awesome'
 
 export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
   <div>
@@ -17,8 +17,8 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
       {global}
     </style>
     <Head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <meta charSet="utf-8" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <title>{title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link
