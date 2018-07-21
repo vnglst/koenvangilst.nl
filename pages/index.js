@@ -236,11 +236,16 @@ export default () => (
             </b>]
           </span>
         </div>
-        {/* <div className='project'>
-          <a href='http://starfield.koenvangilst.nl/'>Starfield</a>: I once
-          wrote this program in assembly, but this time I wanted to do it in
-          Javascript. [<b>2013</b>]
-        </div> */}
+        <div className="project">
+          <h1>Starfield</h1>
+          <p>
+            I once wrote this program in assembly, but this time I wanted to do
+            it in Javascript.
+          </p>
+          <span className="links">
+            <a href="http://starfield.koenvangilst.nl/">Demo</a> [<b>2013</b>]
+          </span>
+        </div>
         <div className="project">
           <h1>Dawkins' Trees</h1>
           <p>
