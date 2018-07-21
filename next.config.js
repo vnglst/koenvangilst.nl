@@ -5,6 +5,7 @@ module.exports = {
       '/blog': { page: '/blog' },
       '/profile': { page: '/profile' },
       '/dedicon': { page: '/dedicon' },
+      '/hilfiger': { page: '/hilfiger' },
     }
   },
   webpack: function(config, { dev }) {

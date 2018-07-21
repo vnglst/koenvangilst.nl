@@ -1,7 +1,7 @@
 {
   "name": "personal-website",
   "version": "2.0.0",
-  "description": "",
+  "description": "Koen van Gilst's personal website",
   "main": "index.js",
   "dependencies": {
     "next": "^6.1.1",
