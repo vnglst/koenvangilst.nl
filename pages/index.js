@@ -37,7 +37,7 @@ export default () => (
             I created this fun little PWA for my daughter Nora to help her spell
             her name. She loved it, hope you do too!
           </p>
-          <ul>
+          <ul style={{ padding: 0, listStyleType: 'none' }}>
             <li>
               🚀 <code>create-react-app</code> + TypeScript
             </li>
@@ -50,6 +50,19 @@ export default () => (
             <a href="https://github.com/vnglst/finding-nora">Source</a> [<b>
               2018
             </b>]
+          </span>
+        </div>
+        <div className="project">
+          <h1>MyTommy Loyalty App</h1>
+          <p>
+            For Tommy Hilfiger I worked in a Scrum team as a fullstack
+            JavaScript developer on their loyality app <b>MyTommy</b>.
+          </p>
+          <span className="links">
+            <Link prefetch href="/hilfiger">
+              <a>Demo page (in Dutch)</a>
+            </Link>{' '}
+            [<b>2018</b>]
           </span>
         </div>
         <div className="project">

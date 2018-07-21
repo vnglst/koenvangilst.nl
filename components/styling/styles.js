@@ -83,8 +83,7 @@ export const global = css`
   }
 
   ul {
-    list-style: none;
-    padding-left: 0;
+    padding-left: 15px;
   }
 
   ul li {
@@ -143,9 +142,9 @@ export const global = css`
 
   .creations .project {
     position: relative;
-    max-width: 290px;
+    max-width: 294px;
     min-height: 210px;
-    margin: 0 15px 20px 15px;
+    margin: 0 10px 20px 10px;
     padding: 20px;
     border: 1px dashed #36382e;
     background-color: white;
@@ -169,6 +168,7 @@ export const global = css`
 
   .creations .project.project--double {
     min-width: 650px;
+    padding-bottom: 50px;
   }
 
   .project.project--profile {
