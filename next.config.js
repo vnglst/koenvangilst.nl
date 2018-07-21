@@ -6,6 +6,7 @@ module.exports = {
       '/profile': { page: '/profile' },
       '/dedicon': { page: '/dedicon' },
       '/hilfiger': { page: '/hilfiger' },
+      '/articles/node-pdf': { page: '/articles/node-pdf' },
     }
   },
   webpack: function(config, { dev }) {

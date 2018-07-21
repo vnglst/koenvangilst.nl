@@ -91,6 +91,21 @@ export const global = css`
     line-height: 18px;
   }
 
+  pre {
+    display: block;
+    overflow-x: auto;
+    background: rgb(29, 31, 33);
+    color: rgb(197, 200, 198);
+    padding: 0.5em;
+  }
+
+  hr {
+    width: 30px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 0.5px dotted #36382e;
+  }
+
   .terminal {
     color: #5bc3eb;
     font-size: 13px;
@@ -116,11 +131,11 @@ export const global = css`
     max-width: 1000px;
     display: block;
     margin: 0 auto;
-    padding: 40px 10px 60px 10px;
+    padding: 20px 10px 60px 10px;
   }
 
   .creations h1 {
-    margin: 0;
+    margin: 0 0 20px 0;
     padding: 0;
     font-size: 14px;
     letter-spacing: 1px;
