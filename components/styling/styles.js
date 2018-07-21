@@ -197,6 +197,7 @@ export const global = css`
     }
     .creations .project.project--double {
       min-width: unset;
+      padding-bottom: 20px;
     }
   }
 
