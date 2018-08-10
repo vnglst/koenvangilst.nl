@@ -18,6 +18,7 @@ export default () => (
       <div className="wrapper">
         <div className="project project--double">
           <h1>Generating a PDF with Express & Node.JS</h1>
+          <p className="date">Published Nov 3, 2016</p>
           <img src="/static/screenshots/form-pdf.png" />
           <p>
             In this article you'll find a fun little tutorial of how to create a
@@ -99,6 +100,7 @@ export default () => (
           <SyntaxHighlighter language="bash" style={tomorrowNight}>
             {`yarn start`}
           </SyntaxHighlighter>
+          <hr />
           <p>
             I hope you enjoyed this tutorial and feel free to ask me any
             questions. You can find me on Twitter as{' '}
@@ -109,7 +111,6 @@ export default () => (
             and takes only a few seconds. Instructions can be found here:{' '}
             <a href="https://zeit.co/now">https://zeit.co/now</a>.
           </p>
-          <hr />
         </div>
       </div>
     </section>
