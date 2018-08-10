@@ -4,7 +4,10 @@ export default () => (
   <Layout title="Tommy Hilfiger | Koen van Gilst" menu="hilfiger">
     <section className="creations">
       <div className="wrapper">
-        <div className="project project--double">
+        <div
+          className="project project--double"
+          style={{ paddingBottom: '50px' }}
+        >
           <h1>MyTommy Loyalty App</h1>
           <p>
             For Tommy Hilfiger I worked in an Agile Scrum team as a fullstack

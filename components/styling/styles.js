@@ -169,6 +169,12 @@ export const global = css`
     -webkit-backface-visibility: hidden;
   }
 
+  .creations .project .date {
+    font-size: 10px;
+    color: #808080;
+    margin: 20px 0;
+  }
+
   .creations .project .links {
     position: absolute;
     left: 20px;
@@ -183,7 +189,6 @@ export const global = css`
 
   .creations .project.project--double {
     min-width: 650px;
-    padding-bottom: 50px;
   }
 
   .project.project--profile {
