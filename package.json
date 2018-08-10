@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "next": "^6.1.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-syntax-highlighter": "^8.0.1"
   },
   "scripts": {
