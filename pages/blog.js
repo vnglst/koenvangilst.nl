@@ -1,4 +1,5 @@
 import Layout from '../components/layout'
+import Link from 'next/link'
 
 export default () => (
   <Layout title="Blog | Koen van Gilst" menu="blog">
@@ -35,7 +36,10 @@ export default () => (
             November 10th.
           </p>
           <span className="links">
-            <a href="blog/node-pdf">Read it here</a> [<b>2016</b>].
+            <Link prefetch href="/blog/node-pdf">
+              <a>Read it here</a>
+            </Link>{' '}
+            [<b>2016</b>]
           </span>
         </div>
       </div>
