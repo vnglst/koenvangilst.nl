@@ -157,6 +157,7 @@ export const global = css`
 
   .creations .project {
     position: relative;
+    width: 320px;
     max-width: 294px;
     min-height: 210px;
     margin: 0 10px 20px 10px;
