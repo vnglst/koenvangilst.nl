@@ -34,7 +34,7 @@ export default () => (
           <span className="links">
             <a
               target="_blank"
-              href="https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/harry-potter/ncc.html"
+              href="https://demo.term-search.nl/v2.2.0-12/?bookUrl=https://demo.term-search.nl/boeken/harry-potter/ncc.html"
             >
               Harry Potter en het vervloekte kind (fragment)
             </a>
@@ -50,7 +50,7 @@ export default () => (
           <span className="links">
             <a
               target="_blank"
-              href="https://demo.vangilst.eu/v2.2.0-12/?bookUrl=https://demo.vangilst.eu/boeken/geel-gras/ncc.html"
+              href="https://demo.term-search.nl/v2.2.0-12/?bookUrl=https://demo.term-search.nl/boeken/geel-gras/ncc.html"
             >
               Geel Gras (fragment)
             </a>
