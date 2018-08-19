@@ -7,11 +7,11 @@ export default () => (
         <div className="project">
           <h1>Profile</h1>
           <p>
-            Entrepreneurial and enthousiastic JavaScript developer based in
-            Utrecht (The Netherlands). I specialize in Node and modern frontend
-            using React. I'm always looking for new challenging freelance work
-            and I'm particularly interested in creating innovative web apps for
-            inspiring companies.
+            Passionate JavaScript developer based in Utrecht, Netherlands. I
+            specialize in Node and modern frontend using React. I'm always
+            looking for new challenging freelance work and I'm particularly
+            interested in creating innovative web apps for <b>inspiring</b>{' '}
+            companies.
           </p>
           <p>
             You can find me on <a href="https://github.com/vnglst">Github</a>,{' '}
@@ -19,7 +19,8 @@ export default () => (
             <a href="http://www.twitter.com/vnglst">Twitter</a> or send me an{' '}
             <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;">
               email
-            </a>.
+            </a>
+            .
           </p>
         </div>
         <div className="project project--profile" />
@@ -56,7 +57,8 @@ export default () => (
           <h1>Education</h1>
           <ul>
             <li>
-              <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>).
+              <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>
+              ).
             </li>
             <li>
               <b>Minor in Computational Science</b>, Utrecht University.
