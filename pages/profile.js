@@ -7,11 +7,11 @@ export default () => (
         <div className="project">
           <h1>Profile</h1>
           <p>
-            Passionate JavaScript developer based in Utrecht, Netherlands. I
-            specialize in Node and modern frontend using React. I'm always
-            looking for new challenging freelance work and I'm particularly
-            interested in creating innovative web apps for <b>inspiring</b>{' '}
-            companies.
+            Passionate & entrepreneurial JavaScript developer based in Utrecht.
+            M.A. in Philosophy (cum laude) and a minor in Computational Science.
+            Specializes in modern frontend (React) and backend (Node).
+            Interested in working with <b>inspiring</b> companies to create
+            innovative web apps that users love.
           </p>
           <p>
             You can find me on <a href="https://github.com/vnglst">Github</a>,{' '}
