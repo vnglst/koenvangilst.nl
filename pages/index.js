@@ -23,13 +23,27 @@ export default () => (
           <p>
             You can also find me on
             <a href="https://github.com/vnglst"> Github</a>,
-            <a href="http://nl.linkedin.com/in/vangilst/"> LinkedIn</a> and
-            <a href="http://www.twitter.com/vnglst"> Twitter</a>. Or send me an{' '}
+            <a href="https://nl.linkedin.com/in/vangilst/"> LinkedIn</a> and
+            <a href="https://www.twitter.com/vnglst"> Twitter</a>. Or send me an{' '}
             <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;">
               email
-            </a>.
+            </a>
+            .
           </p>
           <span className="links">Have fun!</span>
+        </div>
+        <div className="project">
+          <h1>Peter and the Wolf</h1>
+          <p>
+            I created this PWA for my kids, based upon the classical piece
+            "Peter and the Wolf" by Prokofiev. Turns out that making large mp3s
+            available offline was harder than I thought.
+          </p>
+          <span className="links">
+            <a href="https://peter-and-wolf.com">Play</a> +{' '}
+            <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a> [
+            <b>2018</b>]
+          </span>
         </div>
         <div className="project">
           <h1>Finding Nora</h1>
@@ -44,12 +58,10 @@ export default () => (
             <li>⛺ full offline support</li>
             <li>🎺 web audio for sounds</li>
           </ul>
-
           <span className="links">
             <a href="https://nora.now.sh">Play</a> +{' '}
-            <a href="https://github.com/vnglst/finding-nora">Source</a> [<b>
-              2018
-            </b>]
+            <a href="https://github.com/vnglst/finding-nora">Source</a> [
+            <b>2018</b>]
           </span>
         </div>
         <div className="project">
@@ -63,22 +75,6 @@ export default () => (
               <a>Demo page (in Dutch)</a>
             </Link>{' '}
             [<b>2018</b>]
-          </span>
-        </div>
-        <div className="project">
-          <h1>Faster Than Max</h1>
-          <p>
-            Are you faster than Max Verstappen? Test your reaction speed with
-            this iPhone app. Simple React Native iOS app.
-          </p>
-          <span className="links">
-            <a href="https://itunes.apple.com/nl/app/faster-than-max/id1279729114?mt=8">
-              Open in App Store
-            </a>{' '}
-            + <a href="https://github.com/vnglst/sneller-dan-max">Source</a> [<b
-            >
-              2017
-            </b>]
           </span>
         </div>
         <div className="project">
@@ -107,7 +103,8 @@ export default () => (
             <a href="https://github.com/vnglst/startrek ">Source</a>
             <br />
             <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{' '}
-            <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
+            <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>
+            ]
           </span>
         </div>
         <div className="project">
@@ -118,9 +115,8 @@ export default () => (
           </p>
           <span className="links">
             <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a> +{' '}
-            <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [<b>
-              2016
-            </b>]
+            <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [
+            <b>2016</b>]
           </span>
         </div>
         <div className="project">
@@ -143,18 +139,18 @@ export default () => (
           </p>
           <span className="links">
             <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{' '}
-            <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
+            <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>
+            ]
           </span>
         </div>
         <div className="project">
           <h1>Term Search</h1>
           <p>
             A terminology search engine for translators. Currently only
-            German-Dutch terms. Work in progress.
+            German-Dutch terms. Work in progress. [ No longer online ]
           </p>
           <p>Technologies: NodeJS, Express, MongoDB, Loopback, ReactJS.</p>
           <span className="links">
-            <a href="https://term-search.nl/">Visit website</a> +{' '}
             <a href="https://github.com/TermSearch">Source</a> [<b>2016</b>]
           </span>
         </div>
@@ -162,14 +158,14 @@ export default () => (
           <h1>Help Terence!</h1>
           <p>
             A Twitter bot raising emoji money for his trip around the world. Fun
-            little experiment with social media and Twitter bots.
+            little experiment with social media and Twitter bots. [ No longer
+            active ]
           </p>
           <p>Technologies used: Express, MongoDB.</p>
           <span className="links">
             <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{' '}
-            <a href="https://github.com/vnglst/HelpTerence">Source</a> [<b>
-              2016
-            </b>]
+            <a href="https://github.com/vnglst/HelpTerence">Source</a> [
+            <b>2016</b>]
           </span>
         </div>
         <div className="project">
@@ -180,17 +176,10 @@ export default () => (
           </p>
           <span className="links">
             <a href="http://converter.vangilst.de/">Visit the app</a> +{' '}
-            <a href="https://github.com/vnglst/converter2">Source</a> [<b>
-              2016
-            </b>]
+            <a href="https://github.com/vnglst/converter2">Source</a> [
+            <b>2016</b>]
           </span>
         </div>
-        {/* <div className='project'>
-          <a href='http://cost-analysis.koenvangilst.nl/'>costAnalysis</a>: An
-          app for freelance translators to get an idea of the amount of work
-          involved in a translation (hours) and what they should be charging
-          their clients. [<b>2014</b>]
-        </div> */}
         <div className="project">
           <h1>Wikipedia edits by the Dutch government</h1>
           <p>
@@ -201,9 +190,8 @@ export default () => (
           </p>
           <span className="links">
             <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{' '}
-            <a href="https://github.com/vnglst/OverheidEdits">Source</a> [<b>
-              2013
-            </b>]
+            <a href="https://github.com/vnglst/OverheidEdits">Source</a> [
+            <b>2013</b>]
           </span>
         </div>
         <div className="project">
