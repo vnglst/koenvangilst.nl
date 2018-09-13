@@ -32,10 +32,7 @@ export default () => (
             in de audiomodus.
           </p>
           <span className="links">
-            <a
-              target="_blank"
-              href="https://demo.term-search.nl/v2.2.0-12/?bookUrl=https://demo.term-search.nl/boeken/harry-potter/ncc.html"
-            >
+            <a href="https://olp.netlify.com/?bookUrl=https://olp.netlify.com/harry-potter/ncc.html">
               Harry Potter en het vervloekte kind (fragment)
             </a>
           </span>
@@ -48,10 +45,7 @@ export default () => (
             de tekst en het woord wordt gemarkeerd.
           </p>
           <span className="links">
-            <a
-              target="_blank"
-              href="https://demo.term-search.nl/v2.2.0-12/?bookUrl=https://demo.term-search.nl/boeken/geel-gras/ncc.html"
-            >
+            <a href="https://olp.netlify.com/?bookUrl=https://olp.netlify.com/geel-gras/ncc.html">
               Geel Gras (fragment)
             </a>
           </span>
