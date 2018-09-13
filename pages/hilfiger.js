@@ -22,10 +22,7 @@ export default () => (
             <li>Jest/Enzyme unit tests</li>
           </ul>
           <span className="links">
-            <a
-              target="_blank"
-              href="https://itunes.apple.com/nl/app/mytommy/id1272118764?l=en&mt=8"
-            >
+            <a href="https://itunes.apple.com/nl/app/mytommy/id1272118764?l=en&mt=8">
               MyTommy in the App Store
             </a>
           </span>
