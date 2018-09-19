@@ -8,8 +8,3 @@
 # THANKS
 
 
-
-# TECHNOLOGY COLOPHON
-
-    ES2015, HTML5, CSS3
-    Surge.sh
