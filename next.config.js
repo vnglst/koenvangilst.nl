@@ -1,4 +1,6 @@
-module.exports = {
+const withCSS = require('@zeit/next-css')
+
+module.exports = withCSS({
   exportPathMap: function() {
     return {
       '/': { page: '/' },
@@ -6,7 +8,7 @@ module.exports = {
       '/profile': { page: '/profile' },
       '/dedicon': { page: '/dedicon' },
       '/hilfiger': { page: '/hilfiger' },
-      '/blog/node-pdf': { page: '/blog/node-pdf' },
+      '/blog/node-pdf': { page: '/blog/node-pdf' }
     }
   },
   webpack: function(config, { dev }) {
@@ -17,5 +19,5 @@ module.exports = {
     }
 
     return config
-  },
-}
+  }
+})
