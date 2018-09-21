@@ -1,8 +1,7 @@
-import { footer } from './styling/styles'
+import './styling/styles.css'
 
 export default () => (
   <footer>
-    <style jsx>{footer}</style>
     <div className="footer-content">
       <span className="social-links">
         <a href="https://twitter.com/vnglst" title="Follow me on Twitter">
