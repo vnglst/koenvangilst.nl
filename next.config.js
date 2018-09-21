@@ -7,6 +7,7 @@ module.exports = {
       '/dedicon': { page: '/dedicon' },
       '/hilfiger': { page: '/hilfiger' },
       '/blog/node-pdf': { page: '/blog/node-pdf' },
+      '/blog/css-in-depth': { page: '/blog/css-in-depth' }
     }
   },
   webpack: function(config, { dev }) {
@@ -17,5 +18,5 @@ module.exports = {
     }
 
     return config
-  },
+  }
 }

@@ -13,6 +13,15 @@ export default () => (
           </p>
         </div>
         <div className="project">
+          <h1>CSS In Depth (notes)</h1>
+          <p>Some of my reading notes when reading XY's new book on CSS.</p>
+          <span className="links">
+            <Link prefetch href="/blog/css-in-depth">
+              <a>Read it here [2018]</a>
+            </Link>{' '}
+          </span>
+        </div>
+        <div className="project">
           <h1>API Testing with Jest</h1>
           <p>
             Jest is a great JavaScript testing framework by Facebook. It’s often
