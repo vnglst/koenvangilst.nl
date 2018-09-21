@@ -1,21 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Footer from './footer'
-import { global } from './styling/styles'
-import { normalize } from './styling/normalize'
-import { fontAwesome } from './styling/font-awesome'
+
+import './styling/font-awesome.css'
+import './styling/normalize.css'
+import './styling/styles.css'
 
 export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
   <div>
-    <style jsx global>
-      {normalize}
-    </style>
-    <style jsx global>
-      {fontAwesome}
-    </style>
-    <style jsx global>
-      {global}
-    </style>
     <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
