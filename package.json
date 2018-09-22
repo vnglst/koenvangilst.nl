@@ -8,14 +8,15 @@
     "next": "^7.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-syntax-highlighter": "^8.0.1"
+    "react-syntax-highlighter": "^8.0.1",
+    "lighthouse": "^3.1.1"
   },
   "scripts": {
-    "dev": "next",
     "build": "next build && next export && cp -R static-root/* out/",
     "stage": "yarn build && surge -p ./out -d personal.koenvangilst.nl",
     "deploy": "yarn build && netlify deploy out/",
-    "start": "next start"
+    "start": "next",
+    "lighthouse": "lighthouse https://koenvangilst.nl --view"
   },
   "keywords": [],
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
