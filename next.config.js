@@ -11,8 +11,7 @@ module.exports = withMDX(
         '/dedicon': { page: '/dedicon' },
         '/hilfiger': { page: '/hilfiger' },
         '/blog/node-pdf': { page: '/blog/node-pdf' },
-        '/blog/css-in-depth': { page: '/blog/css-in-depth' },
-        '/blog/example': { page: '/blog/example' }
+        '/blog/css-in-depth': { page: '/blog/css-in-depth' }
       }
     }
   })
