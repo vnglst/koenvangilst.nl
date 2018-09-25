@@ -1,7 +1,7 @@
 import './styling/article.css'
 
 const Article = ({ children }) => (
-  <section className="article">{children}</section>
+  <article className="article">{children}</article>
 )
 
 export default Article

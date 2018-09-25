@@ -27,7 +27,7 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
 
     <Navigation menu={menu} />
 
-    <div className="content">{children}</div>
+    <main className="content">{children}</main>
 
     <Footer />
   </div>

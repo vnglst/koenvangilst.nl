@@ -25,7 +25,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <img src="/static/img/koen-photo.jpg" alt="photo Koen van Gilst" />
+        <img src="/static/img/koen-photo.jpg" alt="Koen van Gilst" />
       </Creations.Item>
 
       <Creations.Item fullWidth>
