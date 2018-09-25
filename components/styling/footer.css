@@ -1,4 +1,6 @@
 footer {
+  position: absolute;
+  bottom: 0;
   padding: 1em;
   background-color: white;
   border-top: 1px dashed #36382e;
@@ -9,18 +11,19 @@ footer {
 }
 
 .footer-content {
-  max-width: 70em;
-  display: flex;
-  justify-content: space-between;
+  max-width: 50rem;
   margin: 0px auto;
 }
 
 .social-links a {
-  display: inline-block;
   padding: 0 1em;
   color: #777777;
 }
 
 .social-links i {
   margin-right: 0.5em;
+}
+
+.source {
+  float: right;
 }

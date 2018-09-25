@@ -20,6 +20,7 @@ html {
   color: #36382e;
   font-size: calc(0.75em + 0.25vw);
   line-height: 1.6;
+  height: 100%;
 }
 
 *,
@@ -30,6 +31,10 @@ html {
 
 body {
   background: #f9f9f9;
+  position: relative;
+  margin: 0;
+  padding-bottom: 3rem;
+  min-height: 100%;
 }
 
 a {

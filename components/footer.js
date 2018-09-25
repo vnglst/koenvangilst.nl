@@ -20,7 +20,7 @@ export default () => (
           LinkedIn
         </a>
       </span>
-      <span>
+      <span className="source">
         <a
           href="https://github.com/vnglst/koenvangilst.nl"
           title="Source code website"
