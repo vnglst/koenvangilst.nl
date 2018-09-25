@@ -1,10 +1,11 @@
 import Layout from '../components/layout'
+import Creations from '../components/creations'
 import Link from 'next/link'
 
 export default () => (
   <Layout title="JavaScript Labs | Koen van Gilst" menu="home">
-    <section className="creations">
-      <div className="project project--full">
+    <Creations>
+      <Creations.Item fullWidth>
         <h1>Hi there!</h1>
         <p>
           My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who
@@ -30,8 +31,9 @@ export default () => (
           .
         </p>
         <span className="links">Have fun!</span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Peter and the Wolf</h1>
         <p>
           I created this PWA for my kids, based upon the classical piece "Peter
@@ -43,8 +45,9 @@ export default () => (
           <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a> [
           <b>2018</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Finding Nora</h1>
         <p>
           I created this fun little PWA for my daughter Nora to help her spell
@@ -62,8 +65,9 @@ export default () => (
           <a href="https://github.com/vnglst/finding-nora">Source</a> [
           <b>2018</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>MyTommy Loyalty App</h1>
         <p>
           For Tommy Hilfiger I worked in a Scrum team as a fullstack JavaScript
@@ -75,8 +79,9 @@ export default () => (
           </Link>{' '}
           [<b>2018</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Audio Books Player</h1>
         <p>
           For Dedicon I created a player for their audio books collections, it's
@@ -90,8 +95,9 @@ export default () => (
           </Link>{' '}
           [<b>2017</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Star Wars or Star Trek?</h1>
         <p>
           Why not both? Using just CSS and a bit of JavaScript I recreated these
@@ -104,8 +110,9 @@ export default () => (
           <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{' '}
           <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Shortcut Trainer</h1>
         <p>
           Quickly learn the 10 most commonly used keyboard shortcuts for the
@@ -116,8 +123,9 @@ export default () => (
           <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [
           <b>2016</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>LaTeX Letters</h1>
         <p>
           Creating beautiful PDF letters using LaTeX in a Docker container on a
@@ -127,8 +135,9 @@ export default () => (
           <a href="https://github.com/vnglst/latex-letter">Source code</a> [
           <b>2016</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Rush hour timelapse</h1>
         <p>
           A Twitter bot that creates daily timelapse videos of the traffic jams
@@ -139,8 +148,9 @@ export default () => (
           <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{' '}
           <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Term Search</h1>
         <p>
           A terminology search engine for translators. Currently only
@@ -150,8 +160,9 @@ export default () => (
         <span className="links">
           <a href="https://github.com/TermSearch">Source</a> [<b>2016</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Help Terence!</h1>
         <p>
           A Twitter bot raising emoji money for his trip around the world. Fun
@@ -164,8 +175,9 @@ export default () => (
           <a href="https://github.com/vnglst/HelpTerence">Source</a> [
           <b>2016</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Word to Line Prices</h1>
         <p>
           A simple web app for translators that converts a price per word to a
@@ -176,8 +188,9 @@ export default () => (
           <a href="https://github.com/vnglst/converter2">Source</a> [<b>2016</b>
           ]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Wikipedia edits by the Dutch government</h1>
         <p>
           Twitter bot inspired by{' '}
@@ -190,8 +203,9 @@ export default () => (
           <a href="https://github.com/vnglst/OverheidEdits">Source</a> [
           <b>2013</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Starfield</h1>
         <p>
           I once wrote this program in assembly, but this time I wanted to do it
@@ -200,8 +214,9 @@ export default () => (
         <span className="links">
           <a href="http://starfield.koenvangilst.nl/">Demo</a> [<b>2013</b>]
         </span>
-      </div>
-      <div className="project">
+      </Creations.Item>
+
+      <Creations.Item>
         <h1>Dawkins' Trees</h1>
         <p>
           For this web app I've tried to recreate (in part) the program Richard
@@ -210,7 +225,7 @@ export default () => (
         <span className="links">
           <a href="http://dawkins.koenvangilst.nl/">Demo</a> [<b>2013</b>]
         </span>
-      </div>
-    </section>
+      </Creations.Item>
+    </Creations>
   </Layout>
 )

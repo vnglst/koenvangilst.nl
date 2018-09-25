@@ -1,3 +1,5 @@
+import './styling/footer.css'
+
 export default () => (
   <footer>
     <div className="footer-content">

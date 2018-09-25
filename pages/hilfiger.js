@@ -1,9 +1,10 @@
 import Layout from '../components/layout'
+import Creations from '../components/creations'
 
 export default () => (
   <Layout title="Tommy Hilfiger | Koen van Gilst" menu="hilfiger">
-    <section className="creations">
-      <div className="project project--full">
+    <Creations>
+      <Creations.Item fullWidth>
         <h1>MyTommy Loyalty App</h1>
         <p>
           For Tommy Hilfiger I worked in an Agile Scrum team as a fullstack
@@ -22,9 +23,9 @@ export default () => (
             MyTommy in the App Store
           </a>
         </span>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <h1>Backend stack</h1>
         <p>Classical Node.js Express API. Gray box testing with Nock.</p>
         <ul>
@@ -33,9 +34,9 @@ export default () => (
           <li>Postgresql (Knex) database</li>
           <li>Passport</li>
         </ul>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <h1>Frontend stack</h1>
         <p>Classical React + Redux frontend using:</p>
         <ul>
@@ -44,26 +45,26 @@ export default () => (
           <li>Jest + Enyzme for testing</li>
           <li>Detox for end-to-end testing</li>
         </ul>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <img src="/static/screenshots/mytommy1.png" />
-      </div>
-      <div className="project">
+      </Creations.Item>
+      <Creations.Item>
         <img src="/static/screenshots/mytommy2.png" />
-      </div>
-      <div className="project">
+      </Creations.Item>
+      <Creations.Item>
         <img src="/static/screenshots/mytommy3.png" />
-      </div>
-      <div className="project">
+      </Creations.Item>
+      <Creations.Item>
         <img src="/static/screenshots/mytommy4.png" />
-      </div>
-      <div className="project">
+      </Creations.Item>
+      <Creations.Item>
         <img src="/static/screenshots/mytommy5.png" />
-      </div>
-      <div className="project">
+      </Creations.Item>
+      <Creations.Item>
         <img src="/static/screenshots/mytommy6.png" />
-      </div>
-    </section>
+      </Creations.Item>
+    </Creations>
   </Layout>
 )

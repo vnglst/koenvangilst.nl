@@ -1,9 +1,10 @@
 import Layout from '../components/layout'
+import Creations from '../components/creations'
 
 export default () => (
   <Layout title="Profile | Koen van Gilst" menu="profile">
-    <section className="creations">
-      <div className="project">
+    <Creations>
+      <Creations.Item>
         <h1>Profile</h1>
         <p>
           Passionate & entrepreneurial JavaScript developer based in Utrecht.
@@ -21,13 +22,13 @@ export default () => (
           </a>
           .
         </p>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <img src="/static/img/koen-photo.jpg" alt="photo Koen van Gilst" />
-      </div>
+      </Creations.Item>
 
-      <div className="project project--full">
+      <Creations.Item fullWidth>
         <h1>Skills</h1>
         <ul>
           <li>
@@ -53,9 +54,9 @@ export default () => (
             Bugsnag, BuddyBuild, Mixpanel, Heroku, AWS, Google Cloud, Jira
           </li>
         </ul>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <h1>Education</h1>
         <ul>
           <li>
@@ -69,12 +70,12 @@ export default () => (
             <b>Erasmus Student Exchange</b>, Universität Regensburg (Germany).
           </li>
         </ul>
-      </div>
+      </Creations.Item>
 
-      <div className="project">
+      <Creations.Item>
         <h1>References</h1>
         <p>References, code samples and a copy of my resume upon request.</p>
-      </div>
-    </section>
+      </Creations.Item>
+    </Creations>
   </Layout>
 )

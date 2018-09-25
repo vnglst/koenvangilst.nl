@@ -1,4 +1,6 @@
-import CodeBlock, { registerLanguage } from 'react-syntax-highlighter/light'
+import SyntaxHighlighting, {
+  registerLanguage
+} from 'react-syntax-highlighter/light'
 import xml from 'react-syntax-highlighter/languages/hljs/xml'
 import css from 'react-syntax-highlighter/languages/hljs/css'
 import javascript from 'react-syntax-highlighter/languages/hljs/javascript'
@@ -9,7 +11,7 @@ registerLanguage('xml', xml)
 registerLanguage('javascript', javascript)
 
 export default ({ language, children }) => (
-  <CodeBlock language={language} style={tomorrowNight}>
+  <SyntaxHighlighting language={language} style={tomorrowNight}>
     {children.trim()}
-  </CodeBlock>
+  </SyntaxHighlighting>
 )
