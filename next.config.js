@@ -1,24 +1,19 @@
 const withCSS = require('@zeit/next-css')
+const withMDX = require('@zeit/next-mdx')()
 
-module.exports = withCSS({
-  exportPathMap: function() {
-    return {
-      '/': { page: '/' },
-      '/blog': { page: '/blog' },
-      '/profile': { page: '/profile' },
-      '/dedicon': { page: '/dedicon' },
-      '/hilfiger': { page: '/hilfiger' },
-      '/blog/node-pdf': { page: '/blog/node-pdf' },
-      '/blog/css-in-depth': { page: '/blog/css-in-depth' }
+module.exports = withMDX(
+  withCSS({
+    exportPathMap: function() {
+      return {
+        '/': { page: '/' },
+        '/blog': { page: '/blog' },
+        '/profile': { page: '/profile' },
+        '/dedicon': { page: '/dedicon' },
+        '/hilfiger': { page: '/hilfiger' },
+        '/blog/node-pdf': { page: '/blog/node-pdf' },
+        '/blog/css-in-depth': { page: '/blog/css-in-depth' },
+        '/blog/example': { page: '/blog/example' }
+      }
     }
-  },
-  webpack: function(config, { dev }) {
-    // For the development version, we'll use React.
-    // Because, it supports react hot loading and so on.
-    if (dev) {
-      return config
-    }
-
-    return config
-  }
-})
+  })
+)
