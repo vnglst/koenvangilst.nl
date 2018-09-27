@@ -12,7 +12,7 @@ export default () => (
           <a href="https://medium.com/@vnglst/latest">Medium</a>.
         </p>
       </Creations.Item>
-      <Creations.Item>
+      {/* <Creations.Item>
         <h1>CSS In Depth (notes)</h1>
         <p>Some of my reading notes when reading XY's new book on CSS.</p>
         <span className="links">
@@ -20,7 +20,7 @@ export default () => (
             <a>Read it here [2018]</a>
           </Link>{' '}
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
       <Creations.Item>
         <h1>API Testing with Jest</h1>
         <p>
