@@ -4,7 +4,9 @@
   "description": "Koen van Gilst's personal website",
   "main": "index.js",
   "dependencies": {
+    "@mdx-js/mdx": "^0.15.3",
     "@zeit/next-css": "^1.0.1",
+    "@zeit/next-mdx": "^1.2.0",
     "next": "^7.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -15,8 +17,7 @@
     "build": "next build && next export && cp -R static-root/* out/",
     "stage": "yarn build && surge -p ./out -d personal.koenvangilst.nl",
     "deploy": "yarn build && netlify deploy out/",
-    "start": "next",
-    "lighthouse": "lighthouse https://koenvangilst.nl --view"
+    "start": "next"
   },
   "keywords": [],
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",

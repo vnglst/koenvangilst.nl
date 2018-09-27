@@ -1,0 +1,94 @@
+import CodeBlock from '../../components/code-block.js'
+
+export const meta = {
+  date: '24th of September, 2018',
+  title: 'CSS In Depth (reading notes)',
+  description: ''
+}
+
+# CSS In Depth (reading notes)
+
+![Book cover](/static/blog/css-in-depth-cropped.jpg)
+
+I've always considered CSS a bit of an afterthought. It's something I would add very quickly with some trail-and-error programming and some help from Stackoverflow. This generally works pretty well, but is also frustrating: with trail and error and copypasting you won't end up with a longterm solution and bad CSS is as hard to maintain as bad JavaScript.
+
+If you're like me and you've been using CSS on a daily basis for years without taking the time to understand how it works (and why it always feels so buggy) then <i>CSS In Depth</i> is for you.
+
+The approach of the book is simple: The author, Keith J. Grant, doesn't do any fancy layouts, but focusses on a fundamental yet practical understanding of CSS. The examples he gives cover about 95% of all the CSS you'd generally need.
+
+But since I have a tendency to forget things, I've here gathered some of the snippets and tips that Keith gives in his book.
+
+Here are some more general tips:
+
+- Don't set fixed heights (like height: 100%). Let the browser take care of that. Use relative units (i.e. <code>em</code> and <code>rem</code> for sizes and avoid using <code>px</code>. See code samples below on how to do this responsively.
+- Be aware of margin collapsing: of the top and bottom margin between two elements the browsers picks the largest and ignores that other one, i.e. only one margin is applied. This doesn't happen when using flexbox or when setting padding and/or border size.
+- You can add a margin to all items except the first with a so called 'lobotomized owl' using <code>{`* + * { margin-left: 1em; }`}</code>.
+
+## Equal height columns
+
+One of the standard problems in css that became very easy using flexbox. Consider the following HTML:
+
+<CodeBlock language="html">
+{`
+<div class="container">
+  <main class="main">...</main>
+  <aside class="sidebar">...</aside>
+</div>
+`}
+</CodeBlock>
+
+Using the following CSS you'll get two columns of equal height:
+
+<CodeBlock language="css">
+{`
+.container {
+  display: flex;
+}
+.main {
+  width 70%;
+}
+.sidebar {
+  width: 30%;
+  padding: 1.5em;
+  margin-left: 1.5em;
+}
+`}</CodeBlock>
+
+## Flexbox nav bar
+
+Another standard CSS implementation: a horizontal nav bar at the top of the screen. Consider the following HTML:
+
+<CodeBlock language="html">
+{`
+<nav>
+  <ul class="site-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Item1</a></li>
+      <li><a href="#">Item2</a></li>
+      <li class="nav-right"><a href="#">About</a></li>
+  </ul>
+</nav>
+`}</CodeBlock>
+
+And with this CSS, you'll end up with the commonly used nav bar:
+
+<CodeBlock language="css">
+{`
+.site-nav {
+  display: flex;
+  padding-left: 0;
+  list-style-type: none;
+}
+.site-nav > li > a {
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+.site-nav > li + li {
+  /* every list item that follows another, i.e. all but the first */
+  margin-left: 1.5em;
+}
+.site-nav > .nav-right {
+  margin-left: auto;
+}
+`}</CodeBlock>

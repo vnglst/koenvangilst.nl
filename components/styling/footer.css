@@ -1,0 +1,29 @@
+footer {
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+  background-color: white;
+  border-top: 1px dashed #36382e;
+  font-family: 'Open Sans', 'Helvetica-Neue', Helvetica, sans-serif;
+  font-size: 0.8em;
+  color: #777777;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 50rem;
+  margin: 0px auto;
+}
+
+.social-links a {
+  padding: 0 1em;
+  color: #777777;
+}
+
+.social-links i {
+  margin-right: 0.5em;
+}
+
+.source {
+  float: right;
+}
