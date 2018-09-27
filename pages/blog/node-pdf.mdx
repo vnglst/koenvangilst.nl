@@ -1,0 +1,159 @@
+import CodeBlock from '../../components/code-block.js'
+
+export const meta = {
+  date: 'November 3rd, 2016',
+  title: '',
+  description: ''
+}
+
+# Generating PDF's with Express
+
+![Screenshot endresult](/static/blog/form-pdf.png)
+
+In this article you'll find a fun little tutorial of how to create a
+PDF file using a web form, Express and PDFKit. To get started it'll
+use the express generator and after completing it you'll have a
+simple web form that generates a PDF file if the user clicks on the
+button <b>Create PDF</b>. I'll also point you in the right direction
+if you want to deploy the app using
+<a href="https://zeit.co/now">Now</a>.
+
+First install the Express application generator:
+
+<CodeBlock language="bash" >
+{`yarn global add express-generator # or use npm`}
+</CodeBlock>
+
+Then use this to generate a basic Express app:
+
+<CodeBlock language="bash" >
+{`express --view=pug form-to-pdf`}
+</CodeBlock>
+
+Now go into this folder and install the dependencies using Yarn:
+
+<CodeBlock language="bash" >
+{`cd form-to-pdf\nyarn`}
+</CodeBlock>
+
+Next add the dependency PDFKit
+
+<CodeBlock language="bash" >
+{`yarn add pdfkit`}
+</CodeBlock>
+
+You can now start your app, using:
+
+<CodeBlock language="bash" >
+{`yarn start`}
+</CodeBlock>
+
+Then go to <a href="http://localhost:3000">http://localhost:3000</a>
+in your browser. You should see something like: "Welcome to
+Express".
+
+Next we're going to add our HTML using the templating engine Pug
+(formerly known as Jade). Open the file <code>views/index.pug</code>
+and replace the existing code with the following:
+
+<pre>
+<code>{`
+extends layout
+block content
+  .row
+    .col-md-8
+      h1="Create a PDF"
+      form.form-horizontal.well(method="post", action="/pdf")
+          .form-group
+              label.col-md-2.control-label File Name
+              .col-md-10
+                .input-group
+                  input.form-control(type="text", name="filename", placeholder="File Name")
+                  .input-group-addon=".pdf"
+          .form-group
+              label.col-md-2.control-label Text
+              .col-md-10
+                textarea.form-control(name="content", placeholder="Write some text for on your PDF!")
+          .form-group
+              .col-sm-offset-2.col-sm-10
+                input.btn.btn-default(type="submit", value="Create PDF")
+`
+}</code>
+</pre>
+
+We also want to add some styling using Bootstrap and a theme from <a href="https://bootswatch.com/">Bootswatch</a>.
+In <code>views/layout.pug</code> add the following link directly above the existing link to style.css:
+
+<pre>
+<code>{
+`doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/flatly/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+`}</code>
+</pre>
+
+Now if you restart your app and visit
+<a href="http://localhost:3000">http://localhost:3000</a> you should
+see a nicely formatted HTML form. Next we're going to add the route
+for creating PDF files. Create the file <code>routes/pdf</code> and
+add the following code:
+
+<CodeBlock language="javascript" >
+{`
+const express = require('express')
+const router = express.Router()
+const PDFDocument = require('pdfkit')
+router.post('/', (req, res) => {
+  const doc = new PDFDocument()
+  let filename = req.body.filename
+  // Stripping special characters
+  filename = encodeURIComponent(filename) + '.pdf'
+  // Setting response to 'attachment' (download).
+  // If you use 'inline' here it will automatically open the PDF
+  res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
+  res.setHeader('Content-type', 'application/pdf')
+  const content = req.body.content
+  doc.y = 300
+  doc.text(content, 50, 50)
+  doc.pipe(res)
+  doc.end()
+module.exports = router
+`}
+</CodeBlock>
+
+Then open <code>app.js</code> and require the new pdf route file
+just below the existing routes and add it as a route:
+
+<CodeBlock language="javascript" >
+{`
+...
+var index = require('./routes/index');
+var users = require('./routes/users');
+var pdf = require(‘./routes/pdf’); // <-- add this line
+...
+app.use('/', index);
+app.use('/users', users);
+app.use('/pdf', pdf); // <-- add this line
+...
+`}
+</CodeBlock>
+
+Your PDF rendering Express application is now ready for use! Start
+it with:
+
+<CodeBlock language="bash" >
+{`yarn start`}
+</CodeBlock>
+
+I hope you enjoyed this tutorial and feel free to ask me any
+questions. You can find me on Twitter as
+<a href="https://twitter.com/vnglst/">@vnglst</a>.
+
+You can also deploy your own Form to PDF app using Now. It's easy
+and takes only a few seconds. Instructions can be found here:
+<a href="https://zeit.co/now">https://zeit.co/now</a>.

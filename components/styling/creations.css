@@ -1,0 +1,47 @@
+.creations {
+  max-width: 50rem;
+  padding: 1em;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.creations h1 {
+  margin: 0.5em 0;
+  font-size: 1em;
+}
+
+.creations a:hover {
+  text-decoration: underline;
+}
+
+.creations .project {
+  width: calc(50% - 2em);
+  margin: 1em;
+  padding: 1em;
+  border: 1px dashed #36382e;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.creations .project.project--full {
+  width: 100%;
+}
+
+.creations .project .links {
+  margin-top: auto;
+  padding: 1em 0;
+}
+
+.project img {
+  flex: 1;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 760px) {
+  .creations .project {
+    width: 100%;
+  }
+}

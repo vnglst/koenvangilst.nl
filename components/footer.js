@@ -1,3 +1,5 @@
+import './styling/footer.css'
+
 export default () => (
   <footer>
     <div className="footer-content">
@@ -18,10 +20,12 @@ export default () => (
           LinkedIn
         </a>
       </span>
-      <span className="attribution">
-        Design inspired by{' '}
-        <a href="http://tholman.com/" title="Awesome Tim Holman">
-          Tim Holman
+      <span className="source">
+        <a
+          href="https://github.com/vnglst/koenvangilst.nl"
+          title="Source code website"
+        >
+          {`<SourceCode/>`}
         </a>
       </span>
     </div>
