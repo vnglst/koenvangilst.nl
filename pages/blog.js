@@ -12,15 +12,22 @@ export default () => (
           <a href="https://medium.com/@vnglst/latest">Medium</a>.
         </p>
       </Creations.Item>
-      {/* <Creations.Item>
+      <Creations.Item>
         <h1>CSS In Depth (notes)</h1>
-        <p>Some of my reading notes when reading XY's new book on CSS.</p>
+        <p>
+          If you're like me and you've been using CSS on a daily basis for many
+          years without taking the time to understand how it actually works (and
+          why it always feels so buggy) then <i>CSS In Depth</i> is for you. In
+          this post I gathered some of the snippets and tips from Keith J. Grant
+          as a reference for future-me. But maybe you'll also find them useful.
+        </p>
         <span className="links">
           <Link prefetch href="/blog/css-in-depth">
-            <a>Read it here [2018]</a>
-          </Link>{' '}
+            <a>Read it here</a>
+          </Link>
+          <b> [2018]</b>
         </span>
-      </Creations.Item> */}
+      </Creations.Item>
       <Creations.Item>
         <h1>API Testing with Jest</h1>
         <p>
