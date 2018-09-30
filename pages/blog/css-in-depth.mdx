@@ -10,7 +10,7 @@ export const meta = {
 
 ![Book cover](/static/blog/css-in-depth-cropped.jpg)
 
-I've always considered CSS a bit of an afterthought. It's something I would add very quickly with some trail-and-error programming and some help from Stackoverflow. This generally works pretty well, but is also frustrating: with trail and error and copypasting you won't end up with a longterm solution and bad CSS is as hard to maintain as bad JavaScript.
+I've always considered CSS a bit of an afterthought. It's something I would add very quickly with some trail-and-error programming and some help from Stackoverflow. This generally works pretty well, but it's also frustrating: with trail and error and copypasting you won't end up with a longterm solution and bad CSS is as hard to maintain as bad JavaScript.
 
 If you're like me and you've been using CSS on a daily basis for years without taking the time to understand how it works (and why it always feels so buggy) then <i>CSS In Depth</i> is for you.
 
@@ -20,9 +20,48 @@ But since I have a tendency to forget things, I've here gathered some of the sni
 
 Here are some more general tips:
 
-- Don't set fixed heights (like height: 100%). Let the browser take care of that. Use relative units (i.e. <code>em</code> and <code>rem</code> for sizes and avoid using <code>px</code>. See code samples below on how to do this responsively.
+- Don't set fixed heights (like height: 100%). Let the browser take care of that. Use relative units (i.e. <code>em</code> and <code>rem</code>) for sizes and avoid using <code>px</code>. See code samples below on how to do this responsively.
 - Be aware of margin collapsing: of the top and bottom margin between two elements the browsers picks the largest and ignores that other one, i.e. only one margin is applied. This doesn't happen when using flexbox or when setting padding and/or border size.
 - You can add a margin to all items except the first with a so called 'lobotomized owl' using <code>{`* + * { margin-left: 1em; }`}</code>.
+
+## Responsive sizes
+
+If you want the font size (and sizes related to this) to grow with the screen size, you can use the following formula for setting the root font size:
+
+<CodeBlock language="css">
+{`
+:root {
+  font-size: calc(0.5em + 1vw);
+}
+`}
+</CodeBlock>
+
+Now on larger screens the fontsizes will scale accordingly. On smaller screens it will use a minimum of 0.5 em).
+
+Using this in combination with the following, will make your layouts responsive without the use of any media queries (sometimes also called fluid design). For instance for your buttons you could use:
+
+<CodeBlock language="css">
+{`
+button {
+  font-size: 1em;
+  padding: 1.5em;
+}
+`}
+</CodeBlock>
+
+In this case the padding will also grow with the font size for larger screens, maintaining the same aspect ratio. Note also that in this case the padding of 1.5 em is based upon the font size defined above. Changing the font size of the button to 2em will also result in a larger padding. This is useful if you want to create a larger button with a minimum amount of code.
+
+<CodeBlock language="css">
+{`
+button .large {
+  font-size: 2em;
+}
+`}
+</CodeBlock>
+
+### rem versus em
+
+Rem ist short for `root em`. This means that instead of being relative to the element, this `em` is relative the the root element. This means that `1rem` is always the same value no matter where you apply it in the document. This makes the very predictable and similar to the `px` unit in the regard. When should you use `rems` and when `ems`. About that Keith says the following: "My default is to use rems for font sizes, pixels for borders, and ems for most other measures, especially paddings, margins, and border radius (though I favor the use of percentages for container widths when necessary)."
 
 ## Equal height columns
 
