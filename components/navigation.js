@@ -19,7 +19,7 @@ export default ({ menu }) => (
           <Link prefetch href="/profile">
             <a className={menu === 'profile' ? 'active' : null}>Profile</a>
           </Link>
-          <a href="https://vangilst.netlify.com" className="blog">
+          <a href="https://blog.koenvangilst.nl" className="blog">
             Blog
           </a>
         </span>

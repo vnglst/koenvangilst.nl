@@ -21,7 +21,7 @@ export default () => (
           through my experiments and projects below.
         </p>
         <p>
-          I also keep a blog <a href="https://vangilst.netlify.com">here</a>.
+          I also keep a blog <a href="http://blog.koenvangilst.nl">here</a>.
         </p>
         <p>
           You can also find me on
