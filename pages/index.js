@@ -184,7 +184,7 @@ export default () => (
           price per standard line (55 characters).
         </p>
         <span className="links">
-          <a href="http://converter.vangilst.de/">Visit the app</a> +{' '}
+          <a href="http://converter.koenvangilst.nl/">Visit the app</a> +{' '}
           <a href="https://github.com/vnglst/converter2">Source</a> [<b>2016</b>
           ]
         </span>
