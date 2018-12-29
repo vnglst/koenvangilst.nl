@@ -6,12 +6,9 @@ module.exports = withMDX(
     exportPathMap: function() {
       return {
         '/': { page: '/' },
-        '/blog': { page: '/blog' },
         '/profile': { page: '/profile' },
         '/dedicon': { page: '/dedicon' },
-        '/hilfiger': { page: '/hilfiger' },
-        '/blog/node-pdf': { page: '/blog/node-pdf' },
-        '/blog/css-in-depth': { page: '/blog/css-in-depth' }
+        '/hilfiger': { page: '/hilfiger' }
       }
     }
   })

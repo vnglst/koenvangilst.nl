@@ -17,8 +17,11 @@ export default () => (
           <Link prefetch href="/profile">
             <a>profile</a>
           </Link>{' '}
-          if you're interested in working with me. Or else feel free to browse
-          through my experiments, projects and tutorials below.
+          if you're interested in working with me or else feel free to browse
+          through my experiments and projects below.
+        </p>
+        <p>
+          I also keep a blog <a href="https://vangilst.netlify.com">here</a>.
         </p>
         <p>
           You can also find me on
