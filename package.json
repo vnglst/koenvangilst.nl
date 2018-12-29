@@ -16,7 +16,7 @@
   "scripts": {
     "build": "next build && next export && cp -R static-root/* out/",
     "stage": "yarn build && surge -p ./out -d personal.koenvangilst.nl",
-    "deploy": "yarn build && netlify deploy out/",
+    "deploy": "yarn build && netlify deploy --prod --dir=out/ --open",
     "start": "next"
   },
   "keywords": [],
