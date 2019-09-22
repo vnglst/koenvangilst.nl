@@ -9,7 +9,7 @@ export default () => (
         <h1>Hi there!</h1>
         <p>
           My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who
-          loves creating funny Twitter bots, educational games for my kids other
+          loves creating funny Twitter bots, educational games for my kids and other
           creative stuff.
         </p>
         <p>
