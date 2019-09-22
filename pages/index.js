@@ -9,7 +9,7 @@ export default () => (
         <h1>Hi there!</h1>
         <p>
           My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who
-          loves creating funny Twitter bots, educational games for my kids other
+          loves creating funny Twitter bots, educational games for my kids and other
           creative stuff.
         </p>
         <p>
@@ -21,7 +21,7 @@ export default () => (
           through my experiments and projects below.
         </p>
         <p>
-          I also keep a blog <a href="https://blog.koenvangilst.nl">here</a>.
+          I keep a blog <a href="https://blog.koenvangilst.nl">here</a>.
         </p>
         <p>
           You can also find me on
