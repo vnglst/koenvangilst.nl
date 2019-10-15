@@ -1,5 +1,5 @@
-import './styling/navigation.css'
-import Link from 'next/link'
+import "./styling/navigation.css";
+import Link from "next/link";
 
 export default ({ menu }) => (
   <header>
@@ -13,11 +13,11 @@ export default ({ menu }) => (
           </Link>
         </span>
         <span className="nav-links">
-          <Link prefetch href="/">
-            <a className={menu === 'home' ? 'active' : null}>Home</a>
+          <Link href="/">
+            <a className={menu === "home" ? "active" : null}>Home</a>
           </Link>
-          <Link prefetch href="/profile">
-            <a className={menu === 'profile' ? 'active' : null}>Profile</a>
+          <Link href="/profile">
+            <a className={menu === "profile" ? "active" : null}>Profile</a>
           </Link>
           <a href="https://blog.koenvangilst.nl" className="blog">
             Blog
@@ -26,4 +26,4 @@ export default ({ menu }) => (
       </div>
     </nav>
   </header>
-)
+);
