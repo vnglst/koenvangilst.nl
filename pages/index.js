@@ -47,7 +47,7 @@ export default () => (
           <li>💃 micro animations</li>
           <li>⛺ full offline support</li>
           <li>⌛ prefetching JavaScript</li>
-          <li>💻 service side rendering</li>
+          <li>💻 server side rendering</li>
         </ul>
         <span className="links">
           <a href="https://tafels.app">Play</a> +{" "}
