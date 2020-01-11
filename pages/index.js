@@ -3,291 +3,114 @@ import Creations from "../components/creations";
 import Link from "next/link";
 
 export default () => (
-  <Layout title="JavaScript Labs | Koen van Gilst" menu="home">
+  <Layout title="Profile | Koen van Gilst" menu="home">
     <Creations>
-      <Creations.Item fullWidth>
-        <h1>Hi there!</h1>
+      <Creations.Item>
+        <h1>Koen van Gilst</h1>
         <p>
-          My name is <b>Koen van Gilst</b> and I'm a JavaScript developer who
-          loves creating funny Twitter bots, educational games for my kids and
-          other creative stuff.
+          Passionate & entrepreneurial JavaScript developer based in Utrecht.
+          M.A. in Philosophy (cum laude) and a minor in Computational Science.
+          Specializes in modern frontend (React) and backend (Node). Interested
+          in working with <b>inspiring</b> companies to create innovative web
+          apps that users love.
         </p>
         <p>
-          Have a look at my{" "}
-          <Link href="/profile">
-            <a>profile</a>
-          </Link>{" "}
-          if you're interested in working with me or else feel free to browse
-          through my experiments and projects below.
-        </p>
-        <p>
-          I keep a blog <a href="https://blog.koenvangilst.nl">here</a>.
-        </p>
-        <p>
-          You can also find me on
-          <a href="https://github.com/vnglst"> Github</a>,
-          <a href="https://nl.linkedin.com/in/vangilst/"> LinkedIn</a> and
-          <a href="https://www.twitter.com/vnglst"> Twitter</a>. Or send me an{" "}
+          You can find me on <a href="https://github.com/vnglst">Github</a>,{" "}
+          <a href="http://nl.linkedin.com/in/vangilst/">LinkedIn</a> and{" "}
+          <a href="http://www.twitter.com/vnglst">Twitter</a> or send me an{" "}
           <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;">
             email
           </a>
           .
         </p>
-        <span className="links">Have fun!</span>
       </Creations.Item>
 
       <Creations.Item>
-        <h2>Tafels.App</h2>
-        <p>
-          A new year, a new JavaScript framework! Using <code>svelte</code> I
-          created this PWA to help my kids with math. Goal is to create an
-          app-like experience:
-        </p>
-        <ul style={{ padding: 0, listStyleType: "none" }}>
-          <li>💃 micro animations</li>
-          <li>⛺ full offline support</li>
-          <li>⌛ prefetching JavaScript</li>
-          <li>💻 server side rendering</li>
-        </ul>
-        <span className="links">
-          <a href="https://tafels.app">Play</a> +{" "}
-          <a href="https://github.com/vnglst/tafels.app">Source</a> [<b>2020</b>
-          ]
-        </span>
+        <img src="/static/img/koen-photo.jpg" alt="Koen van Gilst" />
       </Creations.Item>
 
-      <Creations.Item>
-        <h2>Lumber Jack</h2>
-        <p>
-          Weekend project to learn more about Mobx State Tree. Simple kids game
-          inspired by Stardew Valley and Monty Python. Don't forget to turn on
-          sound!
-          <ul style={{ padding: 0, listStyleType: "none" }}>
-            <li>🌳 mobx state tree</li>
-            <li>💃 react pose for animations</li>
-            <li>
-              🚀 <code>create-react-app</code> + TypeScript
-            </li>
-            <li>🎺 web audio for sounds</li>
-          </ul>
-        </p>
-        <span className="links">
-          <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
-          <a href="https://github.com/vnglst/lumber-jack">Source</a> [
-          <b>2019</b>]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Multiple experiments</h2>
-        <p>With React, CSS animations, hooks and UI's.</p>
-        <span className="links">
-          🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
-          <a href="https://github.com/vnglst/klok">Source</a>
-          <br />
-          🖌 <a href="https://kids-draw.netlify.com/">Kids Draw</a> +{" "}
-          <a href="https://github.com/vnglst/kids-draw">Source</a>
-          <br />
-          📖 <a href="https://write-only.netlify.com">Write Only</a> +{" "}
-          <a href="https://github.com/vnglst/write-only">Source</a>
-          <br />
-          <br />[<b>2019</b>]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Peter and the Wolf</h2>
-        <p>
-          Progressive Web App for kids, based upon the classical piece "Peter
-          and the Wolf" by Prokofiev. Turns out that making large mp3s available
-          offline is harder than I thought.
-        </p>
-        <span className="links">
-          <a href="https://peter-and-the-wolf.netlify.com">Play</a> +{" "}
-          <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a> [
-          <b>2018</b>]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Finding Nora</h2>
-        <p>
-          I created this fun little PWA for my daughter Nora to help her spell
-          her name. She loved it, hope you do too!
-        </p>
-        <ul style={{ padding: 0, listStyleType: "none" }}>
+      <Creations.Item fullWidth>
+        <h2>Notable Client Project</h2>
+        <ul>
           <li>
-            🚀 <code>create-react-app</code> + TypeScript
+            For <b>Stichting Dedicon</b> I created a player for their audio
+            books collections, it's designed specifically for users with visual
+            impairments. The player also has a karaoke function that highlights
+            the text currently being read for children with dyslexia.{" "}
+            <Link href="/dedicon">
+              <a>Demo page (in Dutch)</a>
+            </Link>
           </li>
-          <li>⛺ full offline support</li>
-          <li>🎺 web audio for sounds</li>
+          <li>
+            For <b>Tommy Hilfiger</b> worked as a fullstack JavaScript developer
+            on their loyality app <i>MyTommy</i>. The app itself was build in
+            React Native for both iPhone and Android, with a restful
+            Node/Express API on the backend.
+            <Link href="/hilfiger">
+              <a>Demo page (in Dutch)</a>
+            </Link>
+          </li>
+          <li>
+            The <b>Dutch Chambre of Commerce (KVK)</b> has a high traffic
+            website (about 1.5 million visitors per month) with multiple
+            applications that help companies do business in The Netherlands. As
+            a frontend engineer I'm part of the team building and deploying the
+            new Online Registration web app, which makes it easier for Dutch
+            entrepreneurs to register their business online.
+          </li>
         </ul>
-        <span className="links">
-          <a href="https://finding-nora.com">Play</a> +{" "}
-          <a href="https://github.com/vnglst/finding-nora">Source</a> [
-          <b>2018</b>]
-        </span>
+      </Creations.Item>
+
+      <Creations.Item fullWidth>
+        <h2>Skills</h2>
+        <ul>
+          <li>
+            <b>Platforms:</b> Web, Node.js, Mobile (iOS)
+          </li>
+          <li>
+            <b>Languages:</b> JavaScript, TypeScript, HTML5, CSS3
+          </li>
+          <li>
+            <b>Frameworks:</b> React, React Native, Redux, Express, Next.js,
+            Svelte, Sapper, jQuery
+          </li>
+          <li>
+            <b>Tooling & Testing:</b> react-testing-library, Webpack, Lerna,
+            Babel, Jest, Nock, Detox, Cypress, Git, Unix
+          </li>
+          <li>
+            <b>Knowledgeable:</b> CI/CD, Testing, Monorepos, Single Page Apps,
+            Accessibility, Server Side Rendering, Progressive Web Apps,
+            Internationalization
+          </li>
+          <li>
+            <b>Services:</b> Docker, Gitlab CI, MongoDB, Postgresql, BuddyBuild,
+            Mixpanel, Google Tag Manager, Heroku, AWS, Google Cloud, Jira,
+            Sentry, Bugsnag
+          </li>
+        </ul>
       </Creations.Item>
 
       <Creations.Item>
-        <h2>MyTommy Loyalty App</h2>
-        <p>
-          For Tommy Hilfiger I worked in a Scrum team as a fullstack JavaScript
-          developer on their loyality app <b>MyTommy</b>.
-        </p>
-        <span className="links">
-          <Link href="/hilfiger">
-            <a>Demo page (in Dutch)</a>
-          </Link>{" "}
-          [<b>2018</b>]
-        </span>
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>
+            ).
+          </li>
+          <li>
+            <b>Minor in Computational Science</b>, Utrecht University.
+          </li>
+          <li>
+            <b>Erasmus Student Exchange</b>, Universität Regensburg (Germany).
+          </li>
+        </ul>
       </Creations.Item>
 
       <Creations.Item>
-        <h2>Audio Books Player</h2>
-        <p>
-          For Dedicon I created a player for their audio books collections, it's
-          designed specifically for users with visual impairments. The player
-          also has a karaoke function that highlights the text currently being
-          read for children with dyslexia.
-        </p>
-        <span className="links">
-          <Link href="/dedicon">
-            <a>Demo page (in Dutch)</a>
-          </Link>{" "}
-          [<b>2017</b>]
-        </span>
+        <h2>References</h2>
+        <p>References, code samples and a copy of my resume upon request.</p>
       </Creations.Item>
-
-      <Creations.Item>
-        <h2>Star Wars or Star Trek?</h2>
-        <p>
-          Why not both? Using just CSS and a bit of JavaScript I recreated these
-          classic science fiction intro's.
-        </p>
-        <span className="links">
-          <a href="http://star-trek.netlify.com">Star Trek</a> +{" "}
-          <a href="https://github.com/vnglst/startrek ">Source</a>
-          <br />
-          <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}
-          <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
-        </span>
-      </Creations.Item>
-
-      {/* <Creations.Item>
-        <h2>Shortcut Trainer</h2>
-        <p>
-          Quickly learn the 10 most commonly used keyboard shortcuts for the
-          translation CAT tool MemoQ. Weekend project using React.
-        </p>
-        <span className="links">
-          <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a> +{" "}
-          <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [
-          <b>2016</b>]
-        </span>
-      </Creations.Item> */}
-
-      {/* <Creations.Item>
-        <h2>LaTeX Letters</h2>
-        <p>
-          Creating beautiful PDF letters using LaTeX in a Docker container on a
-          server.
-        </p>
-        <span className="links">
-          <a href="https://github.com/vnglst/latex-letter">Source code</a> [
-          <b>2016</b>]
-        </span>
-      </Creations.Item> */}
-
-      {/* <Creations.Item>
-        <h2>Rush hour timelapse</h2>
-        <p>
-          A Twitter bot that creates daily timelapse videos of the traffic jams
-          in The Netherlands. No longer active, but you can still see some of
-          the old timelapses.
-        </p>
-        <span className="links">
-          <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{" "}
-          <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
-        </span>
-      </Creations.Item> */}
-
-      <Creations.Item>
-        <h2>Term Search</h2>
-        <p>
-          A terminology search engine for translators. Currently only
-          German-Dutch terms. Work in progress. [ No longer online ]
-        </p>
-        <p>Technologies: NodeJS, Express, MongoDB, Loopback, ReactJS.</p>
-        <span className="links">
-          <a href="https://github.com/TermSearch">Source</a> [<b>2016</b>]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Help Terence!</h2>
-        <p>
-          A Twitter bot raising emoji money for his trip around the world. Fun
-          little experiment with social media and Twitter bots. [ No longer
-          active ]
-        </p>
-        <p>Technologies used: Express, MongoDB.</p>
-        <span className="links">
-          <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{" "}
-          <a href="https://github.com/vnglst/HelpTerence">Source</a> [
-          <b>2016</b>]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Word to Line Prices</h2>
-        <p>
-          A simple web app for translators that converts a price per word to a
-          price per standard line (55 characters).
-        </p>
-        <span className="links">
-          <a href="http://converter.koenvangilst.nl/">Visit the app</a> +{" "}
-          <a href="https://github.com/vnglst/converter2">Source</a> [<b>2016</b>
-          ]
-        </span>
-      </Creations.Item>
-
-      <Creations.Item>
-        <h2>Wikipedia edits by the Dutch government</h2>
-        <p>
-          Twitter bot inspired by{" "}
-          <a href="https://twitter.com/congressedits">@congressedits</a> that
-          monitors and Tweets any edits made to Wikipedia by the Dutch
-          government.
-        </p>
-        <span className="links">
-          <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{" "}
-          <a href="https://github.com/vnglst/OverheidEdits">Source</a> [
-          <b>2013</b>]
-        </span>
-      </Creations.Item>
-
-      {/* <Creations.Item>
-        <h2>Starfield</h2>
-        <p>
-          I once wrote this program in assembly, but this time I wanted to do it
-          in Javascript.
-        </p>
-        <span className="links">
-          <a href="http://starfield.koenvangilst.nl/">Demo</a> [<b>2013</b>]
-        </span>
-      </Creations.Item> */}
-
-      {/* <Creations.Item>
-        <h2>Dawkins' Trees</h2>
-        <p>
-          For this web app I've tried to recreate (in part) the program Richard
-          Dawkins describes in his book The Blind Watchmaker.
-        </p>
-        <span className="links">
-          <a href="http://dawkins.koenvangilst.nl/">Demo</a> [<b>2013</b>]
-        </span>
-      </Creations.Item> */}
     </Creations>
   </Layout>
 );
