@@ -174,7 +174,7 @@ export default () => (
         </span>
       </Creations.Item>
 
-      <Creations.Item>
+      {/* <Creations.Item>
         <h2>Shortcut Trainer</h2>
         <p>
           Quickly learn the 10 most commonly used keyboard shortcuts for the
@@ -185,9 +185,9 @@ export default () => (
           <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [
           <b>2016</b>]
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
 
-      <Creations.Item>
+      {/* <Creations.Item>
         <h2>LaTeX Letters</h2>
         <p>
           Creating beautiful PDF letters using LaTeX in a Docker container on a
@@ -197,9 +197,9 @@ export default () => (
           <a href="https://github.com/vnglst/latex-letter">Source code</a> [
           <b>2016</b>]
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
 
-      <Creations.Item>
+      {/* <Creations.Item>
         <h2>Rush hour timelapse</h2>
         <p>
           A Twitter bot that creates daily timelapse videos of the traffic jams
@@ -210,7 +210,7 @@ export default () => (
           <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{" "}
           <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
 
       <Creations.Item>
         <h2>Term Search</h2>
@@ -267,7 +267,7 @@ export default () => (
         </span>
       </Creations.Item>
 
-      <Creations.Item>
+      {/* <Creations.Item>
         <h2>Starfield</h2>
         <p>
           I once wrote this program in assembly, but this time I wanted to do it
@@ -276,9 +276,9 @@ export default () => (
         <span className="links">
           <a href="http://starfield.koenvangilst.nl/">Demo</a> [<b>2013</b>]
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
 
-      <Creations.Item>
+      {/* <Creations.Item>
         <h2>Dawkins' Trees</h2>
         <p>
           For this web app I've tried to recreate (in part) the program Richard
@@ -287,7 +287,7 @@ export default () => (
         <span className="links">
           <a href="http://dawkins.koenvangilst.nl/">Demo</a> [<b>2013</b>]
         </span>
-      </Creations.Item>
+      </Creations.Item> */}
     </Creations>
   </Layout>
 );
