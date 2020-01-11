@@ -1,6 +1,5 @@
 import Layout from "../components/layout";
 import Creations from "../components/creations";
-import Link from "next/link";
 
 export default () => (
   <Layout title="JavaScript Labs | Koen van Gilst" menu="labs">
@@ -11,7 +10,7 @@ export default () => (
           I love creating educational games for my kids, interesting Twitter
           bots and other creative stuff. Below you'll find a collection of some
           of my (more recent) JavaScript experiments. I love feedback, so feel
-          free to drop me a line if you{" "}
+          free to drop me a line on{" "}
           <a href="http://www.twitter.com/vnglst">Twitter</a> if you liked them.
         </p>
         <span className="links">Have fun!</span>
