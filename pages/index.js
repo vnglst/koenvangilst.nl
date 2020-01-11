@@ -166,7 +166,7 @@ export default () => (
           classic science fiction intro's.
         </p>
         <span className="links">
-          <a href="http://startrek.koenvangilst.nl">Star Trek</a> +{" "}
+          <a href="http://star-trek.netlify.com">Star Trek</a> +{" "}
           <a href="https://github.com/vnglst/startrek ">Source</a>
           <br />
           <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}
