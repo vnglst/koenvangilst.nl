@@ -16,8 +16,8 @@ export default ({ menu }) => (
           <Link href="/">
             <a className={menu === "home" ? "active" : null}>Home</a>
           </Link>
-          <Link href="/profile">
-            <a className={menu === "profile" ? "active" : null}>Profile</a>
+          <Link href="/labs">
+            <a className={menu === "labs" ? "active" : null}>Labs</a>
           </Link>
           <a href="https://blog.koenvangilst.nl" className="blog">
             Blog
