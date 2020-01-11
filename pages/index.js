@@ -37,11 +37,70 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Peter and the Wolf</h1>
+        <h2>Tafels.App</h2>
         <p>
-          I created this PWA for my kids, based upon the classical piece "Peter
+          A new year, a new JavaScript framework! Using <code>svelte</code> I
+          created this PWA to help my kids with math. Goal is to create an
+          app-like experience:
+        </p>
+        <ul style={{ padding: 0, listStyleType: "none" }}>
+          <li>💃 micro animations</li>
+          <li>⛺ full offline support</li>
+          <li>⌛ prefetching JavaScript</li>
+          <li>💻 service side rendering</li>
+        </ul>
+        <span className="links">
+          <a href="https://tafels.app">Play</a> +{" "}
+          <a href="https://github.com/vnglst/tafels.app">Source</a> [<b>2020</b>
+          ]
+        </span>
+      </Creations.Item>
+
+      <Creations.Item>
+        <h2>Lumber Jack</h2>
+        <p>
+          Weekend project to learn more about Mobx State Tree. Simple kids game
+          inspired by Stardew Valley and Monty Python. Don't forget to turn on
+          sound!
+          <ul style={{ padding: 0, listStyleType: "none" }}>
+            <li>🌳 mobx state tree</li>
+            <li>💃 react pose for animations</li>
+            <li>
+              🚀 <code>create-react-app</code> + TypeScript
+            </li>
+            <li>🎺 web audio for sounds</li>
+          </ul>
+        </p>
+        <span className="links">
+          <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
+          <a href="https://github.com/vnglst/lumber-jack">Source</a> [
+          <b>2019</b>]
+        </span>
+      </Creations.Item>
+
+      <Creations.Item>
+        <h2>Multiple experiments</h2>
+        <p>With React, CSS animations, hooks and UI's.</p>
+        <span className="links">
+          🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
+          <a href="https://github.com/vnglst/klok">Source</a>
+          <br />
+          🖌 <a href="https://kids-draw.netlify.com/">Kids Draw</a> +{" "}
+          <a href="https://github.com/vnglst/kids-draw">Source</a>
+          <br />
+          📖 <a href="https://write-only.netlify.com">Write Only</a> +{" "}
+          <a href="https://github.com/vnglst/write-only">Source</a>
+          <br />
+          <br />[<b>2019</b>]
+        </span>
+      </Creations.Item>
+
+      <Creations.Item>
+        <h2>Peter and the Wolf</h2>
+        <p>
+          Progressive Web App for kids, based upon the classical piece "Peter
           and the Wolf" by Prokofiev. Turns out that making large mp3s available
-          offline was harder than I thought.
+          offline is harder than I thought.
         </p>
         <span className="links">
           <a href="https://peter-and-the-wolf.netlify.com">Play</a> +{" "}
@@ -51,7 +110,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Finding Nora</h1>
+        <h2>Finding Nora</h2>
         <p>
           I created this fun little PWA for my daughter Nora to help her spell
           her name. She loved it, hope you do too!
@@ -71,7 +130,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>MyTommy Loyalty App</h1>
+        <h2>MyTommy Loyalty App</h2>
         <p>
           For Tommy Hilfiger I worked in a Scrum team as a fullstack JavaScript
           developer on their loyality app <b>MyTommy</b>.
@@ -85,7 +144,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Audio Books Player</h1>
+        <h2>Audio Books Player</h2>
         <p>
           For Dedicon I created a player for their audio books collections, it's
           designed specifically for users with visual impairments. The player
@@ -101,7 +160,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Star Wars or Star Trek?</h1>
+        <h2>Star Wars or Star Trek?</h2>
         <p>
           Why not both? Using just CSS and a bit of JavaScript I recreated these
           classic science fiction intro's.
@@ -116,7 +175,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Shortcut Trainer</h1>
+        <h2>Shortcut Trainer</h2>
         <p>
           Quickly learn the 10 most commonly used keyboard shortcuts for the
           translation CAT tool MemoQ. Weekend project using React.
@@ -129,7 +188,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>LaTeX Letters</h1>
+        <h2>LaTeX Letters</h2>
         <p>
           Creating beautiful PDF letters using LaTeX in a Docker container on a
           server.
@@ -141,7 +200,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Rush hour timelapse</h1>
+        <h2>Rush hour timelapse</h2>
         <p>
           A Twitter bot that creates daily timelapse videos of the traffic jams
           in The Netherlands. No longer active, but you can still see some of
@@ -154,7 +213,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Term Search</h1>
+        <h2>Term Search</h2>
         <p>
           A terminology search engine for translators. Currently only
           German-Dutch terms. Work in progress. [ No longer online ]
@@ -166,7 +225,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Help Terence!</h1>
+        <h2>Help Terence!</h2>
         <p>
           A Twitter bot raising emoji money for his trip around the world. Fun
           little experiment with social media and Twitter bots. [ No longer
@@ -181,7 +240,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Word to Line Prices</h1>
+        <h2>Word to Line Prices</h2>
         <p>
           A simple web app for translators that converts a price per word to a
           price per standard line (55 characters).
@@ -194,7 +253,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Wikipedia edits by the Dutch government</h1>
+        <h2>Wikipedia edits by the Dutch government</h2>
         <p>
           Twitter bot inspired by{" "}
           <a href="https://twitter.com/congressedits">@congressedits</a> that
@@ -209,7 +268,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Starfield</h1>
+        <h2>Starfield</h2>
         <p>
           I once wrote this program in assembly, but this time I wanted to do it
           in Javascript.
@@ -220,7 +279,7 @@ export default () => (
       </Creations.Item>
 
       <Creations.Item>
-        <h1>Dawkins' Trees</h1>
+        <h2>Dawkins' Trees</h2>
         <p>
           For this web app I've tried to recreate (in part) the program Richard
           Dawkins describes in his book The Blind Watchmaker.
