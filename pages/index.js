@@ -45,7 +45,7 @@ export default () => (
             For <b>Tommy Hilfiger</b> worked as a fullstack JavaScript developer
             on their loyality app <i>MyTommy</i>. The app itself was build in
             React Native for both iPhone and Android, with a restful
-            Node/Express API on the backend.
+            Node/Express API on the backend.{" "}
             <Link href="/hilfiger">
               <a>Demo page (in Dutch)</a>
             </Link>
