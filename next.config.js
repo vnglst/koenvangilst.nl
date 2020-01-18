@@ -16,6 +16,7 @@ module.exports = {
       "/labs": { page: "/labs" },
       "/dedicon": { page: "/dedicon" },
       "/hilfiger": { page: "/hilfiger" },
+      "/kvk": { page: "/kvk" },
     };
   },
 };
