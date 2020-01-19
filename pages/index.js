@@ -11,7 +11,7 @@ export default () => (
           Passionate & entrepreneurial JavaScript developer based in Utrecht.
           M.A. in Philosophy (cum laude) and a minor in Computational Science.
           Specializes in modern frontend (React) and backend (Node). Interested
-          in working with <b>inspiring</b> companies to create innovative web
+          in working with <b>inspiring</b> companies that create innovative web
           apps that users love.
         </p>
         <p>
