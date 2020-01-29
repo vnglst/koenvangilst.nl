@@ -5,13 +5,16 @@ export default () => (
   <Layout title="JavaScript Labs | Koen van Gilst" menu="labs">
     <Creations>
       <Creations.Item fullWidth>
-        <h1>Hi there!</h1>
         <p>
-          I love creating educational games for my kids, interesting Twitter
-          bots and other creative stuff. Below you'll find a collection of some
-          of my (more recent) JavaScript experiments. I love feedback, so feel
-          free to drop me a line on{" "}
-          <a href="http://www.twitter.com/vnglst">Twitter</a> if you liked them.
+          Below you'll find a collection of my (more recent) JavaScript
+          experiments. It's mostly educational progressive web apps, some
+          Twitter bots and other creative stuff. I generally use these
+          experiments to learn more about a certain technology or library, so
+          don't take the code too seriously. 🐒
+        </p>
+        <p>
+          Feel free to drop me a line on{" "}
+          <a href="http://www.twitter.com/vnglst">Twitter</a> if you like them!
         </p>
         <span className="links">Have fun!</span>
       </Creations.Item>
@@ -20,7 +23,7 @@ export default () => (
         <h2>Tafels.App</h2>
         <p>
           A new year, a new JavaScript framework! Using <code>svelte</code> I
-          created this PWA to help my kids with math. Goal is to create an
+          created this PWA to help my kids with math. Goal was to create an
           app-like experience:
         </p>
         <ul style={{ padding: 0, listStyleType: "none" }}>
@@ -61,8 +64,8 @@ export default () => (
       <Creations.Item>
         <h2>Multiple experiments</h2>
         <p>
-          To play with the new React Hooks, CSS animations and UI's I did some
-          experiments. The following websites were are result of this.
+          Some experiments to play with the new React Hooks and micro animations
+          in web UIs.
         </p>
         <span className="links">
           🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
@@ -82,10 +85,9 @@ export default () => (
         <h2>Size of NPM</h2>
         <p>
           I thought it might be (mildly) interesting to keep track of how the
-          NPM <code>node_modules</code> folder grows over time. So I made this
-          website that keeps track of the folder size of the top 100 npm
-          packages. It's been running for a while now and the results are...
-          frightening?
+          NPM <code>node_modules</code> folder grows over time. This website
+          keeps track of the size of the top 100 npm packages. It's been running
+          for a while now and the results are... frightening?
         </p>
         <span className="links">
           <a href="https://size-of-npm.netlify.com/">View</a> +{" "}
@@ -97,10 +99,10 @@ export default () => (
       <Creations.Item>
         <h2>Protest Against</h2>
         <p>
-          Feel like protesting against some minor injustice? I created this
-          (somewhat silly) web app using web sockets to make this as easy and
-          fun as possible! Multiple users required, but you can also open more
-          tabs.
+          Feel like protesting against some minor injustice? This (somewhat
+          silly) web app makes this as easy and fun as liking something on
+          Facebook! Multiple users required, but you can also open more tabs
+          (wait for the app to wake up).
         </p>
         <span className="links">
           <a href="https://protest-against.now.sh">Play</a> +{" "}
