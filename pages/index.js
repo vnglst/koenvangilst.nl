@@ -36,15 +36,15 @@ export default () => (
             For <b>Stichting Dedicon</b> I created a player for their audio
             books collections, it's designed specifically for users with visual
             impairments. The player also has a karaoke function that highlights
-            the text currently being read for children with dyslexia.{" "}
+            the text currently being read, which helps children with dyslexia.{" "}
             <Link href="/dedicon">
               <a>Demo page (in Dutch)</a>
             </Link>
           </li>
           <li>
-            For <b>Tommy Hilfiger</b> worked as a fullstack JavaScript developer
-            on their loyality app <i>MyTommy</i>. The app itself was build in
-            React Native for both iPhone and Android, with a restful
+            For <b>Tommy Hilfiger</b> I worked as a fullstack JavaScript
+            developer on their loyality app <i>MyTommy</i>. The app itself was
+            build in React Native for both iPhone and Android, with a restful
             Node/Express API on the backend.{" "}
             <Link href="/hilfiger">
               <a>Demo page (in Dutch)</a>
@@ -52,11 +52,11 @@ export default () => (
           </li>
           <li>
             The <b>Dutch Chambre of Commerce (KVK)</b> has a high traffic
-            website (about 1.5 million visitors per month) with multiple
-            applications that help companies do business in The Netherlands. As
-            a frontend engineer I'm part of the team building and deploying the
-            new Online Registration web app, which makes it easier for Dutch
-            entrepreneurs to register their business online.
+            website (about 1.5 million visitors per month) with applications
+            that help companies do business in The Netherlands. As a frontend
+            engineer I'm part of the team building and deploying the new Online
+            Registration web app, which makes it easier for Dutch entrepreneurs
+            to register their business online.
           </li>
         </ul>
       </Creations.Item>
