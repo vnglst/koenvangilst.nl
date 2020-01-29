@@ -47,7 +47,7 @@ export default () => (
             build in React Native for both iPhone and Android, with a restful
             Node/Express API on the backend.{" "}
             <Link href="/hilfiger">
-              <a>Demo page (in Dutch)</a>
+              <a>Demo page</a>
             </Link>
           </li>
           <li>
