@@ -1,8 +1,9 @@
+import { FC } from "react";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 
-export default () => (
-  <Layout title="Tommy Hilfiger | Koen van Gilst" menu="hilfiger">
+const Hilfiger: FC = () => (
+  <Layout title="Tommy Hilfiger | Koen van Gilst" menu="home">
     <Card extraClasses="col-span-2">
       <h1>MyTommy</h1>
       <p>
@@ -66,3 +67,5 @@ export default () => (
     </Card>
   </Layout>
 );
+
+export default Hilfiger;

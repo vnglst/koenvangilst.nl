@@ -1,7 +1,8 @@
+import { FC } from "react";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 
-export default () => (
+const Labs: FC = () => (
   <Layout title="JavaScript Labs | Koen van Gilst" menu="labs">
     <Card extraClasses="col-span-2">
       <h1>JavaScript Labs</h1>
@@ -292,3 +293,5 @@ export default () => (
     </Card> */}
   </Layout>
 );
+
+export default Labs;

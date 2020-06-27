@@ -1,8 +1,9 @@
+import { FC } from "react";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Link from "next/link";
 
-const Home = () => {
+const Home: FC = () => {
   return (
     <Layout title="Home | Koen van Gilst" menu="home">
       <Card extraClasses="col-span-2">
