@@ -58,10 +58,6 @@ export default () => (
     </Card>
 
     <Card>
-      <img src="/static/img/tafels.png" />
-    </Card>
-
-    <Card>
       <h2>Lumber Jack</h2>
       <p>
         Weekend project to learn more about Mobx State Tree. Simple kids game
@@ -80,10 +76,6 @@ export default () => (
         <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
         <a href="https://github.com/vnglst/lumber-jack">Source</a> [<b>2019</b>]
       </Card.Footer>
-    </Card>
-
-    <Card>
-      <img src="/static/img/lumberjack.png" />
     </Card>
 
     <Card>
@@ -135,10 +127,6 @@ export default () => (
     </Card>
 
     <Card>
-      <img src="/static/img/protest.png" />
-    </Card>
-
-    <Card>
       <h2>Peter and the Wolf</h2>
       <p>
         Progressive Web App for kids, based upon the classical piece "Peter and
@@ -150,10 +138,6 @@ export default () => (
         <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a> [
         <b>2018</b>]
       </Card.Footer>
-    </Card>
-
-    <Card>
-      <img src="/static/img/peter.png" />
     </Card>
 
     <Card>
@@ -177,10 +161,6 @@ export default () => (
     </Card>
 
     <Card>
-      <img src="/static/img/nora.png" />
-    </Card>
-
-    <Card>
       <h2>
         Star Wars
         <br />
@@ -197,10 +177,6 @@ export default () => (
         <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}
         <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
       </Card.Footer>
-    </Card>
-
-    <Card>
-      <img src="/static/img/startrek.png" />
     </Card>
 
     {/* <Card>
@@ -291,10 +267,6 @@ export default () => (
         <a href="https://github.com/vnglst/OverheidEdits">Source</a> [
         <b>2014</b>]
       </Card.Footer>
-    </Card>
-
-    <Card>
-      <img src="/static/img/wiki.png" />
     </Card>
 
     {/* <Card>

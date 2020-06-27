@@ -10,7 +10,7 @@ export default () => (
         JavaScript developer on their loyality app <b>MyTommy</b>. I worked on
         new features and bug fixes, in particular:
       </p>
-      <ul className="list-outside pl-4 mb-3">
+      <ul className="list-outside pl-5 mb-3">
         <li>Internationalization (backend and frontend, React-Intl)</li>
         <li>An Instagram feature, see screenshots below</li>
         <li>Mixpanel tracking</li>
@@ -27,7 +27,7 @@ export default () => (
     <Card>
       <h1>Backend</h1>
       <p>Node.js Express API:</p>
-      <ul className="list-outside pl-4">
+      <ul className="list-outside pl-5">
         <li>Nock for gray box testing</li>
         <li>Bugsnag for error reporting</li>
         <li>Postgresql (Knex) database</li>
@@ -38,7 +38,7 @@ export default () => (
     <Card>
       <h1>Frontend</h1>
       <p>React + Redux:</p>
-      <ul className="list-outside pl-4">
+      <ul className="list-outside pl-5">
         <li>Redux Thunk, Persist etc.</li>
         <li>React Intl for localization</li>
         <li>Jest + Enyzme for unit tests</li>

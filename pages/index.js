@@ -28,7 +28,7 @@ const Home = () => {
 
       <Card extraClasses="col-span-2">
         <h2>Skills</h2>
-        <ul className="list-outside pl-4">
+        <ul className="list-outside pl-5">
           <li>
             <b>Platforms:</b> Web, Node.js, Mobile (iOS)
           </li>
@@ -58,7 +58,7 @@ const Home = () => {
 
       <Card extraClasses="col-span-2">
         <h2>Notable Client Project</h2>
-        <ul className="list-outside pl-4">
+        <ul className="list-outside pl-5">
           <li>
             for <b>Stichting Dedicon</b> I created a player for their audio
             books collections, it's designed specifically for users with visual
@@ -90,7 +90,7 @@ const Home = () => {
 
       <Card>
         <h2>Education</h2>
-        <ul className="list-outside pl-4">
+        <ul className="list-outside pl-5">
           <li>
             <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>
             ).
