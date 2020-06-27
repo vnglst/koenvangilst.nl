@@ -1,12 +1,8 @@
-import Head from 'next/head'
-import Navigation from './navigation'
-import Footer from './footer'
+import Head from "next/head";
+import Navigation from "./navigation";
+import Footer from "./footer";
 
-import './styling/font-awesome.css'
-import './styling/normalize.css'
-import './styling/styles.css'
-
-export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
+export default ({ children, title = "Koen van Gilst", menu = "home" }) => (
   <div>
     <Head>
       <meta charSet="utf-8" />
@@ -27,8 +23,10 @@ export default ({ children, title = 'Koen van Gilst', menu = 'home' }) => (
 
     <Navigation menu={menu} />
 
-    <main className="content">{children}</main>
+    <main className="max-w-2xl mx-auto my-4 md:grid md:gap-3 md:grid-cols-2">
+      {children}
+    </main>
 
     <Footer />
   </div>
-)
+);

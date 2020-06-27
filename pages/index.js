@@ -1,20 +1,21 @@
 import Layout from "../components/layout";
-import Creations from "../components/creations";
+import Card from "../components/Card";
 import Link from "next/link";
 
-export default () => (
-  <Layout title="Profile | Koen van Gilst" menu="home">
-    <Creations>
-      <Creations.Item>
-        <h1>Koen van Gilst</h1>
+const Home = () => {
+  return (
+    <Layout title="Home | Koen van Gilst" menu="home">
+      <Card extraClasses="col-span-2">
+        <h1>Hi, I'm Koen!</h1>
         <p>
-          Passionate & entrepreneurial JavaScript developer based in Utrecht.
-          M.A. in Philosophy (cum laude) and a minor in Computational Science.
-          Specializes in modern frontend (React) and backend (Node). Interested
-          in working with <b>inspiring</b> companies that create innovative web
-          apps that users love.
+          I'm a passionate & entrepreneurial JavaScript developer from the
+          Netherlands who likes to push the web beyond it's limits. I specialize
+          in modern frontend (React, Svelte) and I also feel comfortable on the
+          backed using Node/TypeScript. I'm Interested in helping{" "}
+          <b>inspiring</b> companies create innovative web apps that{" "}
+          <b>users love</b>.
         </p>
-        <p>
+        <Card.Footer>
           You can find me on <a href="https://github.com/vnglst">Github</a>,{" "}
           <a href="http://nl.linkedin.com/in/vangilst/">LinkedIn</a> and{" "}
           <a href="http://www.twitter.com/vnglst">Twitter</a> or send me an{" "}
@@ -22,48 +23,12 @@ export default () => (
             email
           </a>
           .
-        </p>
-      </Creations.Item>
+        </Card.Footer>
+      </Card>
 
-      <Creations.Item>
-        <img src="/static/img/koen-photo.jpg" alt="Koen van Gilst" />
-      </Creations.Item>
-
-      <Creations.Item fullWidth>
-        <h2>Notable Client Project</h2>
-        <ul>
-          <li>
-            For <b>Stichting Dedicon</b> I created a player for their audio
-            books collections, it's designed specifically for users with visual
-            impairments. The player also has a karaoke function that highlights
-            the text currently being read, which helps children with dyslexia.{" "}
-            <Link href="/dedicon">
-              <a>Demo page (in Dutch)</a>
-            </Link>
-          </li>
-          <li>
-            For <b>Tommy Hilfiger</b> I worked as a fullstack JavaScript
-            developer on their loyality app <i>MyTommy</i>. The app itself was
-            build in React Native for both iPhone and Android, with a restful
-            Node/Express API on the backend.{" "}
-            <Link href="/hilfiger">
-              <a>Demo page</a>
-            </Link>
-          </li>
-          <li>
-            The <b>Dutch Chambre of Commerce (KVK)</b> has a high traffic
-            website (about 1.5 million visitors per month) with applications
-            that help companies do business in The Netherlands. As a frontend
-            engineer I'm part of the team building and deploying the new Online
-            Registration web app, which makes it easier for Dutch entrepreneurs
-            to register their business online.
-          </li>
-        </ul>
-      </Creations.Item>
-
-      <Creations.Item fullWidth>
+      <Card extraClasses="col-span-2">
         <h2>Skills</h2>
-        <ul>
+        <ul className="list-outside pl-4">
           <li>
             <b>Platforms:</b> Web, Node.js, Mobile (iOS)
           </li>
@@ -89,11 +54,43 @@ export default () => (
             Sentry, Bugsnag
           </li>
         </ul>
-      </Creations.Item>
+      </Card>
 
-      <Creations.Item>
+      <Card extraClasses="col-span-2">
+        <h2>Notable Client Project</h2>
+        <ul className="list-outside pl-4">
+          <li>
+            for <b>Stichting Dedicon</b> I created a player for their audio
+            books collections, it's designed specifically for users with visual
+            impairments. The player also has a karaoke function that highlights
+            the text currently being read, which helps children with dyslexia.{" "}
+            <Link href="/dedicon">
+              <a>Demo page (in Dutch)</a>
+            </Link>
+          </li>
+          <li>
+            for <b>Tommy Hilfiger</b> I worked as a fullstack JavaScript
+            developer on their loyality app <i>MyTommy</i>. The app itself was
+            build in React Native for both iPhone and Android, with a restful
+            Node/Express API on the backend.{" "}
+            <Link href="/hilfiger">
+              <a>Demo page</a>
+            </Link>
+          </li>
+          <li>
+            the <b>Dutch Chambre of Commerce (KVK)</b> has a high traffic
+            website (about 1.5 million visitors per month) with applications
+            that help companies do business in The Netherlands. As a frontend
+            engineer I'm part of the team building and deploying the new Online
+            Registration web app, which makes it easier for Dutch entrepreneurs
+            to register their business online.
+          </li>
+        </ul>
+      </Card>
+
+      <Card>
         <h2>Education</h2>
-        <ul>
+        <ul className="list-outside pl-4">
           <li>
             <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>
             ).
@@ -105,12 +102,14 @@ export default () => (
             <b>Erasmus Student Exchange</b>, Universität Regensburg (Germany).
           </li>
         </ul>
-      </Creations.Item>
+      </Card>
 
-      <Creations.Item>
+      <Card>
         <h2>References</h2>
         <p>References, code samples and a copy of my resume upon request.</p>
-      </Creations.Item>
-    </Creations>
-  </Layout>
-);
+      </Card>
+    </Layout>
+  );
+};
+
+export default Home;

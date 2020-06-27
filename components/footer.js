@@ -1,4 +1,3 @@
-import './styling/footer.css'
 
 export default () => (
   <footer>

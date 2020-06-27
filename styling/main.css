@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+
+html {
+  @apply text-gray-900 antialiased leading-tight;
+  text-rendering: geometricPrecision;
+  line-height: 1.6;
+}
+
+body {
+  @apply bg-white;
+}
+
+h1 {
+  @apply text-2xl mb-2;
+}
+
+h2 {
+  @apply text-xl mb-2;
+}
+
+h3 {
+  @apply text-lg mb-2;
+}
+
+ul {
+  @apply list-disc;
+}
+
+li {
+  @apply mb-1;
+}
+
+p {
+  @apply mb-2;
+}
+
+a {
+  @apply text-kvg-blue underline;
+}
+
+.blink {
+  animation: blink-animation 1s step-start 1s infinite;
+}
+
+@keyframes blink-animation {
+  50% {
+    opacity: 0;
+  }
+}
+
+@tailwind utilities;
