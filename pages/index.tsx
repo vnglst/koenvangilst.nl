@@ -12,7 +12,7 @@ const Home: FC = () => {
           I'm a passionate & entrepreneurial JavaScript developer from the
           Netherlands who likes to push the web beyond it's limits. I specialize
           in modern frontend using React & Svelte and I also feel at home on the
-          backed using Node/TypeScript.
+          backend using Node/TypeScript.
         </p>
         <p>
           I'm interested in helping inspiring companies create innovative web
