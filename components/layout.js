@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Navigation from "./navigation";
+import Navigation from "./Navigation";
 import Footer from "./footer";
 
 export default ({ children, title = "Koen van Gilst", menu = "home" }) => (
