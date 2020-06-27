@@ -4,7 +4,7 @@ const Card = ({ extraClasses, children }) => {
   return (
     <article
       className={cx(
-        "mx-4 my-8 md:m-4 overflow-hidden flex flex-col rounded-md",
+        "p-2 m-3 overflow-hidden flex flex-col rounded-md",
         extraClasses
       )}
     >

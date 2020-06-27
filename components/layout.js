@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Navigation from "./Navigation";
-import Footer from "./footer";
+import Footer from "./Footer";
 
 export default ({ children, title = "Koen van Gilst", menu = "home" }) => (
   <div>
@@ -23,7 +23,7 @@ export default ({ children, title = "Koen van Gilst", menu = "home" }) => (
 
     <Navigation menu={menu} />
 
-    <main className="max-w-2xl mx-auto my-4 md:grid md:gap-3 md:grid-cols-2">
+    <main className="max-w-2xl mx-auto md:grid md:gap-3 md:grid-cols-2">
       {children}
     </main>
 

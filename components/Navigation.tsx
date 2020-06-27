@@ -9,8 +9,8 @@ interface Props {
 
 const Navigation: FC<Props> = ({ menu }) => {
   return (
-    <nav className="border-b border-dashed border-gray-900 px-4 py-4 bg-white">
-      <ul className="max-w-4xl mx-auto text-sm uppercase flex list-none">
+    <nav className="p-4 bg-white">
+      <ul className="max-w-3xl mb-2 lg:mb-4 mx-auto text-sm uppercase flex list-none">
         <NavLink className="mr-auto">
           <Link href="/">
             <a className="text-kvg-blue no-underline">
