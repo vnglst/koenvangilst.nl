@@ -1,6 +1,15 @@
+import { FC } from "react";
 import cx from "classnames";
 
-const Card = ({ extraClasses, children }) => {
+interface Props {
+  extraClasses: string;
+}
+
+interface Footer {
+  Footer: React.FC;
+}
+
+const Card: FC<Props> & Footer = ({ children, extraClasses }) => {
   return (
     <article
       className={cx(
@@ -13,7 +22,7 @@ const Card = ({ extraClasses, children }) => {
   );
 };
 
-const Footer = ({ children }) => {
+const Footer: FC = ({ children }) => {
   return <span className="mt-auto">{children}</span>;
 };
 

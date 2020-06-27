@@ -1,4 +1,6 @@
-const Footer = () => {
+import { FC } from "react";
+
+const Footer: FC = () => {
   return (
     <footer className="my-8 text-gray-600 text-sm text-center">
       <a href="https://www.linkedin.com/in/vangilst/">LinkedIn</a> |{" "}
