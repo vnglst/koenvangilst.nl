@@ -2,7 +2,7 @@ import { FC } from "react";
 import cx from "classnames";
 
 interface Props {
-  extraClasses: string;
+  extraClasses?: string;
 }
 
 interface Footer {
