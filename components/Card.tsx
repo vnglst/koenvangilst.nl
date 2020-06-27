@@ -23,7 +23,7 @@ const Card: FC<Props> & Footer = ({ children, extraClasses }) => {
 };
 
 const Footer: FC = ({ children }) => {
-  return <span className="mt-auto">{children}</span>;
+  return <span className="mt-auto text-sm">{children}</span>;
 };
 
 Card.Footer = Footer;

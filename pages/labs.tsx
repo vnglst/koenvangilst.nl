@@ -15,27 +15,19 @@ const Labs: FC = () => (
       </p>
       <p>
         Feel free to drop me a line on{" "}
-        <a href="http://www.twitter.com/vnglst">Twitter</a> if you like them!
+        <a href="http://www.twitter.com/vnglst">Twitter</a> if you like them.
       </p>
-      <Card.Footer>Have fun!</Card.Footer>
     </Card>
 
     {/* <Card>
       <h2>Decentralized Chat</h2>
       <p>
-        A new year, a new JavaScript framework! Using <code>svelte</code> I
-        created this PWA to help my kids with math. Goal was to create an
-        app-like experience:
+        TODO
       </p>
       <ul className="list-none mb-2">
         <li>💃 micro animations</li>
-        <li>⛺ full offline support</li>
-        <li>⌛ prefetching JavaScript</li>
-        <li>💻 server side rendering</li>
       </ul>
       <Card.Footer>
-        <a href="https://tafels.app">Play</a> +{" "}
-        <a href="https://github.com/vnglst/tafels.app">Source</a> [<b>2020</b>]
       </Card.Footer>
     </Card> */}
 
@@ -53,8 +45,8 @@ const Labs: FC = () => (
         <li>💻 server side rendering</li>
       </ul>
       <Card.Footer>
-        <a href="https://tafels.app">Play</a> +{" "}
-        <a href="https://github.com/vnglst/tafels.app">Source</a> [<b>2020</b>]
+        [2020] <a href="https://tafels.app">Play</a> +{" "}
+        <a href="https://github.com/vnglst/tafels.app">Source</a>
       </Card.Footer>
     </Card>
 
@@ -74,8 +66,8 @@ const Labs: FC = () => (
         <li>🎺 web audio for sounds</li>
       </ul>
       <Card.Footer>
-        <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
-        <a href="https://github.com/vnglst/lumber-jack">Source</a> [<b>2019</b>]
+        [2019] <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
+        <a href="https://github.com/vnglst/lumber-jack">Source</a>
       </Card.Footer>
     </Card>
 
@@ -86,14 +78,15 @@ const Labs: FC = () => (
         in web UIs.
       </p>
       <Card.Footer>
-        🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
+        [2019]
+        <br /> 🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
         <a href="https://github.com/vnglst/klok">Source</a>
         <br />
         🖌 <a href="https://kids-draw.netlify.com/">Kids Draw</a> +{" "}
         <a href="https://github.com/vnglst/kids-draw">Source</a>
         <br />
         📖 <a href="https://write-only.netlify.com">Write Only</a> +{" "}
-        <a href="https://github.com/vnglst/write-only">Source</a> [<b>2019</b>]
+        <a href="https://github.com/vnglst/write-only">Source</a>
       </Card.Footer>
     </Card>
 
@@ -106,9 +99,8 @@ const Labs: FC = () => (
         while now and the results are... frightening?
       </p>
       <Card.Footer>
-        <a href="https://size-of-npm.netlify.com/">View</a> +{" "}
-        <a href="https://github.com/vnglst/size-of-npm/">Source</a> [<b>2018</b>
-        ]
+        [2018] <a href="https://size-of-npm.netlify.com/">View</a> +{" "}
+        <a href="https://github.com/vnglst/size-of-npm/">Source</a>
       </Card.Footer>
     </Card>
 
@@ -121,9 +113,8 @@ const Labs: FC = () => (
         app to wake up).
       </p>
       <Card.Footer>
-        <a href="https://protest-against.now.sh">Play</a> +{" "}
-        <a href="https://github.com/vnglst/protest-against">Source</a> [
-        <b>2018</b>]
+        [2018] <a href="https://protest-against.now.sh">Play</a> +{" "}
+        <a href="https://github.com/vnglst/protest-against">Source</a>
       </Card.Footer>
     </Card>
 
@@ -135,9 +126,8 @@ const Labs: FC = () => (
         offline is harder than I thought.
       </p>
       <Card.Footer>
-        <a href="https://peter-and-the-wolf.netlify.com">Play</a> +{" "}
-        <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a> [
-        <b>2018</b>]
+        [2018] <a href="https://peter-and-the-wolf.netlify.com">Play</a> +{" "}
+        <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a>
       </Card.Footer>
     </Card>
 
@@ -155,9 +145,8 @@ const Labs: FC = () => (
         <li>🎺 web audio for sounds</li>
       </ul>
       <Card.Footer>
-        <a href="https://finding-nora.com">Play</a> +{" "}
-        <a href="https://github.com/vnglst/finding-nora">Source</a> [<b>2018</b>
-        ]
+        [2018] <a href="https://finding-nora.com">Play</a> +{" "}
+        <a href="https://github.com/vnglst/finding-nora">Source</a>
       </Card.Footer>
     </Card>
 
@@ -172,11 +161,12 @@ const Labs: FC = () => (
         these classic science fiction intro's.
       </p>
       <Card.Footer>
+        [2017] <br />
         <a href="http://star-trek.netlify.com">Star Trek</a> +{" "}
         <a href="https://github.com/vnglst/startrek ">Source</a>
         <br />
         <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}
-        <a href="https://github.com/vnglst/starwars">Source</a> [<b>2017</b>]
+        <a href="https://github.com/vnglst/starwars">Source</a>
       </Card.Footer>
     </Card>
 
@@ -187,9 +177,8 @@ const Labs: FC = () => (
           translation CAT tool MemoQ. Weekend project using React.
         </p>
         <Card.Footer>
-          <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a> +{" "}
-          <a href="https://github.com/vnglst/shortcut-trainer">Source</a> [
-          <b>2016</b>]
+          [2016] <a href="http://shortcut-trainer.koenvangilst.nl/">Demo</a> +{" "}
+          <a href="https://github.com/vnglst/shortcut-trainer">Source</a>
         </Card.Footer>
       </Card> */}
 
@@ -200,8 +189,7 @@ const Labs: FC = () => (
           server.
         </p>
         <Card.Footer>
-          <a href="https://github.com/vnglst/latex-letter">Source code</a> [
-          <b>2016</b>]
+          [2016] <a href="https://github.com/vnglst/latex-letter">Source code</a>          
         </Card.Footer>
       </Card> */}
 
@@ -213,8 +201,8 @@ const Labs: FC = () => (
         timelapses.
       </p>
       <Card.Footer>
-        <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{" "}
-        <a href="https://github.com/vnglst/spitsuur">Source</a> [<b>2016</b>]
+        [2016] <a href="https://twitter.com/altijdfiles">@altijdfiles</a> +{" "}
+        <a href="https://github.com/vnglst/spitsuur">Source</a>
       </Card.Footer>
     </Card>
 
@@ -222,11 +210,11 @@ const Labs: FC = () => (
       <h2>Term Search</h2>
       <p>
         A terminology search engine for translators. Currently only German-Dutch
-        terms. Work in progress. [ No longer online ]
+        terms. Work in progress. [no longer active]
       </p>
       <p>Technologies: NodeJS, Express, MongoDB, Loopback, ReactJS.</p>
       <Card.Footer>
-        <a href="https://github.com/TermSearch">Source</a> [<b>2016</b>]
+        [2016] <a href="https://github.com/TermSearch">Source</a>
       </Card.Footer>
     </Card>
 
@@ -234,13 +222,12 @@ const Labs: FC = () => (
       <h2>Help Terence!</h2>
       <p>
         A Twitter bot raising emoji money for his trip around the world. Fun
-        little experiment with social media and Twitter bots. [ No longer active
-        ]
+        little experiment with social media and Twitter bots. [no longer active]
       </p>
       <p>Technologies used: Express, MongoDB.</p>
       <Card.Footer>
-        <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{" "}
-        <a href="https://github.com/vnglst/HelpTerence">Source</a> [<b>2016</b>]
+        [2016] <a href="https://twitter.com/helpTerence"> @helpTerence </a> +{" "}
+        <a href="https://github.com/vnglst/HelpTerence">Source</a>
       </Card.Footer>
     </Card>
 
@@ -251,8 +238,8 @@ const Labs: FC = () => (
         price per standard line (55 characters).
       </p>
       <Card.Footer>
-        <a href="http://converter.koenvangilst.nl/">Visit the app</a> +{" "}
-        <a href="https://github.com/vnglst/converter2">Source</a> [<b>2016</b>]
+        [2016] <a href="http://converter.koenvangilst.nl/">Visit the app</a> +{" "}
+        <a href="https://github.com/vnglst/converter2">Source</a>
       </Card.Footer>
     </Card>
 
@@ -264,9 +251,8 @@ const Labs: FC = () => (
         monitors and Tweets any edits made to Wikipedia by the Dutch government.
       </p>
       <Card.Footer>
-        <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{" "}
-        <a href="https://github.com/vnglst/OverheidEdits">Source</a> [
-        <b>2014</b>]
+        [2014] <a href="https://twitter.com/OverheidEdits">@OverheidEdits</a> +{" "}
+        <a href="https://github.com/vnglst/OverheidEdits">Source</a>
       </Card.Footer>
     </Card>
 
@@ -277,7 +263,7 @@ const Labs: FC = () => (
         in Javascript.
       </p>
       <Card.Footer>
-        <a href="http://starfield.koenvangilst.nl/">Demo</a> [<b>2013</b>]
+        <a href="http://starfield.koenvangilst.nl/">Demo</a> [2013]
       </Card.Footer>
     </Card> */}
 
@@ -288,7 +274,7 @@ const Labs: FC = () => (
         Dawkins describes in his book The Blind Watchmaker.
       </p>
       <Card.Footer>
-        <a href="http://dawkins.koenvangilst.nl/">Demo</a> [<b>2013</b>]
+        <a href="http://dawkins.koenvangilst.nl/">Demo</a> [2013]
       </Card.Footer>
     </Card> */}
   </Layout>

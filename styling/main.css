@@ -5,9 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,900&display=swap");
 
 html {
-  @apply text-gray-900 antialiased leading-tight;
+  @apply text-gray-900 antialiased leading-6;
   text-rendering: geometricPrecision;
-  line-height: 1.6;
   font-family: "Merriweather", "Georgia", serif;
 }
 
@@ -22,11 +21,11 @@ h4,
 h5,
 h6 {
   @apply my-4;
-  line-height: 1.1;
+  @apply leading-tight;
 }
 
 h1 {
-  @apply text-2xl font-black mb-6;
+  @apply text-2xl font-black;
   font-family: "Montserrat", sans-serif;
 }
 

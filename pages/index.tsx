@@ -18,7 +18,7 @@ const Home: FC = () => {
           I'm interested in helping inspiring companies create innovative web
           apps that users love.
         </p>
-        <Card.Footer>
+        <p>
           You can find me on <a href="https://github.com/vnglst">Github</a>,{" "}
           <a href="http://nl.linkedin.com/in/vangilst/">LinkedIn</a> and{" "}
           <a href="http://www.twitter.com/vnglst">Twitter</a> or send me an{" "}
@@ -26,7 +26,7 @@ const Home: FC = () => {
             email
           </a>
           .
-        </Card.Footer>
+        </p>
       </Card>
 
       <Card extraClasses="col-span-2">
