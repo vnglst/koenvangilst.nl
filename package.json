@@ -17,6 +17,9 @@
     "tailwindcss": "^1.4.6",
     "typescript": "^3.9.5"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "build": "next build && next export",
     "deploy": "yarn build && netlify deploy --prod --dir=out/ --open",
