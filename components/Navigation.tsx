@@ -10,7 +10,7 @@ interface Props {
 const Navigation: FC<Props> = ({ menu }) => {
   return (
     <nav className="p-4 bg-white">
-      <ul className="max-w-3xl mb-2 lg:mb-4 mx-auto text-sm uppercase flex list-none">
+      <ul className="font-sans text-base uppercase max-w-3xl mb-2 lg:mb-4 mx-auto  flex list-none">
         <NavLink className="mr-auto">
           <Link href="/">
             <a className="text-kvg-blue no-underline">

@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const Footer: FC = () => {
   return (
-    <footer className="my-8 text-gray-600 text-sm text-center">
+    <footer className="my-10 text-gray-600 text-sm text-center">
       <a href="https://www.linkedin.com/in/vangilst/">LinkedIn</a> |{" "}
       <a href="https://twitter.com/vnglst">Twitter</a> |{" "}
       <a href="https://github.com/vnglst">GitHub</a>

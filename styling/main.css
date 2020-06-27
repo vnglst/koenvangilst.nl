@@ -1,26 +1,41 @@
 @tailwind base;
 @tailwind components;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,900&display=swap");
+
 html {
   @apply text-gray-900 antialiased leading-tight;
   text-rendering: geometricPrecision;
   line-height: 1.6;
+  font-family: "Merriweather", "Georgia", serif;
 }
 
 body {
   @apply bg-white;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply my-4;
+  line-height: 1.1;
+}
+
 h1 {
-  @apply text-2xl mb-2;
+  @apply text-2xl font-black;
+  font-family: "Montserrat", sans-serif;
 }
 
 h2 {
-  @apply text-xl mb-2;
+  @apply text-lg font-black;
 }
 
 h3 {
-  @apply text-lg mb-2;
+  @apply text-lg;
 }
 
 ul {
