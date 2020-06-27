@@ -11,10 +11,12 @@ const Home: FC = () => {
         <p>
           I'm a passionate & entrepreneurial JavaScript developer from the
           Netherlands who likes to push the web beyond it's limits. I specialize
-          in modern frontend (React, Svelte) and I also feel comfortable on the
-          backed using Node/TypeScript. I'm Interested in helping{" "}
-          <b>inspiring</b> companies create innovative web apps that{" "}
-          <b>users love</b>.
+          in modern frontend using React & Svelte and I also feel at home on the
+          backed using Node/TypeScript.
+        </p>
+        <p>
+          I'm interested in helping inspiring companies create innovative web
+          apps that users love.
         </p>
         <Card.Footer>
           You can find me on <a href="https://github.com/vnglst">Github</a>,{" "}
@@ -29,28 +31,24 @@ const Home: FC = () => {
 
       <Card extraClasses="col-span-2">
         <h2>Skills</h2>
-        <ul className="list-outside pl-5">
+        <ul className="list-outside pl-4">
+          <li>Platforms: Web, Node.js, Mobile (iOS)</li>
+          <li>Languages: JavaScript, TypeScript, HTML5, CSS3</li>
           <li>
-            <b>Platforms:</b> Web, Node.js, Mobile (iOS)
+            Frameworks: React, React Native, Redux, Express, Next.js, Svelte,
+            Sapper, jQuery
           </li>
           <li>
-            <b>Languages:</b> JavaScript, TypeScript, HTML5, CSS3
+            Tooling & Testing: react-testing-library, Webpack, Lerna, Babel,
+            Jest, Nock, Detox, Cypress, Git, Unix
           </li>
           <li>
-            <b>Frameworks:</b> React, React Native, Redux, Express, Next.js,
-            Svelte, Sapper, jQuery
-          </li>
-          <li>
-            <b>Tooling & Testing:</b> react-testing-library, Webpack, Lerna,
-            Babel, Jest, Nock, Detox, Cypress, Git, Unix
-          </li>
-          <li>
-            <b>Knowledgeable:</b> CI/CD, Testing, Monorepos, Single Page Apps,
+            Knowledgeable: CI/CD, Testing, Monorepos, Single Page Apps,
             Accessibility, Server Side Rendering, Progressive Web Apps,
             Internationalization
           </li>
           <li>
-            <b>Services:</b> Docker, Gitlab CI, MongoDB, Postgresql, BuddyBuild,
+            Services: Docker, Gitlab CI, MongoDB, Postgresql, BuddyBuild,
             Mixpanel, Google Tag Manager, Heroku, AWS, Google Cloud, Jira,
             Sentry, Bugsnag
           </li>
@@ -59,10 +57,10 @@ const Home: FC = () => {
 
       <Card extraClasses="col-span-2">
         <h2>Notable Client Project</h2>
-        <ul className="list-outside pl-5">
+        <ul className="list-outside pl-4">
           <li>
-            for <b>Stichting Dedicon</b> I created a player for their audio
-            books collections, it's designed specifically for users with visual
+            For Stichting Dedicon I created a player for their audio books
+            collections, it's designed specifically for users with visual
             impairments. The player also has a karaoke function that highlights
             the text currently being read, which helps children with dyslexia.{" "}
             <Link href="/dedicon">
@@ -70,38 +68,34 @@ const Home: FC = () => {
             </Link>
           </li>
           <li>
-            for <b>Tommy Hilfiger</b> I worked as a fullstack JavaScript
-            developer on their loyality app <i>MyTommy</i>. The app itself was
-            build in React Native for both iPhone and Android, with a restful
-            Node/Express API on the backend.{" "}
+            For Tommy Hilfiger I worked as a fullstack JavaScript developer on
+            their loyality app <i>MyTommy</i>. The app itself was build in React
+            Native for both iPhone and Android, with a restful Node/Express API
+            on the backend.{" "}
             <Link href="/hilfiger">
               <a>Demo page</a>
             </Link>
           </li>
           <li>
-            the <b>Dutch Chambre of Commerce (KVK)</b> has a high traffic
-            website (about 1.5 million visitors per month) with applications
-            that help companies do business in The Netherlands. As a frontend
-            engineer I'm part of the team building and deploying the new Online
-            Registration web app, which makes it easier for Dutch entrepreneurs
-            to register their business online.
+            The Dutch Chambre of Commerce (KVK) has a high traffic website
+            (about 1.5 million visitors per month) with applications that help
+            companies do business in The Netherlands. As a frontend engineer I'm
+            part of the team building and deploying the new Online Registration
+            web app, which makes it possible for Dutch entrepreneurs to register
+            their business completely online.
           </li>
         </ul>
       </Card>
 
       <Card>
         <h2>Education</h2>
-        <ul className="list-outside pl-5">
+        <ul className="list-outside pl-4">
           <li>
-            <b>M.A. in Philosophy</b>, Utrecht University (<i>cum laude</i>
+            M.A. in Philosophy, Utrecht University (<i>cum laude</i>
             ).
           </li>
-          <li>
-            <b>Minor in Computational Science</b>, Utrecht University.
-          </li>
-          <li>
-            <b>Erasmus Student Exchange</b>, Universität Regensburg (Germany).
-          </li>
+          <li>Minor in Computational Science, Utrecht University.</li>
+          <li>Erasmus Student Exchange, Universität Regensburg (Germany).</li>
         </ul>
       </Card>
 
