@@ -34,7 +34,7 @@ const Layout: FC<Props> = ({
 
       <Navigation menu={menu} />
 
-      <main className="max-w-2xl mx-auto md:grid md:gap-3 md:grid-cols-2">
+      <main className="max-w-2xl mx-auto md:grid md:gap-2 md:grid-cols-2">
         {children}
       </main>
 

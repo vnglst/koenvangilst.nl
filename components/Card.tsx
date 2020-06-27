@@ -13,7 +13,7 @@ const Card: FC<Props> & Footer = ({ children, extraClasses }) => {
   return (
     <article
       className={cx(
-        "p-2 m-3 overflow-hidden flex flex-col rounded-md",
+        "p-2 m-2 overflow-hidden flex flex-col rounded-md",
         extraClasses
       )}
     >
