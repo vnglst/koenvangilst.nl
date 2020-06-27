@@ -25,6 +25,16 @@ const Layout: FC<Props> = ({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap"
+          rel="stylesheet"
+        />
+
         <link
           rel="shortcut icon"
           type="image/png"

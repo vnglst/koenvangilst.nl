@@ -57,7 +57,7 @@ const Home: FC = () => {
 
       <Card extraClasses="col-span-2">
         <h2>Notable Client Project</h2>
-        <ul className="list-outside pl-4">
+        <ul className="list-outside pl-4 leading-7">
           <li>
             For Stichting Dedicon I created a player for their audio books
             collections, it's designed specifically for users with visual
