@@ -66,7 +66,7 @@ const Labs: FC = () => (
         <li>🎺 web audio for sounds</li>
       </ul>
       <Card.Footer>
-        [2019] <a href="https://lumber-jack.netlify.com">Play</a> +{" "}
+        [2019] <a href="https://lumber-jack.netlify.app">Play</a> +{" "}
         <a href="https://github.com/vnglst/lumber-jack">Source</a>
       </Card.Footer>
     </Card>
@@ -79,13 +79,13 @@ const Labs: FC = () => (
       </p>
       <Card.Footer>
         [2019]
-        <br /> 🕐 <a href="https://klok.netlify.com">Klok</a> +{" "}
+        <br /> 🕐 <a href="https://klok.netlify.app">Klok</a> +{" "}
         <a href="https://github.com/vnglst/klok">Source</a>
         <br />
-        🖌 <a href="https://kids-draw.netlify.com/">Kids Draw</a> +{" "}
+        🖌 <a href="https://kids-draw.netlify.app/">Kids Draw</a> +{" "}
         <a href="https://github.com/vnglst/kids-draw">Source</a>
         <br />
-        📖 <a href="https://write-only.netlify.com">Write Only</a> +{" "}
+        📖 <a href="https://write-only.netlify.app">Write Only</a> +{" "}
         <a href="https://github.com/vnglst/write-only">Source</a>
       </Card.Footer>
     </Card>
@@ -99,7 +99,7 @@ const Labs: FC = () => (
         while now and the results are... frightening?
       </p>
       <Card.Footer>
-        [2018] <a href="https://size-of-npm.netlify.com/">View</a> +{" "}
+        [2018] <a href="https://size-of-npm.netlify.app/">View</a> +{" "}
         <a href="https://github.com/vnglst/size-of-npm/">Source</a>
       </Card.Footer>
     </Card>
@@ -126,7 +126,7 @@ const Labs: FC = () => (
         offline is harder than I thought.
       </p>
       <Card.Footer>
-        [2018] <a href="https://peter-and-the-wolf.netlify.com">Play</a> +{" "}
+        [2018] <a href="https://peter-and-the-wolf.netlify.app">Play</a> +{" "}
         <a href="https://github.com/vnglst/peter-and-the-wolf">Source</a>
       </Card.Footer>
     </Card>
@@ -162,7 +162,7 @@ const Labs: FC = () => (
       </p>
       <Card.Footer>
         [2017] <br />
-        <a href="http://star-trek.netlify.com">Star Trek</a> +{" "}
+        <a href="http://star-trek.netlify.app">Star Trek</a> +{" "}
         <a href="https://github.com/vnglst/startrek ">Source</a>
         <br />
         <a href="http://starwars.koenvangilst.nl">Star Wars</a> +{" "}

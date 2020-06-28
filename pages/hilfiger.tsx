@@ -26,7 +26,7 @@ const Hilfiger: FC = () => (
     </Card>
 
     <Card>
-      <h1>Backend</h1>
+      <h2>Backend</h2>
       <p>Node.js Express API:</p>
       <ul className="list-outside pl-5">
         <li>Nock for gray box testing</li>
@@ -37,7 +37,7 @@ const Hilfiger: FC = () => (
     </Card>
 
     <Card>
-      <h1>Frontend</h1>
+      <h2>Frontend</h2>
       <p>React + Redux:</p>
       <ul className="list-outside pl-5">
         <li>Redux Thunk, Persist etc.</li>

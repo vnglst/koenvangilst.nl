@@ -59,30 +59,30 @@ const Home: FC = () => {
         <h2>Notable Client Project</h2>
         <ul className="list-outside pl-4 leading-7">
           <li>
-            For Stichting Dedicon I created a player for their audio books
-            collections, it's designed specifically for users with visual
-            impairments. The player also has a karaoke function that highlights
-            the text currently being read, which helps children with dyslexia.{" "}
+            For <i>Stichting Dedicon</i> I created a player for their audio
+            books collections. It's build specifically for users with visual
+            impairments. The player has a karaoke function that highlights the
+            text currently being read, which helps children with dyslexia.{" "}
             <Link href="/dedicon">
-              <a>Demo page (in Dutch)</a>
+              <a>Read more about the Online Player here...</a>
             </Link>
           </li>
           <li>
-            For Tommy Hilfiger I worked as a fullstack JavaScript developer on
-            their loyality app <i>MyTommy</i>. The app itself was build in React
+            For <i>Tommy Hilfiger</i> I worked as a fullstack JavaScript
+            developer on their loyality app MyTommy. The app is build in React
             Native for both iPhone and Android, with a restful Node/Express API
             on the backend.{" "}
             <Link href="/hilfiger">
-              <a>Demo page</a>
+              <a>Read more about MyTommy here...</a>
             </Link>
           </li>
           <li>
-            The Dutch Chambre of Commerce (KVK) has a high traffic website
-            (about 1.5 million visitors per month) with applications that help
-            companies do business in The Netherlands. As a frontend engineer I'm
-            part of the team building and deploying the new Online Registration
-            web app, which makes it possible for Dutch entrepreneurs to register
-            their business completely online.
+            The Dutch <i>Chambre of Commerce</i> (KVK) has a high traffic
+            website (about 1.5 million visitors per month) with applications
+            that help companies do business in The Netherlands. As a frontend
+            engineer I'm part of the team building and deploying the new Online
+            Registration web app, which makes it possible for Dutch
+            entrepreneurs to register their business completely online.
           </li>
         </ul>
       </Card>

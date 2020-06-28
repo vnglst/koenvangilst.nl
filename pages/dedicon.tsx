@@ -6,19 +6,17 @@ const Dedicon: FC = () => {
   return (
     <Layout title="Dedicon | Koen van Gilst" menu="home">
       <Card extraClasses="col-span-2">
-        <h1>
-          Project Online Player <span>[OLP]</span>
-        </h1>
+        <h1>Dedicon</h1>
         <p>
           Ontwikkeling van een online audiospeler in opdracht van Dedicon voor
           Stichting Passend Lezen.
         </p>
         <p>
-          Met de OLP krijgt de gebruiker op verschillende manieren ondersteuning
-          bij het lezen. De ondersteuning bestaat o.a. uit een markering van de
-          zin/woorden van de door een menselijke stem voorgelezen tekst.
-          Daarnaast kunnen voorleessnelheid, lettergrootte, kleuren etc. worden
-          aangepast.
+          Met de Online Player (OLP) krijgt de gebruiker op verschillende
+          manieren ondersteuning bij het lezen. De ondersteuning bestaat o.a.
+          uit een markering van de zin/woorden van de door een menselijke stem
+          voorgelezen tekst. Daarnaast kunnen voorleessnelheid, lettergrootte,
+          kleuren etc. worden aangepast.
         </p>
         <p>
           De OLP is geschikt gemaakt voor gebruik met een schermlezer en kan met
@@ -27,29 +25,25 @@ const Dedicon: FC = () => {
       </Card>
 
       <Card>
-        <h1>Voorbeeld audioboek</h1>
+        <h2>Voorbeeld audioboek</h2>
         <p>
           Hierbij opent de OLP het boek "Harry Potter en het vervloekte kind" in
           de audiomodus.
         </p>
-        <span className="links">
-          <a href="https://olp.netlify.app/?bookUrl=https://olp.netlify.app/harry-potter/ncc.html">
-            Harry Potter en het vervloekte kind (fragment)
-          </a>
-        </span>
+        <a href="https://olp.netlify.app/?bookUrl=https://olp.netlify.app/harry-potter/ncc.html">
+          Harry Potter en het vervloekte kind (fragment)
+        </a>
       </Card>
 
       <Card>
-        <h1>Voorbeeld combiboek</h1>
+        <h2>Voorbeeld combiboek</h2>
         <p>
           Hierbij opent de OLP het boek "Geel Gras" in de combimodus, waarbij de
           tekst en het woord wordt gemarkeerd.
         </p>
-        <span className="links">
-          <a href="https://olp.netlify.app/?bookUrl=https://olp.netlify.app/geel-gras/ncc.html">
-            Geel Gras (fragment)
-          </a>
-        </span>
+        <a href="https://olp.netlify.app/?bookUrl=https://olp.netlify.app/geel-gras/ncc.html">
+          Geel Gras (fragment)
+        </a>
       </Card>
 
       <Card>
