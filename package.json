@@ -1,13 +1,22 @@
 {
-  "name": "personal-website",
-  "version": "2.0.0",
+  "name": "koenvangilst.nl",
+  "version": "3.0.0",
   "description": "Koen van Gilst's personal website",
   "main": "index.js",
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "next": "^9.1.7",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "classnames": "^2.2.6",
+    "netlify-plugin-cache-nextjs": "^1.4.0",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "@types/react": "^16.9.41",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.4.6",
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "build": "next build && next export",
@@ -15,6 +24,6 @@
     "start": "next"
   },
   "keywords": [],
-  "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
+  "author": "Koen van Gilst <koen@koenvangilst.nl> (http://koenvangilst.nl)",
   "license": "MIT"
 }
