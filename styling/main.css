@@ -2,7 +2,9 @@
 @tailwind components;
 
 html {
-  @apply text-gray-900 antialiased leading-6;
+  @apply text-gray-900;
+  @apply antialiased;
+  @apply leading-6;
   text-rendering: geometricPrecision;
   font-family: "Merriweather", "Georgia", serif;
 }
@@ -22,12 +24,15 @@ h6 {
 }
 
 h1 {
-  @apply text-2xl font-black;
+  @apply text-3xl;
+  @apply font-black;
+  @apply my-5;
   font-family: "Montserrat", sans-serif;
 }
 
 h2 {
-  @apply text-lg font-black;
+  @apply text-xl;
+  @apply font-black;
 }
 
 h3 {
@@ -47,7 +52,8 @@ p {
 }
 
 a {
-  @apply text-kvg-blue underline;
+  @apply text-kvg-blue;
+  @apply underline;
 }
 
 .blink {
