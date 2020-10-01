@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.2.6",
-    "netlify-plugin-cache-nextjs": "^1.4.0",
+    "netlify-plugin-cache-nextjs": "^1.5.2",
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
