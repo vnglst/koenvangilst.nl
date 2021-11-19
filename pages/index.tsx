@@ -56,7 +56,7 @@ const Home: FC = () => {
       </Card>
 
       <Card extraClasses="col-span-2">
-        <h2>Notable Client Project</h2>
+        <h2>Notable client projects</h2>
         <ul className="list-outside pl-4 leading-7">
           <li>
             For <i>Stichting Dedicon</i> I created a player for their audio
