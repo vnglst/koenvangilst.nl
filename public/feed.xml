@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Koen van Gilst]]></title>
+        <description><![CDATA[Koen van Gilst]]></description>
+        <link>https://koenvangilst.nl</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Sat, 20 Nov 2021 11:26:54 GMT</lastBuildDate>
+        <atom:link href="https://koenvangilst.nl/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[303 See Other]]></title>
+            <description><![CDATA[Last week I learned a few things about how redirects and 303 status codes are handled in the browser.]]></description>
+            <link>https://koenvangilst.nl/blog/303-see-other</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/303-see-other</guid>
+            <pubDate>Sun, 25 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Reading notes Accelerate]]></title>
+            <description><![CDATA[Accelerate gives a scientific analysis of what makes IT organisations successful. I've listed the most important ones (from a developer perspective)]]></description>
+            <link>https://koenvangilst.nl/blog/accelerate-reading-notes</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/accelerate-reading-notes</guid>
+            <pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Accessible SVGs in React]]></title>
+            <description><![CDATA[How to let screenreaders read the title of an SVG using React]]></description>
+            <link>https://koenvangilst.nl/blog/accessible-svgs</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/accessible-svgs</guid>
+            <pubDate>Fri, 23 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[API testing with Jest]]></title>
+            <description><![CDATA[Testing async API calls using Jest’s mocking features]]></description>
+            <link>https://koenvangilst.nl/blog/api-testing-with-jest</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/api-testing-with-jest</guid>
+            <pubDate>Mon, 06 Feb 2017 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Brutalist CSS]]></title>
+            <description><![CDATA[196 bytes of minimal CSS]]></description>
+            <link>https://koenvangilst.nl/blog/brutalist-css</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/brutalist-css</guid>
+            <pubDate>Sat, 17 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Code Colocation is King]]></title>
+            <description><![CDATA[A simple principle to help structure code better]]></description>
+            <link>https://koenvangilst.nl/blog/code-colocation-is-king</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/code-colocation-is-king</guid>
+            <pubDate>Sun, 14 Nov 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Programming quotes]]></title>
+            <description><![CDATA[A collection of great programming quotes]]></description>
+            <link>https://koenvangilst.nl/blog/collection-of-great-tweets</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/collection-of-great-tweets</guid>
+            <pubDate>Sun, 22 Sep 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Reading notes CSS In Depth]]></title>
+            <description><![CDATA[Review of a book for programmers that've always considered CSS to be an (unpleasant) afterthought]]></description>
+            <link>https://koenvangilst.nl/blog/css-in-depth-reading-notes</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/css-in-depth-reading-notes</guid>
+            <pubDate>Mon, 01 Oct 2018 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Forgit me nots]]></title>
+            <description><![CDATA[Git commands I keep forgetting]]></description>
+            <link>https://koenvangilst.nl/blog/for-git-me-nots</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/for-git-me-nots</guid>
+            <pubDate>Sun, 11 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Generating PDF's with Express]]></title>
+            <description><![CDATA[A fun little tutorial of how to create a PDF using a web form, Express and PDFKit]]></description>
+            <link>https://koenvangilst.nl/blog/generating-a-pdf-with-express</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/generating-a-pdf-with-express</guid>
+            <pubDate>Thu, 03 Nov 2016 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[mobx-state-tree]]></title>
+            <description><![CDATA[A first look at the state management library mobx-state-tree and a comparison with Redux Saga.]]></description>
+            <link>https://koenvangilst.nl/blog/mobx-state-tree</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/mobx-state-tree</guid>
+            <pubDate>Sun, 22 Sep 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Of Bundles and Barrels]]></title>
+            <description><![CDATA[Why index barrel files can lead to large bundle sizes]]></description>
+            <link>https://koenvangilst.nl/blog/of-bundles-and-barrels</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/of-bundles-and-barrels</guid>
+            <pubDate>Wed, 17 Nov 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Reading notes Programming TypeScript]]></title>
+            <description><![CDATA[Stuff I don't want to forget from the Book Programming TypeScript.]]></description>
+            <link>https://koenvangilst.nl/blog/programming-typescript-reading-notes</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/programming-typescript-reading-notes</guid>
+            <pubDate>Sun, 11 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Using React Hooks with canvas]]></title>
+            <description><![CDATA[An intro to the React hooks useState, useRef and useEffect]]></description>
+            <link>https://koenvangilst.nl/blog/react-hooks-with-canvas</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/react-hooks-with-canvas</guid>
+            <pubDate>Sat, 16 Mar 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Using Svelte to create a scroll video effect]]></title>
+            <description><![CDATA[Tutorial on how to create a scroll video effect using Svelte’s powerful bind command.]]></description>
+            <link>https://koenvangilst.nl/blog/tutorial-svelte-scroll-video</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/tutorial-svelte-scroll-video</guid>
+            <pubDate>Wed, 18 Nov 2020 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

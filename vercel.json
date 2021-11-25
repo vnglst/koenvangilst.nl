@@ -1,0 +1,29 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/fonts/ibm-plex-sans-var.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/dedicon",
+      "destination": "/portfolio/dedicon"
+    },
+    {
+      "source": "/hilfiger",
+      "destination": "/portfolio/hilfiger"
+    },
+    {
+      "source": "/30",
+      "destination": "https://calendly.com/talk-to-koen/30min"
+    }
+  ]
+}

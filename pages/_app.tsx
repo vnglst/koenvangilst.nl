@@ -1,9 +1,15 @@
-import { AppProps } from "next/app";
-import { FC } from "react";
-import "../styling/main.css";
+import 'styles/global.css';
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
+import { useAnalytics } from 'lib/analytics';
 
-export default App;
+export default function App({ Component, pageProps }: AppProps) {
+  useAnalytics();
+
+  return (
+    <ThemeProvider attribute="class">
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}

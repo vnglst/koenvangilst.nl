@@ -1,0 +1,210 @@
+---
+title: 'Using Svelte to create a scroll video effect'
+publishedAt: '2020-11-18'
+summary: Tutorial on how to create a scroll video effect using Svelte’s powerful bind command.
+---
+
+In this tutorial I’ll show you how svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
+
+<video
+  width="100%"
+  src="https://i.imgur.com/s0GVWeR.mp4"
+  autoPlay
+  muted
+  loop
+></video>
+
+**Note:** the effect itself is a lot smoother than the gifs 😂. Another example can be found [here](https://www.nytimes.com/interactive/2020/09/09/world/middleeast/beirut-explosion.html)). The effect is also sometimes used on product landing pages. Here's an example on [Apple's page for the iMac Pro](https://www.apple.com/imac-pro/).
+
+<video
+  width="100%"
+  src="https://i.imgur.com/10tgKVV.mp4"
+  autoPlay
+  muted
+  loop
+></video>
+
+It gives web pages a very dynamic look and I was surprised to learn how easy you can accomplish this with svelte.
+
+## Setting up svelte
+
+Following the instructions on the [svelte.dev](https://svelte.dev) homepage we run the following commands to get started with svelte:
+
+```bash
+npx degit sveltejs/template scroll-video
+npm install
+npm run dev
+```
+
+A new svelte project is now running on: http://localhost:5000
+
+We start with an empty `App.svelte` file, so let’s delete all the code in that file first.
+
+## Scrolling formula
+
+When the user scrolls down the page, we want the video the play forward. To accomplish this we'll set the current video position using the following formula:
+
+```js
+currentTime = duration * scrollY / total scroll height
+```
+
+where:
+
+- currentTime = the play position in the video
+- duration = total playing time of the video
+- scrollY = the current vertical scroll position
+
+## Binding variables
+
+Now that we figured out what the formula is going to be, let’s see how we can read these values by using svelte’s _variable binding_.
+
+We can get the vertical scrolling position with the following code:
+
+```html
+<script>
+  let scrollY;
+</script>
+
+<svelte:window bind:scrollY />
+```
+
+Here we are binding the vertical scroll position of the window to a variable _scrollY_. Before we can continue, we have to make sure our window is heigh enough to allow for scrolling. Let’s add a `div` and some CSS for that:
+
+```html
+<script>
+  let scrollY;
+</script>
+
+<svelte:window bind:scrollY />
+
+<div class="scroll-container" />
+
+<style>
+  .scroll-container {
+    height: 5000px;
+  }
+</style>
+```
+
+Notice how you can combine HTML, CSS and JavaScript within a svelte component. Almost like you would in a regular HTML file!
+
+To verify if this works you might be tempted to add a _console.log_ just below the line `let scrollY;`. If you try that however you’ll see only one `0` being logged. The reason for this is that any code inside the `<script>` will run only once (when initialising the component). If you want to keep executing the _console.log_ as the scroll values updates, make it reactive using the following notation:
+
+```js
+$: console.log(scrollY);
+```
+
+This may look a bit funky (and it is! I’m not even sure if it’s still JavaScript) but you’ll get used to it.
+
+After adding the console.log with the dollar sign, you should see the scroll position logged on every update. Pretty cool for just 2 lines of code!
+
+Similarly we can use bind on `<video>` to get the other values:
+
+```html
+<script>
+  // … existing code
+  // highlight-start
+  let time;
+  let duration;
+  // highlight-end
+</script>
+
+<!-- …existing code -->
+
+<!-- // highlight-start -->
+<video
+  bind:currentTime="{time}"
+  bind:duration
+  preload="metadata"
+  muted
+  src="https://static01.nyt.com/newsgraphics/2019/10/23/turkey-syria-video-upload/71ab097907156ca46fb7ffd4d21dfbd119fb47e8/syria-turkey-reconstruct-7-800.mp4"
+  type="video/mp4"
+/>
+<!-- // highlight-end -->
+```
+
+The cool thing about these bindings is that they are **bidirectional**. This means that the `time` variable not only holds the current playback time, but that if we change it, we’re also updating the current playback position of the video! This is also known as _two-way data binding_ which was initially popularized by the original _AngularJS_.
+
+In the next section we'll combine this with the formula we made earlier.
+
+## Updating video playback on scroll
+
+Before we can continue we first have to make sure the video is always displayed fullscreen on the background while we are scrolling. Let's add a container _div_ and some CSS to accomplish that:
+
+```html
+<!-- .... -->
+
+<!-- // highlight-start -->
+<div class="video-container">
+  <!-- // highlight-end -->
+  <video
+    bind:currentTime="{time}"
+    bind:duration
+    preload="metadata"
+    muted
+    src="https://int.nyt.com/newsgraphics/2020/beirut-explosion-video/main/warehouse-800.mp4"
+    type="video/mp4"
+  />
+  <!-- // highlight-start -->
+</div>
+<!-- // highlight-end -->
+
+<style>
+  /* // highlight-start */
+  .video-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+  .video-container video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  /* // highlight-end */
+  /* ... */
+</style>
+```
+
+Any changes in the scroll position should immediately be reflected in a change in the playback position. In other words: the changes in the time variable should react to the changes in the scroll position. To accomplish this we have to make sure our formule code is **reactive**. Just as with the console.log we use the `$:` notation to do this:
+
+```html
+<script>
+  let time = 0;
+  let duration;
+
+  let scrollY = 0;
+
+  $: {
+    const totalScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+    time = duration * (scrollY / totalScroll);
+  }
+</script>
+```
+
+## Result
+
+After adding the last piece of code the video scroll effect should work. To make the scroll effect more visible I've also added a heading and some content blocks. You can see the complete feature in the [Svelte REPL](https://svelte.dev/repl/850d34e7f22b4a13935a078b62c2e19a?version=3.29.7) below.
+
+<iframe
+  src="https://svelte.dev/repl/850d34e7f22b4a13935a078b62c2e19a?version=3.29.7"
+  width="600"
+  height="400"
+></iframe>
+
+## Notes on performance
+
+The NYTimes is using optimized, small size videos on their pages. And with good reason: I've been doing experiments with larger (high definition) videos and it's impossible to get the performance right on all browsers: Safari performs surprisingly well, but Firefox and Chrome quickly start to stutter when the video gets larger.
+
+Apple is actually using a different technique to accomplish the effect on their pages: They've split up the video in separate frames (images) and they show a different frame when the scroll position changes. This [technique](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/) performs suprisingly well, even for high definition video content. It does, however, come at a cost: All those frames have to be downloaded individually, adding up to huge download sizes. This is costly not just for mobile end users, but also if you're hosting them.
+
+If you want to use this technique and keep things simple I suggest using a small and optimized video just like the NYTimes does.
+
+For anyone interested in the performance aspects of this effect: I've tweeted about this here (with a demo site): https://twitter.com/vnglst/status/1307681819635183616
