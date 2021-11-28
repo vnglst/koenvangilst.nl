@@ -100,18 +100,17 @@ After adding the console.log with the dollar sign, you should see the scroll pos
 
 Similarly we can use bind on `<video>` to get the other values:
 
-```html
+```html {3,4,11-18}
 <script>
   let scrollY;
-  // highlight-start
   let time;
   let duration;
-  // highlight-end
 </script>
 
-<!-- …existing code -->
+<svelte:window bind:scrollY />
 
-<!-- // highlight-start -->
+<div class="scroll-container" />
+
 <video
   bind:currentTime="{time}"
   bind:duration
@@ -120,7 +119,12 @@ Similarly we can use bind on `<video>` to get the other values:
   src="https://static01.nyt.com/newsgraphics/2019/10/23/turkey-syria-video-upload/71ab097907156ca46fb7ffd4d21dfbd119fb47e8/syria-turkey-reconstruct-7-800.mp4"
   type="video/mp4"
 />
-<!-- // highlight-end -->
+
+<style>
+  .scroll-container {
+    height: 5000px;
+  }
+</style>
 ```
 
 The cool thing about these bindings is that they are **bidirectional**. This means that the `time` variable not only holds the current playback time, but that if we change it, we’re also updating the current playback position of the video! This is also known as _two-way data binding_ which was initially popularized by the original _AngularJS_.
@@ -131,12 +135,18 @@ In the next section we'll combine this with the formula we made earlier.
 
 Before we can continue we first have to make sure the video is always displayed fullscreen on the background while we are scrolling. Let's add a container _div_ and some CSS to accomplish that:
 
-```html
-<!-- .... -->
+```html {11,20, 23-39}
+<script>
+  let scrollY;
+  let time;
+  let duration;
+</script>
 
-<!-- // highlight-start -->
+<svelte:window bind:scrollY />
+
+<div class="scroll-container" />
+
 <div class="video-container">
-  <!-- // highlight-end -->
   <video
     bind:currentTime="{time}"
     bind:duration
@@ -145,18 +155,16 @@ Before we can continue we first have to make sure the video is always displayed 
     src="https://int.nyt.com/newsgraphics/2020/beirut-explosion-video/main/warehouse-800.mp4"
     type="video/mp4"
   />
-  <!-- // highlight-start -->
 </div>
-<!-- // highlight-end -->
 
 <style>
-  /* // highlight-start */
   .video-container {
     position: absolute;
     top: 0;
     bottom: 0;
     overflow: hidden;
   }
+
   .video-container video {
     min-width: 100%;
     min-height: 100%;
@@ -167,14 +175,16 @@ Before we can continue we first have to make sure the video is always displayed 
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  /* // highlight-end */
-  /* ... */
+
+  .scroll-container {
+    height: 5000px;
+  }
 </style>
 ```
 
 Any changes in the scroll position should immediately be reflected in a change in the playback position. In other words: the changes in the time variable should react to the changes in the scroll position. To accomplish this we have to make sure our formule code is **reactive**. Just as with the console.log we use the `$:` notation to do this:
 
-```html
+```html {2,5,7-11}
 <script>
   let time = 0;
   let duration;
