@@ -49,6 +49,11 @@ export default function Footer() {
               Quotes
             </a>
           </Link>
+          <Link href="/credits">
+            <a className="text-gray-500 hover:text-gray-600 transition">
+              Credits
+            </a>
+          </Link>
         </div>
       </div>
     </footer>
