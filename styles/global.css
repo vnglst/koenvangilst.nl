@@ -59,15 +59,6 @@ html {
   }
 }
 
-/* TODO: What is all this CSS below?? */
-
-@supports not (backdrop-filter: none) {
-  .sticky-nav {
-    backdrop-filter: none;
-    @apply bg-opacity-100;
-  }
-}
-
 .prose .anchor {
   @apply absolute invisible;
 
@@ -205,23 +196,6 @@ input[type='email'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
-
-.metric-card > a {
-  @apply no-underline;
-}
-
-.metric-card > p {
-  @apply my-2;
-}
-
-.step > h3 {
-  @apply my-0;
-}
-
-.prose .tweet a {
-  text-decoration: inherit;
-  font-weight: inherit;
 }
 
 table {
