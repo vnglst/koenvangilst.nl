@@ -18,9 +18,9 @@ export default function Snippets({
           Code Snippets
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
-          These are a collection of code snippets I've used in the past and
+          {`These are a collection of code snippets I've used in the past and
           saved. They include React hooks, TypeScript tips, random CSS snippets
-          and Node.js scripts.
+          and Node.js scripts.`}
         </p>
         <div className="grid w-full grid-cols-1 gap-4 my-2 mt-4 sm:grid-cols-2">
           {snippets.map((snippet) => (

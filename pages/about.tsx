@@ -9,14 +9,14 @@ export default function About() {
         </h1>
         <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
           <p>
-            Hi, I'm Koen! I'm a passionate & entrepreneurial JavaScript
+            {`Hi, I'm Koen! I'm a passionate & entrepreneurial JavaScript
             developer from the Netherlands who likes to push the web beyond it's
             limits. I specialize in modern frontend using React & Svelte and I
-            also feel at home on the backend using Node/TypeScript.
+            also feel at home on the backend using Node/TypeScript.`}
           </p>
           <p>
-            I'm interested in helping inspiring companies create innovative web
-            apps that users love.
+            {`I'm interested in helping inspiring companies create innovative web
+            apps that users love.`}
           </p>
         </article>
         <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">

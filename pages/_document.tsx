@@ -1,4 +1,3 @@
-import Script from 'next/script';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
@@ -57,17 +56,6 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-          ga('create', 'UA-136403234-1', 'auto');
-          ga('send', 'pageview');
-        `}
-      </Script>
-      <Script
-        src="https://www.google-analytics.com/analytics.js"
-        strategy="afterInteractive"
-      />
     </Html>
   );
 }
