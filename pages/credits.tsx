@@ -16,7 +16,6 @@ export default function Credits() {
             using the following tech stack:
           </p>
           <ul className="list-inside list-disc">
-            <li>Library: Preact in production</li>
             <li>Framework: Next.js</li>
             <li>Deployment: Vercel</li>
             <li>Styling: Tailwind CSS</li>

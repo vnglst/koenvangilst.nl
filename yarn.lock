@@ -4482,11 +4482,6 @@ postcss@^8.4.4:
     picocolors "^1.0.0"
     source-map-js "^1.0.1"
 
-preact@10.5.15:
-  version "10.5.15"
-  resolved "https://registry.npmjs.org/preact/-/preact-10.5.15.tgz"
-  integrity sha512-5chK29n6QcJc3m1lVrKQSQ+V7K1Gb8HeQY6FViQ5AxCAEGu3DaHffWNDkC9+miZgsLvbvU9rxbV1qinGHMHzqA==
-
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
