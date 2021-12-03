@@ -11,7 +11,7 @@ export default function SnippetLayout({
   return (
     <Container
       title={`${snippet.title} - Code Snippet`}
-      description="A collection of code snippets – including serverless functions, Node.js scripts, and CSS tricks."
+      description="A collection of code snippets – including React hooks, Node.js scripts and CSS tricks."
     >
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
         <div className="flex justify-between w-full mb-8">
