@@ -9,15 +9,15 @@
   </url>
 
   <url>
+    <loc>https://koenvangilst.nl/credits</loc>
+  </url>
+
+  <url>
     <loc>https://koenvangilst.nl/dashboard</loc>
   </url>
 
   <url>
     <loc>https://koenvangilst.nl</loc>
-  </url>
-
-  <url>
-    <loc>https://koenvangilst.nl/portfolio</loc>
   </url>
 
   <url>
@@ -81,6 +81,78 @@
   </url>
 
   <url>
-    <loc>https://koenvangilst.nl/snippets/search</loc>
+    <loc>https://koenvangilst.nl/lab/converter</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/finding-nora</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/gundb-chat</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/help-terence</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/lumberjack</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/mijn-lessen-nl</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/overheidsedits</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/peter-and-the-wolf</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/rush-hour-timelapse</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/size-of-npm</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/star-trek</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/star-wars</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/tafels-app</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/lab/vaccination-progress</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/portfolio/dedicon</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/portfolio/hilfiger</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/portfolio/kvk</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/portfolio/rabobank</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/useStorage</loc>
   </url>
 </urlset>
