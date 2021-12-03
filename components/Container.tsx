@@ -46,7 +46,7 @@ export default function Container(props) {
       <Nav />
       <main
         id="content"
-        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900"
+        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 pt-8"
       >
         {children}
       </main>
