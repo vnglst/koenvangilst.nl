@@ -6,7 +6,12 @@ summary: Testing async API calls using Jest’s mocking features
 
 Jest is a great JavaScript testing framework by Facebook. It’s often used for testing React components, but it’s also a pretty good general purpose testing framework. In this tutorial I’ll give a quick and simple demo of it’s mocking capabilities for testing async functions.
 
-![Example screenshot passing Jest tests](/static/images/api-testing-jest.png)
+<Image
+  alt={`Example screenshot passing Jest tests`}
+  src={`/static/images/api-testing-jest.jpg`}
+  width={1348}
+  height={642}
+/>
 
 ## Purpose of mocking
 
@@ -40,6 +45,13 @@ yarn test
 You should see something like this:
 
 ![Screenshot passing Jest tests](/static/images/passing-jest-tests.png)
+
+<Image
+  alt={`Screenshot passing Jest tests`}
+  src={`/static/images/passing-jest-tests.jpg`}
+  width={1230 / 2}
+  height={694 / 2}
+/>
 
 Congratulations, you’ve now got Jest up and running and are ready to start writing some tests!
 
@@ -139,7 +151,12 @@ describe('#getUser() using Promises', () => {
 
 Start Jest using `yarn test` and you should see the following error message:
 
-![Failing Jest tests](/static/images/failing-jest-tests.png)
+<Image
+  alt={`Failing Jest tests`}
+  src={`/static/images/failing-jest-tests.jpg`}
+  width={1506 / 2}
+  height={1192 / 2}
+/>
 
 What’s happening here? It turns out that using our `getUser` function in a Node environment (which Jest is using to run the tests) makes our request fail. So even though our function works in the browser, it fails in our tests! Would could try and fix this, by adding a `User-Agent` header when we’re running this in a Node environment, but mocking would now be a better solution. Let’s set this up!
 

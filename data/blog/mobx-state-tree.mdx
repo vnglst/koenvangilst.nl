@@ -4,34 +4,26 @@ publishedAt: '2019-09-22'
 summary: A first look at the state management library mobx-state-tree and a comparison with Redux Saga.
 ---
 
-I've been meaning to do this for a looong time, but work and other fun side projects kept getting in the way. But last weekend I finally took a look at the [much praised](https://twitter.com/thekitze/status/1153378446099255298) state management library by Michel Weststrate [@mweststrate](https://twitter.com/mweststrate) called `mobx-state-tree`.
+I've been meaning to do this for a looong time, but work and other side projects kept getting in the way. But last weekend I finally took a look at the [much praised](https://twitter.com/thekitze/status/1153378446099255298) state management library by Michel Weststrate [@mweststrate](https://twitter.com/mweststrate) called `mobx-state-tree`.
 
-![Lumber Jack Kids PWA](/static/images/lumber-jack.png)
+<Image
+  alt={`Lumber Jack Kids PWA`}
+  src={`/static/images/lumber-jack.jpg`}
+  width={1294 / 2}
+  height={1096 / 2}
+/>
 
-To get a feel for the library I created a [simple kids game](https://lumber-jack.netlify.com) figuring Jack the Lumberjack and his axe. The goal is to chop down as many tree as possible (not very CO2 neutral, I know). I used `mobx-state-tree` to keep track of all the game state and that felt really clean and fast (as in: not verbose). Especially when comparing it to my current state management tool (Redux Saga).
+To get a feel for the library I created a [simple kids game](https://lumber-jack.netlify.com) figuring Jack the Lumberjack and his axe. The goal is to chop down as many tree as possible (not very CO2 neutral, I know). I used `mobx-state-tree` to keep track of the game state and that felt clean and fast (as in: not verbose). Especially when comparing it to my current state management tool (Redux Saga).
 
 ## Random observations
 
-- it reduces the boilerplate a lot
-- it aligns a more clearly with the Model View Controller paradigm
-- offers a basic type system for your state (very handy, as this is something that goes wrong all the time in Redux)
-- you can keep your model, view models, actions together in one place (compare this with **idiomatic** Redux, where actions, reducers, sagas, etc. all live in their own folders)
-- in `mob-state-tree` it's immediately (and I would say intuitively) clear _where_ you do _what_: You handle actions in `.actions`. You need some derived piece of state, use `.views`. In Redux Sagas you generally only use actions to dispatch payloads. Any business logic you're supposed to put in the Sagas. At least that's what I do. I’ve also seen examples of people putting business logic in actions and even reducers. Or in the `mapStateToProps`, or in special selectors that live in the same folder as the reducers. In my experience programmers aren’t really sure where to put the logic, so in large codebases it tends to be all over the place.
-- `mobx-state-tree` also seems to solve a lot of other challenges I often face in my React components. Imagine you’ve got some address data (like street, postal code, etc) in your Redux store. And you have to create a component that displays this data as a single (concatenated) string. Since this can get hairy (for instance when data is missing) I tend to write some mapping function for this that I fire off before I do the actual rendering, i.e.:
-
-```jsx
-import { mapAddress } from ‘../mappers’; // in the same file
-
-const Address = ({ address }) => {
-    const addressStr = mapAddress(address);
-    return <div>{addressStr}</div>
-}
-```
-
-- I know you can (and should?) use `mapStateToProps` for that. (And then call the mapper function from there). Or perhaps I should import a new library called `reselect` and use that, or was that only if you were having performance issues?!
-- anyway, back to `mobs-state-tree`. Here it seems easy enough: Just use a `(data) view` which you define next to the model/schema (and actions) of Address.
+- it reduces boilerplate a lot
+- it aligns more clearly with the Model View Controller paradigm
+- offers a basic type system for your state (cause of errors in Redux, when not using TypeScript)
+- you can keep your model, view models and actions together in one place (compare this with **idiomatic** Redux, where actions, reducers, sagas, etc. all live in their own folders)
+- in `mob-state-tree` it's immediately clear _where_ you do _what_: You handle actions in `.actions`. You need some derived piece of state, use `.views`. In Redux Sagas you generally only use actions to dispatch payloads. Any business logic you're supposed to put in the Sagas. At least that's what I do. I’ve also seen examples of people putting business logic in actions and even reducers. Or in the `mapStateToProps`. Or in special selectors that live in the same folder as the reducers. In my experience programmers aren’t really sure where to put the logic, so in large codebases it tends to be all over the place.
 - using it with TypeScript was really easy as well (most of the types are automatically inferred).
 
-`Mobx-state-tree` makes state management all falls into place. 💛💙💜💚
+All in all I was pretty happy with `mobx-state-tree` as a state management solution.
 
 The source code of Lumber Jack can be found on Github: [https://github.com/vnglst/lumber-jack](https://github.com/vnglst/lumber-jack)
