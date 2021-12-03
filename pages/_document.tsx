@@ -36,12 +36,12 @@ export default function Document() {
           type="image/png"
         />
         <link
-          color="#4a9885"
+          color="#5bc3eb"
           href="/static/favicons/safari-pinned-tab.svg"
           rel="mask-icon"
         />
-        <meta content="#ffffff" name="theme-color" />
-        <meta content="#ffffff" name="msapplication-TileColor" />
+        <meta content="#5bc3eb" name="theme-color" />
+        <meta content="#5bc3eb" name="msapplication-TileColor" />
         <meta
           content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
