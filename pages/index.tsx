@@ -14,7 +14,7 @@ export default function Home() {
               Koen van Gilst
             </h1>
             <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-              Senior Frontend Developer at{' '}
+              Senior Frontend Developer (currently) at{' '}
               <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
