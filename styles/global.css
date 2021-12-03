@@ -109,6 +109,8 @@ html {
   margin-bottom: 1.25em !important;
 }
 
+/* Syntax highlighting, see https://www.npmjs.com/package/rehype-prism-plus#styling */
+
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -186,8 +188,13 @@ pre {
   @apply mt-0 rounded-t-none;
 }
 
+.code-highlight {
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+
 .highlight-line {
-  @apply block px-4 -mx-4 bg-gray-100 border-l-4 border-blue-500 dark:bg-gray-800;
+  @apply block px-4 -mx-4 border-l-4 border-blue-500 bg-gray-100 dark:bg-gray-800;
 }
 
 /* Remove Safari input shadow on mobile */
