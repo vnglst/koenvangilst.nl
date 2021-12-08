@@ -39,17 +39,14 @@ export default function Home() {
           <BlogPostCard
             title="Using Svelte to create a scroll video effect"
             slug="tutorial-svelte-scroll-video"
-            gradient="from-[#79e4ff] via-[#53f9ff] to-[#5bc3eb]"
           />
           <BlogPostCard
             title="Code Colocation is King"
             slug="code-colocation-is-king"
-            gradient="from-[#53f9ff] via-[#60A5FA] to-[#5bc3eb]"
           />
           <BlogPostCard
             title="Using React Hooks with canvas"
             slug="react-hooks-with-canvas"
-            gradient="from-[#53ceff] via-[#60A5FA] to-[#38f7f7]"
           />
         </section>
         <Link href="/blog">
