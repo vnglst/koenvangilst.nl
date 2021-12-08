@@ -13,7 +13,7 @@ export default function Nav() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="sticky top-0 z-10 flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 bg-opacity-80 dark:bg-opacity-80">
+    <nav className="sticky top-0 z-10 flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 bg-opacity-80 dark:bg-opacity-80 backdrop-saturate-50">
       <div className="flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto py-4 text-gray-900 dark:text-gray-100">
         <a href="#content" className="skip-nav">
           Skip to content
