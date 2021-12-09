@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import MobileMenu from 'components/MobileMenu';
 import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
