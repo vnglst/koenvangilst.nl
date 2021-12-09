@@ -22,7 +22,7 @@ html {
 }
 
 #__next {
-  @apply bg-gray-50 dark:bg-gray-900;
+  @apply bg-gray-100 dark:bg-gray-900;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,11 +41,7 @@ html {
   display: table;
 }
 
-.skip-nav {
-  @apply absolute px-4 py-3 transition-transform duration-200 transform -translate-y-12 -left-1/4 focus:top-4 focus:translate-y-3 -top-8;
-}
-
-#skip {
+#content {
   scroll-margin-top: 1.125rem;
 }
 

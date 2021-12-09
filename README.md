@@ -1,6 +1,7 @@
 # koenvangilst.nl
 
-The source code of my personal website and blog. It's a fork of Lee Robinson excellent personal website (stripped down and with some styling changes). The source code of Lee's original can be found [here](https://github.com/leerob/leerob.io).
+The source code of my personal website and blog. This started as a fork of Lee Robinsons excellent personal website (with many styling changes).
+Lee's original source code can be found [here](https://github.com/leerob/leerob.io).
 
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Deployment**: [Vercel](https://vercel.com)
@@ -9,7 +10,7 @@ The source code of my personal website and blog. It's a fork of Lee Robinson exc
 
 ## Learn More
 
-Lee Robinson recorded two live streams walking through his repository and answering questions. It's a introduction to Next and also the source of this website.
+Lee Robinson recorded two live streams walking through his repository and answering questions. It's an introduction to Next and also the source of this website.
 
 - [Stream #1 – Jan 27, 2021 (1h 11min)](https://www.youtube.com/watch?v=xXQsF0q8KUg)
 - [Stream #2 – Nov 10, 2021 (1h 4min)](https://www.youtube.com/watch?v=WZZFW5xDjJ4)

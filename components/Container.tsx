@@ -16,7 +16,7 @@ export default function Container(props) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-100 dark:bg-gray-900">
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
@@ -46,7 +46,7 @@ export default function Container(props) {
       <Nav />
       <main
         id="content"
-        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16"
+        className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen"
       >
         {children}
       </main>
