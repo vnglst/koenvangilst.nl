@@ -1,9 +1,24 @@
-import { AppProps } from "next/app";
-import { FC } from "react";
-import "../styling/main.css";
+import 'styles/global.css';
+import Script from 'next/script';
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
 
-export default App;
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider attribute="class">
+      <Component {...pageProps} />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+          ga('create', 'UA-136403234-1', 'auto');
+          ga('send', 'pageview');
+        `}
+      </Script>
+      <Script
+        src="https://www.google-analytics.com/analytics.js"
+        strategy="afterInteractive"
+      />
+    </ThemeProvider>
+  );
+}

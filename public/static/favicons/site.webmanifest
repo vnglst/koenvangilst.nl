@@ -1,0 +1,24 @@
+{
+  "name": "Koen van Gilst",
+  "short_name": "koenvangilst.nl",
+  "description": "JavaScript developerw who likes to push the web beyond it's limits.",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#5bc3eb",
+  "theme_color": "#5bc3eb",
+  "display": "standalone",
+  "dir": "ltr",
+  "lang": "en-US",
+  "orientation": "portrait-primary",
+  "start_url": "../../index.html"
+}
