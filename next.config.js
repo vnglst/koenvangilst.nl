@@ -1,21 +1,20 @@
-const pkg = require("./package.json");
+const { withContentlayer } = require('next-contentlayer');
 
-const commitHash = require("child_process")
+const pkg = require('./package.json');
+
+const commitHash = require('child_process')
   .execSync('git log --pretty=format:"%h" -n1')
   .toString()
   .trim();
 
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ */
+module.exports = withContentlayer()({
+  swcMinify: true,
+  reactStrictMode: true,
   env: {
     APP_VERSION: pkg.version,
-    COMMIT_HASH: commitHash,
-  },
-  exportPathMap: function () {
-    return {
-      "/": { page: "/" },
-      "/labs": { page: "/labs" },
-      "/dedicon": { page: "/dedicon" },
-      "/hilfiger": { page: "/hilfiger" },
-    };
-  },
-};
+    COMMIT_HASH: commitHash
+  }
+});

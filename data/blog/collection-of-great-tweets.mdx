@@ -1,0 +1,73 @@
+---
+title: Programming quotes
+publishedAt: '2019-09-22'
+summary: A collection of great programming quotes
+---
+
+> If you don’t actively fight for simplicity in software, complexity will win.
+>
+> …and it will suck.
+
+[Henrik Joreteg, 2013](https://twitter.com/HenrikJoreteg/status/364989455414726657)
+
+---
+
+> There are only two kinds of languages: the ones people complain about and the ones nobody uses.
+
+Brendan Eich approvingly quoting Bjarne Stroustrup (C++ creator) when asked about the constant hate on JavaScript. [From his AMA on Reddit.](https://reddit.com/r/IAmA/comments/dwfbmf/im_brendan_eich_inventor_of_javascript_and/f7j1ohf/)
+
+---
+
+> Write tests. Not too many. Mostly integration.
+
+[Guillermo Rauch, 2016](https://twitter.com/rauchg/status/807626710350839808)
+
+It also my experience that integration tests offer the best value for money when it comes to testing. Unit tests tend to be pointless (especially for front end code) and fragile when you do large refactors. End-2-end tests tend to be too unreliable for large scale usage.
+
+---
+
+> Hierarchy of any implementation:
+>
+> 1 Correct  
+> 2 Simple  
+> 3 Fast
+>
+> Be wary of the temptation to flip 2 and 3. Fast is great but if you can never touch the code again what is the point?
+
+[Sam Saccone, 2019](https://twitter.com/samccone/status/1160660630631673856)
+
+I like working with managers/product owners that also follow this philosophy. First make it work (and ship it!), then make it right (and ship it!), and then fast, small, beautiful, etc will follow.
+
+Turns out the quote **Make it work, make it right, make it fast** is [originally from Kent Beck](https://wiki.c2.com/?MakeItWorkMakeItRightMakeItFast) (who learned it [from his dad](https://twitter.com/KentBeck/status/1297256742170968064)).
+
+---
+
+> When people say "React is declarative" this is what they mean.
+>
+> Instead of manipulating the UI in response to user actions to arrive at an undeclared state, you declare state and then the UI that represents it.
+>
+> Now user actions just change state and React mirrors it to the UI.
+
+[Ryan Florence, 2019](https://twitter.com/ryanflorence/status/1162463162337120256?s=20)
+
+It's not always easy to explain what makes React's component based programming model so powerful and fun to work with, but this tweet of Ryan Florence captures a major part of it's appeal.
+
+---
+
+> A physicist, a structural engineer, and a programmer were in a car driving over a steep alpine pass when the brakes failed. The car went faster and faster, they were struggling to get around the corners, and once or twice the flimsy crash barrier saved them from tumbling down the side of the mountain. They were sure they were all going to die, when suddenly they spotted an escape lane. They pulled into the escape lane, and came safely to a halt.
+>
+> The physicist said, “We need to model the friction in the brake pads and the resultant temperature rise, and see if we can work out why they failed.”
+>
+> The structural engineer said, “I think I’ve got a few spanners in the back. I’ll take a look and see if I can work out what’s wrong.”
+>
+> The programmer said, “Why don’t we see if it’s reproducible?”
+>
+> Anonymous
+
+From Boris Cherny's [excellent book on TypeScript](/programming-typescript-reading-notes/). This one is related to another one of my favorite programming quotes:
+
+---
+
+> Everybody has a testing environment. Some people are lucky enough to have a totally separate environment to run production in.
+
+[Michael Stahnke, 2015](https://twitter.com/stahnma/status/634849376343429120?s=20)

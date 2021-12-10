@@ -1,110 +1,74 @@
-import { FC } from "react";
-import Layout from "../components/Layout";
-import Card from "../components/Card";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-const Home: FC = () => {
+import Container from 'components/Container';
+import BlogPostCard from 'components/BlogPostCard';
+
+export default function Home() {
   return (
-    <Layout title="Home | Koen van Gilst" menu="home">
-      <Card extraClasses="col-span-2">
-        <h1>Hi, I'm Koen!</h1>
-        <p>
-          I'm a passionate & entrepreneurial JavaScript developer from the
-          Netherlands who likes to push the web beyond it's limits. I specialize
-          in modern frontend using React & Svelte and I also feel at home on the
-          backend using Node/TypeScript.
-        </p>
-        <p>
-          I'm interested in helping inspiring companies create innovative web
-          apps that users love.
-        </p>
-        <p>
-          You can find me on <a href="https://github.com/vnglst">Github</a>,{" "}
-          <a href="http://nl.linkedin.com/in/vangilst/">LinkedIn</a> and{" "}
-          <a href="http://www.twitter.com/vnglst">Twitter</a> or send me an{" "}
-          <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#107;&#x6f;&#x65;&#x6e;&#x40;&#x6b;&#x6f;&#x65;&#x6e;&#x76;&#97;&#x6e;&#x67;&#x69;&#108;&#x73;&#116;&#x2e;&#x6e;&#x6c;">
-            email
+    <Container>
+      <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16 min-h-screen">
+        <article className="flex flex-col-reverse sm:flex-row items-start">
+          <div className="flex flex-col pr-8">
+            <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
+              Koen van Gilst
+            </h1>
+            <h2 className="text-gray-700 dark:text-gray-200 mb-4">
+              Frontend Developer at{' '}
+              <span className="font-semibold">Rabobank</span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-16">
+              {`I'm a passionate & entrepreneurial JavaScript developer from the
+              Netherlands who likes to push the web beyond it's limits.`}
+            </p>
+          </div>
+          <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
+            <Image
+              alt="Koen van Gilst"
+              height={176}
+              width={176}
+              src="/avatar.jpg"
+              className="rounded-full filter grayscale"
+            />
+          </div>
+        </article>
+        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
+          Featured
+        </h3>
+        <section className="flex gap-6 flex-col md:flex-row">
+          <BlogPostCard
+            title="Using Svelte to create a scroll video effect"
+            slug="tutorial-svelte-scroll-video"
+          />
+          <BlogPostCard
+            title="Code Colocation is King"
+            slug="code-colocation-is-king"
+          />
+          <BlogPostCard
+            title="Using React Hooks with canvas"
+            slug="react-hooks-with-canvas"
+          />
+        </section>
+        <Link href="/blog">
+          <a className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+            Read all posts
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-6 w-6 ml-1"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
+              />
+            </svg>
           </a>
-          .
-        </p>
-      </Card>
-
-      <Card extraClasses="col-span-2">
-        <h2>Skills</h2>
-        <ul className="list-outside pl-4">
-          <li>Platforms: Web, Node.js, Mobile (iOS)</li>
-          <li>Languages: JavaScript, TypeScript, HTML5, CSS3</li>
-          <li>
-            Frameworks: React, React Native, Redux, Express, Next.js, Svelte,
-            Sapper, jQuery
-          </li>
-          <li>
-            Tooling & Testing: react-testing-library, Webpack, Lerna, Babel,
-            Jest, Nock, Detox, Cypress, Git, Unix
-          </li>
-          <li>
-            Knowledgeable: CI/CD, Testing, Monorepos, Single Page Apps,
-            Accessibility, Server Side Rendering, Progressive Web Apps,
-            Internationalization
-          </li>
-          <li>
-            Services: Docker, Gitlab CI, MongoDB, Postgresql, BuddyBuild,
-            Mixpanel, Google Tag Manager, Heroku, AWS, Google Cloud, Jira,
-            Sentry, Bugsnag
-          </li>
-        </ul>
-      </Card>
-
-      <Card extraClasses="col-span-2">
-        <h2>Notable client projects</h2>
-        <ul className="list-outside pl-4 leading-7">
-          <li>
-            For <i>Stichting Dedicon</i> I created a player for their audio
-            books collections. It's build specifically for users with visual
-            impairments. The player has a karaoke function that highlights the
-            text currently being read, which helps children with dyslexia.{" "}
-            <Link href="/dedicon">
-              <a>Read more about the Online Player here...</a>
-            </Link>
-          </li>
-          <li>
-            For <i>Tommy Hilfiger</i> I worked as a fullstack JavaScript
-            developer on their loyality app MyTommy. The app is build in React
-            Native for both iPhone and Android, with a restful Node/Express API
-            on the backend.{" "}
-            <Link href="/hilfiger">
-              <a>Read more about MyTommy here...</a>
-            </Link>
-          </li>
-          <li>
-            The Dutch <i>Chambre of Commerce</i> (KVK) has a high traffic
-            website (about 1.5 million visitors per month) with applications
-            that help companies do business in The Netherlands. As a frontend
-            engineer I'm part of the team building and deploying the new Online
-            Registration web app, which makes it possible for Dutch
-            entrepreneurs to register their business completely online.
-          </li>
-        </ul>
-      </Card>
-
-      <Card>
-        <h2>Education</h2>
-        <ul className="list-outside pl-4">
-          <li>
-            M.A. in Philosophy, Utrecht University (<i>cum laude</i>
-            ).
-          </li>
-          <li>Minor in Computational Science, Utrecht University.</li>
-          <li>Erasmus Student Exchange, Universität Regensburg (Germany).</li>
-        </ul>
-      </Card>
-
-      <Card>
-        <h2>References</h2>
-        <p>References, code samples and a copy of my resume upon request.</p>
-      </Card>
-    </Layout>
+        </Link>
+      </div>
+    </Container>
   );
-};
-
-export default Home;
+}
