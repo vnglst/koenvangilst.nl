@@ -17,7 +17,7 @@ export default function Dashboard() {
             This is my personal dashboard, built with Next.js API routes
             deployed as serverless functions. I use this dashboard to track
             various metrics across platforms like Unsplash and GitHub, more to
-            follow soon..
+            follow soon...
           </p>
         </div>
         <div className="flex flex-col w-full">

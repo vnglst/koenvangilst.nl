@@ -12,7 +12,7 @@ export default function Blog({
   return (
     <Container
       title="Labs – Koen van Gilst"
-      description="A list of all my JavaScript experiments. Mostly small (educational) apps for my kids or to learn a new technology myself."
+      description="A list of JavaScript experiments. Mostly small (educational) apps for my kids or to learn a new technology myself."
     >
       <article className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
