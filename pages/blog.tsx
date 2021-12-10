@@ -64,7 +64,7 @@ export default function Blog({
             </h3>
             <BlogPost
               title="Using Svelte to create a scroll video effect"
-              summary="Tutorial on how to create a scroll video effect using Svelte’s powerful bind command."
+              summary="Tutorial on how to create a scroll video effect using Svelte's powerful bind command."
               slug="tutorial-svelte-scroll-video"
             />
             <BlogPost

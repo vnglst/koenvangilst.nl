@@ -9,7 +9,7 @@ export default function Credits() {
         </h1>
         <div className="mb-8 text-gray-600 dark:text-gray-400">
           <p className="mb-4">
-            The design and code of this website is a stripped down clone of{' '}
+            The code of this website is inspired by{' '}
             <a href="https://leerob.io/" className="underline">
               Lee Robinsons personal website
             </a>{' '}
