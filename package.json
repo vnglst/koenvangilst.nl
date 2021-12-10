@@ -1,4 +1,7 @@
 {
+  "name": "koenvangilst.nl",
+  "version": "4.0.0",
+  "description": "Koen van Gilst's personal website",
   "private": true,
   "license": "MIT",
   "scripts": {
