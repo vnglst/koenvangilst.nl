@@ -10,6 +10,14 @@
   src: url(/fonts/ibm-plex-sans-var.woff2) format('woff2');
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/montserrat.woff2) format('woff2');
+}
+
 ::selection {
   background-color: #5bc3eb;
   color: #fefefe;
@@ -19,6 +27,10 @@ html {
   min-width: 360px;
   scroll-behavior: smooth;
   @apply md:overflow-x-scroll;
+}
+
+h1 {
+  font-family: Montserrat, sans-serif;
 }
 
 #__next {
