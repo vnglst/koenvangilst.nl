@@ -23,6 +23,18 @@
   ],
   "redirects": [
     {
+      "source": "/api-testing-with-jest",
+      "destination": "/blog/api-testing-with-jest"
+    },
+    {
+      "source": "/react-hooks-with-canvas",
+      "destination": "/blog/react-hooks-with-canvas"
+    },
+    {
+      "source": "/tutorial-svelte-scroll-video",
+      "destination": "/blog/tutorial-svelte-scroll-video"
+    },
+    {
       "source": "/dedicon",
       "destination": "/portfolio/dedicon"
     },
