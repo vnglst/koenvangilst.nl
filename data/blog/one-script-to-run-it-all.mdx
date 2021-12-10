@@ -1,0 +1,19 @@
+---
+title: One command to run it all
+publishedAt: '2021-12-10'
+summary: One NPM script that always works
+---
+
+One of the more annoying things I've experienced as a frontend developer in complex corporate environments is that it's often surprisingly hard to get the app to start. API's might not be not available, you don't have access because of proxies, you need a plugin etc. etc.
+
+To avoid this frustration on my most recent project I've started with a script which allows me to always (in any environment, even without internet!) start the app using one command:
+
+`npm run start:mocked`
+
+This requires mocking the external services (API's, authentication) which is a definitely more work. But I'm a 100% sure this has paid itself off many times over.
+
+These mocks can also be reused for the integration tests. Which give me a lot more confidence when doing large scale refactors or deploying new features. Another benefit of this approach: When tests do fail I can just start the mocked version of the app to see why the tests are failing (in the browser). No more debugging endless streams of Jest error logs.
+
+To mock the API calls in both the browser and in tests I've used a library called Mock Service Worker and a custom mock for the Microsoft Authentication Library. Both are a bit tricky to set up, but the MSW library is [well documented](https://mswjs.io/).
+
+And about mocking the Microsoft Authentication Library I'll write soon, it's easier than you'd think.
