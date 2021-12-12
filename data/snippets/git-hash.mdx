@@ -4,9 +4,9 @@ description: 'A snippet to parse the git hash from the command line and add it a
 logo: 'react.png'
 ---
 
-It's often useful to have a git hash in the project to help determine which version
-you're looking at. This snippet will add the git hash to the project
-as an environment variable.
+It's often useful to have a Git hash shown somewhere to help determine which version
+you're looking at. This snippet will add to a Next.js app as an
+environment variable.
 
 ```ts
 const pkg = require('./package.json');
@@ -41,7 +41,7 @@ You can then use it in your code like this (example taken from this website):
 </span>
 ```
 
-Or if you don't want to expose the git hash in the frontend, you can attach it
+Or if you don't want to expose the hash in the frontend, you can attach it
 to the `window` object:
 
 ```ts
