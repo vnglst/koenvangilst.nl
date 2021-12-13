@@ -219,3 +219,14 @@ table {
   overflow-x: auto;
   white-space: nowrap;
 }
+
+/* styling scroll bar with gradient to primary color */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary dark:bg-gradient-to-b dark:from-primary dark:to-black;
+  border-radius: 12px;
+}
