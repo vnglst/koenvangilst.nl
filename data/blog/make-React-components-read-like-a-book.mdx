@@ -4,9 +4,9 @@ publishedAt: '2021-12-17'
 summary: How the ordering of your functions can make your component files easier to read.
 ---
 
-Readable code is something all programmer should aim for and readability is often increased by making sure that **code reads like a book** where the most **the most important things come first**.
+Code readability can often be increased by making sure that **code reads like a book** where the most **the most important things come first**.
 
-Consider the following React component, which is adapted from the (excellent) new documentation for React. Look closely how the code is structured; when functions are defined and exported.
+Consider the following React component, which is adapted from the (excellent) [new documentation website for React](https://beta.reactjs.org/). Look closely how the code is structured, particularly when functions are defined and exported.
 
 ```tsx
 import { useReducer } from 'react';
@@ -92,11 +92,11 @@ function TaskBoard() {
 export default Taskboard;
 ```
 
-Next, let's see if we can improve the readability!
+Next, let's see if we can improve this!
 
-Let's first make sure the most important thing comes first. In most cases when you open a file you'd be looking for the **exported functions**, or (if available) the **default export**. So let's move that to the top.
+First we make sure that the most important thing comes first. In most cases when you open a file you'd be looking for the **exported functions**, or (if available) the **default export**. So let's move that to the top.
 
-This will mean that we have to move some functions around. In JavaScript you might feel obligated to first define functions before you use them. Technically this is **not** a requirement ([function definitions are hoisted to the top of their scope](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)) and to improve readability it is often a good idea to define them **after** they've been used.
+This will mean that we have to move some functions around. In JavaScript you might feel obligated to define functions before they are used. Technically this is **not** a requirement ([function definitions are hoisted to the top of their scope](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)) and to improve readability it is often a good idea to define them **after** they've been used.
 
 Let's look at the improved snippet below:
 
@@ -188,6 +188,6 @@ Notice how:
 - When we start reading the component, the mentioned reducer function `taskReducer` is defined directly under the main component TaskBoard.
 - In the `taskReducer` the initial state variable is mentioned before it's defined below that function.
 
-I think these small improvements make the code React component more readable and (therefore) easier to maintain.
+I think these small improvements can make React component files more readable and (therefore) easier to maintain.
 
 Note: The code **improved** snippet above is taken from the [new React documentation website](https://beta.reactjs.org/learn/scaling-up-with-reducer-and-context).
