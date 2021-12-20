@@ -176,7 +176,11 @@ h1 {
 
 code[class*='language-'],
 pre[class*='language-'] {
-  @apply text-gray-800 dark:text-gray-50;
+  @apply text-gray-800 dark:text-gray-50 bg-gray-50;
+}
+
+code[class*='language-'] {
+  @apply border-none p-0;
 }
 
 pre::-webkit-scrollbar {
