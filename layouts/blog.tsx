@@ -6,7 +6,7 @@ import type { PropsWithChildren } from 'react';
 import type { Blog } from '.contentlayer/types';
 
 const editUrl = (slug) =>
-  `https://github.com/vnglst/koenvangilst.nl/edit/main/data/blog/${slug}.mdx`;
+  `https://github.com/vnglst/koenvangilst.nl/edit/master/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://koenvangilst.nl/blog/${slug}`
