@@ -10,7 +10,7 @@ export default function Container(props) {
   const meta = {
     title: 'Koen van Gilst – TypeScript Developer',
     description: `Passionate & entrepreneurial TypeScript developer from the Netherlands`,
-    image: '/static/images/banner.png',
+    image: 'https://koenvangilst.nl/static/images/banner.png',
     type: 'website',
     ...customMeta
   };
