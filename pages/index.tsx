@@ -41,8 +41,8 @@ export default function Home() {
             slug="tutorial-svelte-scroll-video"
           />
           <BlogPostCard
-            title="Code Colocation is King"
-            slug="code-colocation-is-king"
+            title="Adding Tailwind to Phoenix"
+            slug="adding-tailwind-to-phoenix"
           />
           <BlogPostCard
             title="Using React Hooks with canvas"

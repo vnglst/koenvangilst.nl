@@ -7,16 +7,21 @@ export default function About() {
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           About Me
         </h1>
-        <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
+        <article className="mb-4 prose leading-6 text-gray-600 dark:text-gray-400">
           <p>
             {`Hi, I'm Koen! I'm a passionate & entrepreneurial JavaScript
             developer from the Netherlands who likes to push the web beyond it's
             limits. I specialize in modern frontend using React & Svelte and I
-            also feel at home on the backend using Node/TypeScript.`}
+            also feel at home on the backend using Node/TypeScript. I'm interested 
+            in helping inspiring companies create innovative web apps that users love.`}
           </p>
           <p>
-            {`I'm interested in helping inspiring companies create innovative web
-            apps that users love.`}
+            If you want to discuss an opportunity with me, feel free to{' '}
+            <a className="text-primary" href="/15">
+              reach out
+            </a>
+            . Sometimes I&apos;m available for hire for advice, mentoring or
+            consulting.
           </p>
         </article>
         <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
