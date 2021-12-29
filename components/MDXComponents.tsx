@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import Unsplash from 'components/metrics/Unsplash';
-import ImageWithTheme from 'components/ImageWithTheme';
+import Unsplash from './metrics/Unsplash';
+import ImageWithTheme from './ImageWithTheme';
+import Disclaimer from './Disclaimer';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -27,7 +28,8 @@ const MDXComponents = {
   Image: RoundedImage,
   ImageWithTheme,
   a: CustomLink,
-  Unsplash
+  Unsplash,
+  Disclaimer
 };
 
 export default MDXComponents;
