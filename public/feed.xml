@@ -4,7 +4,7 @@
         <description><![CDATA[Koen van Gilst]]></description>
         <link>https://koenvangilst.nl</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 09 Dec 2021 21:27:31 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 11 Jan 2022 18:50:17 GMT</lastBuildDate>
         <atom:link href="https://koenvangilst.nl/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[303 See Other]]></title>
@@ -26,6 +26,13 @@
             <link>https://koenvangilst.nl/blog/accessible-svgs</link>
             <guid isPermaLink="true">https://koenvangilst.nl/blog/accessible-svgs</guid>
             <pubDate>Fri, 23 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Adding Tailwind CSS to a Phoenix project]]></title>
+            <description><![CDATA[With the official mix task it has become very easy to add Tailwind to any Phoenix project. To make it even more straightforward I've written this quick step-by-step guide.]]></description>
+            <link>https://koenvangilst.nl/blog/adding-tailwind-to-phoenix</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/adding-tailwind-to-phoenix</guid>
+            <pubDate>Mon, 27 Dec 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[API testing with Jest]]></title>
@@ -77,6 +84,13 @@
             <pubDate>Thu, 03 Nov 2016 00:00:00 GMT</pubDate>
         </item>
         <item>
+            <title><![CDATA[React components should read like a book]]></title>
+            <description><![CDATA[How the ordering of functions can make component files easier to read.]]></description>
+            <link>https://koenvangilst.nl/blog/make-React-components-read-like-a-book</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/make-React-components-read-like-a-book</guid>
+            <pubDate>Fri, 17 Dec 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
             <title><![CDATA[mobx-state-tree]]></title>
             <description><![CDATA[A first look at the state management library mobx-state-tree and a comparison with Redux Saga.]]></description>
             <link>https://koenvangilst.nl/blog/mobx-state-tree</link>
@@ -89,6 +103,13 @@
             <link>https://koenvangilst.nl/blog/of-bundles-and-barrels</link>
             <guid isPermaLink="true">https://koenvangilst.nl/blog/of-bundles-and-barrels</guid>
             <pubDate>Wed, 17 Nov 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[One command to run it all]]></title>
+            <description><![CDATA[Why mocking all external requests for your app is worth it.]]></description>
+            <link>https://koenvangilst.nl/blog/one-script-to-run-it-all</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/one-script-to-run-it-all</guid>
+            <pubDate>Fri, 10 Dec 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Reading notes Programming TypeScript]]></title>
