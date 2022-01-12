@@ -33,6 +33,10 @@
   </url>
 
   <url>
+    <loc>https://koenvangilst.nl/blog/adding-tailwind-to-phoenix</loc>
+  </url>
+
+  <url>
     <loc>https://koenvangilst.nl/blog/api-testing-with-jest</loc>
   </url>
 
@@ -61,11 +65,21 @@
   </url>
 
   <url>
+    <loc
+      >https://koenvangilst.nl/blog/make-React-components-read-like-a-book</loc
+    >
+  </url>
+
+  <url>
     <loc>https://koenvangilst.nl/blog/mobx-state-tree</loc>
   </url>
 
   <url>
     <loc>https://koenvangilst.nl/blog/of-bundles-and-barrels</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/blog/one-script-to-run-it-all</loc>
   </url>
 
   <url>
@@ -94,6 +108,22 @@
 
   <url>
     <loc>https://koenvangilst.nl/portfolio/rabobank</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/css-accent-color</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/git-hash</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/styling-scrollbars</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/useStorage</loc>
   </url>
 
   <url>
@@ -150,9 +180,5 @@
 
   <url>
     <loc>https://koenvangilst.nl/lab/vaccination-progress</loc>
-  </url>
-
-  <url>
-    <loc>https://koenvangilst.nl/snippets/useStorage</loc>
   </url>
 </urlset>

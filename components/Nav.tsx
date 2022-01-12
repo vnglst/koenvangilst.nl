@@ -62,7 +62,7 @@ export default function Nav() {
 
 function NavItem({ href, text }) {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  const isActive = router.asPath.startsWith(href);
 
   return (
     <NextLink href={href}>
