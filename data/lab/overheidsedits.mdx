@@ -1,22 +1,24 @@
 ---
 name: Wikipedia edits door de Nederlandse overheid
-url: ./labs/overheidsedits
+url: ./labs/overheidedits
 year: 2014
 summary: Twitter bot inspired by @congressedits that monitors and Tweets any edits made to Wikipedia by the Dutch government. It's been in the news quite a few times (de Volkskrant) and the account has more followers than I do. (in Dutch)
-image: /static/screenshots/overheidsedits.png
+image: /static/screenshots/overheidedits.png
 ---
 
-<Image
-  alt={`Overheidsedits screenshot`}
-  src={`/static/screenshots/overheidsedits.png`}
-  width={1196}
-  height={1110}
-  priority
-/>
+<a href="https://twitter.com/overheidedits">
+  <Image
+    alt={`overheidedits screenshot`}
+    src={`/static/screenshots/overheidedits.png`}
+    width={1196}
+    height={1110}
+    priority
+  />
+</a>
 
 ## Werking
 
-Overheidsedits is een Twitter-bot die de stream van Wikipedia-wijzigingen in de gaten en kijkt of bepaalde IP-adressen daarin voorkomen. Als een bepaalde wijziging is gedaan door een bekend IP-adres van de Nederlandse overheid, dan wordt dit getweet. De bot publiceert hierbij alleen zogenaamde anonieme edits (bij ingelogde Wikipedia-gebruikers blijven de IP-adressen verborgen).
+Overheidedits is een Twitter-bot die de stream van Wikipedia-wijzigingen in de gaten houdt en kijkt of bepaalde IP-adressen daarin voorkomen. Als een bepaalde wijziging is gedaan door een bekend IP-adres van de Nederlandse overheid, dan wordt dit getweet. De bot publiceert daarbij alleen zogenaamde anonieme edits (bij ingelogde Wikipedia-gebruikers blijven de IP-adressen verborgen).
 
 ## Broncode
 
