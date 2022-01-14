@@ -1,0 +1,69 @@
+---
+title: Live user cursors with Phoenix Presence
+publishedAt: '2022-01-14'
+summary: A tutorial for creating live cursors as seen in Figma. A step-by-step guide focussed on beginners (I'm learning Phoenix myself).
+---
+
+The past few months I've been learning about Phoenix and Elixir. Since I already spent most of time behind a computer for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I've had not a chance to get my hands dirty and write some actual Elixir code.
+
+This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other colleberative tools). In Figma you can see the cursors of other users working side-by-side in the document. It's a really cool feature and Phoenix was made for this stuff!
+
+## What we're building
+
+When users visit the website, they're automatically added to the channel, get assigned a user name (with a corresponding color), and can send messages to other users using the input field. The endresult of this tutorial will look like this:
+
+<Image
+  alt={`Screenshot of the end result`}
+  src={`/static/screenshots/phoenix-live-cursors.png`}
+  width={2152}
+  height={1372}
+/>
+
+## Getting started
+
+Create a new Phoenix project using:
+
+```bash
+mix phx.new cursors
+```
+
+I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [this earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix).
+
+Let's add a nice background and some basic HTML.
+
+```html
+
+```
+
+You can see the results so far by running:
+
+```bash
+mix phx.server
+```
+
+Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
+
+## Tracking mouse movements
+
+- adding channel using mix phx.gen.channel Cursor
+- adding events for cursor movements
+- display cursors on the DOM
+
+## Adding names
+
+- adding token based names to move events
+
+## Tracking who's online
+
+- adding presence to track user cursors
+- add unique color for every name
+
+## Sending messages
+
+- allow sending messages
+
+## BONUS: deploying on Digital Ocean
+
+- mix phx.gen.release --docker
+- fix compilation of css assets (Tailwind)
+- add url to check_origin
