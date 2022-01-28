@@ -1,0 +1,37 @@
+---
+title: To be null or to be undefined
+publishedAt: '2022-01-28'
+summary: ...
+---
+
+https://twitter.com/vnglst/status/1444268178943709184
+https://threadreaderapp.com/thread/1444240111042973701.html
+
+I got caught up in an interesting discussion on Twitter the other days about using null in JSON responses (from API's).
+
+In the past my mental model for using `null` and `undefined` used to be this:
+
+```
+
+```
+
+I must admit I've not given it much thought after settling on this model and I've been using it for years. Until I came across a tweet by ....
+
+Turns out that many people consider the `null` to be superfleous and that using it should be avoided as much as possible.
+
+In 2014 Douglas Crockford (the inventor of JSON) said the following about null and undefined:
+
+"It doesn't make sense to have two of them and you treat them as though they're the same. We should get rid of one of them."
+
+Video
+
+Based on this I'm going to change my mental model for JSON responses to this: act as if null doesn't exist and leave the fields out (ie. undefined):
+
+Code
+
+The result is JSON that is:
+
+1. simpler & smaller
+2. only about the data, not documentation
+3. on the frontend you can reliably use typeof(x) (see screenshot)
+4. simpler TypeScript types, no more: type Product { price?: number | null; }
