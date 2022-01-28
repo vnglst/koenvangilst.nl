@@ -4,11 +4,12 @@ publishedAt: '2019-08-23'
 summary: How to let screenreaders read the title of an SVG using React
 ---
 
----
-
-**tl;dr add a `<title>` tag to you SVGs to improve accessiblity. If you need general browser support (Safari in particular) read on...**
-
----
+<Disclaimer>
+  **tl;dr**
+  
+  If your SVG is just decorative add `aria-hidden="true"`. If not, add a `<title>` tag to improve accessiblity.
+  Read on if you want general browser support (Safari in particular).
+</Disclaimer>
 
 With `<title>` tags you can let screenreader users know what a SVG represents. However, browser support is not quite there yet. So for instance VoiceOver on Mac + Safari does not read titles to the user.
 
