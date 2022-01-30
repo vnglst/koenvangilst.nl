@@ -1,7 +1,7 @@
 ---
 title: To be null or to be undefined
 publishedAt: '2022-01-28'
-summary: ...
+summary: text...
 ---
 
 https://twitter.com/vnglst/status/1444268178943709184
@@ -11,8 +11,12 @@ I got caught up in an interesting discussion on Twitter the other days about usi
 
 In the past my mental model for using `null` and `undefined` used to be this:
 
-```
-
+```json
+{
+  "foo": "bar",
+  "baz": null,
+  "qux": undefined
+}
 ```
 
 I must admit I've not given it much thought after settling on this model and I've been using it for years. Until I came across a tweet by ....
@@ -33,5 +37,5 @@ The result is JSON that is:
 
 1. simpler & smaller
 2. only about the data, not documentation
-3. on the frontend you can reliably use typeof(x) (see screenshot)
-4. simpler TypeScript types, no more: type Product { price?: number | null; }
+3. on the frontend you can reliably use `typeof(x)` (see screenshot)
+4. simpler TypeScript types, no more: `type Product { price?: number | null; }`
