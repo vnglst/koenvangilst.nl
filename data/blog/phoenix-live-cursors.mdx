@@ -1,7 +1,7 @@
 ---
 title: Live user cursors with Phoenix Presence
 publishedAt: '2022-02-04'
-summary: A tutorial for creating live cursors as seen in Figma. A step-by-step guide focussed on beginners (I'm learning Phoenix myself).
+summary: A tutorial for creating live cursors as seen in Figma. A step-by-step guide focused on beginners (I'm learning Phoenix myself).
 ---
 
 The past few months I've been learning about Phoenix and Elixir. Since I already spent most of time behind a computer for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I've had not a chance to get my hands dirty and write some actual Elixir code.
@@ -319,12 +319,108 @@ now have a name attached to it!
 
 ## Tracking who's online
 
-- adding presence to track user cursors
-- add unique color for every name
+Now that we're able to identify users, we're ready to track their online presence. This is a feature that Phoenix offers out of the box! Use the generator to get started:
+
+```bash
+mix phx.gen.presence
+```
+
+Follow the instructions that are displayed after running this command.
+
+In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online.
+
+```js {1, 18, 24-40}
+import { Socket, Presence } from 'phoenix';
+
+let socket = new Socket('/socket', {
+  params: { token: sessionStorage.userToken }
+});
+
+socket.connect();
+
+channel
+  .join()
+  .receive('ok', (resp) => {
+    console.log('Joined successfully', resp);
+    document.addEventListener('mousemove', (e) => {
+      const x = e.pageX / window.innerWidth;
+      const y = e.pageY / window.innerHeight;
+      channel.push('move', { x, y });
+    });
+    // remove the code that updates cursor positions on the move event
+  })
+  .receive('error', (resp) => {
+    console.log('Unable to join', resp);
+  });
+
+const presence = new Presence(channel);
+
+presence.onSync(() => {
+  const ul = document.createElement('ul');
+
+  presence.list((name, { metas: [firstDevice] }) => {
+    const { x, y } = firstDevice;
+    const cursorLi = cursorTemplate({
+      name,
+      x: x * window.innerWidth,
+      y: y * window.innerHeight
+    });
+    ul.appendChild(cursorLi);
+  });
+
+  document.getElementById('cursor-list').innerHTML = ul.innerHTML;
+});
+```
+
+After a users joins the channel we'll setup his presence in that channel and when this user send a `move` event, we'll update his Presence state. Update `cursor_channel` to the following:
+
+```elixir {3,8,12-22,25-33}
+defmodule PhoenixCursorsWeb.CursorChannel do
+  require Logger
+  alias PhoenixCursorsWeb.Presence
+  use PhoenixCursorsWeb, :channel
+
+  @impl true
+  def join("cursor:lobby", _payload, socket) do
+    send(self(), :after_join)
+    {:ok, socket}
+  end
+
+  @impl true
+  def handle_info(:after_join, socket) do
+    {:ok, _} =
+      Presence.track(socket, socket.assigns.current_user, %{
+        online_at: inspect(System.system_time(:second))
+      })
+
+    push(socket, "presence_state", Presence.list(socket))
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_in("move", %{"x" => x, "y" => y}, socket) do
+    {:ok, _} =
+      Presence.update(socket, socket.assigns.current_user, fn _previousState ->
+        %{
+          online_at: inspect(System.system_time(:second)),
+          x: x,
+          y: y
+        }
+      end)
+
+    {:noreply, socket}
+  end
+```
+
+Restart the server et voilà! You should see a live cursor for every user present in the channel.
 
 ## Adding colors
 
-- add unique color for every name
+To make the cursors a bit more colorful, we're going to add a unique color to each user. We'll generate a color based on the user name using the following Elixir code:
+
+```elixir
+
+```
 
 ## Sending messages
 
