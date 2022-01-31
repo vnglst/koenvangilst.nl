@@ -407,12 +407,15 @@ defmodule PhoenixCursorsWeb.CursorChannel do
   @impl true
   def handle_in("move", %{"x" => x, "y" => y}, socket) do
     {:ok, _} =
-      Presence.update(socket, socket.assigns.current_user, fn _previousState ->
-        %{
-          online_at: inspect(System.system_time(:second)),
-          x: x,
-          y: y
-        }
+      Presence.update(socket, socket.assigns.current_user, fn previousState ->
+        Map.merge(
+          previousState,
+          %{
+            online_at: inspect(System.system_time(:second)),
+            x: x,
+            y: y
+          }
+        )
       end)
 
     {:noreply, socket}
@@ -434,6 +437,91 @@ defmodule PhoenixCursors.Colors do
 end
 ```
 
+We assign this color the user's presence in `cursor_channel.ex`:
+
+```elixir {6,21}
+  @impl true
+  def handle_info(:after_join, socket) do
+    {:ok, _} =
+      Presence.track(socket, socket.assigns.current_user, %{
+        online_at: inspect(System.system_time(:second))
+        color: PhoenixCursors.Colors.getHSL(socket.assigns.current_user)
+      })
+
+    push(socket, "presence_state", Presence.list(socket))
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_in("move", %{"x" => x, "y" => y}, socket) do
+    {:ok, _} =
+      Presence.update(socket, socket.assigns.current_user, fn _previousState ->
+        %{
+          online_at: inspect(System.system_time(:second)),
+          x: x,
+          y: y,
+          color: PhoenixCursors.Colors.getHSL(socket.assigns.current_user)
+        }
+      end)
+
+    {:noreply, socket}
+  end
+```
+
+And in the frontend we use this color for rendering the list of user cursors. In `user_socket.js`:
+
+```js {3, 8}
+presence.list((name, { metas: [firstDevice] }) => {
+  const { x, y, color } = firstDevice;
+  const cursorLi = cursorTemplate({
+    name,
+    x: x * window.innerWidth,
+    y: y * window.innerHeight,
+    color
+  });
+  ul.appendChild(cursorLi);
+});
+```
+
+And update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
+
+```js {1,4,7,17,18}
+function cursorTemplate({ x, y, name, color }) {
+  const li = document.createElement('li');
+  li.classList =
+    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden';
+  li.style.left = x + 'px';
+  li.style.top = y + 'px';
+  li.style.color = color;
+
+  li.innerHTML = `
+    <svg
+      version="1.1"
+      width="25px"
+      height="25px"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 21 21">
+        <polygon
+          fill="black"
+          points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+        <polygon
+          fill="currentColor"
+          points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+        />
+    </svg>
+    <span class="mt-1 ml-4 px-1 text-sm text-white" />
+  `;
+
+  li.lastChild.style.backgroundColor = color;
+  li.lastChild.textContent = name;
+
+  return li;
+}
+```
+
+With this in place all cursors should have a unique color.
+
 ## Sending messages
 
 - allow sending messages
@@ -443,3 +531,7 @@ end
 - mix phx.gen.release --docker
 - fix compilation of css assets (Tailwind)
 - add url to check_origin
+
+```
+
+```
