@@ -4,13 +4,13 @@ publishedAt: '2022-02-04'
 summary: A tutorial for creating live cursors as seen in Figma. A step-by-step guide focused on beginners (I'm learning Phoenix myself).
 ---
 
-The past few months I've been learning about Phoenix and Elixir. Since I already spent most of time behind a computer for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I've had not a chance to get my hands dirty and write some actual Elixir code.
+The past few months I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I've had not a chance to get my hands dirty and write some actual Elixir code.
 
-This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other colleberative tools). In Figma you can see the cursors of other users working side-by-side in the document. It's a really cool feature and Phoenix was made for this stuff!
+This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other collaborative tools). In Figma you can see the mouse cursors of others people working in the document. It's a really cool feature and Phoenix was made for this stuff!
 
 ## What we're building
 
-When users visit the website, they're automatically added to the channel, get assigned a user name (with a corresponding color), and can send messages to other users using the input field. The endresult of this tutorial will look like this:
+The feature works like this: when users visit the website, they're automatically added to a channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The end result of this tutorial will look like this:
 
 <Image
   alt={`Screenshot of the end result`}
@@ -21,15 +21,15 @@ When users visit the website, they're automatically added to the channel, get as
 
 ## Getting started
 
-Create a new Phoenix project using. We only need the bare miniumum to get started, so we'll not add Ecto, Live View or Mailer.
+Create a new Phoenix project using the command line. We only need the bare minimum to get started, so we'll not add Ecto, Live View or Mailer.
 
 ```bash
 mix phx.new phoenix_cursors --no-ecto --no-dashboard --no-live --no-mailer
 ```
 
-I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [this earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/phoenix_cursors/commit/9800403ad1e0b33f30e666957245218589a9e211).
+I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [my earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/phoenix_cursors/commit/9800403ad1e0b33f30e666957245218589a9e211).
 
-Let's add a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
+I've also added a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
 
 ```html
 <section
@@ -65,7 +65,7 @@ You can see the results so far by running:
 mix phx.server
 ```
 
-It should now look like this:
+It should look like this:
 
 <Image
   alt={`Screenshot of the end result`}
@@ -83,7 +83,7 @@ Now that we have a working Phoenix project with Tailwind CSS, let's start buildi
 
 ## Tracking mouse movements
 
-First thing we need to do is add a channel that we can use to send mouse position updates to others:
+First we'll add a channel that we can use to send mouse position updates to:
 
 ```bash
 mix phx.gen.channel Cursor
@@ -91,9 +91,7 @@ mix phx.gen.channel Cursor
 
 Phoenix added some files to our repo. Make sure to follow any instructions that this commands gives you.
 
-To get a feeling for working with this channel (and sending updates to it)
-we'll start by logging cursor movements server side. First we need to start sending events from the client. In
-the file `assets/js/user_socket.js` we'll add the following:
+To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
 
 ```js {1, 6-10}
 let channel = socket.channel('cursor:lobby', {});
@@ -114,10 +112,10 @@ channel
 export default socket;
 ```
 
-This listens to changes in the mouse cursor position and sends an even to the Phoenix channel.
+This listens for changes in the mouse cursor position and sends those as events to the Phoenix channel.
 Events for mouse coordinate changes are made independent of the viewport (between 0 and 1).
 This makes sure cursors stay within the viewport of all users (esp. those with smaller screens).
-To display them we need to scale them to the viewport (i.e. multiply them again).
+To display them we need to scale them to the viewport.
 
 Next step: handle the updates in Phoenix. We'll update the file `lib/phoenix_cursors_web/channels/cursor_channel.ex` for this:
 
@@ -136,10 +134,10 @@ defmodule PhoenixCursorsWeb.CursorChannel do
   # ...etc
 ```
 
-If you start the Phoenix server and move around with the mouse,
-you'll see the cursor position updates in the console. Yeah, it works!
+If you start the Phoenix server and move around with the mouse, you'll see the
+cursor position updates in the console. Yeah, it works!
 
-Now let's also display those updates on the page. For this we'll need a bit of JavaScript.
+Let's also display those updates on the page. For this we'll need a bit of JavaScript.
 We'll add a template function to the file `user_socket.js`:
 
 ```js
@@ -175,7 +173,7 @@ function cursorTemplate({ x, y, name }) {
 }
 ```
 
-And we'll listen to any 'move' events on the channel:
+And we'll listen for 'move' events on the channel:
 
 ```js {13-22}
 let channel = socket.channel('cursor:lobby', {});
@@ -206,18 +204,19 @@ channel
   });
 ```
 
-If you open up to browser windows next to each other you can see the cursor moving around. However, the moment you
-leave the window the cursor will disappear. To fix this we'll need a way to keep track if users are still present
-in the channel. For this we'll need another feature that Phoenix offers, the `Presence` feature.
+If you open up two browser tabs next to each other you can see the cursor moving around. However, the moment you
+leave the tab the cursor will disappear. To fix this we'll need a way to keep track if users are still present
+in the channel. For this we need the `Presence` feature.
 
 ## Adding names
 
-Before we can track who's online, we'll need a way to identify users. Normally you would use some kind of authentication
-(using signup/sign in) and a database for that, but I want to keep this tutorial simple. So instead we'll assign each user
-an unique name the moment they join the channel.
+However, before we can track who's online, we need to add a way to identify users. Normally you would use some kind of authentication (signup/sign in) and a database for that, but I want to keep this tutorial as simple as possible.
+So instead I'll assign each user a unique name the moment they join the channel.
 
-To generate unique names we'll use the following function. I'm completely new to Elixir so there's probably a more elegant
-way to do this. Please let me know if you know a better way!
+To generate unique names we'll add the following function to the project.
+
+**Disclaimer:** I'm completely new to Elixir so there's probably a more elegant way to do this.
+Please let me know if there's better way!
 
 ```elixir
 # lib/phoenix_cursors/names.ex
@@ -239,9 +238,8 @@ defmodule Cursor.Names do
 end
 ```
 
-We'll generate this name on the server and send a signed version to the client. We sign it
-to make sure user can't temper with it on the client. This should prevent users from
-changing their name to someone else's.
+We'll generate this name on the server and send a signed token containing the name to the client. We sign it
+to make sure users can't temper with it. The idea is that this prevents users from changing their name to someone else's.
 
 In `page_controller.ex` add the following:
 
@@ -257,7 +255,7 @@ defmodule PhoenixCursorsWeb.PageController do
 end
 ```
 
-We'll store the userToken in sessionStorage on the client. Add the following line in `root.html.heex`:
+We'll store the `userToken` in sessionStorage on the client. Add the following line in `root.html.heex`:
 
 ```html {4}
     <!-- ... -->
@@ -279,9 +277,7 @@ let socket = new Socket('/socket', {
 
 When a user connects to the socket we can verify its authenticity by checking the token. Once
 we've verified that the token is valid, we read the user name from it and assign that name
-to the socker connection.
-
-This is done server side in the file `user_socket.ex`:
+to the socket connection. This is done server side in the file `user_socket.ex`:
 
 ```elixir
   def connect(%{"token" => token}, socket, _connect_info) do
@@ -339,7 +335,7 @@ mix phx.gen.presence
 
 Follow the instructions that are displayed after running this command.
 
-In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online.
+In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online/present.
 
 ```js {1, 18, 24-40}
 import { Socket, Presence } from 'phoenix';
@@ -384,7 +380,7 @@ presence.onSync(() => {
 });
 ```
 
-After a users joins the channel we'll setup his presence in that channel and when this user send a `move` event, we'll update his Presence state. Update `cursor_channel` to the following:
+After a user joins the channel we setup his presence in that channel. When this user sends a `move` event, we update his Presence state. Update `cursor_channel` to the following:
 
 ```elixir {3,8,12-22,25-33}
 defmodule PhoenixCursorsWeb.CursorChannel do
@@ -427,7 +423,7 @@ defmodule PhoenixCursorsWeb.CursorChannel do
   end
 ```
 
-Restart your server and visit `http://localhost:4000/` in your browser. Every user should now have a live cursor.
+Restart your server and visit `http://localhost:4000/` in your browser. Every user should now have a live cursor that follows their mouse around.
 
 ## Adding colors
 
@@ -488,7 +484,7 @@ presence.list((name, { metas: [firstDevice] }) => {
 });
 ```
 
-And update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
+Update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
 
 ```js {1,4,7,25,28}
 function cursorTemplate({ x, y, name, color }) {
@@ -540,7 +536,7 @@ of them. That particular user will be removed from the list of online users!
 
 <Disclaimer>
   This concludes the first part of this tutorial. In the next part I'll show you
-  how to allow users to send messages using the input field displayed in the
-  center. If you followed along in this example you should be able to add this
-  functionality yourself!
+  how to let users send messages using the input field displayed in the center.
+  If you followed along in this example you should be able to add this
+  functionality yourself.
 </Disclaimer>
