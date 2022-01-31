@@ -219,10 +219,17 @@ way to do this. Please let me know if you know a better way!
 defmodule Cursor.Names do
   def generate do
     title = ~w(Sir Sr Prof Saint Ibn Lady Madam Mistress Herr Dr) |> Enum.random()
-    start = ~w(A B C D F G H J K L M N P Q R S T V W X Z) |> Enum.random()
-    middle = ~w(o a i e u oo aj aa oe ou) |> Enum.random()
-    ending = ~w(y na no la ka ko lo po pa ro ru) |> Enum.random()
-    "#{title} #{start}#{middle}#{ending}"
+    name =
+      [
+        ~w(B C D F G H J K L M N P Q R S T V W X Z),
+        ~w(o a i ij e ee u uu oo aj aa oe ou eu),
+        ~w(b c d f g h k l m n p q r s t v w x z),
+        ~w(o a i ij e ee u uu oo aj aa oe ou eu)
+      ]
+      |> Enum.map(fn l -> Enum.random(l) end)
+      |> Enum.join()
+
+    "#{title} #{name}"
   end
 end
 ```
@@ -416,10 +423,15 @@ Restart the server et voilà! You should see a live cursor for every user presen
 
 ## Adding colors
 
-To make the cursors a bit more colorful, we're going to add a unique color to each user. We'll generate a color based on the user name using the following Elixir code:
+To make the cursors more recognizable, we're going to add a unique color to each user. We'll generate a color based on the user name using the following Elixir code in the file `lib/cursors/colors.ex`:
 
 ```elixir
-
+defmodule PhoenixCursors.Colors do
+  def getHSL(s) do
+    hue = to_charlist(s) |> Enum.sum() |> rem(360)
+    "hsl(#{hue}, 70%, 40%)"
+  end
+end
 ```
 
 ## Sending messages
