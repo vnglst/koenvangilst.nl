@@ -27,7 +27,7 @@ Create a new Phoenix project using. We only need the bare miniumum to get starte
 mix phx.new phoenix_cursors --no-ecto --no-dashboard --no-live --no-mailer
 ```
 
-I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [this earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit]().
+I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [this earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/phoenix_cursors/commit/9800403ad1e0b33f30e666957245218589a9e211).
 
 Let's add a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
 
@@ -76,6 +76,11 @@ It should now look like this:
 
 Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
 
+<Disclaimer>
+  Note: you can also follow along with this tutorial on Github. Visit the list
+  of commits here: https://github.com/vnglst/phoenix_cursors/commits/main
+</Disclaimer>
+
 ## Tracking mouse movements
 
 First thing we need to do is add a channel that we can use to send mouse position updates to others:
@@ -116,7 +121,7 @@ To display them we need to scale them to the viewport (i.e. multiply them again)
 
 Next step: handle the updates in Phoenix. We'll update the file `lib/phoenix_cursors_web/channels/cursor_channel.ex` for this:
 
-```elixir {4-7}
+```elixir {4-8}
 defmodule PhoenixCursorsWeb.CursorChannel do
   use PhoenixCursorsWeb, :channel
 
@@ -422,7 +427,7 @@ defmodule PhoenixCursorsWeb.CursorChannel do
   end
 ```
 
-Restart the server et voilà! You should see a live cursor for every user present in the channel.
+Restart your server and visit `http://localhost:4000/` in your browser. Every user should now have a live cursor.
 
 ## Adding colors
 
@@ -470,7 +475,7 @@ We assign this color the user's presence in `cursor_channel.ex`:
 
 And in the frontend we use this color for rendering the list of user cursors. In `user_socket.js`:
 
-```js {3, 8}
+```js {3, 7}
 presence.list((name, { metas: [firstDevice] }) => {
   const { x, y, color } = firstDevice;
   const cursorLi = cursorTemplate({
@@ -485,7 +490,7 @@ presence.list((name, { metas: [firstDevice] }) => {
 
 And update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
 
-```js {1,4,7,17,18}
+```js {1,4,7,25,28}
 function cursorTemplate({ x, y, name, color }) {
   const li = document.createElement('li');
   li.classList =
@@ -520,18 +525,22 @@ function cursorTemplate({ x, y, name, color }) {
 }
 ```
 
-With this in place all cursors should have a unique color.
+Restart the server et voilà! You should see a nicely colored cursor for every user present in the channel.
 
-## Sending messages
+<Image
+  alt={`Screenshot of the end result`}
+  src={`/static/screenshots/phoenix-live-cursors-part1.jpg`}
+  width={1480}
+  height={1284}
+/>
 
-- allow sending messages
+What's really cool about Phoenix Presence is that it automatically keeps track of who's online and who's not.
+You can verify this if you open up a few browser tabs (to simulate multiple users) and then close any one
+of them. That particular user will be removed from the list of online users!
 
-## BONUS: deploying on Digital Ocean
-
-- mix phx.gen.release --docker
-- fix compilation of css assets (Tailwind)
-- add url to check_origin
-
-```
-
-```
+<Disclaimer>
+  This concludes the first part of this tutorial. In the next part I'll show you
+  how to allow users to send messages using the input field displayed in the
+  center. If you followed along in this example you should be able to add this
+  functionality yourself!
+</Disclaimer>
