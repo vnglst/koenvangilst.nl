@@ -57,6 +57,11 @@ h1 {
   scroll-margin-top: 1.125rem;
 }
 
+/* make sure footnotes don't fall under nav bar */
+[id^='fnref'] {
+  scroll-margin-top: 150px;
+}
+
 .blink {
   animation: blink-animation 1s step-start 1s infinite;
 }
@@ -115,6 +120,13 @@ h1 {
   /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
+}
+
+.prose a.footnote-back {
+  @apply border-none;
+  @apply bg-transparent;
+  @apply text-gray-500 dark:text-gray-300;
+  @apply mx-1;
 }
 
 /* Syntax highlighting, see https://www.npmjs.com/package/rehype-prism-plus#styling */
