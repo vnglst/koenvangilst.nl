@@ -14,8 +14,7 @@ export default function Home() {
               Koen van Gilst
             </h1>
             <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-              Frontend Developer at{' '}
-              <span className="font-semibold">Rabobank</span>
+              Web Developer at <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
               {`I'm a passionate & entrepreneurial JavaScript developer from the
@@ -37,16 +36,16 @@ export default function Home() {
         </h3>
         <section className="flex gap-6 flex-col md:flex-row">
           <BlogPostCard
+            title="Live user cursors with Phoenix Presence"
+            slug="phoenix-live-cursors"
+          />
+          <BlogPostCard
+            title="Clean Code is Phase"
+            slug="clean-code-is-a-phase"
+          />
+          <BlogPostCard
             title="Using Svelte to create a scroll video effect"
             slug="tutorial-svelte-scroll-video"
-          />
-          <BlogPostCard
-            title="Adding Tailwind to Phoenix"
-            slug="adding-tailwind-to-phoenix"
-          />
-          <BlogPostCard
-            title="Using React Hooks with canvas"
-            slug="react-hooks-with-canvas"
           />
         </section>
         <Link href="/blog">
