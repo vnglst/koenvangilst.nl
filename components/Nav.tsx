@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import cn from 'clsx';
 import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
