@@ -4,7 +4,7 @@
         <description><![CDATA[Koen van Gilst]]></description>
         <link>https://koenvangilst.nl</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 11 Jan 2022 18:50:17 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 03 Feb 2022 19:57:53 GMT</lastBuildDate>
         <atom:link href="https://koenvangilst.nl/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[303 See Other]]></title>
@@ -47,6 +47,13 @@
             <link>https://koenvangilst.nl/blog/brutalist-css</link>
             <guid isPermaLink="true">https://koenvangilst.nl/blog/brutalist-css</guid>
             <pubDate>Sat, 17 Aug 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Clean code is a phase]]></title>
+            <description><![CDATA[Why it's better to be kind, than to be clean.]]></description>
+            <link>https://koenvangilst.nl/blog/clean-code-is-a-phase</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/clean-code-is-a-phase</guid>
+            <pubDate>Fri, 28 Jan 2022 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Code Colocation is King]]></title>
@@ -110,6 +117,13 @@
             <link>https://koenvangilst.nl/blog/one-script-to-run-it-all</link>
             <guid isPermaLink="true">https://koenvangilst.nl/blog/one-script-to-run-it-all</guid>
             <pubDate>Fri, 10 Dec 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Live user cursors with Phoenix Presence]]></title>
+            <description><![CDATA[A tutorial for creating live cursors as seen in Figma. A step-by-step guide focused on beginners (I'm learning Phoenix myself).]]></description>
+            <link>https://koenvangilst.nl/blog/phoenix-live-cursors</link>
+            <guid isPermaLink="true">https://koenvangilst.nl/blog/phoenix-live-cursors</guid>
+            <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Reading notes Programming TypeScript]]></title>

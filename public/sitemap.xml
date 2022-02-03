@@ -45,6 +45,10 @@
   </url>
 
   <url>
+    <loc>https://koenvangilst.nl/blog/clean-code-is-a-phase</loc>
+  </url>
+
+  <url>
     <loc>https://koenvangilst.nl/blog/code-colocation-is-king</loc>
   </url>
 
@@ -83,6 +87,10 @@
   </url>
 
   <url>
+    <loc>https://koenvangilst.nl/blog/phoenix-live-cursors</loc>
+  </url>
+
+  <url>
     <loc>https://koenvangilst.nl/blog/programming-typescript-reading-notes</loc>
   </url>
 
@@ -111,22 +119,6 @@
   </url>
 
   <url>
-    <loc>https://koenvangilst.nl/snippets/css-accent-color</loc>
-  </url>
-
-  <url>
-    <loc>https://koenvangilst.nl/snippets/git-hash</loc>
-  </url>
-
-  <url>
-    <loc>https://koenvangilst.nl/snippets/styling-scrollbars</loc>
-  </url>
-
-  <url>
-    <loc>https://koenvangilst.nl/snippets/useStorage</loc>
-  </url>
-
-  <url>
     <loc>https://koenvangilst.nl/lab/converter</loc>
   </url>
 
@@ -151,7 +143,7 @@
   </url>
 
   <url>
-    <loc>https://koenvangilst.nl/lab/overheidsedits</loc>
+    <loc>https://koenvangilst.nl/lab/overheidedits</loc>
   </url>
 
   <url>
@@ -180,5 +172,21 @@
 
   <url>
     <loc>https://koenvangilst.nl/lab/vaccination-progress</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/css-accent-color</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/git-hash</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/styling-scrollbars</loc>
+  </url>
+
+  <url>
+    <loc>https://koenvangilst.nl/snippets/useStorage</loc>
   </url>
 </urlset>
