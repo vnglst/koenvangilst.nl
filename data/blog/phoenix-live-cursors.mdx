@@ -89,7 +89,27 @@ First we'll add a channel that we can use to send mouse position updates to:
 mix phx.gen.channel Cursor
 ```
 
-Phoenix added some files to our repo. Make sure to follow any instructions that this command gives you.
+Phoenix added some files to our repo. Make sure to follow any instructions that this command gives you and
+add the socket handler to your `lib/phoenix_cursors_web/endpoint.ex`. I added it just above the socket for LiveView (disabled in my case):
+
+```elixir {1-3}
+  socket "/socket", PhoenixCursorsWeb.UserSocket,
+    websocket: true,
+    longpoll: false
+
+  # socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+```
+
+For the front-end integration, you need to import the `user_socket.js` in your `assets/js/app.js` file. Uncomment the following line:
+
+```js {3}
+// If you want to use Phoenix channels, run `mix help phx.gen.channel`
+// to get started and then uncomment the line below.
+import './user_socket.js';
+
+// You can include dependencies in two ways.
+//
+```
 
 To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
 
@@ -235,12 +255,6 @@ defmodule Cursor.Names do
 end
 ```
 
-<Disclaimer>
-  **Disclaimer:** I'm new to Elixir myself so there's probably a more elegant
-  way to do this. Please [let me know](https://twitter.com/vnglst) if you know a
-  better way!
-</Disclaimer>
-
 We'll generate this name on the server and send a signed token containing the name to the client. We sign it
 to make sure users can't temper with it. The idea is that this prevents users from changing their name to someone else's.
 
@@ -336,7 +350,29 @@ Now that we're able to identify users, we're ready to track their online presenc
 mix phx.gen.presence
 ```
 
-Follow the instructions that are displayed after running this command.
+Follow the instructions that are displayed after running this command by adding the new module to your supervision tree
+in `lib/phoenix_cursors/application.ex`:
+
+```elixir {11}
+  def start(_type, _args) do
+    children = [
+      # Start the Telemetry supervisor
+      PhoenixCursorsWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: PhoenixCursors.PubSub},
+      # Start the Endpoint (http/https)
+      PhoenixCursorsWeb.Endpoint,
+      # Start a worker by calling: PhoenixCursors.Worker.start_link(arg)
+      # {PhoenixCursors.Worker, arg}
+      PhoenixCursorsWeb.Presence
+    ]
+
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: PhoenixCursors.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+```
 
 In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online/present.
 
@@ -547,6 +583,6 @@ of them. That particular cursor will be removed from the screen!
 [^1]:
     I'm aware that the live cursor feature would've been an excellent
     fit for Phoenix LiveView. However, I first wanted to get a better feeling for
-    the Phoenix primitives like Channels and Presence, before I start with
-    LiveView. In the future I would like to build the same functionality
-    again with LiveView to see how it would reduce complexity.
+    the Phoenix primitives Channels and Presence.
+    In the future I would like to build the same functionality again with LiveView
+    to see how that would reduce complexity.
