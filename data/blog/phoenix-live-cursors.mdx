@@ -266,7 +266,7 @@ defmodule PhoenixCursorsWeb.PageController do
 
   def index(conn, _params) do
     render(conn, "index.html",
-      user_token: Phoenix.Token.sign(CursorsWeb.Endpoint, "user socket", Cursor.Names.generate())
+      user_token: Phoenix.Token.sign(PhoenixCursorsWeb.Endpoint, "user socket", Cursor.Names.generate())
     )
   end
 end
