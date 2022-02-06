@@ -294,7 +294,8 @@ let socket = new Socket('/socket', {
 
 When a user connects to the socket we can verify the authenticity by checking the token. Once
 we've verified that a token is valid, we read the user name from it and assign that name
-to the socket connection. This is done server side in the file `user_socket.ex`:
+to the socket connection. This is done server side in the file `user_socket.ex`. Replace the
+existing `connect` function with the following:
 
 ```elixir
   def connect(%{"token" => token}, socket, _connect_info) do
@@ -579,6 +580,11 @@ of them. That particular cursor will be removed from the screen!
   If you followed along in this example you should be able to add this
   functionality yourself.
 </Disclaimer>
+
+## Credits
+
+Many thanks to [Dmitri Don](https://twitter.com/DmitriDon) for giving this tutorial a try and
+fixing any mistakes and unclarities.
 
 [^1]:
     I'm aware that the live cursor feature would've been an excellent
