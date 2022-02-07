@@ -485,7 +485,7 @@ We assign this color to the user's presence in `cursor_channel.ex`:
   def handle_info(:after_join, socket) do
     {:ok, _} =
       Presence.track(socket, socket.assigns.current_user, %{
-        online_at: inspect(System.system_time(:second))
+        online_at: inspect(System.system_time(:second)),
         color: PhoenixCursors.Colors.getHSL(socket.assigns.current_user)
       })
 
@@ -511,7 +511,7 @@ We assign this color to the user's presence in `cursor_channel.ex`:
 
 And in the frontend we use this color for rendering the list of user cursors. In `user_socket.js`:
 
-```js {3, 7}
+```js {2, 3, 7}
 presence.list((name, { metas: [firstDevice] }) => {
   const { x, y, color } = firstDevice;
   const cursorLi = cursorTemplate({
