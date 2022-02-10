@@ -72,6 +72,14 @@ h1 {
   }
 }
 
+.up-hover:hover {
+  transform: translateY(-5px);
+}
+
+.up-hover {
+  transition: all 0.2s ease-in-out;
+}
+
 .prose .anchor {
   @apply absolute invisible;
 

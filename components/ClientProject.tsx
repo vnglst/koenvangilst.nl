@@ -11,7 +11,7 @@ export default function ClientProject({ title, summary, slug, year }: Props) {
   return (
     <Link href={`/portfolio/${slug}`}>
       <a className="w-full">
-        <article className="w-full mb-4 transform hover:scale-[1.01] transition-all py-3">
+        <article className="w-full mb-4 py-3 up-hover">
           <div className="flex items-baseline">
             <div className="text-primary  text-left mr-6 leading-2">{year}</div>
             <div className="w-full">
