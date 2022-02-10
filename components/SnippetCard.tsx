@@ -11,7 +11,7 @@ export default function SnippetCard({
   return (
     <Link href={`/snippets/${slug}`}>
       <a
-        className="transform hover:scale-[1.02] transition-all bg-gray-50 dark:bg-black border-dashed border-gray-400 border rounded-xl p-4 w-full"
+        className="bg-gray-50 dark:bg-black border-dashed border-gray-400 border rounded-xl p-4 w-full up-hover"
         {...rest}
       >
         <Image

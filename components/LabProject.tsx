@@ -14,7 +14,7 @@ export default function LabProject({ title, summary, url, year }: Props) {
       className="w-full"
       rel="noreferrer"
     >
-      <article className="w-full mb-4 transform hover:scale-[1.01] transition-all py-3">
+      <article className="w-full mb-4 py-3 up-hover">
         <div className="flex items-baseline">
           <div className="text-primary text-left mr-6">{year}</div>
           <div className="w-full">

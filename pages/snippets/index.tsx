@@ -22,7 +22,7 @@ export default function Snippets({
           saved. They include React hooks, TypeScript tips, random CSS snippets
           and Node.js scripts.`}
         </p>
-        <div className="grid w-full grid-cols-1 gap-4 my-2 mt-4 sm:grid-cols-2">
+        <div className="grid w-full grid-cols-1 gap-8 my-2 mt-4 sm:grid-cols-2">
           {snippets.map((snippet) => (
             <SnippetCard
               key={snippet.slug}
