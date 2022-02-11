@@ -4,6 +4,7 @@ import { parseISO, format } from 'date-fns';
 import Container from 'components/Container';
 import type { PropsWithChildren } from 'react';
 import type { Blog } from '.contentlayer/types';
+import { useViews } from 'lib/useViews';
 
 const editUrl = (slug) =>
   `https://github.com/vnglst/koenvangilst.nl/edit/master/data/blog/${slug}.mdx`;
@@ -16,6 +17,8 @@ export default function BlogLayout({
   children,
   post
 }: PropsWithChildren<{ post: Blog }>) {
+  const { views } = useViews(`/blog/${post.slug}`);
+
   return (
     <Container
       title={`${post.title} – Koen van Gilst`}
@@ -43,6 +46,8 @@ export default function BlogLayout({
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
             {post.readingTime.text}
+            {` • `}
+            <span>{`${views > 0 ? views.toLocaleString() : '–––'} views`}</span>
           </p>
         </div>
         <section className="w-full mt-4 prose dark:prose-dark max-w-none">
