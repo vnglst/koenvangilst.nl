@@ -63,9 +63,9 @@ export default function Blog({
               Most Popular
             </h3>
             <BlogPost
-              title="Using Svelte to create a scroll video effect"
-              summary="Tutorial on how to create a scroll video effect using Svelte's powerful bind command."
-              slug="tutorial-svelte-scroll-video"
+              title="Using React Hooks with canvas"
+              summary="An intro to the React hooks useState, useRef and useEffect."
+              slug="react-hooks-with-canvas"
             />
             <BlogPost
               title="Code Colocation is King"
@@ -73,9 +73,9 @@ export default function Blog({
               slug="code-colocation-is-king"
             />
             <BlogPost
-              title="Using React Hooks with canvas"
-              summary="An intro to the React hooks useState, useRef and useEffect."
-              slug="react-hooks-with-canvas"
+              title="Using Svelte to create a scroll video effect"
+              summary="Tutorial on how to create a scroll video effect using Svelte's powerful bind command."
+              slug="tutorial-svelte-scroll-video"
             />
           </>
         )}
