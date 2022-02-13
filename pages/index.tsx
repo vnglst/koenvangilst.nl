@@ -17,7 +17,7 @@ export default function Home() {
               Web Developer at <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
-              {`I'm a passionate & entrepreneurial JavaScript developer from the
+              {`I'm a passionate & entrepreneurial TypeScript developer from the
               Netherlands who likes to push the web beyond it's limits.`}
             </p>
           </div>
@@ -40,8 +40,8 @@ export default function Home() {
             slug="phoenix-live-cursors"
           />
           <BlogPostCard
-            title="Clean Code is Phase"
-            slug="clean-code-is-a-phase"
+            title="Code Colocation is King"
+            slug="code-colocation-is-king"
           />
           <BlogPostCard
             title="Using Svelte to create a scroll video effect"
