@@ -6,9 +6,10 @@ import type { PropsWithChildren } from 'react';
 import type { Blog } from '.contentlayer/types';
 import { useViews } from 'lib/useViews';
 
-const editUrl = (slug) =>
+const editUrl = (slug: string) =>
   `https://github.com/vnglst/koenvangilst.nl/edit/master/data/blog/${slug}.mdx`;
-const discussUrl = (slug) =>
+
+const discussUrl = (slug: string) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://koenvangilst.nl/blog/${slug}`
   )}`;
