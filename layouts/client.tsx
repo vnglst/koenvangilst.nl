@@ -3,7 +3,7 @@ import { parseISO, format } from 'date-fns';
 
 import Container from 'components/Container';
 import type { PropsWithChildren } from 'react';
-import type { Client } from '.contentlayer/types';
+import type { Client } from 'contentlayer/generated';
 
 export default function ClientLayout({
   children,
