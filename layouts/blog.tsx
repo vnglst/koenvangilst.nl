@@ -3,7 +3,7 @@ import { parseISO, format } from 'date-fns';
 
 import Container from 'components/Container';
 import type { PropsWithChildren } from 'react';
-import type { Blog } from '.contentlayer/types';
+import type { Blog } from 'contentlayer/generated';
 import { useViews } from 'lib/useViews';
 
 const editUrl = (slug: string) =>

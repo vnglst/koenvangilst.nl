@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Container from 'components/Container';
 import type { PropsWithChildren } from 'react';
-import { Project } from '.contentlayer/types';
+import { Project } from 'contentlayer/generated';
 
 export default function ProjectLayout({
   children,

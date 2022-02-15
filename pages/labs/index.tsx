@@ -1,7 +1,7 @@
 import Container from 'components/Container';
 import LabProject from 'components/LabProject';
 import { pick } from 'lib/utils';
-import { allProjects } from '.contentlayer/data';
+import { allProjects } from 'contentlayer/generated';
 import { InferGetStaticPropsType } from 'next';
 
 export default function Blog({
