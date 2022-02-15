@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import type { Blog } from '.contentlayer/types';
+import type { Blog } from 'contentlayer/generated';
 import { useViews } from 'lib/useViews';
 
 export default function BlogPost({

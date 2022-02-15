@@ -1,9 +1,8 @@
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import components from 'components/MDXComponents';
-import ClientLayout from 'layouts/client';
-import { allProjects } from '.contentlayer/data';
-import type { Project } from '.contentlayer/types';
+import type { Project } from 'contentlayer/generated';
+import { allProjects } from 'contentlayer/generated';
 import ProjectLayout from 'layouts/project';
+import { useMDXComponent } from 'next-contentlayer/hooks';
 
 export default function Post({ project }: { project: Project }) {
   const Component = useMDXComponent(project.body.code);

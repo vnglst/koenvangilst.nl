@@ -1,8 +1,8 @@
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import components from 'components/MDXComponents';
 import ClientLayout from 'layouts/client';
-import { allClients } from '.contentlayer/data';
-import type { Client } from '.contentlayer/types';
+import { allClients } from 'contentlayer/generated';
+import type { Client } from 'contentlayer/generated';
 
 export default function Post({ client }: { client: Client }) {
   const Component = useMDXComponent(client.body.code);
