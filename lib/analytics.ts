@@ -21,6 +21,11 @@ export const useAnalytics = () => {
 function trackPageView() {
   const url = '/api/views';
 
+  // don't track in dev
+  if (process.env.NODE_ENV === 'development') {
+    return;
+  }
+
   // use sendBeacon if browser supports it
   if (navigator.sendBeacon) {
     navigator.sendBeacon(url);
