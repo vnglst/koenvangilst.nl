@@ -7,7 +7,7 @@ import MetricCard from 'components/metrics/Card';
 export default function GitHubCard() {
   const { data } = useSWR<GitHub>('/api/github', fetcher);
 
-  const stars = new Number(data?.stars);
+  const stars = Number(data?.stars);
   const link = 'https://github.com/vnglst';
 
   return (
