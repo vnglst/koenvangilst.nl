@@ -21,13 +21,9 @@ export default function Dashboard() {
             shows daily, weekly & total view counts for my website.
           </p>
         </div>
-        <div className="flex flex-col w-full">
-          <Unsplash />
-        </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+          <Unsplash />
           <GitHub />
-        </div>
-        <div className="flex flex-col w-full">
           <Views />
         </div>
       </div>

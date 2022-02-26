@@ -9,10 +9,10 @@ export default function Views() {
   const { data: totalViews } = useSWR<any>('/api/views/all', fetcher);
 
   return (
-    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-      <MetricCard header="Daily Views" metric={todaysViews} />
-      <MetricCard header="Weekly Views" metric={weekViews} />
-      <MetricCard header="Total Views" metric={totalViews} />
-    </div>
+    <>
+      <MetricCard header="Daily Website Views" metric={todaysViews} />
+      <MetricCard header="Weekly Website Views" metric={weekViews} />
+      <MetricCard header="Total Website Views" metric={totalViews} />
+    </>
   );
 }
