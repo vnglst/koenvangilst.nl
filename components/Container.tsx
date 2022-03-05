@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Footer from 'components/Footer';
 import Nav from 'components/Nav';
+import UkraineBanner from './UkraineBanner';
 
 export default function Container(props) {
   const { children, ...customMeta } = props;
@@ -51,6 +52,7 @@ export default function Container(props) {
         {children}
       </main>
       <Footer />
+      <UkraineBanner />
     </div>
   );
 }
