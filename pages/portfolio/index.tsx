@@ -1,7 +1,7 @@
 import ClientProject from 'components/ClientProject';
 import Container from 'components/Container';
+import { pick } from 'contentlayer/client';
 import { allClients } from 'contentlayer/generated';
-import { pick } from 'lib/utils';
 import { InferGetStaticPropsType } from 'next';
 
 export default function Blog({
