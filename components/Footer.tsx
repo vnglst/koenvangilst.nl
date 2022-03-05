@@ -3,7 +3,7 @@ import ExternalLink from './ExternalLink';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-center px-8">
+    <footer className="flex flex-col justify-center px-8 mb-12">
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto w-full">
         <div className="w-full max-w-2xl grid grid-cols-1 gap-4 pb-16 sm:grid-cols-3 mt-8">
           <div className="flex flex-col space-y-4">
