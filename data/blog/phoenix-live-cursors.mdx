@@ -424,7 +424,6 @@ After users join the channel we setup their presence in the channel. When a user
 
 ```elixir {3,8,12-22,25-33}
 defmodule PhoenixCursorsWeb.CursorChannel do
-  require Logger
   alias PhoenixCursorsWeb.Presence
   use PhoenixCursorsWeb, :channel
 
