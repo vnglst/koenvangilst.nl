@@ -1,0 +1,26 @@
+---
+title: 'Support Ukraine banner'
+description: 'Add a stand with Ukraine banner using this TailwindCSS snippet'
+logo: 'tailwindcss.jpeg'
+---
+
+Show your support for Ukraine by adding this banner to your website.
+If you're using Tailwind on your website you can copy paste this html snippet
+to e.g. your footer. An example implementation for a React website can found
+in [this pull request](https://github.com/vnglst/koenvangilst.nl/pull/96/files).
+
+```html
+<a target="_blank" rel="noopener noreferrer" href="https://www.stopputin.net/">
+  <div
+    className="bg-[#0066cc] text-white fixed flex items-center justify-center bottom-0 w-screen h-12 z-50"
+  >
+    <span className="block md:hidden">
+      <strong className="text-[#ffcc00]">Stand with Ukraine.</strong> Donate →
+    </span>
+    <span className="hidden md:block">
+      <strong className="text-[#ffcc00]">Stand with Ukraine.</strong>{' '}
+      Petition your leaders. Show your support.
+    </span>
+  </div>
+</a>
+```
