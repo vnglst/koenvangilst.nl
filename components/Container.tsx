@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Footer from 'components/Footer';
 import Nav from 'components/Nav';
 import UkraineBanner from './UkraineBanner';
+import { isServer } from 'lib/utils';
 
 export default function Container(props) {
   const { children, ...customMeta } = props;
@@ -52,7 +53,7 @@ export default function Container(props) {
         {children}
       </main>
       <Footer />
-      <UkraineBanner />
+      {!isServer() && <UkraineBanner />}
     </div>
   );
 }

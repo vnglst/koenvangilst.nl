@@ -1,6 +1,6 @@
 import Container from 'components/Container';
 import LabProject from 'components/LabProject';
-import { pick } from 'lib/utils';
+import { pick } from 'contentlayer/client';
 import { allProjects } from 'contentlayer/generated';
 import { InferGetStaticPropsType } from 'next';
 
