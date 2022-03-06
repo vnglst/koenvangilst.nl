@@ -80,7 +80,7 @@ const useStorage: UseStorage = (
     try {
       storage.setItem(key, serialize(newState));
     } catch (error) {
-      reportError(error);
+      console.error(error);
     }
     setState(newState);
   };
