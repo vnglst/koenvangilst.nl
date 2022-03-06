@@ -1,7 +1,7 @@
 import Container from 'components/Container';
 import SnippetCard from 'components/SnippetCard';
+import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
-import { pick } from 'lib/utils';
 import type { InferGetStaticPropsType } from 'next';
 
 export default function Snippets({

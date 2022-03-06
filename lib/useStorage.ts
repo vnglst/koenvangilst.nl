@@ -1,11 +1,12 @@
----
-title: 'useStorage'
-description: 'A React hook that uses localStorage (or sessionStorage) to persist component state.'
-logo: 'react.png'
----
-
-````ts
 import { useState } from 'react';
+
+export function useSessionStorage<T>(key: string, initialValue: T) {
+  return useStorage(key, initialValue, { storage: window.sessionStorage });
+}
+
+export function useLocalStorage<T>(key: string, initialValue: T) {
+  return useStorage(key, initialValue, { storage: window.sessionStorage });
+}
 
 type UseStorage = <T>(
   key: string,
@@ -39,7 +40,7 @@ type UseStorage = <T>(
  * ```
  *
  */
-export const useStorage: UseStorage = (
+const useStorage: UseStorage = (
   key,
   initialState,
   {
@@ -86,4 +87,3 @@ export const useStorage: UseStorage = (
 
   return [state, storeState];
 };
-````
