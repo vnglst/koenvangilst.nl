@@ -7,8 +7,9 @@ export function middleware() {
 function addSecurityHeaders(response: NextResponse) {
   const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com *.google-analytics.com;
-  child-src *.youtube.com *.google.com *.twitter.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
+  script-src-elem 'self' data: ;
+  child-src *.youtube.com *.twitter.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src i.imgur.com;
