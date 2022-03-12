@@ -1,7 +1,61 @@
-import { NextResponse } from 'next/server';
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+import invariant from 'tiny-invariant';
 
-export function middleware() {
+// regex to check if string contains a file extension
+const PUBLIC_FILE = /\.(.*)$/;
+
+export function middleware(req: NextRequest, ev: NextFetchEvent) {
+  // Runs after the response has been returned
+  // so tracking analytics doesn't block rendering
+  ev.waitUntil(
+    (async () => {
+      logPageView(req);
+    })()
+  );
+
   return addSecurityHeaders(NextResponse.next());
+}
+
+async function logPageView(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  if (
+    // don't track files like /robots.txt
+    PUBLIC_FILE.test(pathname) ||
+    // don't track the following paths
+    pathname.startsWith('/static') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/fonts') ||
+    pathname.startsWith('/logos') ||
+    // headers added when next/link pre-fetches a route
+    // don't track these
+    req.headers.get('x-middleware-preflight')
+  ) {
+    return;
+  }
+
+  const body = JSON.stringify({
+    origin: req.nextUrl.origin,
+    pathname,
+    ua: req.ua.ua
+    // TODO: add geo tracking later
+    // ...req.geo
+  });
+
+  if (process.env.NODE_ENV === 'development') {
+    return console.log('[Tracking pageview]:', pathname);
+  }
+
+  const request = await fetch(`${process.env.SUPABASE_URL}/rest/v1/visits`, {
+    headers: {
+      apikey: process.env.SUPABASE_ANON_KEY,
+      'Content-Type': 'application/json'
+    },
+    body,
+    method: 'POST'
+  });
+
+  invariant(request.status === 201, 'Error logging analytics');
 }
 
 function addSecurityHeaders(response: NextResponse) {
