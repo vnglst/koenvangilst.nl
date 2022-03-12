@@ -38,6 +38,7 @@ async function logPageView(req: NextRequest) {
     origin: req.nextUrl.origin,
     pathname,
     ua: req.ua.ua
+    // TODO: add geo tracking later
     // ...req.geo
   });
 
