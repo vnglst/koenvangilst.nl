@@ -1,6 +1,6 @@
 type Props = {
   header: string;
-  link?: string;
+  link: string;
   metric: number;
   isCurrency?: boolean;
 };
@@ -11,9 +11,15 @@ export default function MetricCard({
   metric,
   isCurrency
 }: Props) {
+  const isExternalLink = link.startsWith('https://');
+
   return (
     <div className="bg-white dark:bg-gray-900 border border-dashed border-gray-400 rounded-lg p-4 max-w-72 w-full text-gray-900 dark:text-gray-100">
-      {link ? <ExternalLink link={link}>{header}</ExternalLink> : header}
+      {isExternalLink ? (
+        <ExternalLink link={link}>{header}</ExternalLink>
+      ) : (
+        <a href={link}>{header}</a>
+      )}
       <p className="mt-2 text-3xl font-bold spacing-sm text-black dark:text-white">
         {metric > 0 && isCurrency && '$'}
         {metric > 0 ? metric.toLocaleString() : '-'}
