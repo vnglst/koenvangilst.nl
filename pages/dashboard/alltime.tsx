@@ -13,14 +13,17 @@ export default function TodaysVisits() {
   const { data } = useSWR<Visit[]>('/api/views/perday', fetcher);
 
   return (
-    <Container title="Today – Koen van Gilst" description="ddddd">
+    <Container
+      title="All time visits – Koen van Gilst"
+      description="Visual showing the all time visits for my website."
+    >
       <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">
         <div className="mb-4">
           <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
             All visits
           </h1>
         </div>
-        <div className="w-full h-[50vh]">
+        <div className="w-full max-w-full h-[50vh] overflow-hidden">
           {data ? (
             <ParentSize>
               {({ width, height }) => (
