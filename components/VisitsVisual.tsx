@@ -74,7 +74,8 @@ export default withTooltip<AreaProps, TooltipData>(
         }),
       [innerWidth, margin.left, data]
     );
-    const stockValueScale = useMemo(
+
+    const countValueScale = useMemo(
       () =>
         scaleLinear({
           range: [innerHeight + margin.top, margin.top],
@@ -104,13 +105,14 @@ export default withTooltip<AreaProps, TooltipData>(
               ? d1
               : d0;
         }
+
         showTooltip({
           tooltipData: d,
           tooltipLeft: x,
-          tooltipTop: stockValueScale(getValue(d))
+          tooltipTop: countValueScale(getValue(d))
         });
       },
-      [showTooltip, stockValueScale, dateScale, data]
+      [showTooltip, countValueScale, dateScale, data]
     );
 
     return (
@@ -137,7 +139,7 @@ export default withTooltip<AreaProps, TooltipData>(
           />
           <GridRows
             left={margin.left}
-            scale={stockValueScale}
+            scale={countValueScale}
             width={innerWidth}
             strokeDasharray="1,3"
             stroke={accentColor}
@@ -156,8 +158,8 @@ export default withTooltip<AreaProps, TooltipData>(
           <AreaClosed<DataPoint>
             data={data}
             x={(d) => dateScale(getDate(d)) ?? 0}
-            y={(d) => stockValueScale(getValue(d)) ?? 0}
-            yScale={stockValueScale}
+            y={(d) => countValueScale(getValue(d)) ?? 0}
+            yScale={countValueScale}
             strokeWidth={1}
             stroke="url(#area-gradient)"
             fill="url(#area-gradient)"
