@@ -214,24 +214,23 @@ export default withTooltip<AreaProps, TooltipData>(
           <div>
             <TooltipWithBounds
               key={Math.random()}
-              top={tooltipTop - 12}
-              left={tooltipLeft + 12}
+              top={tooltipTop - 50}
+              left={tooltipLeft}
               style={tooltipStyles}
             >
               {`Visits ${getValue(tooltipData)}`}
             </TooltipWithBounds>
-            <Tooltip
-              top={innerHeight + margin.top - 14}
+            <TooltipWithBounds
+              top={tooltipTop - 20}
               left={tooltipLeft}
               style={{
                 ...defaultStyles,
                 minWidth: 72,
-                textAlign: 'center',
-                transform: 'translateX(-50%)'
+                textAlign: 'center'
               }}
             >
               {formatDate(getDate(tooltipData))}
-            </Tooltip>
+            </TooltipWithBounds>
           </div>
         )}
       </div>
