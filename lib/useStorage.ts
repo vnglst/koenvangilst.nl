@@ -5,7 +5,7 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
 }
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
-  return useStorage(key, initialValue, { storage: window.sessionStorage });
+  return useStorage(key, initialValue, { storage: window.localStorage });
 }
 
 type UseStorage = <T>(
