@@ -1,11 +1,11 @@
-import { useSessionStorage } from 'lib/useStorage';
+import { useLocalStorage } from 'lib/useStorage';
 import { MouseEvent, useEffect, useState } from 'react';
 
 type ClickEvent = MouseEvent<HTMLButtonElement, globalThis.MouseEvent>;
 
 export default function UkraineBanner() {
   const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useSessionStorage('ukr', true);
+  const [isOpen, setIsOpen] = useLocalStorage('ukr', true);
 
   // only render banner after first mount to avoid SSR errors
   useEffect(() => {

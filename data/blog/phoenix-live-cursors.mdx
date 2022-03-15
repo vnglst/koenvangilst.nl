@@ -4,6 +4,12 @@ publishedAt: '2022-02-01'
 summary: A tutorial for creating live cursors as seen in Figma. A step-by-step guide focused on beginners (I'm learning Phoenix myself).
 ---
 
+<Disclaimer>
+  Don't forget to also read the [second part of this
+  tutorial](/blog/phoenix-liveview-cursors), where I implement the same
+  functionality using Phoenix LiveView!
+</Disclaimer>
+
 The past few months I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I've had not a chance to get my hands dirty and write some actual Elixir code.
 
 This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other collaborative tools). In Figma you can see the mouse cursors of others people working in the document. It's a really cool feature and Phoenix was made for this stuff!
@@ -27,7 +33,7 @@ Create a new Phoenix project using the command line. We only need the bare minim
 mix phx.new phoenix_cursors --no-ecto --no-dashboard --no-live --no-mailer
 ```
 
-I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [my earlier tutorial](https://koenvangilst.nl/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/phoenix_cursors/commit/9800403ad1e0b33f30e666957245218589a9e211).
+I'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [my earlier tutorial](/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/phoenix_cursors/commit/9800403ad1e0b33f30e666957245218589a9e211).
 
 I've also added a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
 

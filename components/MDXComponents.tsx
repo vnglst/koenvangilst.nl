@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Unsplash from './metrics/Unsplash';
 import ImageWithTheme from './ImageWithTheme';
 import Disclaimer from './Disclaimer';
+import Waypoint from './Waypoint';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -29,7 +30,8 @@ const MDXComponents = {
   ImageWithTheme,
   a: CustomLink,
   Unsplash,
-  Disclaimer
+  Disclaimer,
+  Waypoint
 };
 
 export default MDXComponents;
