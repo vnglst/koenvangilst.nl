@@ -4,13 +4,13 @@ publishedAt: '2022-03-16'
 summary: Part 2 of my tutorial creating "live cursors" as seen in Figma. In this tutorial I'll be using Phoenix LiveView to create the same feature.
 ---
 
-In my [previous tutorial](https://koenvangilst.nl/blog/phoenix-live-cursors) I created a feature called "live cursors" using Phoenix Channels and Presence. In this tutorial I'll be recreating the same functionality using Phoenix **LiveView**. When learning some exciting new technology, I generally first want to get a feeling for the problem is tries to solve. That's why I started without LiveView. If you've also followed the previous tutorial you'll discover how much simpler and more readable the implementation becomes when using LiveView.
+In my [previous tutorial](https://koenvangilst.nl/blog/phoenix-live-cursors) I created a feature called "live cursors" using Phoenix Channels and Presence. In this tutorial I'll create the same functionality using [**Phoenix LiveView**](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html). LiveView is a relatively new feature in Phoenix and a lot of people are very excited about it. If you've followed along in the previous tutorial you'll discover how much simpler and more readable the implementation becomes when using LiveView.
 
 ## What we're building
 
-We'll be building a simple, but compelling software feature I've seen in the design tool Figma. In Figma you can see the mouse cursors of others people working in the document. It's a really cool functionality and Phoenix was made for this!
+We'll be building a simple, but compelling software feature I've seen in the design tools like Figma. In Figma you can see the mouse cursors of other users working in the document. It's a really cool functionality and Phoenix LiveView was made for this!
 
-The feature works like this: when users visit the website, they're automatically added to a channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The end result of this tutorial will look like this:
+The feature works like this: when users visit the website, they're automatically added to a websocket channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The end result of this tutorial will look like this:
 
 <Image
   alt={`Screenshot of the end result`}
@@ -57,7 +57,7 @@ To add our first LiveView to the application we have to implement a new `live` r
   end
 ```
 
-Next, in the folder `lib/liveview_cursors_web/live`, create file `cursors.ex` with the following content. This'll be our LiveView.
+Next, in the folder `lib/liveview_cursors_web/live`, create a file `cursors.ex` with the following code. This'll be our LiveView.
 
 ```elixir
 defmodule LiveviewCursorsWeb.Cursors do
@@ -108,7 +108,7 @@ The idea of LiveView is to do as much of the work on the server, but in some cas
 
 As an escape hatch Phoenix offers so called **client hooks** with the `phx-hook` binding. These hooks are initialized on the client and allow us to write JavaScript to send events to the server. In our case we'll use the hook to listen to `mousemove` events and send the changed coordinates to the server. In `assets/js/app.js` add the following code:
 
-```js {5-16,19}
+```js {5-15,19}
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute('content');
@@ -117,7 +117,6 @@ let Hooks = {};
 
 Hooks.TrackClientCursor = {
   mounted() {
-    console.log('[TrackClientCursor] mounted');
     document.addEventListener('mousemove', (e) => {
       const x = (e.pageX / window.innerWidth) * 100; // in %
       const y = (e.pageY / window.innerHeight) * 100; // in %
@@ -134,7 +133,7 @@ let liveSocket = new LiveSocket('/live', Socket, {
 
 To activate a hook in our LiveView template, we have to specify the hook name in the `phx-hook` binding. In our case is doens't really matter to which element we bind it. Make sure to add an id to the element so that LiveView can identify it. We also need to handle the events coming from the client. In our LiveView file `cursors.ex` make the following changes:
 
-```elixir {11-18, 23}
+```elixir {11-18, 22,23}
 defmodule LiveviewCursorsWeb.Cursors do
   use LiveviewCursorsWeb, :live_view
   def mount(_params, _session, socket) do
@@ -193,11 +192,11 @@ If you start the server and open the browser again, you should see a pink cursor
 
 ## Identifying users
 
-Showing a copy of your own mouse cursor is nothing special. We want to be able to broadcast this information to every user in the channel and _at the same time_ keep track of who's in that channel. To make that happend we first need to identify our users.
+Showing a copy of your own mouse cursor is nothing special. We want to be able to broadcast this information to every user in the channel and _at the same time_ keep track of who's in that channel. To make that happen we first need to be able to identify our users.
 
-To keep this tutorial simple we'll substitute real authentication with the following: When a user visits the website, a session is created by assigning a random name to a user. After the session is created, we'll redirect to the `/cursors` route. There we can retrieve the user name from the session and display it under to the cursor.
+We'll substitute real authentication with a simplified flow like this: When a user visits the website, a session is automatically created by assigning a random name to a user. After the session is created, we'll redirect to the `/cursors` route. There we can retrieve the user name from the session and display it under to the cursor.
 
-Let's start with a utility function that generates a random name. In `lib/liveview_cursors/names.ex`:
+Let's start with a utility function that generates a random name. Create the following file `lib/liveview_cursors/names.ex`:
 
 ```elixir
 defmodule LiveviewCursorsWeb.Name do
@@ -219,7 +218,7 @@ defmodule LiveviewCursorsWeb.Name do
 end
 ```
 
-Next, update the controller for the root route to create a new session if there is none. After that redirect the user to the `/cursors` route. In `lib/liveview_cursors_web/controllers/page_controller.ex` update the code to the following:
+Next, update the controller for the root route to create a new session if there is none. After that redirect the user to the `/cursors` route. In `page_controller.ex` update the code to the following:
 
 ```elixir {5-17}
 defmodule LiveviewCursorsWeb.PageController do
@@ -296,13 +295,13 @@ defmodule LiveviewCursorsWeb.Cursors do
     """
 ```
 
-Restart the server and open the browser again. You should see the pink cursor again, but this time with a random name assigned to it. This name should persist between page refreshes and when you close the browser (it is stored in a cookie).
+Restart the server and open the browser. You should see the pink cursor again, but this time with a random name assigned to it. This name should persist between page refreshes and when you close the browser (it is stored in a cookie).
 
 <Waypoint url="https://github.com/vnglst/liveview_cursors/commit/0cc3b3578d5366378be369e7e53e46e1a8ceb9c8" />
 
 ## Tracking who's online
 
-We'll be using Phoenix Presence to keep track of who's online in the channel. We'll store information about the user (coordinates and name) in the Presence channel. First, add Presence to our application. We'll use the Phoenix generator for doing this:
+We'll be using Phoenix Presence to keep track of who's online in the channel. We'll store information about the user (coordinates and name) in the Presence channel. First, add Presence to our application. We can use the Phoenix generator for this:
 
 ```bash
 mix phx.gen.presence
@@ -312,9 +311,9 @@ Make sure to also follow the instructions after executing the generator. Take a 
 
 <Waypoint url="https://github.com/vnglst/liveview_cursors/commit/7d70e848b63dfc46c2e2d84e2f81599d626caa8d" />
 
-The next step in the tutorial will be the most difficult one. The good thing is: to make this work we only need to make changes in our LiveView. Let's break it down:
+The next step in the tutorial will be the most difficult one. The good thing is: to make this work we only need to make changes in our LiveView in `cursors.ex`. Let's break it down:
 
-In the mount function of our LiveView we'll initialize Presence for our channel by executing `Presence.track`. In the body of the function we'll also specify the initial values for the current user. Make the following changes:
+In the mount function of our LiveView we'll initialize Presence for our channel by executing `Presence.track`. In the body of the function we'll specify the initial values for the current user. Make the following changes:
 
 ```elixir {2, 5, 7-19, 22,23}
 defmodule LiveviewCursorsWeb.Cursors do
@@ -346,9 +345,7 @@ defmodule LiveviewCursorsWeb.Cursors do
   end
 ```
 
-At the end of the `mount` function we're assigning the user, the list of users currently present and the socket id to the LiveView socket. We'll be using that information to render the list of users in the LiveView.
-
-Update the `render` function at the bottom of the LiveView with the following:
+At the end of the `mount` function we're assigning the user, the list of users currently present and the socket id to the LiveView socket. We'll be using that information to render the list of users in the LiveView. Update the `render` function at the bottom of the file with the following:
 
 ```elixir {4,5, 21-25}
 def render(assigns) do
@@ -381,7 +378,7 @@ def render(assigns) do
 end
 ```
 
-We can also handle the `cursor-move` event coming from the client. If we receive this event we'll update the coordinates in the list of users in the Presence channel with the `socket.id` as an identifier. The code for this is as follows:
+We're now also able to properly handle the `cursor-move` events coming from the client. If we receive this event we'll update the coordinates in the list of users in the Presence channel with the `socket.id` as an identifier. The code for this is as follows:
 
 ```elixir
 def handle_event("cursor-move", %{"x" => x, "y" => y}, socket) do
@@ -416,7 +413,7 @@ def handle_info(%{event: "presence_diff", payload: _payload}, socket) do
 end
 ```
 
-Pfew! Let's see if that worked. Restart the server and open the browser. You should see a pink cursor again. To verify that multiple users are tracked correctly open up another browser window **either in a different browser or in private mode**. We need to make sure that we create a new session. Otherwise you'll just see two you's.
+Phew! Let's see if that worked. Restart the server and open the browser. You should see the pink cursor again. To verify that multiple users are tracked correctly open up another browser window **either in a different browser or in private mode**. We need to make sure that we create a new session. Otherwise you'll just see two you's.
 
 <Waypoint url="https://github.com/vnglst/liveview_cursors/commit/68e580a755d0d8c52257d481e79e3602f8ffd4c2" />
 
@@ -593,14 +590,12 @@ If you restart the server and open up a few tabs (in different browsers) you sho
 
 ## Conclusion
 
-This concludes my tutorial in which I recreated the live cursors functionality using LiveView. Comparing this approach with my earlier tutorial in which did most of the implementation client side using JavaScript I found that LiveView offers quite a few advantages:
-
-When using LiveView:
+This concludes my tutorial in which I recreated the live cursors functionality using LiveView. Comparing this approach with my earlier tutorial where a large part of the implementation was happening on the client using JavaScript I found that LiveView offers considerable advantages:
 
 - all the code the makes the feature work, lives on the server
 - this means there's minimal switching between Elixir and JavaScript
-- you can update HTML + tailwind classes close to where data lives (colocation of code that frequently changes together)
-- the logic for this feature is almost all in the one place (LiveView component)
-- this feels familiar to me as a React developer
+- you can update HTML + Tailwind classes close to where data lives
+- this means that code that frequently changes together, also is close together
+- somehow this also feelds familiar to me as a React developer
 
-I hope you enjoyed it and if you have any questions or comments feel free to send me a message on Twitter using the link below.
+I hope you enjoyed this tutorials and if you have any questions or comments feel free to send me a message on Twitter using the link below. Any kind of feedback (tips, improvements, ideas) is appreciated.
