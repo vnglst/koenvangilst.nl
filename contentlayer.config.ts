@@ -73,19 +73,9 @@ const Project = defineDocumentType(() => ({
   computedFields
 }));
 
-const OtherPage = defineDocumentType(() => ({
-  name: 'OtherPage',
-  filePathPattern: '*.mdx',
-  contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true }
-  },
-  computedFields
-}));
-
 const contentLayerConfig = makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Snippet, Client, Project, OtherPage],
+  documentTypes: [Blog, Snippet, Client, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
