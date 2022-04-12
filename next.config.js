@@ -21,7 +21,7 @@ module.exports = withContentlayer({
     // Replace React with Preact only in client production build
 
     // TODO: Figure out why @visx/tooltip is not working with Preact
-    // Disabling preat until then
+    // Disabling preact until then
 
     // if (!dev && !isServer) {
     //   Object.assign(config.resolve.alias, {

@@ -64,5 +64,8 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "resolutions": {
+    "@types/react": "17.0.39"
   }
 }
