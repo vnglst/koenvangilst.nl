@@ -10,7 +10,7 @@ const commitHash = require('child_process')
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withContentlayer()({
+module.exports = withContentlayer({
   swcMinify: true,
   reactStrictMode: true,
   env: {
