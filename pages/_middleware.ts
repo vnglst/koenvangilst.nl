@@ -62,7 +62,7 @@ function addSecurityHeaders(response: NextResponse) {
   const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
-  script-src-elem 'self' data: ;
+  script-src-elem 'self' 'unsafe-inline';
   child-src *.youtube.com *.twitter.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
