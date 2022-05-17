@@ -46,7 +46,8 @@ async function logPageView(req: NextRequest) {
     return console.log('[Tracking pageview]:', pathname);
   }
 
-  const request = await fetch(`${process.env.SUPABASE_URL}/rest/v1/visits`, {
+  console.log('[Tracking start]:', pathname);
+  const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/visits`, {
     headers: {
       apikey: process.env.SUPABASE_ANON_KEY,
       'Content-Type': 'application/json'
@@ -54,8 +55,9 @@ async function logPageView(req: NextRequest) {
     body,
     method: 'POST'
   });
+  console.log('[Tracking end]:', response.status);
 
-  invariant(request.status === 201, 'Error logging analytics');
+  invariant(response.status === 201, 'Error logging analytics');
 }
 
 function addSecurityHeaders(response: NextResponse) {
