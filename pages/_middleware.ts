@@ -9,7 +9,11 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
   // so tracking analytics doesn't block rendering
   ev.waitUntil(
     (async () => {
-      logPageView(req);
+      try {
+        await logPageView(req);
+      } catch (error) {
+        console.error('Error logging analytics', error);
+      }
     })()
   );
 
