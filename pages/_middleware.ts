@@ -59,6 +59,8 @@ async function logPageView(req: NextRequest) {
     method: 'POST'
   });
 
+  console.log('[Tracking pageview]:', pathname);
+
   invariant(response.status === 201, 'Error logging analytics');
 }
 
