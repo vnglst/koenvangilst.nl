@@ -13,6 +13,11 @@ const commitHash = require('child_process')
 module.exports = withContentlayer({
   swcMinify: true,
   reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+    legacyBrowsers: false,
+    browsersListForSwc: true
+  },
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
