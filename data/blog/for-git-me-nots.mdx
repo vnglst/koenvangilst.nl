@@ -9,7 +9,7 @@ summary: Git commands I keep forgetting
 I know there's a better way to do this (using rebase) but I like this way since it gives me more control.
 
 ```bash
-git merge-base master yourBranch
+git merge-base main yourBranch
 
 # note commit hash
 
@@ -21,21 +21,21 @@ git reset --soft # enter commit hash
 It's easier on \*nix using the following oneliner:
 
 ```bash
-git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD))
+git reset $(git merge-base main $(git rev-parse --abbrev-ref HEAD))
 ```
 
-## Rebasing without pulling master
+## Rebasing without pulling main
 
-Rebase using the remote master to make sure you're really up to date. Useful when updating merge requests (on GitLab).
+Rebase using the remote main to make sure you're really up to date. Useful when updating merge requests (on GitLab).
 
 ```bash
-git pull --rebase origin master
+git pull --rebase origin main
 ```
 
-## Copy file from master to current branch
+## Copy file from main to current branch
 
 ```bash
-git checkout master -- yarn.lock
+git checkout main -- yarn.lock
 ```
 
 ## Useful aliases
