@@ -14,7 +14,8 @@ export default function Home() {
               Koen van Gilst
             </h1>
             <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-              Web Developer at <span className="font-semibold">Rabobank</span>
+              Lead Frontend Developer at{' '}
+              <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
               {`I'm a passionate & entrepreneurial TypeScript developer from the
