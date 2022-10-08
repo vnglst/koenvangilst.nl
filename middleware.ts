@@ -32,9 +32,9 @@ async function logPageView(req: NextRequest) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/fonts') ||
     pathname.startsWith('/logos') ||
-    // headers added when next/link pre-fetches a route
-    // don't track these
-    req.headers.get('x-middleware-preflight')
+    pathname.startsWith('/_next') ||
+    // when it's a prefetch request, don't track these
+    req.headers.get('purpose') === 'prefetch'
   ) {
     return;
   }
