@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { parseISO, format } from 'date-fns';
 
 import Container from 'components/Container';
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 import type { Blog } from 'contentlayer/generated';
 import { useViews } from 'lib/useViews';
 
@@ -52,7 +52,7 @@ export default function BlogLayout({
           </p>
         </div>
         <section className="w-full mt-4 prose dark:prose-dark max-w-none">
-          {children}
+          <Suspense fallback={null}>{children}</Suspense>
         </section>
         <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
           <a
