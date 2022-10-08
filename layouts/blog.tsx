@@ -7,7 +7,7 @@ import type { Blog } from 'contentlayer/generated';
 import { useViews } from 'lib/useViews';
 
 const editUrl = (slug: string) =>
-  `https://github.com/vnglst/koenvangilst.nl/edit/master/data/blog/${slug}.mdx`;
+  `https://github.com/vnglst/koenvangilst.nl/edit/main/data/blog/${slug}.mdx`;
 
 const discussUrl = (slug: string) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
