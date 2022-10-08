@@ -24,7 +24,7 @@ module.exports = withContentlayer({
   // TODO: Figure out why @visx/tooltip is not working with Preact
   // Disabling preact until then
   // webpack: (config, { dev, isServer }) => {
-  // Replace React with Preact only in client production build
+  // // //Replace React with Preact only in client production build
   // if (!dev && !isServer) {
   //   Object.assign(config.resolve.alias, {
   //     'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
