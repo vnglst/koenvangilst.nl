@@ -2,7 +2,7 @@ type Props = {
   title: string;
   summary: string;
   url: string;
-  year: string;
+  year: number;
 };
 
 export default function LabProject({ title, summary, url, year }: Props) {

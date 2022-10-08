@@ -4,7 +4,7 @@ type Props = {
   title: string;
   summary: string;
   slug: string;
-  year: string;
+  year: number;
 };
 
 export default function ClientProject({ title, summary, slug, year }: Props) {

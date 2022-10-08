@@ -11,32 +11,28 @@ const commitHash = require('child_process')
  * @type {import('next').NextConfig}
  */
 module.exports = withContentlayer({
-  swcMinify: true,
   reactStrictMode: true,
   experimental: {
-    scrollRestoration: true,
     legacyBrowsers: false,
+    scrollRestoration: true,
     browsersListForSwc: true
   },
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
-  },
-  webpack: (config, { dev, isServer }) => {
-    // Replace React with Preact only in client production build
-
-    // TODO: Figure out why @visx/tooltip is not working with Preact
-    // Disabling preact until then
-
-    // if (!dev && !isServer) {
-    //   Object.assign(config.resolve.alias, {
-    //     'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
-    //     react: 'preact/compat',
-    //     'react-dom/test-utils': 'preact/test-utils',
-    //     'react-dom': 'preact/compat'
-    //   });
-    // }
-
-    return config;
   }
+  // TODO: Figure out why @visx/tooltip is not working with Preact
+  // Disabling preact until then
+  // webpack: (config, { dev, isServer }) => {
+  // // //Replace React with Preact only in client production build
+  // if (!dev && !isServer) {
+  //   Object.assign(config.resolve.alias, {
+  //     'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
+  //     react: 'preact/compat',
+  //     'react-dom/test-utils': 'preact/test-utils',
+  //     'react-dom': 'preact/compat'
+  //   });
+  // }
+  // return config;
+  // }
 });
