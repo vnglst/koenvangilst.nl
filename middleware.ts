@@ -1,4 +1,5 @@
-import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+import { userAgent, NextResponse } from 'next/server';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 import invariant from 'tiny-invariant';
 
 // regex to check if string contains a file extension
@@ -41,7 +42,7 @@ async function logPageView(req: NextRequest) {
   const body = JSON.stringify({
     origin: req.nextUrl.origin,
     pathname,
-    ua: req.ua.ua
+    ua: userAgent(req).ua
     // TODO: add geo tracking later
     // ...req.geo
   });
