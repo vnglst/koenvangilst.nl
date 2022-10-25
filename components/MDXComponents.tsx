@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 import Unsplash from './metrics/Unsplash';
 import Disclaimer from './Disclaimer';
