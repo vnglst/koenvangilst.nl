@@ -29,7 +29,7 @@
     "d3-array": "3.2.0",
     "d3-time-format": "4.1.0",
     "date-fns": "2.29.3",
-    "next": "12.3.1",
+    "next": "13.0.0",
     "next-contentlayer": "0.2.8",
     "next-themes": "0.2.1",
     "react": "18.2.0",
