@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Container from 'components/Container';
-import BlogPostCard from 'components/BlogPostCard';
+import BlogPostCard from './BlogPostCard';
 
-export default function Home() {
+export default async function Home() {
   return (
-    <Container>
+    <main
+      id="content"
+      className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
+    >
       <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16 min-h-screen">
         <article className="flex flex-col-reverse sm:flex-row items-start">
           <div className="flex flex-col pr-8">
@@ -14,8 +16,7 @@ export default function Home() {
               Koen van Gilst
             </h1>
             <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-              Lead Frontend Developer at{' '}
-              <span className="font-semibold">Rabobank</span>
+              Lead Frontend Developer at <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
               {`I'm a passionate & entrepreneurial TypeScript developer from the
@@ -40,10 +41,7 @@ export default function Home() {
             title="Live user cursors with Phoenix Presence"
             slug="phoenix-live-cursors"
           />
-          <BlogPostCard
-            title="Code Colocation is King"
-            slug="code-colocation-is-king"
-          />
+          <BlogPostCard title="Code Colocation is King" slug="code-colocation-is-king" />
           <BlogPostCard
             title="Using Svelte to create a scroll video effect"
             slug="tutorial-svelte-scroll-video"
@@ -51,8 +49,10 @@ export default function Home() {
         </section>
         <Link
           href="/blog"
-          className="flex content-center justify-center justify-items-center item-center mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
-          Read all posts<svg
+          className="flex content-center justify-center justify-items-center item-center mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+        >
+          Read all posts
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -66,9 +66,8 @@ export default function Home() {
               d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
             />
           </svg>
-
         </Link>
       </div>
-    </Container>
+    </main>
   );
 }

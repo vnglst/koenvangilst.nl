@@ -9,3 +9,5 @@ public/feed.xml
 
 # Contentlayer
 .contentlayer
+
+.vscode

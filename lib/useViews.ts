@@ -6,9 +6,6 @@ type Views = {
 };
 
 export function useViews(pathname: string) {
-  const { data } = useSWR<Views>(
-    `/api/views/${encodeURIComponent(pathname)}`,
-    fetcher
-  );
+  const { data } = useSWR<Views>(`/api/views/${encodeURIComponent(pathname)}`, fetcher);
   return { views: data?.views };
 }
