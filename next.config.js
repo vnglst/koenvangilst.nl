@@ -13,8 +13,12 @@ const commitHash = require('child_process')
 module.exports = withContentlayer({
   reactStrictMode: true,
   experimental: {
-    legacyBrowsers: false
+    legacyBrowsers: false,
+    fontLoaders: [
+      { loader: '@next/font/google', options: { subsets: ['latin'] } }
+    ]
   },
+
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
