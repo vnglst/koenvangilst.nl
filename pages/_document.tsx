@@ -2,15 +2,11 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html
+      lang="en"
+      className="min-w-[360px] scroll-smooth md:overflow-x-scroll"
+    >
       <Head>
-        <link
-          rel="preload"
-          href="/fonts/ibm-plex-sans-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
         <link
           rel="preload"
           href="/fonts/montserrat.woff2"
@@ -47,11 +43,6 @@ export default function Document() {
         <meta
           content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
-        />
-        <meta content="14d2e73487fa6c71" name="yandex-verification" />
-        <meta
-          content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw"
-          name="google-site-verification"
         />
       </Head>
       <body className="bg-white dark:bg-black text-white dark:text-black">

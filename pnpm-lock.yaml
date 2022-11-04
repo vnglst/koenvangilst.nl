@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@next/font': ^13.0.2
   '@tailwindcss/typography': 0.5.7
   '@types/d3-array': 3.0.3
   '@types/d3-time-format': 4.0.0
@@ -46,6 +47,7 @@ specifiers:
   typescript: 4.8.4
 
 dependencies:
+  '@next/font': 13.0.2
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.1
   '@types/d3-array': 3.0.3
   '@types/d3-time-format': 4.0.0
@@ -423,6 +425,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.0.2:
+    resolution: {integrity: sha512-tLbyZCA1uF8HjbUEN5c4zB453yEzt5aT9VDhXPw1/eJhX4U0Q4lD3s3Bs+gpCjuLrEgILd56jQuzxgrMnWHH8A==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.0.2:
     resolution: {integrity: sha512-X54UQCTFyOGnJP//Z71dPPlp4BCYcQL2ncikKXQcPzVpqPs4C3m+tKC8ivBNH6edAXkppwsLRz1/yQwgSZ9Swg==}
