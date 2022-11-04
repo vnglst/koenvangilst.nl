@@ -15,21 +15,12 @@
   color: #fefefe;
 }
 
-html {
-  min-width: 360px;
-  scroll-behavior: smooth;
-  @apply md:overflow-x-scroll;
-}
-
 h1 {
   font-family: Montserrat, sans-serif;
 }
 
 #__next {
-  @apply bg-gray-100 dark:bg-gray-900;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 /* https://seek-oss.github.io/capsize/ */
@@ -43,10 +34,6 @@ h1 {
   content: '';
   margin-top: -0.219em;
   display: table;
-}
-
-#content {
-  scroll-margin-top: 1.125rem;
 }
 
 /* make sure footnotes don't fall under nav bar */

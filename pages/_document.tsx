@@ -2,7 +2,10 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html
+      lang="en"
+      className="min-w-[360px] scroll-smooth md:overflow-x-scroll"
+    >
       <Head>
         <link
           rel="preload"
