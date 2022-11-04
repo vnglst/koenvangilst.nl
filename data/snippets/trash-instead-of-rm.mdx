@@ -4,23 +4,20 @@ description: 'Stop using rm -rf node_modules, use Trash instead.'
 logo: 'terminal.png'
 ---
 
-Based on this [excellent 🔥 tip](https://mobile.twitter.com/wesbos/status/1588520765380612098) by Wes Bos.
-Some great other tips in that thread and I'm summarizing them here for future reference.
-
-Add the following to your `.zshrc`:
+Based on [this excellent 🔥 tip](https://mobile.twitter.com/wesbos/status/1588520765380612098) by Wes Bos
+and the ensuing Twitter thread I've now added the following to my `.zshrc`:
 
 ```bash
 trash() {
-  echo "[x] moving files to trash..."
+  echo "🗑️ Moving files to Trash can..."
   mv "$@" "$HOME/.trash"
 }
 ```
 
-Now instead of using `rm -rf node_modules` you can now use `trash node_modules`. Which is:
+Now instead of using the destructive `rm -rf node_modules` use
+`trash` to move files to the Trash. This is:
 
-- faster, milliseconds instead of minutes
-- safer, you can always restore files if you make a mistake
+- faster - milliseconds instead of minutes
+- safer - you can always restore files if you make a mistake
 
-Other options:
-
-- a [Node.js based cli](https://github.com/sindresorhus/trash-cli) by @sindresorhus
+Another option would be to install the [Node.js based cli](https://github.com/sindresorhus/trash-cli) by @sindresorhus.
