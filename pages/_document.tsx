@@ -44,7 +44,7 @@ export default function Document() {
           content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
         />
-        <link rel="me" href="https://mastodon.social/@vnglst" />
+        <link rel="me" href="https://toot.community/@vnglst" />
       </Head>
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <Main />
