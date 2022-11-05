@@ -44,6 +44,15 @@ export default function Document() {
           content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
         />
+<<<<<<< Updated upstream
+=======
+        <meta content="14d2e73487fa6c71" name="yandex-verification" />
+        <meta
+          content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw"
+          name="google-site-verification"
+        />
+        <link rel="me" href="https://mastodon.social/@vnglst" />
+>>>>>>> Stashed changes
       </Head>
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <Main />
