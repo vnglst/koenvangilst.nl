@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col space-y-4">
-            <ExternalLink rel="me" href="https://mastodon.social/@vnglst">
+            <ExternalLink rel="me" href="https://toot.community/@vnglst">
               Mastodon
             </ExternalLink>
           </div>
