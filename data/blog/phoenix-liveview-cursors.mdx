@@ -100,7 +100,7 @@ end
 
 Start the server and open the browser to the `/cursors` route. In the middle of the screen you should see a static pink cursor. We've given it a static position (of 50%) in the `mount` function, but we're not updating it yet. That's no fun of course, so let's make it more dynamic.
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/9c02ea98ac6ad6ddabf1b96f4bc17d42afae66e4" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/9c02ea98ac6ad6ddabf1b96f4bc17d42afae66e4" />
 
 ## Tracking cursor movements
 
@@ -181,7 +181,7 @@ end
 
 If you start the server and open the browser again, you should see a pink cursor following your mouse movements.
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/5ceb53e1c94091ec4f07b7f81294b05c8a7d6851" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/5ceb53e1c94091ec4f07b7f81294b05c8a7d6851" />
 
 <Image
   alt={`Screenshot of the cursor on the client`}
@@ -297,7 +297,7 @@ defmodule LiveviewCursorsWeb.Cursors do
 
 Restart the server and open the browser. You should see the pink cursor again, but this time with a random name assigned to it. This name should persist between page refreshes and when you close the browser (it is stored in a cookie).
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/0cc3b3578d5366378be369e7e53e46e1a8ceb9c8" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/0cc3b3578d5366378be369e7e53e46e1a8ceb9c8" />
 
 ## Tracking who's online
 
@@ -309,7 +309,7 @@ mix phx.gen.presence
 
 Make sure to also follow the instructions after executing the generator. Take a look at the waypoint below if you get stuck.
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/7d70e848b63dfc46c2e2d84e2f81599d626caa8d" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/7d70e848b63dfc46c2e2d84e2f81599d626caa8d" />
 
 The next step in the tutorial will be the most difficult one. The good thing is: to make this work we only need to make changes in our LiveView in `cursors.ex`. Let's break it down:
 
@@ -415,7 +415,7 @@ end
 
 Phew! Let's see if that worked. Restart the server and open the browser. You should see the pink cursor again. To verify that multiple users are tracked correctly open up another browser window **either in a different browser or in private mode**. We need to make sure that we create a new session. Otherwise you'll just see two you's.
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/68e580a755d0d8c52257d481e79e3602f8ffd4c2" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/68e580a755d0d8c52257d481e79e3602f8ffd4c2" />
 
 <Image
   alt={`Screenshot of multiple users with Presence`}
@@ -474,7 +474,7 @@ end
 
 Don't forget to import the module in the `defmodule` block using `import LiveviewCursorsWeb.Colors`. If you restart the server you should see a different color for each user.
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/5a69d68504d1ce03a975b0b5acf6edb9fe878ec3" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/5a69d68504d1ce03a975b0b5acf6edb9fe878ec3" />
 
 ## Sending messages
 
@@ -579,7 +579,7 @@ When mounting the LiveView we also have to initialize the user message:
 
 If you restart the server and open up a few tabs (in different browsers) you should see the following endresult:
 
-<Waypoint url="https://github.com/vnglst/liveview_cursors/commit/cc65084342e87322a7e52a46632e965dc98c8101" />
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/cc65084342e87322a7e52a46632e965dc98c8101" />
 
 <Image
   alt={`Screenshot of the end result`}
