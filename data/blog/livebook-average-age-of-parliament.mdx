@@ -73,6 +73,23 @@ members =
 
 ```
 
+```elixir
+[
+  %{
+    "dob" => "1997-03-21T00:00:00Z",
+    "member" => "http://www.wikidata.org/entity/Q105835852",
+    "memberLabel" => "Julian Bushoff",
+    "start" => "2022-11-22T00:00:00Z"
+  },
+  %{
+    "dob" => "1972-05-06T00:00:00Z",
+    "member" => "http://www.wikidata.org/entity/Q106120677",
+    "memberLabel" => "Simone Richardson",
+    "start" => "2022-11-01T00:00:00Z"
+  }
+  ...
+```
+
 ## Formatting the data
 
 To make sure that the data is in a form that we can easily plot, we're going apply the following transformations to the original data. We will:
@@ -105,6 +122,23 @@ members =
   )
 ```
 
+```elixir
+[
+  %{dob: ~D[1997-03-21], end: ~D[2022-12-31], memberLabel: "Julian Bushoff", start: ~D[2022-11-22]},
+  %{
+    dob: ~D[1972-05-06],
+    end: ~D[2022-12-31],
+    memberLabel: "Simone Richardson",
+    start: ~D[2022-11-01]
+  },
+  %{dob: ~D[1992-03-12], end: ~D[2022-12-31], memberLabel: "Eva Akerboom", start: ~D[2022-10-13]},
+  %{
+    dob: ~D[1972-05-06],
+    end: ~D[2022-10-28],
+    memberLabel: "Simone Richardson"
+  ...
+```
+
 ## Creating a list of active years for every member
 
 To get an idea of the how the average age of members of parliament have changed over time we'd have to plot the years on the x axis. On the y axis we'd like to see the average age of the members.
@@ -131,6 +165,23 @@ members_per_year = 1850..2022
   |> List.flatten()
 ```
 
+```elixir
+[
+  %{
+    member: %{
+      dob: ~D[1807-11-14],
+      end: ~D[1850-08-20],
+      memberLabel: "Schelto van Heemstra",
+      start: ~D[1849-11-19]
+    },
+    year: ~D[1850-01-01]
+  },
+  %{
+    member: %{
+      dob: ~D[1804-04-29],
+  ...
+```
+
 ## Adding ages per year
 
 We now have a nice list of year, member pairs. The only thing that is still missing, is the age of every member at that time. Let's replace the member maps with the age.
@@ -143,6 +194,23 @@ end
 ages =
   members_per_year
   |> Enum.map(&Map.new(year: &1.year, age: age.(&1.member.dob, &1.year)))
+```
+
+```elixir
+[
+  %{age: 42, year: ~D[1850-01-01]},
+  %{age: 45, year: ~D[1850-01-01]},
+  %{age: 56, year: ~D[1850-01-01]},
+  %{age: 41, year: ~D[1850-01-01]},
+  %{age: 48, year: ~D[1850-01-01]},
+  %{age: 53, year: ~D[1850-01-01]},
+  %{age: 32, year: ~D[1850-01-01]},
+  %{age: 40, year: ~D[1850-01-01]},
+  %{age: 48, year: ~D[1850-01-01]},
+  %{age: 45, year: ~D[1850-01-01]},
+  %{age: 38, year: ~D[1850-01-01]},
+  %{age: 33, year: ~D[1850-01-01]},
+  ...
 ```
 
 ## Plotting
