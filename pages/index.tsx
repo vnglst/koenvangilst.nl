@@ -37,22 +37,24 @@ export default function Home() {
         </h3>
         <section className="flex gap-6 flex-col md:flex-row">
           <BlogPostCard
-            title="Live user cursors with Phoenix Presence"
-            slug="phoenix-live-cursors"
+            title="Plotting the age of parliament with Livebook"
+            slug="livebook-average-age-of-parliament"
           />
           <BlogPostCard
             title="Code Colocation is King"
             slug="code-colocation-is-king"
           />
           <BlogPostCard
-            title="Using Svelte to create a scroll video effect"
-            slug="tutorial-svelte-scroll-video"
+            title="Live user cursors with Phoenix Presence"
+            slug="phoenix-live-cursors"
           />
         </section>
         <Link
           href="/blog"
-          className="flex content-center justify-center justify-items-center item-center mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
-          Read all posts<svg
+          className="flex content-center justify-center justify-items-center item-center mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+        >
+          Read all posts
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -66,7 +68,6 @@ export default function Home() {
               d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
             />
           </svg>
-
         </Link>
       </div>
     </Container>
