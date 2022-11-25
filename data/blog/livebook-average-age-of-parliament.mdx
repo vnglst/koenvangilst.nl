@@ -6,17 +6,17 @@ summary: A tutorial for Livebook, an interactive coding notebook for the Elixir 
 
 I've been meaning to give Livebook, an interactive coding notebook for the Elixir programing language, a try and on Twitter I recently came across the perfect opportunity. A [tweet](https://twitter.com/WaltHickey/status/1569827673760845826) by the data journalist [Walter Hickey](https://twitter.com/WaltHickey) alarmingly noted that the percentage of congress members that is over 70 is increasing exponentially. This caught my interest and I wanted to see if the same is also true for my home country the Netherlands.
 
-In this tutorial I'll go over the steps needed to retrieve, prepare and visualise the data in an Elixir Livebook. At the end of this tutorial you should be able to visualize the average age of politicians of other countries as well. The corresponding Livebook can be found [here](https://github.com/vnglst/livebook-age-of-dutch-parliament/blob/main/age-of-parliament.livemd).
+In this tutorial I'll go over the steps needed to retrieve, prepare and visualise the data in an Elixir Livebook. At the end you should be able to visualize the average age of politicians of other countries as well. The corresponding Livebook can be found [here](https://github.com/vnglst/livebook-age-of-dutch-parliament/blob/main/age-of-parliament.livemd).
 
 I'll be using the following libraries.
 
-- [`vega_lite`](https://github.com/elixir-nx/vega_lite) which allows us to define our visualisations in Elixir.
-- [`kino_vega_lite`](https://github.com/livebook-dev/kino_vega_lite), which instructs Livebook how to render.
-- [`jason`](https://hexdocs.pm/jason/readme.html) library for parsing JSON.
+- [vega_lite](https://github.com/elixir-nx/vega_lite), which allows us to define our visualisations in Elixir.
+- [kino_vega_lite](https://github.com/livebook-dev/kino_vega_lite), which instructs Livebook how to render.
+- [jason](https://hexdocs.pm/jason/readme.html) a library for parsing JSON.
 
 ## Getting the data from Wikidata
 
-To retrieve the data I used the Wikidata's query engine that is provided free of charge. Wikidata uses the SPARQL query language, which is a powerful language in and by itself. It's somewhat similar to SQL, but it did take me some time to [familiarize myself with the syntax](https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial).
+To retrieve the data I used Wikidata's query engine that is provided free of charge. Wikidata uses the SPARQL query language, which is a powerful language in and by itself. It's somewhat similar to SQL, but it did take me some time to [familiarize myself with the syntax](https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial).
 
 I came up with the following [query](https://query.wikidata.org/#SELECT%20%3Fmember%20%3Fdob%20%3Fstart%20%3Fend%20%3FmemberLabel%0AWHERE%20%7B%0A%20%20%3Fmember%20wdt%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP569%20%3Fdob.%0A%0A%20%20%3Fmember%20p%3AP39%20%3Fposition.%0A%20%20%3Fposition%20ps%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pq%3AP580%20%3Fstart.%0A%20%20%0A%20%20OPTIONAL%20%7B%20%3Fmember%20p%3AP39%20%3Fposition.%0A%20%20%3Fposition%20ps%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pq%3AP582%20%3Fend.%20%7D%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22.%20%7D%0A%7D%20ORDER%20BY%20DESC%28%3Fstart%29%0A) to retrieve all the members of the Dutch house of representatives:
 
@@ -38,7 +38,7 @@ WHERE {
 } ORDER BY DESC(?start)
 ```
 
-In English the above query would read something like this:
+In English the above query would read something like:
 
 > Give me a list of everyone who has held a position as a member in the Dutch House of Representatives.
 > Of those persons returns the start time (ie. date of birth).
@@ -54,7 +54,7 @@ The results of the query look something like this in my case:
   height={1714}
 />
 
-I saved the results of the query in a JSON file. This file is also stored on the Github repo for this Livebook.
+I saved the results of the query in a JSON file. This file is also stored in the [Github repo](https://github.com/vnglst/livebook-age-of-dutch-parliament) for this Livebook.
 
 ## Loading the data
 
@@ -72,6 +72,8 @@ members =
   # |> Enum.filter(fn m -> String.contains?(m["memberLabel"], "Mark Rutte") end)
 
 ```
+
+Output:
 
 ```elixir
 [
@@ -100,18 +102,16 @@ To make sure that the data is in a form that we can easily plot, we're going app
 
 ```elixir
 parse_date = fn date_str ->
-  [year, month, day] =
-    date_str
-      |> String.split("T")
-      |> List.first()
-      |> String.split("-")
-      |> Enum.map(&String.to_integer(&1))
+  [year, month, day] = date_str
+    |> String.split("T")
+    |> List.first()
+    |> String.split("-")
+    |> Enum.map(&String.to_integer(&1))
 
   Date.new!(year, month, day)
 end
 
-members =
-  members
+members = members
   |> Enum.map(
     &Map.new(
       memberLabel: &1["memberLabel"],
@@ -121,6 +121,8 @@ members =
     )
   )
 ```
+
+Output:
 
 ```elixir
 [
@@ -143,7 +145,9 @@ members =
 
 To get an idea of the how the average age of members of parliament have changed over time we'd have to plot the years on the x axis. On the y axis we'd like to see the average age of the members.
 
-To make this happen we would have to transform the list of members to a list of years on the one hand, and every member that was in parliament at the 1st of January of that year on the other hand. Note: We could have taken any date during that year, but it is important to pick one specific date of that year.
+To make this happen we have to transform the list of members to a list of years on the one hand, and every member that was in parliament at the 1st of January of that year on the other hand.
+
+**Note**: We could have taken any date during that year, but it is important to pick a specific one.
 
 ```elixir
 defmodule Filter do
@@ -164,6 +168,8 @@ members_per_year = 1850..2022
   |> Enum.map(&Filter.active_members(members, &1))
   |> List.flatten()
 ```
+
+Output:
 
 ```elixir
 [
@@ -196,6 +202,8 @@ ages =
   |> Enum.map(&Map.new(year: &1.year, age: age.(&1.member.dob, &1.year)))
 ```
 
+Output:
+
 ```elixir
 [
   %{age: 42, year: ~D[1850-01-01]},
@@ -220,7 +228,6 @@ Our data is now ready to be visualised. Let's start with a simple scatter plot, 
 ```elixir
 Vl.new(width: 800, height: 400, title: "Age of Dutch parliament", view: [fill: "#040506"])
   |> Vl.data_from_values(ages)
-  # scatterplot showing all ages of members
   |> Vl.mark(:point, color: "#53ceff")
   |> Vl.encode_field(:x, "year", type: :temporal)
   |> Vl.encode_field(:y, "age", type: :quantitative)
@@ -233,12 +240,17 @@ Vl.new(width: 800, height: 400, title: "Age of Dutch parliament", view: [fill: "
   height={476}
 />
 
-As you can see, around the 1950 the density of the circles increases. That makes sense, as around that time the number of members in parliament was increased to 150.
+As you can see, around the 1950 the density of the circles increases. That makes sense, as around that time the number of members in parliament was increased from 100 to 150.
 
-The next step would be to plot the average age. We could do that using Elixir code, but the plotting library VegaLite is perfectly capable of doing that.
+The next step would be to plot the average age. We could do that using Elixir code, but the plotting library VegaLite is also perfectly capable of doing that.
 
 ```elixir
-Vl.new(width: 800, height: 400, title: "Average age of Dutch parliament", view: [fill: "#040506"])
+Vl.new(
+    width: 800,
+    height: 400,
+    title: "Average age of Dutch parliament",
+    view: [fill: "#040506"]
+  )
   |> Vl.data_from_values(ages)
   |> Vl.mark(:line, size: 5, color: "#53ceff", tooltip: true)
   |> Vl.encode_field(:x, "year", title: "Year", type: :temporal, time_unit: :year)
@@ -252,9 +264,15 @@ Vl.new(width: 800, height: 400, title: "Average age of Dutch parliament", view: 
   height={476}
 />
 
-Looking at the plot it seems like the Dutch parliament is getting younger! Pfew, no gerontocracy in my country!
+Looking at the plot it seems like the Dutch parliament is getting younger instead of older. Pfew, no gerontocracy in my country!
 
-## Bonus: Even nicer visualizations
+## Conclusion
+
+In this post I've shown how you can use Livebook to explore data. We started with loading the data from a JSON file, transforming it and then visualise it using the VegaLite plotting library. I hope you enjoyed this post and that it gave you some inspiration to try out Livebook yourself.
+
+## Bonus
+
+### Even nicer visualizations
 
 I've already tried to customize the way the visualization looks by changing the colors, but I also wanted to add a gradient below to line graph to make it look even nicer. It turns out that this is not possible using the standard DSL of VegaLite in Livebook. You can, however, use an escape hatch: `from_json`.
 
