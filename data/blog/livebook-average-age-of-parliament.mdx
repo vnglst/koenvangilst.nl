@@ -6,17 +6,17 @@ summary: A tutorial for Livebook, an interactive coding notebook for the Elixir 
 
 I've been meaning to give Livebook, an interactive coding notebook for the Elixir programming language, a try, and on Twitter, I recently came across the perfect opportunity. A [tweet](https://twitter.com/WaltHickey/status/1569827673760845826) by the data journalist [Walter Hickey](https://twitter.com/WaltHickey) alarmingly noted that the percentage of congress members who are over 70 is increasing exponentially. This caught my interest, and I wanted to see if the same is also true for my home country, the Netherlands.
 
-In this tutorial, I'll go over the steps needed to retrieve, prepare, and visualize the data in an Elixir Livebook. At the end, you should be able to visualize the average age of politicians from other countries as well. The corresponding Livebook can be found [here](https://github.com/vnglst/livebook-age-of-dutch-parliament/blob/main/age-of-parliament.livemd).
+In this tutorial, I'll go over the steps needed to retrieve, prepare, and visualize the data in an Elixir Livebook. In the end, you should be able to visualize the average age of politicians from other countries as well. The corresponding Livebook can be found [here](https://github.com/vnglst/livebook-age-of-dutch-parliament/blob/main/age-of-parliament.livemd).
 
 I'll be using the following libraries.
 
-- [vega_lite](https://github.com/elixir-nx/vega_lite), which allows us to define our visualisations in Elixir.
+- [vega_lite](https://github.com/elixir-nx/vega_lite), which allows us to define our visualizations in Elixir.
 - [kino_vega_lite](https://github.com/livebook-dev/kino_vega_lite), which instructs Livebook how to render.
 - [jason](https://hexdocs.pm/jason/readme.html) a library for parsing JSON.
 
 ## Getting the data from Wikidata
 
-To retrieve the data I used Wikidata's query engine that is provided free of charge. Wikidata uses the SPARQL query language, which is a powerful language in and by itself. It's somewhat similar to SQL, but it did take me some time to [familiarize myself with the syntax](https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial).
+To retrieve the data I used Wikidata's query engine which is provided free of charge. Wikidata uses the SPARQL query language, which is a powerful language in and by itself. It's somewhat similar to SQL, but it did take me some time to [familiarize myself with the syntax](https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial).
 
 I came up with the following [query](https://query.wikidata.org/#SELECT%20%3Fmember%20%3Fdob%20%3Fstart%20%3Fend%20%3FmemberLabel%0AWHERE%20%7B%0A%20%20%3Fmember%20wdt%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP569%20%3Fdob.%0A%0A%20%20%3Fmember%20p%3AP39%20%3Fposition.%0A%20%20%3Fposition%20ps%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pq%3AP580%20%3Fstart.%0A%20%20%0A%20%20OPTIONAL%20%7B%20%3Fmember%20p%3AP39%20%3Fposition.%0A%20%20%3Fposition%20ps%3AP39%20wd%3AQ18887908%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20pq%3AP582%20%3Fend.%20%7D%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22.%20%7D%0A%7D%20ORDER%20BY%20DESC%28%3Fstart%29%0A) to retrieve all the members of the Dutch house of representatives:
 
@@ -38,10 +38,10 @@ WHERE {
 } ORDER BY DESC(?start)
 ```
 
-In English the above query would read something like:
+In English the above query would read something like this:
 
-> Give me a list of everyone who has held a position as a member in the Dutch House of Representatives.
-> Of those persons returns the start time (ie. date of birth).
+> Give me a list of everyone who has held a position as a member of the Dutch House of Representatives.
+> Of those persons return the start time (ie. date of birth).
 > And of the position held by that person the start and end time.
 > The end time is optional and can be empty.
 
@@ -58,7 +58,7 @@ I saved the results of the query in a JSON file. This file is also stored in the
 
 ## Loading the data
 
-Next step would be to load the data into our Livebook. This was a little trickier that I expected. You have to use the `__DIR__` prefix to get the path of the current working directory (where the Livebook is stored). I would've expected `./name_of_json.json` to work.
+The next step would be to load the data into our Livebook. This was a little trickier than I expected. You have to use the `__DIR__` prefix to get the path of the current working directory (where the Livebook is stored). I would've expected `./name_of_json.json` to work.
 
 To verify our results we can filter on the name of our current Prime Minister, Mark Rutte.
 He was part of 5 parliaments and after forming a coalition he immediately leaves
@@ -143,9 +143,9 @@ Output:
 
 ## Creating a list of active years for every member
 
-To get an idea of the how the average age of members of parliament have changed over time we'd have to plot the years on the x axis. On the y axis we'd like to see the average age of the members.
+To get an idea of how the average age of members of parliament has changed over time we'd have to plot the years on the x-axis. On the y-axis, we'd like to see the average age of the members.
 
-To make this happen we have to transform the list of members to a list of years on the one hand, and every member that was in parliament at the 1st of January of that year on the other hand.
+To make this happen we have to transform the list of members to a list of years on the one hand, and every member that was in parliament on the 1st of January of that year on the other hand.
 
 **Note**: We could have taken any date during that year, but it is important to pick a specific one.
 
@@ -190,7 +190,7 @@ Output:
 
 ## Adding ages per year
 
-We now have a nice list of year, member pairs. The only thing that is still missing, is the age of every member at that time. Let's replace the member maps with the age.
+We now have a nice list of the year, member pairs. The only thing that is still missing, is the age of every member at that time. Let's replace the member maps with the age.
 
 ```elixir
 age = fn birth_date, date ->
@@ -223,7 +223,7 @@ Output:
 
 ## Plotting
 
-Our data is now ready to be visualised. Let's start with a simple scatter plot, showing all the members of parliament and their ages over the years.
+Our data is now ready to be visualized. Let's start with a simple scatter plot, showing all the members of parliament and their ages over the years.
 
 ```elixir
 Vl.new(width: 800, height: 400, title: "Age of Dutch parliament", view: [fill: "#040506"])
@@ -240,7 +240,7 @@ Vl.new(width: 800, height: 400, title: "Age of Dutch parliament", view: [fill: "
   height={476}
 />
 
-As you can see, around the 1950 the density of the circles increases. That makes sense, as around that time the number of members in parliament was increased from 100 to 150.
+As you can see, around 1950 the density of the circles increases. That makes sense, as around that time the number of members in parliament increased from 100 to 150.
 
 The next step would be to plot the average age. We could do that using Elixir code, but the plotting library VegaLite is also perfectly capable of doing that.
 
@@ -268,7 +268,7 @@ Looking at the plot it seems like the Dutch parliament is getting younger instea
 
 ## Conclusion
 
-In this post I've shown how you can use Livebook to explore data. We started with loading the data from a JSON file, transforming it and then visualise it using the VegaLite plotting library. I hope you enjoyed this post and that it gave you some inspiration to try out Livebook yourself.
+In this post, I've shown how you can use Livebook to explore data. We started by loading the data from a JSON file, transforming it and then visualizing it using the VegaLite plotting library. I hope you enjoyed this post and that it gave you some inspiration to try out Livebook yourself.
 
 ## Bonus
 
@@ -276,7 +276,7 @@ In this post I've shown how you can use Livebook to explore data. We started wit
 
 I've already tried to customize the way the visualization looks by changing the colors, but I also wanted to add a gradient below to line graph to make it look even nicer. It turns out that this is not possible using the standard DSL of VegaLite in Livebook. You can, however, use an escape hatch: `from_json`.
 
-This offers the possibility to use a standard VegaLite JSON configuration. This way, anything that is possible within the [VegaLite editor](https://vega.github.io/editor/#/) is also possible in Livebook. Below this JSON config you can use `Vl.load_from_values()` to load the data from the notebook.
+This offers the possibility to use a standard VegaLite JSON configuration. This way, anything that is possible within the [VegaLite editor](https://vega.github.io/editor/#/) is also possible in Livebook. Below this JSON config, you can use `Vl.load_from_values()` to load the data from the notebook.
 
 ```elixir
 Vl.from_json("""

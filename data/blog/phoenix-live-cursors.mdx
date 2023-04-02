@@ -10,13 +10,13 @@ summary: A tutorial for creating live cursors as seen in Figma. A step-by-step g
   functionality using Phoenix LiveView!
 </Disclaimer>
 
-The past few months I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I hadn't had a chance to get my hands dirty and write some actual Elixir code.
+For the past few months, I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I hadn't had a chance to get my hands dirty and write some actual Elixir code.
 
-This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other collaborative tools). In Figma you can see the mouse cursors of others people working in the document. It's a really cool feature and Phoenix was made for this stuff!
+This tutorial is my way of getting better at Phoenix, especially Phoenix Channels and Presence. What I'll be building is a simple, but compelling software feature I've seen in the design tool Figma (and other collaborative tools). In Figma, you can see the mouse cursors of others people working on the document. It's a cool feature and Phoenix was made for this stuff!
 
 ## What we're building
 
-The feature works like this: when users visit the website, they're automatically added to a channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The end result of this tutorial will look like this:
+The feature works like this: when users visit the website, they're automatically added to a channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The result of this tutorial will look like this:
 
 <Image
   alt={`Screenshot of the end result`}
@@ -83,13 +83,13 @@ It should look like this:
 Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
 
 <Disclaimer>
-  Note: you can also follow along with this tutorial on Github. Visit the list
+  Note: you can also follow along with this tutorial on GitHub. Visit the list
   of commits here: https://github.com/vnglst/phoenix_cursors/commits/main
 </Disclaimer>
 
 ## Tracking mouse movements
 
-First we'll add a channel that we can use to send mouse position updates to:
+First, we'll add a channel that we can use to send mouse position updates to:
 
 ```bash
 mix phx.gen.channel Cursor
@@ -103,7 +103,7 @@ add the socket handler to your `lib/phoenix_cursors_web/endpoint.ex`. I added it
     websocket: true,
     longpoll: false
 
-  # socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  # socket "/live", Phoenix.LiveView.Socket, WebSocket: [connect_info: [session: @session_options]]
 ```
 
 For the front-end integration, you need to import the `user_socket.js` in your `assets/js/app.js` file. Uncomment the following line:
@@ -117,7 +117,7 @@ import './user_socket.js';
 //
 ```
 
-To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
+To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First, we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
 
 ```js {1, 6-10}
 let channel = socket.channel('cursor:lobby', {});
@@ -163,7 +163,7 @@ defmodule PhoenixCursorsWeb.CursorChannel do
 If you start the Phoenix server and move around with the mouse, you'll see the
 cursor position updates in the console. Yeah, it works!
 
-Let's also display those updates on the page. For this we'll need a bit of JavaScript.
+Let's also display those updates on the page. For this, we'll need a bit of JavaScript.
 We'll add a template function to the file `user_socket.js`:
 
 ```js
@@ -232,7 +232,7 @@ channel
 
 If you open up two browser tabs next to each other you can see the cursor moving around. However, the moment you
 leave the tab the cursor will disappear. To fix this we'll need a way to keep track if users are still present
-in the channel. For this we need the `Presence` feature.
+in the channel. For this, we need the `Presence` feature.
 
 ## Adding names
 
@@ -262,7 +262,7 @@ end
 ```
 
 We'll generate this name on the server and send a signed token containing the name to the client. We sign it
-to make sure users can't temper with it. The idea is that this prevents users from changing their name to someone else's.
+to make sure users can't tamper with it. The idea is that this prevents users from changing their name to someone else's.
 
 In `page_controller.ex` add the following:
 
@@ -426,7 +426,7 @@ presence.onSync(() => {
 });
 ```
 
-After users join the channel we setup their presence in the channel. When a user sends a `move` event, we update the Presence state. Update `cursor_channel` to the following:
+After users join the channel we set up their presence in the channel. When a user sends a `move` event, we update the Presence state. Update `cursor_channel` to the following:
 
 ```elixir {3,8,12-22,25-33}
 defmodule PhoenixCursorsWeb.CursorChannel do
@@ -514,7 +514,7 @@ We assign this color to the user's presence in `cursor_channel.ex`:
   end
 ```
 
-And in the frontend we use this color for rendering the list of user cursors. In `user_socket.js`:
+And in the front end we use this color for rendering the list of user cursors. In `user_socket.js`:
 
 ```js {2, 3, 7}
 presence.list((name, { metas: [firstDevice] }) => {
@@ -576,7 +576,7 @@ Restart the server et voilà! You should see a nicely colored cursor for every u
 />
 
 What's really cool about Phoenix Presence is that it automatically keeps track of who's online.
-You can verify this by opening a few browser tabs (to simulate multiple users) and then close any one
+You can verify this by opening a few browser tabs (to simulate multiple users) and then closing any one
 of them. That particular cursor will be removed from the screen!
 
 ## Conclusion
@@ -597,5 +597,5 @@ you'll find all the necessary code changes to get the chat functionality working
     I'm aware that the live cursor feature would've been an excellent
     fit for Phoenix LiveView. However, I first wanted to get a better feeling for
     the Phoenix primitives Channels and Presence.
-    In the future I would like to build a similar functionality again with LiveView
+    In the future, I would like to build a similar functionality again with LiveView
     to see how that would reduce complexity.

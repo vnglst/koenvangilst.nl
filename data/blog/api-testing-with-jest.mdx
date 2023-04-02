@@ -10,7 +10,7 @@ summary: Testing async API calls using Jest’s mocking features
   Service Worker](https://mswjs.io/) to mock API calls.
 </Disclaimer>
 
-Jest is a great JavaScript testing framework by Facebook. It’s often used for testing React components, but it’s also a pretty good general purpose testing framework. In this tutorial I’ll give a quick and simple demo of it’s mocking capabilities for testing async functions.
+Jest is a great JavaScript testing framework by Facebook. It’s often used for testing React components, but it’s also a pretty good general-purpose testing framework. In this tutorial, I’ll give a quick and simple demo of its mocking capabilities for testing async functions.
 
 <Image
   alt={`Example screenshot passing Jest tests`}
@@ -21,7 +21,7 @@ Jest is a great JavaScript testing framework by Facebook. It’s often used for 
 
 ## Purpose of mocking
 
-Mocking async function (like API calls) instead of testing with a real API is useful for a couple of reasons:
+Mocking async functions (like API calls) instead of testing with a real API is useful for a couple of reasons:
 
 - It’s faster: you don’t have to wait until the API response comes in and you don’t have to deal with rate limits.
 - It makes your tests `pure`, i.e. whether they fail or pass depends only on your code, and not on the data that the API returns.
@@ -61,7 +61,7 @@ Congratulations, you’ve now got Jest up and running and are ready to start wri
 
 ## Adding the API
 
-We’ll be using `rest.js` for the making the API requests. `Rest.js` works well in the browser and Node.js.
+We’ll be using `rest.js` for making the API requests. `Rest.js` works well in the browser and Node.js.
 
 **Note (2018): Rest is no longer actively maintained. Use something like [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) instead.**
 
@@ -69,7 +69,7 @@ We’ll be using `rest.js` for the making the API requests. `Rest.js` works well
 yarn add rest
 ```
 
-Create a new folder api in the folder src and add the file `github.js` with the following code:
+Create a new folder `api` in the folder `src` and add the file `github.js` with the following code:
 
 ```js
 import request from './request';
@@ -162,7 +162,7 @@ Start Jest using `yarn test` and you should see the following error message:
   height={1192 / 2}
 />
 
-What’s happening here? It turns out that using our `getUser` function in a Node environment (which Jest is using to run the tests) makes our request fail. So even though our function works in the browser, it fails in our tests! Would could try and fix this, by adding a `User-Agent` header when we’re running this in a Node environment, but mocking would now be a better solution. Let’s set this up!
+What’s happening here? It turns out that using our `getUser` function in a Node environment (which Jest is using to run the tests) makes our request fail. So even though our function works in the browser, it fails in our tests! We could try and fix this, by adding a `User-Agent` header when we’re running this in a Node environment, but mocking would now be a better solution. Let’s set this up!
 
 ## Creating a mock
 
@@ -242,7 +242,7 @@ This tutorial is based upon the [async example](https://jestjs.io/docs/en/tutori
 
 ## BONUS: testing using async/await
 
-If you’re using the `create-react-app` you can also use async/await to write your tests. This definitely makes your tests easier to write and more readable:
+If you’re using the `create-react-app` you can also use async/await to write your tests. This makes your tests easier to write and more readable:
 
 ```js
 // The exact same test using async/await

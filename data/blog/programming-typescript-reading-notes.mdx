@@ -23,7 +23,7 @@ let oneMillion = 1_000_0000;
 
 ## Structurally typed
 
-JavaScript (and TypeScript) are structurally typed. This means that it's not the name of the object that determines it's type (this would be nominally typed) but the properties that the object has. Structural typing is also known as duck typing (i.e. if it walks and swims like a duck, the object is of the type duck).
+JavaScript (and TypeScript) are structurally typed. This means that it's not the name of the object that determines its type (this would be nominally typed) but the properties that the object has. Structural typing is also known as duck typing (i.e. if it walks and swims like a duck, the object is of the type duck).
 
 ## Index signatures
 
@@ -39,13 +39,13 @@ a = { b: 10, 1: true, 100: false }; // example
 
 ## Tuples
 
-Tuples are a subtype of array. They've got a fixed length and each index has a known type. For example:
+Tuples are a subtype of an array. They've got a fixed length and each index has a known type. For example:
 
 ```ts
 let b: [string, string, number] = ['koen', 'van gilst', 1978];
 ```
 
-Cherny advises to use tuples often: they allow you to safely encode heterogeneous lists with fixed lengths.
+Cherny advises using tuples often: they allow you to safely encode heterogeneous lists with fixed lengths.
 
 ## Immutable arrays
 
@@ -131,7 +131,7 @@ type WarnUser = {
 
 ## Generics
 
-With generics we can keep type constraints on functions even if we don't know exactly what the type of the variable is going to be when we invoke the function. For example, this is what a typed version of the array filter function would look like:
+With generics, we can keep type constraints on functions even if we don't know exactly what the type of the variable is going to be when we invoke the function. For example, this is what a typed version of the array filter function would look like:
 
 ```ts
 filter([ 1 , 2 , 3 , 4 ], el => el < 3) // example usage, evaluates to [1, 2]
@@ -159,9 +159,9 @@ function map<T, U>(array: T[], f: (item: T) => U): U[] {
 
 Functions that take any number of arguments.
 
-## Type driven development
+## Type-driven development
 
-A style of programming where you sketch out type signatures first, and fill in values later.
+A style of programming where you sketch out type signatures first and fill in values later.
 
 ## Private vs protected
 
@@ -187,7 +187,7 @@ class Piece {
 - You don't have to reassign arguments in the `constructor` function to `this` to make them part of the class. You can use the keywords `private`, `public` and `private` for that (i.e. less typing).
 - _Private_ means "that code within a Piece instance can read and write to it, but code outside of a Piece instance can’t. Different instances of Piece can access each other’s private members; instances of any other class - even a subclass of Piece - can’t."
 - _Protected_ is similar to private, but it "makes the property visible both to instances of Piece and to instances of any subclass of Piece."
-- A _public_ property is accesible from anywhere.
+- A _public_ property is accessible from anywhere.
 
 ## Abstracts
 
@@ -208,7 +208,7 @@ Using the `abstract` keyword in front of a class method tells any class that ext
 
 ## Interfaces
 
-Like aliases interfaces let you define types of things. Interfaces don’t have to extend other interfaces. In fact, an interface can extend any shape: an object type , a class , or another interface .
+Like aliases interfaces let you define types of things. Interfaces don’t have to extend other interfaces. An interface can extend any shape: an object type, a class, or another interface.
 
 ```ts
 type Cake = {
@@ -243,7 +243,7 @@ let APIPayload = serializable(
 );
 ```
 
-However, since decorators are still an experimental in JavaScript (and also in TypeScript) (see: https://github.com/tc39/proposal-decorators) Cherny recommands stickting to ordinary function until decorators become stable.
+However, since decorators are still experimental in JavaScript (and also in TypeScript) (see: https://github.com/tc39/proposal-decorators) Cherny recommends sticking to ordinary functions until decorators become stable.
 
 ## Builder pattern
 
@@ -257,7 +257,7 @@ new RequestBuilder()
   .send();
 ```
 
-Cherny shows how to build this in a type safe way using TypeScript:
+Cherny shows how to build this in a type-safe way using TypeScript:
 
 ```ts
 class RequestBuilder {
@@ -288,4 +288,4 @@ class RequestBuilder {
 
 ---
 
-All quotations from: [Programming TypeScript: Making Your JavaScript Applications Scale](https://www.amazon.com/Programming-TypeScript-Making-JavaScript-Applications/dp/1492037656)
+All quotations from [Programming TypeScript: Making Your JavaScript Applications Scale](https://www.amazon.com/Programming-TypeScript-Making-JavaScript-Applications/dp/1492037656)

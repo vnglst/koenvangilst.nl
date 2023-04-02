@@ -4,7 +4,7 @@ publishedAt: '2020-11-18'
 summary: Tutorial on how to create a scroll video effect using Svelte’s powerful bind command.
 ---
 
-In this tutorial I’ll show you how svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
+In this tutorial, I’ll show you how svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
 
 <video width="672" height="577" muted loop controls autoPlay playsInline>
   <source src="https://i.imgur.com/s0GVWeR.mp4" type="video/mp4" />
@@ -16,7 +16,7 @@ In this tutorial I’ll show you how svelte’s bind command can be used to crea
   <source src="https://i.imgur.com/10tgKVV.mp4" type="video/mp4" />
 </video>
 
-It gives web pages a very dynamic look and I was surprised to learn how easy you can accomplish this with svelte.
+It gives web pages a very dynamic look and I was surprised to learn how easily you can accomplish this with svelte.
 
 ## Setting up svelte
 
@@ -28,7 +28,7 @@ npm install
 npm run dev
 ```
 
-A new svelte project is now running on: http://localhost:5000
+A new svelte project is now running on http://localhost:5000
 
 We start with an empty `App.svelte` file, so let’s delete all the code in that file first.
 
@@ -60,7 +60,7 @@ We can get the vertical scrolling position with the following code:
 <svelte:window bind:scrollY />
 ```
 
-Here we are binding the vertical scroll position of the window to a variable _scrollY_. Before we can continue, we have to make sure our window is heigh enough to allow for scrolling. Let’s add a `div` and some CSS for that:
+Here we are binding the vertical scroll position of the window to a variable _scrollY_. Before we can continue, we have to make sure our window is high enough to allow for scrolling. Let’s add a `div` and some CSS for that:
 
 ```html
 <script>
@@ -80,7 +80,7 @@ Here we are binding the vertical scroll position of the window to a variable _sc
 
 Notice how you can combine HTML, CSS and JavaScript within a svelte component. Almost like you would in a regular HTML file!
 
-To verify if this works you might be tempted to add a _console.log_ just below the line `let scrollY;`. If you try that however you’ll see only one `0` being logged. The reason for this is that any code inside the `<script>` will run only once (when initialising the component). If you want to keep executing the _console.log_ as the scroll values updates, make it reactive using the following notation:
+To verify if this works you might be tempted to add a _console.log_ just below the line `let scrollY;`. If you try that however you’ll see only one `0` being logged. The reason for this is that any code inside the `<script>` will run only once (when initializing the component). If you want to keep executing the _console.log_ as the scroll values update, make it reactive using the following notation:
 
 ```js
 $: console.log(scrollY);
@@ -90,7 +90,7 @@ This may look a bit funky (and it is! I’m not even sure if it’s still JavaSc
 
 After adding the console.log with the dollar sign, you should see the scroll position logged on every update. Pretty cool for just 2 lines of code!
 
-Similarly we can use bind on `<video>` to get the other values:
+Similarly, we can use bind on `<video>` to get the other values:
 
 ```html {3,4,11-18}
 <script>
@@ -119,13 +119,13 @@ Similarly we can use bind on `<video>` to get the other values:
 </style>
 ```
 
-The cool thing about these bindings is that they are **bidirectional**. This means that the `time` variable not only holds the current playback time, but that if we change it, we’re also updating the current playback position of the video! This is also known as _two-way data binding_ which was initially popularized by the original _AngularJS_.
+The cool thing about these bindings is that they are **bidirectional**. This means that the `time` variable not only holds the current playback time but that if we change it, we’re also updating the current playback position of the video! This is also known as _two-way data binding_ which was initially popularized by the original _AngularJS_.
 
-In the next section we'll combine this with the formula we made earlier.
+In the next section, we'll combine this with the formula we made earlier.
 
 ## Updating video playback on scroll
 
-Before we can continue we first have to make sure the video is always displayed fullscreen on the background while we are scrolling. Let's add a container _div_ and some CSS to accomplish that:
+Before we can continue we first have to make sure the video is always displayed fullscreen in the background while we are scrolling. Let's add a container _div_ and some CSS to accomplish that:
 
 ```html {11,20, 23-39}
 <script>
@@ -174,7 +174,7 @@ Before we can continue we first have to make sure the video is always displayed 
 </style>
 ```
 
-Any changes in the scroll position should immediately be reflected in a change in the playback position. In other words: the changes in the time variable should react to the changes in the scroll position. To accomplish this we have to make sure our formule code is **reactive**. Just as with the console.log we use the `$:` notation to do this:
+Any changes in the scroll position should immediately be reflected in a change in the playback position. In other words: the changes in the time variable should react to the changes in the scroll position. To accomplish this we have to make sure our formula code is **reactive**. Just as with the console.log we use the `$:` notation to do this:
 
 ```html {2,5,7-11}
 <script>
@@ -203,9 +203,9 @@ After adding the last piece of code the video scroll effect should work. To make
 
 ## Notes on performance
 
-The NYTimes is using optimized, small size videos on their pages. And with good reason: I've been doing experiments with larger (high definition) videos and it's impossible to get the performance right on all browsers: Safari performs surprisingly well, but Firefox and Chrome quickly start to stutter when the video gets larger.
+The NYTimes is using optimized, small-size videos on their pages. And with good reason: I've been doing experiments with larger (high definition) videos and it's impossible to get the performance right on all browsers: Safari performs surprisingly well, but Firefox and Chrome quickly start to stutter when the video gets larger.
 
-Apple is actually using a different technique to accomplish the effect on their pages: They've split up the video in separate frames (images) and they show a different frame when the scroll position changes. This [technique](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/) performs suprisingly well, even for high definition video content. It does, however, come at a cost: All those frames have to be downloaded individually, adding up to huge download sizes. This is costly not just for mobile end users, but also if you're hosting them.
+Apple is using a different technique to accomplish the effect on their pages: They've split up the video in separate frames (images) and they show a different frame when the scroll position changes. This [technique](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/) performs surprisingly well, even for high-definition video content. It does, however, come at a cost: All those frames have to be downloaded individually, adding up to huge download sizes. This is costly not just for mobile end users, but also if you're hosting them.
 
 If you want to use this technique and keep things simple I suggest using a small and optimized video just like the NYTimes does.
 

@@ -110,6 +110,6 @@ Instead of using -f or --force developers should use
 git push --force-with-lease
 ```
 
-Why? Because it checks the remote branch for changes which is absolutely a good idea. Let's imagine that James and Lisa are working on the same feature branch and Lisa has pushed a commit. James now rebases his local branch and is rejected when trying to push. Of course James thinks this is due to rebase and uses --force and would rewrite all Lisa's changes. If James had used --force-with-lease he would have received a warning that there are commits done by someone else. I don't see why anyone would use --force instead of --force-with-lease when pushing after a rebase.
+Why? Because it checks the remote branch for changes which is a good idea. Let's imagine that James and Lisa are working on the same feature branch and Lisa has pushed a commit. James now rebases his local branch and is rejected when trying to push. Of course James thinks this is due to rebase and uses --force and would rewrite all Lisa's changes. If James had used --force-with-lease he would have received a warning that there are commits done by someone else. I don't see why anyone would use --force instead of --force-with-lease when pushing after a rebase.
 
 Source: https://stackoverflow.com/questions/8939977/git-push-rejected-after-feature-branch-rebase

@@ -11,9 +11,9 @@ summary: An intro to the React hooks useState, useRef and useEffect
   height={774 / 2}
 />
 
-In this tutorial I will use React Hooks to create an html canvas drawing website. I will start from zero using the _Create React App_ starter kit. The [resulting app](https://han-hooks.netlify.com/) offers basic features like `Clear`, `Undo` and saves drawings using localStorage.
+In this tutorial, I will use React Hooks to create an html canvas drawing website. I will start from zero using the _Create React App_ starter kit. The [resulting app](https://han-hooks.netlify.com/) offers basic features like `Clear`, `Undo` and saves drawings using localStorage.
 
-With this tutorial I'd like to show you how hooks make composition and reuse of stateful logic possible using _custom hooks_.
+With this tutorial, I'd like to show you how hooks make the composition and reuse of stateful logic possible using _custom hooks_.
 
 ## Basic setup
 
@@ -53,7 +53,7 @@ Clicking somewhere in the open browser window should now display an alert popup,
 
 Great, it works!
 
-Now let's actually draw something. For that we need a `ref` to the canvas element and our first hook `useRef` is going help us with that.
+Now let's draw something. For that, we need a `ref` to the canvas element and our first hook `useRef` is going to help us with that.
 
 ```jsx {4,11,12,13}
 import React from 'react';
@@ -78,9 +78,9 @@ function App() {
 export default App;
 ```
 
-Normally in React you don't need a `ref` to update something, but the canvas is not like other DOM elements. Most DOM elements have a property like `value` that you can update directly. The canvas works with a context (`ctx` in our app) that allows you to draw things. For that we have to use a `ref`, which is a reference to the actual canvas DOM element.
+Normally in React you don't need a `ref` to update something, but the canvas is not like other DOM elements. Most DOM elements have a property like `value` that you can update directly. The canvas works with a context (`ctx` in our app) that allows you to draw things. For that, we have to use a `ref`, which is a reference to the actual canvas DOM element.
 
-Now that we have the canvas context it's time to draw something. For that I'm going to copy paste the code that draws an SVG hook. It's got nothing to do with hooks, so don't worry if you don't fully understand it.
+Now that we have the canvas context it's time to draw something. For that, I'm going to copy-paste the code that draws an SVG hook. It's got nothing to do with hooks, so don't worry if you don't fully understand it.
 
 ```jsx {3-18,31}
 import React from 'react';
@@ -122,13 +122,13 @@ function App() {
 export default App;
 ```
 
-All this does is draw an SVG shape (a fishing hook!) on position `x` and `y`. As it's not relevant for this tutorial I will omit it from now on.
+All this does is draw an SVG shape (a fishing hook!) on position `x` and `y`. As it's not relevant to this tutorial I will omit it from now on.
 
-Try it out, see if it works!
+Try it out, and see if it works!
 
 ## 2nd hook: useState
 
-The next features we'd like to add are the `Clean` and `Undo` buttons. For that we need to keep track of the user interactions with the `useState` hook.
+The next features we'd like to add are the `Clean` and `Undo` buttons. For that, we need to keep track of the user interactions with the `useState` hook.
 
 ```jsx {8,19-20}
 import React from 'react';
@@ -160,11 +160,11 @@ function App() {
 export default App;
 ```
 
-There! We've added state to our app. You can verify this by adding a `console.log(locations)` just above the `return`. In the console you should see a growing array of the user clicks.
+There! We've added state to our app. You can verify this by adding a `console.log(locations)` just above the `return`. In the console, you should see a growing array of user clicks.
 
 ## 3rd hook: useEffect
 
-Currently we're not doing anything with that state. We're drawing the hooks just like we did before. Let's see how we can fix this with the `useEffect` hook.
+Currently, we're not doing anything with that state. We're drawing the hooks just like we did before. Let's see how we can fix this with the `useEffect` hook.
 
 ```jsx {11-16}
 import React from 'react';
@@ -200,11 +200,11 @@ function App() {
 export default App;
 ```
 
-There's a lot going on here so let's break it down. We've moved the drawing function from the onClick handler to the `useEffect` callback. This is important, because drawing on the canvas is a _side effect_ determined by the app state. Later we'll add persistency using localStorage, which will also be a side effect of state updates.
+A lot is going on here so let's break it down. We've moved the drawing function from the onClick handler to the `useEffect` callback. This is important because drawing on the canvas is a _side effect_ determined by the app state. Later we'll add persistency using localStorage, which will also be a side effect of state updates.
 
-I've also made a few changes to the actual drawing on the canvas itself. In the current implementation every render first clears the canvas and then draws all the locations. We could be smarter than that, but to keep it simple I'll leave it to reader to further optimize this.
+I've also made a few changes to the actual drawing on the canvas itself. In the current implementation, every render first clears the canvas and then draws all the locations. We could be smarter than that, but to keep it simple I'll leave it to the reader to further optimize this.
 
-We've done all the hard work, adding the new feature should be easy now. Let's create the `Clear` button.
+We've done all the hard work, and adding the new feature should be easy now. Let's create the `Clear` button.
 
 ```jsx {18-21,23-25,29}
 import React from 'react';
@@ -249,7 +249,7 @@ function App() {
 export default App;
 ```
 
-The Clear feature is just a simple state update: we clearing the state by setting it to an empty array `[]`. That was easy right?
+The Clear feature is just a simple state update: we clear the state by setting it to an empty array `[]`. That was easy, right?
 
 I've also taken the opportunity to clean up a bit, by moving the canvas `onClick` handler to a separate function.
 
@@ -303,9 +303,9 @@ function App() {
 export default App;
 ```
 
-Since any state update in React has to be immutible, we can't use something like `locations.pop()` to remove the most recent item from the array. We have to do it without changing the original `locations` array. The way to do this is with `slice`, i.e. by slicing off all the elements up until the last one. You can do that with `locations.slice(0, locations.length - 1)`, but `slice` is smart enough to interpret `-1` as the last item in the array.
+Since any state update in React has to be immutable, we can't use something like `locations.pop()` to remove the most recent item from the array. We have to do it without changing the original `locations` array. The way to do this is with `slice`, i.e. by slicing off all the elements up until the last one. You can do that with `locations.slice(0, locations.length - 1)`, but `slice` is smart enough to interpret `-1` as the last item in the array.
 
-Before we continue, let's clean up the html and add some css. Add the following `div` around the buttons:
+Before we continue, let's clean up the HTML and add some CSS. Add the following `div` around the buttons:
 
 ```jsx {3,14,17}
 import React from 'react';
@@ -338,7 +338,7 @@ function App() {
 export default App;
 ```
 
-And replace the css in `App.css` with the following:
+And replace the CSS in `App.css` with the following:
 
 ```css
 *,
@@ -579,17 +579,17 @@ function App() {
 export default App;
 ```
 
-As you can see our _App_ component has become quite small. All the logic that is related to storing the state in localStorage and drawing on the canvas is extracted to custom hooks. You could clean up this file even further by moving the hooks into a _hooks_ file. That way other components could reuse this logic, for instance to compose even better hooks.
+As you can see our _App_ component has become quite small. All the logic that is related to storing the state in localStorage and drawing on the canvas is extracted to custom hooks. You could clean up this file even further by moving the hooks into a _hooks_ file. That way other components could reuse this logic, for instance, to compose even better hooks.
 
 ## Conclusions
 
 What makes hooks so special if you compare them to the lifecycle methods (like `componentDidMount`, `componentDidUpdate`)? Looking at the examples above:
 
 - hooks allow you to **reuse** lifecycle logic in different components
-- with hooks you can use **composition** to create richer custom hooks, just like you can use composition to create richer UI components
+- with hooks, you can use **composition** to create richer custom hooks, just like you can use composition to create richer UI components
 - hooks are **shorter and cleaner** - no more bloated, and sometimes confusing, lifecycle methods
 
-It's still too early to tell whether hooks are really going to solve all these problems - and what new bad practices might arise from them - but looking at the above I'm pretty excited and optimistic for React's future!
+It's still too early to tell whether hooks are going to solve all these problems - and what new bad practices might arise from them - but looking at the above I'm pretty excited and optimistic for React's future!
 
 Let me know what you think! You can reach me on Twitter using [@vnglst](https://twitter.com/vnglst).
 
