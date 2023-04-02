@@ -19,9 +19,7 @@ export default function Blog({
           JavaScript Labs
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
-          {`Below you'll find a collection of my JavaScript experiments. It's mostly educational progressive
-           web apps, some Twitter bots and other creative stuff. I generally use these experiments to learn more about a 
-           certain technology or library, so don't take the code too seriously. 🐒`}
+          {`Below, you'll find a collection of my JavaScript experiments. It's mostly educational progressive web apps, some Twitter bots, and other creative stuff. I generally use these experiments to learn more about a certain technology or library, so don't take the code too seriously. 🐒`}
         </p>
         <h3 className="mt-8 mb-8 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           Side Projects
