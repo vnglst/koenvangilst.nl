@@ -1,27 +1,27 @@
 ---
 title: Reading notes Accelerate
 publishedAt: '2019-01-01'
-summary: Accelerate gives a scientific analysis of what makes IT organisations successful. I've listed the most important ones (from a developer perspective)
+summary: Accelerate gives a scientific analysis of what makes IT organizations successful. I've listed the most important ones (from a developer perspective)
 ---
 
-This Christmas I've been reading `Accelerate` by Nicole Forsgren, Jez Humble and Gene Kim. It describes their scientific research into what makes IT organisations successful. As as developer I found their findings to be very recognizable and I can only hope that the organizations I work for will take them to heart. It's good to hear that things like continuous deployment are not just pet peeves of developers, but reliably indicate the success of IT organisations. My more takeaways as a developer are:
+This Christmas I've been reading `Accelerate` by Nicole Forsgren, Jez Humble and Gene Kim. It describes their scientific research into what makes IT organizations successful. As a developer I found their findings to be very recognizable and I can only hope that the organizations I work for will take them to heart. It's good to hear that things like continuous deployment are not just pet peeves of developers, but reliably indicate the success of IT organizations. My takeaways as a developer are:
 
-## High performing IT organisations:
+## High-performing IT organizations:
 
 - **deploy to production** on demand, `multiple times per day`
 - have a product **delivery lead time** of `less than 1 hour` (the time it takes from a code commit to code successfully running in production)
 - have a low `0-15%` change fail rate (percentage of changes to production that fail)
-- are able to **fix production issues** within `less than 1 hour` (mean time to restore)
-- have completely **automated their deployment**, generally it's just one command to deploy master to production
-- use **trunk-based development**: developers create short lived branches (with less than 1 day's work) that are merged back to master
+- can **fix production issues** within `less than 1 hour` (mean time to restore)
+- have completely **automated their deployment**, generally, it's just one command to deploy master to production
+- use **trunk-based development**: developers create short-lived branches (with less than 1 day's work) that are merged back to main
 - use **continuous integration**: tests, linting and other checks are run on feature branches and are only merged to master if all succeed
-- have **test automation that is reliable**: failing tests indicate real problems, no failures means the software is working correctly. Those tests are _written by the developers_ (i.e. not by a separate QA team of company)
-- have a **lightweight approval process**, i.e. peer reviews of code or pair programming, but _no Changes Approval Board_. Approval by an external body _simple doesn't work_, it's a "form of risk management theatre: we check boxes so that when something goes wrong, we can say that at least we followed the process. At best, this process only introduces time delays and handoffs."
+- have **test automation that is reliable**: failing tests indicate real problems, and no failures means the software is working correctly. Those tests are _written by the developers_ (i.e. not by a separate QA team or company)
+- have a **lightweight approval process**, i.e. peer reviews of code or pair programming, but _no Changes Approval Board_. Approval by an external body _simply doesn't work_, it's a "form of risk management theatre: we check boxes so that when something goes wrong, we can say that at least we followed the process. At best, this process only introduces time delays and handoffs."
 - have **little or no deployment pain**: engineers and technical staff don't have any fear or anxiety when they push code to production. "We found that where code deployments are most painful, you’ll find the poorest software delivery performance, organizational performance, and culture."
-- work in **small batches**, i.e. new features a split up into smaller ones that are taken to the customer as quickly a possible to get their feedback as early as possible
+- work in **small batches**, i.e. new features a split up into smaller ones that are taken to the customer as quickly as possible to get their feedback as early as possible
 - **deploy changes to production during normal business hours**. If that's not possible then this is "a sign of architectural problems that should be addressed."
 - **address burnout at an organizational level** (instead of trying to fix the person). Organizations that do the above (e.g. continuous deployment, no deployment pain) have lower burnout rates.
-- allow teams to **choose their own tools**, so instead of forcing developers to pick tools from an approved list, they can choose the tool they think is best suited for their needs. This has downsides (increases complexity and skills needed for maintenance) but in general: "The technical professionals who develop and deliver software and run complex infrastructures make these tool choices based on what is best for completing their work and supporting their users."
+- allow teams to **choose their tools**, so instead of forcing developers to pick tools from an approved list, they can choose the tool they think is best suited for their needs. This has downsides (increases complexity and skills needed for maintenance) but in general: "The technical professionals who develop and deliver software and run complex infrastructures make these tool choices based on what is best for completing their work and supporting their users."
 - have architects that **focus on engineers and outcomes**, not on tools or technologies
 
 ---

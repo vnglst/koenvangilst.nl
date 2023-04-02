@@ -4,7 +4,7 @@ publishedAt: '2016-11-03'
 summary: A fun little tutorial of how to create a PDF using a web form, Express and PDFKit
 ---
 
-In this article you'll find a fun little tutorial of how to create a PDF file using a web form, Express and PDFKit. To get started it'll use the express generator and after completing it you'll have a simple web form that generates a PDF file if the user clicks on the button _Create PDF_. I'll also point you in the right direction if you want to deploy the app using [Now](https://zeit.co/now).
+In this article, you'll find a fun little tutorial on how to create a PDF file using a web form, Express and PDFKit. To get started it'll use the express generator and after completing it you'll have a simple web form that generates a PDF file if the user clicks on the button _Create PDF_. I'll also point you in the right direction if you want to deploy the app using [Now](https://zeit.co/now).
 
 <Image
   alt={`Screenshot endresult`}
@@ -13,7 +13,7 @@ In this article you'll find a fun little tutorial of how to create a PDF file us
   height={464}
 />
 
-First install the Express application generator:
+First, install the Express application generator:
 
 ```bash
 yarn global add express-generator # or use npm
@@ -32,7 +32,7 @@ cd form-to-pdf
 yarn
 ```
 
-Next add the dependency PDFKit
+Next, add the dependency PDFKit
 
 ```bash
 yarn add pdfkit
@@ -46,7 +46,7 @@ yarn start
 
 Then go to [http://localhost:3000](http://localhost:3000) in your browser. You should see something like: `Welcome to Express`
 
-Next we're going to add our HTML using the templating engine Pug (formerly known as Jade). Open the file `views/index.pug`
+Next, we're going to add our HTML using the templating engine Pug (formerly known as Jade). Open the file `views/index.pug`
 and replace the existing code with the following:
 
 ```pug
@@ -84,7 +84,7 @@ html
         block content
 ```
 
-Now if you restart your app and visit [http://localhost:3000](http://localhost:3000) you should see a nicely formatted HTML form. Next we're going to add the route for creating PDF files. Create the file `routes/pdf` and add the following code:
+Now if you restart your app and visit [http://localhost:3000](http://localhost:3000) you should see a nicely formatted HTML form. Next, we're going to add the route for creating PDF files. Create the file `routes/pdf` and add the following code:
 
 ```js
 const express = require('express')
@@ -128,4 +128,4 @@ it with:
 yarn start
 ```
 
-I hope you enjoyed this tutorial and feel free to ask me any questions. You can also deploy your own Form to PDF app using Now. It's easy and takes only a few seconds. Instructions can be found [here](https://zeit.co/now).
+I hope you enjoyed this tutorial and feel free to ask me any questions. You can also deploy your Form to PDF app using Now. It's easy and takes only a few seconds. Instructions can be found [here](https://zeit.co/now).

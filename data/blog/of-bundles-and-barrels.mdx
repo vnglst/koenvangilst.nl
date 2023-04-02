@@ -4,7 +4,7 @@ publishedAt: '2021-11-17'
 summary: Why index barrel files can lead to large bundle sizes
 ---
 
-Until recently I've been an unequivocal fan of so called barrel files. They work like this:
+Until recently I've been an unequivocal fan of so-called barrel files. They work like this:
 
 ```ts
 // src/components/index.js
@@ -19,7 +19,7 @@ Which allows you to use components like this:
 import { Foo, Bar, FooBar } from 'src/components';
 ```
 
-Short and sweet! For this reason I'm also a happy user of the VSCode plugin [Auto-barrel](https://marketplace.visualstudio.com/items?itemName=mikehanson.auto-barrel) which helps with creating/updating these barrel files.
+Short and sweet! For this reason, I'm also a happy user of the VSCode plugin [Auto-barrel](https://marketplace.visualstudio.com/items?itemName=mikehanson.auto-barrel) which helps with creating/updating these barrel files.
 
 I did recently discover, however, that this pattern can have unwanted side effects. Re-exporting all your imports in an index file can result in large bundle sizes.
 
