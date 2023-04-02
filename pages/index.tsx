@@ -18,8 +18,7 @@ export default function Home() {
               <span className="font-semibold">Rabobank</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
-              {`I'm a passionate & entrepreneurial TypeScript developer from the
-              Netherlands who likes to push the web beyond it's limits.`}
+              {`I'm a passionate and entrepreneurial web developer from the Netherlands who likes to push the web beyond its limits.`}
             </p>
           </div>
           <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
