@@ -12,11 +12,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/d3-array": "3.0.4",
-    "@next/font": "^13.2.4",
+    "@next/font": "13.2.4",
     "@tailwindcss/typography": "0.5.9",
+    "@types/d3-array": "3.0.4",
     "@types/d3-time-format": "4.0.0",
-    "@vercel/analytics": "^0.1.11",
+    "@vercel/analytics": "0.1.11",
     "@visx/curve": "2.1.0",
     "@visx/event": "2.6.0",
     "@visx/gradient": "2.10.0",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@types/react": "18.0.32",
+    "@types/node": "18.15.11",
     "autoprefixer": "10.4.13",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
