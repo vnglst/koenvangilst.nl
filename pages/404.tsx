@@ -11,15 +11,13 @@ export default function NotFound() {
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-8">
           {`It seems you've found something that used to exist, or you spelled something
-          wrong. I'm guessing you spelled something wrong. Can you double check
-          that URL?`}
+            wrong. I'm guessing you spelled something wrong. Can you double-check that URL?`}
         </p>
         <Link
           href="/"
-          className="p-1 sm:p-4 w-64 font-bold bg-gray-200 dark:bg-gray-800 text-center rounded-md text-black dark:text-white">
-          
-            Return Home
-          
+          className="p-1 sm:p-4 w-64 font-bold bg-gray-200 dark:bg-gray-800 text-center rounded-md text-black dark:text-white"
+        >
+          Return Home
         </Link>
       </div>
     </Container>
