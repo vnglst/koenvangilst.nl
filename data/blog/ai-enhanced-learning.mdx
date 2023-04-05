@@ -1,0 +1,50 @@
+---
+title: AI Enhanced Learning
+publishedAt: '2023-04-02'
+summary: 'How to use AI to create personalized learning experiences'
+---
+
+Two years ago, during the pandemic, I worked on a side project that allowed parents to create lessons for their kids to help them study. The idea was that parents would be able to share these lessons with others and by doing so create a library of lessons for other kids in primary school.
+
+I enjoyed working on the app and letting my kids test drive it but quickly realized that creating new lessons was too time-consuming for busy parents. So I let the idea go and of the original project only the landing page and the source code remain.
+
+Now with the arrival of smarter AIs like GPT, this could change. What if parents would only have to input the text of a homework assignment and then sit back and let the AI generate the questions for them?
+
+After trying this out on ChatGPT to verify the idea I started sketching some designs for an app. The app would feature an input box where users could type in the text they want to study.
+
+<Image
+  alt={`Screenshot of how the app would look like`}
+  src={`/static/screenshots/ailearning1.jpg`}
+  width={1540}
+  height={1558}
+/>
+
+Fill in the input text and click "Generate Questions". The app would leverage the GPT API to generate an initial set of questions.
+
+<Image
+  alt={`Screenshot of the app after generating questions`}
+  src={`/static/screenshots/ailearning2.jpg`}
+  width={1482}
+  height={1888}
+/>
+
+It's also possible to edit the questions, answers and options. It should also be possible to discard certain questions and generate new ones. I've noticed that this iterative approach works well with LLM-based AIs.
+
+Once you confirm a lesson the selected questions will be saved to the database. Practicing this lesson could look like this.
+
+<Image
+  alt={`Screenshot of what practicing a lesson would look like`}
+  src={`/static/screenshots/ailearning3.jpg`}
+  width={994}
+  height={1266}
+/>
+
+Beyond lessons for practicing your understanding of a text, I also imagine other kinds of lessons. For instance:
+
+- lessons to improve your vocabulary by generating a list of difficult words in a text
+- or generating a list of words that are key to understanding a German text with their English translations
+- provide a link to a programming language documentation website and have the AI help you rehearse the syntax
+- linking to a YouTube video and generating questions based on the content
+- provide the lyrics of your favorite Spanish song and let the platform generate a vocabulary list for you
+
+I think there's a lot of potential here and I can't wait to get started on a proof of concept to verify that this works. Until then I look forward to any feedback on the idea. Drop me a line on Mastodon or Twitter to let me know what you think!
