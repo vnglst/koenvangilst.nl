@@ -2,21 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url(/fonts/montserrat.woff2) format('woff2');
-}
-
 ::selection {
   background-color: #5bc3eb;
   color: #fefefe;
 }
 
 h1 {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
 }
 
 #__next {
