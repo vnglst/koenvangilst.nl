@@ -1,7 +1,9 @@
+'use client';
+
 import cn from 'clsx';
 import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Nav() {
@@ -61,36 +63,35 @@ export default function Nav() {
 }
 
 function NavItem({ href, text }) {
-  const router = useRouter();
-  const isActive = router.asPath.startsWith(href);
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
-    (<NextLink
+    <NextLink
       href={href}
       className={cn(
         isActive
           ? 'font-semibold text-gray-800 dark:text-gray-200'
           : 'font-normal text-gray-600 dark:text-gray-400',
         'inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:ring-2 ring-primary transition-all'
-      )}>
-
+      )}
+    >
       <span className="capsize">{text}</span>
-
-    </NextLink>)
+    </NextLink>
   );
 }
 
 function NavItemHome() {
-  const router = useRouter();
-  const isActive = router.asPath === '/';
+  const pathname = usePathname();
+  const isActive = pathname === '/';
 
   return (
-    (<NextLink
+    <NextLink
       href="/"
       className={
         'font-normal text-gray-600 dark:text-gray-400 p-1 sm:px-3 sm:py-2 rounded-lg hover:ring-2 ring-primary transition-all'
-      }>
-
+      }
+    >
       <svg
         height="20"
         width="20"
@@ -107,15 +108,12 @@ function NavItemHome() {
         />
         <path
           className={cn(
-            isActive
-              ? 'blink text-primary'
-              : 'text-gray-600 dark:text-gray-400'
+            isActive ? 'blink text-primary' : 'text-gray-600 dark:text-gray-400'
           )}
           fill="currentColor"
           d="m275.2 358.4c-7.19 0-13.59 2.58-18.55 7.51-4.88 4.91-7.47 11.31-7.47 18.5v21.5c0 7.24 2.6 13.65 7.48 18.51 4.91 4.92 11.32 7.51 18.54 7.51h322.45c7.22 0 13.63-2.6 18.5-7.48 4.91-4.9 7.52-11.32 7.52-18.55 0-2.15 0-19.35 0-21.5 0-7.19-2.59-13.59-7.53-18.56-4.91-4.86-11.3-7.44-18.49-7.44-64.49 0-290.2 0-322.45 0z"
         />
       </svg>
-
-    </NextLink>)
+    </NextLink>
   );
 }
