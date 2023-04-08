@@ -15,9 +15,7 @@ import 'styles/global.css';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
-      <div
-        className={`${montserrat.variable} ${inter.variable} font-sans bg-gray-100 dark:bg-gray-900`}
-      >
+      <div className={`${montserrat.variable} ${inter.variable} font-sans`}>
         <Component {...pageProps} />
       </div>
       <Analytics />
