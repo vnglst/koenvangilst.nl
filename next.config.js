@@ -13,7 +13,7 @@ const commitHash = require('child_process')
 module.exports = withContentlayer({
   reactStrictMode: true,
   experimental: {
-    legacyBrowsers: false
+    appDir: true
   },
   env: {
     APP_VERSION: pkg.version,
