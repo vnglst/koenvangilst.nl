@@ -1,13 +1,12 @@
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import ThemeToggle from './ThemeToggle';
 import { NavItemHome, NavItem } from './NavItem';
 
+type Theme = 'dark' | 'light' | undefined;
+
 export default function Nav() {
-  const cookieStore = cookies();
-  const userSelected = cookieStore.get('mode')?.value as
-    | 'dark'
-    | 'light'
-    | undefined;
+  const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme') as Theme;
+  const cookieTheme = cookies().get('mode')?.value as Theme;
 
   return (
     <nav className="sticky top-0 z-10 flex gap-4 items-center justify-start p-4 md:px-8 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-saturate-50">
@@ -22,7 +21,7 @@ export default function Nav() {
       <NavItem href="/portfolio" text="Portfolio" />
       <NavItem href="/labs" text="Labs" />
       <NavItem href="/blog" text="Blog" />
-      <ThemeToggle userSelected={userSelected} />
+      <ThemeToggle userSelected={cookieTheme || systemTheme} />
     </nav>
   );
 }

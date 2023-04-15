@@ -22,8 +22,10 @@ export default function ThemeToggle({ userSelected }: ThemeToggleProps) {
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
+        setMode('dark');
         document.documentElement.classList.add('dark');
       } else {
+        setMode('light');
         document.documentElement.classList.remove('dark');
       }
     };

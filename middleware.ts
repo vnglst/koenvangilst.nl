@@ -18,7 +18,7 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     })()
   );
 
-  return addSecurityHeaders(NextResponse.next());
+  return addHeaders(NextResponse.next());
 }
 
 async function logPageView(req: NextRequest) {
@@ -65,7 +65,7 @@ async function logPageView(req: NextRequest) {
   invariant(response.status === 201, 'Error logging analytics');
 }
 
-function addSecurityHeaders(response: NextResponse) {
+function addHeaders(response: NextResponse) {
   const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
@@ -96,7 +96,10 @@ function addSecurityHeaders(response: NextResponse) {
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-DNS-Prefetch-Control', 'on');
 
-  // TODO: add dark mode detection here
+  // Dark mode detection headers
+  response.headers.set('Accept-CH', 'Sec-CH-Prefers-Color-Scheme');
+  response.headers.set('Vary', 'Sec-CH-Prefers-Color-Scheme');
+  response.headers.set('Critical-CH', 'Sec-CH-Prefers-Color-Scheme');
 
   return response;
 }

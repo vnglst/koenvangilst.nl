@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Footer from 'components/Footer';
 import Nav from 'components-new/NavNew';
 import { Inter, Montserrat } from 'next/font/google';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 
 import 'styles/global.css';
 
@@ -49,16 +49,16 @@ type LayoutProps = {
 };
 
 export default function RootLayout({ children }: LayoutProps) {
-  const cookieStore = cookies();
-  const mode = cookieStore.get('mode');
-  const modeClass = mode?.value;
+  const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme');
+  const cookieTheme = cookies().get('mode')?.value;
+  const themeClass = cookieTheme || systemTheme;
 
   return (
     <html
       lang="en"
       suppressHydrationWarning={true}
       className={`
-      ${modeClass ? modeClass : ''}
+      ${themeClass ? themeClass : ''}
       ${montserrat.variable} ${
         inter.variable
       } font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll 
@@ -101,7 +101,14 @@ export default function RootLayout({ children }: LayoutProps) {
           id="theme"
           dangerouslySetInnerHTML={{
             __html: `
-            const modeClass = '${modeClass ? modeClass : ''}';
+
+            // If the user has not set a preferred mode and the system mode cannot be 
+            // determined by the server using the Sec-CH-Prefers-Color-Scheme header
+            // use JavaScript to set correct system mode.
+            // This has to be done in the head to avoid a flash of the wrong mode
+            // (sometimes also referred to as FOUC, or Flash of Unstyled Content).
+
+            const modeClass = '${themeClass ? themeClass : ''}';
             if (!modeClass && window.matchMedia('(prefers-color-scheme: dark)').matches) {
               document.documentElement.classList.add('dark');
             }
