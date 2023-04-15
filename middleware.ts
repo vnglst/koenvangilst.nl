@@ -96,5 +96,7 @@ function addSecurityHeaders(response: NextResponse) {
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-DNS-Prefetch-Control', 'on');
 
+  // TODO: add dark mode detection here
+
   return response;
 }

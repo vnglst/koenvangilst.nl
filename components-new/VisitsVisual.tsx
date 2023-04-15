@@ -1,14 +1,12 @@
+'use client';
+
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
 import { curveMonotoneX } from '@visx/curve';
 import { GridRows, GridColumns } from '@visx/grid';
 import { scaleTime, scaleLinear } from '@visx/scale';
-import {
-  withTooltip,
-  Tooltip,
-  TooltipWithBounds,
-  defaultStyles
-} from '@visx/tooltip';
+import { ParentSize } from '@visx/responsive';
+import { withTooltip, TooltipWithBounds, defaultStyles } from '@visx/tooltip';
 import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withTooltip';
 import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
@@ -41,15 +39,15 @@ const bisectDate = bisector<DataPoint, Date>(
 ).left;
 
 export type AreaProps = {
-  data: DataPoint[];
+  visits: DataPoint[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
 
-export default withTooltip<AreaProps, TooltipData>(
+const Visual = withTooltip<AreaProps, TooltipData>(
   ({
-    data,
+    visits,
     width,
     height,
     margin = { top: 0, right: 0, bottom: 0, left: 0 },
@@ -70,19 +68,19 @@ export default withTooltip<AreaProps, TooltipData>(
       () =>
         scaleTime({
           range: [margin.left, innerWidth + margin.left],
-          domain: extent(data, getDate) as [Date, Date]
+          domain: extent(visits, getDate) as [Date, Date]
         }),
-      [innerWidth, margin.left, data]
+      [innerWidth, margin.left, visits]
     );
 
     const countValueScale = useMemo(
       () =>
         scaleLinear({
           range: [innerHeight + margin.top, margin.top],
-          domain: [0, (max(data, getValue) || 0) + innerHeight / 3],
+          domain: [0, (max(visits, getValue) || 0) + innerHeight / 3],
           nice: true
         }),
-      [margin.top, innerHeight, data]
+      [margin.top, innerHeight, visits]
     );
 
     // tooltip handler
@@ -94,9 +92,9 @@ export default withTooltip<AreaProps, TooltipData>(
       ) => {
         const { x } = localPoint(event) || { x: 0 };
         const x0 = dateScale.invert(x);
-        const index = bisectDate(data, x0, 2);
-        const d0 = data[index - 1];
-        const d1 = data[index];
+        const index = bisectDate(visits, x0, 2);
+        const d0 = visits[index - 1];
+        const d1 = visits[index];
         let d = d0;
         if (d1 && getDate(d1)) {
           d =
@@ -112,7 +110,7 @@ export default withTooltip<AreaProps, TooltipData>(
           tooltipTop: countValueScale(getValue(d))
         });
       },
-      [showTooltip, countValueScale, dateScale, data]
+      [showTooltip, countValueScale, dateScale, visits]
     );
 
     return (
@@ -156,7 +154,7 @@ export default withTooltip<AreaProps, TooltipData>(
             pointerEvents="none"
           />
           <AreaClosed<DataPoint>
-            data={data}
+            data={visits}
             x={(d) => dateScale(getDate(d)) ?? 0}
             y={(d) => countValueScale(getValue(d)) ?? 0}
             yScale={countValueScale}
@@ -237,3 +235,19 @@ export default withTooltip<AreaProps, TooltipData>(
     );
   }
 );
+
+type VisitsVisualProps = {
+  visits?: DataPoint[];
+};
+
+export default function VisitsVisual({ visits }: VisitsVisualProps) {
+  if (!visits) return null;
+
+  return (
+    <ParentSize>
+      {({ width, height }) => (
+        <Visual width={width} height={height} visits={visits} />
+      )}
+    </ParentSize>
+  );
+}
