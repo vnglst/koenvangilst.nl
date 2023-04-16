@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "postbuild": "node ./scripts/generate-rss.mjs",
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint"

@@ -1,8 +1,7 @@
-import { writeFileSync } from 'fs';
 import RSS from 'rss';
-import { allBlogs } from '../.contentlayer/generated/index.mjs';
+import { allBlogs } from 'contentlayer/generated';
 
-async function generate() {
+export async function GET() {
   const feed = new RSS({
     title: 'Koen van Gilst',
     site_url: 'https://koenvangilst.nl',
@@ -18,7 +17,11 @@ async function generate() {
     });
   });
 
-  writeFileSync('./public/feed.xml', feed.xml({ indent: true }));
+  return new Response(feed.xml({ indent: true }), {
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 'max-age=0, s-maxage=86400'
+    },
+    status: 200
+  });
 }
-
-generate();
