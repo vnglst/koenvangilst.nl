@@ -1,5 +1,3 @@
-const { withContentlayer } = require('next-contentlayer');
-
 const pkg = require('./package.json');
 
 const commitHash = require('child_process')
@@ -10,7 +8,7 @@ const commitHash = require('child_process')
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withContentlayer({
+module.exports = {
   reactStrictMode: true,
   experimental: {
     appDir: true
@@ -19,4 +17,4 @@ module.exports = withContentlayer({
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
   }
-});
+};
