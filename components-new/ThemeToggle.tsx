@@ -68,7 +68,11 @@ export default function ThemeToggle({ userSelected }: ThemeToggleProps) {
         aria-label={`Switch to ${nextMode} mode`}
         className="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-900 dark:ring-gray-100 transition-all"
       >
-        {mode === 'dark' ? <SunSvg /> : <MoonSvg />}
+        {/* We're not using JS here to conditionally display the correct dark mode but CSS (using dark class)
+            This way the correct icon is displayed on first render and there is no Flash of Incorrect Icon
+        */}
+        <MoonSvg />
+        <SunSvg />
       </button>
     </form>
   );
@@ -77,7 +81,7 @@ export default function ThemeToggle({ userSelected }: ThemeToggleProps) {
 function SunSvg() {
   return (
     <svg
-      className="w-5 h-5"
+      className="w-5 h-5 block dark:hidden"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +94,7 @@ function SunSvg() {
 function MoonSvg() {
   return (
     <svg
-      className="w-5 h-5"
+      className="w-5 h-5 hidden dark:block"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
