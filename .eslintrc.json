@@ -10,7 +10,9 @@
           // Packages. `react` related packages come first.
           ["^react", "^@?\\w"],
           // Internal packages.
-          ["^(src)(/.*|$)"],
+          ["^(components|api|lib)(/.*|$)"],
+          // Internal packages.
+          ["^(contentlayer)(/.*|$)"],
           // Side effect imports.
           ["^\\u0000"],
           // Parent imports. Put `..` last.

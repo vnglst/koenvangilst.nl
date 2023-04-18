@@ -1,4 +1,5 @@
 import LabProject from 'components/LabProject';
+
 import { pick } from 'contentlayer/client';
 import { allProjects } from 'contentlayer/generated';
 

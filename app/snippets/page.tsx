@@ -1,4 +1,5 @@
 import SnippetCard from 'components/SnippetCard';
+
 import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
 

@@ -1,8 +1,10 @@
-import components from 'components/MDXComponents';
-import { allSnippets } from 'contentlayer/generated';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+
+import components from 'components/MDXComponents';
+
+import { allSnippets } from 'contentlayer/generated';
 
 type SnippetPageProps = {
   params: { slug: string };

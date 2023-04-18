@@ -1,8 +1,10 @@
-import components from 'components/MDXComponents';
-import { allClients } from 'contentlayer/generated';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+
+import components from 'components/MDXComponents';
+
+import { allClients } from 'contentlayer/generated';
 
 export default function Client({ params }: { params: { slug: string } }) {
   const client = findClientBySlug(params.slug);

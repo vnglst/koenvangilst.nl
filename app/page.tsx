@@ -1,6 +1,7 @@
-import BlogPostCard from 'components/BlogPostCard';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import BlogPostCard from 'components/BlogPostCard';
 
 export default function Home() {
   return (

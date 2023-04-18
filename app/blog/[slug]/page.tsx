@@ -1,10 +1,12 @@
-import { getViews } from 'api/supabase';
-import components from 'components/MDXComponents';
-import { allBlogs } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+
+import { getViews } from 'api/supabase';
+import components from 'components/MDXComponents';
+
+import { allBlogs } from 'contentlayer/generated';
 
 type PostProps = {
   params: { slug: string };

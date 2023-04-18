@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+
 import BlogPost from 'components/BlogPost';
+
 import { Blog } from 'contentlayer/generated';
 
 type Post = Pick<Blog, 'slug' | 'title' | 'summary' | 'publishedAt'> & {

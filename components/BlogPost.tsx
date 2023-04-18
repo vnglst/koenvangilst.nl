@@ -1,5 +1,6 @@
-import type { Blog } from 'contentlayer/generated';
 import Link from 'next/link';
+
+import type { Blog } from 'contentlayer/generated';
 
 type BlogPostProps = Pick<Blog, 'title' | 'summary' | 'slug'> & {
   views?: number;

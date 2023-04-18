@@ -1,9 +1,10 @@
 'use client';
 
+import useSWR from 'swr';
+
 import MetricCard from 'components/metrics/Card';
 import fetcher from 'lib/fetcher';
 import { Unsplash } from 'lib/types';
-import useSWR from 'swr';
 
 export default function UnsplashCard() {
   const { data } = useSWR<Unsplash>('/api/unsplash', fetcher);

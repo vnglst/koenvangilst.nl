@@ -1,4 +1,5 @@
 import ClientProject from 'components/ClientProject';
+
 import { pick } from 'contentlayer/client';
 import { allClients } from 'contentlayer/generated';
 
