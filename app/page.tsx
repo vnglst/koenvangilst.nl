@@ -1,7 +1,6 @@
+import BlogPostCard from 'components/BlogPostCard';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import BlogPostCard from 'components/BlogPostCard';
 
 export default function Home() {
   return (
@@ -33,14 +32,17 @@ export default function Home() {
         Featured
       </h3>
       <section className="flex gap-6 flex-col md:flex-row">
+        {/* @ts-expect-error Server Component */}
         <BlogPostCard
           title="Plotting the age of parliament with Livebook"
           slug="livebook-average-age-of-parliament"
         />
+        {/* @ts-expect-error Server Component */}
         <BlogPostCard
           title="Code Colocation is King"
           slug="code-colocation-is-king"
         />
+        {/* @ts-expect-error Server Component */}
         <BlogPostCard
           title="Live user cursors with Phoenix Presence"
           slug="phoenix-live-cursors"

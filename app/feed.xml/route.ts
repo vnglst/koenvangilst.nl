@@ -1,5 +1,5 @@
-import RSS from 'rss';
 import { allBlogs } from 'contentlayer/generated';
+import RSS from 'rss';
 
 export async function GET() {
   const feed = new RSS({

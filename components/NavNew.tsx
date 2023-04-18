@@ -1,6 +1,7 @@
 import { cookies, headers } from 'next/headers';
+
+import { NavItem,NavItemHome } from './NavItem';
 import ThemeToggle from './ThemeToggle';
-import { NavItemHome, NavItem } from './NavItem';
 
 type Theme = 'dark' | 'light' | undefined;
 

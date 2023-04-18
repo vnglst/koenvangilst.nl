@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import cn from 'clsx';
-import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function Nav() {
   const [mounted, setMounted] = useState(false);

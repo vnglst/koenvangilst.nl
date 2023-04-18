@@ -1,7 +1,8 @@
+import { getViews, getViewsPerMonth } from 'api/supabase';
 import { pick } from 'contentlayer/client';
 import { allBlogs } from 'contentlayer/generated';
+
 import { Search } from './search';
-import { getViews, getViewsPerMonth } from 'api/supabase';
 
 export const revalidate = 60 * 60 * 24; // 24 hours
 

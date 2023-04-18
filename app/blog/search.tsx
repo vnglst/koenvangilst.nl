@@ -1,8 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import BlogPost from 'components/BlogPost';
 import { Blog } from 'contentlayer/generated';
-import { useState } from 'react';
 
 type Post = Pick<Blog, 'slug' | 'title' | 'summary' | 'publishedAt'> & {
   views: number;

@@ -1,4 +1,4 @@
-import type { NextApiResponse, NextApiRequest } from 'next/types';
+import type { NextApiRequest,NextApiResponse } from 'next/types';
 
 const ACCESS_TOKEN = process.env.UNSPLASH_ACCESS_KEY;
 

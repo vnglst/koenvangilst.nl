@@ -1,8 +1,8 @@
-import { allProjects } from 'contentlayer/generated';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 import components from 'components/MDXComponents';
+import { allProjects } from 'contentlayer/generated';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { getMDXComponent } from 'next-contentlayer/hooks';
 
 export default function Project({ params }: { params: { slug: string } }) {
   const project = findProjectBySlug(params.slug);
