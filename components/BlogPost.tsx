@@ -1,15 +1,17 @@
 import Link from 'next/link';
 
 import type { Blog } from 'contentlayer/generated';
-import { useViews } from 'lib/useViews';
+
+type BlogPostProps = Pick<Blog, 'title' | 'summary' | 'slug'> & {
+  views?: number;
+};
 
 export default function BlogPost({
   title,
   summary,
-  slug
-}: Pick<Blog, 'title' | 'summary' | 'slug'>) {
-  const { views } = useViews(`/blog/${slug}`);
-
+  slug,
+  views
+}: BlogPostProps) {
   return (
     <Link href={`/blog/${slug}`} className="w-full">
       <div className="w-full mb-8">

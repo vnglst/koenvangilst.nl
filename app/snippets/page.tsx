@@ -2,6 +2,12 @@ import SnippetCard from 'components/SnippetCard';
 import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
 
+export const metadata = {
+  title: 'Code Snippets – Koen van Gilst',
+  description:
+    'A collection of code snippets – including React hooks, TypeScript tips, random CSS snippets and Node.js scripts'
+};
+
 export default function Snippets() {
   const snippets = allSnippets.map((snippet) =>
     pick(snippet, ['slug', 'title', 'logo', 'description'])

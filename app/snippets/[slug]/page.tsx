@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import components from 'components/MDXComponents';
 import { allSnippets } from 'contentlayer/generated';
+import { getMDXComponent } from 'next-contentlayer/hooks';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 type SnippetPageProps = {
@@ -9,13 +9,13 @@ type SnippetPageProps = {
 };
 
 export default function SnippetPage({ params }: SnippetPageProps) {
-  const snippet = allSnippets.find((snippet) => snippet.slug === params.slug);
+  const snippet = findSnippet(params.slug);
 
   if (!snippet) {
     notFound();
   }
 
-  const Component = useMDXComponent(snippet.body.code);
+  const Component = getMDXComponent(snippet.body.code);
 
   return (
     <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
@@ -39,16 +39,26 @@ export default function SnippetPage({ params }: SnippetPageProps) {
         </div>
       </div>
       <div className="prose dark:prose-dark w-full">
-        <Component components={components as any} />
+        <Component components={components} />
       </div>
     </article>
   );
 }
 
-// TODO: Investigate error Dynamic server usage: headers
-// It seems that when using cookies and headers server side pages cannot be statically generated.
-// Investigate if this is bad for performance or not.
+function findSnippet(slug: string) {
+  return allSnippets.find((snippet) => snippet.slug === slug);
+}
 
-// export async function generateStaticParams() {
-//   return allSnippets.map((s) => ({ params: { slug: s.slug } }));
-// }
+export function generateMetadata({ params }) {
+  const snippet = findSnippet(params.slug);
+
+  if (!snippet) {
+    return null;
+  }
+
+  return {
+    title: snippet.title,
+    description: snippet.description,
+    image: snippet.logo
+  };
+}

@@ -1,6 +1,6 @@
 import VisitsVisual from 'components-new/VisitsVisual';
 import ExternalLink from 'components/ExternalLink';
-import { api } from 'lib/api.server';
+import { api } from 'api/api.server';
 
 export const metadata = {
   title: 'All time visits',

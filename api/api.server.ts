@@ -1,5 +1,5 @@
-import fetcher from './fetcher';
-import { getOrigin } from './vercel.utils';
+import fetcher from '../lib/fetcher';
+import { getOrigin } from '../lib/vercel.utils';
 
 export function getAbsolutePath(relativePath: string) {
   const origin = getOrigin();

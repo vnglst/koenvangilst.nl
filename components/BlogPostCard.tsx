@@ -1,10 +1,8 @@
-'use client';
-
-import { useViews } from 'lib/useViews';
+import { getViews } from 'api/supabase';
 import Link from 'next/link';
 
-export default function BlogPostCard({ title, slug }) {
-  const { views } = useViews(`/blog/${slug}`);
+export default async function BlogPostCard({ title, slug }) {
+  const views = await getViews('/blog/' + slug);
 
   return (
     <Link

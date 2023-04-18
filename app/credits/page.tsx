@@ -4,7 +4,7 @@ export const metadata = {
 
 export default function Credits() {
   return (
-    <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+    <div className="flex flex-col justify-center items-start max-w-2xl m-auto">
       <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
         Credits
       </h1>

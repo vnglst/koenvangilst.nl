@@ -51,18 +51,13 @@ type LayoutProps = {
 export default function RootLayout({ children }: LayoutProps) {
   const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme');
   const cookieTheme = cookies().get('mode')?.value;
-  const themeClass = cookieTheme || systemTheme;
+  const themeClass = cookieTheme || systemTheme || '';
 
   return (
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`
-      ${themeClass ? themeClass : ''}
-      ${montserrat.variable} ${
-        inter.variable
-      } font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll 
-      `}
+      className={`${themeClass} ${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
       <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
       <link href="/static/favicons/site.webmanifest" rel="manifest" />
@@ -118,7 +113,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <Nav />
         <main
           id="content"
-          className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
+          className="flex flex-col px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
         >
           {children}
         </main>
