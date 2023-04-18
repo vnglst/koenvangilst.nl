@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/react';
 import Footer from 'components/Footer';
-import Nav from 'components-new/NavNew';
+import Nav from 'components/NavNew';
 import { Inter, Montserrat } from 'next/font/google';
 import { cookies, headers } from 'next/headers';
 

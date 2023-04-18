@@ -7,7 +7,6 @@ module.exports = {
     './app/**/*.tsx',
     './pages/**/*.tsx',
     './components/**/*.tsx',
-    './components-new/**/*.tsx',
     './layouts/**/*.tsx',
     './styles/**/*.css'
   ],

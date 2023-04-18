@@ -1,4 +1,4 @@
-import VisitsVisual from 'components-new/VisitsVisual';
+import VisitsVisual from 'components/VisitsVisual';
 import ExternalLink from 'components/ExternalLink';
 import { api } from 'api/api.server';
 
