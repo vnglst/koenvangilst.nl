@@ -1,6 +1,7 @@
-import { trackView } from 'api/supabase';
-import { userAgent, NextResponse } from 'next/server';
 import type { NextFetchEvent, NextRequest } from 'next/server';
+import { NextResponse, userAgent } from 'next/server';
+
+import { trackView } from 'api/supabase';
 
 // regex to check if string contains a file extension
 const PUBLIC_FILE = /\.(.*)$/;
