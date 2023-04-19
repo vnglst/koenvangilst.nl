@@ -48,24 +48,23 @@ async function logPageView(req: NextRequest) {
 
 function addHeaders(response: NextResponse) {
   // TODO: Why is this not working with React Server Components
+  // const ContentSecurityPolicy = `
   // default-src 'self';
   // script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
+  // script-src-elem 'self' 'unsafe-inline';
+  // child-src *.youtube.com *.twitter.com;
+  // style-src 'self' 'unsafe-inline';
+  // img-src * blob: data:;
+  // media-src i.imgur.com;
+  // connect-src *;
+  // font-src 'self';
+  // frame-src svelte.dev codesandbox.io;
+  // `;
 
-  const ContentSecurityPolicy = `
-  script-src-elem 'self' 'unsafe-inline';
-  child-src *.youtube.com *.twitter.com;
-  style-src 'self' 'unsafe-inline';
-  img-src * blob: data:;
-  media-src i.imgur.com;
-  connect-src *;
-  font-src 'self';
-  frame-src svelte.dev codesandbox.io;
-`;
-
-  response.headers.set(
-    'Content-Security-Policy',
-    ContentSecurityPolicy.replace(/\n/g, '')
-  );
+  // response.headers.set(
+  //   'Content-Security-Policy',
+  //   ContentSecurityPolicy.replace(/\n/g, '')
+  // );
   response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
   response.headers.set(
     'Permissions-Policy',
