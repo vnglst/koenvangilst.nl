@@ -3,7 +3,7 @@ import { Inter, Montserrat } from 'next/font/google';
 import { cookies, headers } from 'next/headers';
 
 import Footer from 'components/Footer';
-import Nav from 'components/NavNew';
+import Nav from 'components/Nav';
 
 import 'styles/global.css';
 
@@ -45,20 +45,24 @@ export const metadata = {
   }
 };
 
+export type Theme = 'dark' | 'light' | undefined;
+
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: LayoutProps) {
-  const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme');
-  const cookieTheme = cookies().get('mode')?.value;
-  const themeClass = cookieTheme || systemTheme || '';
+  const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme') as Theme;
+  const cookieTheme = cookies().get('mode')?.value as Theme;
+  const theme = cookieTheme || systemTheme;
 
   return (
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${themeClass} ${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
+      className={`${theme || ''} ${montserrat.variable} ${
+        inter.variable
+      } font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
       <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
       <link href="/static/favicons/site.webmanifest" rel="manifest" />
@@ -104,14 +108,14 @@ export default function RootLayout({ children }: LayoutProps) {
             // This has to be done in the head to avoid a flash of the wrong mode
             // (sometimes also referred to as FOUC, or Flash of Unstyled Content).
 
-            const modeClass = '${themeClass ? themeClass : ''}';
+            const modeClass = '${theme ? theme : ''}';
             if (!modeClass && window.matchMedia('(prefers-color-scheme: dark)').matches) {
               document.documentElement.classList.add('dark');
             }
           `
           }}
         />
-        <Nav />
+        <Nav theme={theme} />
         <main
           id="content"
           className="flex flex-col px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
