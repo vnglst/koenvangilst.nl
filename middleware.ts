@@ -47,9 +47,11 @@ async function logPageView(req: NextRequest) {
 }
 
 function addHeaders(response: NextResponse) {
+  // TODO: Why is this not working with React Server Components
+  // default-src 'self';
+  // script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
+
   const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
   script-src-elem 'self' 'unsafe-inline';
   child-src *.youtube.com *.twitter.com;
   style-src 'self' 'unsafe-inline';
