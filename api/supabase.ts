@@ -25,7 +25,7 @@ export async function getViews(pathnameRaw: string): Promise<number> {
 
     return views;
   } catch (error) {
-    console.error(error);
+    console.error('Fetching views failed', error);
     return 0;
   }
 }
@@ -55,7 +55,7 @@ export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
 
     return views;
   } catch (error) {
-    console.error(error);
+    console.error('Fetching monthly views failed', error);
     return 0;
   }
 }
@@ -80,6 +80,6 @@ export async function trackView({ origin, pathname, ua }) {
     invariant(request.status === 201, 'Error logging analytics');
     invariant(request.ok, 'Error logging analytics');
   } catch (error) {
-    console.error(error);
+    console.error('Tracking view failed', error);
   }
 }
