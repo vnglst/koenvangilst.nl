@@ -61,7 +61,7 @@ const Client = defineDocumentType(() => ({
 
 const Project = defineDocumentType(() => ({
   name: 'Project',
-  filePathPattern: 'lab/*.mdx',
+  filePathPattern: 'labs/*.mdx',
   contentType: 'mdx',
   fields: {
     name: { type: 'string', required: true },
