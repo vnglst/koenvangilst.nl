@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import { Inter, Montserrat } from 'next/font/google';
-import { cookies, headers } from 'next/headers';
 
+// import { cookies, headers } from 'next/headers';
 import Footer from 'components/Footer';
 import Nav from 'components/Nav';
 
@@ -52,9 +52,10 @@ type LayoutProps = {
 };
 
 export default function RootLayout({ children }: LayoutProps) {
-  const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme') as Theme;
-  const cookieTheme = cookies().get('mode')?.value as Theme;
-  const theme = cookieTheme || systemTheme;
+  // const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme') as Theme;
+  // const cookieTheme = cookies().get('mode')?.value as Theme;
+  // const theme = cookieTheme || systemTheme;
+  const theme = 'dark';
 
   return (
     <html

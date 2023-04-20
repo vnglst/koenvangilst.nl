@@ -13,9 +13,11 @@ type Visit = {
 };
 
 export default async function TodaysVisits() {
-  const visits = await api.get<Visit[]>('api/views/perday', {
-    next: { revalidate: 60 }
-  });
+  // const visits = await api.get<Visit[]>('api/views/perday', {
+  //   next: { revalidate: 60 }
+  // });
+
+  const visits = [];
 
   return (
     <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full overflow-hidden">
