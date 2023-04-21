@@ -1,17 +1,12 @@
 'use client';
 
-import { Theme } from 'app/layout';
 import cn from 'clsx';
 import NextLink from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 import ThemeToggle from './ThemeToggle';
 
-type NavProps = {
-  theme: Theme;
-};
-
-export default function Nav({ theme }: NavProps) {
+export default function Nav() {
   return (
     <nav className="sticky top-0 z-10 flex gap-4 items-center justify-start p-4 md:px-8 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-saturate-50">
       <a
@@ -25,7 +20,7 @@ export default function Nav({ theme }: NavProps) {
       <NavItem slug="portfolio" text="Portfolio" />
       <NavItem slug="labs" text="Labs" />
       <NavItem slug="blog" text="Blog" />
-      <ThemeToggle userSelected={theme} />
+      <ThemeToggle />
     </nav>
   );
 }

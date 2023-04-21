@@ -1,7 +1,6 @@
 import { Analytics } from '@vercel/analytics/react';
 import { Inter, Montserrat } from 'next/font/google';
 
-// import { cookies, headers } from 'next/headers';
 import Footer from 'components/Footer';
 import Nav from 'components/Nav';
 
@@ -45,25 +44,16 @@ export const metadata = {
   }
 };
 
-export type Theme = 'dark' | 'light' | undefined;
-
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: LayoutProps) {
-  // const systemTheme = headers().get('Sec-CH-Prefers-Color-Scheme') as Theme;
-  // const cookieTheme = cookies().get('mode')?.value as Theme;
-  // const theme = cookieTheme || systemTheme;
-  const theme = 'dark';
-
   return (
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${theme || ''} ${montserrat.variable} ${
-        inter.variable
-      } font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
+      className={`${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
       <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
       <link href="/static/favicons/site.webmanifest" rel="manifest" />
@@ -103,20 +93,25 @@ export default function RootLayout({ children }: LayoutProps) {
           dangerouslySetInnerHTML={{
             __html: `
 
-            // If the user has not set a preferred mode and the system mode cannot be 
-            // determined by the server using the Sec-CH-Prefers-Color-Scheme header
-            // use JavaScript to set correct system mode.
+            // This script is responsible for setting the correct theme on page load.
             // This has to be done in the head to avoid a flash of the wrong mode
             // (sometimes also referred to as FOUC, or Flash of Unstyled Content).
+            // The theme is set by adding the 'dark' class to the <html> element.
 
-            const modeClass = '${theme ? theme : ''}';
-            if (!modeClass && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const preferredTheme = localStorage.getItem('theme');
+
+            if (preferredTheme) {
+              if (preferredTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+              }
+            } else if (systemDark) {
               document.documentElement.classList.add('dark');
             }
           `
           }}
         />
-        <Nav theme={theme} />
+        <Nav />
         <main
           id="content"
           className="flex flex-col px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"

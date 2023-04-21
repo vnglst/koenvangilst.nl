@@ -1,31 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const PREFERS_DARK = '(prefers-color-scheme: dark)';
 
-type ThemeToggleProps = {
-  userSelected: 'dark' | 'light' | undefined;
-};
-
-export default function ThemeToggle({ userSelected }: ThemeToggleProps) {
-  const [mode, setMode] = useState(userSelected);
-  const nextMode = mode === 'dark' ? 'light' : 'dark';
-
-  useEffect(() => {
-    if (!mode) {
-      const prefersDark = window.matchMedia(PREFERS_DARK);
-      setMode(prefersDark.matches ? 'dark' : 'light');
-    }
-  }, [mode]);
-
+export default function ThemeToggle() {
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        setMode('dark');
         document.documentElement.classList.add('dark');
       } else {
-        setMode('light');
         document.documentElement.classList.remove('dark');
       }
     };
@@ -41,40 +25,27 @@ export default function ThemeToggle({ userSelected }: ThemeToggleProps) {
     };
   }, []);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    setMode(nextMode);
-    if (nextMode === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    const formData = new FormData(event.target as HTMLFormElement);
-    fetch('/theme', { method: 'POST', body: formData });
+  function handleClick() {
+    document.documentElement.classList.toggle('dark');
+    const theme = document.documentElement.classList.contains('dark');
+    window.localStorage.setItem('theme', theme ? 'dark' : 'light');
   }
 
   return (
-    <form
-      className="font-semibold text-gray-800 dark:text-gray-200"
-      action="/theme"
-      method="POST"
-      onSubmit={handleSubmit}
-    >
-      <input type="hidden" name="nextMode" value={nextMode} />
+    <div className="font-semibold text-gray-800 dark:text-gray-200">
       <button
-        type="submit"
-        aria-label={`Switch to ${nextMode} mode`}
+        aria-label={`Toggle between light and dark mode`}
+        onClick={handleClick}
         className="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-900 dark:ring-gray-100 transition-all"
       >
-        {/* We're not using JS here to conditionally display the correct dark mode but CSS (using dark class)
-            This way the correct icon is displayed on first render and there is no Flash of Incorrect Icon
+        {/* 
+          We're not using JS here to conditionally display the correct dark mode but CSS (using dark class)
+          This way the correct icon is displayed on first render and there is no Flash of Incorrect Icon
         */}
         <MoonSvg />
         <SunSvg />
       </button>
-    </form>
+    </div>
   );
 }
 
