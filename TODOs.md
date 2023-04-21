@@ -3,7 +3,7 @@
 ## Website Next13 app
 
 - [ ] Replace all API routes
-- [ ] Headers to next config
+- [x] Headers to next config
 - [ ] Metadata to export metadata
 - [x] Client side dark mode
 - [ ] Static generation of [slug] routes
