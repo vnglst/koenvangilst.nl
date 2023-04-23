@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { getTotalTodayViews } from 'services/supabase';
 
 export async function GET() {

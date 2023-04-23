@@ -1,7 +1,6 @@
-import { getViewsPerDay } from 'services/supabase';
-
 import ExternalLink from 'components/ExternalLink';
 import VisitsVisual from 'components/VisitsVisual';
+import { getViewsPerDay } from 'services/supabase';
 
 export const metadata = {
   title: 'All time visits',

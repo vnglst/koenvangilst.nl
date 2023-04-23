@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { getGithubStats } from 'services/github';
 
 export async function GET() {
