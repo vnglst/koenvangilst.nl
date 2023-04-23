@@ -2,12 +2,14 @@
 
 ## Website Next13 app
 
-- [ ] Replace all API routes
 - [x] Headers to next config
-- [ ] Metadata to export metadata
 - [x] Client side dark mode
+- [ ] Replace all API routes
+- [ ] Metadata to export metadata
 - [ ] Static generation of [slug] routes
 - [ ] Use canary next releases
+- [ ] Use SWR to refresh cached page views
+- [ ] Replace Supabase api with supabase client
 
 ## Dark mode
 
