@@ -1,4 +1,4 @@
-import { api } from 'api/api.server';
+import { getViewsPerDay } from 'api/supabase';
 import ExternalLink from 'components/ExternalLink';
 import VisitsVisual from 'components/VisitsVisual';
 
@@ -7,17 +7,8 @@ export const metadata = {
   description: 'Visual showing the all time visits for my website.'
 };
 
-type Visit = {
-  created_at: string;
-  count: number;
-};
-
 export default async function TodaysVisits() {
-  // const visits = await api.get<Visit[]>('api/views/perday', {
-  //   next: { revalidate: 60 }
-  // });
-
-  const visits = [];
+  const visits = await getViewsPerDay();
 
   return (
     <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full overflow-hidden">
@@ -39,15 +30,5 @@ export default async function TodaysVisits() {
         implementation found in the NextJS middleware.
       </p>
     </article>
-  );
-}
-
-function isLocalNetwork(hostname = window.location.host) {
-  return (
-    hostname.startsWith('localhost') ||
-    hostname.startsWith('127.0.0.1') ||
-    hostname.startsWith('192.168.') ||
-    hostname.startsWith('10.0.') ||
-    hostname.endsWith('.local')
   );
 }
