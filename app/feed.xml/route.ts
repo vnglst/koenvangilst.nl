@@ -1,4 +1,5 @@
 import RSS from 'rss';
+
 import { allBlogs } from 'contentlayer/generated';
 
 export async function GET() {

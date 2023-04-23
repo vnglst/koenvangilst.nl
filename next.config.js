@@ -1,3 +1,4 @@
+const { headers } = require('./config/next-headers');
 const pkg = require('./package.json');
 
 const commitHash = require('child_process')
@@ -11,8 +12,10 @@ const commitHash = require('child_process')
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    appDir: true
+    appDir: true,
+    swcMinify: true
   },
+  headers,
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash

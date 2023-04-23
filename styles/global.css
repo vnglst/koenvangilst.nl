@@ -11,10 +11,6 @@ h1 {
   font-family: var(--font-montserrat), sans-serif;
 }
 
-#__next {
-  height: 100%;
-}
-
 /* https://seek-oss.github.io/capsize/ */
 .capsize::before {
   content: '';
