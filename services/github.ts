@@ -20,7 +20,7 @@ export async function getGithubStats(): Promise<GitHub> {
       stars
     };
   } catch (error) {
-    console.log('Error fetching Github stats', error);
+    console.error('Error fetching Github stats', error);
     return {};
   }
 }

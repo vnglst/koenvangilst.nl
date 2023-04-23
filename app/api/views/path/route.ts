@@ -11,6 +11,5 @@ export async function GET(request: Request) {
   }
 
   const views = await getViews(pathname);
-  console.log('🚀 ~ file: route.ts:14 ~ GET ~ views:', views);
   return NextResponse.json(views);
 }

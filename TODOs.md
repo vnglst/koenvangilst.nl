@@ -8,7 +8,7 @@
 - [x] Replace all API routes
 - [ ] Metadata to export metadata
 - [x] Use canary next releases
-- [ ] Use SWR to refresh cached page views
+- [x] Use SWR to refresh cached page views
 - [ ] Replace Supabase api with supabase client
 
 ## Dark mode
