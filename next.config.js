@@ -12,8 +12,8 @@ const commitHash = require('child_process')
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    appDir: true
-    // typedRoutes: true
+    appDir: true,
+    swcMinify: true
   },
   headers,
   env: {

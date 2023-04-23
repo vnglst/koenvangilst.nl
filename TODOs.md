@@ -7,7 +7,7 @@
 - [ ] Static generation of [slug] routes
 - [ ] Replace all API routes
 - [ ] Metadata to export metadata
-- [ ] Use canary next releases
+- [x] Use canary next releases
 - [ ] Use SWR to refresh cached page views
 - [ ] Replace Supabase api with supabase client
 
