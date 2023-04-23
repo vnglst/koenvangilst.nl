@@ -1,15 +1,20 @@
 import invariant from 'tiny-invariant';
 
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
 const HEADERS = {
-  apikey: process.env.SUPABASE_ANON_KEY,
+  apikey: SUPABASE_ANON_KEY,
   'Content-Type': 'application/json'
 };
 
 const URLS = {
-  totals: `${process.env.SUPABASE_URL}/rest/v1/totals`,
-  perMonth: `${process.env.SUPABASE_URL}/rest/v1/month`,
-  perDay: `${process.env.SUPABASE_URL}/rest/v1/perday`,
-  visits: `${process.env.SUPABASE_URL}/rest/v1/visits`
+  totals: `${SUPABASE_URL}/rest/v1/totals`,
+  perMonth: `${SUPABASE_URL}/rest/v1/month`,
+  perDay: `${SUPABASE_URL}/rest/v1/perday`,
+  week: `${SUPABASE_URL}/rest/v1/week`,
+  today: `${SUPABASE_URL}/rest/v1/today`,
+  visits: `${SUPABASE_URL}/rest/v1/visits`
 };
 
 type View = {
@@ -84,6 +89,75 @@ export async function getViewsPerDay(): Promise<View[]> {
   } catch (error) {
     console.error('Fetching daily views failed', error);
     return [];
+  }
+}
+
+/**
+ * Retrieves a list of total website views of last week
+ */
+export async function getTotalWeekViews(): Promise<number | undefined> {
+  try {
+    const request = await fetch(`${URLS.perDay}`, {
+      headers: HEADERS,
+      method: 'GET'
+    });
+
+    invariant(request.status === 200, 'Error retrieving view');
+    invariant(request.ok, 'Error retrieving view');
+
+    const list: View[] = await request.json();
+    const totals = list.reduce((prev, item) => prev + item.count, 0);
+
+    return totals;
+  } catch (error) {
+    console.error('Fetching weekly views failed', error);
+    return;
+  }
+}
+
+/**
+ * Retrieves a list of total website views of today
+ */
+export async function getTotalTodayViews(): Promise<number | undefined> {
+  try {
+    const request = await fetch(`${URLS.today}`, {
+      headers: HEADERS,
+      method: 'GET'
+    });
+
+    invariant(request.status === 200, 'Error retrieving view');
+    invariant(request.ok, 'Error retrieving view');
+
+    const list: View[] = await request.json();
+    const totals = list.reduce((prev, item) => prev + item.count, 0);
+
+    return totals;
+  } catch (error) {
+    console.error('Fetching daily views failed', error);
+    return;
+  }
+}
+
+/**
+ * Retrieves a list of total website views for all time
+ */
+export async function getTotalViews(): Promise<number | undefined> {
+  try {
+    const request = await fetch(`${URLS.totals}`, {
+      headers: HEADERS,
+      method: 'GET'
+    });
+
+    invariant(request.status === 200, 'Error retrieving view');
+    invariant(request.ok, 'Error retrieving view');
+
+    const list = await request.json();
+    const totals = list.reduce((prev, item) => prev + item.total, 0);
+
+    return totals;
+  } catch (error) {
+    console.error('Fetching total views failed', error);
+    return;
   }
 }
 

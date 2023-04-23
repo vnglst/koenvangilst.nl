@@ -1,7 +1,7 @@
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse, userAgent } from 'next/server';
 
-import { trackView } from 'api/supabase';
+import { trackView } from 'services/supabase';
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
   // Runs after the response has been returned
@@ -26,13 +26,13 @@ async function logPageView(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // don't track the following paths
-  const blackList = ['/static', '/api', '/fonts', '/logos', '/_next'];
+  const ignoreList = ['/static', '/api', '/fonts', '/logos', '/_next'];
 
   if (
     // don't track files like /robots.txt
     PUBLIC_FILE.test(pathname) ||
     // don't track the following paths
-    blackList.some((path) => pathname.startsWith(path)) ||
+    ignoreList.some((path) => pathname.startsWith(path)) ||
     // when it's a prefetch request, don't track these
     req.headers.get('purpose') === 'prefetch'
   ) {

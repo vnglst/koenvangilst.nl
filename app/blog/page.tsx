@@ -1,4 +1,4 @@
-import { getViews, getViewsPerMonth } from 'api/supabase';
+import { getViews, getViewsPerMonth } from 'services/supabase';
 
 import { pick } from 'contentlayer/client';
 import { allBlogs } from 'contentlayer/generated';

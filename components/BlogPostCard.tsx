@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { getViews } from 'api/supabase';
+import { getViews } from 'services/supabase';
 
 export default async function BlogPostCard({ title, slug }) {
   const views = await getViews('/blog/' + slug);
