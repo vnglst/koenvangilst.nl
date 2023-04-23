@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import { getViews } from 'services/supabase';
 import components from 'components/MDXComponents';
+import { getViews } from 'services/supabase';
 
 import { allBlogs } from 'contentlayer/generated';
 
@@ -100,4 +100,8 @@ export function generateMetadata({ params }) {
     description: blog.summary,
     date: blog.publishedAt
   };
+}
+
+export function generateStaticParams() {
+  return allBlogs.map((blog) => blog.slug);
 }

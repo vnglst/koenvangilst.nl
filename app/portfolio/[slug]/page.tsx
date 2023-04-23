@@ -57,3 +57,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     description: client?.summary
   };
 }
+
+export function generateStaticParams() {
+  return allClients.map((client) => client.slug);
+}

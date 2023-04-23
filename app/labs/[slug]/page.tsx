@@ -58,3 +58,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     image: `https://koenvangilst.nl${project?.image}`
   };
 }
+
+export function generateStaticParams() {
+  return allProjects.map((project) => project.slug);
+}

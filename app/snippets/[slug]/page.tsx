@@ -64,3 +64,7 @@ export function generateMetadata({ params }) {
     image: snippet.logo
   };
 }
+
+export function generateStaticParams() {
+  return allSnippets.map((snippet) => snippet.slug);
+}
