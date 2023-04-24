@@ -1,9 +1,7 @@
-import { userAgent, NextResponse } from 'next/server';
 import type { NextFetchEvent, NextRequest } from 'next/server';
-import invariant from 'tiny-invariant';
+import { NextResponse, userAgent } from 'next/server';
 
-// regex to check if string contains a file extension
-const PUBLIC_FILE = /\.(.*)$/;
+import { trackView } from 'services/supabase';
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
   // Runs after the response has been returned
@@ -18,83 +16,32 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     })()
   );
 
-  return addSecurityHeaders(NextResponse.next());
+  return NextResponse.next();
 }
+
+// regex to check if string contains a file extension
+const PUBLIC_FILE = /\.(.*)$/;
 
 async function logPageView(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // don't track the following paths
+  const ignoreList = ['/static', '/api', '/fonts', '/logos', '/_next'];
 
   if (
     // don't track files like /robots.txt
     PUBLIC_FILE.test(pathname) ||
     // don't track the following paths
-    pathname.startsWith('/static') ||
-    pathname.startsWith('/api') ||
-    pathname.startsWith('/fonts') ||
-    pathname.startsWith('/logos') ||
-    pathname.startsWith('/_next') ||
+    ignoreList.some((path) => pathname.startsWith(path)) ||
     // when it's a prefetch request, don't track these
     req.headers.get('purpose') === 'prefetch'
   ) {
     return;
   }
 
-  const body = JSON.stringify({
+  await trackView({
     origin: req.nextUrl.origin,
     pathname,
     ua: userAgent(req).ua
-    // TODO: add geo tracking later
-    // ...req.geo
   });
-
-  if (process.env.NODE_ENV === 'development') {
-    return console.log('[Tracking pageview]:', pathname);
-  }
-
-  const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/visits`, {
-    headers: {
-      apikey: process.env.SUPABASE_ANON_KEY,
-      'Content-Type': 'application/json'
-    },
-    body,
-    method: 'POST'
-  });
-
-  console.log('[Tracking pageview]:', pathname);
-
-  invariant(response.status === 201, 'Error logging analytics');
-}
-
-function addSecurityHeaders(response: NextResponse) {
-  const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
-  script-src-elem 'self' 'unsafe-inline';
-  child-src *.youtube.com *.twitter.com;
-  style-src 'self' 'unsafe-inline';
-  img-src * blob: data:;
-  media-src i.imgur.com;
-  connect-src *;
-  font-src 'self';
-  frame-src svelte.dev codesandbox.io;
-`;
-
-  response.headers.set(
-    'Content-Security-Policy',
-    ContentSecurityPolicy.replace(/\n/g, '')
-  );
-  response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
-  response.headers.set(
-    'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=()'
-  );
-  response.headers.set(
-    'Strict-Transport-Security',
-    'max-age=31536000; includeSubDomains; preload'
-  );
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-DNS-Prefetch-Control', 'on');
-
-  return response;
 }

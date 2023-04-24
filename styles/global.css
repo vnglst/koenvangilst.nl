@@ -11,10 +11,6 @@ h1 {
   font-family: var(--font-montserrat), sans-serif;
 }
 
-#__next {
-  height: 100%;
-}
-
 /* https://seek-oss.github.io/capsize/ */
 .capsize::before {
   content: '';
@@ -40,6 +36,19 @@ h1 {
 @keyframes blink-animation {
   50% {
     opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fade-entrance ease-in-out 0.2s both;
+}
+
+@keyframes fade-entrance {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
