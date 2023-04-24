@@ -1,7 +1,9 @@
+'use client';
+
 import useSWR from 'swr';
 
-import fetcher from 'lib/fetcher';
 import MetricCard from 'components/metrics/Card';
+import fetcher from 'lib/fetcher';
 
 export default function Views() {
   const { data: todaysViews } = useSWR<any>('/api/views/today', fetcher);

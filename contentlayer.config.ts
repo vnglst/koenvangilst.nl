@@ -1,15 +1,15 @@
+import readingTime from 'reading-time';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+
 import {
   ComputedFields,
   defineDocumentType,
   makeSource
 } from 'contentlayer/source-files';
-
-import readingTime from 'reading-time';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeCodeTitles from 'rehype-code-titles';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrismPlus from 'rehype-prism-plus';
 
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
@@ -61,7 +61,7 @@ const Client = defineDocumentType(() => ({
 
 const Project = defineDocumentType(() => ({
   name: 'Project',
-  filePathPattern: 'labs/*.mdx',
+  filePathPattern: 'lab/*.mdx',
   contentType: 'mdx',
   fields: {
     name: { type: 'string', required: true },
