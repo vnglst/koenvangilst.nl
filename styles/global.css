@@ -39,6 +39,19 @@ h1 {
   }
 }
 
+.fade-in {
+  animation: fade-entrance ease-in-out 0.2s both;
+}
+
+@keyframes fade-entrance {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .up-hover:hover {
   transform: translateY(-5px);
 }

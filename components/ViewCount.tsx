@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
-import { useOnScreen } from 'app/hooks/useOnScreen';
+import { useOnScreen } from 'hooks/useOnScreen';
 import useSWR from 'swr';
 
 import fetcher from 'lib/fetcher';
@@ -13,8 +12,9 @@ type ViewCountProps = {
 };
 
 export function ViewCount({ initialCount, path, className }: ViewCountProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isOnScreen = useOnScreen(ref);
+  const [setRef, isOnScreen] = useOnScreen<HTMLSpanElement>({
+    triggerOnce: true
+  });
 
   const { data: views } = useSWR<number>(
     isOnScreen ? `/api/views/path?path=${path}` : null,
@@ -23,8 +23,11 @@ export function ViewCount({ initialCount, path, className }: ViewCountProps) {
   );
 
   return (
-    <span className={className} ref={ref}>
-      {`${views ? views.toLocaleString() : '–––'} views`}
+    <span className={className} ref={setRef}>
+      <span className="fade-in" key={`${views}`}>{`${
+        views ? views.toLocaleString() : '–––'
+      } `}</span>
+      views
     </span>
   );
 }
