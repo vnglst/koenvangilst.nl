@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
@@ -89,17 +90,21 @@ function getDiscussUrl(slug: string) {
   )}`;
 }
 
-export function generateMetadata({ params }) {
+export function generateMetadata({ params }): Metadata {
   const blog = findBlog(params.slug);
 
   if (!blog) {
-    return null;
+    return {};
   }
 
   return {
     title: blog.title,
     description: blog.summary,
-    date: blog.publishedAt
+    openGraph: {
+      type: 'article',
+      publishedTime: blog.publishedAt,
+      authors: ['Koen van Gilst']
+    }
   };
 }
 

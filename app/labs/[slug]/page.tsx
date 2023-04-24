@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
@@ -49,13 +50,19 @@ function findProjectBySlug(slug: string) {
   return allProjects.find((project) => project.slug === slug);
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({
+  params
+}: {
+  params: { slug: string };
+}): Metadata {
   const project = findProjectBySlug(params.slug);
 
   return {
     title: `${project?.name}`,
     description: project?.summary,
-    image: `https://koenvangilst.nl${project?.image}`
+    openGraph: {
+      images: `https://koenvangilst.nl${project?.image}`
+    }
   };
 }
 

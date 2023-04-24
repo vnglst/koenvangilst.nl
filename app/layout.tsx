@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { Metadata } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
 import Footer from 'components/Footer';
@@ -19,15 +20,26 @@ const meta = {
   image: 'https://koenvangilst.nl/static/images/banner.png'
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     template: '%s | Koen van Gilst',
     absolute: meta.title
   },
   description: meta.description,
   openGraph: {
-    images: [meta.image],
-    type: 'website'
+    title: meta.title,
+    description: meta.description,
+    url: 'https://koenvangilst.nl',
+    siteName: 'Koen van Gilst',
+    images: [
+      {
+        url: meta.image,
+        width: 1820,
+        height: 904
+      }
+    ],
+    type: 'website',
+    locale: 'en-US'
   },
   alternates: {
     canonical: 'https://koenvangilst.nl',
@@ -41,7 +53,36 @@ export const metadata = {
     title: meta.title,
     description: meta.description,
     images: [meta.image]
-  }
+  },
+  referrer: 'origin-when-cross-origin',
+  keywords: ['Koen van Gilst', 'Web Developer', 'JavaScript'],
+  authors: [{ name: 'Koen van Gilst', url: 'https://koenvangilst.nl' }],
+  creator: 'Koen van Gilst',
+  icons: {
+    icon: [
+      {
+        rel: 'icon',
+        url: '/static/favicons/favicon-32x32.png',
+        sizes: '32x32'
+      },
+      {
+        rel: 'icon',
+        url: '/static/favicons/favicon-16x16.png',
+        sizes: '16x16'
+      }
+    ],
+    shortcut: {
+      rel: 'shortcut icon',
+      url: '/static/favicons/favicon.ico'
+    },
+    other: {
+      rel: 'apple-touch-icon',
+      url: '/static/favicons/apple-touch-icon.png',
+      sizes: '180x180'
+    }
+  },
+  themeColor: '#5bc3eb',
+  manifest: '/static/favicons/site.webmanifest'
 };
 
 type LayoutProps = {
@@ -55,36 +96,6 @@ export default function RootLayout({ children }: LayoutProps) {
       suppressHydrationWarning={true}
       className={`${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
-      <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
-      <link href="/static/favicons/site.webmanifest" rel="manifest" />
-      <link
-        href="/static/favicons/apple-touch-icon.png"
-        rel="apple-touch-icon"
-        sizes="180x180"
-      />
-      <link
-        href="/static/favicons/favicon-32x32.png"
-        rel="icon"
-        sizes="32x32"
-        type="image/png"
-      />
-      <link
-        href="/static/favicons/favicon-16x16.png"
-        rel="icon"
-        sizes="16x16"
-        type="image/png"
-      />
-      <link
-        color="#5bc3eb"
-        href="/static/favicons/safari-pinned-tab.svg"
-        rel="mask-icon"
-      />
-      <meta content="#5bc3eb" name="theme-color" />
-      <meta content="#5bc3eb" name="msapplication-TileColor" />
-      <meta
-        content="/static/favicons/browserconfig.xml"
-        name="msapplication-config"
-      />
       <link rel="me" href="https://maakr.social/@koen" />
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <script
