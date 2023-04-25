@@ -29,6 +29,7 @@ export default function Project({ params }: { params: { slug: string } }) {
             width={24}
             src="/avatar.jpg"
             className="rounded-full"
+            priority
           />
           <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
             {'Koen van Gilst / '}

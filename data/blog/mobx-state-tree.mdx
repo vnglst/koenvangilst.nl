@@ -11,6 +11,7 @@ I've been meaning to do this for a long time, but work and other side projects k
   src={`/static/images/lumber-jack.jpg`}
   width={1294 / 2}
   height={1096 / 2}
+  priority
 />
 
 To get a feel for the library I created a [simple kids' game](https://lumber-jack.netlify.com) figuring Jack the Lumberjack and his axe. The goal is to chop down as many trees as possible (not very CO2 neutral, I know). I used `mobx-state-tree` to keep track of the game state and that felt clean and fast (as in: not verbose). Especially when comparing it to my current state management tool (Redux Saga).
