@@ -6,7 +6,16 @@ summary: Tutorial on how to create a scroll video effect using Svelte’s powerf
 
 In this tutorial, I’ll show you how svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
 
-<video width="672" height="577" muted loop controls autoPlay playsInline>
+<video
+  width="672"
+  height="577"
+  muted
+  loop
+  controls
+  autoPlay
+  playsInline
+  fetchpriority="high"
+>
   <source src="https://i.imgur.com/s0GVWeR.mp4" type="video/mp4" />
 </video>
 

@@ -28,6 +28,7 @@ export default function Home() {
             width={176}
             src="/avatar.jpg"
             className="rounded-full filter grayscale"
+            priority
           />
         </div>
       </article>
