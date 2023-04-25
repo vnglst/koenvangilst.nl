@@ -1,0 +1,23 @@
+{
+  "subject": "acct:koen@maakr.social",
+  "aliases": [
+    "https://maakr.social/@koen",
+    "https://maakr.social/users/koen"
+  ],
+  "links": [
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://maakr.social/@koen"
+    },
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "https://maakr.social/users/koen"
+    },
+    {
+      "rel": "http://ostatus.org/schema/1.0/subscribe",
+      "template": "https://maakr.social/authorize_interaction?uri={uri}"
+    }
+  ]
+}
