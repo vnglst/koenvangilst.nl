@@ -10,6 +10,9 @@
 - [x] Use canary next releases
 - [x] Use SWR to refresh cached page views
 - [ ] Replace Supabase api with supabase client
+- [ ] Remove dependency on contentlayer
+- [ ] Cleanup global CSS
+- [ ] Add webfinger for mastodon accounts
 
 ## Dark mode
 
