@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     template: '%s | Koen van Gilst',
     absolute: meta.title
   },
+  metadataBase: new URL('https://koenvangilst.nl'),
   description: meta.description,
   openGraph: {
     title: meta.title,
