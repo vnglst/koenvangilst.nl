@@ -12,7 +12,7 @@
 - [ ] Replace Supabase api with supabase client
 - [ ] Remove dependency on contentlayer
 - [ ] Cleanup global CSS
-- [ ] Add webfinger for mastodon accounts
+- [x] Add webfinger for mastodon accounts
 
 ## Dark mode
 
