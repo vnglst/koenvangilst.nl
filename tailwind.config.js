@@ -5,9 +5,9 @@ module.exports = {
   mode: 'jit',
   content: [
     './app/**/*.tsx',
-    './pages/**/*.tsx',
     './components/**/*.tsx',
-    './styles/**/*.css'
+    './styles/**/*.css',
+    './public/icons/*.svg'
   ],
   darkMode: 'class',
   theme: {
