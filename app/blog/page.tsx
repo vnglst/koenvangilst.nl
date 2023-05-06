@@ -12,13 +12,15 @@ export const metadata = {
   description: `I've been writing online since 2016, mostly about web development (React & Svelte). In total, I've written ${allBlogs.length} articles on this site.`
 };
 
-export default async function Blog() {
-  const posts = allBlogs
-    .map((post) => pick(post, ['slug', 'title', 'summary', 'publishedAt']))
-    .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-    );
+// Do this outside the render cycle so we only have to do this once
+const posts = allBlogs
+  .map((post) => pick(post, ['slug', 'title', 'summary', 'publishedAt']))
+  .sort(
+    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+  );
+
+export default async function Blog({ searchParams }) {
+  const search = searchParams?.search || '';
 
   const postsWithViews = await Promise.all(
     posts.map(async (post) => {
@@ -26,6 +28,12 @@ export default async function Blog() {
       const viewsPerMonth = await getViewsPerMonth('/blog/' + post.slug);
       return { ...post, views, viewsPerMonth: viewsPerMonth };
     })
+  );
+
+  const searchResult = postsWithViews.filter(
+    (post) =>
+      post.title.match(new RegExp(search, 'i')) ||
+      post.summary.match(new RegExp(search, 'i'))
   );
 
   const mostPopularPosts = [...postsWithViews]
@@ -43,7 +51,11 @@ export default async function Blog() {
           In total, I've written ${posts.length} articles on this site.
           Use the search below to filter by title.`}
       </p>
-      <Search posts={postsWithViews} mostPopularPosts={mostPopularPosts} />
+      <Search
+        searchResults={searchResult}
+        placeholderPosts={mostPopularPosts}
+        defaultValue={search}
+      />
     </div>
   );
 }

@@ -30,7 +30,8 @@ export async function getViews(pathnameRaw: string): Promise<number> {
     const pathname = encodeURIComponent(pathnameRaw);
     const request = await fetch(`${URLS.totals}?pathname=eq.${pathname}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
@@ -54,7 +55,8 @@ export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
     const pathname = encodeURIComponent(pathnameRaw);
     const request = await fetch(`${URLS.perMonth}?pathname=eq.${pathname}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
@@ -77,7 +79,8 @@ export async function getViewsPerDay(): Promise<View[]> {
   try {
     const request = await fetch(`${URLS.perDay}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
@@ -99,7 +102,8 @@ export async function getTotalWeekViews(): Promise<number | undefined> {
   try {
     const request = await fetch(`${URLS.perDay}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
@@ -122,7 +126,8 @@ export async function getTotalTodayViews(): Promise<number | undefined> {
   try {
     const request = await fetch(`${URLS.today}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
@@ -145,7 +150,8 @@ export async function getTotalViews(): Promise<number | undefined> {
   try {
     const request = await fetch(`${URLS.totals}`, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: { revalidate: 60 }
     });
 
     invariant(request.status === 200, 'Error retrieving view');
