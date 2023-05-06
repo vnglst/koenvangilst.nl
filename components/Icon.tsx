@@ -1,5 +1,5 @@
 type IconProps = {
-  icon: 'search' | 'spinner';
+  icon: 'search' | 'spinner' | 'eye' | 'external-link';
   className?: string;
 };
 
