@@ -88,7 +88,7 @@ export function Search({
           </svg>
         )}
       </div>
-      {!searchResults && (
+      {!defaultValue && (
         <>
           <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
             Popular this month
@@ -101,12 +101,12 @@ export function Search({
       <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
         All Posts
       </h3>
-      {!searchResults.length && (
-        <p className="mb-4 text-gray-600 dark:text-gray-400">No posts found.</p>
-      )}
       {searchResults.map((post) => (
         <BlogPost key={post.title} {...post} />
       ))}
+      {searchResults.length === 0 && (
+        <p className="mb-4 text-gray-600 dark:text-gray-400">No posts found.</p>
+      )}
     </>
   );
 }
