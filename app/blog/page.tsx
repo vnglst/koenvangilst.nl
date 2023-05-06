@@ -30,8 +30,10 @@ export default async function Blog({ searchParams }) {
     })
   );
 
-  const searchResult = postsWithViews.filter((post) =>
-    post.title.match(new RegExp(search, 'i'))
+  const searchResult = postsWithViews.filter(
+    (post) =>
+      post.title.match(new RegExp(search, 'i')) ||
+      post.summary.match(new RegExp(search, 'i'))
   );
 
   const mostPopularPosts = [...postsWithViews]
