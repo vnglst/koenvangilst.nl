@@ -65,17 +65,17 @@ export function Search({
       </div>
       {!defaultValue && (
         <>
-          <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+          <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
             Popular this month
-          </h3>
+          </h2>
           {placeholderPosts.map((post) => (
             <BlogPost key={post.title} {...post} />
           ))}
         </>
       )}
-      <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+      <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
         All Posts
-      </h3>
+      </h2>
       {searchResults.map((post) => (
         <BlogPost key={post.title} {...post} />
       ))}
