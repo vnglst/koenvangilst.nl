@@ -99,11 +99,6 @@ h1 {
   @apply text-gray-800 dark:text-gray-200;
 }
 
-.prose img {
-  /* Don't apply styles to next/image */
-  /* @apply m-0; */
-}
-
 .prose > :first-child {
   /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
