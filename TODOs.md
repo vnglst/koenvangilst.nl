@@ -13,6 +13,7 @@
 - [ ] Remove dependency on contentlayer
 - [ ] Cleanup global CSS
 - [x] Add webfinger for mastodon accounts
+- [ ] use Icon component for all svgs
 
 ## Dark mode
 
