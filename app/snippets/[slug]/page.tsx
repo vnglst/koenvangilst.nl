@@ -35,7 +35,7 @@ export default function SnippetPage({ params }: SnippetPageProps) {
             alt={snippet.title}
             height={48}
             width={48}
-            src={`/logos/${snippet.logo}`}
+            src={`/static/logos/${snippet.logo}`}
             className="rounded-full"
             priority
           />
