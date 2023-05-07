@@ -101,7 +101,7 @@ h1 {
 
 .prose img {
   /* Don't apply styles to next/image */
-  @apply m-0;
+  /* @apply m-0; */
 }
 
 .prose > :first-child {

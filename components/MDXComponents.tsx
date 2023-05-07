@@ -21,7 +21,9 @@ const CustomLink = (props) => {
 };
 
 function RoundedImage(props) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />;
+  return (
+    <Image alt={props.alt} className="m-4 rounded-lg inline-block" {...props} />
+  );
 }
 
 const MDXComponents = {
