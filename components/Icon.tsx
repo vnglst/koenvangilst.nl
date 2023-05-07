@@ -6,7 +6,7 @@ type IconProps = {
 export default function Icon({ icon, className }: IconProps) {
   return (
     <svg className={`${className}`} fill="currentColor">
-      <use xlinkHref={`icons/${icon}.svg#${icon}`} />
+      <use xlinkHref={`static/icons/${icon}.svg#${icon}`} />
     </svg>
   );
 }
