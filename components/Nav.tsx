@@ -46,7 +46,7 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
 
 export function NavItemHome() {
   const segment = useSelectedLayoutSegment();
-  const isActive = segment === '/';
+  const isActive = segment === null;
 
   return (
     <NextLink
