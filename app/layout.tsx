@@ -97,7 +97,7 @@ export default function RootLayout({ children }: LayoutProps) {
       suppressHydrationWarning={true}
       className={`${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
-      <link rel="me" href="https://maakr.social/@koen" />
+      <link rel="me" href="https://hachyderm.io/@vnglst" />
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <script
           defer
