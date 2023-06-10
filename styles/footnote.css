@@ -1,0 +1,14 @@
+.footnotes {
+  font-size: smaller;
+  color: #8b949e;
+  border-top: 1px solid #30363d;
+}
+
+/* Place `[` and `]` around footnote references. */
+[data-footnote-ref]::before {
+  content: '[';
+}
+
+[data-footnote-ref]::after {
+  content: ']';
+}
