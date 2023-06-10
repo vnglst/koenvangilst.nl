@@ -28,11 +28,7 @@
     "d3-array": "3.2.3",
     "d3-time-format": "4.1.0",
     "date-fns": "2.30.0",
-<<<<<<< Updated upstream
-    "next": "^13.4.4",
-=======
     "next": "13.4.5-canary.9",
->>>>>>> Stashed changes
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "2.1.5"
