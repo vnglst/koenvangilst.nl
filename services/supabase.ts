@@ -100,7 +100,7 @@ export async function getViewsPerDay(): Promise<View[]> {
  */
 export async function getTotalWeekViews(): Promise<number | undefined> {
   try {
-    const request = await fetch(`${URLS.perDay}`, {
+    const request = await fetch(`${URLS.week}`, {
       headers: HEADERS,
       method: 'GET',
       next: { revalidate: 60 }
