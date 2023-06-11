@@ -38,7 +38,7 @@ export default async function Blog({ searchParams }) {
 
   const mostPopularPosts = [...postsWithViews]
     .sort((a, b) => b.viewsPerMonth - a.viewsPerMonth)
-    .slice(0, 3)
+    .slice(0, 6)
     .sort((a, b) => b.views - a.views);
 
   return (
