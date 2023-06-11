@@ -1,21 +1,9 @@
-import invariant from 'tiny-invariant';
-
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
-const HEADERS = {
-  apikey: SUPABASE_ANON_KEY,
-  'Content-Type': 'application/json'
-};
+import { createClient } from '@supabase/supabase-js';
 
-const URLS = {
-  totals: `${SUPABASE_URL}/rest/v1/totals`,
-  perMonth: `${SUPABASE_URL}/rest/v1/month`,
-  perDay: `${SUPABASE_URL}/rest/v1/perday`,
-  week: `${SUPABASE_URL}/rest/v1/week`,
-  today: `${SUPABASE_URL}/rest/v1/today`,
-  visits: `${SUPABASE_URL}/rest/v1/visits`
-};
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 type View = {
   created_at: string;
@@ -26,145 +14,103 @@ type View = {
  * Retrieves the view count for a given pathname.
  */
 export async function getViews(pathnameRaw: string): Promise<number> {
-  try {
-    const pathname = encodeURIComponent(pathnameRaw);
-    const request = await fetch(`${URLS.totals}?pathname=eq.${pathname}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+  const { data: views, error } = await supabase
+    .from('totals')
+    .select('total')
+    .eq('pathname', pathnameRaw);
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const json = await request.json();
-    const views = json.length > 0 ? json[0].total : 0;
-
-    return views;
-  } catch (error) {
+  if (error) {
     console.error('Fetching views failed', error);
     return 0;
   }
+
+  return views[0].total;
 }
 
 /**
  * Retrieves the view count for a given pathname for a given month.
  */
 export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
-  try {
-    const pathname = encodeURIComponent(pathnameRaw);
-    const request = await fetch(`${URLS.perMonth}?pathname=eq.${pathname}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+  const { data: views, error } = await supabase
+    .from('month')
+    .select('count')
+    .eq('pathname', pathnameRaw);
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const json = await request.json();
-    const views = json.length > 0 ? json[0].count : 0;
-
-    return views;
-  } catch (error) {
+  if (error) {
     console.error('Fetching monthly views failed', error);
     return 0;
   }
+
+  return views[0].count;
 }
 
 /**
  * Retrieves a list of total website views per day.
  */
-export async function getViewsPerDay(): Promise<View[]> {
-  try {
-    const request = await fetch(`${URLS.perDay}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+export async function getViewsPerDay(days: number): Promise<View[]> {
+  const { data: views, error } = await supabase
+    .from('perday')
+    .select('created_at, count')
+    // only get views for last x days
+    .gte(
+      'created_at',
+      new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+    );
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const views = (await request.json()) as View[];
-
-    return views;
-  } catch (error) {
+  if (error) {
     console.error('Fetching daily views failed', error);
     return [];
   }
+
+  return views;
 }
 
 /**
  * Retrieves a list of total website views of last week
  */
-export async function getTotalWeekViews(): Promise<number | undefined> {
-  try {
-    const request = await fetch(`${URLS.week}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+export async function getTotalWeekViews(): Promise<number> {
+  const { data: views, error } = await supabase.from('week').select('count');
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const list: View[] = await request.json();
-    const totals = list.reduce((prev, item) => prev + item.count, 0);
-
-    return totals;
-  } catch (error) {
+  if (error) {
     console.error('Fetching weekly views failed', error);
-    return;
+    return 0;
   }
+
+  const list = views.reduce((prev, item) => prev + item.count, 0);
+
+  return list;
 }
 
 /**
  * Retrieves a list of total website views of today
  */
-export async function getTotalTodayViews(): Promise<number | undefined> {
-  try {
-    const request = await fetch(`${URLS.today}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+export async function getTotalTodayViews(): Promise<number> {
+  const { data: views, error } = await supabase.from('today').select('count');
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const list: View[] = await request.json();
-    const totals = list.reduce((prev, item) => prev + item.count, 0);
-
-    return totals;
-  } catch (error) {
-    console.error('Fetching daily views failed', error);
-    return;
+  if (error) {
+    console.error('Fetching today views failed', error);
+    return 0;
   }
+
+  const list = views.reduce((prev, item) => prev + item.count, 0);
+
+  return list;
 }
 
 /**
  * Retrieves a list of total website views for all time
  */
-export async function getTotalViews(): Promise<number | undefined> {
-  try {
-    const request = await fetch(`${URLS.totals}`, {
-      headers: HEADERS,
-      method: 'GET',
-      next: { revalidate: 60 }
-    });
+export async function getTotalViews(): Promise<number> {
+  const { data: views, error } = await supabase.from('totals').select('total');
 
-    invariant(request.status === 200, 'Error retrieving view');
-    invariant(request.ok, 'Error retrieving view');
-
-    const list = await request.json();
-    const totals = list.reduce((prev, item) => prev + item.total, 0);
-
-    return totals;
-  } catch (error) {
+  if (error) {
     console.error('Fetching total views failed', error);
-    return;
+    return 0;
   }
+
+  const list = views.reduce((prev, item) => prev + item.total, 0);
+
+  return list;
 }
 
 /**
@@ -175,18 +121,11 @@ export async function trackView({ origin, pathname, ua }) {
     return console.log('[Tracking pageview]:', pathname);
   }
 
-  try {
-    const body = JSON.stringify({ origin, pathname, ua });
+  const { error } = await supabase
+    .from('visits')
+    .insert([{ origin, pathname, ua }]);
 
-    const request = await fetch(URLS.visits, {
-      headers: HEADERS,
-      body,
-      method: 'POST'
-    });
-
-    invariant(request.status === 201, 'Error logging analytics');
-    invariant(request.ok, 'Error logging analytics');
-  } catch (error) {
+  if (error) {
     console.error('Tracking view failed', error);
   }
 }
