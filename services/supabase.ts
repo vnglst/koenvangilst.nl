@@ -26,7 +26,7 @@ export async function getViews(pathnameRaw: string): Promise<number> {
     return 0;
   }
 
-  return views[0].total;
+  return views[0]?.total;
 }
 
 /**
@@ -43,7 +43,7 @@ export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
     return 0;
   }
 
-  return views[0].count;
+  return views[0]?.count;
 }
 
 /**
