@@ -43,7 +43,7 @@
     "concurrently": "8.0.1",
     "contentlayer": "0.3.3",
     "eslint": "8.39.0",
-    "eslint-config-next": "13.4.5-canary.9",
+    "eslint-config-next": "13.4.5",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "globby": "13.1.4",
     "next-contentlayer": "0.3.3",
