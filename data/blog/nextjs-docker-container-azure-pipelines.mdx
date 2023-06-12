@@ -8,13 +8,13 @@ I recently had to create a Dockerfile for deploying a Next.js app using an Azure
 
 ## The problem
 
-Part of the build process of our Next.js is pre-generating all the pages that contain content that is (mostly) static. We want those pages to be part of the Docker container that we're going to deploy. But for Next to be able to generate those pages, certain environment variables (things like the public base URL) have to be set.
+Part of the build process of our Next.js website is pre-rendering all the pages that contain content that is (mostly) static. We want those pages to be part of the Docker container that we're going to deploy. But for Next to be able to generate those pages, certain environment variables (like the public base URL, but also the API key for the CMS) have to be set.
 
-Next.js has great support for `.env` files, but committing those files to your source control is generally not recommended. It also makes it more difficult for every environment to have a different `.env` file. So we need to find a way to load these dynamically at build time.
+Next.js has great support for `.env` files, but committing those files to your source control is not recommended. Besides, every environment will need a different `.env` file. So we need to find a way to load these dynamically at build time.
 
 ## The solution
 
-Instead of trying to pass every environment variable separately to the Docker build command, we can first generate our .env file in our Azure pipeline:
+Instead of trying to pass every environment variable separately to the Docker build command, we can first generate our `.env` file in our Azure pipeline:
 
 ```yaml
 jobs:
