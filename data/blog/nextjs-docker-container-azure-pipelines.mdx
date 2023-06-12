@@ -1,10 +1,10 @@
 ---
-title: Building a Next.js Docker Container using Azure Pipelines
+title: Next.js Docker Containers with Azure Pipelines
 publishedAt: '2023-06-12'
-summary: I recently had to create a Dockerfile for deploying a Next.js app using an Azure DevOps pipeline. I found an elegant solution to provide the correct environment variables in the Docker build phase.
+summary: An elegant solution for providing the correct environment variables in the Docker build phase.
 ---
 
-I recently had to create a Dockerfile for deploying a Next.js app using an Azure DevOps pipeline. I found an elegant solution to provide the correct environment variables in the Docker build phase that's easy to implement. In this post, I'll show you why this is needed and how the implementation works. You can also Skip to the code snippet if you're in a hurry.
+I recently had to create a Dockerfile for deploying a Next.js app using an Azure DevOps pipeline. I found an elegant solution to provide the correct environment variables in the Docker build phase that's easy to implement. In this post, I'll show you why this is needed and how the implementation works. You can also <a href="#the-solution">Skip to the code snippet</a> if you're in a hurry.
 
 ## The problem
 
@@ -44,10 +44,10 @@ jobs:
             latest
 ```
 
-For the Next.js Dockerfile, you can use the example created by the Vercel team as a starting point. [https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile)
+For the Next.js Dockerfile, you can use [the example](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile) created by the Vercel team as a starting point.
 
 ## Note about security
 
-Even though it's also possible to pass secrets using the above method it is generally not recommended if you’re creating images for public use. As the .env file is used in the build process it will also be part of the image - even though it’s not available in the resulting runtime. This is quite harmless if you're keeping your images private and secure, but otherwise, you might want to look into using secret files in Docker as described here: [https://render.com/docs/docker-secrets#secret-files-in-docker-builds](https://render.com/docs/docker-secrets#secret-files-in-docker-builds)
+Passing secrets using the above method is not recommended if you’re creating images for _public_ use. As the .env file is used in the build process it will also be part of one of the intermediate images - even though it’s not in the resulting runtime. This is quite harmless if you're keeping those images private and secure, but otherwise, you should look into using _secret files_ in Docker as described [here](https://render.com/docs/docker-secrets#secret-files-in-docker-builds).
 
 It’s also good to note that the environment variables for the runtime (ie. the Next.js webserver) are not included in this way. They still have to be provided as regular environment variables via a config.
