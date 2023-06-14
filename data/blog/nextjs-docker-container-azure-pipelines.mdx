@@ -1,0 +1,53 @@
+---
+title: Next.js Docker Containers with Azure Pipelines
+publishedAt: '2023-06-12'
+summary: An elegant solution for providing the correct environment variables in the Docker build phase.
+---
+
+I recently had to create a Dockerfile for deploying a Next.js app using an Azure DevOps pipeline. I found an elegant solution to provide the correct environment variables in the Docker build phase that's easy to implement. In this post, I'll show you why this is needed and how the implementation works. You can also <a href="#the-solution">Skip to the code snippet</a> if you're in a hurry.
+
+## The problem
+
+Part of the build process of our Next.js website is pre-rendering all the pages that contain content that is (mostly) static. We want those pages to be part of the Docker container that we're going to deploy. But for Next to be able to generate those pages, certain environment variables (like the public base URL, but also the API key for the CMS) have to be set.
+
+Next.js has great support for `.env` files, but committing those files to your source control is not recommended. Besides, every environment will need a different `.env` file. So we need to find a way to load these dynamically at build time.
+
+## The solution
+
+Instead of trying to pass every environment variable separately to the Docker build command, we can first generate our `.env` file in our Azure pipeline:
+
+```yaml
+jobs:
+  - job: BuildWebsite
+    displayName: Building Website
+    steps:
+      - checkout: self
+      - task: Bash@3
+        displayName: Create an .env file
+        inputs:
+          targetType: 'inline'
+          script: |
+            cat <<EOT > .env
+            ENVIRONMENT_NAME=${{ parameters.env }}
+            NEXT_PUBLIC_WEBSITE_URL=$( parameters.public_url )
+            // put the rest of your env vars here
+            EOT
+
+      - task: Docker@2
+        displayName: Build and Push Docker image
+        inputs:
+          containerRegistry: 'My Container Registry'
+          repository: 'nextjs-web'
+          command: 'buildAndPush'
+          tags: |
+            $(Build.BuildId)
+            latest
+```
+
+For the Next.js Dockerfile, you can use [the example](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile) created by the Vercel team as a starting point.
+
+## Note about security
+
+Passing secrets using the above method is not recommended if you’re creating images for _public_ use. As the .env file is used in the build process it will also be part of one of the intermediate images - even though it’s not in the resulting runtime. This is quite harmless if you're keeping those images private and secure, but otherwise, you should look into using _secret files_ in Docker as described [here](https://render.com/docs/docker-secrets#secret-files-in-docker-builds).
+
+It’s also good to note that the environment variables for the runtime (ie. the Next.js webserver) are not included in this way. They still have to be provided as regular environment variables via a config.
