@@ -4,6 +4,7 @@ export default async function sitemap() {
   const allPages = await globby([
     'pages/*.tsx',
     'data/**/*.mdx',
+    '!data/labs/**/*.mdx',
     '!data/*.mdx',
     '!pages/_*.tsx',
     '!pages/api',
