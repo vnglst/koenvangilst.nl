@@ -2,6 +2,9 @@ export const metadata = {
   title: 'About',
   openGraph: {
     type: 'article'
+  },
+  alternates: {
+    canonical: 'about'
   }
 };
 

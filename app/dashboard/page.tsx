@@ -5,7 +5,10 @@ import Views from 'components/metrics/Views';
 export const metadata = {
   title: 'Dashboard',
   description:
-    'My personal dashboard, built with Next.js API routes deployed as serverless functions.'
+    'My personal dashboard, built with Next.js API routes deployed as serverless functions.',
+  alternates: {
+    canonical: 'dashboard'
+  }
 };
 
 export default function Dashboard() {

@@ -62,7 +62,10 @@ export function generateMetadata({ params }) {
   return {
     title: snippet.title,
     description: snippet.description,
-    image: snippet.logo
+    image: snippet.logo,
+    alternates: {
+      canonical: 'snippets/' + snippet.slug
+    }
   };
 }
 
