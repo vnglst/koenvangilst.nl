@@ -98,7 +98,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <link
         rel="alternate"
         type="application/rss+xml"
-        href="https://koenvangilst.nl/rss.xml"
+        href="https://koenvangilst.nl/feed.xml"
       ></link>
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <script
