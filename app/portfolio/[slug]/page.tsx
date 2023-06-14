@@ -55,7 +55,10 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 
   return {
     title: client?.name,
-    description: client?.summary
+    description: client?.summary,
+    alternates: {
+      canonical: 'portfolio/' + client?.slug
+    }
   };
 }
 

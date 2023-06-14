@@ -105,6 +105,9 @@ export function generateMetadata({ params }): Metadata {
       type: 'article',
       publishedTime: blog.publishedAt,
       authors: ['Koen van Gilst']
+    },
+    alternates: {
+      canonical: 'blog/' + blog.slug
     }
   };
 }

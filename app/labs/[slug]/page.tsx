@@ -63,6 +63,9 @@ export function generateMetadata({
     description: project?.summary,
     openGraph: {
       images: `https://koenvangilst.nl${project?.image}`
+    },
+    alternates: {
+      canonical: 'labs/' + project?.slug
     }
   };
 }

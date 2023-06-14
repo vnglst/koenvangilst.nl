@@ -43,10 +43,7 @@ export const metadata: Metadata = {
     locale: 'en-US'
   },
   alternates: {
-    canonical: 'https://koenvangilst.nl',
-    types: {
-      'application/rss+xml': 'https://koenvangilst.nl/rss.xml'
-    }
+    canonical: 'https://koenvangilst.nl'
   },
   twitter: {
     card: 'summary_large_image',
@@ -98,6 +95,11 @@ export default function RootLayout({ children }: LayoutProps) {
       className={`${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        href="https://koenvangilst.nl/rss.xml"
+      ></link>
       <body className="bg-white dark:bg-black text-white dark:text-black">
         <script
           defer

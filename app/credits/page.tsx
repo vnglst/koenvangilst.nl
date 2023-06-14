@@ -1,5 +1,8 @@
 export const metadata = {
-  title: 'Credits'
+  title: 'Credits',
+  alternates: {
+    canonical: 'credits'
+  }
 };
 
 export default function Credits() {

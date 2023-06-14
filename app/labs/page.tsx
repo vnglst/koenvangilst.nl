@@ -10,7 +10,10 @@ const projects = allProjects.map((client) =>
 export const metadata = {
   title: 'Labs',
   description:
-    'A list of JavaScript experiments. Mostly small (educational) apps for my kids or to learn a new technology myself.'
+    'A list of JavaScript experiments. Mostly small (educational) apps for my kids or to learn a new technology myself.',
+  alternates: {
+    canonical: 'labs'
+  }
 };
 
 export default function Labs() {

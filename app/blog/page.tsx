@@ -8,6 +8,9 @@ import { Search } from './search';
 export const revalidate = 60 * 60 * 24; // 24 hours
 
 export const metadata = {
+  alternates: {
+    canonical: 'blog'
+  },
   title: 'Blog',
   description: `I've been writing online since 2016, mostly about web development (React & Svelte). In total, I've written ${allBlogs.length} articles on this site.`
 };
