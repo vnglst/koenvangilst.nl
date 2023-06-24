@@ -6,6 +6,7 @@ export default function SnippetCard({
   description,
   slug,
   logo,
+  views,
   ...rest
 }) {
   return (
@@ -14,13 +15,18 @@ export default function SnippetCard({
       className="bg-gray-50 dark:bg-black border-dashed border-gray-400 border rounded-xl p-4 w-full up-hover"
       {...rest}
     >
-      <Image
-        alt={title}
-        height={32}
-        width={32}
-        src={`/static/logos/${logo}`}
-        className="rounded-full"
-      />
+      <div className="flex content-baseline justify-between">
+        <Image
+          alt={title}
+          height={32}
+          width={32}
+          src={`/static/logos/${logo}`}
+          className="rounded-full"
+        />
+        <span className="text-sm text-gray-600 dark:text-gray-400">
+          {views} views
+        </span>
+      </div>
       <h3 className="text-lg font-bold text-left mt-2 text-gray-900 dark:text-gray-100">
         {title}
       </h3>
