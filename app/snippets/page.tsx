@@ -1,7 +1,10 @@
 import SnippetCard from 'components/SnippetCard';
+import { getViews } from 'services/supabase';
 
 import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
+
+export const revalidate = 60 * 30; // 30 min
 
 export const metadata = {
   title: 'Code Snippets – Koen van Gilst',
@@ -9,10 +12,19 @@ export const metadata = {
     'A collection of code snippets – including React hooks, TypeScript tips, random CSS snippets and Node.js scripts'
 };
 
-export default function Snippets() {
-  const snippets = allSnippets.map((snippet) =>
-    pick(snippet, ['slug', 'title', 'logo', 'description'])
+const snippets = allSnippets.map((snippet) =>
+  pick(snippet, ['slug', 'title', 'logo', 'description'])
+);
+
+export default async function Snippets() {
+  const snippetsWithViews = await Promise.all(
+    snippets.map(async (post) => {
+      const views = await getViews('/snippets/' + post.slug);
+      return { ...post, views };
+    })
   );
+
+  const mostPopular = [...snippetsWithViews].sort((a, b) => b.views - a.views);
 
   return (
     <article className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
@@ -25,13 +37,14 @@ export default function Snippets() {
           and Node.js scripts.`}
       </p>
       <div className="grid w-full grid-cols-1 gap-8 my-2 mt-4 sm:grid-cols-2">
-        {snippets.map((snippet) => (
+        {mostPopular.map((snippet) => (
           <SnippetCard
             key={snippet.slug}
             title={snippet.title}
             slug={snippet.slug}
             logo={snippet.logo}
             description={snippet.description}
+            views={snippet.views}
           />
         ))}
       </div>

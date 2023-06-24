@@ -52,7 +52,9 @@ export default async function Blog({ searchParams }) {
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         {`I've been writing online since 2016, mostly about web development (React & Svelte).
           In total, I've written ${posts.length} articles on this site.
-          Use the search below to filter by title.`}
+          Use the search below to filter by title. They've been viewed a total of ${postsWithViews
+            .reduce((acc, post) => acc + post.views, 0)
+            .toLocaleString()} times.`}
       </p>
       <Search
         searchResults={searchResult}
