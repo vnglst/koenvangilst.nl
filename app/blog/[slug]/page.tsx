@@ -1,6 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
@@ -53,9 +54,10 @@ export default async function Post({ params }: PostProps) {
           <ViewCount initialCount={views} path={`/blog/${post.slug}`} />
         </p>
       </div>
-      <section className="w-full mt-4 prose dark:prose-dark max-w-none">
+      <section className="w-full mt-2 prose dark:prose-dark max-w-none">
         <Component components={components} />
       </section>
+
       <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
         <a
           href={getDiscussUrl(post.slug)}
@@ -72,6 +74,19 @@ export default async function Post({ params }: PostProps) {
         >
           {'Edit on GitHub'}
         </a>
+        {post.tagsAsSlugs && (
+          <div className="flex flex-wrap w-full mt-8 gap-2">
+            {post.tagsAsSlugs.map((tag: string) => (
+              <NextLink
+                key={tag}
+                href={`/blog/tag/${tag}`}
+                className="px-3 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded dark:bg-gray-800 dark:text-gray-200"
+              >
+                {tag.split('-').join(' ')}
+              </NextLink>
+            ))}
+          </div>
+        )}
       </footer>
     </article>
   );
