@@ -4,6 +4,7 @@ import { Inter, Montserrat } from 'next/font/google';
 
 import Footer from 'components/Footer';
 import Nav from 'components/Nav';
+import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
 
@@ -134,6 +135,7 @@ export default function RootLayout({ children }: LayoutProps) {
         </main>
         <Footer />
       </body>
+      <Tracking />
       <Analytics />
     </html>
   );
