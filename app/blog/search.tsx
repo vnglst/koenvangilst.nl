@@ -1,7 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import BlogPost from 'components/BlogPost';
 import Icon from 'components/Icon';
@@ -13,31 +12,26 @@ type Post = Pick<Blog, 'slug' | 'title' | 'summary' | 'publishedAt'> & {
 };
 
 type SearchProps = {
-  searchResults: Post[];
+  posts: Post[];
   placeholderPosts: Post[];
-  defaultValue?: string;
 };
 
-export function Search({
-  searchResults,
-  placeholderPosts,
-  defaultValue
-}: SearchProps) {
-  const { replace } = useRouter();
-  const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
+export function Search({ posts, placeholderPosts }: SearchProps) {
+  const [query, setQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<Post[]>([]);
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const searchValue = e.target.value;
-    let params = new URLSearchParams(window.location.search);
 
-    if (searchValue) {
-      params.set('search', searchValue);
-    } else {
-      params.delete('search');
-    }
+    setQuery(searchValue);
 
-    startTransition(() => replace(pathname + '?' + params.toString()));
+    const result = posts.filter(
+      (post) =>
+        post.title.match(new RegExp(searchValue, 'i')) ||
+        post.summary.match(new RegExp(searchValue, 'i'))
+    );
+
+    setSearchResults(result);
   }
 
   return (
@@ -46,24 +40,17 @@ export function Search({
         <input
           aria-label="Search articles"
           type="text"
-          defaultValue={defaultValue}
+          value={query}
           onChange={handleSearch}
           placeholder="Search articles"
           className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100"
         />
-        {isPending ? (
-          <Icon
-            icon="spinner"
-            className="absolute w-5 h-5 text-gray-400 right-3 top-3 animate-spin dark:text-gray-300"
-          />
-        ) : (
-          <Icon
-            icon="search"
-            className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
-          />
-        )}
+        <Icon
+          icon="search"
+          className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
+        />
       </div>
-      {!defaultValue && (
+      {!query ? (
         <>
           <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
             Popular this month
@@ -71,16 +58,27 @@ export function Search({
           {placeholderPosts.map((post) => (
             <BlogPost key={post.title} {...post} />
           ))}
+          <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+            All Posts
+          </h2>
+          {posts.map((post) => (
+            <BlogPost key={post.title} {...post} />
+          ))}
         </>
-      )}
-      <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-        All Posts
-      </h2>
-      {searchResults.map((post) => (
-        <BlogPost key={post.title} {...post} />
-      ))}
-      {searchResults.length === 0 && (
-        <p className="mb-4 text-gray-600 dark:text-gray-400">No posts found.</p>
+      ) : (
+        <>
+          <h2 className="mt-8 mb-6 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+            Search result
+          </h2>
+          {searchResults.map((post) => (
+            <BlogPost key={post.title} {...post} />
+          ))}
+          {searchResults.length === 0 && (
+            <p className="mb-4 text-gray-600 dark:text-gray-400">
+              No posts found.
+            </p>
+          )}
+        </>
       )}
     </>
   );

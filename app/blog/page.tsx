@@ -5,8 +5,6 @@ import { allBlogs } from 'contentlayer/generated';
 
 import { Search } from './search';
 
-export const revalidate = 60 * 30; // 30 min
-
 export const metadata = {
   alternates: {
     canonical: 'blog'
@@ -22,21 +20,13 @@ const posts = allBlogs
     (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
   );
 
-export default async function Blog({ searchParams }) {
-  const search = searchParams?.search || '';
-
+export default async function Blog() {
   const postsWithViews = await Promise.all(
     posts.map(async (post) => {
       const views = await getViews('/blog/' + post.slug);
       const viewsPerMonth = await getViewsPerMonth('/blog/' + post.slug);
       return { ...post, views, viewsPerMonth: viewsPerMonth };
     })
-  );
-
-  const searchResult = postsWithViews.filter(
-    (post) =>
-      post.title.match(new RegExp(search, 'i')) ||
-      post.summary.match(new RegExp(search, 'i'))
   );
 
   const mostPopularPosts = [...postsWithViews]
@@ -56,11 +46,7 @@ export default async function Blog({ searchParams }) {
             .reduce((acc, post) => acc + post.views, 0)
             .toLocaleString()} times.`}
       </p>
-      <Search
-        searchResults={searchResult}
-        placeholderPosts={mostPopularPosts}
-        defaultValue={search}
-      />
+      <Search posts={postsWithViews} placeholderPosts={mostPopularPosts} />
     </div>
   );
 }
