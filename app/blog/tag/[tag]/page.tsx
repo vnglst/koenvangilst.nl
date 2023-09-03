@@ -2,16 +2,17 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import BlogPost from 'components/BlogPost';
+import { Tag } from 'components/Tag';
 
 import { allBlogs } from 'contentlayer/generated';
 
 export const revalidate = 60 * 30; // 30 min
 
-type TagProps = {
+type TagPageProps = {
   params: { tag: string };
 };
 
-export default async function Tag({ params }: TagProps) {
+export default async function TagPage({ params }: TagPageProps) {
   const blogs = findBlogsForTag(params.tag);
 
   if (blogs.length === 0) {
@@ -34,14 +35,30 @@ export default async function Tag({ params }: TagProps) {
           <BlogPost key={post.title} {...post} />
         ))}
       </section>
-      <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8"></footer>
+      <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
+        <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+          Other tags
+        </h2>
+        <ul className="flex flex-wrap w-full gap-3">
+          {getUniqueTagSlugs().map((tag) => (
+            <li key={tag}>
+              <Tag tag={tag} />
+            </li>
+          ))}
+        </ul>
+      </footer>
     </article>
   );
 }
 
-export function generateStaticParams() {
-  const tags = allBlogs.flatMap((blog) => blog.tagsAsSlugs ?? []);
+function getUniqueTagSlugs() {
+  const tags = allBlogs.flatMap((blog) => blog.tagsAsSlugs ?? []) as string[];
   const uniqueTags = [...new Set(tags)];
+  return uniqueTags;
+}
+
+export function generateStaticParams() {
+  const uniqueTags = getUniqueTagSlugs();
   return uniqueTags.map((tag) => ({ params: { tag } }));
 }
 

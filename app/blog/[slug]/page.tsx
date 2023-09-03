@@ -1,11 +1,11 @@
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import NextLink from 'next/link';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import components from 'components/MDXComponents';
+import { Tag } from 'components/Tag';
 import { ViewCount } from 'components/ViewCount';
 import { getViews } from 'services/supabase';
 
@@ -55,17 +55,13 @@ export default async function Post({ params }: PostProps) {
         </p>
       </div>
       {post.tagsAsSlugs && (
-        <div className="flex flex-wrap w-full mt-4 gap-2">
+        <ul className="flex flex-wrap w-full mt-4 gap-2">
           {post.tagsAsSlugs.map((tag: string) => (
-            <NextLink
-              key={tag}
-              href={`/blog/tag/${tag}`}
-              className="px-3 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:bg-gray-300 hover:text-gray-900"
-            >
-              {tag.split('-').join(' ')}
-            </NextLink>
+            <li key={tag}>
+              <Tag tag={tag} />
+            </li>
           ))}
-        </div>
+        </ul>
       )}
       <section className="w-full prose dark:prose-dark max-w-none">
         <Component components={components} />
