@@ -2,9 +2,12 @@
 title: 'Using Svelte to create a scroll video effect'
 publishedAt: '2020-11-18'
 summary: Tutorial on how to create a scroll video effect using Svelte’s powerful bind command.
+tags:
+  - svelte
+  - tutorial
 ---
 
-In this tutorial, I’ll show you how svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
+In this tutorial, I’ll show you how Svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
 
 <video
   width="672"
@@ -19,7 +22,7 @@ In this tutorial, I’ll show you how svelte’s bind command can be used to cre
   <source src="https://i.imgur.com/s0GVWeR.mp4" type="video/mp4" />
 </video>
 
-**Note:** the effect itself is a lot smoother than the gifs 😂. Another example can be found [here](https://www.nytimes.com/interactive/2020/09/09/world/middleeast/beirut-explosion.html)). The effect is also sometimes used on product landing pages. Here's an example on [Apple's page for the iMac Pro](https://www.apple.com/imac-pro/).
+**Note:** The effect itself is a lot smoother than the gifs 😂. Another example can be found [here](https://www.nytimes.com/interactive/2020/09/09/world/middleeast/beirut-explosion.html)). The effect is also sometimes used on product landing pages. Here's an example on [Apple's page for the iMac Pro](https://www.apple.com/imac-pro/).
 
 <video width="672" height="577" muted loop controls autoPlay playsInline>
   <source src="https://i.imgur.com/10tgKVV.mp4" type="video/mp4" />
@@ -87,7 +90,7 @@ Here we are binding the vertical scroll position of the window to a variable _sc
 </style>
 ```
 
-Notice how you can combine HTML, CSS and JavaScript within a svelte component. Almost like you would in a regular HTML file!
+Notice how you can combine HTML, CSS and JavaScript within a Svelte component. Almost like you would in a regular HTML file!
 
 To verify if this works you might be tempted to add a _console.log_ just below the line `let scrollY;`. If you try that however you’ll see only one `0` being logged. The reason for this is that any code inside the `<script>` will run only once (when initializing the component). If you want to keep executing the _console.log_ as the scroll values update, make it reactive using the following notation:
 
@@ -215,7 +218,7 @@ After adding the last piece of code the video scroll effect should work. To make
 
 The NYTimes is using optimized, small-size videos on their pages. And with good reason: I've been doing experiments with larger (high definition) videos and it's impossible to get the performance right on all browsers: Safari performs surprisingly well, but Firefox and Chrome quickly start to stutter when the video gets larger.
 
-Apple is using a different technique to accomplish the effect on their pages: They've split up the video in separate frames (images) and they show a different frame when the scroll position changes. This [technique](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/) performs surprisingly well, even for high-definition video content. It does, however, come at a cost: All those frames have to be downloaded individually, adding up to huge download sizes. This is costly not just for mobile end users, but also if you're hosting them.
+Apple is using a different technique to accomplish the effect on their pages: They've split up the video into separate frames (images) and they show a different frame when the scroll position changes. This [technique](https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/) performs surprisingly well, even for high-definition video content. It does, however, come at a cost: All those frames have to be downloaded individually, adding up to huge download sizes. This is costly not just for mobile end users, but also if you're hosting them.
 
 If you want to use this technique and keep things simple I suggest using a small and optimized video just like the NYTimes does.
 

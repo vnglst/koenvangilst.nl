@@ -28,7 +28,7 @@ export default async function Tag({ params }: TagProps) {
       <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center"></div>
       <section className="relative w-full mb-4">
         <p className="mt-6 mb-6 text-gray-600 dark:text-gray-400">
-          There are {blogs.length} post(s) about the topic {tagLabel}.
+          There are <b>{blogs.length} post(s)</b> about the topic {tagLabel}.
         </p>
         {blogs.map((post) => (
           <BlogPost key={post.title} {...post} />
