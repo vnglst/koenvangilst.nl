@@ -39,7 +39,7 @@ export default async function Tag({ params }: TagProps) {
   );
 }
 
-export function generateStaticPaths() {
+export function generateStaticParams() {
   const tags = allBlogs.flatMap((blog) => blog.tagsAsSlugs ?? []);
   const uniqueTags = [...new Set(tags)];
   return uniqueTags.map((tag) => ({ params: { tag } }));
