@@ -20,6 +20,13 @@ const computedFields: ComputedFields = {
   slug: {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, '')
+  },
+  tagsAsSlugs: {
+    type: 'list',
+    resolve: (doc) =>
+      doc.tags?._array.map((tag: string) =>
+        tag.trim().toLowerCase().split(' ').join('-')
+      )
   }
 };
 
@@ -30,7 +37,8 @@ const Blog = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     publishedAt: { type: 'string', required: true },
-    summary: { type: 'string', required: true }
+    summary: { type: 'string', required: true },
+    tags: { type: 'list', required: true, of: { type: 'string' } }
   },
   computedFields
 }));

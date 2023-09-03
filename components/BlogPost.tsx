@@ -16,7 +16,7 @@ export default function BlogPost({
 }: BlogPostProps) {
   return (
     <Link href={`/blog/${slug}`} className="w-full">
-      <div className="w-full mb-8">
+      <div className="w-full mb-8 up-hover">
         <div className="flex flex-col justify-between md:flex-row">
           <h3 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
             {title}

@@ -17,7 +17,9 @@ export const metadata = {
 
 // Do this outside the render cycle so we only have to do this once
 const posts = allBlogs
-  .map((post) => pick(post, ['slug', 'title', 'summary', 'publishedAt']))
+  .map((post) =>
+    pick(post, ['slug', 'title', 'summary', 'publishedAt', 'tags'])
+  )
   .sort(
     (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
   );
