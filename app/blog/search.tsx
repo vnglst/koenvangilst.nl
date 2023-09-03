@@ -7,7 +7,10 @@ import Icon from 'components/Icon';
 
 import { Blog } from 'contentlayer/generated';
 
-type Post = Pick<Blog, 'slug' | 'title' | 'summary' | 'publishedAt'> & {
+type Post = Pick<
+  Blog,
+  'slug' | 'title' | 'summary' | 'publishedAt' | 'tags'
+> & {
   views: number;
 };
 
@@ -28,7 +31,8 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
     const result = posts.filter(
       (post) =>
         post.title.match(new RegExp(searchValue, 'i')) ||
-        post.summary.match(new RegExp(searchValue, 'i'))
+        post.summary.match(new RegExp(searchValue, 'i')) ||
+        post.tags.some((tag) => tag.match(new RegExp(searchValue, 'i')))
     );
 
     setSearchResults(result);
