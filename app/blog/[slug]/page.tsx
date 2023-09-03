@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import components from 'components/MDXComponents';
+import { Tag } from 'components/Tag';
 import { ViewCount } from 'components/ViewCount';
 import { getViews } from 'services/supabase';
 
@@ -53,7 +54,16 @@ export default async function Post({ params }: PostProps) {
           <ViewCount initialCount={views} path={`/blog/${post.slug}`} />
         </p>
       </div>
-      <section className="w-full mt-4 prose dark:prose-dark max-w-none">
+      {post.tagsAsSlugs && (
+        <ul className="flex flex-wrap w-full mt-4 gap-2">
+          {post.tagsAsSlugs.map((tag: string) => (
+            <li key={tag}>
+              <Tag tag={tag} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <section className="w-full prose dark:prose-dark max-w-none">
         <Component components={components} />
       </section>
       <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">

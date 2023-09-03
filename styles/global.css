@@ -55,7 +55,7 @@ h1 {
 }
 
 .up-hover:hover {
-  transform: translateY(-5px);
+  transform: scale(1.02);
 }
 
 .up-hover {
