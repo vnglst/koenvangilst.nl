@@ -81,10 +81,7 @@ export const metadata: Metadata = {
     }
   },
   manifest: '/static/favicons/site.webmanifest',
-  viewPort: {
-    themeColor: '#5bc3eb',
-
-  }
+  themeColor: '#5bc3eb',
 };
 
 type LayoutProps = {
