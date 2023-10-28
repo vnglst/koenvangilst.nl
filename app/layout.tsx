@@ -80,8 +80,11 @@ export const metadata: Metadata = {
       sizes: '180x180'
     }
   },
-  themeColor: '#5bc3eb',
-  manifest: '/static/favicons/site.webmanifest'
+  manifest: '/static/favicons/site.webmanifest',
+  viewPort: {
+    themeColor: '#5bc3eb',
+
+  }
 };
 
 type LayoutProps = {
