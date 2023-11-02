@@ -1,5 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
 import Footer from 'components/Footer';
@@ -80,8 +80,11 @@ export const metadata: Metadata = {
       sizes: '180x180'
     }
   },
-  manifest: '/static/favicons/site.webmanifest',
-  themeColor: '#5bc3eb',
+  manifest: '/static/favicons/site.webmanifest'
+};
+
+export const viewport: Viewport = {
+  themeColor: '#5bc3eb'
 };
 
 type LayoutProps = {
