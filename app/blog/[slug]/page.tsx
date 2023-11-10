@@ -64,6 +64,16 @@ export default async function Post({ params }: PostProps) {
         </ul>
       )}
       <section className="w-full prose dark:prose-dark max-w-none">
+        {post.image && post.image.showAsHeader ? (
+          <Image
+            alt={post.image.alt}
+            src={post.image.src}
+            width={post.image.width}
+            height={post.image.height}
+            className="m-2 rounded-lg inline-block"
+            priority
+          />
+        ) : null}
         <Component components={components} />
       </section>
       <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
@@ -108,13 +118,24 @@ export function generateMetadata({ params }): Metadata {
     return {};
   }
 
+  const images = blog.image
+    ? [
+        {
+          url: blog.image.src,
+          width: blog.image.width,
+          height: blog.image.height
+        }
+      ]
+    : [];
+
   return {
     title: blog.title,
     description: blog.summary,
     openGraph: {
       type: 'article',
       publishedTime: blog.publishedAt,
-      authors: ['Koen van Gilst']
+      authors: ['Koen van Gilst'],
+      images
     },
     alternates: {
       canonical: 'blog/' + blog.slug
