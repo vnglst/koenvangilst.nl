@@ -21,7 +21,11 @@ const CustomLink = (props) => {
 
 function RoundedImage(props) {
   return (
-    <Image alt={props.alt} className="m-2 rounded-lg inline-block" {...props} />
+    <Image
+      alt={props.alt}
+      className="my-0 rounded-lg inline-block"
+      {...props}
+    />
   );
 }
 

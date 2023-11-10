@@ -70,7 +70,7 @@ export default async function Post({ params }: PostProps) {
             src={post.image.src}
             width={post.image.width}
             height={post.image.height}
-            className="m-2 rounded-lg inline-block"
+            className="my-0 rounded-lg inline-block"
             priority
           />
         ) : null}
