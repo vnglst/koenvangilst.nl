@@ -33,15 +33,19 @@ What draws me to TBD is its straightforward approach. Here’s why I find it eff
 - Simplified workflow: Fewer branches translate to less complexity. It makes the workflow more manageable, especially for new team members. It also reduces the risk of merge conflicts.
 - Quick Integration: Merging changes frequently into the trunk means we can integrate and test new features more rapidly. There's always only one version of the codebase to test & integrate with.
 
+This is not just based on my personal experience. Nicole Forsgren notes in her book [Accelerate: The Science of Lean Software and DevOps](accelerate-reading-notes) do better in terms of deployment frequency, lead time, and mean time to recovery.
+
+> Our research also found that developing off trunk/master rather than on long-lived feature branches was correlated with higher delivery performance. Teams that did well had fewer than three active branches at any time, their branches had very short lifetimes (less than a day) before being merged into trunk and never had “code freeze” or stabilization periods. It’s worth re-emphasizing that these results are independent of team size, organization size, or industry.
+
 ## Overcoming resistance
 
-When I first encountered trunk-based development (TBD), I was hesitant. As a developer used to aligning branches with specific environments - develop for development, acceptance for testing, and main for production - this new approach seemed disruptive to my established workflow.
+I must admit, that when I first encountered trunk-based development (TBD), I was hesitant. As a developer used to aligning branches with specific environments - develop for development, acceptance for testing, and main for production - this new approach seemed disruptive to my established workflow.
 
-The idea of a single `trunk` where most development happens, contradicted my understanding of structured, organized development. But our tech lead at the time introduced this change to our team and as I experienced the new way of working, my perspective began to shift. I realized the excessive complexity that came with maintaining multiple long-lived branches and the slow pace it enforced on our processes.
+The idea of a single _trunk_ where most development happens, contradicted my understanding of structured, organized development. But our tech lead at the time introduced this change to our team and as I experienced the new way of working, my perspective began to shift. I realized the excessive complexity that came with maintaining multiple long-lived branches and the slow pace it enforced on our processes.
 
 At first, our team was scared by the fact that every pull request we merged automatically landed on the main branch and that our tech lead said we had to make sure the code was always in a releasable state. This was a stark departure from the safety net we felt with Git Flow, where multiple branches provided a cushion before hitting production. The notion of having every change be potentially release-ready brought a new level of accountability and focus to our work.
 
-Gradually, however, this fear transformed into a powerful motivator. We became more vigilant with our code reviews, ensuring that anything merged into the trunk was robust and thoroughly tested. This constant state of readiness encouraged us to develop cleaner, more reliable code.
+Gradually, however, this fear transformed into a powerful motivator. We became more careful with our code reviews, ensuring that anything merged into the trunk was robust and thoroughly tested. This constant state of readiness encouraged us to develop cleaner, more reliable code.
 
 ## Feature toggles
 
@@ -64,5 +68,20 @@ It's good to take into account that any new commits should still land on the mai
 In conclusion, my evolution as a web developer, from a Git Flow enthusiast to a staunch advocate of trunk-based development (TBD), has been a journey of adapting to a more dynamic and streamlined workflow. Initially hesitant, I've come to appreciate the clarity and simplicity of TBD. This shift has not only refined the development practices of the teams I was in but also instilled a mindset geared towards continuous, incremental improvement.
 
 Trunk-based development, in my experience, represents more than just a branching strategy; it's a reflection of a modern, responsive approach to software development.
+
+## Summary of Pros and Cons
+
+### Pros
+
+- Simplified Workflow
+- Quicker Integration
+- Single Source of Truth
+- Aligns well with continuous deployment
+
+### Cons
+
+- Requires strong CI/CD infrastructure
+- Requires a cultural shift
+- Feature toggles can be challenging to implement
 
 [^1]: The concept of Git Flow was originally introduced in the blog post [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen. His diagram of Git Flow has since then been shared countless times with many teams and on many corporate websites. In 2020 Vincent added a comment that Git Flow is not for everyone, especially when a team is doing continuous deployment.
