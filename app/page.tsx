@@ -37,8 +37,8 @@ export default function Home() {
       </h3>
       <section className="flex gap-6 flex-col md:flex-row">
         <BlogPostCard
-          title="Plotting the age of parliament with Livebook"
-          slug="livebook-average-age-of-parliament"
+          title="Why I Prefer Trunk-Based Development"
+          slug="trunkbased-development"
         />
         <BlogPostCard
           title="Code Colocation is King"
