@@ -35,8 +35,7 @@ export default async function Blog() {
 
   const mostPopularPosts = [...postsWithViews]
     .sort((a, b) => b.viewsPerMonth - a.viewsPerMonth)
-    .slice(0, 6)
-    .sort((a, b) => b.views - a.views);
+    .slice(0, 6);
 
   return (
     <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
