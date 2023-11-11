@@ -21,7 +21,7 @@ Before delving into why I prefer this approach, let's quickly recap the main dif
 
 ## TBD vs. Git Flow
 
-The essence of the difference lies in their branching strategies. Trunk-based development, also known as [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow) in some circles, revolves around a main _trunk_ branch. Developers work either directly on this trunk or on short-lived branches that are merged back frequently.
+Trunk-based development traditionally involves developers working directly on the main trunk branch. In contrast, the variant I advocate for utilizes short-lived feature branches for pull requests before merging them frequently back into the trunk. This variant is sometimes, confusingly, equated with [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
 
 Git Flow, in contrast, involves multiple branches (feature, develop, release, hotfix), each serving a specific stage in the development cycle. This model suits environments where releases are less frequent.
 
