@@ -131,6 +131,13 @@ export function generateMetadata({ params }): Metadata {
   return {
     title: blog.title,
     description: blog.summary,
+    twitter: {
+      card: 'summary_large_image',
+      site: '@vnglst',
+      title: blog.title,
+      description: blog.summary,
+      images: blog.image ? [blog.image.src] : []
+    },
     openGraph: {
       type: 'article',
       publishedTime: blog.publishedAt,
