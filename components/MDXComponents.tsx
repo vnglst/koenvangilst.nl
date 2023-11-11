@@ -7,22 +7,25 @@ import Waypoint from './Waypoint';
 
 const CustomLink = (props) => {
   const href = props.href;
-  const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
+  const isExternalLink = href && href.startsWith('http');
 
-  if (isInternalLink) {
-    return (
-      <Link href={href} {...props}>
-        {props.children}
-      </Link>
-    );
-  }
+  if (isExternalLink)
+    return <a target="_blank" rel="noopener noreferrer" {...props} />;
 
-  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+  return (
+    <Link href={href} {...props}>
+      {props.children}
+    </Link>
+  );
 };
 
 function RoundedImage(props) {
   return (
-    <Image alt={props.alt} className="m-2 rounded-lg inline-block" {...props} />
+    <Image
+      alt={props.alt}
+      className="my-0 rounded-lg inline-block"
+      {...props}
+    />
   );
 }
 
