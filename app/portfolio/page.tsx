@@ -10,7 +10,7 @@ const clients = allClients.map((client) =>
 export const metadata = {
   title: 'Portfolio',
   description:
-    "I've been a freelance web developer since 2013 and have been involved in all sorts of projects. Here you'll find some of my most recent clients."
+    "Experienced Lead Frontend Developer at Rabobank with a strong background in freelance web development since 2013. Specialized in React for frontend design and TypeScript for backend API development. Here you'll find some of my most recent clients."
 };
 
 export default function Portfolio() {
@@ -22,10 +22,25 @@ export default function Portfolio() {
         Portfolio
       </h1>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
-        {`I've been a freelance web developer since 2013 and have been involved in all sorts of projects, from a CMS for a narrowcasting system to a mobile app for a global fashion retailer and a web app for investment bankers. In most roles, the focus has been on creating the frontend (using React), but I also feel confident creating and contributing to backend APIs (in TypeScript).`}
+        Beginning my journey as a freelance web developer in 2013, I have been
+        involved in a multitude of projects, including the development of a
+        mobile application for a prestigious global fashion retailer, an
+        audioplayer for user with visual impairments and a web application for
+        investment banking professionals. My focus has predominantly been on
+        frontend development, harnessing the power of React to craft user
+        friendly interfaces. In addition to my frontend expertise, I am also
+        adept in backend development using TypeScript and enjoy working with
+        Python and Elixir for occasional side projects.
       </p>
+      <p className="mb-4 text-gray-600 dark:text-gray-400">
+        In 2022, I transitioned from my freelance career to a corporate role,
+        taking on the position of Lead Frontend Developer at Rabobank. Here, I
+        continue to leverage my skill set, leading innovative projects and
+        guiding a team of developers.
+      </p>
+
       <h3 className="mt-8 mb-8 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-        Recent client projects
+        Recent projects
       </h3>
       {sorted.map((client) => {
         return (

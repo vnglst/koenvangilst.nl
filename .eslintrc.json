@@ -3,6 +3,7 @@
   "plugins": ["simple-import-sort"],
   "rules": {
     "simple-import-sort/exports": "warn",
+    "react/no-unescaped-entities": "off",
     "simple-import-sort/imports": [
       "warn",
       {
