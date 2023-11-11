@@ -7,7 +7,7 @@ image:
   width: 1024
   height: 1024
   showAsHeader: true
-summary: Embracing trunk-based development marked a significant shift in my web development workflow, moving away from the structured Git Flow to a more continuous approach.
+summary: Moving away from the structured Git Flow to a more continuous approach with only one main branch.
 tags:
   - git
   - continuous deployment
@@ -31,31 +31,27 @@ What draws me to TBD is its straightforward approach. Here’s why I find it eff
 
 - One source of truth: With only one branch that represents the latest state of the codebase, there’s no confusion about which branch is the most up-to-date.
 - Simplified workflow: Fewer branches translate to less complexity. It makes the workflow more manageable, especially for new team members. It also reduces the risk of merge conflicts.
-- Quick Integration: Merging changes frequently into the trunk means we can integrate and test new features more rapidly. There's always only one version of the codebase to test & integrate with.
+- Quick integration: Merging changes frequently into the trunk means you can integrate and test new features more rapidly. There's always only one version of the codebase to test & integrate with.
 
-This is not just based on my personal experience. Nicole Forsgren notes in her book [Accelerate: The Science of Lean Software and DevOps](accelerate-reading-notes) do better in terms of deployment frequency, lead time, and mean time to recovery.
+This is not just based on my personal experience. Nicole Forsgren notes in her book [Accelerate: The Science of Lean Software and DevOps](accelerate-reading-notes) that teams do better in terms of deployment frequency, lead time, and mean time to recovery.
 
 > Our research also found that developing off trunk/master rather than on long-lived feature branches was correlated with higher delivery performance. Teams that did well had fewer than three active branches at any time, their branches had very short lifetimes (less than a day) before being merged into trunk and never had “code freeze” or stabilization periods. It’s worth re-emphasizing that these results are independent of team size, organization size, or industry.
 
 ## Overcoming resistance
 
-I must admit, that when I first encountered trunk-based development (TBD), I was hesitant. As a developer used to aligning branches with specific environments - develop for development, acceptance for testing, and main for production - this new approach seemed disruptive to my established workflow.
-
-The idea of a single _trunk_ where most development happens, contradicted my understanding of structured, organized development. But our tech lead at the time introduced this change to our team and as I experienced the new way of working, my perspective began to shift. I realized the excessive complexity that came with maintaining multiple long-lived branches and the slow pace it enforced on our processes.
+Initially, I was hesitant about trunk-based development (TBD), finding it disruptive to my usual workflow which involved aligning branches with specific environments. However, after our tech lead introduced it and we began working in this new way, my perspective shifted. I quickly recognized the benefits, such as reduced complexity and faster processes, that came from moving away from multiple long-lived branches.
 
 At first, our team was scared by the fact that every pull request we merged automatically landed on the main branch and that our tech lead said we had to make sure the code was always in a releasable state. This was a stark departure from the safety net we felt with Git Flow, where multiple branches provided a cushion before hitting production. The notion of having every change be potentially release-ready brought a new level of accountability and focus to our work.
 
-Gradually, however, this fear transformed into a powerful motivator. We became more careful with our code reviews, ensuring that anything merged into the trunk was robust and thoroughly tested. This constant state of readiness encouraged us to develop cleaner, more reliable code.
-
 ## Feature toggles
 
-Another thing that seemed impractical was building large features or doing complex refactors that could take weeks to complete. How could we do that with short-lived branches and still keep the main branch in a releasable state? The answer lay in the concept of feature toggles.
+Another thing that may seem impractical is building large features or doing complex refactors that could take weeks to complete. How is that possible with short-lived branches, while still keeping the main branch in a releasable state? The answer lies in the concept of feature toggles.
 
-Feature toggles, also known as feature flags, allowed us to merge partial or incomplete features into the main branch without disrupting the user experience. By wrapping new functionalities in these toggles, we could deploy them turned 'off' and then activate them when ready. This approach gave us the flexibility to continuously integrate and test our changes in a live environment, without exposing them to end-users prematurely.
+Feature toggles, also known as feature flags, let you merge partial or incomplete features into the main branch without disrupting the user experience. By wrapping new functionalities in these toggles, you deploy them turned 'off' and then activate them when ready. This approach gives you the flexibility to continuously integrate and test changes in a live environment, without exposing them to end-users prematurely.
 
-The adoption of feature toggles required a shift in our mindset. We had to plan our development in a way that allowed incremental changes and think ahead about how features could be toggled on and off. This planning led to more modular and adaptable code, which, in turn, increased our overall efficiency and responsiveness.
+The adoption of feature toggles requires a shift in mindset. You have to plan development in a way that allows incremental changes and think ahead about how features could be toggled on and off. This planning approach aims to result in more modular and adaptable code, although achieving this can be challenging.
 
-## TBD for immature projects
+## Immature projects
 
 Not every development team is at a stage where they can reliably maintain the main branch in a releasable state. Sometimes there is limited or no testing capacity, sometimes there are no automated tests yet. These shortcomings can be overcome by being pragmatic about trunk-based development (TBD). As a team, you can choose to first create a release branch from the trunk every time you're ready for a release.
 
