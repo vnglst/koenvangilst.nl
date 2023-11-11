@@ -16,22 +16,30 @@ export default function About() {
       </h1>
       <article className="mb-4 prose leading-6 text-gray-600 dark:text-gray-400">
         <p>
-          {`Hi, I'm Koen! I'm a passionate and entrepreneurial JavaScript developer from 
-            the Netherlands who likes to push the web beyond its limits. I specialize in 
-            modern frontend using React and Svelte, and I also feel at home on the backend 
-            using Node/TypeScript. I'm interested in helping inspiring companies create 
-            innovative web apps that users love.`}
+          Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript
+          developer from the Netherlands who likes to push the web beyond its
+          limits. My expertise lies in crafting cutting-edge frontend
+          experiences using React, Angular or Svelte, while also navigating
+          comfortably through backend landscapes with Node and TypeScript. I'm
+          interested in helping inspiring companies create innovative web apps
+          that users love.
         </p>
         <p>
           If you want to discuss an opportunity with me, feel free to{' '}
           <a className="text-primary" href="/15">
             reach out
           </a>
-          . Sometimes I&apos;m available for hire for advice, mentoring or
+          . Sometimes I'm available for hire for advice, mentoring or
           consulting.
         </p>
         <p>
-          {`This year, I joined Rabobank as a lead frontend developer. In my new role, I'll be helping others find their way around the complex environment of Rabobank. I hope to create a sense of community so that developers can more easily ask colleagues for help, conduct code reviews, share code snippets, and generally learn from each other. Of course, I will still be coding myself as well. I wouldn't want to miss that!`}
+          Recently, I embarked on a new journey with Rabobank, stepping into the
+          role of a lead frontend developer. In this position, my aim is to
+          guide others through Rabobank's sometimes complex environment,
+          fostering a community where developers can effortlessly seek
+          assistance, engage in code reviews, exchange code snippets, and
+          collectively grow. And of course, I'll continue coding – an aspect of
+          my career that I always cherish and wouldn't dream of giving up!
         </p>
       </article>
       <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
@@ -40,10 +48,12 @@ export default function About() {
         </h2>
         <ul>
           <li>Platforms: Web, Node.js, Mobile (iOS)</li>
-          <li>Languages: JavaScript, TypeScript, HTML5, CSS3</li>
           <li>
-            Frameworks: React, React Native, Redux, Express, Next.js, Svelte,
-            Sapper, jQuery
+            Languages: JavaScript, TypeScript, Python, Elixir, HTML5, CSS3
+          </li>
+          <li>
+            Frameworks: React, React Native, Redux, Express, Next.js, Angular,
+            Svelte, Sapper, jQuery
           </li>
           <li>
             Tooling & Testing: react-testing-library, Webpack, Lerna, Babel,
