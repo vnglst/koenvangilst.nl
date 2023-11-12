@@ -10,7 +10,7 @@ const clients = allClients.map((client) =>
 export const metadata = {
   title: 'Portfolio',
   description:
-    "Experienced Lead Frontend Developer at Rabobank with a strong background in freelance web development since 2013. Specialized in React for frontend design and TypeScript for backend API development. Here you'll find some of my most recent clients."
+    "Experienced Lead Frontend Developer at Rabobank with a strong background in freelance web development and over a decade of experience. Specialized in React for frontend design and TypeScript for backend API development. Here you'll find some of my most recent clients."
 };
 
 export default function Portfolio() {
@@ -22,15 +22,15 @@ export default function Portfolio() {
         Portfolio
       </h1>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
-        Beginning my journey as a freelance web developer in 2013, I have been
-        involved in a multitude of projects, including the development of a
-        mobile application for a prestigious global fashion retailer, an
-        audioplayer for user with visual impairments and a web application for
-        investment banking professionals. My focus has predominantly been on
-        frontend development, harnessing the power of React to craft user
-        friendly interfaces. In addition to my frontend expertise, I am also
-        adept in backend development using TypeScript and enjoy working with
-        Python and Elixir for occasional side projects.
+        Starting my career as a freelance web developer over a decade ago, I
+        have participated in a wide array of projects. These include developing
+        a mobile application for a well-known global fashion brand, creating an
+        audioplayer designed for users with visual impairments, and engineering
+        a web application tailored for investment banking professionals. My
+        focus has been on frontend development, using the power of React to
+        craft user friendly interfaces. In addition to my frontend expertise, I
+        am also adept in backend development using TypeScript and Node.js. For
+        occasional side projects, I also enjoy in coding with Python and Elixir.
       </p>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         In 2022, I transitioned from my freelance career to a corporate role,
