@@ -2,7 +2,7 @@ import ExternalLink from 'components/ExternalLink';
 import VisitsVisual from 'components/VisitsVisual';
 import { getViewsPerDay } from 'services/supabase';
 
-export const revalidate = 60 * 1;
+export const revalidate = 60 * 60;
 
 export const metadata = {
   title: 'All time visits',
