@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
@@ -139,7 +138,6 @@ export default function RootLayout({ children }: LayoutProps) {
         <Footer />
       </body>
       <Tracking />
-      <Analytics />
     </html>
   );
 }
