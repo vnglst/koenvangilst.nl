@@ -21,10 +21,10 @@ export default function Dashboard() {
       </h1>
       <div className="mb-8">
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          This is my personal dashboard, built with Next.js API routes deployed
-          as serverless functions. I use this dashboard to track various metrics
-          across platforms like Unsplash and GitHub. It also shows daily, weekly
-          & total view counts for my website.
+          This is my personal dashboard, built with React Server Components. I
+          use this dashboard to track various metrics across platforms like
+          Unsplash and GitHub. It also shows daily, weekly & total view counts
+          for my website.
         </p>
       </div>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
