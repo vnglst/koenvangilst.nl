@@ -28,8 +28,7 @@ export default async function TodaysVisits() {
         <ExternalLink href="https://airbnb.io/visx/areas">
           <b>VisX</b>
         </ExternalLink>
-        . The data is fetched from a Supabase endpoint with a custom analytics
-        implementation found in the NextJS middleware.
+        .
       </p>
     </article>
   );
