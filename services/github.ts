@@ -5,8 +5,18 @@ const REPO_STATS = 'https://api.github.com/users/vnglst/repos?per_page=100';
 
 export async function getGithubStats(): Promise<GitHub> {
   try {
-    const userResponse = await fetch(USER_STATS);
-    const userReposResponse = await fetch(REPO_STATS);
+    const userResponse = await fetch(USER_STATS, {
+      next: {
+        revalidate: 60 * 60
+      }
+    });
+
+    const userReposResponse = await fetch(REPO_STATS, {
+      next: {
+        revalidate: 60 * 60
+      }
+    });
+
     const user = await userResponse.json();
     const repositories = await userReposResponse.json();
 
