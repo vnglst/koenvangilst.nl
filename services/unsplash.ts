@@ -13,7 +13,10 @@ export async function getUnsplashStatistics(): Promise<Unsplash> {
   try {
     const response = await fetch(STATIS_URL, {
       headers: HEADERS,
-      method: 'GET'
+      method: 'GET',
+      next: {
+        revalidate: 60 * 60
+      }
     });
 
     invariant(response.status === 200, 'Error retrieving Unsplash statistics');
