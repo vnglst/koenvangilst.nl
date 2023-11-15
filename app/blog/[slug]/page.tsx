@@ -11,7 +11,7 @@ import { getViews } from 'services/supabase';
 
 import { allBlogs } from 'contentlayer/generated';
 
-export const revalidate = 60 * 30; // 30 min
+export const revalidate = 60 * 30;
 
 type PostProps = {
   params: { slug: string };

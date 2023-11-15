@@ -17,7 +17,7 @@ export function ViewCount({ initialCount, path, className }: ViewCountProps) {
   });
 
   const { data: views } = useSWR<number>(
-    isOnScreen ? `/api/views/path?path=${path}` : null,
+    isOnScreen ? `/api/views?path=${path}` : null,
     fetcher,
     { fallbackData: initialCount, revalidateOnFocus: true }
   );

@@ -1,13 +1,8 @@
-'use client';
-
-import useSWR from 'swr';
-
 import MetricCard from 'components/metrics/Card';
-import fetcher from 'lib/fetcher';
-import { Unsplash } from 'services/types';
+import { getUnsplashStatistics } from 'services/unsplash';
 
-export default function UnsplashCard() {
-  const { data } = useSWR<Unsplash>('/api/unsplash', fetcher);
+export default async function UnsplashCard() {
+  const data = await getUnsplashStatistics();
 
   const downloads = Number(data?.downloads);
   const views = Number(data?.views);

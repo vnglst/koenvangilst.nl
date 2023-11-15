@@ -4,7 +4,7 @@ import { getViews } from 'services/supabase';
 import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
 
-export const revalidate = 60 * 30; // 30 min
+export const revalidate = 60 * 30;
 
 export const metadata = {
   title: 'Code Snippets – Koen van Gilst',

@@ -5,7 +5,7 @@ import { allBlogs } from 'contentlayer/generated';
 
 import { Search } from './search';
 
-export const revalidate = 60 * 30; // 30 min
+export const revalidate = 60 * 30;
 
 export const metadata = {
   alternates: {
