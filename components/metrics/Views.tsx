@@ -1,14 +1,14 @@
-'use client';
-
-import useSWR from 'swr';
-
 import MetricCard from 'components/metrics/Card';
-import fetcher from 'lib/fetcher';
+import {
+  getTotalTodayViews,
+  getTotalViews,
+  getTotalWeekViews
+} from 'services/supabase';
 
-export default function Views() {
-  const { data: todaysViews } = useSWR<any>('/api/views/today', fetcher);
-  const { data: weekViews } = useSWR<any>('/api/views/week', fetcher);
-  const { data: totalViews } = useSWR<any>('/api/views/all', fetcher);
+export default async function Views() {
+  const todaysViews = await getTotalTodayViews();
+  const weekViews = await getTotalWeekViews();
+  const totalViews = await getTotalViews();
 
   const link = '/dashboard/alltime';
 

@@ -1,13 +1,8 @@
-'use client';
-
-import useSWR from 'swr';
-
 import MetricCard from 'components/metrics/Card';
-import fetcher from 'lib/fetcher';
-import { GitHub } from 'services/types';
+import { getGithubStats } from 'services/github';
 
-export default function GitHubCard() {
-  const { data } = useSWR<GitHub>('/api/github', fetcher);
+export default async function GitHubCard() {
+  const data = await getGithubStats();
 
   const stars = Number(data?.stars);
   const link = 'https://github.com/vnglst';

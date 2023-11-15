@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Unsplash from './metrics/Unsplash';
 import Disclaimer from './Disclaimer';
 import Waypoint from './Waypoint';
 
@@ -32,7 +31,6 @@ function RoundedImage(props) {
 const MDXComponents = {
   Image: RoundedImage,
   a: CustomLink,
-  Unsplash,
   Disclaimer,
   Waypoint
 };

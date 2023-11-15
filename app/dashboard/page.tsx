@@ -2,7 +2,7 @@ import GitHub from 'components/metrics/Github';
 import Unsplash from 'components/metrics/Unsplash';
 import Views from 'components/metrics/Views';
 
-export const revalidate = 60 * 15; // 30 minutes
+export const revalidate = 60 * 15;
 
 export const metadata = {
   title: 'Dashboard',
