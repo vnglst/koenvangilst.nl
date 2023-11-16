@@ -80,4 +80,47 @@ Trunk-based development, in my experience, represents more than just a branching
 - Requires a cultural shift
 - Feature toggles can be challenging to implement
 
+## Some practical examples
+
+Developing new features on short-lived feature branches:
+
+```mermaid
+gitGraph
+commit
+commit
+branch feature/add-dashboard
+checkout feature/add-dashboard
+commit id: "add dashboard"
+commit id: "add styling"
+checkout main
+merge feature/add-dashboard
+commit
+branch feature/add-profile
+checkout feature/add-profile
+commit id: "add profile"
+commit id: "add unit tests"
+checkout main
+commit
+merge feature/add-profile
+commit
+```
+
+Creating a new release branch from the main branch:
+
+```mermaid
+gitGraph
+commit
+commit
+branch release/2023-02-07
+commit type:HIGHLIGHT id: "release 1"
+checkout main
+commit
+commit
+commit
+branch release/2023-02-09
+commit type:HIGHLIGHT id: "release 2"
+checkout main
+commit
+```
+
 [^1]: The concept of Git Flow was originally introduced in the blog post [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen. His diagram of Git Flow has since then been shared countless times with many teams and on many corporate websites. In 2020 Vincent added a comment that Git Flow is not for everyone, especially when a team is doing continuous deployment.
