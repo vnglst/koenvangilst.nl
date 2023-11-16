@@ -9,6 +9,7 @@
     "build": "next build",
     "dev": "concurrently \"contentlayer dev\" \"next dev\"",
     "start": "next start",
+    "postinstall": "pnpm exec playwright install",
     "lint": "next lint"
   },
   "dependencies": {
