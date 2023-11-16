@@ -1,6 +1,7 @@
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCodeTitles from 'rehype-code-titles';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
@@ -101,6 +102,7 @@ const contentLayerConfig = makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
+      [rehypeMermaid as any, { strategy: 'inline-svg' }],
       rehypeCodeTitles,
       rehypePrismPlus,
       [

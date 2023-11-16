@@ -80,4 +80,62 @@ Trunk-based development, in my experience, represents more than just a branching
 - Requires a cultural shift
 - Feature toggles can be challenging to implement
 
+## Some practical examples
+
+Developing new features on short-lived feature branches works like this:
+
+- git checkout -b `feature/abc`
+- create a PR for review
+- make sure all code is in a releasable state
+- merge to `main` → deployment to development
+
+```mermaid
+gitGraph
+commit id: "feature 1"
+commit id: "feature 2"
+branch feature/add-dashboard
+checkout feature/add-dashboard
+commit id: "add dashboard"
+commit id: "add styling"
+checkout main
+merge feature/add-dashboard
+commit id: "fix 1"
+commit id: "fix 2"
+branch feature/add-profile
+checkout feature/add-profile
+commit id: "add profile"
+checkout main
+commit id: "feature 3"
+checkout feature/add-profile
+commit id: "add unit tests"
+checkout main
+merge feature/add-profile
+commit id: "fix 3"
+```
+
+### Deploying a new release
+
+- create a branch on remote `release/2022-09-22`
+- CI/CD triggers deploy to acceptance
+- tag commit on the release branch → deployment to development
+
+In a diagram this would look like:
+
+```mermaid
+gitGraph
+checkout main
+commit id: "feature 1"
+commit id: "feature 2"
+branch release/2023-02-07
+commit type:HIGHLIGHT id: "release v1" tag: "v1.0.0"
+checkout main
+commit id: "feature 3"
+commit id: "fix 1"
+commit id: "fix 2"
+branch release/2023-02-09
+commit type:HIGHLIGHT id: "release v2" tag: "v2.0.0"
+checkout main
+commit id: "feature 4"
+```
+
 [^1]: The concept of Git Flow was originally introduced in the blog post [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen. His diagram of Git Flow has since then been shared countless times with many teams and on many corporate websites. In 2020 Vincent added a comment that Git Flow is not for everyone, especially when a team is doing continuous deployment.
