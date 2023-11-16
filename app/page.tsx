@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import BlogPostCard from 'components/BlogPostCard';
 
-export const revalidate = 60; // 1 minute
+export const revalidate = 60;
 
 export default function Home() {
   return (
