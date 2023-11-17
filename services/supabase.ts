@@ -120,6 +120,31 @@ export async function getTotalViews(): Promise<number> {
   return list;
 }
 
+export async function getAllTimeList(): Promise<
+  {
+    url: string;
+    views: number;
+  }[]
+> {
+  const { data: views, error } = await supabase
+    .from('totals')
+    .select('total, pathname')
+    .order('total', { ascending: false })
+    .filter('total', 'gt', 200);
+
+  if (error) {
+    console.error('Fetching total views failed', error);
+    return [];
+  }
+
+  const list = views.map((item) => ({
+    url: item.pathname,
+    views: item.total
+  }));
+
+  return list;
+}
+
 /**
  * Tracks a page view for a given pathname, also storing the user agent.
  */
