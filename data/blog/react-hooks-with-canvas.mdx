@@ -13,6 +13,16 @@ tags:
   - canvas
 ---
 
+<Disclaimer>
+  This tutorial was written in March 2019, when React Hooks were just released.
+  It was written in the spirit of those times and when I look back at it now, I
+  notice that the tutorial overuses some of the hooks. Nowadays I would be
+  hesitant to use `useEffect` so extensively and I would handle side effects in
+  event handler functions instead. That said, I still think it's a good tutorial
+  to get a feel for how hooks work and how you can compose them to create custom
+  hooks.
+</Disclaimer>
+
 In this tutorial, I will use React Hooks to create an html canvas drawing website. I will start from zero using the _Create React App_ starter kit. The [resulting app](https://han-hooks.netlify.com/) offers basic features like `Clear`, `Undo` and saves drawings using localStorage.
 
 With this tutorial, I'd like to show you how hooks make the composition and reuse of stateful logic possible using _custom hooks_.
