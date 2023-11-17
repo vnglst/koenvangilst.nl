@@ -82,7 +82,7 @@ Trunk-based development, in my experience, represents more than just a branching
 
 ## Some practical examples
 
-Developing new features on short-lived feature branches works like this:
+Developing new features on short-lived feature branches could work like this:
 
 - git checkout -b `feature/abc`
 - create a PR for review
@@ -114,6 +114,10 @@ commit id: "fix 3"
 ```
 
 ### Deploying a new release
+
+Ideally, the deployment process is fully automated in a CI/CD pipeline. It would then be a matter of automatically deploying the latest main to production regularly.
+
+In the early phases of a project, this might not be the case yet. In that case, you could opt for using release branches like this:
 
 - create a branch on remote `release/2022-09-22`
 - CI/CD triggers deploy to acceptance
