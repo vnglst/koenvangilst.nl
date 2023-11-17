@@ -15,14 +15,10 @@ export default async function TodaysVisits() {
     <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full overflow-hidden">
       <div className="mb-4 w-full max-w-2xl mx-auto">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          Visits Graph Past 365 Days
+          Visitor Stats
         </h1>
       </div>
       <VisitsVisual visits={visits} />
-      <p className="w-full max-w-2xl mx-auto my-10 tracking-tight text-gray-700 dark:text-gray-400">
-        This is a visual showing all page views for the last 365 days. It was
-        build using ECharts.
-      </p>
     </article>
   );
 }

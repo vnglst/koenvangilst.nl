@@ -32,15 +32,25 @@ export function VisitsVisual({ visits }: { visits: View[] }) {
     const chart = echarts.init(chartRef.current);
     chart.setOption(generateOptions(visits));
 
+    function handleResize() {
+      chart.resize();
+    }
+
+    window.addEventListener('resize', handleResize);
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    mediaQuery.addEventListener('change', handleResize);
+
     return () => {
       chart.dispose();
+      window.removeEventListener('resize', handleResize);
+      mediaQuery.removeEventListener('change', handleResize);
     };
   }, [chartRef, visits]);
 
   return (
     <div
       ref={chartRef}
-      className="aspect-video min-h-[50vh] md:min-h-0 w-full rounded-xl overflow-hidden"
+      className="aspect-video min-h-[80vh] md:min-h-0 w-full rounded-xl overflow-hidden"
     ></div>
   );
 }
@@ -51,8 +61,21 @@ function generateOptions(visits: View[]) {
   });
 
   return {
-    darkMode: true,
-    backgroundColor: new echarts.graphic.RadialGradient(0, 0, 10, [
+    title: {
+      padding: 20,
+      text: 'Visits Past 365 Days',
+      textStyle: {
+        color: '#fff',
+        fontFamily: 'var(--font-montserrat), sans-serif'
+      },
+      left: 'center'
+    },
+    bar: {
+      itemStyle: {
+        borderRadius: [15, 15, 0, 0]
+      }
+    },
+    backgroundColor: new echarts.graphic.RadialGradient(0, 0, 8, [
       {
         offset: 0,
         color: '#111827'
@@ -76,8 +99,8 @@ function generateOptions(visits: View[]) {
 
           const visits = new Intl.NumberFormat('en-US').format(item.data[1]);
           tooltipContent += `
-            <div class="flex flex-col p-2 gap-2">
-              <div class="pr-5">${date}</div>
+            <div class="flex flex-col p-3 gap-1">
+              <div>${date}</div>
               <div class="flex flex-row gap-2 justify-between items-center">
                 Visits
                 <div class="font-bold">
@@ -138,6 +161,9 @@ function generateOptions(visits: View[]) {
         data: data,
         emphasis: {
           focus: 'series'
+        },
+        itemStyle: {
+          borderRadius: [15, 15, 0, 0]
         },
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
