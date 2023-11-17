@@ -64,6 +64,33 @@ function generateOptions(visits: View[]) {
     ]),
     tooltip: {
       trigger: 'axis',
+      formatter: (params) => {
+        let tooltipContent = '';
+
+        params.forEach((item) => {
+          const date = new Date(item.data[0]).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          const visits = new Intl.NumberFormat('en-US').format(item.data[1]);
+          tooltipContent += `
+            <div class="flex flex-col p-2 gap-2">
+              <div class="pr-5">${date}</div>
+              <div class="flex flex-row gap-2 justify-between items-center">
+                Visits
+                <div class="font-bold">
+                  ${visits}
+                </div>
+              </div>
+            </div>`;
+        });
+
+        return tooltipContent;
+      },
+      padding: 0,
+      margin: 0,
       axisPointer: {
         type: 'cross',
         label: {
