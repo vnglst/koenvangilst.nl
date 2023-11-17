@@ -3,14 +3,11 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 import { createClient } from '@supabase/supabase-js';
 
+import { View } from './types';
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: false }
 });
-
-type View = {
-  created_at: string;
-  count: number;
-};
 
 /**
  * Retrieves the view count for a given pathname.
@@ -119,6 +116,31 @@ export async function getTotalViews(): Promise<number> {
   }
 
   const list = views.reduce((prev, item) => prev + item.total, 0);
+
+  return list;
+}
+
+export async function getAllTimeList(): Promise<
+  {
+    url: string;
+    views: number;
+  }[]
+> {
+  const { data: views, error } = await supabase
+    .from('totals')
+    .select('total, pathname')
+    .order('total', { ascending: false })
+    .filter('total', 'gt', 200);
+
+  if (error) {
+    console.error('Fetching total views failed', error);
+    return [];
+  }
+
+  const list = views.map((item) => ({
+    url: item.pathname,
+    views: item.total
+  }));
 
   return list;
 }

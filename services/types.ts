@@ -7,3 +7,8 @@ export type Unsplash = {
   downloads?: number;
   views?: number;
 };
+
+export type View = {
+  created_at: string;
+  count: number;
+};
