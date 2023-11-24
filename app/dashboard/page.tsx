@@ -1,8 +1,8 @@
+import { Suspense } from 'react';
+
 import GitHub from 'components/metrics/Github';
 import Unsplash from 'components/metrics/Unsplash';
 import Views from 'components/metrics/Views';
-
-export const revalidate = 1;
 
 export const metadata = {
   title: 'Dashboard',
@@ -30,7 +30,9 @@ export default function Dashboard() {
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
         <Unsplash />
         <GitHub />
-        <Views />
+        <Suspense>
+          <Views />
+        </Suspense>
       </div>
     </div>
   );
