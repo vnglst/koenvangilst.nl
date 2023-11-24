@@ -31,7 +31,7 @@ dependencies:
 
 devDependencies:
   '@playwright/test':
-    specifier: ^1.40.0
+    specifier: ^1.39.0
     version: 1.40.0
   '@tailwindcss/typography':
     specifier: 0.5.10
@@ -4192,7 +4192,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.4.2
       mermaid: 10.6.1
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4975,12 +4975,6 @@ packages:
   /pirates@4.0.5:
     resolution: {integrity: sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==}
     engines: {node: '>= 6'}
-    dev: true
-
-  /playwright-core@1.39.0:
-    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
-    engines: {node: '>=16'}
-    hasBin: true
     dev: true
 
   /playwright-core@1.40.0:

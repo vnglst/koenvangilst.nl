@@ -24,7 +24,7 @@
     "swr": "2.2.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
+    "@playwright/test": "^1.39.0",
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.9.1",
     "@types/react": "18.2.37",

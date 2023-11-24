@@ -10,24 +10,22 @@ export default async function Views() {
   const weekViews = await getTotalWeekViews();
   const totalViews = await getTotalViews();
 
-  const link = '/dashboard/alltime';
-
   return (
     <>
       <MetricCard
         header="Daily Website Views"
         metric={todaysViews}
-        link={link}
+        link="/dashboard/alltime"
       />
       <MetricCard
         header="Weekly Website Views"
         metric={weekViews}
-        link={link}
+        link="/dashboard/alltime"
       />
       <MetricCard
         header="Total Website Views"
         metric={totalViews}
-        link={link}
+        link="/dashboard/stats"
       />
     </>
   );
