@@ -47,12 +47,7 @@ export function VisitsVisual({ visits }: { visits: View[] }) {
     };
   }, [chartRef, visits]);
 
-  return (
-    <div
-      ref={chartRef}
-      className="aspect-video min-h-[80vh] md:min-h-0 w-full rounded-xl overflow-hidden"
-    ></div>
-  );
+  return <div ref={chartRef} className="h-full w-full" />;
 }
 
 function generateOptions(visits: View[]) {
