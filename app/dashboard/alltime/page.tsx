@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
-import Link from 'next/link';
 
 import { VisitsVisual } from 'components/VisitsVisual';
-import { getAllTimeList, getViewsPerDay } from 'services/supabase';
+import { getViewsPerDay } from 'services/supabase';
 
 export const revalidate = 60 * 60;
 
