@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Disclaimer from './Disclaimer';
-import Waypoint from './Waypoint';
+import Disclaimer from '../ui/Disclaimer';
+import Waypoint from '../ui/Waypoint';
 
 const CustomLink = (props) => {
   const href = props.href;

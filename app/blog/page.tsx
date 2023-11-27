@@ -1,4 +1,5 @@
 import { getViews, getViewsPerMonth } from 'services/supabase';
+import { Heading } from 'ui/Heading';
 
 import { pick } from 'contentlayer/client';
 import { allBlogs } from 'contentlayer/generated';
@@ -39,9 +40,7 @@ export default async function Blog() {
 
   return (
     <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-        Blog
-      </h1>
+      <Heading level={1}>Blog</Heading>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         {`I've been writing online since 2016, mostly about web development (React & Svelte).
           In total, I've written ${posts.length} articles on this site.

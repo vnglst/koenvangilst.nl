@@ -1,3 +1,5 @@
+import { Heading } from 'ui/Heading';
+
 export const metadata = {
   title: 'Credits',
   alternates: {
@@ -8,9 +10,7 @@ export const metadata = {
 export default function Credits() {
   return (
     <div className="flex flex-col justify-center items-start max-w-2xl m-auto">
-      <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-        Credits
-      </h1>
+      <Heading level={1}>Credits</Heading>
       <div className="mb-8 text-gray-600 dark:text-gray-400">
         <p className="mb-4">
           The code of this website is inspired by{' '}

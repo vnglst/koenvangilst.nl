@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import BlogPost from 'components/BlogPost';
-import Icon from 'components/Icon';
+import Icon from 'ui/Icon';
 
 import { Blog } from 'contentlayer/generated';
 

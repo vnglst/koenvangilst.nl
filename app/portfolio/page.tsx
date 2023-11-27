@@ -1,4 +1,5 @@
 import ClientProject from 'components/ClientProject';
+import { Heading } from 'ui/Heading';
 
 import { pick } from 'contentlayer/client';
 import { allClients } from 'contentlayer/generated';
@@ -18,9 +19,7 @@ export default function Portfolio() {
 
   return (
     <article className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-        Portfolio
-      </h1>
+      <Heading level={1}>Portfolio</Heading>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         Starting my career as a freelance web developer over a decade ago, I
         have participated in a wide array of projects. These include developing
@@ -39,9 +38,7 @@ export default function Portfolio() {
         guiding a team of developers.
       </p>
 
-      <h3 className="mt-8 mb-8 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-        Recent projects
-      </h3>
+      <Heading level={2}>Recent projects</Heading>
       {sorted.map((client) => {
         return (
           <ClientProject

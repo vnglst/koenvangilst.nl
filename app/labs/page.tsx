@@ -1,4 +1,5 @@
 import LabProject from 'components/LabProject';
+import { Heading } from 'ui/Heading';
 
 import { pick } from 'contentlayer/client';
 import { allProjects } from 'contentlayer/generated';
@@ -21,9 +22,10 @@ export default function Labs() {
 
   return (
     <article className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+      {/* <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
         JavaScript Labs
-      </h1>
+      </h1> */}
+      <Heading level={1}>JavaScript Labs</Heading>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         Below, you'll find a collection of JavaScript projects I've been
         tinkering with. You'll see a mix of educational progressive web apps, a

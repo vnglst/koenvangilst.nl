@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import { getViews } from 'services/supabase';
+import Icon from 'ui/Icon';
 
-import Icon from './Icon';
 import { ViewCount } from './ViewCount';
 
 export default async function BlogPostCard({ title, slug }) {

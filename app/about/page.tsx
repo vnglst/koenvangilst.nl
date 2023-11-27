@@ -1,3 +1,5 @@
+import { Heading } from 'ui/Heading';
+
 export const metadata = {
   title: 'About',
   openGraph: {
@@ -10,10 +12,8 @@ export const metadata = {
 
 export default function About() {
   return (
-    <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-        About Me
-      </h1>
+    <div className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
+      <Heading level={1}>About Me</Heading>
       <article className="mb-4 prose leading-6 text-gray-600 dark:text-gray-400">
         <p>
           Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript
@@ -42,9 +42,7 @@ export default function About() {
         </p>
       </article>
       <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
-        <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-          Skills
-        </h2>
+        <Heading level={2}>Skills</Heading>
         <ul>
           <li>Platforms: Web, Node.js, Mobile (iOS)</li>
           <li>
@@ -69,9 +67,7 @@ export default function About() {
         </ul>
       </article>
       <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
-        <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-          Education
-        </h2>
+        <Heading level={2}>Education</Heading>
         <ul>
           <li>
             M.A. in Philosophy, Utrecht University (<i>cum laude</i>).
@@ -80,6 +76,6 @@ export default function About() {
           <li>Erasmus Student Exchange, Universität Regensburg (Germany).</li>
         </ul>
       </article>
-    </article>
+    </div>
   );
 }

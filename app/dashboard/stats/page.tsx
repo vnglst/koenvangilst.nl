@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { getAllTimeList } from 'services/supabase';
+import { Heading } from 'ui/Heading';
 
 export const revalidate = 60 * 60;
 
@@ -11,15 +12,16 @@ export const metadata = {
 };
 
 export default async function AllLinks() {
+  const allTime = getAllTimeList();
+
   return (
     <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full overflow-hidden text-black dark:text-white">
       <div className="container mx-auto py-8 my-5">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-7">
-          All links visits
-        </h1>
+        <Heading level={1}>All links visits</Heading>
+        All links visits
         <ul className="my-2 min-h-[3000px]">
           <Suspense>
-            <LinksContainer />
+            <LinksContainer allTime={allTime} />
           </Suspense>
         </ul>
       </div>
@@ -27,10 +29,14 @@ export default async function AllLinks() {
   );
 }
 
-async function LinksContainer() {
-  const allTime = await getAllTimeList();
+type LinksContainerProps = {
+  allTime: Promise<{ url: string; views: number }[]>;
+};
 
-  return allTime.map((item, index) => (
+async function LinksContainer({ allTime }: LinksContainerProps) {
+  const list = await allTime;
+
+  return list.map((item, index) => (
     <li key={index} className="w-full flex py-1">
       <Link href={item.url} className="w-full py-2">
         <div className="flex flex-col justify-between md:flex-row">
