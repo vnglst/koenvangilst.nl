@@ -1,3 +1,5 @@
+import { Article } from 'ui/Article';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 export const metadata = {
@@ -9,32 +11,24 @@ export const metadata = {
 
 export default function Credits() {
   return (
-    <div className="flex flex-col justify-center items-start max-w-2xl m-auto">
+    <Container centered>
       <Heading level={1}>Credits</Heading>
-      <div className="mb-8 text-gray-600 dark:text-gray-400">
-        <p className="mb-4">
+      <Article>
+        <p>
           The code of this website is inspired by{' '}
-          <a href="https://leerob.io/" className="underline">
-            Lee Robinsons personal website
-          </a>{' '}
-          using the following tech stack:
+          <a href="https://leerob.io/">Lee Robinsons personal website</a> using
+          the following tech stack:
         </p>
-        <ul className="list-inside list-disc">
+        <ul>
           <li>Framework: Next.js</li>
           <li>Deployment: Vercel</li>
           <li>Styling: Tailwind CSS</li>
         </ul>
-        <p className="mt-4">
+        <p>
           The source code of this website can be found{' '}
-          <a
-            href="https://github.com/vnglst/koenvangilst.nl"
-            className="underline"
-          >
-            on Github
-          </a>
-          .
+          <a href="https://github.com/vnglst/koenvangilst.nl">on Github</a>.
         </p>
-      </div>
-    </div>
+      </Article>
+    </Container>
   );
 }

@@ -8,15 +8,15 @@ export function Heading({ children, level = 1, ...props }) {
   switch (level) {
     case 1:
       className =
-        'mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white';
+        'my-4 text-3xl md:text-5xl font-bold tracking-tight text-black dark:text-white';
       break;
     case 2:
       className =
-        'mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white';
+        'mt-10 mb-6 text-2xl md:text-4xl font-bold tracking-tight text-black dark:text-white';
       break;
     default:
       className =
-        'mb-6 font-bold text-2xl md:text-4xl tracking-tight  text-black dark:text-white';
+        'mt-6 mb-4 text-xl md:text-3xl font-bold tracking-tight text-black dark:text-white';
       break;
   }
 

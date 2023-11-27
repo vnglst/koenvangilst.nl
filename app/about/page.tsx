@@ -1,3 +1,5 @@
+import { Article } from 'ui/Article';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 export const metadata = {
@@ -12,9 +14,9 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
+    <Container>
       <Heading level={1}>About Me</Heading>
-      <article className="mb-4 prose leading-6 text-gray-600 dark:text-gray-400">
+      <Article>
         <p>
           Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript
           developer from the Netherlands who likes to push the web beyond its
@@ -40,8 +42,7 @@ export default function About() {
           coding myself – an aspect of my career that I love and wouldn't dream
           of giving up!
         </p>
-      </article>
-      <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
+
         <Heading level={2}>Skills</Heading>
         <ul>
           <li>Platforms: Web, Node.js, Mobile (iOS)</li>
@@ -65,8 +66,7 @@ export default function About() {
             Manager, Heroku, AWS, Google Cloud, Jira, Sentry
           </li>
         </ul>
-      </article>
-      <article className="mb-8 prose leading-6 text-gray-600 dark:text-gray-400">
+
         <Heading level={2}>Education</Heading>
         <ul>
           <li>
@@ -75,7 +75,7 @@ export default function About() {
           <li>Minor in Computational Science, Utrecht University.</li>
           <li>Erasmus Student Exchange, Universität Regensburg (Germany).</li>
         </ul>
-      </article>
-    </div>
+      </Article>
+    </Container>
   );
 }

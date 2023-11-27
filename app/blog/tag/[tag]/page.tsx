@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import BlogPost from 'components/BlogPost';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 import { Tag } from 'ui/Tag';
 
@@ -23,9 +24,9 @@ export default async function TagPage({ params }: TagPageProps) {
   const tagLabel = params.tag.split('-').join(' ');
 
   return (
-    <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16 break-words">
+    <Container>
       <Heading level={1}>Posts about {tagLabel}</Heading>
-      <section className="relative w-full mb-4">
+      <section className="w-full mb-4">
         <p className="mt-6 mb-6 text-gray-600 dark:text-gray-400">
           There are <b>{blogs.length} post(s)</b> about the topic {tagLabel}.
         </p>
@@ -33,7 +34,7 @@ export default async function TagPage({ params }: TagPageProps) {
           <BlogPost key={post.title} {...post} />
         ))}
       </section>
-      <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
+      <section className="text-sm text-gray-700 dark:text-gray-300 mt-8">
         <Heading level={2}>Other tags</Heading>
         <ul className="flex flex-wrap w-full gap-3">
           {getUniqueTagSlugs().map((tag) => (
@@ -42,8 +43,8 @@ export default async function TagPage({ params }: TagPageProps) {
             </li>
           ))}
         </ul>
-      </footer>
-    </article>
+      </section>
+    </Container>
   );
 }
 

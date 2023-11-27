@@ -1,4 +1,6 @@
 import { getViews, getViewsPerMonth } from 'services/supabase';
+import { Article } from 'ui/Article';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 import { pick } from 'contentlayer/client';
@@ -16,16 +18,16 @@ export const metadata = {
   description: `I've been writing online since 2016, mostly about web development (React & Svelte). In total, I've written ${allBlogs.length} articles on this site.`
 };
 
-// Do this outside the render cycle so we only have to do this once
-const posts = allBlogs
-  .map((post) =>
-    pick(post, ['slug', 'title', 'summary', 'publishedAt', 'tags'])
-  )
-  .sort(
-    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
-  );
-
 export default async function Blog() {
+  const posts = allBlogs
+    .map((post) =>
+      pick(post, ['slug', 'title', 'summary', 'publishedAt', 'tags'])
+    )
+    .sort(
+      (a, b) =>
+        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+    );
+
   const postsWithViews = await Promise.all(
     posts.map(async (post) => {
       const views = await getViews('/blog/' + post.slug);
@@ -38,17 +40,17 @@ export default async function Blog() {
     .sort((a, b) => b.viewsPerMonth - a.viewsPerMonth)
     .slice(0, 6);
 
+  const totalViews = postsWithViews.reduce((acc, post) => acc + post.views, 0);
+
   return (
-    <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
+    <Container>
       <Heading level={1}>Blog</Heading>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
-        {`I've been writing online since 2016, mostly about web development (React & Svelte).
+      <Article>
+        {`I've been writing online since 2016, mostly about web development.
           In total, I've written ${posts.length} articles on this site.
-          Use the search below to filter by title. They've been viewed a total of ${postsWithViews
-            .reduce((acc, post) => acc + post.views, 0)
-            .toLocaleString()} times.`}
-      </p>
+          Use the search below to filter by title. They've been viewed a total of ${totalViews.toLocaleString()} times.`}
+      </Article>
       <Search posts={postsWithViews} placeholderPosts={mostPopularPosts} />
-    </div>
+    </Container>
   );
 }

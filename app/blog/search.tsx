@@ -40,7 +40,7 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
 
   return (
     <>
-      <div className="relative w-full mb-4">
+      <div className="relative w-full my-4">
         <input
           aria-label="Search articles"
           type="text"

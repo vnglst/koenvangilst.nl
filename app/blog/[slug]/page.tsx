@@ -7,6 +7,7 @@ import { getMDXComponent } from 'next-contentlayer/hooks';
 import components from 'components/MDXComponents';
 import { ViewCount } from 'components/ViewCount';
 import { getViews } from 'services/supabase';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 import { Tag } from 'ui/Tag';
 
@@ -30,7 +31,7 @@ export default async function Post({ params }: PostProps) {
   const Component = getMDXComponent(post.body.code);
 
   return (
-    <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16 break-words">
+    <Container>
       <Heading level={1}>{post.title}</Heading>
       <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
         <div className="flex items-center">
@@ -92,7 +93,7 @@ export default async function Post({ params }: PostProps) {
           {'Edit on GitHub'}
         </a>
       </footer>
-    </article>
+    </Container>
   );
 }
 

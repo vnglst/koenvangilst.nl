@@ -131,7 +131,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <Nav />
         <main
           id="content"
-          className="flex flex-col px-8 bg-gray-50 dark:bg-gray-900 pt-8 md:pt-16 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
+          className="flex flex-col px-8 pt-8 md:pt-16 bg-gray-50 dark:bg-gray-900 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
         >
           {children}
         </main>
