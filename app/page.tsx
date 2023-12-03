@@ -1,74 +1,85 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import BlogPostCard from 'components/BlogPostCard';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import Icon from 'components/Icon';
+import { ViewCount } from 'components/ViewCount';
+import { getViews } from 'services/supabase';
 
 export const revalidate = 60;
 
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16 min-h-screen">
-      <article className="flex flex-col-reverse sm:flex-row items-start">
+    <Container centered>
+      <section className="mb-4 flex flex-col-reverse items-start sm:flex-row">
         <div className="flex flex-col pr-8">
-          <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
-            Koen van Gilst
-          </h1>
-          <h2 className="text-gray-700 dark:text-gray-200 mb-4">
+          <Heading level={1}>Koen van Gilst</Heading>
+          <div className="mb-4 text-gray-700 dark:text-gray-200">
             Lead Frontend Developer at{' '}
             <span className="font-semibold">Rabobank</span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-16">
-            {`I'm a passionate and entrepreneurial web developer from the Netherlands who likes to push the web beyond its limits.`}
+          </div>
+          <p className="text-gray-600 dark:text-gray-400">
+            I'm a passionate and entrepreneurial web developer from the
+            Netherlands who likes to push the web beyond its limits.
           </p>
         </div>
-        <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
+        <div className="relative mr-auto mt-4 w-[80px] sm:w-[176px]">
           <Image
             alt="Koen van Gilst"
             height={176}
             width={176}
             src="/avatar.jpg"
-            className="rounded-full filter grayscale"
+            className="rounded-full grayscale filter"
             priority
           />
         </div>
-      </article>
-      <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
-        Featured
-      </h3>
-      <section className="flex gap-6 flex-col md:flex-row">
-        <BlogPostCard
+      </section>
+      <Heading level={2}>Featured</Heading>
+      <section className="flex flex-col gap-6 md:flex-row">
+        <FeaturedCard
           title="Why I Prefer Trunk-Based Development"
           slug="trunkbased-development"
         />
-        <BlogPostCard
+        <FeaturedCard
           title="Code Colocation is King"
           slug="code-colocation-is-king"
         />
-        <BlogPostCard
+        <FeaturedCard
           title="Live user cursors with Phoenix Presence"
           slug="phoenix-live-cursors"
         />
       </section>
       <Link
         href="/blog"
-        className="flex content-center justify-center justify-items-center item-center mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+        className="item-center mb-12 mt-8 flex h-6 content-center justify-center justify-items-center rounded-lg leading-7 text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
       >
         Read all posts
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 ml-1"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
-          />
-        </svg>
+        <Icon icon="arrow-right" className="ml-1 h-6 w-6" />
       </Link>
-    </div>
+    </Container>
+  );
+}
+
+async function FeaturedCard({ title, slug }) {
+  const views = await getViews('/blog/' + slug);
+
+  return (
+    <Link
+      href={`/blog/${slug}`}
+      className="up-hover flex w-full flex-col justify-between rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 dark:bg-black md:w-1/3"
+    >
+      <h4 className="mb-6 w-full text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 sm:mb-10 md:text-lg">
+        {title}
+      </h4>
+      <div className="capsize flex items-center text-gray-800 dark:text-gray-200">
+        <Icon icon="eye" className="h-6 w-6" />
+        <ViewCount
+          className="capsize ml-2 align-baseline"
+          initialCount={views}
+          path={`/blog/${slug}`}
+        />
+      </div>
+    </Link>
   );
 }

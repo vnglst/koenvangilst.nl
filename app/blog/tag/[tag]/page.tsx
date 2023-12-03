@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import BlogPost from 'components/BlogPost';
+import { BlogPostLink } from 'components/BlogPostLink';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
 import { Tag } from 'components/Tag';
 
 import { allBlogs } from 'contentlayer/generated';
@@ -22,32 +24,27 @@ export default async function TagPage({ params }: TagPageProps) {
   const tagLabel = params.tag.split('-').join(' ');
 
   return (
-    <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16 break-words">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-        Posts about {tagLabel}
-      </h1>
-      <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center"></div>
-      <section className="relative w-full mb-4">
-        <p className="mt-6 mb-6 text-gray-600 dark:text-gray-400">
+    <Container>
+      <Heading level={1}>Posts about {tagLabel}</Heading>
+      <section className="mb-4 w-full">
+        <p className="mb-6 mt-6 text-gray-600 dark:text-gray-400">
           There are <b>{blogs.length} post(s)</b> about the topic {tagLabel}.
         </p>
         {blogs.map((post) => (
-          <BlogPost key={post.title} {...post} />
+          <BlogPostLink key={post.title} {...post} />
         ))}
       </section>
-      <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
-        <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-          Other tags
-        </h2>
-        <ul className="flex flex-wrap w-full gap-3">
+      <section className="mt-8 text-sm text-gray-700 dark:text-gray-300">
+        <Heading level={2}>Other tags</Heading>
+        <ul className="flex w-full flex-wrap gap-3">
           {getUniqueTagSlugs().map((tag) => (
             <li key={tag}>
               <Tag tag={tag} />
             </li>
           ))}
         </ul>
-      </footer>
-    </article>
+      </section>
+    </Container>
   );
 }
 

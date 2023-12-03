@@ -3,7 +3,10 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import components from 'components/MDXComponents';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { components } from 'components/MDXComponents';
+import { Prose } from 'components/Prose';
 
 import { allProjects } from 'contentlayer/generated';
 
@@ -17,11 +20,9 @@ export default function Project({ params }: { params: { slug: string } }) {
   const Component = getMDXComponent(project.body.code);
 
   return (
-    <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-        {project.name}
-      </h1>
-      <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
+    <Container>
+      <Heading level={1}>{project.name}</Heading>
+      <div className="mb-6 mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-center">
           <Image
             alt="Koen van Gilst"
@@ -36,14 +37,14 @@ export default function Project({ params }: { params: { slug: string } }) {
             {project.year}
           </p>
         </div>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
+        <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
           {project.readingTime.text}
         </p>
       </div>
-      <section className="w-full mt-4 prose dark:prose-dark max-w-none">
+      <Prose as="section">
         <Component components={components} />
-      </section>
-    </article>
+      </Prose>
+    </Container>
   );
 }
 

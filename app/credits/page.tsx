@@ -1,3 +1,7 @@
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { Prose } from 'components/Prose';
+
 export const metadata = {
   title: 'Credits',
   alternates: {
@@ -7,34 +11,24 @@ export const metadata = {
 
 export default function Credits() {
   return (
-    <div className="flex flex-col justify-center items-start max-w-2xl m-auto">
-      <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-        Credits
-      </h1>
-      <div className="mb-8 text-gray-600 dark:text-gray-400">
-        <p className="mb-4">
+    <Container centered>
+      <Prose>
+        <Heading level={1}>Credits</Heading>
+        <p>
           The code of this website is inspired by{' '}
-          <a href="https://leerob.io/" className="underline">
-            Lee Robinsons personal website
-          </a>{' '}
-          using the following tech stack:
+          <a href="https://leerob.io/">Lee Robinsons personal website</a> using
+          the following tech stack:
         </p>
-        <ul className="list-inside list-disc">
+        <ul>
           <li>Framework: Next.js</li>
           <li>Deployment: Vercel</li>
           <li>Styling: Tailwind CSS</li>
         </ul>
-        <p className="mt-4">
+        <p>
           The source code of this website can be found{' '}
-          <a
-            href="https://github.com/vnglst/koenvangilst.nl"
-            className="underline"
-          >
-            on Github
-          </a>
-          .
+          <a href="https://github.com/vnglst/koenvangilst.nl">on Github</a>.
         </p>
-      </div>
-    </div>
+      </Prose>
+    </Container>
   );
 }
