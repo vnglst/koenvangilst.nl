@@ -13,13 +13,13 @@ export default function ExternalLink({
 
   return (
     <a
-      className="text-gray-500 hover:text-gray-600 transition"
+      className="text-gray-500 transition hover:text-gray-600"
       target="_blank"
       rel={`noopener noreferrer${extraRel}`}
       href={href}
     >
       {children}
-      <Icon icon="external-link" className="h-4 w-4 ml-1 inline" />
+      <Icon icon="external-link" className="ml-1 inline h-4 w-4" />
     </a>
   );
 }

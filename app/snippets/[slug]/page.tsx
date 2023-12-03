@@ -2,7 +2,10 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import components from 'components/MDXComponents';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { components } from 'components/MDXComponents';
+import { Prose } from 'components/Prose';
 
 import { allSnippets } from 'contentlayer/generated';
 
@@ -20,31 +23,27 @@ export default function SnippetPage({ params }: SnippetPageProps) {
   const Component = getMDXComponent(snippet.body.code);
 
   return (
-    <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
-      <div className="flex justify-between w-full mb-8">
+    <Container>
+      <div className="mb-5 flex w-full justify-between">
         <div>
-          <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-            {snippet.title}
-          </h1>
+          <Heading level={1}>{snippet.title}</Heading>
           <p className="text-gray-700 dark:text-gray-300">
             {snippet.description}
           </p>
         </div>
-        <div className="mt-2 sm:mt-0">
-          <Image
-            alt={snippet.title}
-            height={48}
-            width={48}
-            src={`/static/logos/${snippet.logo}`}
-            className="rounded-full"
-            priority
-          />
-        </div>
+        <Image
+          alt={snippet.title}
+          height={48}
+          width={48}
+          src={`/static/logos/${snippet.logo}`}
+          className="mt-4 aspect-square h-8 w-8 rounded-full md:h-12 md:w-12"
+          priority
+        />
       </div>
-      <div className="prose dark:prose-dark w-full">
+      <Prose as="section">
         <Component components={components} />
-      </div>
-    </article>
+      </Prose>
+    </Container>
   );
 }
 
