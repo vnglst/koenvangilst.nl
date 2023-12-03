@@ -105,12 +105,6 @@ h1 {
   @apply text-gray-800 dark:text-gray-200;
 }
 
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
-}
-
 .prose a.footnote-back {
   @apply border-none;
   @apply bg-transparent;

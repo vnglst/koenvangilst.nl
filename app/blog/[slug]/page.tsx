@@ -55,7 +55,7 @@ export default async function Post({ params }: PostProps) {
         </p>
       </div>
       {post.tagsAsSlugs && (
-        <ul className="flex flex-wrap w-full mt-4 gap-2">
+        <ul className="flex flex-wrap w-full my-4 gap-2">
           {post.tagsAsSlugs.map((tag: string) => (
             <li key={tag}>
               <Tag tag={tag} />
@@ -63,14 +63,14 @@ export default async function Post({ params }: PostProps) {
           ))}
         </ul>
       )}
-      <section className="w-full prose dark:prose-dark max-w-none">
+      <section className="prose dark:prose-dark">
         {post.image && post.image.showAsHeader ? (
           <Image
             alt={post.image.alt}
             src={post.image.src}
             width={post.image.width}
             height={post.image.height}
-            className="my-0 rounded-lg inline-block"
+            className="rounded-lg inline-block"
             priority
           />
         ) : null}

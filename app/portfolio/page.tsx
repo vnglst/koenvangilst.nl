@@ -21,8 +21,8 @@ export default function Portfolio() {
 
   return (
     <Container>
-      <Heading level={1}>Portfolio</Heading>
       <Article>
+        <Heading level={1}>Portfolio</Heading>
         <p>
           Starting my career as a freelance web developer over a decade ago, I
           have participated in a wide array of projects. These include

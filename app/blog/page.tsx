@@ -44,8 +44,8 @@ export default async function Blog() {
 
   return (
     <Container>
-      <Heading level={1}>Blog</Heading>
       <Article>
+        <Heading level={1}>Blog</Heading>
         {`I've been writing online since 2016, mostly about web development.
           In total, I've written ${posts.length} articles on this site.
           Use the search below to filter by title. They've been viewed a total of ${totalViews.toLocaleString()} times.`}

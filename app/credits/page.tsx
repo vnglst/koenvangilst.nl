@@ -12,8 +12,8 @@ export const metadata = {
 export default function Credits() {
   return (
     <Container centered>
-      <Heading level={1}>Credits</Heading>
       <Article>
+        <Heading level={1}>Credits</Heading>
         <p>
           The code of this website is inspired by{' '}
           <a href="https://leerob.io/">Lee Robinsons personal website</a> using

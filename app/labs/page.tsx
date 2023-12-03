@@ -24,8 +24,8 @@ export default function Labs() {
 
   return (
     <Container>
-      <Heading level={1}>JavaScript Labs</Heading>
       <Article>
+        <Heading level={1}>JavaScript Labs</Heading>
         <p>
           Below, you'll find a collection of JavaScript projects I've been
           tinkering with. You'll see a mix of educational progressive web apps,

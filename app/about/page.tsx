@@ -15,8 +15,8 @@ export const metadata = {
 export default function About() {
   return (
     <Container>
-      <Heading level={1}>About Me</Heading>
       <Article>
+        <Heading level={1}>About Me</Heading>
         <p>
           Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript
           developer from the Netherlands who likes to push the web beyond its
