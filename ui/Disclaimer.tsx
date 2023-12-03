@@ -1,6 +1,6 @@
 export default function Disclaimer({ children }) {
   return (
-    <div className="bg-gray-200 dark:bg-gray-800 p-2 border-l-8 px-8 border-gray-400 rounded-md dark:border-gray-500">
+    <div className="rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
       {children}
     </div>
   );

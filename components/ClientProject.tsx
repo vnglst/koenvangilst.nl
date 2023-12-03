@@ -10,12 +10,12 @@ type Props = {
 export default function ClientProject({ title, summary, slug, year }: Props) {
   return (
     <Link href={`/portfolio/${slug}`} className="w-full">
-      <article className="w-full mb-4 py-3 up-hover">
+      <article className="up-hover mb-4 w-full py-3">
         <div className="flex items-baseline">
-          <div className="text-primary  text-left mr-6 leading-2">{year}</div>
+          <div className="leading-2  mr-6 text-left text-primary">{year}</div>
           <div className="w-full">
             <div className="flex flex-col justify-between md:flex-row">
-              <h4 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
+              <h4 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
                 {title}
               </h4>
             </div>

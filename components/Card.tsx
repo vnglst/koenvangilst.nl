@@ -23,10 +23,10 @@ export default async function MetricCard({ header, link, metric }: Props) {
       <div className="flex items-center">
         {header}
         {isExternalLink ? (
-          <Icon icon="external-link" className="h-4 w-4 ml-1" />
+          <Icon icon="external-link" className="ml-1 h-4 w-4" />
         ) : null}
       </div>
-      <p className="mt-2 text-3xl font-bold spacing-sm text-black dark:text-white">
+      <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
         {metricNumber > 0 ? metricNumber.toLocaleString() : '-'}
       </p>
     </Link>

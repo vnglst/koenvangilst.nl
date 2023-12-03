@@ -33,7 +33,7 @@ export default async function Post({ params }: PostProps) {
   return (
     <Container>
       <Heading level={1}>{post.title}</Heading>
-      <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
+      <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-center">
           <Image
             alt="Koen van Gilst"
@@ -48,14 +48,14 @@ export default async function Post({ params }: PostProps) {
             {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
           </p>
         </div>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 min-w-32 md:mt-0">
+        <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
           {post.readingTime.text}
           {` • `}
           <ViewCount initialCount={views} path={`/blog/${post.slug}`} />
         </p>
       </div>
       {post.tagsAsSlugs && (
-        <ul className="flex flex-wrap w-full my-4 gap-2">
+        <ul className="my-4 flex w-full flex-wrap gap-2">
           {post.tagsAsSlugs.map((tag: string) => (
             <li key={tag}>
               <Tag tag={tag} />
@@ -70,13 +70,13 @@ export default async function Post({ params }: PostProps) {
             src={post.image.src}
             width={post.image.width}
             height={post.image.height}
-            className="rounded-lg inline-block"
+            className="inline-block rounded-lg"
             priority
           />
         ) : null}
         <Component components={components} />
       </section>
-      <footer className="text-sm text-gray-700 dark:text-gray-300 mt-8">
+      <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
         <a
           href={getDiscussUrl(post.slug)}
           target="_blank"

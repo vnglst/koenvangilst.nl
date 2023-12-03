@@ -12,7 +12,7 @@ export default function SnippetCard({
   return (
     <Link
       href={`/snippets/${slug}`}
-      className="bg-gray-50 dark:bg-black border-dashed border-gray-400 border rounded-xl p-4 w-full up-hover"
+      className="up-hover w-full rounded-xl border border-dashed border-gray-400 bg-gray-50 p-4 dark:bg-black"
       {...rest}
     >
       <div className="flex content-baseline justify-between">
@@ -27,7 +27,7 @@ export default function SnippetCard({
           {views} views
         </span>
       </div>
-      <h3 className="text-lg font-bold text-left mt-2 text-gray-900 dark:text-gray-100">
+      <h3 className="mt-2 text-left text-lg font-bold text-gray-900 dark:text-gray-100">
         {title}
       </h3>
       <p className="mt-1 text-gray-700 dark:text-gray-400">{description}</p>

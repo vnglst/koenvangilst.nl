@@ -34,17 +34,17 @@ export default async function Dashboard() {
   const link = 'https://github.com/vnglst';
 
   return (
-    <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+    <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">
       <Heading level={1}>Dashboard</Heading>
       <div className="mb-8">
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-400">
           This is my personal dashboard, built with React Server Components. I
           use this dashboard to track various metrics across platforms like
           Unsplash and GitHub. It also shows daily, weekly & total view counts
           for my website.
         </p>
       </div>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
+      <div className="my-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         <MetricCard
           header="Unsplash Downloads"
           link={link}

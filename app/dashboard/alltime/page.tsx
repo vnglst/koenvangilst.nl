@@ -16,11 +16,11 @@ export default async function TodaysVisits() {
   const visits = getViewsPerDay(365);
 
   return (
-    <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full overflow-hidden text-black dark:text-white">
-      <div className="mb-4 w-full max-w-2xl mx-auto">
+    <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center overflow-hidden text-black dark:text-white">
+      <div className="mx-auto mb-4 w-full max-w-2xl">
         <Heading level={1}>Visitor Stats</Heading>
       </div>
-      <div className="aspect-video min-h-[80vh] md:min-h-0 w-full rounded-xl overflow-hidden bg-[#111827]">
+      <div className="aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl bg-[#111827] md:min-h-0">
         <Suspense>
           <VisualContainer visits={visits} />
         </Suspense>

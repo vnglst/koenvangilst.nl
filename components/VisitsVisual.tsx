@@ -50,7 +50,7 @@ export function VisitsVisual({ visits }: { visits: View[] }) {
   return (
     <div
       ref={chartRef}
-      className="aspect-video min-h-[80vh] md:min-h-0 w-full rounded-xl overflow-hidden bg-[#111827]"
+      className="aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl bg-[#111827] md:min-h-0"
     />
   );
 }

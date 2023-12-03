@@ -95,7 +95,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${montserrat.variable} ${inter.variable} font-sans min-w-[360px] scroll-smooth md:overflow-x-scroll`}
+      className={`${montserrat.variable} ${inter.variable} min-w-[360px] scroll-smooth font-sans md:overflow-x-scroll`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: LayoutProps) {
         type="application/rss+xml"
         href="https://koenvangilst.nl/feed.xml"
       ></link>
-      <body className="bg-white dark:bg-black text-white dark:text-black">
+      <body className="bg-white text-white dark:bg-black dark:text-black">
         <script
           defer
           id="theme"
@@ -131,7 +131,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <Nav />
         <main
           id="content"
-          className="flex flex-col px-8 pt-8 md:pt-16 bg-gray-50 dark:bg-gray-900 bg-gradient-to-b from-white dark:from-black to-gray-100 dark:to-gray-900 min-h-screen break-words"
+          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 px-8 pt-8 dark:bg-gray-900 dark:from-black dark:to-gray-900 md:pt-16"
         >
           {children}
         </main>

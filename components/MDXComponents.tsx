@@ -22,7 +22,7 @@ function RoundedImage(props) {
   return (
     <Image
       alt={props.alt}
-      className="my-1 rounded-lg inline-block"
+      className="my-1 inline-block rounded-lg"
       {...props}
     />
   );

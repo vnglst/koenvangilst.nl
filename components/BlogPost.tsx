@@ -16,13 +16,13 @@ export default function BlogPost({
 }: BlogPostProps) {
   return (
     <Link href={`/blog/${slug}`} className="w-full no-underline">
-      <div className="w-full mb-8 up-hover">
+      <div className="up-hover mb-8 w-full">
         <div className="flex flex-col justify-between md:flex-row">
-          <h3 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
+          <h3 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
             {title}
           </h3>
           <ViewCount
-            className="w-64 mb-4 text-left text-gray-500 md:text-right md:mb-0"
+            className="mb-4 w-64 text-left text-gray-500 md:mb-0 md:text-right"
             initialCount={views}
             path={`/blog/${slug}`}
           />

@@ -4,9 +4,9 @@ import ExternalLink from '../ui/ExternalLink';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-center px-8 mb-12">
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto w-full">
-        <div className="w-full max-w-2xl grid grid-cols-1 gap-4 pb-16 sm:grid-cols-4 mt-8">
+    <footer className="mb-12 flex flex-col justify-center px-8">
+      <div className="mx-auto flex w-full max-w-2xl flex-col items-start justify-center">
+        <div className="mt-8 grid w-full max-w-2xl grid-cols-1 gap-4 pb-16 sm:grid-cols-4">
           <div className="flex flex-col space-y-4">
             <Link href="/" className="text-gray-500 hover:text-gray-600">
               Home
@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <span className="text-gray-500 text-right text-xs my-4">
+      <span className="my-4 text-right text-xs text-gray-500">
         v. {process.env.APP_VERSION} |{' '}
         <a
           className="underline"

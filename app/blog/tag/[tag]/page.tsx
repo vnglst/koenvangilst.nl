@@ -26,17 +26,17 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <Container>
       <Heading level={1}>Posts about {tagLabel}</Heading>
-      <section className="w-full mb-4">
-        <p className="mt-6 mb-6 text-gray-600 dark:text-gray-400">
+      <section className="mb-4 w-full">
+        <p className="mb-6 mt-6 text-gray-600 dark:text-gray-400">
           There are <b>{blogs.length} post(s)</b> about the topic {tagLabel}.
         </p>
         {blogs.map((post) => (
           <BlogPost key={post.title} {...post} />
         ))}
       </section>
-      <section className="text-sm text-gray-700 dark:text-gray-300 mt-8">
+      <section className="mt-8 text-sm text-gray-700 dark:text-gray-300">
         <Heading level={2}>Other tags</Heading>
-        <ul className="flex flex-wrap w-full gap-3">
+        <ul className="flex w-full flex-wrap gap-3">
           {getUniqueTagSlugs().map((tag) => (
             <li key={tag}>
               <Tag tag={tag} />

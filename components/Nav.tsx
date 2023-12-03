@@ -8,10 +8,10 @@ import ThemeToggle from './ThemeToggle';
 
 export default function Nav() {
   return (
-    <nav className="sticky top-0 z-10 flex gap-4 items-center justify-start p-4 md:px-8 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-saturate-50">
+    <nav className="sticky top-0 z-10 flex items-center justify-start gap-4 bg-white bg-opacity-80 p-4 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80 md:px-8">
       <a
         href="#content"
-        className="absolute px-4 py-3 bg-gray-800 dark:text-white transition-transform duration-200 transform -top-12 focus:translate-y-32"
+        className="absolute -top-12 transform bg-gray-800 px-4 py-3 transition-transform duration-200 focus:translate-y-32 dark:text-white"
       >
         Skip to content
       </a>
@@ -36,7 +36,7 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
         isActive
           ? 'font-semibold text-gray-800 dark:text-gray-200'
           : 'font-normal text-gray-600 dark:text-gray-400',
-        'inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:ring-2 ring-primary transition-all'
+        'inline-block rounded-lg p-1 ring-primary transition-all hover:ring-2 sm:px-3 sm:py-2'
       )}
     >
       <span className="capsize">{text}</span>
@@ -52,7 +52,7 @@ export function NavItemHome() {
     <NextLink
       href="/"
       className={
-        'font-normal text-gray-600 dark:text-gray-400 p-1 sm:px-3 sm:py-2 rounded-lg hover:ring-2 ring-primary transition-all'
+        'rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400 sm:px-3 sm:py-2'
       }
     >
       <svg
