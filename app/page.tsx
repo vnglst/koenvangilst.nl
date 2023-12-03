@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import BlogPostCard from 'components/BlogPostCard';
+import { FeaturedCard } from 'components/FeaturedCard';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 import Icon from 'ui/Icon';
@@ -36,15 +36,15 @@ export default function Home() {
       </section>
       <Heading level={2}>Featured</Heading>
       <section className="flex flex-col gap-6 md:flex-row">
-        <BlogPostCard
+        <FeaturedCard
           title="Why I Prefer Trunk-Based Development"
           slug="trunkbased-development"
         />
-        <BlogPostCard
+        <FeaturedCard
           title="Code Colocation is King"
           slug="code-colocation-is-king"
         />
-        <BlogPostCard
+        <FeaturedCard
           title="Live user cursors with Phoenix Presence"
           slug="phoenix-live-cursors"
         />
