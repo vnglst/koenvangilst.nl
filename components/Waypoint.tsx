@@ -1,6 +1,6 @@
 import Icon from './Icon';
 
-export default function Waypoint({ href }) {
+export function Waypoint({ href }) {
   return (
     <div className="my-5 md:ml-[-27px]">
       <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}

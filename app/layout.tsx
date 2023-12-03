@@ -1,8 +1,8 @@
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
-import Footer from 'components/Footer';
-import Nav from 'components/Nav';
+import { Footer } from 'components/Footer';
+import { Nav } from 'components/Nav';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';

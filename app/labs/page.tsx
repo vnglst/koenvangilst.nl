@@ -1,7 +1,7 @@
-import LabProject from 'components/LabProject';
-import { Prose } from 'ui/Prose';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import Icon from 'components/Icon';
+import { Prose } from 'components/Prose';
 
 import { pick } from 'contentlayer/client';
 import { allProjects } from 'contentlayer/generated';
@@ -37,7 +37,7 @@ export default function Labs() {
       <Heading level={2}>Side projects</Heading>
       {sorted.map((client) => {
         return (
-          <LabProject
+          <LabProjectLink
             title={client.name}
             year={client.year}
             summary={client.summary}
@@ -47,5 +47,41 @@ export default function Labs() {
         );
       })}
     </Container>
+  );
+}
+
+type Props = {
+  title: string;
+  summary: string;
+  url: string;
+  year: number;
+};
+
+function LabProjectLink({ title, summary, url, year }: Props) {
+  const isExternal = url.startsWith('https://');
+  return (
+    <a
+      href={url}
+      target={isExternal ? '_blank' : ''}
+      className="w-full"
+      rel="noreferrer"
+    >
+      <article className="up-hover mb-4 w-full py-3">
+        <div className="flex items-baseline">
+          <div className="mr-6 text-left text-primary">{year}</div>
+          <div className="w-full">
+            <div className="flex flex-col justify-between md:flex-row">
+              <h4 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
+                {title}
+                {isExternal && (
+                  <Icon icon="external-link" className="ml-2 inline h-4 w-4" />
+                )}
+              </h4>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">{summary}</p>
+          </div>
+        </div>
+      </article>
+    </a>
   );
 }

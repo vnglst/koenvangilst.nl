@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import BlogPost from 'components/BlogPost';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
-import { Tag } from 'ui/Tag';
+import { BlogPostLink } from 'components/BlogPostLink';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { Tag } from 'components/Tag';
 
 import { allBlogs } from 'contentlayer/generated';
 
@@ -31,7 +31,7 @@ export default async function TagPage({ params }: TagPageProps) {
           There are <b>{blogs.length} post(s)</b> about the topic {tagLabel}.
         </p>
         {blogs.map((post) => (
-          <BlogPost key={post.title} {...post} />
+          <BlogPostLink key={post.title} {...post} />
         ))}
       </section>
       <section className="mt-8 text-sm text-gray-700 dark:text-gray-300">

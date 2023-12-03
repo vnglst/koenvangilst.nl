@@ -2,10 +2,10 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import components from 'components/MDXComponents';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
-import { Prose } from 'ui/Prose';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { components } from 'components/MDXComponents';
+import { Prose } from 'components/Prose';
 
 import { allSnippets } from 'contentlayer/generated';
 

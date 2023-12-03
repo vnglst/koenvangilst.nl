@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 
-import BlogPost from 'components/BlogPost';
-import Icon from 'ui/Icon';
+import { BlogPostLink } from 'components/BlogPostLink';
+import Icon from 'components/Icon';
 
-import { Blog } from 'contentlayer/generated';
+import type { Blog } from 'contentlayer/generated';
 
 type Post = Pick<
   Blog,
@@ -60,13 +60,13 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
             Popular this month
           </h2>
           {placeholderPosts.map((post) => (
-            <BlogPost key={post.title} {...post} />
+            <BlogPostLink key={post.title} {...post} />
           ))}
           <h2 className="mb-6 mt-8 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
             All Posts
           </h2>
           {posts.map((post) => (
-            <BlogPost key={post.title} {...post} />
+            <BlogPostLink key={post.title} {...post} />
           ))}
         </>
       ) : (
@@ -75,7 +75,7 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
             Search result
           </h2>
           {searchResults.map((post) => (
-            <BlogPost key={post.title} {...post} />
+            <BlogPostLink key={post.title} {...post} />
           ))}
           {searchResults.length === 0 && (
             <p className="mb-4 text-gray-600 dark:text-gray-400">

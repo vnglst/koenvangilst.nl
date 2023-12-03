@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { Prose } from 'ui/Prose';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { Prose } from 'components/Prose';
 
 export const metadata = {
   title: '404 – Not found'

@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
 import { getAllTimeList } from 'services/supabase';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
 
 export const revalidate = 60 * 60;
 

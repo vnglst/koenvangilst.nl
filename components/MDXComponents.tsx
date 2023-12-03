@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Disclaimer from '../ui/Disclaimer';
-import Waypoint from '../ui/Waypoint';
+import { Disclaimer } from './Disclaimer';
+import { Waypoint } from './Waypoint';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -28,11 +28,9 @@ function RoundedImage(props) {
   );
 }
 
-const MDXComponents = {
+export const components = {
   Image: RoundedImage,
   a: CustomLink,
   Disclaimer,
   Waypoint
 };
-
-export default MDXComponents;

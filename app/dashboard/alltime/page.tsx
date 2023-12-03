@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getViewsPerDay } from 'services/supabase';
 import { View } from 'services/types';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
 
 export const revalidate = 60 * 60;
 

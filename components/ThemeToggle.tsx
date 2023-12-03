@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 
-import Icon from 'ui/Icon';
+import Icon from 'components/Icon';
 
 const PREFERS_DARK = '(prefers-color-scheme: dark)';
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {

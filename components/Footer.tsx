@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import ExternalLink from '../ui/ExternalLink';
+import ExternalLink from './ExternalLink';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="mb-12 flex flex-col justify-center px-8">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-start justify-center">

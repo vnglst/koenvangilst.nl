@@ -3,12 +3,7 @@ const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} \*/
 module.exports = {
   mode: 'jit',
-  content: [
-    './app/**/*.tsx',
-    './components/**/*.tsx',
-    './styles/**/*.css',
-    './ui/**/*.tsx'
-  ],
+  content: ['./app/**/*.tsx', './components/**/*.tsx', './styles/**/*.css'],
   darkMode: 'class',
   theme: {
     extend: {

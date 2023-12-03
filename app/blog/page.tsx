@@ -1,7 +1,7 @@
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import { Prose } from 'components/Prose';
 import { getViews, getViewsPerMonth } from 'services/supabase';
-import { Prose } from 'ui/Prose';
-import { Container } from 'ui/Container';
-import { Heading } from 'ui/Heading';
 
 import { pick } from 'contentlayer/client';
 import { allBlogs } from 'contentlayer/generated';

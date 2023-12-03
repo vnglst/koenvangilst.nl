@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import type { Blog } from 'contentlayer/generated';
+import { Blog } from 'contentlayer/generated';
 
 import { ViewCount } from './ViewCount';
 
@@ -8,12 +8,7 @@ type BlogPostProps = Pick<Blog, 'title' | 'summary' | 'slug'> & {
   views?: number;
 };
 
-export default function BlogPost({
-  title,
-  summary,
-  slug,
-  views
-}: BlogPostProps) {
+export function BlogPostLink({ title, summary, slug, views }: BlogPostProps) {
   return (
     <Link href={`/blog/${slug}`} className="w-full no-underline">
       <div className="up-hover mb-8 w-full">
