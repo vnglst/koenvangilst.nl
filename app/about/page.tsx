@@ -1,4 +1,4 @@
-import { Article } from 'ui/Article';
+import { Prose } from 'ui/Prose';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
@@ -15,7 +15,7 @@ export const metadata = {
 export default function About() {
   return (
     <Container>
-      <Article>
+      <Prose>
         <Heading level={1}>About Me</Heading>
         <p>
           Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript
@@ -75,7 +75,7 @@ export default function About() {
           <li>Minor in Computational Science, Utrecht University.</li>
           <li>Erasmus Student Exchange, Universität Regensburg (Germany).</li>
         </ul>
-      </Article>
+      </Prose>
     </Container>
   );
 }

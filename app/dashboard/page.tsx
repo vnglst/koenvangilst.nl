@@ -8,6 +8,7 @@ import {
   getTotalWeekViews
 } from 'services/supabase';
 import { getUnsplashStatistics } from 'services/unsplash';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 export const metadata = {
@@ -34,7 +35,7 @@ export default async function Dashboard() {
   const link = 'https://github.com/vnglst';
 
   return (
-    <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">
+    <Container>
       <Heading level={1}>Dashboard</Heading>
       <div className="mb-8">
         <p className="mb-4 text-gray-600 dark:text-gray-400">
@@ -74,6 +75,6 @@ export default async function Dashboard() {
           />
         </Suspense>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -9,6 +9,7 @@ import { ViewCount } from 'components/ViewCount';
 import { getViews } from 'services/supabase';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
+import { Prose } from 'ui/Prose';
 import { Tag } from 'ui/Tag';
 
 import { allBlogs } from 'contentlayer/generated';
@@ -63,7 +64,7 @@ export default async function Post({ params }: PostProps) {
           ))}
         </ul>
       )}
-      <section className="prose dark:prose-dark">
+      <Prose as="section">
         {post.image && post.image.showAsHeader ? (
           <Image
             alt={post.image.alt}
@@ -75,7 +76,7 @@ export default async function Post({ params }: PostProps) {
           />
         ) : null}
         <Component components={components} />
-      </section>
+      </Prose>
       <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
         <a
           href={getDiscussUrl(post.slug)}

@@ -1,7 +1,7 @@
 import ClientProject from 'components/ClientProject';
-import { Article } from 'ui/Article';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
+import { Prose } from 'ui/Prose';
 
 import { pick } from 'contentlayer/client';
 import { allClients } from 'contentlayer/generated';
@@ -21,7 +21,7 @@ export default function Portfolio() {
 
   return (
     <Container>
-      <Article>
+      <Prose>
         <Heading level={1}>Portfolio</Heading>
         <p>
           Starting my career as a freelance web developer over a decade ago, I
@@ -41,7 +41,7 @@ export default function Portfolio() {
           continue to leverage my skill set, leading innovative projects and
           guiding a team of developers.
         </p>
-      </Article>
+      </Prose>
 
       <Heading level={2}>Recent projects</Heading>
       {sorted.map((client) => {

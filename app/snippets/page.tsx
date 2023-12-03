@@ -1,8 +1,8 @@
 import SnippetCard from 'components/SnippetCard';
 import { getViews } from 'services/supabase';
-import { Article } from 'ui/Article';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
+import { Prose } from 'ui/Prose';
 
 import { pick } from 'contentlayer/client';
 import { allSnippets } from 'contentlayer/generated';
@@ -31,14 +31,14 @@ export default async function Snippets() {
 
   return (
     <Container>
-      <Article>
+      <Prose>
         <Heading level={1}>Code Snippets</Heading>
         <p>
-          {`These are a collection of code snippets I've used in the past and
+          These are a collection of code snippets I've used in the past and
           saved. They include React hooks, TypeScript tips, random CSS snippets
-          and Node.js scripts.`}
+          and Node.js scripts.
         </p>
-      </Article>
+      </Prose>
       <div className="my-2 mt-4 grid w-full grid-cols-1 gap-8 sm:grid-cols-2">
         {mostPopular.map((snippet) => (
           <SnippetCard

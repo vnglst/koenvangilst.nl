@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import components from 'components/MDXComponents';
+import { Container } from 'ui/Container';
+import { Heading } from 'ui/Heading';
+import { Prose } from 'ui/Prose';
 
 import { allProjects } from 'contentlayer/generated';
 
@@ -17,11 +20,9 @@ export default function Project({ params }: { params: { slug: string } }) {
   const Component = getMDXComponent(project.body.code);
 
   return (
-    <article className="mx-auto mb-16 flex w-full max-w-2xl flex-col items-start justify-center">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
-        {project.name}
-      </h1>
-      <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
+    <Container>
+      <Heading level={1}>{project.name}</Heading>
+      <div className="mb-6 mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-center">
           <Image
             alt="Koen van Gilst"
@@ -40,10 +41,10 @@ export default function Project({ params }: { params: { slug: string } }) {
           {project.readingTime.text}
         </p>
       </div>
-      <section className="prose mt-4 w-full max-w-none dark:prose-dark">
+      <Prose as="section">
         <Component components={components} />
-      </section>
-    </article>
+      </Prose>
+    </Container>
   );
 }
 

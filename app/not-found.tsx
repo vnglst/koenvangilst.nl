@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Article } from 'ui/Article';
+import { Prose } from 'ui/Prose';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
@@ -11,7 +11,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <Container centered>
-      <Article>
+      <Prose>
         <Heading level={1}>404 - Not found</Heading>
         <p>
           It seems you've found something that used to exist, or you spelled
@@ -24,7 +24,7 @@ export default function NotFound() {
         >
           Return Home
         </Link>
-      </Article>
+      </Prose>
     </Container>
   );
 }

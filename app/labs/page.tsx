@@ -1,5 +1,5 @@
 import LabProject from 'components/LabProject';
-import { Article } from 'ui/Article';
+import { Prose } from 'ui/Prose';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
@@ -24,7 +24,7 @@ export default function Labs() {
 
   return (
     <Container>
-      <Article>
+      <Prose>
         <Heading level={1}>JavaScript Labs</Heading>
         <p>
           Below, you'll find a collection of JavaScript projects I've been
@@ -33,7 +33,7 @@ export default function Labs() {
           these as playgrounds to dive deeper into new tech or libraries, so the
           code is just me having a bit of fun. Nothing too formal! 🐒
         </p>
-      </Article>
+      </Prose>
       <Heading level={2}>Side projects</Heading>
       {sorted.map((client) => {
         return (

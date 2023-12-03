@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getViewsPerDay } from 'services/supabase';
 import { View } from 'services/types';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 export const revalidate = 60 * 60;
@@ -16,16 +17,14 @@ export default async function TodaysVisits() {
   const visits = getViewsPerDay(365);
 
   return (
-    <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center overflow-hidden text-black dark:text-white">
-      <div className="mx-auto mb-4 w-full max-w-2xl">
-        <Heading level={1}>Visitor Stats</Heading>
-      </div>
-      <div className="aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl bg-[#111827] md:min-h-0">
+    <Container>
+      <Heading level={1}>Visitor Stats</Heading>
+      <section className="mt-4 aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl bg-[#111827] md:min-h-0">
         <Suspense>
           <VisualContainer visits={visits} />
         </Suspense>
-      </div>
-    </article>
+      </section>
+    </Container>
   );
 }
 

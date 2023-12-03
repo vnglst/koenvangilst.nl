@@ -1,4 +1,4 @@
-import { Article } from 'ui/Article';
+import { Prose } from 'ui/Prose';
 import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
@@ -12,7 +12,7 @@ export const metadata = {
 export default function Credits() {
   return (
     <Container centered>
-      <Article>
+      <Prose>
         <Heading level={1}>Credits</Heading>
         <p>
           The code of this website is inspired by{' '}
@@ -28,7 +28,7 @@ export default function Credits() {
           The source code of this website can be found{' '}
           <a href="https://github.com/vnglst/koenvangilst.nl">on Github</a>.
         </p>
-      </Article>
+      </Prose>
     </Container>
   );
 }

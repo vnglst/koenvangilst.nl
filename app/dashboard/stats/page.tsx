@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { getAllTimeList } from 'services/supabase';
+import { Container } from 'ui/Container';
 import { Heading } from 'ui/Heading';
 
 export const revalidate = 60 * 60;
@@ -15,17 +16,15 @@ export default async function AllLinks() {
   const allTime = getAllTimeList();
 
   return (
-    <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center overflow-hidden text-black dark:text-white">
-      <div className="container mx-auto my-5 py-8">
-        <Heading level={1}>All links visits</Heading>
-        All links visits
-        <ul className="my-2 min-h-[3000px]">
-          <Suspense>
-            <LinksContainer allTime={allTime} />
-          </Suspense>
-        </ul>
-      </div>
-    </article>
+    <Container>
+      <Heading level={1}>All links visits</Heading>
+      All links visits
+      <ul className="my-2 min-h-[3000px]">
+        <Suspense>
+          <LinksContainer allTime={allTime} />
+        </Suspense>
+      </ul>
+    </Container>
   );
 }
 
