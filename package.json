@@ -15,7 +15,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",
     "clsx": "2.0.0",
-    "date-fns": "2.30.0",
     "echarts": "^5.4.3",
     "encoding": "^0.1.13",
     "next": "14.0.3",
