@@ -1,4 +1,3 @@
-import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -46,7 +45,11 @@ export default async function Post({ params }: PostProps) {
           />
           <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
             {'Koen van Gilst / '}
-            {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
+            {new Date(post.publishedAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
           </p>
         </div>
         <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">

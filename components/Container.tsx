@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
-import cx from 'clsx';
+
+import { cx } from 'lib/clsx';
 
 type ContainerProps = {
   centered?: boolean;
@@ -11,10 +12,7 @@ export function Container({
 }: PropsWithChildren<ContainerProps>) {
   const classes = cx(
     'flex flex-col items-start justify-center w-full max-w-2xl',
-    {
-      'm-auto': centered,
-      'mx-auto mb-16': !centered
-    }
+    centered ? 'mx-auto' : 'mx-auto mb-16'
   );
 
   return <div className={classes}>{children}</div>;

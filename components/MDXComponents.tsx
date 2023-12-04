@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Disclaimer } from './Disclaimer';
-import { Waypoint } from './Waypoint';
+import Icon from './Icon';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -25,6 +24,25 @@ function RoundedImage(props) {
       className="my-1 inline-block rounded-lg"
       {...props}
     />
+  );
+}
+
+function Disclaimer({ children }) {
+  return (
+    <div className="rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
+      {children}
+    </div>
+  );
+}
+
+export function Waypoint({ href }) {
+  return (
+    <div className="my-5 md:ml-[-27px]">
+      <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}
+      <a href={href} className="ml-2" target="_blank" rel="noopener noreferrer">
+        Commit on Github
+      </a>
+    </div>
   );
 }
 

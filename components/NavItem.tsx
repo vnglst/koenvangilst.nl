@@ -1,8 +1,9 @@
 'use client';
 
-import cn from 'clsx';
 import NextLink from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
+
+import { cx } from 'lib/clsx';
 
 export function NavItem({ slug, text }: { slug: string; text: string }) {
   const segment = useSelectedLayoutSegment();
@@ -11,7 +12,7 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
   return (
     <NextLink
       href={`/${slug}`}
-      className={cn(
+      className={cx(
         isActive
           ? 'font-semibold text-gray-800 dark:text-gray-200'
           : 'font-normal text-gray-600 dark:text-gray-400',
@@ -42,14 +43,14 @@ export function NavItemHome() {
         aria-label="terminal with blinking cursor"
       >
         <path
-          className={cn(
+          className={cx(
             isActive ? 'text-primary' : 'text-gray-600 dark:text-gray-400'
           )}
           fill="currentColor"
           d="m218.2 230.54c-15.65-15.65-140.86-140.86-156.51-156.51-5.12-5.13-11.53-7.83-18.53-7.83-7.02 0-13.43 2.71-18.53 7.83-1.68 1.68-15.12 15.12-16.8 16.8-5.12 5.12-7.82 11.53-7.82 18.5 0 7.02 2.71 13.43 7.83 18.53l121.2 121.2c-72.73 72.73-113.13 113.14-121.21 121.22-5.12 5.12-7.83 11.53-7.83 18.52 0 7 2.71 13.41 7.83 18.51 1.68 1.67 15.07 15.07 16.75 16.74 5.1 5.16 11.53 7.88 18.58 7.88 7.03 0 13.44-2.72 18.52-7.83 15.65-15.65 140.88-140.87 156.53-156.52 5.12-5.13 7.82-11.53 7.82-18.52 0-6.98-2.7-13.38-7.83-18.52z"
         />
         <path
-          className={cn(
+          className={cx(
             isActive ? 'blink text-primary' : 'text-gray-600 dark:text-gray-400'
           )}
           fill="currentColor"
