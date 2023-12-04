@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import { cx } from 'lib/clsx';
 
 type ContainerProps = {
-  centered: boolean;
+  centered?: boolean;
 };
 
 export function Container({
