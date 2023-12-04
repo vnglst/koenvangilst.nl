@@ -1,12 +1,7 @@
+const icons = ['search', 'spinner', 'eye', 'external-link', 'arrow-right'];
+
 type IconProps = {
-  icon:
-    | 'search'
-    | 'spinner'
-    | 'eye'
-    | 'external-link'
-    | 'arrow-right'
-    | 'sun'
-    | 'moon';
+  icon: (typeof icons)[number];
   className?: string;
 };
 
