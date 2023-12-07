@@ -1,3 +1,4 @@
+import { getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -35,7 +36,7 @@ function Disclaimer({ children }) {
   );
 }
 
-export function Waypoint({ href }) {
+function Waypoint({ href }) {
   return (
     <div className="my-5 md:ml-[-27px]">
       <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}
@@ -46,9 +47,23 @@ export function Waypoint({ href }) {
   );
 }
 
-export const components = {
-  Image: RoundedImage,
-  a: CustomLink,
-  Disclaimer,
-  Waypoint
+type MDXComponentProps = {
+  additionalComponents?: Record<string, React.ComponentType>;
+  code: string;
 };
+
+export function MDXComponent({
+  additionalComponents,
+  code
+}: MDXComponentProps) {
+  const components = {
+    Image: RoundedImage,
+    a: CustomLink,
+    Disclaimer,
+    Waypoint,
+    ...additionalComponents
+  };
+
+  const Cmp = getMDXComponent(code);
+  return <Cmp components={components} />;
+}

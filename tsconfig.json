@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -15,9 +19,6 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,
-    "paths": {
-      "contentlayer/generated": ["./.contentlayer/generated"]
-    },
     "plugins": [
       {
         "name": "next"
@@ -30,8 +31,9 @@
     "environment.d.ts",
     "**/*.tsx",
     "**/*.ts",
-    "contentlayer/generated",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

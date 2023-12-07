@@ -13,19 +13,6 @@ h1 {
   font-family: var(--font-montserrat), sans-serif;
 }
 
-/* https://seek-oss.github.io/capsize/ */
-.capsize::before {
-  content: '';
-  margin-bottom: -0.098em;
-  display: table;
-}
-
-.capsize::after {
-  content: '';
-  margin-top: -0.219em;
-  display: table;
-}
-
 /* make sure footnotes don't fall under nav bar */
 [id^='fnref'] {
   scroll-margin-top: 150px;

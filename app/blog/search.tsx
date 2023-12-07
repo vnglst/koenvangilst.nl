@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 
-import { BlogPostLink } from 'components/BlogPostLink';
 import Icon from 'components/Icon';
+import { BlogPostLink } from 'components/PostLink';
 
-import type { Blog } from 'contentlayer/generated';
-
-type Post = Pick<
-  Blog,
-  'slug' | 'title' | 'summary' | 'publishedAt' | 'tags'
-> & {
+type Post = {
+  title: string;
+  summary: string;
+  tags: string[];
+  slug: string;
   views: number;
 };
 

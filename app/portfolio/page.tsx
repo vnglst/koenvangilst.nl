@@ -1,15 +1,9 @@
+import { getClients } from 'cms/queries';
 import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
-
-import { pick } from 'contentlayer/client';
-import { allClients } from 'contentlayer/generated';
-
-const clients = allClients.map((client) =>
-  pick(client, ['slug', 'name', 'year', 'summary'])
-);
 
 export const metadata = {
   title: 'Portfolio',
@@ -17,8 +11,10 @@ export const metadata = {
     "Experienced Lead Frontend Developer at Rabobank with a strong background in freelance web development and over a decade of experience. Specialized in React for frontend design and TypeScript for backend API development. Here you'll find some of my most recent clients."
 };
 
-export default function Portfolio() {
-  const sorted = clients.sort((a, b) => Number(b.year) - Number(a.year));
+export default async function Portfolio() {
+  const sorted = (await getClients()).sort(
+    (a, b) => Number(b.year) - Number(a.year)
+  );
 
   return (
     <Container>

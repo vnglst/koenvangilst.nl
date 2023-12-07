@@ -1,63 +1,32 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
+import { getProject, getProjects } from 'cms/queries';
 import { notFound } from 'next/navigation';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
-import { components } from 'components/MDXComponents';
-import { Prose } from 'components/Prose';
+import { MarkdownLayout } from 'components/MarkdownLayout';
 
-import { allProjects } from 'contentlayer/generated';
+type PageProps = {
+  params: { slug: string };
+};
 
-export default function Project({ params }: { params: { slug: string } }) {
-  const project = findProjectBySlug(params.slug);
+export default async function Page({ params }: PageProps) {
+  const project = await getProject(params.slug);
 
   if (!project) {
     notFound();
   }
 
-  const Component = getMDXComponent(project.body.code);
-
   return (
-    <Container>
-      <Heading level={1}>{project.name}</Heading>
-      <div className="mb-6 mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
-        <div className="flex items-center">
-          <Image
-            alt="Koen van Gilst"
-            height={24}
-            width={24}
-            src="/avatar.jpg"
-            className="rounded-full"
-            priority
-          />
-          <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {'Koen van Gilst / '}
-            {project.year}
-          </p>
-        </div>
-        <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
-          {project.readingTime.text}
-        </p>
-      </div>
-      <Prose as="section">
-        <Component components={components} />
-      </Prose>
-    </Container>
+    <MarkdownLayout
+      publishedAt={project.year.toString()}
+      title={project.name}
+      readingTime={project.readingTime}
+      path={'/labs/' + project.slug}
+      code={project.code}
+    />
   );
 }
 
-function findProjectBySlug(slug: string) {
-  return allProjects.find((project) => project.slug === slug);
-}
-
-export function generateMetadata({
-  params
-}: {
-  params: { slug: string };
-}): Metadata {
-  const project = findProjectBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const project = await getProject(params.slug);
 
   return {
     title: `${project?.name}`,
@@ -71,6 +40,6 @@ export function generateMetadata({
   };
 }
 
-export function generateStaticParams() {
-  return allProjects.map((project) => project.slug);
+export async function generateStaticParams() {
+  return (await getProjects()).map((project) => project.slug);
 }

@@ -1,14 +1,20 @@
 import Link from 'next/link';
 
-import { Blog } from 'contentlayer/generated';
-
 import { ViewCount } from './ViewCount';
 
-type BlogPostProps = Pick<Blog, 'title' | 'summary' | 'slug'> & {
-  views?: number;
+type BlogPostLinkProps = {
+  title: string;
+  summary: string;
+  slug: string;
+  views: number;
 };
 
-export function BlogPostLink({ title, summary, slug, views }: BlogPostProps) {
+export function BlogPostLink({
+  title,
+  summary,
+  slug,
+  views
+}: BlogPostLinkProps) {
   return (
     <Link href={`/blog/${slug}`} className="w-full no-underline">
       <div className="up-hover mb-8 w-full">
@@ -18,8 +24,7 @@ export function BlogPostLink({ title, summary, slug, views }: BlogPostProps) {
           </h3>
           <ViewCount
             className="mb-4 w-64 text-left text-gray-500 md:mb-0 md:text-right"
-            initialCount={views}
-            path={`/blog/${slug}`}
+            views={views}
           />
         </div>
         <p className="text-gray-600 dark:text-gray-400">{summary}</p>

@@ -42,7 +42,7 @@ const securityHeaders = [
   }
 ];
 
-async function headers() {
+export async function headers() {
   return [
     {
       source: '/(.*)',
@@ -50,5 +50,3 @@ async function headers() {
     }
   ];
 }
-
-module.exports = { headers };
