@@ -150,7 +150,8 @@ export async function getAllTimeList(): Promise<
  */
 export async function trackView({ origin, pathname, ua }) {
   if (process.env.NODE_ENV === 'development') {
-    return console.log('[Tracking pageview]:', pathname);
+    // console.log('[Tracking pageview]:', pathname);
+    return;
   }
 
   const { error } = await supabase

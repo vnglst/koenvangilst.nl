@@ -1,26 +1,22 @@
+import { getSnippet, getSnippets } from 'cms/queries';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { components } from 'components/MDXComponents';
+import { MDXComponent } from 'components/MDXComponent';
 import { Prose } from 'components/Prose';
 
-import { allSnippets } from 'contentlayer/generated';
-
-type SnippetPageProps = {
+type PageProps = {
   params: { slug: string };
 };
 
-export default function SnippetPage({ params }: SnippetPageProps) {
-  const snippet = findSnippet(params.slug);
+export default async function Page({ params }: PageProps) {
+  const snippet = await getSnippet(params.slug);
 
   if (!snippet) {
     notFound();
   }
-
-  const Component = getMDXComponent(snippet.body.code);
 
   return (
     <Container>
@@ -41,21 +37,17 @@ export default function SnippetPage({ params }: SnippetPageProps) {
         />
       </div>
       <Prose as="section">
-        <Component components={components} />
+        <MDXComponent code={snippet.code} />
       </Prose>
     </Container>
   );
 }
 
-function findSnippet(slug: string) {
-  return allSnippets.find((snippet) => snippet.slug === slug);
-}
-
-export function generateMetadata({ params }) {
-  const snippet = findSnippet(params.slug);
+export async function generateMetadata({ params }) {
+  const snippet = await getSnippet(params.slug);
 
   if (!snippet) {
-    return null;
+    return notFound;
   }
 
   return {
@@ -68,6 +60,6 @@ export function generateMetadata({ params }) {
   };
 }
 
-export function generateStaticParams() {
-  return allSnippets.map((snippet) => snippet.slug);
+export async function generateStaticParams() {
+  return (await getSnippets()).map((snippet) => snippet.slug);
 }

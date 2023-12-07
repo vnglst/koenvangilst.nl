@@ -89,9 +89,17 @@ Developing new features on short-lived feature branches could work like this:
 - make sure all code is in a releasable state
 - merge to `main` → deployment to development
 
-```mermaid
+<Image
+  src="/static/images/mermaid1.svg"
+  width="830"
+  height="500"
+  alt="mermaid diagram of trunk-based development"
+/>
+
+{/* 
+Visit https://mermaid.live/ to update the diagram using the following code:
 gitGraph
-commit id: "feature 1"
+commit id: "feature 1" 
 commit id: "feature 2"
 branch feature/add-dashboard
 checkout feature/add-dashboard
@@ -111,7 +119,9 @@ commit id: "add unit tests"
 checkout main
 merge feature/add-profile
 commit id: "fix 3"
-```
+
+*/}
+
 
 ### Deploying a new release
 
@@ -125,7 +135,15 @@ In the early phases of a project, this might not be the case yet. In that case, 
 
 In a diagram this would look like:
 
-```mermaid
+<Image
+  src="/static/images/mermaid2.svg"
+  width="830"
+  height="500"
+  alt="mermaid diagram of trunk-based development"
+/>
+
+{/* 
+Visit https://mermaid.live/ to update the diagram using the following code:
 gitGraph
 checkout main
 commit id: "feature 1"
@@ -139,7 +157,8 @@ commit id: "fix 2"
 branch release/2023-02-09
 commit type:HIGHLIGHT id: "release v2" tag: "v2.0.0"
 checkout main
-commit id: "feature 4"
-```
+commit id: "feature 4" 
+
+*/}
 
 [^1]: The concept of Git Flow was originally introduced in the blog post [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen. His diagram of Git Flow has since then been shared countless times with many teams and on many corporate websites. In 2020 Vincent added a comment that Git Flow is not for everyone, especially when a team is doing continuous deployment.

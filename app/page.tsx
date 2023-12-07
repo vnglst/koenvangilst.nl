@@ -74,11 +74,7 @@ async function FeaturedCard({ title, slug }) {
       </h4>
       <div className="capsize flex items-center text-gray-800 dark:text-gray-200">
         <Icon icon="eye" className="h-6 w-6" />
-        <ViewCount
-          className="capsize ml-2 align-baseline"
-          initialCount={views}
-          path={`/blog/${slug}`}
-        />
+        <ViewCount className="capsize ml-2 align-baseline" views={views} />
       </div>
     </Link>
   );

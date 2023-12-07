@@ -1,14 +1,9 @@
+import { getProjects } from 'cms/queries';
+
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import Icon from 'components/Icon';
 import { Prose } from 'components/Prose';
-
-import { pick } from 'contentlayer/client';
-import { allProjects } from 'contentlayer/generated';
-
-const projects = allProjects.map((client) =>
-  pick(client, ['url', 'name', 'year', 'summary'])
-);
 
 export const metadata = {
   title: 'Labs',
@@ -19,8 +14,10 @@ export const metadata = {
   }
 };
 
-export default function Labs() {
-  const sorted = projects.sort((a, b) => Number(b.year) - Number(a.year));
+export default async function Labs() {
+  const sorted = (await getProjects()).sort(
+    (a, b) => Number(b.year) - Number(a.year)
+  );
 
   return (
     <Container>

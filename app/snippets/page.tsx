@@ -1,3 +1,4 @@
+import { getSnippets } from 'cms/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -5,9 +6,6 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 import { getViews } from 'services/supabase';
-
-import { pick } from 'contentlayer/client';
-import { allSnippets } from 'contentlayer/generated';
 
 export const revalidate = 60 * 30;
 
@@ -17,11 +15,9 @@ export const metadata = {
     'A collection of code snippets – including React hooks, TypeScript tips, random CSS snippets and Node.js scripts'
 };
 
-const snippets = allSnippets.map((snippet) =>
-  pick(snippet, ['slug', 'title', 'logo', 'description'])
-);
-
 export default async function Snippets() {
+  const snippets = await getSnippets();
+
   const snippetsWithViews = await Promise.all(
     snippets.map(async (post) => {
       const views = await getViews('/snippets/' + post.slug);

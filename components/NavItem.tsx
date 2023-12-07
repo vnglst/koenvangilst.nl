@@ -19,7 +19,7 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
         'inline-block rounded-lg p-1 ring-primary transition-all hover:ring-2 sm:px-3 sm:py-2'
       )}
     >
-      <span className="capsize">{text}</span>
+      {text}
     </NextLink>
   );
 }
