@@ -39,7 +39,3 @@ export async function generateMetadata({ params }: PageProps) {
     }
   };
 }
-
-export async function generateStaticParams() {
-  return (await getProjects()).map((project) => project.slug);
-}
