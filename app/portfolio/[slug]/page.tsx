@@ -40,7 +40,3 @@ export async function generateMetadata({ params }: PageProps) {
     }
   };
 }
-
-export async function generateStaticParams() {
-  return (await getClients()).map((client) => client.slug);
-}

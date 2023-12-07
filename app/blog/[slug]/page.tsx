@@ -47,7 +47,3 @@ export async function generateMetadata({ params }: Props) {
     }
   };
 }
-
-export async function generateStaticParams() {
-  return (await getPosts()).map((snippet) => snippet.slug);
-}

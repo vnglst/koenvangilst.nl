@@ -59,7 +59,3 @@ export async function generateMetadata({ params }) {
     }
   };
 }
-
-export async function generateStaticParams() {
-  return (await getSnippets()).map((snippet) => snippet.slug);
-}

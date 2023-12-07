@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -72,9 +73,11 @@ async function FeaturedCard({ title, slug }) {
       <h4 className="mb-6 w-full text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 sm:mb-10 md:text-lg">
         {title}
       </h4>
-      <div className="capsize flex items-center text-gray-800 dark:text-gray-200">
+      <div className="flex items-center text-gray-800 dark:text-gray-200">
         <Icon icon="eye" className="h-6 w-6" />
-        <ViewCount className="capsize ml-2 align-baseline" views={views} />
+        <Suspense>
+          <ViewCount className="ml-2 align-baseline" views={views} />
+        </Suspense>
       </div>
     </Link>
   );
