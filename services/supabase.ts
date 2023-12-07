@@ -2,6 +2,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 import { createClient } from '@supabase/supabase-js';
+import { unstable_noStore as noStore } from 'next/cache';
 
 import { View } from './types';
 
@@ -13,6 +14,8 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
  * Retrieves the view count for a given pathname.
  */
 export async function getViews(pathnameRaw: string): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase
     .from('totals')
     .select('total')
