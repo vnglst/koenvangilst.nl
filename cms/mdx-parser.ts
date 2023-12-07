@@ -46,7 +46,7 @@ export async function loadMDXFile<T>(slug: string, dir: string) {
   } as T;
 }
 
-export function loadFile(path) {
+function loadFile(path: string) {
   try {
     const rawString = fs.readFileSync(path, 'utf-8');
     return rawString;
