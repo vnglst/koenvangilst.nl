@@ -2,6 +2,10 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 import { createClient } from '@supabase/supabase-js';
+import {
+  unstable_cache as cache,
+  unstable_noStore as noStore
+} from 'next/cache';
 
 import { View } from './types';
 
@@ -13,6 +17,8 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
  * Retrieves the view count for a given pathname.
  */
 export async function getViews(pathnameRaw: string): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase
     .from('totals')
     .select('total')
@@ -34,6 +40,8 @@ export async function getViews(pathnameRaw: string): Promise<number> {
  * Retrieves the view count for a given pathname for a given month.
  */
 export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase
     .from('month')
     .select('count')
@@ -55,6 +63,8 @@ export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
  * Retrieves a list of total website views per day.
  */
 export async function getViewsPerDay(days: number): Promise<View[]> {
+  noStore();
+
   const { data: views, error } = await supabase
     .from('perday')
     .select('created_at, count')
@@ -76,6 +86,8 @@ export async function getViewsPerDay(days: number): Promise<View[]> {
  * Retrieves a list of total website views of last week
  */
 export async function getTotalWeekViews(): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase.from('week').select('count');
 
   if (error) {
@@ -92,6 +104,8 @@ export async function getTotalWeekViews(): Promise<number> {
  * Retrieves a list of total website views of today
  */
 export async function getTotalTodayViews(): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase.from('today').select('count');
 
   if (error) {
@@ -108,6 +122,8 @@ export async function getTotalTodayViews(): Promise<number> {
  * Retrieves a list of total website views for all time
  */
 export async function getTotalViews(): Promise<number> {
+  noStore();
+
   const { data: views, error } = await supabase.from('totals').select('total');
 
   if (error) {
@@ -126,6 +142,8 @@ export async function getAllTimeList(): Promise<
     views: number;
   }[]
 > {
+  noStore();
+
   const { data: views, error } = await supabase
     .from('totals')
     .select('total, pathname')
