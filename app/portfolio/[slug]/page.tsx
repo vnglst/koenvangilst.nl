@@ -1,7 +1,9 @@
-import { getClient, getClients } from 'cms/queries';
+import { getClient } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
+
+export const dynamic = 'force-dynamic';
 
 type PageProps = {
   params: { slug: string };

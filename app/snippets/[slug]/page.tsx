@@ -1,4 +1,4 @@
-import { getSnippet, getSnippets } from 'cms/queries';
+import { getSnippet } from 'cms/queries';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -6,6 +6,8 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { MDXComponent } from 'components/MDXComponent';
 import { Prose } from 'components/Prose';
+
+export const dynamic = 'force-dynamic';
 
 type PageProps = {
   params: { slug: string };
