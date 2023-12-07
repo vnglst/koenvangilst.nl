@@ -2,7 +2,7 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@supabase/supabase-js':
-    specifier: ^2.39.0
+    specifier: 2.39.0
     version: 2.39.0
   '@tailwindcss/typography':
     specifier: 0.5.10
@@ -17,10 +17,10 @@ dependencies:
     specifier: 10.4.16
     version: 10.4.16(postcss@8.4.32)
   echarts:
-    specifier: ^5.4.3
+    specifier: 5.4.3
     version: 5.4.3
   encoding:
-    specifier: ^0.1.13
+    specifier: 0.1.13
     version: 0.1.13
   esbuild:
     specifier: 0.19.8
@@ -38,7 +38,7 @@ dependencies:
     specifier: 14.0.0
     version: 14.0.0
   gray-matter:
-    specifier: ^4.0.3
+    specifier: 4.0.3
     version: 4.0.3
   mdx-bundler:
     specifier: 10.0.1
@@ -53,7 +53,7 @@ dependencies:
     specifier: 3.1.0
     version: 3.1.0
   prettier-plugin-tailwindcss:
-    specifier: ^0.5.9
+    specifier: 0.5.9
     version: 0.5.9(prettier@3.1.0)
   react:
     specifier: 18.2.0

@@ -16,7 +16,8 @@ export async function loadMetadataFromDir<T>(dir: string) {
   return (await Promise.all(
     mdxFiles.map(async (file) => {
       const slug = file.replace(/\.mdx$/, '');
-      const rawString = fs.readFileSync(path.join(dir, file), 'utf-8');
+      const mdxPath = path.join(process.cwd(), dir, file);
+      const rawString = fs.readFileSync(mdxPath, 'utf-8');
       const { data } = grayMatter(rawString);
       return {
         ...data,
@@ -27,7 +28,8 @@ export async function loadMetadataFromDir<T>(dir: string) {
 }
 
 export async function loadMDXFile<T>(slug: string, dir: string) {
-  const rawString = loadFile(path.join(dir, slug + '.mdx'));
+  const mdxFilePath = path.join(process.cwd(), dir, slug + '.mdx');
+  const rawString = loadFile(mdxFilePath);
 
   if (!rawString) {
     return;
