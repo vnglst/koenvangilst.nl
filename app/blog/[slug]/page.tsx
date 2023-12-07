@@ -1,4 +1,4 @@
-import { getPost, getPosts } from 'cms/queries';
+import { getPost } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';

@@ -8,8 +8,6 @@ import Icon from 'components/Icon';
 import { ViewCount } from 'components/ViewCount';
 import { getViews } from 'services/supabase';
 
-export const revalidate = 60;
-
 export default function Home() {
   return (
     <Container centered>

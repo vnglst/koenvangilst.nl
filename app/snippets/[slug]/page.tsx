@@ -1,4 +1,4 @@
-import { getSnippet, getSnippets } from 'cms/queries';
+import { getSnippet } from 'cms/queries';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
