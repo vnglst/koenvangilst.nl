@@ -1,4 +1,4 @@
-import { getProject, getProjects } from 'cms/queries';
+import { getProject } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';

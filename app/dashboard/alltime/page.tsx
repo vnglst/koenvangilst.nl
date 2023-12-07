@@ -6,7 +6,7 @@ import { VisitsVisual } from 'components/VisitsVisual';
 import { getViewsPerDay } from 'services/supabase';
 import { View } from 'services/types';
 
-export const revalidate = 60 * 60;
+export const revalidate = 60;
 
 export const metadata = {
   title: 'All time visits',

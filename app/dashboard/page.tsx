@@ -12,6 +12,8 @@ import {
 } from 'services/supabase';
 import { getUnsplashStatistics } from 'services/unsplash';
 
+export const revalidate = 60;
+
 export const metadata = {
   title: 'Dashboard',
   description:
