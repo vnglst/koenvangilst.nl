@@ -1,8 +1,6 @@
 import { getProject } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-
 import { MarkdownLayout } from 'components/MarkdownLayout';
 
 type PageProps = {

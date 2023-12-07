@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from 'next/cache';
+
 import { loadMDXFile, loadMetadataFromDir } from './mdx-parser';
 import {
   Client,
@@ -16,6 +18,8 @@ export async function getPosts() {
 }
 
 export async function getPost(slug: string) {
+  noStore();
+
   const post = await loadMDXFile<Post>(slug, 'data/blog');
 
   if (!post) {
@@ -38,6 +42,7 @@ export async function getSnippets() {
 }
 
 export async function getSnippet(slug: string) {
+  noStore();
   const snippet = await loadMDXFile<Snippet>(slug, 'data/snippets');
   return snippet;
 }
@@ -48,6 +53,7 @@ export async function getClients() {
 }
 
 export async function getClient(slug: string) {
+  noStore();
   const client = await loadMDXFile<Client>(slug, 'data/portfolio');
   return client;
 }
@@ -58,6 +64,7 @@ export async function getProjects() {
 }
 
 export async function getProject(slug: string) {
+  noStore();
   const project = await loadMDXFile<Project>(slug, 'data/labs');
   return project;
 }

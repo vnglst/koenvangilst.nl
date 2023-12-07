@@ -7,8 +7,6 @@ import { Heading } from 'components/Heading';
 import { MDXComponent } from 'components/MDXComponent';
 import { Prose } from 'components/Prose';
 
-export const dynamic = 'force-dynamic';
-
 type PageProps = {
   params: { slug: string };
 };
