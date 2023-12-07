@@ -63,7 +63,7 @@ export async function MarkdownLayout({
         <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
           {readingTime.text}
           {` • `}
-          <ViewCount initialCount={views} path={path} />
+          <ViewCount views={views} />
         </p>
       </div>
       <ul className="my-4 flex w-full flex-wrap gap-2">

@@ -1,5 +1,4 @@
-import invariant from 'tiny-invariant';
-
+import invariant from 'lib/invariant';
 import { Unsplash } from 'services/types';
 
 const ACCESS_TOKEN = process.env.UNSPLASH_ACCESS_KEY;

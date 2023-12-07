@@ -24,8 +24,7 @@ export function BlogPostLink({
           </h3>
           <ViewCount
             className="mb-4 w-64 text-left text-gray-500 md:mb-0 md:text-right"
-            initialCount={views}
-            path={`/blog/${slug}`}
+            views={views}
           />
         </div>
         <p className="text-gray-600 dark:text-gray-400">{summary}</p>

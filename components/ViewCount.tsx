@@ -1,30 +1,12 @@
-'use client';
-
-import { useOnScreen } from 'hooks/useOnScreen';
-import useSWR from 'swr';
-
-import { fetcher } from 'lib/fetcher';
-
 type ViewCountProps = {
-  initialCount?: number;
-  path: string;
+  views?: number;
   className?: string;
 };
 
-export function ViewCount({ initialCount, path, className }: ViewCountProps) {
-  const [setRef, isOnScreen] = useOnScreen<HTMLSpanElement>({
-    triggerOnce: true
-  });
-
-  const { data: views } = useSWR<number>(
-    isOnScreen ? `/api/views?path=${path}` : null,
-    fetcher,
-    { fallbackData: initialCount, revalidateOnFocus: true }
-  );
-
+export function ViewCount({ views, className }: ViewCountProps) {
   return (
-    <span className={className} ref={setRef}>
-      <span className="fade-in" key={`${views}`}>{`${
+    <span className={className}>
+      <span className="fade-in">{`${
         views ? views.toLocaleString() : '–––'
       } `}</span>
       views
