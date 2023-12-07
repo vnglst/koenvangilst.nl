@@ -12,7 +12,7 @@ export function Container({
 }: PropsWithChildren<ContainerProps>) {
   const classes = cx(
     'flex flex-col items-start justify-center w-full max-w-2xl',
-    centered ? 'mx-auto' : 'mx-auto mb-16'
+    centered ? 'm-auto' : 'mx-auto mb-16'
   );
 
   return <div className={classes}>{children}</div>;

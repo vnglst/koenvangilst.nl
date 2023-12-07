@@ -1,6 +1,5 @@
+import { getPosts } from 'cms/queries';
 import RSS from 'rss';
-
-import { allBlogs } from 'contentlayer/generated';
 
 export async function GET() {
   const feed = new RSS({
@@ -9,7 +8,9 @@ export async function GET() {
     feed_url: 'https://koenvangilst.nl/feed.xml'
   });
 
-  allBlogs.map((post) => {
+  const posts = await getPosts();
+
+  posts.map((post) => {
     feed.item({
       title: post.title,
       url: `https://koenvangilst.nl/blog/${post.slug}`,
