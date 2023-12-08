@@ -1,6 +1,6 @@
 export const lightTheme = {
   darkMode: false,
-  backgroundColor: '#fff',
+  backgroundColor: 'transparent',
   textStyle: {
     fontFamily: "'Lato', sans-serif"
   },
@@ -21,5 +21,5 @@ export const lightTheme = {
     right: '4%',
     bottom: '13%',
     containLabel: true
-  },
+  }
 };

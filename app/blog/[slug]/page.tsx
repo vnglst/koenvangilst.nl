@@ -21,7 +21,7 @@ export default async function Page({ params }: Props) {
       publishedAt={post.publishedAt}
       title={post.title}
       readingTime={post.readingTime}
-      tags={post.tagsAsSlugs}
+      tags={post.tags}
       path={'/blog/' + post.slug}
       image={post.image}
       code={post.code}
