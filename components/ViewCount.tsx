@@ -1,20 +1,29 @@
-import { unstable_noStore as noStore } from 'next/cache';
+'use client';
 
-import { getViews } from 'services/supabase';
+import { useOnScreen } from 'hooks/useOnScreen';
+import useSWR from 'swr';
+
+import { fetcher } from 'lib/fetcher';
 
 type ViewCountProps = {
   path: string;
   className?: string;
 };
 
-export async function ViewCount({ path, className }: ViewCountProps) {
-  noStore();
+export function ViewCount({ path, className }: ViewCountProps) {
+  const [setRef, isOnScreen] = useOnScreen<HTMLSpanElement>({
+    triggerOnce: true
+  });
 
-  const views = await getViews(path);
+  const { data: views } = useSWR<number>(
+    isOnScreen ? `/api/views?path=${path}` : null,
+    fetcher,
+    { revalidateOnFocus: true }
+  );
 
   return (
-    <span className={className}>
-      <span className="fade-in">{`${
+    <span className={className} ref={setRef}>
+      <span className="fade-in" key={`${views}`}>{`${
         views ? views.toLocaleString() : '–––'
       } `}</span>
       views

@@ -1,4 +1,4 @@
-import { getSnippet } from 'cms/queries';
+import { getSnippet, getSnippets } from 'cms/queries';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -58,4 +58,8 @@ export async function generateMetadata({ params }) {
       canonical: 'snippets/' + snippet.slug
     }
   };
+}
+
+export async function generateStaticParams() {
+  return (await getSnippets()).map((snippet) => snippet.slug);
 }

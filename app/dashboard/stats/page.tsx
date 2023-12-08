@@ -1,10 +1,11 @@
 import { Suspense } from 'react';
-import { unstable_noStore } from 'next/cache';
 import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { getAllTimeList } from 'services/supabase';
+
+export const revalidate = 60;
 
 export const metadata = {
   title: 'All links visits',
@@ -26,8 +27,6 @@ export default async function AllLinks() {
 }
 
 async function LinksContainer() {
-  unstable_noStore();
-
   const list = await getAllTimeList();
 
   return list.map((item, index) => (

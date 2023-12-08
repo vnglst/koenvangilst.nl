@@ -1,4 +1,4 @@
-import { getProject } from 'cms/queries';
+import { getProject, getProjects } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
@@ -38,4 +38,8 @@ export async function generateMetadata({ params }: PageProps) {
       canonical: 'labs/' + project?.slug
     }
   };
+}
+
+export async function generateStaticParams() {
+  return (await getProjects()).map((project) => project.slug);
 }

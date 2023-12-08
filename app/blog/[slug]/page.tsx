@@ -1,4 +1,4 @@
-import { getPost } from 'cms/queries';
+import { getPost, getPosts } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
@@ -46,4 +46,8 @@ export async function generateMetadata({ params }: Props) {
       canonical: 'blog/' + post.slug
     }
   };
+}
+
+export async function generateStaticParams() {
+  return (await getPosts()).map((snippet) => snippet.slug);
 }
