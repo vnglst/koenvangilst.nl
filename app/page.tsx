@@ -6,7 +6,6 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import Icon from 'components/Icon';
 import { ViewCount } from 'components/ViewCount';
-import { getViews } from 'services/supabase';
 
 export default function Home() {
   return (
@@ -71,9 +70,7 @@ async function FeaturedCard({ title, slug }) {
       </h4>
       <div className="flex items-center text-gray-800 dark:text-gray-200">
         <Icon icon="eye" className="h-6 w-6" />
-        <Suspense>
-          <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
-        </Suspense>
+        <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
       </div>
     </Link>
   );

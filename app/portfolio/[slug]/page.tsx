@@ -1,4 +1,4 @@
-import { getClient } from 'cms/queries';
+import { getClient, getClients } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
@@ -39,4 +39,8 @@ export async function generateMetadata({ params }: PageProps) {
       canonical: 'portfolio/' + client?.slug
     }
   };
+}
+
+export async function generateStaticParams() {
+  return (await getClients()).map((client) => client.slug);
 }
