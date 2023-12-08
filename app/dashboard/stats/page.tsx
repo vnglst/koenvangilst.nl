@@ -1,11 +1,10 @@
 import { Suspense } from 'react';
+import { unstable_noStore } from 'next/cache';
 import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { getAllTimeList } from 'services/supabase';
-
-export const revalidate = 60;
 
 export const metadata = {
   title: 'All links visits',
@@ -13,27 +12,23 @@ export const metadata = {
 };
 
 export default async function AllLinks() {
-  const allTime = getAllTimeList();
-
   return (
     <Container>
       <Heading level={1}>All links visits</Heading>
       All links visits
       <ul className="my-2 min-h-[3000px]">
         <Suspense>
-          <LinksContainer allTime={allTime} />
+          <LinksContainer />
         </Suspense>
       </ul>
     </Container>
   );
 }
 
-type LinksContainerProps = {
-  allTime: Promise<{ url: string; views: number }[]>;
-};
+async function LinksContainer() {
+  unstable_noStore();
 
-async function LinksContainer({ allTime }: LinksContainerProps) {
-  const list = await allTime;
+  const list = await getAllTimeList();
 
   return list.map((item, index) => (
     <li key={index} className="flex w-full py-1">
