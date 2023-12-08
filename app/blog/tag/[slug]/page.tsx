@@ -52,7 +52,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
 async function getUniqueTagSlugs() {
   const posts = await getPosts();
-  const tags = posts.map((post) => post.tagsAsSlugs).flat();
+  const tags = posts.map((post) => post.tags).flat();
   const uniqueTags = [...new Set(tags)];
   return uniqueTags;
 }

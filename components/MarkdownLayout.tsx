@@ -1,7 +1,4 @@
-import { Suspense } from 'react';
 import Image from 'next/image';
-
-import { getViews } from 'services/supabase';
 
 import { Container } from './Container';
 import { Heading } from './Heading';
@@ -37,8 +34,6 @@ export async function MarkdownLayout({
   code,
   additionalComponents
 }: Props) {
-  const views = await getViews(path);
-
   return (
     <Container>
       <Heading level={1}>{title}</Heading>
