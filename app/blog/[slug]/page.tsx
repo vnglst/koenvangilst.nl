@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
 
+export const runtime = 'edge';
+
 type Props = {
   params: {
     slug: string;
