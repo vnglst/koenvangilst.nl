@@ -61,8 +61,6 @@ export default function Home() {
 }
 
 async function FeaturedCard({ title, slug }) {
-  const views = await getViews('/blog/' + slug);
-
   return (
     <Link
       href={`/blog/${slug}`}
@@ -74,7 +72,7 @@ async function FeaturedCard({ title, slug }) {
       <div className="flex items-center text-gray-800 dark:text-gray-200">
         <Icon icon="eye" className="h-6 w-6" />
         <Suspense>
-          <ViewCount className="ml-2 align-baseline" views={views} />
+          <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
         </Suspense>
       </div>
     </Link>

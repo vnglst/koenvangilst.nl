@@ -65,7 +65,7 @@ export async function MarkdownLayout({
           {readingTime.text}
           {` • `}
           <Suspense>
-            <ViewCount views={views} />
+            <ViewCount path={path} />
           </Suspense>
         </p>
       </div>
