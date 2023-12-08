@@ -1,19 +1,20 @@
 import Link from 'next/link';
 
+import { getViews } from 'services/supabase';
+
 type BlogPostLinkProps = {
   title: string;
   summary: string;
   slug: string;
-  views: number;
 };
 
-export function BlogPostLink({
+export async function BlogPostLink({
   title,
   summary,
-  slug,
-  views
+  slug
 }: BlogPostLinkProps) {
   const path = `/blog/${slug}`;
+  const views = await getViews(path);
 
   return (
     <Link href={path} className="w-full no-underline">

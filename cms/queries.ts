@@ -1,3 +1,5 @@
+import { sluggify } from 'lib/sluggify';
+
 import { loadMDXFile, loadMetadataFromDir } from './mdx-parser';
 import {
   Client,
@@ -12,7 +14,11 @@ import {
 
 export async function getPosts() {
   const posts = await loadMetadataFromDir<PostMeta>('data/blog');
-  return posts;
+
+  return posts.map((post) => ({
+    ...post,
+    tagsAsSlugs: post.tags ? post.tags.map(sluggify) : []
+  }));
 }
 
 export async function getPost(slug: string) {
@@ -24,11 +30,7 @@ export async function getPost(slug: string) {
 
   return {
     ...post,
-    tagsAsSlugs: post.tags
-      ? post.tags.map((tag: string) =>
-          tag.trim().toLowerCase().split(' ').join('-')
-        )
-      : []
+    tagsAsSlugs: post.tags ? post.tags.map(sluggify) : []
   };
 }
 
