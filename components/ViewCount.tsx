@@ -6,12 +6,11 @@ import useSWR from 'swr';
 import { fetcher } from 'lib/fetcher';
 
 type ViewCountProps = {
-  initialCount?: number;
   path: string;
   className?: string;
 };
 
-export function ViewCount({ initialCount, path, className }: ViewCountProps) {
+export function ViewCount({ path, className }: ViewCountProps) {
   const [setRef, isOnScreen] = useOnScreen<HTMLSpanElement>({
     triggerOnce: true
   });
@@ -19,7 +18,7 @@ export function ViewCount({ initialCount, path, className }: ViewCountProps) {
   const { data: views } = useSWR<number>(
     isOnScreen ? `/api/views?path=${path}` : null,
     fetcher,
-    { fallbackData: initialCount, revalidateOnFocus: true }
+    { revalidateOnFocus: true }
   );
 
   return (
