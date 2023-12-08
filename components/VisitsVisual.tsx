@@ -1,55 +1,19 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { BarChart } from 'echarts/charts';
-import {
-  DataZoomComponent,
-  GraphicComponent,
-  GridComponent,
-  TitleComponent,
-  TooltipComponent
-} from 'echarts/components';
-import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-
 import { View } from 'services/types';
 
-echarts.use([
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  DataZoomComponent,
-  BarChart,
-  CanvasRenderer,
-  GraphicComponent
-]);
+import { Chart, echarts } from './Chart';
 
-export function VisitsVisual({ visits }: { visits: View[] }) {
-  const chartRef = useRef<HTMLDivElement>(null);
+type VisitsVisualProps = {
+  visits: View[];
+};
 
-  useEffect(() => {
-    if (!chartRef.current) return;
-    const chart = echarts.init(chartRef.current);
-    chart.setOption(generateOptions(visits));
-
-    function handleResize() {
-      chart.resize();
-    }
-
-    window.addEventListener('resize', handleResize);
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    mediaQuery.addEventListener('change', handleResize);
-
-    return () => {
-      chart.dispose();
-      window.removeEventListener('resize', handleResize);
-      mediaQuery.removeEventListener('change', handleResize);
-    };
-  }, [chartRef, visits]);
+export function VisitsVisual({ visits }: VisitsVisualProps) {
+  const options = generateOptions(visits);
 
   return (
-    <div
-      ref={chartRef}
+    <Chart
+      options={options}
       className="aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-[#111827] md:min-h-0"
     />
   );
@@ -70,21 +34,6 @@ function generateOptions(visits: View[]) {
       },
       left: 'center'
     },
-    bar: {
-      itemStyle: {
-        borderRadius: [15, 15, 0, 0]
-      }
-    },
-    backgroundColor: new echarts.graphic.RadialGradient(0, 0, 8, [
-      {
-        offset: 0,
-        color: '#111827'
-      },
-      {
-        offset: 1,
-        color: '#204051'
-      }
-    ]),
     tooltip: {
       trigger: 'axis',
       formatter: (params) => {
@@ -120,12 +69,6 @@ function generateOptions(visits: View[]) {
           backgroundColor: '#6a7985'
         }
       }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '13%',
-      containLabel: true
     },
     xAxis: {
       type: 'time',
