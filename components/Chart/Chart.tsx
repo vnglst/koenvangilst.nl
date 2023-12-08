@@ -25,6 +25,8 @@ echarts.use([
 
 export { echarts };
 
+import { Theme, useTheme } from 'components/Theme';
+
 import { darkTheme } from './themes/dark-theme';
 import { lightTheme } from './themes/light-theme';
 
@@ -34,14 +36,15 @@ type ChartProps = {
 };
 
 export function Chart({ options, className }: ChartProps) {
+  const mode = useTheme((state) => state.theme);
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
-    echarts.registerTheme('light', lightTheme);
-    echarts.registerTheme('dark', darkTheme);
+    echarts.registerTheme(Theme.Light, lightTheme);
+    echarts.registerTheme(Theme.Dark, darkTheme);
 
-    const chart = echarts.init(chartRef.current, 'dark');
+    const chart = echarts.init(chartRef.current, mode);
     chart.setOption(options);
 
     const handleResize = () => chart.resize();
@@ -54,7 +57,7 @@ export function Chart({ options, className }: ChartProps) {
       window.removeEventListener('resize', handleResize);
       mediaQuery.removeEventListener('change', handleResize);
     };
-  }, [chartRef, options]);
+  }, [chartRef, mode, options]);
 
   return <div ref={chartRef} className={className} />;
 }

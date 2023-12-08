@@ -1,18 +1,23 @@
 'use client';
-
 import { useEffect } from 'react';
 
 import Icon from 'components/Icon';
 
+import { Theme, useTheme } from './theme.store';
+
 const PREFERS_DARK = '(prefers-color-scheme: dark)';
 
 export function ThemeToggle() {
+  const setTheme = useTheme((state) => state.setTheme);
+
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
         document.documentElement.classList.add('dark');
+        setTheme(Theme.Dark);
       } else {
         document.documentElement.classList.remove('dark');
+        setTheme(Theme.Light);
       }
     };
 
@@ -25,12 +30,19 @@ export function ThemeToggle() {
         .matchMedia(PREFERS_DARK)
         .removeEventListener('change', handleThemeChange);
     };
-  }, []);
+  }, [setTheme]);
+
+  useEffect(() => {
+    const theme = getInitialTheme();
+    setTheme(theme);
+  }, [setTheme]);
 
   function handleClick() {
     document.documentElement.classList.toggle('dark');
     const theme = document.documentElement.classList.contains('dark');
-    window.localStorage.setItem('theme', theme ? 'dark' : 'light');
+    const nextTheme = theme ? Theme.Dark : Theme.Light;
+    setTheme(nextTheme);
+    window.localStorage.setItem('theme', nextTheme);
   }
 
   return (
@@ -49,4 +61,9 @@ export function ThemeToggle() {
       </button>
     </div>
   );
+}
+
+function getInitialTheme(): Theme {
+  const darkClass = document.documentElement.classList.contains('dark');
+  return darkClass ? Theme.Dark : Theme.Light;
 }
