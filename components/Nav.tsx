@@ -1,5 +1,5 @@
+import { ThemeToggle } from './Theme/ThemeToggle';
 import { NavItem, NavItemHome } from './NavItem';
-import { ThemeToggle } from './ThemeToggle';
 
 export function Nav() {
   return (
