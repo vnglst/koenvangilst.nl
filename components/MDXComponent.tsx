@@ -1,6 +1,9 @@
+import { ComponentProps } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { cx } from 'lib/clsx';
 
 import Icon from './Icon';
 
@@ -18,14 +21,17 @@ const CustomLink = (props) => {
   );
 };
 
-function RoundedImage(props) {
-  return (
-    <Image
-      alt={props.alt}
-      className="my-1 inline-block rounded-lg"
-      {...props}
-    />
+function RoundedImage({
+  fullBleed,
+  alt,
+  ...props
+}: ComponentProps<typeof Image> & { fullBleed?: boolean }) {
+  const className = cx(
+    'my-1 inline-block rounded-lg',
+    fullBleed && 'lg:full-bleed'
   );
+
+  return <Image alt={alt} {...props} className={className} />;
 }
 
 function Disclaimer({ children }) {
