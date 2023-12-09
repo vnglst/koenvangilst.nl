@@ -44,9 +44,12 @@ export default async function Blog() {
     <Container>
       <Prose>
         <Heading level={1}>Blog</Heading>
-        {`I've been writing online since 2016, mostly about web development.
-          In total, I've written ${sortedPosts.length} articles on this site.
-          Use the search below to filter by title. They've been viewed a total of ${totalViews.toLocaleString()} times.`}
+        <p>
+          I've been writing online since 2016, mostly about web development. In
+          total, I've written {sortedPosts.length} articles on this site. Use
+          the search below to filter by title. They've been viewed a total of{' '}
+          {totalViews.toLocaleString()} times.
+        </p>
       </Prose>
       <Search posts={postsWithViews} placeholderPosts={mostPopularPosts} />
     </Container>
