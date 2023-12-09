@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { getViews } from 'services/supabase';
-
 import { ViewCount } from './ViewCount';
 
 type BlogPostLinkProps = {
@@ -10,11 +8,7 @@ type BlogPostLinkProps = {
   slug: string;
 };
 
-export async function BlogPostLink({
-  title,
-  summary,
-  slug
-}: BlogPostLinkProps) {
+export function BlogPostLink({ title, summary, slug }: BlogPostLinkProps) {
   const path = `/blog/${slug}`;
 
   return (
