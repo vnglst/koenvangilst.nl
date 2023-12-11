@@ -61,6 +61,10 @@
     {
       "source": "/15",
       "destination": "https://calendly.com/talk-to-koen/15min"
+    },
+    {
+      "source": "/blog/feed",
+      "destination": "/feed.xml"
     }
   ]
 }

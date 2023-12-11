@@ -13,7 +13,7 @@ export function BlogPostLink({ title, summary, slug }: BlogPostLinkProps) {
 
   return (
     <Link href={path} className="w-full no-underline">
-      <div className="up-hover mb-8 w-full">
+      <div className="up-hover w-full">
         <div className="flex flex-col justify-between md:flex-row">
           <h3 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
             {title}

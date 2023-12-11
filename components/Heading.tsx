@@ -1,6 +1,17 @@
 import React from 'react';
 
-export function Heading({ children, level = 1, ...props }) {
+type Props = {
+  children: React.ReactNode;
+  className?: string;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+};
+
+export function Heading({
+  children,
+  className: extraClassName,
+  level = 1,
+  ...props
+}: Props) {
   const Tag = `h${level}`;
 
   let className =
@@ -16,6 +27,10 @@ export function Heading({ children, level = 1, ...props }) {
     default:
       className += 'mt-6 mb-4 text-xl md:text-3xl line';
       break;
+  }
+
+  if (extraClassName) {
+    className += ' ' + extraClassName;
   }
 
   return React.createElement(Tag, { className, ...props }, children);

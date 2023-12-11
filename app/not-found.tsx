@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
+import Icon from 'components/Icon';
 import { Prose } from 'components/Prose';
 
 export const metadata = {
@@ -20,9 +21,10 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="rounded-md text-center font-bold text-black dark:text-white"
+          className="align-center flex w-fit text-gray-600 no-underline transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
         >
           Return Home
+          <Icon icon="arrow-right" className="ml-1 h-6 w-6" />
         </Link>
       </Prose>
     </Container>

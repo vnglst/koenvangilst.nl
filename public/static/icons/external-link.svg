@@ -1,14 +1,13 @@
 <svg
   id="external-link"
-  xmlns="http://www.w3.org/2000/svg"
+  width="12"
+  height="12"
+  viewBox="0 0 12 12"
   fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
 >
   <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-  />
+    d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
+    fill="currentColor"
+  ></path>
 </svg>

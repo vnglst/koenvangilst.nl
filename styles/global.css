@@ -16,6 +16,17 @@
   color: #fefefe;
 }
 
+/* Remove outline for non-keyboard :focus */
+*:focus:not:focus-visible {
+  outline: none;
+}
+
+/* Add :focus-visible outline when navigating with keyboard */
+*:focus-visible {
+  @apply rounded-md;
+  outline: 2px solid #5bc3eb;
+}
+
 h1 {
   font-family: var(--font-montserrat), sans-serif;
 }

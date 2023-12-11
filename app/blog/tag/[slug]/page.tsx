@@ -28,8 +28,8 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <Container>
       <Heading level={1}>Posts about {tag}</Heading>
-      <section className="mb-4 w-full">
-        <p className="mb-6 mt-6 text-gray-600 dark:text-gray-400">
+      <section className="mb-4 flex w-full flex-col gap-6">
+        <p className="mt-6 text-gray-600 dark:text-gray-400">
           There are <b>{posts.length} post(s)</b> about the topic {tag}.
         </p>
         {posts.map((post) => (

@@ -1,62 +1,54 @@
 import Link from 'next/link';
 
+import { Container } from './Container';
 import ExternalLink from './ExternalLink';
 
 export function Footer() {
+  const footerLinks = [
+    [
+      { href: '/', label: 'Home' },
+      { href: '/about', label: 'About' },
+      { href: '/dashboard', label: 'Dashboard' }
+    ],
+    [
+      { href: '/snippets', label: 'Snippets' },
+      { href: '/blog/collection-of-great-tweets', label: 'Quotes' },
+      { href: '/credits', label: 'Credits' }
+    ],
+    [
+      {
+        href: 'https://twitter.com/vnglst',
+        label: 'Twitter'
+      },
+      { href: 'https://github.com/vngls', label: 'GitHub' },
+      {
+        href: 'https://www.linkedin.com/in/vangilst/',
+        label: 'LinkedIn'
+      }
+    ],
+    [
+      {
+        href: 'https://hachyderm.io/@vnglst',
+        label: 'Mastodon'
+      }
+    ]
+  ];
+
   return (
     <footer className="mb-12 flex flex-col justify-center px-8">
-      <div className="mx-auto flex w-full max-w-2xl flex-col items-start justify-center">
-        <div className="mt-8 grid w-full max-w-2xl grid-cols-1 gap-4 pb-16 sm:grid-cols-4">
-          <div className="flex flex-col space-y-4">
-            <Link href="/" className="text-gray-500 hover:text-gray-600">
-              Home
-            </Link>
-            <Link href="/about" className="text-gray-500 hover:text-gray-600">
-              About
-            </Link>
-            <Link
-              href="/dashboard"
-              className="text-gray-500 hover:text-gray-600"
-            >
-              Dashboard
-            </Link>
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <Link
-              href="/snippets"
-              className="text-gray-500 hover:text-gray-600"
-            >
-              Snippets
-            </Link>
-            <Link
-              href="/blog/collection-of-great-tweets"
-              className="text-gray-500 hover:text-gray-600"
-            >
-              Quotes
-            </Link>
-            <Link href="/credits" className="text-gray-500 hover:text-gray-600">
-              Credits
-            </Link>
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <ExternalLink href="https://twitter.com/vnglst">
-              Twitter
-            </ExternalLink>
-            <ExternalLink href="https://github.com/vnglst">GitHub</ExternalLink>
-            <ExternalLink href="https://www.linkedin.com/in/vangilst/">
-              LinkedIn
-            </ExternalLink>
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <ExternalLink rel="me" href="https://hachyderm.io/@vnglst">
-              Mastodon
-            </ExternalLink>
-          </div>
+      <Container>
+        <div className="mb-16 mt-8 grid w-full grid-cols-1 justify-between gap-4 sm:grid-cols-4">
+          {footerLinks.map((links, index) => (
+            <FooterLinkGroup key={index}>
+              {links.map(({ href, label }) => (
+                <FooterLink key={href} href={href}>
+                  {label}
+                </FooterLink>
+              ))}
+            </FooterLinkGroup>
+          ))}
         </div>
-      </div>
+      </Container>
       <span className="my-4 text-right text-xs text-gray-500">
         v. {process.env.APP_VERSION} |{' '}
         <a
@@ -67,5 +59,26 @@ export function Footer() {
         </a>
       </span>
     </footer>
+  );
+}
+
+function FooterLinkGroup({ children }) {
+  return <div className="flex flex-col space-y-4">{children}</div>;
+}
+
+function FooterLink({ href, children }) {
+  const isExternal = href.startsWith('http');
+  const Cmp = isExternal ? ExternalLink : InternalLink;
+  return <Cmp href={href}>{children}</Cmp>;
+}
+
+function InternalLink({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="w-fit text-gray-600 transition hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+    >
+      {children}
+    </Link>
   );
 }

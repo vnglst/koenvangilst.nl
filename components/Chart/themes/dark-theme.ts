@@ -13,14 +13,17 @@ export const darkTheme = {
     }
   ]),
   textStyle: {
-    fontFamily: "'Lato', sans-serif",
+    fontFamily: 'var(--font-inter), sans-serif',
     color: '#cbd5e1'
   },
   title: {
+    padding: 20,
+    left: 'left',
     textStyle: {
+      color: '#fff',
       fontSize: 16,
-      fontWeight: 'bold',
-      color: '#cbd5e1'
+      fontWeight: 'normal',
+      fontFamily: 'var(--font-inter), sans-serif'
     },
     subtextStyle: {
       color: '#94a3b8'
@@ -33,6 +36,7 @@ export const darkTheme = {
     }
   },
   grid: {
+    top: '20%',
     left: '3%',
     right: '4%',
     bottom: '13%',
