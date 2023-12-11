@@ -32,7 +32,7 @@ export function NavItemHome() {
     <NextLink
       href="/"
       className={
-        'rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400 sm:px-3 sm:py-2'
+        'mr-auto rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400 sm:px-3 sm:py-2'
       }
     >
       <svg

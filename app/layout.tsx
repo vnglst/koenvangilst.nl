@@ -8,6 +8,7 @@ import { Tracking } from 'components/Tracking';
 import 'styles/global.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
 const montserrat = Montserrat({
   weight: '900',
   subsets: ['latin'],

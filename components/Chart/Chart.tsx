@@ -10,7 +10,7 @@ import {
   TooltipComponent
 } from 'echarts/components';
 import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { ECBasicOption } from 'echarts/types/dist/shared';
 
 echarts.use([
@@ -19,7 +19,7 @@ echarts.use([
   GridComponent,
   DataZoomComponent,
   BarChart,
-  CanvasRenderer,
+  SVGRenderer,
   GraphicComponent
 ]);
 
@@ -44,7 +44,7 @@ export function Chart({ options, className }: ChartProps) {
     echarts.registerTheme(Theme.Light, lightTheme);
     echarts.registerTheme(Theme.Dark, darkTheme);
 
-    const chart = echarts.init(chartRef.current, mode);
+    const chart = echarts.init(chartRef.current, mode, { renderer: 'svg' });
     chart.setOption(options);
 
     const handleResize = () => chart.resize();

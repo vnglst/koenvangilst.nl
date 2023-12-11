@@ -5,11 +5,14 @@ export const lightTheme = {
     fontFamily: "'Lato', sans-serif"
   },
   title: {
+    padding: 20,
+    left: 'left',
     textStyle: {
+      color: '#000',
       fontSize: 16,
-      fontWeight: 'bold'
-    },
-    bottom: 200
+      fontWeight: 'normal',
+      fontFamily: 'var(--font-inter), sans-serif'
+    }
   },
   bar: {
     itemStyle: {
@@ -17,6 +20,7 @@ export const lightTheme = {
     }
   },
   grid: {
+    top: '20%',
     left: '3%',
     right: '4%',
     bottom: '13%',

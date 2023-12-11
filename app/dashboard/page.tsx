@@ -87,15 +87,17 @@ async function MetricCard({ header, link, metric }: Props) {
 
   return (
     <Link className={className} href={link}>
-      <div className="flex items-center">
-        {header}
-        {isExternalLink ? (
-          <Icon icon="external-link" className="ml-1 h-4 w-4" />
-        ) : null}
+      <div className="up-hover">
+        <div className="flex items-center">
+          {header}{' '}
+          {isExternalLink ? (
+            <Icon icon="external-link" className="ml-auto h-4 w-4" />
+          ) : null}
+        </div>
+        <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
+          {metric > 0 ? metric.toLocaleString() : '-'}
+        </p>
       </div>
-      <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
-        {metric > 0 ? metric.toLocaleString() : '-'}
-      </p>
     </Link>
   );
 }

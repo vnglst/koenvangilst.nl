@@ -11,8 +11,7 @@ export function Nav() {
         Skip to content
       </a>
       <NavItemHome />
-      <div className="ml-auto" />
-      <NavItem slug="portfolio" text="Portfolio" />
+      <NavItem slug="portfolio" text="Work" />
       <NavItem slug="labs" text="Labs" />
       <NavItem slug="blog" text="Blog" />
       <ThemeToggle />

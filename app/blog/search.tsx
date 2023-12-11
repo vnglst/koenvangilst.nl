@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { Heading } from 'components/Heading';
 import Icon from 'components/Icon';
 import { BlogPostLink } from 'components/PostLink';
 
@@ -53,36 +54,38 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
           className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
         />
       </div>
-      {!query ? (
-        <>
-          <h2 className="mb-6 mt-8 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
-            Popular this month
-          </h2>
-          {placeholderPosts.map((post) => (
-            <BlogPostLink key={post.title} {...post} />
-          ))}
-          <h2 className="mb-6 mt-8 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
-            All Posts
-          </h2>
-          {posts.map((post) => (
-            <BlogPostLink key={post.title} {...post} />
-          ))}
-        </>
-      ) : (
-        <>
-          <h2 className="mb-6 mt-8 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
-            Search result
-          </h2>
-          {searchResults.map((post) => (
-            <BlogPostLink key={post.title} {...post} />
-          ))}
-          {searchResults.length === 0 && (
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
-              No posts found.
-            </p>
-          )}
-        </>
-      )}
+      <div className="flex flex-col gap-6">
+        {!query ? (
+          <>
+            <Heading level={2} className="mb-1">
+              Popular this month
+            </Heading>
+            {placeholderPosts.map((post) => (
+              <BlogPostLink key={post.title} {...post} />
+            ))}
+            <Heading level={2} className="mb-1">
+              All Posts
+            </Heading>
+            {posts.map((post) => (
+              <BlogPostLink key={post.title} {...post} />
+            ))}
+          </>
+        ) : (
+          <>
+            <Heading level={2} className="mb-1">
+              Search result
+            </Heading>
+            {searchResults.map((post) => (
+              <BlogPostLink key={post.title} {...post} />
+            ))}
+            {searchResults.length === 0 && (
+              <p className="mb-4 text-gray-600 dark:text-gray-400">
+                No posts found.
+              </p>
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 }

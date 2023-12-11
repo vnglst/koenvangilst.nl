@@ -50,7 +50,7 @@ export default function Home() {
       </section>
       <Link
         href="/blog"
-        className="item-center mb-12 mt-8 flex h-6 content-center justify-center justify-items-center rounded-lg leading-7 text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+        className="align-center my-8 flex w-fit text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
       >
         Read all posts
         <Icon icon="arrow-right" className="ml-1 h-6 w-6" />
@@ -63,14 +63,16 @@ async function FeaturedCard({ title, slug }) {
   return (
     <Link
       href={`/blog/${slug}`}
-      className="up-hover flex w-full flex-col justify-between rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 dark:bg-black md:w-1/3"
+      className="rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 dark:bg-black md:w-1/3"
     >
-      <h4 className="mb-4 w-full text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6 md:text-lg">
-        {title}
-      </h4>
-      <div className="flex items-center text-gray-800 dark:text-gray-200">
-        <Icon icon="eye" className="h-6 w-6" />
-        <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
+      <div className="up-hover flex h-full w-full flex-col justify-between">
+        <h3 className="mb-4 w-full text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6 md:text-lg">
+          {title}
+        </h3>
+        <div className="flex items-center text-gray-800 dark:text-gray-200">
+          <Icon icon="eye" className="h-6 w-6" />
+          <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
+        </div>
       </div>
     </Link>
   );

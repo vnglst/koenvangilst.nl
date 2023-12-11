@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
+import { ProjectLink } from 'components/ProjectLink';
 import { Prose } from 'components/Prose';
 
 export const metadata = {
@@ -12,7 +13,7 @@ export const metadata = {
 };
 
 export default async function Portfolio() {
-  const sorted = (await getClients()).sort(
+  const sorted = (await getClients()).toSorted(
     (a, b) => Number(b.year) - Number(a.year)
   );
 
@@ -30,7 +31,7 @@ export default async function Portfolio() {
           power of React to craft user friendly interfaces. In addition to my
           frontend expertise, I am also adept in backend development using
           TypeScript and Node.js. For occasional side projects, I also enjoy in
-          coding with Python and Elixir.
+          coding with Python and Elixir. <a href="/about">More about me...</a>
         </p>
         <p>
           In 2022, I transitioned from my freelance career to a corporate role,
@@ -44,41 +45,14 @@ export default async function Portfolio() {
       {sorted.map((client) => {
         return (
           <ProjectLink
+            key={client.slug}
             title={client.name}
             year={client.year}
             summary={client.summary}
-            slug={client.slug}
-            key={client.slug}
+            href={`/portfolio/${client.slug}`}
           />
         );
       })}
     </Container>
-  );
-}
-
-type Props = {
-  title: string;
-  summary: string;
-  slug: string;
-  year: number;
-};
-
-function ProjectLink({ title, summary, slug, year }: Props) {
-  return (
-    <Link href={`/portfolio/${slug}`} className="w-full">
-      <article className="up-hover mb-4 w-full py-3">
-        <div className="flex items-baseline">
-          <div className="leading-2  mr-6 text-left text-primary">{year}</div>
-          <div className="w-full">
-            <div className="flex flex-col justify-between md:flex-row">
-              <h4 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
-                {title}
-              </h4>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400">{summary}</p>
-          </div>
-        </div>
-      </article>
-    </Link>
   );
 }

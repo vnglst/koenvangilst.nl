@@ -26,13 +26,7 @@ function generateOptions(visits: View[]) {
 
   return {
     title: {
-      padding: 20,
-      text: 'Visits Past 365 Days',
-      textStyle: {
-        color: '#fff',
-        fontFamily: 'var(--font-montserrat), sans-serif'
-      },
-      left: 'center'
+      text: 'Visits Past 365 Days'
     },
     tooltip: {
       trigger: 'axis',
