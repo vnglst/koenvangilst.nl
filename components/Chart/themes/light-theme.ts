@@ -1,6 +1,6 @@
 export const lightTheme = {
   darkMode: false,
-  backgroundColor: 'transparent',
+  backgroundColor: 'white',
   textStyle: {
     fontFamily: "'Lato', sans-serif"
   },

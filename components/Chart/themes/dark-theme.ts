@@ -41,5 +41,10 @@ export const darkTheme = {
     right: '4%',
     bottom: '13%',
     containLabel: true
+  },
+  visualMap: {
+    textStyle: {
+      color: '#fff'
+    }
   }
 };

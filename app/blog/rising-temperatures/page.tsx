@@ -2,6 +2,7 @@ import { getPost } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
+import { ClimateHeatmap } from 'components/Prognose2100/ClimateHeatmap';
 import { Temperatures } from 'components/Prognose2100/Temperatures';
 
 const SLUG = 'rising-temperatures';
@@ -22,7 +23,7 @@ export default async function Page() {
       path={'/blog/' + post.slug}
       image={post.image}
       code={post.code}
-      additionalComponents={{ Temperatures }}
+      additionalComponents={{ Temperatures, ClimateHeatmap }}
     />
   );
 }
