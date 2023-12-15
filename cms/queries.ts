@@ -1,6 +1,4 @@
-import { sluggify } from 'lib/sluggify';
-
-import { loadMDXFile, loadMetadataFromDir } from './mdx-parser';
+import { loadAllMdx, loadSingleMdx } from './mdx-parser';
 import {
   Client,
   ClientMeta,
@@ -10,56 +8,36 @@ import {
   ProjectMeta,
   Snippet,
   SnippetMeta
-} from './types';
+} from './schema';
 
 export async function getPosts() {
-  const posts = await loadMetadataFromDir<PostMeta>('data/blog');
-
-  return posts.map((post) => ({
-    ...post,
-    tagsAsSlugs: post.tags ? post.tags.map(sluggify) : []
-  }));
+  return loadAllMdx<PostMeta>('data/blog', PostMeta);
 }
 
 export async function getPost(slug: string) {
-  const post = await loadMDXFile<Post>(slug, 'data/blog');
-
-  if (!post) {
-    return;
-  }
-
-  return {
-    ...post,
-    tagsAsSlugs: post.tags ? post.tags.map(sluggify) : []
-  };
+  return loadSingleMdx<Post>(slug, 'data/blog', Post);
 }
 
 export async function getSnippets() {
-  const snippets = await loadMetadataFromDir<SnippetMeta>('data/snippets');
-  return snippets;
+  return loadAllMdx<SnippetMeta>('data/snippets', SnippetMeta);
 }
 
 export async function getSnippet(slug: string) {
-  const snippet = await loadMDXFile<Snippet>(slug, 'data/snippets');
-  return snippet;
+  return loadSingleMdx<Snippet>(slug, 'data/snippets', Snippet);
 }
 
 export async function getClients() {
-  const clients = await loadMetadataFromDir<ClientMeta>('data/portfolio');
-  return clients;
+  return loadAllMdx<ClientMeta>('data/portfolio', ClientMeta);
 }
 
 export async function getClient(slug: string) {
-  const client = await loadMDXFile<Client>(slug, 'data/portfolio');
-  return client;
+  return loadSingleMdx<Client>(slug, 'data/portfolio', Client);
 }
 
 export async function getProjects() {
-  const projects = await loadMetadataFromDir<ProjectMeta>('data/labs');
-  return projects;
+  return loadAllMdx<ProjectMeta>('data/labs', ProjectMeta);
 }
 
 export async function getProject(slug: string) {
-  const project = await loadMDXFile<Project>(slug, 'data/labs');
-  return project;
+  return loadSingleMdx<Project>(slug, 'data/labs', Project);
 }
