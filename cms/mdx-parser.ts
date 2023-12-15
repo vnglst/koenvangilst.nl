@@ -8,42 +8,95 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 
-export async function loadMetadataFromDir<T>(dir: string) {
+import { sluggify } from 'lib/sluggify';
+
+import {
+  Client,
+  ClientMeta,
+  Post,
+  PostMeta,
+  Project,
+  ProjectMeta,
+  Snippet,
+  SnippetMeta
+} from './schema';
+
+type MetadataValidators =
+  | typeof SnippetMeta
+  | typeof PostMeta
+  | typeof ClientMeta
+  | typeof ProjectMeta;
+
+export async function loadAllMdx<Validated>(
+  dir: string,
+  Validator: MetadataValidators
+) {
   const mdxFiles = fs
     .readdirSync(dir)
     .filter((file) => path.extname(file) === '.mdx');
 
-  return (await Promise.all(
-    mdxFiles.map(async (file) => {
-      const slug = file.replace(/\.mdx$/, '');
-      const mdxPath = path.join(process.cwd(), dir, file);
-      const rawString = fs.readFileSync(mdxPath, 'utf-8');
-      const { data } = grayMatter(rawString);
-      return {
-        ...data,
-        slug
-      };
-    })
-  )) as T[];
+  const rawMetadata = mdxFiles.map((file) => {
+    const slug = file.replace(/\.mdx$/, '');
+    const mdxPath = path.join(process.cwd(), dir, file);
+    const rawString = fs.readFileSync(mdxPath, 'utf-8');
+    const { data } = grayMatter(rawString);
+
+    if (data.tags) {
+      data.tagsAsSlugs = data.tags.map(sluggify);
+    }
+
+    return {
+      ...data,
+      slug
+    };
+  });
+
+  return rawMetadata.map((item) => {
+    try {
+      return Validator.parse(item) as Validated;
+    } catch (error) {
+      console.error('Error parsing item: ', item);
+      console.error('Error: ', error.message);
+      throw error;
+    }
+  });
 }
 
-export async function loadMDXFile<T>(slug: string, dir: string) {
+type Validator = typeof Snippet | typeof Post | typeof Client | typeof Project;
+
+export async function loadSingleMdx<Validated>(
+  slug: string,
+  dir: string,
+  Validator: Validator
+) {
   const mdxFilePath = path.join(process.cwd(), dir, slug + '.mdx');
   const rawString = loadFile(mdxFilePath);
 
   if (!rawString) {
-    return;
+    throw new Error('File empty');
   }
 
   const { code, frontmatter, matter } = await parseMDXFile(rawString);
   const readingTime = calculateReadingTime(matter.content);
 
-  return {
+  if (frontmatter.tags) {
+    frontmatter.tagsAsSlugs = frontmatter.tags.map(sluggify);
+  }
+
+  const rawFile = {
     ...frontmatter,
     slug,
     code,
     readingTime
-  } as T;
+  };
+
+  try {
+    return Validator.parse(rawFile) as Validated;
+  } catch (error) {
+    console.error('Error parsing file: ', dir + '/' + slug);
+    console.error('Error: ', error.message);
+    throw error;
+  }
 }
 
 function loadFile(path: string) {
@@ -52,7 +105,7 @@ function loadFile(path: string) {
     return rawString;
   } catch (error) {
     console.log('Error loading file: ', error.message);
-    return;
+    throw new Error('File not found');
   }
 }
 

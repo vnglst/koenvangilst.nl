@@ -32,14 +32,14 @@ export default async function Labs() {
         </p>
       </Prose>
       <Heading level={2}>Side projects</Heading>
-      {sorted.map((client) => {
+      {sorted.map((project) => {
         return (
           <ProjectLink
-            title={client.name}
-            year={client.year}
-            summary={client.summary}
-            href={client.url}
-            key={client.url}
+            title={project.name}
+            year={project.year}
+            summary={project.summary}
+            href={project.url}
+            key={project.url}
           />
         );
       })}
