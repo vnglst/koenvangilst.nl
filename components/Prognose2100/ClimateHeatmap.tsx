@@ -49,7 +49,7 @@ function generateOptions() {
     },
     title: [
       {
-        text: 'Monthly tempaturature Anomaly',
+        text: 'Monthly Temperature Anomaly',
         subtext: 'Deviation from 20th century average.\nSource: KNMI.',
         subtextStyle: {
           lineHeight: 18
@@ -70,7 +70,7 @@ function generateOptions() {
     },
     yAxis: {
       type: 'category',
-      data: years.toReversed()
+      data: years
     },
     xAxis: {
       type: 'category',
@@ -100,10 +100,9 @@ function generateOptions() {
     },
     series: [
       {
-        name: 'Temperature Data',
         type: 'heatmap',
         aspectScale: 1,
-        data: heatMapData.map(([y, m, v]) => [m, y, v]).toReversed(),
+        data: heatMapData,
         label: {
           show: false
         },

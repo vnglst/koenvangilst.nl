@@ -3,7 +3,7 @@
 import { Chart, echarts } from '../Chart';
 
 import { temperatureFormatter } from './formatters';
-import { historicDifferences, historicYears } from './temperature.data';
+import { yearlyAnomalies, years } from './temperature.data';
 
 export function Temperatures() {
   const options = generateOptions();
@@ -62,7 +62,7 @@ function generateOptions() {
       }
     },
     xAxis: {
-      data: historicYears,
+      data: years,
       // Enable this for forecasting
       // .concat(
       //   new Array(2030 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
@@ -86,34 +86,45 @@ function generateOptions() {
       {
         name: 'Anomaly',
         type: 'bar',
-        data: historicDifferences.map((value) => ({
-          value,
-          itemStyle: {
-            color:
-              value > 0
-                ? new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: '#ffcc6a'
-                    },
-                    {
-                      offset: 1,
-                      color: '#ff9662'
-                    }
-                  ])
-                : new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: '#74e2ff'
-                    },
-                    {
-                      offset: 1,
-                      color: '#cbf3ff'
-                    }
-                  ]),
-            borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
+        data: yearlyAnomalies.map((value) => {
+          if (value === null) {
+            return {
+              value: 0,
+              itemStyle: {
+                color: '#ffffff'
+              }
+            };
           }
-        })),
+
+          return {
+            value,
+            itemStyle: {
+              color:
+                value > 0
+                  ? new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      {
+                        offset: 0,
+                        color: '#ffcc6a'
+                      },
+                      {
+                        offset: 1,
+                        color: '#ff9662'
+                      }
+                    ])
+                  : new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      {
+                        offset: 0,
+                        color: '#74e2ff'
+                      },
+                      {
+                        offset: 1,
+                        color: '#cbf3ff'
+                      }
+                    ]),
+              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
+            }
+          };
+        }),
         // Enable this for forecasting
         // markLine: {
         //   lineStyle: {
