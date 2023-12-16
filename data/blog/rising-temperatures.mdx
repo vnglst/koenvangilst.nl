@@ -1,16 +1,37 @@
 ---
 title: Rising Temperatures in The Netherlands
-publishedAt: 2023-12-08
-summary: TODO
+publishedAt: 2023-12-16
+summary: Visualizing the rising temperatures in The Netherlands using data from the Dutch Meteorological Institute (KNMI).
+image:
+  src: /static/images/temperature-anomaly.png
+  alt: Rising Temperatures in The Netherlands
+  width: 1992
+  height: 1120
+  showAsHeader: false
 tags:
   - climate change
   - data visualization
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl.
+
+
+
+Rarely does a day pass without some news of our changing climate. Here in The Netherlands, we're also experiencing this firsthand – our summers are hotter and our winters milder. In this blog post, I've tried to visually capture these changes. By using temperature data from the Dutch Meteorological Institute (KNMI), I've created two visualizations that show how the average temperature in The Netherlands has changed over the last 123 years.
+
+## Yearly temperature anomalies
+
+The first visualization shows the yearly temperature anomalies in The Netherlands from 1901 to 2023. The data is based on the average temperature of each year, compared to the average temperature of the period 1901-2000 (previous century). The visualization is interactive, so you can hover over the graph to see the exact temperature anomaly for each year.
 
 <Temperatures />
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl. Sed euismod, nisl quis ultricies ultricies, nunc nisl aliquam nunc, quis ultricies nisl nunc quis nisl.
+## Heatmap of monthly temperature anomalies
+
+The second visualization shows the monthly temperature anomalies in The Netherlands from 1901 to 2023. I'm using a heatmap to visualize the data, where the color of each cell represents the temperature anomaly for that month. So if you see a lot of red, it means that the temperature was higher than average. If it's blue, it means that the temperature was lower than average.
+
+The data is based on the average temperature of each month, compared to the average temperature of the period 1901-2000 (previous century). The visualization is interactive like the previous one.
 
 <ClimateHeatmap />
+
+## Source code
+
+The source code of these charts is open source and available on Github (see link below). I still have to open-source the data processing scripts in Python and I'll update this blog post when I do. To realize these charts, I've used the following:
