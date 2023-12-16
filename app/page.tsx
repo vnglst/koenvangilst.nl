@@ -36,16 +36,16 @@ export default function Home() {
       <Heading level={2}>Featured</Heading>
       <section className="flex flex-col gap-6 md:flex-row">
         <FeaturedCard
+          title="Rising Temperatures in The Netherlands"
+          slug="rising-temperatures"
+        />
+        <FeaturedCard
           title="Why I Prefer Trunk-Based Development"
           slug="trunkbased-development"
         />
         <FeaturedCard
           title="Code Colocation is King"
           slug="code-colocation-is-king"
-        />
-        <FeaturedCard
-          title="Live user cursors with Phoenix Presence"
-          slug="phoenix-live-cursors"
         />
       </section>
       <Link
