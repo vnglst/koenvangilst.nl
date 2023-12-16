@@ -40,7 +40,14 @@ export async function generateMetadata({ params }: Props) {
     title: post.title,
     description: post.summary,
     openGraph: {
-      images: `https://koenvangilst.nl${post.image}`
+      images: `https://koenvangilst.nl${post.image?.src}`
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@vnglst',
+      title: post.title,
+      description: post.summary,
+      images: [post.image?.src]
     },
     alternates: {
       canonical: 'blog/' + post.slug
