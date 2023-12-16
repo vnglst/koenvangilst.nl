@@ -50,7 +50,8 @@ function generateOptions() {
     title: [
       {
         text: 'Monthly Temperature Anomaly',
-        subtext: 'Deviation from 20th century average.\nSource: KNMI.',
+        subtext:
+          'Deviation from 20th century average.\nSource: KNMI • www.koenvangilst.nl',
         subtextStyle: {
           lineHeight: 18
         },
@@ -58,16 +59,6 @@ function generateOptions() {
         left: 0
       }
     ],
-    graphic: {
-      type: 'text',
-      right: 20,
-      bottom: 20,
-      style: {
-        text: 'www.koenvangilst.nl',
-        fill: '#9CA3AF',
-        fontSize: 12
-      }
-    },
     yAxis: {
       type: 'category',
       data: years

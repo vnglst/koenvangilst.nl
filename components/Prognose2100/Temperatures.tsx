@@ -20,7 +20,7 @@ function generateOptions() {
   return {
     grid: {
       top: 110,
-      bottom: 50,
+      bottom: 20,
       left: 15,
       right: 15,
       containLabel: true
@@ -36,7 +36,7 @@ function generateOptions() {
       {
         text: 'Temperature Anomalies',
         subtext:
-          'Deviations from 20th century average of 9.3 ºC.\nSource: KNMI.',
+          'Deviations from 20th century average of 9.3 ºC.\nSource: KNMI • www.koenvangilst.nl',
         subtextStyle: {
           lineHeight: 18
         },
@@ -44,16 +44,6 @@ function generateOptions() {
         left: 0
       }
     ],
-    graphic: {
-      type: 'text',
-      right: 20,
-      bottom: 20,
-      style: {
-        text: 'www.koenvangilst.nl',
-        fill: '#9CA3AF',
-        fontSize: 12
-      }
-    },
     tooltip: {
       valueFormatter: temperatureFormatter,
       trigger: 'axis',
@@ -76,7 +66,10 @@ function generateOptions() {
       min: -2,
       max: 3,
       splitLine: {
-        show: false
+        show: true,
+        lineStyle: {
+          type: 'dashed'
+        }
       },
       axisLabel: {
         formatter: temperatureFormatter
@@ -88,12 +81,7 @@ function generateOptions() {
         type: 'bar',
         data: yearlyAnomalies.map((value) => {
           if (value === null) {
-            return {
-              value: 0,
-              itemStyle: {
-                color: '#ffffff'
-              }
-            };
+            return;
           }
 
           return {
