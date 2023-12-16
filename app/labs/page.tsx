@@ -15,7 +15,7 @@ export const metadata = {
 };
 
 export default async function Labs() {
-  const sorted = (await getProjects()).toSorted(
+  const sorted = (await getProjects()).sort(
     (a, b) => Number(b.year) - Number(a.year)
   );
 

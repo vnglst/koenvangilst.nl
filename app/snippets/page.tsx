@@ -25,7 +25,7 @@ export default async function Snippets() {
     })
   );
 
-  const mostPopular = snippetsWithViews.toSorted((a, b) => b.views - a.views);
+  const mostPopular = snippetsWithViews.sort((a, b) => b.views - a.views);
 
   return (
     <Container>
