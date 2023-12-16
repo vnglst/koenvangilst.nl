@@ -46,16 +46,15 @@ function generateOptions() {
     ],
     tooltip: {
       valueFormatter: temperatureFormatter,
-      trigger: 'axis',
+      trigger: 'item',
       axisPointer: {
         type: 'cross'
       }
     },
     xAxis: {
       data: years,
-      // Enable this for forecasting
       // .concat(
-      //   new Array(2030 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
+      //   new Array(2040 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
       // ),
       splitLine: {
         show: false
@@ -113,47 +112,46 @@ function generateOptions() {
             }
           };
         }),
-        // Enable this for forecasting
-        // markLine: {
-        //   lineStyle: {
-        //     color: '#74e2ff',
-        //     width: 1,
-        //     type: 'dashed'
-        //   },
-        //   symbol: ['none', 'none'],
-        //   animation: false,
-        //   label: {
-        //     fontStyle: 'italic',
-        //     fontWeight: 'normal',
-        //     color: '#9CA3AF'
-        //   },
-        //   data: [
-        //     {
-        //       name: 'Prognosis 2050',
-        //       yAxis: 1.5,
-        //       label: {
-        //         formatter: '2050',
-        //         position: 'insideEndTop'
-        //       },
-        //       tooltip: {
-        //         show: true,
-        //         formatter: 'KNMI Prognosis 2050'
-        //       }
-        //     },
-        //     {
-        //       name: 'Prognosis 2100',
-        //       yAxis: 2.0,
-        //       label: {
-        //         formatter: '2100',
-        //         position: 'insideEndTop'
-        //       },
-        //       tooltip: {
-        //         show: true,
-        //         formatter: 'KNMI Prognosis 2100'
-        //       }
-        //     }
-        //   ]
-        // },
+        markLine: {
+          lineStyle: {
+            color: '#74e2ff',
+            width: 2,
+            type: 'dashed'
+          },
+          symbol: ['none', 'none'],
+          animation: false,
+          label: {
+            fontStyle: 'italic',
+            fontWeight: 'normal',
+            color: '#9CA3AF'
+          }
+          // data: [
+          //   {
+          //     name: 'Best case',
+          //     yAxis: 2,
+          //     label: {
+          //       formatter: 'Best case',
+          //       position: 'insideEndTop'
+          //     },
+          //     tooltip: {
+          //       show: true,
+          //       formatter: 'KNMI best case 2100 Ld'
+          //     }
+          //   },
+          //   {
+          //     name: 'Worst case',
+          //     yAxis: 5.4,
+          //     label: {
+          //       formatter: 'Worst case',
+          //       position: 'insideEndTop'
+          //     },
+          //     tooltip: {
+          //       show: true,
+          //       formatter: 'KNMI worst case 2100 Hn'
+          //     }
+          //   }
+          // ]
+        },
         emphasis: {
           focus: 'series'
         }

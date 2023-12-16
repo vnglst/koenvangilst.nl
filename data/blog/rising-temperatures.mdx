@@ -17,7 +17,7 @@ Rarely does a day pass without some news of our changing climate. Here in the Ne
 
 ## Yearly temperature anomalies
 
-The first visualization shows the yearly temperature anomalies in The Netherlands from 1901 to 2023. The data is based on the average temperature of each year, compared to the average temperature of the period 1901-2000 (previous century). The visualization is interactive, so you can hover over the graph to see the exact temperature anomaly for each year.
+The first visualization presents the yearly temperature anomalies in The Netherlands from 1901 to 2023. The data, sourced from a [weather station in De Bilt](https://www.knmi.nl/over-het-knmi/nieuws/120-jaar-weerstation-de-bilt), is based on the average temperature of each year, compared to the average temperature of the period 1901-2000. This visualization is designed to be interactive, allowing users to hover over the graph to see the exact temperature anomaly for each year.
 
 <Temperatures />
 
@@ -25,10 +25,16 @@ The first visualization shows the yearly temperature anomalies in The Netherland
 
 The second visualization shows the monthly temperature anomalies in The Netherlands from 1901 to 2023. I'm using a heatmap to visualize the data, where the color of each cell represents the temperature anomaly for that month. So if you see a lot of red, it means that the temperature was higher than average; if it's blue, the temperature was lower than average.
 
-The data is based on the average temperature of each month, compared to the average temperature of the period 1901-2000 (previous century). The visualization is interactive like the previous one.
+The data is based on the average temperature of each month, compared to the average temperature of the period 1901-2000. Like the previous chart, the data is sourced from a [weather station in De Bilt](https://www.knmi.nl/over-het-knmi/nieuws/120-jaar-weerstation-de-bilt).
 
 <ClimateHeatmap />
 
 ## Source code
 
-The source code of these charts is open source and available on Github (see link below). I still have to open-source the data processing scripts in Python and I'll update this blog post when I do.
+The source code of these charts is open source and available on Github (see link below). I still have to open-source the data processing scripts in Python and I'll update this blog post when I do. A link to the data source can be found [here](https://cdn.knmi.nl/knmi/map/page/klimatologie/gegevens/maandgegevens/mndgeg_260_tg.txt).
+
+<Disclaimer>
+  This article reached the Hacker News front page on December 16, 2023. If you're interested be sure to 
+  [head over to the discussion](https://news.ycombinator.com/item?id=38663881), but brace yourself for some climate change skepticism.
+</Disclaimer>
+
