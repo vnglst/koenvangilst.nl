@@ -13,8 +13,10 @@ export const darkTheme = {
     }
   ]),
   textStyle: {
-    fontFamily: 'var(--font-inter), sans-serif',
-    color: '#cbd5e1'
+    // Setting fontFamily doesn't work for Canvas renderer.
+    // fontFamily: 'var(--font-inter), sans-serif',
+    color: '#cbd5e1',
+    fontSize: 12
   },
   title: {
     padding: 20,
@@ -22,11 +24,13 @@ export const darkTheme = {
     textStyle: {
       color: '#fff',
       fontSize: 16,
-      fontWeight: 'normal',
-      fontFamily: 'var(--font-inter), sans-serif'
+      fontWeight: 'normal'
+      // Setting fontFamily doesn't work for Canvas renderer.
+      // fontFamily: 'var(--font-inter), sans-serif'
     },
     subtextStyle: {
-      color: '#94a3b8'
+      color: '#94a3b8',
+      fontSize: 12
     },
     bottom: 200
   },
@@ -41,5 +45,15 @@ export const darkTheme = {
     right: '4%',
     bottom: '13%',
     containLabel: true
+  },
+  visualMap: {
+    textStyle: {
+      color: '#fff'
+    }
+  },
+  toolbox: {
+    iconStyle: {
+      borderColor: '#fff'
+    }
   }
 };

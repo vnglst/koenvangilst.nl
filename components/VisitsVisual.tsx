@@ -25,6 +25,13 @@ function generateOptions(visits: View[]) {
   });
 
   return {
+    grid: {
+      top: 80,
+      bottom: 50,
+      left: 15,
+      right: 15,
+      containLabel: true
+    },
     title: {
       text: 'Visits Past 365 Days'
     },
