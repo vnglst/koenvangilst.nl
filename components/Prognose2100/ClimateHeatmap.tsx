@@ -3,6 +3,7 @@
 import { Chart } from '../Chart';
 
 import { heatMapData, years } from './climate-heatmap.data';
+import { temperatureFormatter } from './formatters';
 
 export function ClimateHeatmap() {
   const options = generateOptions();
@@ -19,14 +20,14 @@ function generateOptions() {
   const MONTHS = [
     'Jan',
     'Feb',
-    'Mrt',
+    'Mar',
     'Apr',
-    'Mei',
+    'May',
     'Jun',
     'Jul',
     'Aug',
-    'Sep',
-    'Okt',
+    'Sept',
+    'Oct',
     'Nov',
     'Dec'
   ];
@@ -34,7 +35,7 @@ function generateOptions() {
   return {
     grid: {
       top: 140,
-      bottom: 20,
+      bottom: 50,
       left: 20,
       right: 20,
       containLabel: true
@@ -46,14 +47,26 @@ function generateOptions() {
         }
       }
     },
-    title: {
-      text: 'Monthly tempaturature Anomaly',
-      subtext: 'Deviation from 20th century average.\nSource: KNMI.',
-      subtextStyle: {
-        lineHeight: 18
-      },
-      top: 0,
-      left: 0
+    title: [
+      {
+        text: 'Monthly tempaturature Anomaly',
+        subtext: 'Deviation from 20th century average.\nSource: KNMI.',
+        subtextStyle: {
+          lineHeight: 18
+        },
+        top: 0,
+        left: 0
+      }
+    ],
+    graphic: {
+      type: 'text',
+      right: 20,
+      bottom: 20,
+      style: {
+        text: 'www.koenvangilst.nl',
+        fill: '#9CA3AF',
+        fontSize: 12
+      }
     },
     yAxis: {
       type: 'category',
@@ -77,10 +90,12 @@ function generateOptions() {
     },
     tooltip: {
       trigger: 'item',
-      formatter: function (params) {
+      formatter: function (params: { value: [number, string, number] }) {
         const [month, year, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}, ${year}: ${value.toFixed(2)} °C`;
+        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${temperatureFormatter(
+          value
+        )}</b>`;
       }
     },
     series: [

@@ -2,7 +2,9 @@ export const lightTheme = {
   darkMode: false,
   backgroundColor: 'white',
   textStyle: {
-    fontFamily: "'Lato', sans-serif"
+    fontSize: 12
+    // Setting fontFamily doesn't work for Canvas renderer.
+    // fontFamily: 'var(--font-inter), sans-serif',
   },
   title: {
     padding: 20,
@@ -10,9 +12,14 @@ export const lightTheme = {
     textStyle: {
       color: '#000',
       fontSize: 16,
-      fontWeight: 'normal',
-      fontFamily: 'var(--font-inter), sans-serif'
-    }
+      fontWeight: 'normal'
+      // Setting fontFamily doesn't work for Canvas renderer.
+      // fontFamily: 'var(--font-inter), sans-serif'
+    },
+    subtextStyle: {
+      fontSize: 12
+    },
+    bottom: 200
   },
   bar: {
     itemStyle: {
@@ -25,5 +32,10 @@ export const lightTheme = {
     right: '4%',
     bottom: '13%',
     containLabel: true
+  },
+  toolbox: {
+    iconStyle: {
+      borderColor: '#000'
+    }
   }
 };

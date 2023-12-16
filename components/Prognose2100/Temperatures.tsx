@@ -2,6 +2,7 @@
 
 import { Chart, echarts } from '../Chart';
 
+import { temperatureFormatter } from './formatters';
 import { historicDifferences, historicYears } from './temperature.data';
 
 export function Temperatures() {
@@ -19,7 +20,7 @@ function generateOptions() {
   return {
     grid: {
       top: 110,
-      bottom: 15,
+      bottom: 50,
       left: 15,
       right: 15,
       containLabel: true
@@ -31,26 +32,41 @@ function generateOptions() {
         }
       }
     },
-    title: {
-      text: 'Tempaturature Anomaly',
-      subtext: 'Deviation from 20th century average of 9.3 ºC.\nSource: KNMI.',
-      subtextStyle: {
-        lineHeight: 18
-      },
-      top: 0,
-      left: 0
+    title: [
+      {
+        text: 'Temperature Anomalies',
+        subtext:
+          'Deviations from 20th century average of 9.3 ºC.\nSource: KNMI.',
+        subtextStyle: {
+          lineHeight: 18
+        },
+        top: 0,
+        left: 0
+      }
+    ],
+    graphic: {
+      type: 'text',
+      right: 20,
+      bottom: 20,
+      style: {
+        text: 'www.koenvangilst.nl',
+        fill: '#9CA3AF',
+        fontSize: 12
+      }
     },
     tooltip: {
-      valueFormatter: (value) => `${value.toFixed(2)} °C`,
-      trigger: 'item',
+      valueFormatter: temperatureFormatter,
+      trigger: 'axis',
       axisPointer: {
         type: 'cross'
       }
     },
     xAxis: {
-      data: historicYears.concat(
-        new Array(2100 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
-      ),
+      data: historicYears,
+      // Enable this for forecasting
+      // .concat(
+      //   new Array(2030 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
+      // ),
       splitLine: {
         show: false
       }
@@ -63,7 +79,7 @@ function generateOptions() {
         show: false
       },
       axisLabel: {
-        formatter: `{value} °C`
+        formatter: temperatureFormatter
       }
     },
     series: [
@@ -98,46 +114,47 @@ function generateOptions() {
             borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
           }
         })),
-        markLine: {
-          lineStyle: {
-            color: '#74e2ff',
-            width: 1,
-            type: 'dashed'
-          },
-          symbol: ['none', 'none'],
-          animation: false,
-          label: {
-            fontStyle: 'italic',
-            fontWeight: 'normal',
-            color: '#9CA3AF'
-          },
-          data: [
-            {
-              name: 'Prognosis 2050',
-              yAxis: 1.5,
-              label: {
-                formatter: '2050',
-                position: 'insideEndTop'
-              },
-              tooltip: {
-                show: true,
-                formatter: 'KNMI Prognosis 2050'
-              }
-            },
-            {
-              name: 'Prognosis 2100',
-              yAxis: 2.0,
-              label: {
-                formatter: '2100',
-                position: 'insideEndTop'
-              },
-              tooltip: {
-                show: true,
-                formatter: 'KNMI Prognosis 2100'
-              }
-            }
-          ]
-        },
+        // Enable this for forecasting
+        // markLine: {
+        //   lineStyle: {
+        //     color: '#74e2ff',
+        //     width: 1,
+        //     type: 'dashed'
+        //   },
+        //   symbol: ['none', 'none'],
+        //   animation: false,
+        //   label: {
+        //     fontStyle: 'italic',
+        //     fontWeight: 'normal',
+        //     color: '#9CA3AF'
+        //   },
+        //   data: [
+        //     {
+        //       name: 'Prognosis 2050',
+        //       yAxis: 1.5,
+        //       label: {
+        //         formatter: '2050',
+        //         position: 'insideEndTop'
+        //       },
+        //       tooltip: {
+        //         show: true,
+        //         formatter: 'KNMI Prognosis 2050'
+        //       }
+        //     },
+        //     {
+        //       name: 'Prognosis 2100',
+        //       yAxis: 2.0,
+        //       label: {
+        //         formatter: '2100',
+        //         position: 'insideEndTop'
+        //       },
+        //       tooltip: {
+        //         show: true,
+        //         formatter: 'KNMI Prognosis 2100'
+        //       }
+        //     }
+        //   ]
+        // },
         emphasis: {
           focus: 'series'
         }
