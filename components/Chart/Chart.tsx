@@ -1,26 +1,34 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { BarChart } from 'echarts/charts';
+import { BarChart, HeatmapChart } from 'echarts/charts';
 import {
   DataZoomComponent,
   GraphicComponent,
   GridComponent,
+  MarkLineComponent,
   TitleComponent,
-  TooltipComponent
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent
 } from 'echarts/components';
 import * as echarts from 'echarts/core';
-import { SVGRenderer } from 'echarts/renderers';
+import { CanvasRenderer } from 'echarts/renderers';
 import { ECBasicOption } from 'echarts/types/dist/shared';
+import merge from 'lodash/merge';
 
 echarts.use([
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  DataZoomComponent,
   BarChart,
-  SVGRenderer,
-  GraphicComponent
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  HeatmapChart,
+  MarkLineComponent,
+  CanvasRenderer,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent
 ]);
 
 export { echarts };
@@ -35,17 +43,31 @@ type ChartProps = {
   className: string;
 };
 
+const DEFAULT_OPTIONS: ECBasicOption = {
+  toolbox: {
+    feature: {
+      saveAsImage: {
+        title: 'Save',
+        show: true
+      }
+    },
+    right: 15,
+    top: 15
+  }
+};
+
 export function Chart({ options, className }: ChartProps) {
   const mode = useTheme((state) => state.theme);
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
+
     echarts.registerTheme(Theme.Light, lightTheme);
     echarts.registerTheme(Theme.Dark, darkTheme);
 
-    const chart = echarts.init(chartRef.current, mode, { renderer: 'svg' });
-    chart.setOption(options);
+    const chart = echarts.init(chartRef.current, mode, { renderer: 'canvas' });
+    chart.setOption(merge(options, DEFAULT_OPTIONS));
 
     const handleResize = () => chart.resize();
     window.addEventListener('resize', handleResize);

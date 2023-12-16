@@ -22,7 +22,7 @@ export async function generateMetadata() {
 }
 
 export default async function Blog() {
-  const sortedPosts = (await getPosts()).toSorted(
+  const sortedPosts = (await getPosts()).sort(
     (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
   );
 
@@ -35,7 +35,7 @@ export default async function Blog() {
   );
 
   const mostPopularPosts = [...postsWithViews]
-    .toSorted((a, b) => b.viewsPerMonth - a.viewsPerMonth)
+    .sort((a, b) => b.viewsPerMonth - a.viewsPerMonth)
     .slice(0, 6);
 
   const totalViews = postsWithViews.reduce((acc, post) => acc + post.views, 0);

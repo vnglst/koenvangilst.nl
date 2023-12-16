@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 export default async function Portfolio() {
-  const sorted = (await getClients()).toSorted(
+  const sorted = (await getClients()).sort(
     (a, b) => Number(b.year) - Number(a.year)
   );
 
