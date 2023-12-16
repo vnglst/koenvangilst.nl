@@ -19,7 +19,7 @@
     "autoprefixer": "10.4.16",
     "echarts": "5.4.3",
     "esbuild": "0.19.9",
-    "eslint": "8.55.0",
+    "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "gray-matter": "4.0.3",
