@@ -54,14 +54,14 @@ export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
 /**
  * Retrieves a list of total website views per day.
  */
-export async function getViewsPerDay(days: number): Promise<View[]> {
+export async function getViewsPerDay(daysBack: number): Promise<View[]> {
   const { data: views, error } = await supabase
     .from('perday')
     .select('created_at, count')
     // only get views for last x days
-    .gte(
+    .gt(
       'created_at',
-      new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+      new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString()
     );
 
   if (error) {
@@ -76,32 +76,18 @@ export async function getViewsPerDay(days: number): Promise<View[]> {
  * Retrieves a list of total website views of last week
  */
 export async function getTotalWeekViews(): Promise<number> {
-  const { data: views, error } = await supabase.from('week').select('count');
-
-  if (error) {
-    console.error('Fetching weekly views failed', error);
-    return 0;
-  }
-
-  const list = views.reduce((prev, item) => prev + item.count, 0);
-
-  return list;
+  return getViewsPerDay(7).then((views) => {
+    return views.reduce((prev, item) => prev + item.count, 0);
+  });
 }
 
 /**
  * Retrieves a list of total website views of today
  */
 export async function getTotalTodayViews(): Promise<number> {
-  const { data: views, error } = await supabase.from('today').select('count');
-
-  if (error) {
-    console.error('Fetching today views failed', error);
-    return 0;
-  }
-
-  const list = views.reduce((prev, item) => prev + item.count, 0);
-
-  return list;
+  return getViewsPerDay(1).then((views) => {
+    return views.reduce((prev, item) => prev + item.count, 0);
+  });
 }
 
 /**
