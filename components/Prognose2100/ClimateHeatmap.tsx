@@ -34,7 +34,7 @@ function generateOptions() {
 
   return {
     grid: {
-      top: 140,
+      top: 160,
       bottom: 50,
       left: 20,
       right: 20,
@@ -63,10 +63,24 @@ function generateOptions() {
       type: 'category',
       data: years
     },
-    xAxis: {
-      type: 'category',
-      data: MONTHS
-    },
+    xAxis: [
+      {
+        type: 'category',
+        data: MONTHS,
+        position: 'top',
+        axisLabel: {
+          rotate: 90
+        }
+      },
+      {
+        type: 'category',
+        data: MONTHS,
+        position: 'bottom',
+        axisLabel: {
+          rotate: 90
+        }
+      }
+    ],
     visualMap: {
       min: -4,
       max: 4,
