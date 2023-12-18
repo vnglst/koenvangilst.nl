@@ -22,7 +22,7 @@ export async function generateMetadata() {
 }
 
 export default async function Blog() {
-  const sortedPosts = (await getPosts()).sort(
+  const sortedPosts = [...(await getPosts())].sort(
     (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
   );
 
