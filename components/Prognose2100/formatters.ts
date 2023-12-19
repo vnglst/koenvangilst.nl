@@ -1,5 +1,5 @@
-export const temperatureFormatter = (value?: number) => {
-  if (value === undefined) {
+export const temperatureFormatter = (value?: number | null) => {
+  if (value === undefined || value === null) {
     return 'N/A';
   }
 
@@ -7,4 +7,22 @@ export const temperatureFormatter = (value?: number) => {
     maximumFractionDigits: 2,
     signDisplay: 'always'
   })} °C`;
+};
+
+export const dateFormatter = (value: string) => {
+  return new Date(value).toLocaleDateString('en-UK', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+};
+
+export const dateTimeFormatter = (value: string) => {
+  return new Date(value).toLocaleDateString('en-UK', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  });
 };
