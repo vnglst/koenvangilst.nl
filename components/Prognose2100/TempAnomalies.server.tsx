@@ -13,7 +13,7 @@ export async function TemperatureAnomalies() {
 }
 
 async function fetchAnomalies() {
-  const data = await fetcher(DATA_URL, { next: { revalidate: 60 * 60 } });
+  const data = await fetcher(DATA_URL, { next: { revalidate: 60 * 5 } });
   const parsedData = Anomalies.parse(data);
   return parsedData;
 }
