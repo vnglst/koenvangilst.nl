@@ -7,6 +7,8 @@ type ProseProps = {
 
 export function Prose({ children, as: Cmp = 'article' }: ProseProps) {
   return (
-    <Cmp className="prose w-full max-w-none dark:prose-dark">{children}</Cmp>
+    <Cmp className="prose w-full max-w-none text-pretty dark:prose-dark">
+      {children}
+    </Cmp>
   );
 }
