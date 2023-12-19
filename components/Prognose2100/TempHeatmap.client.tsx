@@ -2,11 +2,16 @@
 
 import { Chart } from '../Chart';
 
-import { heatMapData, years } from './climate-heatmap.data';
-import { temperatureFormatter } from './formatters';
+import { dateTimeFormatter, temperatureFormatter } from './formatters';
+import type { Heatmap, HeatMapValue } from './TempHeatmap.server';
 
-export function ClimateHeatmap() {
-  const options = generateOptions();
+type TempHeatmapProps = {
+  heatmap: Heatmap;
+};
+
+export function TempHeatmapClient({ heatmap }: TempHeatmapProps) {
+  console.log('TempHeatmap, refresh:', dateTimeFormatter(heatmap.timestamp));
+  const options = generateOptions(heatmap);
 
   return (
     <Chart
@@ -16,7 +21,7 @@ export function ClimateHeatmap() {
   );
 }
 
-function generateOptions() {
+function generateOptions(heatmap: Heatmap) {
   const MONTHS = [
     'Jan',
     'Feb',
@@ -34,7 +39,7 @@ function generateOptions() {
 
   return {
     grid: {
-      top: 160,
+      top: 150,
       bottom: 50,
       left: 20,
       right: 20,
@@ -61,8 +66,20 @@ function generateOptions() {
     ],
     yAxis: {
       type: 'category',
-      data: years
+      data: heatmap.years
     },
+    // graphic: [
+    //   {
+    //     right: 20,
+    //     bottom: 20,
+    //     fontSize: 10,
+    //     type: 'text',
+    //     style: {
+    //       text: 'Data from: ' + dateFormatter(heatmap.timestamp),
+    //       fill: '#9CA3AF'
+    //     }
+    //   }
+    // ],
     xAxis: [
       {
         type: 'category',
@@ -86,7 +103,7 @@ function generateOptions() {
       max: 4,
       calculable: true,
       orient: 'horizontal',
-      top: 80,
+      top: 90,
       right: 10,
       type: 'continuous',
       inRange: {
@@ -95,7 +112,7 @@ function generateOptions() {
     },
     tooltip: {
       trigger: 'item',
-      formatter: function (params: { value: [number, string, number] }) {
+      formatter: function (params: { value: HeatMapValue }) {
         const [month, year, value] = params.value;
         const monthStr = MONTHS[month];
         return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${temperatureFormatter(
@@ -107,7 +124,7 @@ function generateOptions() {
       {
         type: 'heatmap',
         aspectScale: 1,
-        data: heatMapData,
+        data: heatmap.data,
         label: {
           show: false
         },

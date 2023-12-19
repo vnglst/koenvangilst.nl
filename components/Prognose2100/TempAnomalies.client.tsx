@@ -2,11 +2,19 @@
 
 import { Chart, echarts } from '../Chart';
 
-import { temperatureFormatter } from './formatters';
-import { yearlyAnomalies, years } from './temperature.data';
+import { dateTimeFormatter, temperatureFormatter } from './formatters';
+import { Anomalies } from './TempAnomalies.server';
 
-export function Temperatures() {
-  const options = generateOptions();
+type TempAnomaliesProps = {
+  anomalies: Anomalies;
+};
+
+export function TempAnomaliesClient({ anomalies }: TempAnomaliesProps) {
+  console.log(
+    'TempAnomalies, refresh:',
+    dateTimeFormatter(anomalies.timestamp)
+  );
+  const options = generateOptions(anomalies);
 
   return (
     <Chart
@@ -16,7 +24,7 @@ export function Temperatures() {
   );
 }
 
-function generateOptions() {
+function generateOptions(anomalies: Anomalies) {
   return {
     grid: {
       top: 110,
@@ -52,7 +60,7 @@ function generateOptions() {
       }
     },
     xAxis: {
-      data: years,
+      data: anomalies.years,
       // .concat(
       //   new Array(2040 - 2023).fill('').map((v, idx) => `${idx + 2024}`)
       // ),
@@ -78,7 +86,7 @@ function generateOptions() {
       {
         name: 'Anomaly',
         type: 'bar',
-        data: yearlyAnomalies.map((value) => {
+        data: anomalies.data.map((value) => {
           if (value === null) {
             return;
           }
