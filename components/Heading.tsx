@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 type Props = {
-  children: React.ReactNode;
   className?: string;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 };
@@ -11,7 +10,7 @@ export function Heading({
   className: extraClassName,
   level = 1,
   ...props
-}: Props) {
+}: PropsWithChildren<Props>) {
   const Tag = `h${level}`;
 
   let className =

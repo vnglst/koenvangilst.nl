@@ -91,15 +91,15 @@ h1 {
   @apply visible no-underline;
 }
 
-.prose pre {
+.prose pre:has(.code-highlight) {
   @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
 }
 
-.prose code {
-  @apply rounded-lg border border-gray-100 bg-gray-100 px-1 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
+.prose code.code-highlight {
+  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }
 
-.prose pre code {
+.prose code.code-highlight {
   @apply text-gray-800 dark:text-gray-200;
 }
 
@@ -187,7 +187,6 @@ pre::-webkit-scrollbar {
 }
 
 pre {
-  -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
@@ -211,8 +210,6 @@ pre {
 /* Remove Safari input shadow on mobile */
 input[type='text'],
 input[type='email'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
