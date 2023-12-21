@@ -56,7 +56,7 @@ export async function MarkdownLayout({
             })}
           </p>
         </div>
-        <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
+        <p className="mt-2 min-w-32 text-sm text-gray-600 md:mt-0 dark:text-gray-400">
           {readingTime.text}
           {` • `}
           <ViewCount path={path} />

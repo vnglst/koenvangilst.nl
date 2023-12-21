@@ -19,7 +19,7 @@ export function TempAnomaliesClient({ anomalies }: TempAnomaliesProps) {
   return (
     <Chart
       options={options}
-      className="lg:full-bleed aspect-video min-h-[60vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black md:min-h-0"
+      className="lg:full-bleed aspect-video min-h-[60vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
     />
   );
 }
