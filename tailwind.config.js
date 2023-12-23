@@ -27,7 +27,7 @@ module.exports = {
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32]
             },
-            code: { color: theme('colors.grey.500') },
+            code: { color: theme('colors.gray.500') },
             'blockquote p:first-of-type::before': false,
             'blockquote p:last-of-type::after': false
           }
