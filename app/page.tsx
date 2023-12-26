@@ -63,10 +63,10 @@ async function FeaturedCard({ title, slug }) {
   return (
     <Link
       href={`/blog/${slug}`}
-      className="rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 dark:bg-black md:w-1/3"
+      className="rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 md:w-1/3 dark:bg-black"
     >
       <div className="up-hover flex h-full w-full flex-col justify-between">
-        <h3 className="mb-4 w-full text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6 md:text-lg">
+        <h3 className="mb-4 w-full text-lg font-medium tracking-tight text-gray-900 md:mb-6 md:text-lg dark:text-gray-100">
           {title}
         </h3>
         <div className="flex items-center text-gray-800 dark:text-gray-200">

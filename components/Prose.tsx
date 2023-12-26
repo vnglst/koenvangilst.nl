@@ -1,12 +1,16 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 type ProseProps = {
   as?: keyof JSX.IntrinsicElements;
-  children: ReactNode;
 };
 
-export function Prose({ children, as: Cmp = 'article' }: ProseProps) {
+export function Prose({
+  children,
+  as: Cmp = 'article'
+}: PropsWithChildren<ProseProps>) {
   return (
-    <Cmp className="prose w-full max-w-none dark:prose-dark">{children}</Cmp>
+    <Cmp className="prose w-full max-w-none text-pretty dark:prose-dark">
+      {children}
+    </Cmp>
   );
 }

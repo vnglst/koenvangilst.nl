@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
@@ -87,11 +88,7 @@ export const viewport: Viewport = {
   themeColor: '#5bc3eb'
 };
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html
       lang="en"
@@ -132,7 +129,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <Nav />
         <main
           id="content"
-          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 px-8 pt-8 dark:bg-gray-900 dark:from-black dark:to-gray-900 md:pt-16"
+          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 px-8 pt-8 md:pt-16 dark:bg-gray-900 dark:from-black dark:to-gray-900"
         >
           {children}
         </main>
