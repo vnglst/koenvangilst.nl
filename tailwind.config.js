@@ -27,7 +27,7 @@ module.exports = {
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32]
             },
-            code: { color: theme('colors.pink.500') },
+            code: { color: theme('colors.gray.700') },
             'blockquote p:first-of-type::before': false,
             'blockquote p:last-of-type::after': false
           }
@@ -61,6 +61,7 @@ module.exports = {
                 '&:before': { backgroundColor: theme('colors.gray.500') }
               }
             },
+            code: { color: theme('colors.gray.300') },
             strong: { color: theme('colors.gray.100') }
           }
         }

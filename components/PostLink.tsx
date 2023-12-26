@@ -15,7 +15,7 @@ export function BlogPostLink({ title, summary, slug }: BlogPostLinkProps) {
     <Link href={path} className="w-full no-underline">
       <div className="up-hover w-full">
         <div className="flex flex-col justify-between md:flex-row">
-          <h3 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
+          <h3 className="mb-2 w-full text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
             {title}
           </h3>
           <ViewCount

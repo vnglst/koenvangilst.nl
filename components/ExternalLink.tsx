@@ -1,14 +1,17 @@
+import { PropsWithChildren } from 'react';
+
 import Icon from './Icon';
+
+type Props = {
+  href: string;
+  rel?: string;
+};
 
 export default function ExternalLink({
   href,
   children,
   rel
-}: {
-  href: string;
-  children: React.ReactNode;
-  rel?: string;
-}) {
+}: PropsWithChildren<Props>) {
   const extraRel = rel ? ` ${rel}` : '';
 
   return (

@@ -16,7 +16,7 @@ export function TempHeatmapClient({ heatmap }: TempHeatmapProps) {
   return (
     <Chart
       options={options}
-      className="aspect-[1/9] overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black md:min-h-0"
+      className="aspect-[1/9] overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
     />
   );
 }

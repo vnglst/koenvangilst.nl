@@ -27,7 +27,7 @@ export function ProjectLink({ title, summary, href, year }: Props) {
         <div className="mr-5 text-left text-primary">{year}</div>
         <div className="up-hover">
           <div className="flex flex-col justify-between md:flex-row">
-            <h4 className="mb-2 w-full text-lg font-medium text-gray-900 dark:text-gray-100 md:text-xl">
+            <h4 className="mb-2 w-full text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
               {title}
               {isExternal && (
                 <Icon icon="external-link" className="ml-2 inline h-4 w-4" />
