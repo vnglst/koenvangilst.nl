@@ -1,8 +1,8 @@
 'use client';
 
-import { Chart } from '../Chart';
+import { Chart } from 'components/Chart';
+import { dateTimeFormatter } from 'lib/formatters';
 
-import { dateTimeFormatter } from './formatters';
 import { Data, HeatmapValue } from './RainHeatmap.server';
 
 type RainHeatmapProps = {
@@ -41,11 +41,11 @@ function generateOptions(heatmap: Data) {
 
   const mmmFormat = (value: number | null) => {
     if (value === null) return '-';
-    return `${Math.round(value)} mm`;
+    return `${Math.round(value)} hours`;
   };
 
-  const max = Math.max(...heatmap.heatmap.map((v) => v[2] ?? 0));
-  const min = Math.min(...heatmap.heatmap.map((v) => v[2] ?? 0));
+  const max = Math.max(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
+  const min = Math.min(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
 
   return {
     grid: {
@@ -114,7 +114,7 @@ function generateOptions(heatmap: Data) {
     series: [
       {
         type: 'heatmap',
-        data: heatmap.heatmap,
+        data: heatmap.sunshine_heatmap,
         label: {
           show: false
         },

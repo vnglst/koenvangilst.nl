@@ -1,8 +1,8 @@
 'use client';
 
-import { Chart } from '../Chart';
+import { Chart } from 'components/Chart';
+import { dateTimeFormatter, temperatureFormatter } from 'lib/formatters';
 
-import { dateTimeFormatter, temperatureFormatter } from './formatters';
 import type { Heatmap, HeatMapValue } from './TempHeatmap.server';
 
 type TempHeatmapProps = {

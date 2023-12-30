@@ -1,8 +1,8 @@
 'use client';
 
-import { Chart, echarts } from '../Chart';
+import { Chart, echarts } from 'components/Chart';
+import { dateTimeFormatter, temperatureFormatter } from 'lib/formatters';
 
-import { dateTimeFormatter, temperatureFormatter } from './formatters';
 import { Anomalies } from './TempAnomalies.server';
 
 type TempAnomaliesProps = {

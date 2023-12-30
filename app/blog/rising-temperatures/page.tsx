@@ -2,8 +2,8 @@ import { getPost } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
-import { TemperatureAnomalies } from 'components/Prognose2100/TempAnomalies.server';
-import { TemperatureHeatmap } from 'components/Prognose2100/TempHeatmap.server';
+import { TemperatureAnomalies } from 'app/blog/rising-temperatures/charts/TempAnomalies.server';
+import { TemperatureHeatmap } from 'app/blog/rising-temperatures/charts/TempHeatmap.server';
 
 const SLUG = 'rising-temperatures';
 

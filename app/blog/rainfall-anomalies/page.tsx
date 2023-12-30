@@ -2,8 +2,9 @@ import { getPost } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
-import { Rain } from 'components/Prognose2100/Rain.server';
-import { RainHeatmap } from 'components/Prognose2100/RainHeatmap.server';
+
+import { Anomaly } from './charts/Anomaly.server';
+import { RainHeatmap } from './heatmaps/RainHeatmap.server';
 
 const SLUG = 'rainfall-anomalies';
 
@@ -24,7 +25,7 @@ export default async function Page() {
       image={post.image}
       code={post.code}
       additionalComponents={{
-        RainAnomalies: Rain,
+        Anomaly,
         RainHeatmap
       }}
     />

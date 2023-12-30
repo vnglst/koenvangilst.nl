@@ -22,9 +22,14 @@ async function fetchHeatmap() {
 const Data = z.object({
   timestamp: z.string(),
   years: z.array(z.string()),
-  heatmap: z.array(z.tuple([z.string(), z.number(), z.number().nullable()]))
+  rainfall_heatmap: z.array(
+    z.tuple([z.string(), z.number(), z.number().nullable()])
+  ),
+  sunshine_heatmap: z.array(
+    z.tuple([z.string(), z.number(), z.number().nullable()])
+  )
 });
 
 export type Data = z.infer<typeof Data>;
-export type Heatmap = Data['heatmap'];
+export type Heatmap = Data['rainfall_heatmap'];
 export type HeatmapValue = Heatmap[0];
