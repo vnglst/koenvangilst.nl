@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { MarkdownLayout } from 'components/MarkdownLayout';
 
 import { Anomaly } from './charts/Anomaly.server';
-import { RainHeatmap } from './heatmaps/RainHeatmap.server';
+import { Heatmap } from './heatmaps/Heatmap.server';
 
 const SLUG = 'weather-anomalies';
 
@@ -26,7 +26,7 @@ export default async function Page() {
       code={post.code}
       additionalComponents={{
         Anomaly,
-        RainHeatmap
+        Heatmap
       }}
     />
   );

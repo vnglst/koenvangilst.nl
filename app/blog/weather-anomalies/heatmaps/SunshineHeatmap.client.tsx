@@ -5,11 +5,11 @@ import { dateTimeFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
-type RainHeatmapProps = {
+type SunshineHeatmapProps = {
   data: Data;
 };
 
-export function RainHeatmapClient({ data }: RainHeatmapProps) {
+export function SunshineHeatmapClient({ data }: SunshineHeatmapProps) {
   console.log('Heatmap data refresh:', dateTimeFormatter(data.timestamp));
   const options = generateOptions(data);
 
@@ -39,13 +39,13 @@ function generateOptions(heatmap: Data) {
     'Dec'
   ];
 
-  const mmmFormat = (value: number | null) => {
+  const hourFormat = (value: number | null) => {
     if (value === null) return '-';
-    return `${Math.round(value)} mm`;
+    return `${Math.round(value)} hours`;
   };
 
-  const max = Math.max(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
-  const min = Math.min(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
+  const max = Math.max(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
+  const min = Math.min(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
 
   return {
     grid: {
@@ -58,13 +58,13 @@ function generateOptions(heatmap: Data) {
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'monthly-rainfall-anomalies'
+          name: 'monthly-sunshine-anomalies'
         }
       }
     },
     title: [
       {
-        text: 'Monthly Rainfall Anomalies De Bilt',
+        text: 'Monthly Sunshine Anomalies De Bilt',
         subtext: 'Source: KNMI • www.koenvangilst.nl',
         subtextStyle: {
           lineHeight: 18
@@ -98,7 +98,7 @@ function generateOptions(heatmap: Data) {
       left: 'center',
       type: 'continuous',
       inRange: {
-        color: ['#ffffff', '#44d6ff', '#0022ff']
+        color: ['#ffffff', '#ffcc6a', '#ff9662']
       }
     },
     tooltip: {
@@ -106,7 +106,7 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>Rainfall <b style="padding-left: 15px">${mmmFormat(
+        return `${monthStr}. ${year}<br/>Sunshine <b style="padding-left: 15px">${hourFormat(
           value
         )}</b>`;
       }
@@ -114,7 +114,7 @@ function generateOptions(heatmap: Data) {
     series: [
       {
         type: 'heatmap',
-        data: heatmap.rainfall_heatmap,
+        data: heatmap.sunshine_heatmap,
         label: {
           show: false
         },

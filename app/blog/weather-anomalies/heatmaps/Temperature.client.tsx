@@ -1,15 +1,15 @@
 'use client';
 
 import { Chart } from 'components/Chart';
-import { dateTimeFormatter } from 'lib/formatters';
+import { dateTimeFormatter, temperatureFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
-type RainHeatmapProps = {
+type TemperatureHeatmapProps = {
   data: Data;
 };
 
-export function RainHeatmapClient({ data }: RainHeatmapProps) {
+export function TemperatureHeatmapClient({ data }: TemperatureHeatmapProps) {
   console.log('Heatmap data refresh:', dateTimeFormatter(data.timestamp));
   const options = generateOptions(data);
 
@@ -39,13 +39,8 @@ function generateOptions(heatmap: Data) {
     'Dec'
   ];
 
-  const mmmFormat = (value: number | null) => {
-    if (value === null) return '-';
-    return `${Math.round(value)} mm`;
-  };
-
-  const max = Math.max(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
-  const min = Math.min(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
+  const max = Math.max(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
+  const min = Math.min(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
 
   return {
     grid: {
@@ -58,13 +53,13 @@ function generateOptions(heatmap: Data) {
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'monthly-rainfall-anomalies'
+          name: 'monthly-temperature-anomalies'
         }
       }
     },
     title: [
       {
-        text: 'Monthly Rainfall Anomalies De Bilt',
+        text: 'Monthly Temperature Anomalies De Bilt',
         subtext: 'Source: KNMI • www.koenvangilst.nl',
         subtextStyle: {
           lineHeight: 18
@@ -98,7 +93,7 @@ function generateOptions(heatmap: Data) {
       left: 'center',
       type: 'continuous',
       inRange: {
-        color: ['#ffffff', '#44d6ff', '#0022ff']
+        color: ['#74e2ff', '#ffffff', '#ff9662']
       }
     },
     tooltip: {
@@ -106,7 +101,7 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>Rainfall <b style="padding-left: 15px">${mmmFormat(
+        return `${monthStr}. ${year}<br/>temperature <b style="padding-left: 15px">${temperatureFormatter(
           value
         )}</b>`;
       }
@@ -114,7 +109,7 @@ function generateOptions(heatmap: Data) {
     series: [
       {
         type: 'heatmap',
-        data: heatmap.rainfall_heatmap,
+        data: heatmap.sunshine_heatmap,
         label: {
           show: false
         },
