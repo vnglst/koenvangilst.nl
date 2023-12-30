@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart } from 'components/Chart';
-import { dateTimeFormatter } from 'lib/formatters';
+import { dateTimeFormatter, mmFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
@@ -38,14 +38,6 @@ function generateOptions(heatmap: Data) {
     'Nov',
     'Dec'
   ];
-
-  const mmmFormat = (value: number | null) => {
-    if (value === null) return '-';
-    return `${Math.round(value)} mm`;
-  };
-
-  const max = Math.max(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
-  const min = Math.min(...heatmap.rainfall_heatmap.map((v) => v[2] ?? 0));
 
   return {
     grid: {
@@ -90,8 +82,8 @@ function generateOptions(heatmap: Data) {
       }
     ],
     visualMap: {
-      min,
-      max,
+      min: -50,
+      max: 150,
       calculable: true,
       orient: 'horizontal',
       top: 10,
@@ -106,7 +98,7 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>Rainfall <b style="padding-left: 15px">${mmmFormat(
+        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${mmFormatter(
           value
         )}</b>`;
       }

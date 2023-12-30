@@ -39,9 +39,6 @@ function generateOptions(heatmap: Data) {
     'Dec'
   ];
 
-  const max = Math.max(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
-  const min = Math.min(...heatmap.sunshine_heatmap.map((v) => v[2] ?? 0));
-
   return {
     grid: {
       top: 90,
@@ -85,8 +82,8 @@ function generateOptions(heatmap: Data) {
       }
     ],
     visualMap: {
-      min,
-      max,
+      min: -5,
+      max: 5,
       calculable: true,
       orient: 'horizontal',
       top: 10,
@@ -101,7 +98,7 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>temperature <b style="padding-left: 15px">${temperatureFormatter(
+        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${temperatureFormatter(
           value
         )}</b>`;
       }
@@ -109,7 +106,7 @@ function generateOptions(heatmap: Data) {
     series: [
       {
         type: 'heatmap',
-        data: heatmap.sunshine_heatmap,
+        data: heatmap.temperature_heatmap,
         label: {
           show: false
         },

@@ -5,8 +5,31 @@ export const temperatureFormatter = (value?: number | null) => {
 
   return `${value.toLocaleString('en-UK', {
     maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
     signDisplay: 'always'
   })} °C`;
+};
+
+export const mmFormatter = (value?: number | null) => {
+  if (value === undefined || value === null) {
+    return 'N/A';
+  }
+
+  return `${value.toLocaleString('en-UK', {
+    maximumFractionDigits: 0,
+    signDisplay: 'always'
+  })} mm`;
+};
+
+export const hoursFormatter = (value?: number | null) => {
+  if (value === undefined || value === null) {
+    return 'N/A';
+  }
+
+  return `${value.toLocaleString('en-UK', {
+    maximumFractionDigits: 0,
+    signDisplay: 'always'
+  })} hours`;
 };
 
 export const dateFormatter = (value: string) => {
