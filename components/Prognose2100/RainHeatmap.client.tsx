@@ -15,7 +15,10 @@ export function RainHeatmapClient({ data }: RainHeatmapProps) {
 
   return (
     <div className="lg:full-bleed-20 overflow-x-auto overflow-y-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black">
-      <Chart options={options} className="aspect-[4/1] min-h-[300px]" />
+      <Chart
+        options={options}
+        className="aspect-[5/1] min-h-[250px] w-auto lg:h-auto"
+      />
     </div>
   );
 }
@@ -70,10 +73,12 @@ function generateOptions(heatmap: Data) {
       {
         type: 'category',
         data: MONTHS,
-        position: 'top',
-        axisLabel: {
-          rotate: 90
-        }
+        position: 'left'
+      },
+      {
+        type: 'category',
+        data: MONTHS,
+        position: 'right'
       }
     ],
     visualMap: {
