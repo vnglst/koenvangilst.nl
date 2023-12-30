@@ -23,11 +23,11 @@ export function RainClient({ data }: RainProps) {
 
 function generateOptions(data: Data) {
   function mmFormatter(value) {
-    return `${Math.round(value)} mm`;
+    return `${Math.round(value + data.mean)} mm`;
   }
 
-  const min = Math.min(...data.rainfall);
-  const max = Math.max(...data.rainfall);
+  const min = Math.min(...data.anomalies);
+  const max = Math.max(...data.anomalies);
 
   return {
     grid: {
@@ -84,7 +84,7 @@ function generateOptions(data: Data) {
       {
         name: 'Anomaly',
         type: 'bar',
-        data: data.rainfall.map((value) => {
+        data: data.anomalies.map((value) => {
           if (value === null) return;
 
           const factor = (value - min) / (max - min);

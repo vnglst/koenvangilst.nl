@@ -23,11 +23,11 @@ async function fetchData() {
 
 const Data = z.object({
   timestamp: z.string(),
-  years: z.array(z.string()),
-  rainfall: z.array(z.number()),
-  trend: z.array(z.number())
+  mean: z.number(),
+  anomalies: z.array(z.number()),
+  trend: z.array(z.number()),
+  years: z.array(z.string())
 });
 
 export type Data = z.infer<typeof Data>;
-export type Rainfall = Data['rainfall'];
-export type Trend = Data['trend'];
+export type Anomalies = Data['anomalies'];

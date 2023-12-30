@@ -39,6 +39,14 @@ function generateOptions(heatmap: Data) {
     'Dec'
   ];
 
+  const mmmFormat = (value: number | null) => {
+    if (value === null) return '-';
+    return `${Math.round(value)} mm`;
+  };
+
+  const max = Math.max(...heatmap.heatmap.map((v) => v[2] ?? 0));
+  const min = Math.min(...heatmap.heatmap.map((v) => v[2] ?? 0));
+
   return {
     grid: {
       top: 90,
@@ -82,6 +90,8 @@ function generateOptions(heatmap: Data) {
       }
     ],
     visualMap: {
+      min,
+      max,
       calculable: true,
       orient: 'horizontal',
       top: 10,
@@ -96,7 +106,9 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>Rainfall <b style="padding-left: 15px">${value} mm</b>`;
+        return `${monthStr}. ${year}<br/>Rainfall <b style="padding-left: 15px">${mmmFormat(
+          value
+        )}</b>`;
       }
     },
     series: [
