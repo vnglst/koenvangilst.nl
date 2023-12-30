@@ -6,7 +6,7 @@ import { MarkdownLayout } from 'components/MarkdownLayout';
 import { Anomaly } from './charts/Anomaly.server';
 import { RainHeatmap } from './heatmaps/RainHeatmap.server';
 
-const SLUG = 'rainfall-anomalies';
+const SLUG = 'weather-anomalies';
 
 export default async function Page() {
   const post = await getPost(SLUG);
