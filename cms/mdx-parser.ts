@@ -73,7 +73,7 @@ export async function loadSingleMdx<Validated>(
   const rawString = loadFile(mdxFilePath);
 
   if (!rawString) {
-    throw new Error('File empty');
+    return null;
   }
 
   const { code, frontmatter, matter } = await parseMDXFile(rawString);
@@ -105,7 +105,7 @@ function loadFile(path: string) {
     return rawString;
   } catch (error) {
     console.log('Error loading file: ', error.message);
-    throw new Error('File not found');
+    return null;
   }
 }
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import data from './heatmap.json';
+import data from './monthly.json';
 import { RainHeatmapClient } from './RainHeatmap.client';
 import { SunshineHeatmapClient } from './SunshineHeatmap.client';
 import { TemperatureHeatmapClient } from './TemperatureHeatmap.client';

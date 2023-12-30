@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart } from 'components/Chart';
-import { dateTimeFormatter, hoursFormatter } from 'lib/formatters';
+import { hoursFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
@@ -10,7 +10,6 @@ type SunshineHeatmapProps = {
 };
 
 export function SunshineHeatmapClient({ data }: SunshineHeatmapProps) {
-  console.log('Heatmap data refresh:', dateTimeFormatter(data.timestamp));
   const options = generateOptions(data);
 
   return (

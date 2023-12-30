@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
-import { dateTimeFormatter, temperatureFormatter } from 'lib/formatters';
+import { temperatureFormatter } from 'lib/formatters';
 
 import { Data } from './Anomaly.server';
 
@@ -10,13 +10,12 @@ type TemperatureProps = {
 };
 
 export function TemperatureClient({ data }: TemperatureProps) {
-  console.log('Data refresh:', dateTimeFormatter(data.timestamp));
   const options = generateOptions(data);
 
   return (
     <Chart
       options={options}
-      className="lg:full-bleed aspect-video min-h-[40vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
+      className="lg:full-bleed aspect-[2/1] min-h-[40vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
     />
   );
 }
@@ -67,6 +66,8 @@ function generateOptions(data: Data) {
       }
     },
     yAxis: {
+      min: min - 1,
+      max: max + 1,
       type: 'value',
       splitLine: {
         show: true,

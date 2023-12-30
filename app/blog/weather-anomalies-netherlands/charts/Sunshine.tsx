@@ -1,33 +1,31 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
-import { dateTimeFormatter } from 'lib/formatters';
 
 import { Data } from './Anomaly.server';
 
-type RainProps = {
+type SunshineProps = {
   data: Data;
 };
 
-export function RainClient({ data }: RainProps) {
-  console.log('Data refresh:', dateTimeFormatter(data.timestamp));
+export function SunshineClient({ data }: SunshineProps) {
   const options = generateOptions(data);
 
   return (
     <Chart
       options={options}
-      className="lg:full-bleed my-4 aspect-video min-h-[40vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
+      className="lg:full-bleed my-4 aspect-[2/1] min-h-[40vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
     />
   );
 }
 
 function generateOptions(data: Data) {
-  function mmFormatter(value) {
-    return `${Math.round(value + data.mean_rainfall)} mm`;
+  function hoursFormatter(value: number) {
+    return `${Math.round(value)} hours`;
   }
 
-  const min = Math.min(...data.rainfall_anomalies);
-  const max = Math.max(...data.rainfall_anomalies);
+  const min = Math.min(...data.sunshine_anomalies);
+  const max = Math.max(...data.sunshine_anomalies);
 
   return {
     grid: {
@@ -40,15 +38,15 @@ function generateOptions(data: Data) {
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'rainfall'
+          name: 'sunshine-anomalies'
         }
       }
     },
     title: [
       {
-        text: 'Rainfall Anomalies in De Bilt',
-        subtext: `Deviations from 20th century average of ${mmFormatter(
-          data.mean_rainfall
+        text: 'Sunshine Anomalies in De Bilt',
+        subtext: `Deviations from 20th century average of ${hoursFormatter(
+          data.mean_sunshine
         )}.\nSource: KNMI • www.koenvangilst.nl`,
         subtextStyle: {
           lineHeight: 18
@@ -58,7 +56,7 @@ function generateOptions(data: Data) {
       }
     ],
     tooltip: {
-      valueFormatter: mmFormatter,
+      valueFormatter: hoursFormatter,
       trigger: 'item',
       axisPointer: {
         type: 'cross'
@@ -71,6 +69,8 @@ function generateOptions(data: Data) {
       }
     },
     yAxis: {
+      min: min - 50,
+      max: max + 50,
       type: 'value',
       splitLine: {
         show: true,
@@ -79,21 +79,22 @@ function generateOptions(data: Data) {
         }
       },
       axisLabel: {
-        formatter: mmFormatter
+        formatter: hoursFormatter
       }
     },
     series: [
       {
         name: 'Anomaly',
         type: 'bar',
-        data: data.rainfall_anomalies.map((value) => {
+        data: data.sunshine_anomalies.map((value) => {
           if (value === null) return;
 
           const factor = (value - min) / (max - min);
           const color = echarts.color.lerp(factor, [
+            '#74e2ff',
             '#cbf3ff',
-            '#44d6ff',
-            '#0022ff'
+            '#ffcc6a',
+            '#ff9662'
           ]);
 
           return {
@@ -119,7 +120,7 @@ function generateOptions(data: Data) {
       // {
       //   name: '10 year trend',
       //   type: 'line',
-      //   data: data.rainfall_trend,
+      //   data: data.sunshine_trend,
       //   smooth: true,
       //   lineStyle: {
       //     color: '#ff0000'

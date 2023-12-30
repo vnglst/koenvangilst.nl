@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart } from 'components/Chart';
-import { dateTimeFormatter, mmFormatter } from 'lib/formatters';
+import { mmFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
@@ -10,7 +10,6 @@ type RainHeatmapProps = {
 };
 
 export function RainHeatmapClient({ data }: RainHeatmapProps) {
-  console.log('Heatmap data refresh:', dateTimeFormatter(data.timestamp));
   const options = generateOptions(data);
 
   return (
