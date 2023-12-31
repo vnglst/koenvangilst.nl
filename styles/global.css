@@ -9,6 +9,11 @@
     margin-left: -10vw;
     min-width: min(calc(100% + 20vw), 100vw);
   }
+
+  .full-bleed-20 {
+    margin-left: -20vw;
+    min-width: min(calc(100% + 40vw), 100vw);
+  }
 }
 
 ::selection {
@@ -223,7 +228,7 @@ table {
 /* styling scroll bar with gradient to primary color */
 ::-webkit-scrollbar {
   width: 4px;
-  height: 1px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {

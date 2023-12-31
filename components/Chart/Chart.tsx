@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { BarChart, HeatmapChart } from 'echarts/charts';
+import { BarChart, HeatmapChart, LineChart } from 'echarts/charts';
 import {
   DataZoomComponent,
   GraphicComponent,
@@ -19,6 +19,7 @@ import merge from 'lodash/merge';
 
 echarts.use([
   BarChart,
+  LineChart,
   DataZoomComponent,
   GraphicComponent,
   GridComponent,
