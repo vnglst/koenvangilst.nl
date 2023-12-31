@@ -37,5 +37,10 @@ export const lightTheme = {
     iconStyle: {
       borderColor: '#000'
     }
+  },
+  legend: {
+    textStyle: {
+      color: '#000'
+    }
   }
 };

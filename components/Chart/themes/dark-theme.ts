@@ -55,5 +55,10 @@ export const darkTheme = {
     iconStyle: {
       borderColor: '#fff'
     }
+  },
+  legend: {
+    textStyle: {
+      color: '#fff'
+    }
   }
 };

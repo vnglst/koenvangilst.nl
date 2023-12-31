@@ -27,7 +27,7 @@ function generateOptions(data: Data) {
   return {
     grid: {
       top: 110,
-      bottom: 20,
+      bottom: 50,
       left: 15,
       right: 15,
       containLabel: true
@@ -59,6 +59,14 @@ function generateOptions(data: Data) {
         type: 'cross'
       }
     },
+    legend: {
+      data: ['10 year trend'],
+      bottom: 10,
+      left: 'center',
+      selected: {
+        '10 year trend': false
+      }
+    },
     xAxis: {
       data: data.years,
       splitLine: {
@@ -66,8 +74,8 @@ function generateOptions(data: Data) {
       }
     },
     yAxis: {
-      min: min - 50,
-      max: max + 50,
+      min: -500,
+      max: 600,
       type: 'value',
       splitLine: {
         show: true,
