@@ -2,8 +2,9 @@ import { getPost } from 'cms/queries';
 import { notFound } from 'next/navigation';
 
 import { MarkdownLayout } from 'components/MarkdownLayout';
-import { TemperatureAnomalies } from 'components/Prognose2100/TempAnomalies.server';
-import { TemperatureHeatmap } from 'components/Prognose2100/TempHeatmap.server';
+
+import { Anomaly } from './charts/Anomaly.server';
+import { Heatmap } from './heatmaps/Heatmap.server';
 
 const SLUG = 'rising-temperatures';
 
@@ -23,10 +24,7 @@ export default async function Page() {
       path={'/blog/' + post.slug}
       image={post.image}
       code={post.code}
-      additionalComponents={{
-        TemperatureAnomalies,
-        TemperatureHeatmap
-      }}
+      additionalComponents={{ Anomaly, Heatmap }}
     />
   );
 }
