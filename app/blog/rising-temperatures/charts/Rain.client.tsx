@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
-import { mmFormatter } from 'lib/formatters';
+import { dateFormatter, mmFormatter } from 'lib/formatters';
 
 import { Data } from './Anomaly.server';
 
@@ -44,7 +44,7 @@ function generateOptions(data: Data) {
         text: 'Rainfall Anomalies in De Bilt',
         subtext: `Deviations from 20th century average of ${mmFormatter(
           data.mean_rainfall
-        )}.\nSource: KNMI • www.koenvangilst.nl`,
+        )}.\nKNMI • www.koenvangilst.nl • ${dateFormatter(data.timestamp)}`,
         subtextStyle: {
           lineHeight: 18
         },

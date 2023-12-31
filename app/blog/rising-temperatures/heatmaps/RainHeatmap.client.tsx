@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart } from 'components/Chart';
-import { mmFormatter } from 'lib/formatters';
+import { dateFormatter, mmFormatter } from 'lib/formatters';
 
 import { Data, HeatmapValue } from './Heatmap.server';
 
@@ -53,7 +53,9 @@ function generateOptions(heatmap: Data) {
     title: [
       {
         text: 'Monthly Rainfall Anomalies De Bilt',
-        subtext: 'Source: KNMI • www.koenvangilst.nl',
+        subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(
+          heatmap.timestamp
+        )}`,
         subtextStyle: {
           lineHeight: 18
         },
