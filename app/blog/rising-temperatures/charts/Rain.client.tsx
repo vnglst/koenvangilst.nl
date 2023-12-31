@@ -35,7 +35,7 @@ function generateOptions(data: Data) {
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'rainfall'
+          name: 'rainfall-anomalies'
         }
       }
     },
