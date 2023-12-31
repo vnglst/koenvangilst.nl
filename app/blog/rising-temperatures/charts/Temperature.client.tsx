@@ -114,7 +114,8 @@ function generateOptions(data: Data) {
                   offset: 1,
                   color
                 }
-              ])
+              ]),
+              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
             }
           };
         }),
