@@ -30,7 +30,7 @@ function generateOptions(data: Data) {
   return {
     grid: {
       top: 110,
-      bottom: 20,
+      bottom: 50,
       left: 15,
       right: 15,
       containLabel: true
@@ -60,6 +60,14 @@ function generateOptions(data: Data) {
       trigger: 'item',
       axisPointer: {
         type: 'cross'
+      }
+    },
+    legend: {
+      data: ['10 year trend'],
+      bottom: 10,
+      left: 'center',
+      selected: {
+        '10 year trend': false
       }
     },
     xAxis: {

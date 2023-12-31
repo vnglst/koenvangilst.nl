@@ -6,6 +6,7 @@ import {
   DataZoomComponent,
   GraphicComponent,
   GridComponent,
+  LegendComponent,
   MarkLineComponent,
   TitleComponent,
   ToolboxComponent,
@@ -20,6 +21,7 @@ import merge from 'lodash/merge';
 echarts.use([
   BarChart,
   LineChart,
+  LegendComponent,
   DataZoomComponent,
   GraphicComponent,
   GridComponent,
