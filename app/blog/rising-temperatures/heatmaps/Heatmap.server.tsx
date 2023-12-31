@@ -1,9 +1,13 @@
 import { z } from 'zod';
 
-import data from './monthly.json';
+import { fetcher } from 'lib/fetcher';
+
 import { RainHeatmapClient } from './RainHeatmap.client';
 import { SunshineHeatmapClient } from './SunshineHeatmap.client';
 import { TemperatureHeatmapClient } from './TemperatureHeatmap.client';
+
+const DATA_URL =
+  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/weather-heatmap.json';
 
 export async function Heatmap({ type }) {
   const heatmap = await fetchHeatmapData();
@@ -17,6 +21,7 @@ export async function Heatmap({ type }) {
 }
 
 async function fetchHeatmapData() {
+  const data = await fetcher(DATA_URL, { next: { revalidate: 60 * 5 } });
   const parsedData = Data.parse(data);
   return parsedData;
 }

@@ -17,7 +17,7 @@ export const mmFormatter = (value?: number | null) => {
 
   return `${value.toLocaleString('en-UK', {
     maximumFractionDigits: 0,
-    signDisplay: 'always'
+    signDisplay: 'auto'
   })} mm`;
 };
 

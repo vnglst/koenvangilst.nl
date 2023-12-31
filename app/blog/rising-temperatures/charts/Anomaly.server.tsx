@@ -1,9 +1,13 @@
 import { z } from 'zod';
 
+import { fetcher } from 'lib/fetcher';
+
 import { RainClient } from './Rain.client';
 import { SunshineClient } from './Sunshine';
 import { TemperatureClient } from './Temperature.client';
-import data from './yearly.json';
+
+const DATA_URL =
+  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/weather.json';
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
@@ -28,6 +32,7 @@ export async function Anomaly({ type }: AnomalyProps) {
 }
 
 async function fetchData() {
+  const data = await fetcher(DATA_URL, { next: { revalidate: 60 * 5 } });
   const parsedData = Data.parse(data);
   return parsedData;
 }

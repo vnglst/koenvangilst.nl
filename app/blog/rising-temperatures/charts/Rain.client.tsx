@@ -1,6 +1,7 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
+import { mmFormatter } from 'lib/formatters';
 
 import { Data } from './Anomaly.server';
 
@@ -20,10 +21,6 @@ export function RainClient({ data }: RainProps) {
 }
 
 function generateOptions(data: Data) {
-  function mmFormatter(value) {
-    return `${Math.round(value + data.mean_rainfall)} mm`;
-  }
-
   const min = Math.min(...data.rainfall_anomalies);
   const max = Math.max(...data.rainfall_anomalies);
 
