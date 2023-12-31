@@ -14,10 +14,7 @@ export function TemperatureHeatmapClient({ data }: TemperatureHeatmapProps) {
 
   return (
     <div className="lg:full-bleed-20 my-4 overflow-x-auto overflow-y-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black">
-      <Chart
-        options={options}
-        className="aspect-[5/1] min-h-[250px] w-auto lg:h-auto"
-      />
+      <Chart options={options} className="aspect-[5/1] min-h-[250px]" />
     </div>
   );
 }

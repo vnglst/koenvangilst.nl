@@ -15,7 +15,7 @@ export function TemperatureClient({ data }: TemperatureProps) {
   return (
     <Chart
       options={options}
-      className="lg:full-bleed aspect-[2/1] min-h-[40vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
+      className="lg:full-bleed aspect-[2/1] min-h-[60vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
     />
   );
 }
@@ -66,8 +66,8 @@ function generateOptions(data: Data) {
       }
     },
     yAxis: {
-      min: min - 1,
-      max: max + 1,
+      min: -2,
+      max: 3,
       type: 'value',
       splitLine: {
         show: true,
@@ -76,7 +76,7 @@ function generateOptions(data: Data) {
         }
       },
       axisLabel: {
-        formatter: temperatureFormatter
+        formatter: (value: number) => `${Math.round(value)} °C`
       }
     },
     series: [
@@ -113,19 +113,19 @@ function generateOptions(data: Data) {
         emphasis: {
           focus: 'series'
         }
+      },
+      {
+        name: '10 year trend',
+        type: 'line',
+        data: data.temperature_trend,
+        smooth: true,
+        lineStyle: {
+          color: '#ff0000'
+        },
+        emphasis: {
+          focus: 'series'
+        }
       }
-      // {
-      //   name: '10 year trend',
-      //   type: 'line',
-      //   data: data.temperature_trend,
-      //   smooth: true,
-      //   lineStyle: {
-      //     color: '#ff0000'
-      //   },
-      //   emphasis: {
-      //     focus: 'series'
-      //   }
-      // }
     ]
   };
 }
