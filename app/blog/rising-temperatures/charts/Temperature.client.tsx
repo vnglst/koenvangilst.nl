@@ -1,7 +1,7 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
-import { temperatureFormatter } from 'lib/formatters';
+import { dateFormatter, temperatureFormatter } from 'lib/formatters';
 
 import { Data } from './Anomaly.server';
 
@@ -44,7 +44,7 @@ function generateOptions(data: Data) {
         text: 'Temperature Anomalies in De Bilt',
         subtext: `Deviations from 20th century average of ${temperatureFormatter(
           data.mean_temperature
-        )}.\nSource: KNMI • www.koenvangilst.nl`,
+        )}.\nKNMI • www.koenvangilst.nl • ${dateFormatter(data.timestamp)}`,
         subtextStyle: {
           lineHeight: 18
         },
