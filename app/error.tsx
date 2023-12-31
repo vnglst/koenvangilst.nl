@@ -1,0 +1,35 @@
+'use client';
+import { useEffect } from 'react';
+import Link from 'next/link';
+
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
+import Icon from 'components/Icon';
+import { Prose } from 'components/Prose';
+
+type ErrorProps = {
+  error: Error & { digest?: string };
+};
+
+export default function Error({ error }: ErrorProps) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
+  return (
+    <Container centered>
+      <Prose>
+        <Heading level={1}>Something went wrong!</Heading>
+        <p>You've run into an error. Please try again later.</p>
+        <Link
+          href="/"
+          className="align-center flex w-fit text-gray-600 no-underline transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+        >
+          Return Home
+          <Icon icon="arrow-right" className="ml-1 h-6 w-6" />
+        </Link>
+      </Prose>
+    </Container>
+  );
+}
