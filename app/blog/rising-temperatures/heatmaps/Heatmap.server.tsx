@@ -7,7 +7,7 @@ import { SunshineHeatmapClient } from './SunshineHeatmap.client';
 import { TemperatureHeatmapClient } from './TemperatureHeatmap.client';
 
 const DATA_URL =
-  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/weather-heatmap.json';
+  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/monthly-weather-data.json';
 
 export async function Heatmap({ type }) {
   const heatmap = await fetchHeatmapData();
