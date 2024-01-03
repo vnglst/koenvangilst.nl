@@ -11,21 +11,25 @@ const DATA_URL =
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
+  className?: string;
 };
 
-export async function Anomaly({ type }: AnomalyProps) {
+export async function Anomaly({
+  type,
+  className = 'lg:full-bleed my-4 aspect-[2/1] min-h-[60vh]'
+}: AnomalyProps) {
   const data = await fetchData();
 
   if (type === 'sunshine') {
-    return <SunshineClient data={data} />;
+    return <SunshineClient data={data} className={className} />;
   }
 
   if (type === 'rain') {
-    return <RainClient data={data} />;
+    return <RainClient data={data} className={className} />;
   }
 
   if (type === 'temperature') {
-    return <TemperatureClient data={data} />;
+    return <TemperatureClient data={data} className={className} />;
   }
 
   return null;
