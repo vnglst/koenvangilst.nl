@@ -1,5 +1,7 @@
 import { Anomaly } from 'app/blog/rising-temperatures/charts/Anomaly.server';
 
+import { Sealevel } from './(charts)/Sealevel.server';
+
 export const metadata = {
   title: 'Prognose 2100',
   description:
@@ -12,6 +14,7 @@ export default async function Prognose2100() {
       <Anomaly type="temperature" look="dashboard" />
       <Anomaly type="sunshine" look="dashboard" />
       <Anomaly type="rain" look="dashboard" />
+      <Sealevel />
     </div>
   );
 }
