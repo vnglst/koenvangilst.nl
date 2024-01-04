@@ -4,6 +4,7 @@ import { cx } from 'lib/clsx';
 
 type ContainerProps = {
   centered?: boolean;
+  left?: boolean;
 };
 
 export function Container({

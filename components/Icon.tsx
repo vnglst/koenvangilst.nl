@@ -1,4 +1,11 @@
-const icons = ['search', 'spinner', 'eye', 'external-link', 'arrow-right'];
+const icons = [
+  'search',
+  'spinner',
+  'eye',
+  'external-link',
+  'arrow-right',
+  'info'
+];
 
 type IconProps = {
   icon: (typeof icons)[number];

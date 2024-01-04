@@ -31,7 +31,8 @@ export default async function Portfolio() {
           power of React to craft user friendly interfaces. In addition to my
           frontend expertise, I am also adept in backend development using
           TypeScript and Node.js. For occasional side projects, I also enjoy in
-          coding with Python and Elixir. <a href="/about">More about me...</a>
+          coding with Python and Elixir.{' '}
+          <Link href="/about">More about me...</Link>
         </p>
         <p>
           In 2022, I transitioned from my freelance career to a corporate role,

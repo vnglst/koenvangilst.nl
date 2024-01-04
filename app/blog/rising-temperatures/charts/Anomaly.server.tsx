@@ -11,21 +11,25 @@ const DATA_URL =
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
+  look: 'blog' | 'dashboard';
 };
 
-export async function Anomaly({ type }: AnomalyProps) {
+export async function Anomaly({ type, look = 'blog' }: AnomalyProps) {
   const data = await fetchData();
+  const classNameForBlog = 'lg:full-bleed my-4 aspect-[2/1] min-h-[60vh]';
+  const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
+  const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 
   if (type === 'sunshine') {
-    return <SunshineClient data={data} />;
+    return <SunshineClient data={data} className={className} />;
   }
 
   if (type === 'rain') {
-    return <RainClient data={data} />;
+    return <RainClient data={data} className={className} />;
   }
 
   if (type === 'temperature') {
-    return <TemperatureClient data={data} />;
+    return <TemperatureClient data={data} className={className} />;
   }
 
   return null;
