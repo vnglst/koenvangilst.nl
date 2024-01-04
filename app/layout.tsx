@@ -129,7 +129,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <Nav />
         <main
           id="content"
-          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 px-4 pt-8 md:px-8 md:pt-16 dark:bg-gray-900 dark:from-black dark:to-gray-900"
+          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 px-8 pt-8 md:pt-16 dark:bg-gray-900 dark:from-black dark:to-gray-900"
         >
           {children}
         </main>
