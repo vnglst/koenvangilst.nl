@@ -6,7 +6,7 @@ import { Prose } from 'components/Prose';
 
 export default function Page() {
   return (
-    <Container left>
+    <Container>
       <Prose>
         <Heading>Over</Heading>
         <p>
