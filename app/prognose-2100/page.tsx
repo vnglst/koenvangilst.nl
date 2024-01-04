@@ -9,18 +9,9 @@ export const metadata = {
 export default async function Prognose2100() {
   return (
     <div className="mb-10 grid w-full grid-cols-1 place-content-center gap-4 lg:grid-cols-2 2xl:grid-cols-3">
-      <Anomaly
-        type="temperature"
-        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-      />
-      <Anomaly
-        type="sunshine"
-        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-      />
-      <Anomaly
-        type="rain"
-        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-      />
+      <Anomaly type="temperature" look="dashboard" />
+      <Anomaly type="sunshine" look="dashboard" />
+      <Anomaly type="rain" look="dashboard" />
     </div>
   );
 }

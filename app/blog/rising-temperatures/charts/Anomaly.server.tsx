@@ -11,14 +11,14 @@ const DATA_URL =
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
-  className?: string;
+  look: 'blog' | 'dashboard';
 };
 
-export async function Anomaly({
-  type,
-  className = 'lg:full-bleed my-4 aspect-[2/1] min-h-[60vh]'
-}: AnomalyProps) {
+export async function Anomaly({ type, look = 'blog' }: AnomalyProps) {
   const data = await fetchData();
+  const classNameForBlog = 'lg:full-bleed my-4 aspect-[2/1] min-h-[60vh]';
+  const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
+  const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 
   if (type === 'sunshine') {
     return <SunshineClient data={data} className={className} />;

@@ -37,11 +37,11 @@ export default function Page() {
             Koen van Gilst
           </Link>
           . De broncode is open source en te vinden op{' '}
-          <a href="#" target="_blank">
+          <a href="https://github.com/vnglst/koenvangilst.nl" target="_blank">
             Github
           </a>
-          . Voor de realisatie van deze website is gebruik gemaakt van
-          SvelteKit, TailwindCSS en de visualisatielibrary Apache ECharts.
+          . Voor de realisatie van deze website is gebruik gemaakt van React,
+          TailwindCSS en de visualisatielibrary Apache ECharts.
         </p>
       </Prose>
     </Container>
