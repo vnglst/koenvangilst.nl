@@ -7,15 +7,16 @@ import { Data } from './Anomaly.server';
 
 type TemperatureProps = {
   data: Data;
+  className: string;
 };
 
-export function TemperatureClient({ data }: TemperatureProps) {
+export function TemperatureClient({ data, className }: TemperatureProps) {
   const options = generateOptions(data);
 
   return (
     <Chart
       options={options}
-      className="lg:full-bleed aspect-[2/1] min-h-[60vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
+      className={`w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black ${className}`}
     />
   );
 }
@@ -78,7 +79,7 @@ function generateOptions(data: Data) {
       max: 3,
       type: 'value',
       splitLine: {
-        show: true,
+        show: false,
         lineStyle: {
           type: 'dashed'
         }

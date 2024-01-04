@@ -7,15 +7,16 @@ import { Data } from './Anomaly.server';
 
 type SunshineProps = {
   data: Data;
+  className: string;
 };
 
-export function SunshineClient({ data }: SunshineProps) {
+export function SunshineClient({ data, className }: SunshineProps) {
   const options = generateOptions(data);
 
   return (
     <Chart
       options={options}
-      className="lg:full-bleed my-4 aspect-[2/1] min-h-[60vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black"
+      className={`w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black ${className}`}
     />
   );
 }
@@ -82,7 +83,7 @@ function generateOptions(data: Data) {
       max: 700,
       type: 'value',
       splitLine: {
-        show: true,
+        show: false,
         lineStyle: {
           type: 'dashed'
         }
