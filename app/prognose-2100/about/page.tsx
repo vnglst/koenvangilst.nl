@@ -10,38 +10,38 @@ export default function Page() {
       <Prose>
         <Heading>Over</Heading>
         <p>
-          Het jaar 2100 lijkt ver weg maar het is niet onwaarschijnlijk dat mijn
-          kinderen dan nog leven. Hoe ziet Nederland er dan uit? Hebben we dan
-          een warmer, subtropisch klimaat? Zijn onze dijken hoog genoeg? En
-          draait onze economie dan helemaal CO2-neutraal?
+          The year 2100 seems far away but it is not unlikely that my children
+          will still be alive then. What will the Netherlands look like then?
+          Will we have a warmer, subtropical climate then? Will our dykes be
+          high enough? And will our economy be completely CO2 neutral?
         </p>
         <p>
-          Met deze website wil ik in een oogopslag een antwoord geven op deze
-          vragen. Je kunt meteen zien waar we nu staan en wat de prognose is
-          voor Nederland in 2100. De grafieken zijn altijd gebaseerd op feiten
-          en wetenschappelijke modellen van bekende instituten. Waarbij de data
-          zoveel mogelijk up to date is en de modellen corresponderen met de
-          nieuwste inzichten.
+          With this website, I want to answer these questions at a glance. You
+          can immediately see where we are now and what the prognosis is for the
+          Netherlands in 2100. The graphs are always based on facts and
+          scientific models from well-known institutes. Where the data is as up
+          to date as possible and the models correspond to the latest insights.
         </p>
         <p>
-          Ik hoop dat mijn kinderen als tachtigjarigen kunnen terugkijken op
-          onze periode als het kantelpunt waarop we de klimaatverandering
-          serieus begonnen aan te pakken.
+          I hope that, as octogenarians, my children will be able to look back
+          on our period as the tipping point when we started to tackle climate
+          change seriously.
         </p>
         <p>
-          Deze website is gemaakt door{' '}
+          The source code is open source and can be found on Github. This
+          website was created by{' '}
           <Link
             href="https://koenvangilst.nl/about"
             className="underline hover:text-slate-700 dark:hover:text-slate-200"
           >
             Koen van Gilst
           </Link>
-          . De broncode is open source en te vinden op{' '}
+          . The source code can be found on{' '}
           <a href="https://github.com/vnglst/koenvangilst.nl" target="_blank">
             Github
           </a>
-          . Voor de realisatie van deze website is gebruik gemaakt van React,
-          TailwindCSS en de visualisatielibrary Apache ECharts.
+          . React, TailwindCSS and the visualisation library Apache ECharts were
+          used to create this website..
         </p>
       </Prose>
     </Container>
