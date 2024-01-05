@@ -9,7 +9,7 @@ import { TemperatureHeatmapClient } from './TemperatureHeatmap.client';
 const DATA_URL =
   'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/monthly-weather-data.json';
 
-export async function Heatmap({ type }) {
+export async function WeatherHeatmap({ type }) {
   const heatmap = await fetchHeatmapData();
 
   if (type === 'rain') return <RainHeatmapClient data={heatmap} />;
