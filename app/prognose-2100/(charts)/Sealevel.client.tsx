@@ -41,7 +41,7 @@ function generateOptions(data: DataType) {
       left: 10
     },
     tooltip: {
-      valueFormatter: (value: number) => `${value.toFixed(2)} m`,
+      valueFormatter: (value: number) => `${value.toFixed(3)} m`,
       trigger: 'axis',
       axisPointer: {
         type: 'cross'
