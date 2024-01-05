@@ -1,5 +1,4 @@
-import { Anomaly } from 'app/blog/rising-temperatures/charts/Anomaly.server';
-
+import { Anomaly } from './(charts)/Anomaly.server';
 import { Sealevel } from './(charts)/Sealevel.server';
 
 export const metadata = {

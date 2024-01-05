@@ -16,6 +16,18 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+  let additionalComponents = {};
+
+  try {
+    additionalComponents = await import(
+      'data/blog/' + params.slug + '.components.js'
+    );
+  } catch (e) {
+    if (!e || e.code !== 'MODULE_NOT_FOUND') {
+      throw e;
+    }
+  }
+
   return (
     <MarkdownLayout
       publishedAt={post.publishedAt}
@@ -25,6 +37,7 @@ export default async function Page({ params }: Props) {
       path={'/blog/' + post.slug}
       image={post.image}
       code={post.code}
+      additionalComponents={additionalComponents}
     />
   );
 }
