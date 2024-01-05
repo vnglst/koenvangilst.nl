@@ -3,7 +3,7 @@
 import { Chart, echarts } from 'components/Chart';
 import { dateFormatter, mmFormatter } from 'lib/formatters';
 
-import { Data } from './Anomaly.server';
+import { Data } from './WeatherAnomaly.server';
 
 type RainProps = {
   data: Data;

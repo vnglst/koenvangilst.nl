@@ -3,7 +3,7 @@
 import { Chart } from 'components/Chart';
 import { dateFormatter, temperatureFormatter } from 'lib/formatters';
 
-import { Data, HeatmapValue } from './Heatmap.server';
+import { Data, HeatmapValue } from './WeatherHeatmap.server';
 
 type TemperatureHeatmapProps = {
   data: Data;

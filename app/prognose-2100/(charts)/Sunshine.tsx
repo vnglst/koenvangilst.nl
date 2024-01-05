@@ -3,7 +3,7 @@
 import { Chart, echarts } from 'components/Chart';
 import { dateFormatter } from 'lib/formatters';
 
-import { Data } from './Anomaly.server';
+import { Data } from './WeatherAnomaly.server';
 
 type SunshineProps = {
   data: Data;
