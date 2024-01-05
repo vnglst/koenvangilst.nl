@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <Container>
       <Prose>
-        <Heading>Over</Heading>
+        <Heading>About</Heading>
         <p>
           The year 2100 seems far away but it is not unlikely that my children
           will still be alive then. What will the Netherlands look like then?
