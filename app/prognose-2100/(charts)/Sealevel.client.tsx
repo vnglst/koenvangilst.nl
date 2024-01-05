@@ -48,7 +48,7 @@ function generateOptions(data: DataType) {
       }
     },
     xAxis: {
-      type: 'time',
+      data: data.years,
       splitLine: {
         show: false
       }
@@ -62,8 +62,9 @@ function generateOptions(data: DataType) {
     },
     series: [
       {
-        name: 'Zeespiegelstijging',
-        type: 'bar',
+        name: 'Global Sea Level Rise',
+        type: 'line',
+        smooth: true,
         data: data.sealevels,
         emphasis: {
           focus: 'series'
@@ -77,7 +78,19 @@ function generateOptions(data: DataType) {
             offset: 1,
             color: '#cbf3ff'
           }
-        ])
+        ]),
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: '#19c9ff'
+            },
+            {
+              offset: 1,
+              color: '#74e2ff'
+            }
+          ])
+        }
       }
     ]
   };
