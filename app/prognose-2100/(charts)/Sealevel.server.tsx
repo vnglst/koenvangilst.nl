@@ -26,7 +26,8 @@ async function fetchData() {
 
 const Data = z.object({
   timestamp: z.string(),
-  sealevels: z.array(z.tuple([z.string(), z.number()]))
+  sealevels: z.array(z.number()),
+  years: z.array(z.string())
 });
 
 export type DataType = z.infer<typeof Data>;
