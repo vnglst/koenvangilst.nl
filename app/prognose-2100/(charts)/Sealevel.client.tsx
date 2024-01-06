@@ -3,6 +3,8 @@
 import { Chart, echarts } from 'components/Chart';
 import { dateFormatter } from 'lib/formatters';
 
+import { usePrognosisStore } from '../(store)/prognosis';
+
 import { DataType } from './Sealevel.server';
 
 type SealevelProps = {
@@ -11,7 +13,8 @@ type SealevelProps = {
 };
 
 export function SealevelClient({ data, className }: SealevelProps) {
-  const options = generateOptions(data);
+  const store = usePrognosisStore();
+  const options = generateOptions(data, store.showPrognosis);
 
   return (
     <Chart
@@ -21,7 +24,62 @@ export function SealevelClient({ data, className }: SealevelProps) {
   );
 }
 
-function generateOptions(data: DataType) {
+function generateOptions(data: DataType, showPrognosis: boolean) {
+  let years = data.years;
+  let max = 0.15;
+
+  if (showPrognosis) {
+    const lastHistoricYear = +data.years[data.years.length - 1] + 1;
+    const endYear = 2100;
+    const forecastYears = Array.from(
+      { length: endYear - lastHistoricYear + 1 },
+      (_, i) => `${lastHistoricYear + i}`
+    );
+    years = years.concat(forecastYears);
+    max = 1;
+  }
+
+  const prognosisMarklines = [
+    {
+      name: 'Worst Case',
+      type: 'line',
+      markLine: {
+        symbol: 'none',
+        data: [
+          [
+            {
+              xAxis: '2023',
+              yAxis: data.sealevels[data.sealevels.length - 1]
+            },
+            { xAxis: '2100', yAxis: 0.87 }
+          ]
+        ],
+        lineStyle: {
+          color: 'red'
+        }
+      }
+    },
+    {
+      name: 'Best Case',
+      type: 'line',
+      markLine: {
+        symbol: 'none',
+        data: [
+          [
+            {
+              xAxis: '2023',
+              yAxis: data.sealevels[data.sealevels.length - 1]
+            },
+            { xAxis: '2100', yAxis: 0.49 }
+          ]
+        ],
+        lineStyle: {
+          color: 'green'
+        }
+      }
+    }
+  ];
+
   return {
     grid: {
       top: 120,
@@ -47,8 +105,18 @@ function generateOptions(data: DataType) {
         type: 'cross'
       }
     },
+    ...(showPrognosis
+      ? {
+          legend: {
+            data: ['Sea Level', 'Worst Case', 'Best Case'],
+            align: 'right',
+            bottom: 10,
+            left: 'center'
+          }
+        }
+      : {}),
     xAxis: {
-      data: data.years,
+      data: years,
       splitLine: {
         show: false
       }
@@ -58,11 +126,12 @@ function generateOptions(data: DataType) {
       splitLine: {
         show: false
       },
-      min: 0
+      min: 0,
+      max
     },
     series: [
       {
-        name: 'Global Sea Level Rise',
+        name: 'Sea Level',
         type: 'line',
         smooth: true,
         data: data.sealevels,
@@ -91,7 +160,8 @@ function generateOptions(data: DataType) {
             }
           ])
         }
-      }
+      },
+      ...(showPrognosis ? prognosisMarklines : [])
     ]
   };
 }
