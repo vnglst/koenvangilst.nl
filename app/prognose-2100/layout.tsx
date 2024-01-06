@@ -15,10 +15,7 @@ export default async function Layout({ children }) {
           Prognosis 2100
         </Link>
         <PrognosisToggle />
-        <Link
-          href="/prognose-2100/about"
-          className="ml-auto                 mr-1"
-        >
+        <Link href="/prognose-2100/about" className="ml-auto mr-1">
           <Icon icon="info" className="h-6 w-6" />
         </Link>
       </nav>

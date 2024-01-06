@@ -25,24 +25,6 @@ export function SealevelClient({ data, className }: SealevelProps) {
 }
 
 function generateOptions(data: DataType, showPrognosis: boolean) {
-  let years = data.years;
-  let max = 0.15;
-
-  // Source: https://sealevel.nasa.gov/ipcc-ar6-sea-level-projection-tool?psmsl_id=32&data_layer=scenario&boxinfo=true
-  const BEST_CASE = 0.42;
-  const WORST_CASE = 0.8;
-
-  if (showPrognosis) {
-    const lastHistoricYear = +data.years[data.years.length - 1] + 1;
-    const endYear = 2100;
-    const forecastYears = Array.from(
-      { length: endYear - lastHistoricYear + 1 },
-      (_, i) => `${lastHistoricYear + i}`
-    );
-    years = years.concat(forecastYears);
-    max = 1;
-  }
-
   const prognosisMarklines = [
     {
       name: 'Worst Case',
@@ -53,9 +35,9 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
           [
             {
               xAxis: '2023',
-              yAxis: data.sealevels[data.sealevels.length - 1]
+              yAxis: data.last_sealevel
             },
-            { xAxis: '2100', yAxis: WORST_CASE }
+            { xAxis: '2100', yAxis: data.worst_case }
           ]
         ],
         lineStyle: {
@@ -72,9 +54,9 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
           [
             {
               xAxis: '2023',
-              yAxis: data.sealevels[data.sealevels.length - 1]
+              yAxis: data.last_sealevel
             },
-            { xAxis: '2100', yAxis: BEST_CASE }
+            { xAxis: '2100', yAxis: data.best_case }
           ]
         ],
         lineStyle: {
@@ -120,7 +102,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         }
       : {}),
     xAxis: {
-      data: years,
+      data: showPrognosis ? data.forecast_years : data.years,
       splitLine: {
         show: false
       }
@@ -131,7 +113,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         show: false
       },
       min: 0,
-      max
+      max: showPrognosis ? 0.8 : 0.15
     },
     series: [
       {
