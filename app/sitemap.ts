@@ -15,7 +15,7 @@ export default async function sitemap() {
     'labs',
     'portfolio',
     'snippets',
-    'prognose-2100'
+    'prognosis-2100'
   ];
 
   const urls = [
