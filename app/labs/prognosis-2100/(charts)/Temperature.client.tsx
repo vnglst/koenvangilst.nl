@@ -1,6 +1,7 @@
 'use client';
 
 import { Chart, echarts } from 'components/Chart';
+import { colors } from 'components/Chart/themes/colors';
 import { dateFormatter, temperatureFormatter } from 'lib/formatters';
 
 import { usePrognosisStore } from '../(store)/prognosis';
@@ -31,6 +32,9 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       type: 'line',
       markLine: {
         symbol: 'none',
+        lineStyle: {
+          color: colors.red
+        },
         data: [
           [
             {
@@ -40,6 +44,9 @@ function generateOptions(data: Data, showPrognosis: boolean) {
             { xAxis: '2100', yAxis: data.temperature_worst_case }
           ]
         ]
+      },
+      itemStyle: {
+        color: colors.red
       }
     },
     {
@@ -47,6 +54,9 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       type: 'line',
       markLine: {
         symbol: 'none',
+        lineStyle: {
+          color: colors.limeGreen
+        },
         data: [
           [
             {
@@ -56,6 +66,9 @@ function generateOptions(data: Data, showPrognosis: boolean) {
             { xAxis: '2100', yAxis: data.temperature_best_case }
           ]
         ]
+      },
+      itemStyle: {
+        color: colors.limeGreen
       }
     }
   ];

@@ -1,0 +1,22 @@
+export const colors = {
+  turquoise: '#red',
+  primaryBlue: '#74e2ff',
+  skyBlue: '#5ab1ef',
+  sandyBrown: '#ffb980',
+  lightCoral: '#d87a80',
+  slateGray: '#8d98b3',
+  gold: '#e5cf0d',
+  yellowGreen: '#97b552',
+  rosyBrown: '#95706d',
+  orchid: '#dc69aa',
+  teal: '#07a2a4',
+  mediumPurple: '#9a7fd1',
+  steelBlue: '#588dd5',
+  darkOrange: '#f5994e',
+  red: '#c05050',
+  darkSlateBlue: '#59678c',
+  darkGoldenRod: '#c9ab00',
+  limeGreen: '#7eb00a',
+  darkSlateGray: '#6f5553',
+  deepPink: '#c14089'
+};

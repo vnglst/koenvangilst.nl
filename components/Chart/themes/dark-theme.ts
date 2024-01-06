@@ -1,7 +1,10 @@
 import { echarts } from '../Chart';
 
+import { colors } from './colors';
+
 export const darkTheme = {
   darkMode: true,
+  color: Object.values(colors),
   backgroundColor: new echarts.graphic.RadialGradient(0, 0, 8, [
     {
       offset: 0,
