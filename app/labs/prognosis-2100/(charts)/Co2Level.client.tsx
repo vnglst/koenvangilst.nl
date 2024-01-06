@@ -81,7 +81,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       right: 15
     },
     title: {
-      text: 'CO2 level',
+      text: 'CO2 levels',
       subtext: `Global CO2 level in ppm measured at Mauna Loa.\nGlobal Monitoring Laboratory • www.koenvangilst.nl • ${dateFormatter(
         data.timestamp
       )}`,
@@ -132,7 +132,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
     },
     series: [
       {
-        name: 'CO2 level',
+        name: 'CO2 levels',
         type: 'line',
         smooth: true,
         data: data.co2_levels,
