@@ -28,6 +28,10 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
   let years = data.years;
   let max = 0.15;
 
+  // Source: https://sealevel.nasa.gov/ipcc-ar6-sea-level-projection-tool?psmsl_id=32&data_layer=scenario&boxinfo=true
+  const BEST_CASE = 0.42;
+  const WORST_CASE = 0.8;
+
   if (showPrognosis) {
     const lastHistoricYear = +data.years[data.years.length - 1] + 1;
     const endYear = 2100;
@@ -51,7 +55,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
               xAxis: '2023',
               yAxis: data.sealevels[data.sealevels.length - 1]
             },
-            { xAxis: '2100', yAxis: 0.87 }
+            { xAxis: '2100', yAxis: WORST_CASE }
           ]
         ],
         lineStyle: {
@@ -70,7 +74,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
               xAxis: '2023',
               yAxis: data.sealevels[data.sealevels.length - 1]
             },
-            { xAxis: '2100', yAxis: 0.49 }
+            { xAxis: '2100', yAxis: BEST_CASE }
           ]
         ],
         lineStyle: {
