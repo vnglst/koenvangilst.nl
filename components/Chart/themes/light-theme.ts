@@ -1,5 +1,8 @@
+import { colors } from './colors';
+
 export const lightTheme = {
   darkMode: false,
+  color: Object.values(colors),
   backgroundColor: 'white',
   textStyle: {
     fontSize: 12
