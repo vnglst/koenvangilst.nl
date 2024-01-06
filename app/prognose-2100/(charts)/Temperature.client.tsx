@@ -22,9 +22,6 @@ export function TemperatureClient({ data, className }: TemperatureProps) {
 }
 
 function generateOptions(data: Data) {
-  const min = Math.min(...data.temperature_anomalies);
-  const max = Math.max(...data.temperature_anomalies);
-
   return {
     grid: {
       top: 110,
@@ -95,7 +92,9 @@ function generateOptions(data: Data) {
         data: data.temperature_anomalies.map((value) => {
           if (value === null) return;
 
-          const factor = (value - min) / (max - min);
+          const factor =
+            (value - data.min_temperature_anomaly) /
+            (data.max_temperature_anomaly - data.min_temperature_anomaly);
           const color = echarts.color.lerp(factor, [
             '#74e2ff',
             '#cbf3ff',

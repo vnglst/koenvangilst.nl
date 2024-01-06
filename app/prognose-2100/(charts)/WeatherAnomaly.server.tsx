@@ -52,7 +52,13 @@ const Data = z.object({
   rainfall_trend: z.array(z.number()),
   sunshine_trend: z.array(z.number()),
   temperature_trend: z.array(z.number()),
-  years: z.array(z.string())
+  temperature_worst_case: z.number(),
+  temperature_best_case: z.number(),
+  max_temperature_anomaly: z.number(),
+  min_temperature_anomaly: z.number(),
+  last_temperature_anomaly: z.number(),
+  years: z.array(z.string()),
+  forecast_years: z.array(z.string())
 });
 
 export type Data = z.infer<typeof Data>;
