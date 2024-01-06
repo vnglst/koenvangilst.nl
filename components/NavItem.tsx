@@ -8,7 +8,6 @@ import { cx } from 'lib/clsx';
 export function NavItem({ slug, text }: { slug: string; text: string }) {
   const segment = useSelectedLayoutSegment();
   const isActive = slug === segment;
-  console.log('segment', segment);
 
   return (
     <NextLink
