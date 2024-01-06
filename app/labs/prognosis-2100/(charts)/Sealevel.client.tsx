@@ -39,10 +39,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
             },
             { xAxis: '2100', yAxis: data.worst_case }
           ]
-        ],
-        lineStyle: {
-          color: 'red'
-        }
+        ]
       }
     },
     {
@@ -58,10 +55,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
             },
             { xAxis: '2100', yAxis: data.best_case }
           ]
-        ],
-        lineStyle: {
-          color: 'green'
-        }
+        ]
       }
     }
   ];
@@ -86,7 +80,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
     },
     tooltip: {
       valueFormatter: (value: number) => `${value.toFixed(3)} m`,
-      trigger: 'axis',
+      trigger: 'item',
       axisPointer: {
         type: 'cross'
       }
@@ -95,9 +89,17 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       ? {
           legend: {
             data: ['Sea Level', 'Worst Case', 'Best Case'],
-            align: 'right',
             bottom: 10,
-            left: 'center'
+            left: 'center',
+            selected: showPrognosis
+              ? {
+                  'Sea Level': true,
+                  'Worst Case': true,
+                  'Best Case': true
+                }
+              : {
+                  'Sea Level': true
+                }
           }
         }
       : {}),
