@@ -57,6 +57,7 @@ const Data = z.object({
   max_temperature_anomaly: z.number(),
   min_temperature_anomaly: z.number(),
   last_temperature_anomaly: z.number(),
+  last_temperature_trend: z.number(),
   years: z.array(z.string()),
   forecast_years: z.array(z.string())
 });

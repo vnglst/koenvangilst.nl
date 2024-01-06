@@ -3,6 +3,8 @@
 import { Chart, echarts } from 'components/Chart';
 import { dateFormatter, temperatureFormatter } from 'lib/formatters';
 
+import { usePrognosisStore } from '../(store)/prognosis';
+
 import { Data } from './WeatherAnomaly.server';
 
 type TemperatureProps = {
@@ -11,7 +13,8 @@ type TemperatureProps = {
 };
 
 export function TemperatureClient({ data, className }: TemperatureProps) {
-  const options = generateOptions(data);
+  const store = usePrognosisStore();
+  const options = generateOptions(data, store.showPrognosis);
 
   return (
     <Chart
@@ -21,7 +24,42 @@ export function TemperatureClient({ data, className }: TemperatureProps) {
   );
 }
 
-function generateOptions(data: Data) {
+function generateOptions(data: Data, showPrognosis: boolean) {
+  const prognosisMarklines = [
+    {
+      name: 'Worst Case',
+      type: 'line',
+      markLine: {
+        symbol: 'none',
+        data: [
+          [
+            {
+              xAxis: '2023',
+              yAxis: data.last_temperature_trend
+            },
+            { xAxis: '2100', yAxis: data.temperature_worst_case }
+          ]
+        ]
+      }
+    },
+    {
+      name: 'Best Case',
+      type: 'line',
+      markLine: {
+        symbol: 'none',
+        data: [
+          [
+            {
+              xAxis: '2023',
+              yAxis: data.last_temperature_trend
+            },
+            { xAxis: '2100', yAxis: data.temperature_best_case }
+          ]
+        ]
+      }
+    }
+  ];
+
   return {
     grid: {
       top: 110,
@@ -58,22 +96,31 @@ function generateOptions(data: Data) {
       }
     },
     legend: {
-      data: ['10 year trend'],
+      data: showPrognosis
+        ? ['10 year trend', 'Worst Case', 'Best Case']
+        : ['10 year trend'],
       bottom: 10,
       left: 'center',
-      selected: {
-        '10 year trend': false
-      }
+      selected: showPrognosis
+        ? {
+            Anomaly: false,
+            '10 year trend': true,
+            'Worst Case': true,
+            'Best Case': true
+          }
+        : {
+            '10 year trend': false
+          }
     },
     xAxis: {
-      data: data.years,
+      data: showPrognosis ? data.forecast_years : data.years,
       splitLine: {
         show: false
       }
     },
     yAxis: {
       min: -2,
-      max: 3,
+      max: showPrognosis ? 8 : 3,
       type: 'value',
       splitLine: {
         show: false,
@@ -128,13 +175,11 @@ function generateOptions(data: Data) {
         type: 'line',
         data: data.temperature_trend,
         smooth: true,
-        lineStyle: {
-          color: '#ff0000'
-        },
         emphasis: {
           focus: 'series'
         }
-      }
+      },
+      ...(showPrognosis ? prognosisMarklines : [])
     ]
   };
 }
