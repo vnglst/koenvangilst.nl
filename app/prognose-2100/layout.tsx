@@ -14,16 +14,12 @@ export default async function Layout({ children }) {
         >
           Prognosis 2100
         </Link>
-        <div className="flex items-center space-x-2">
-          <PrognosisToggle />
-        </div>
-      </nav>
-      {children}
-      <nav className="mb-8 flex w-full gap-5 text-slate-700 dark:text-slate-300">
-        <Link href="/prognose-2100/about">
+        <PrognosisToggle />
+        <Link href="/prognose-2100/about" className="ml-auto">
           <Icon icon="info" className="h-6 w-6" />
         </Link>
       </nav>
+      {children}
     </div>
   );
 }
