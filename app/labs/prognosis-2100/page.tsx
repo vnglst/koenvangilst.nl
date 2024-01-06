@@ -1,3 +1,4 @@
+import { Co2Level } from './(charts)/Co2Level';
 import { Sealevel } from './(charts)/Sealevel.server';
 import { WeatherAnomaly } from './(charts)/WeatherAnomaly.server';
 
@@ -12,6 +13,7 @@ export default async function Prognosis2100() {
     <div className="mb-10 grid w-full grid-cols-1 place-content-center gap-4 p-4 md:px-8 lg:grid-cols-2 2xl:grid-cols-3">
       <WeatherAnomaly type="temperature" look="dashboard" />
       <Sealevel />
+      <Co2Level />
     </div>
   );
 }
