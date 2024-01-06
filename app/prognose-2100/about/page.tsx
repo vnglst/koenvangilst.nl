@@ -5,7 +5,7 @@ import { Prose } from 'components/Prose';
 
 export default function Page() {
   return (
-    <div className="mb-10 w-full">
+    <div className="mb-10 w-full max-w-[65ch]">
       <Prose>
         <Heading>About</Heading>
         <p>
