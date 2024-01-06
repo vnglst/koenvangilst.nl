@@ -1,12 +1,11 @@
 import Link from 'next/link';
 
-import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 
 export default function Page() {
   return (
-    <Container>
+    <div className="mb-10 w-full">
       <Prose>
         <Heading>About</Heading>
         <p>
@@ -44,6 +43,6 @@ export default function Page() {
           used to create this website..
         </p>
       </Prose>
-    </Container>
+    </div>
   );
 }
