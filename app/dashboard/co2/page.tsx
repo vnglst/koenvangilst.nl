@@ -48,14 +48,14 @@ export default async function AllLinks() {
 async function Readings() {
   unstable_noStore();
   const reading = await getLastReading();
-  const timestamp = new Date(reading.timestamp * 1000).toLocaleTimeString(
-    'en-UK',
-    {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }
-  );
+  const timezoneOffset = new Date().getTimezoneOffset() * 60;
+  const timestamp = new Date(
+    reading.timestamp * 1000 + timezoneOffset
+  ).toLocaleTimeString('en-UK', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
 
   return (
     <div className="min-h-[600px] w-full">
