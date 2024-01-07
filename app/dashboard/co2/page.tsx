@@ -39,7 +39,7 @@ export default async function AllLinks() {
         </a>{' '}
         is reading the data on a 5 minute interval via Bluetooth.
       </p>
-      <Suspense>
+      <Suspense fallback={<div className="min-h-[600px] w-full" />}>
         <Readings />
       </Suspense>
     </Container>
@@ -58,7 +58,7 @@ async function Readings() {
   );
 
   return (
-    <>
+    <div className="min-h-[600px] w-full">
       <pre className="mb-6 w-full text-center text-gray-600 dark:text-gray-400">
         {timestamp}
       </pre>
@@ -72,7 +72,7 @@ async function Readings() {
         <MetricCard header="Humidity" metric={reading.humidity} unit="%" />
         <MetricCard header="Pressure" metric={reading.pressure} unit="hPa" />
       </div>
-    </>
+    </div>
   );
 }
 

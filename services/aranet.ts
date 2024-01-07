@@ -8,6 +8,9 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 });
 
 export async function getLastReading() {
+  // wait 2 seconds for the reading to be saved
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   const { data, error } = await supabase
     .from('readings')
     .select('*')
