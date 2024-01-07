@@ -39,9 +39,7 @@ export default async function AllLinks() {
         </a>{' '}
         is reading the data on a 5 minute interval via Bluetooth.
       </p>
-      <Suspense>
-        <Readings />
-      </Suspense>
+      <Readings />
     </Container>
   );
 }
