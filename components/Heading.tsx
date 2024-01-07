@@ -2,12 +2,14 @@ import React, { PropsWithChildren } from 'react';
 
 type Props = {
   className?: string;
+  centered?: boolean;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
 export function Heading({
   children,
   className: extraClassName,
+  centered = false,
   level = 1,
   ...props
 }: PropsWithChildren<Props>) {
@@ -30,6 +32,10 @@ export function Heading({
 
   if (extraClassName) {
     className += ' ' + extraClassName;
+  }
+
+  if (centered) {
+    className += ' text-center w-full';
   }
 
   return React.createElement(Tag, { className, ...props }, children);
