@@ -81,8 +81,8 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       right: 15
     },
     title: {
-      text: 'CO2 levels',
-      subtext: `Global CO2 level in ppm measured at Mauna Loa.\nGlobal Monitoring Laboratory • www.koenvangilst.nl • ${dateFormatter(
+      text: 'Global CO2 level',
+      subtext: `In ppm measured at Mauna Loa.\nGlobal Monitoring Laboratory • www.koenvangilst.nl • ${dateFormatter(
         data.timestamp
       )}`,
       subtextStyle: {
