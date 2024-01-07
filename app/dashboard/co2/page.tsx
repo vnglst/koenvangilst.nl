@@ -1,9 +1,5 @@
-import { Suspense } from 'react';
-import { unstable_noStore } from 'next/cache';
-
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { getLastReading } from 'services/aranet';
 
 import { Readings } from '../stats/(components)/Readings';
 
