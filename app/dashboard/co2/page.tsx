@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 
@@ -37,7 +39,9 @@ export default async function AllLinks() {
         </a>{' '}
         is reading the data on a 5 minute interval via Bluetooth.
       </p>
-      <Readings />
+      <Suspense>
+        <Readings />
+      </Suspense>
     </Container>
   );
 }
