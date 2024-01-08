@@ -14,7 +14,7 @@ type Reading = {
 
 export function Co2Meter() {
   const { data: reading } = useSWR<Reading>('/api/co2', fetcher, {
-    refreshInterval: 1000,
+    refreshInterval: 30_000,
     revalidateOnFocus: true
   });
 
