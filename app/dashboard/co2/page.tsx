@@ -1,12 +1,10 @@
-import { Suspense } from 'react';
-
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 
 import { Readings } from '../stats/(components)/Readings';
 
 export const metadata = {
-  title: 'CO2 readings in my office',
+  title: 'Office CO2 readings',
   description: 'Readings of the CO2 sensor in my office.'
 };
 
