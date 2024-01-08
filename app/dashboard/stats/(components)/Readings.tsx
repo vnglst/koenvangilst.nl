@@ -12,8 +12,8 @@ type Reading = {
   pressure: number;
 };
 
-export function Readings() {
-  const { data: reading, isLoading } = useSWR<Reading>('/api/co2', fetcher, {
+export function Co2Meter() {
+  const { data: reading } = useSWR<Reading>('/api/co2', fetcher, {
     refreshInterval: 1000,
     revalidateOnFocus: true
   });

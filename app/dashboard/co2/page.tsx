@@ -1,7 +1,7 @@
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 
-import { Readings } from '../stats/(components)/Readings';
+import { Co2Meter } from '../stats/(components)/Readings';
 
 export const metadata = {
   title: 'Office CO2 readings',
@@ -37,7 +37,7 @@ export default async function AllLinks() {
         </a>{' '}
         is reading the data on a 5 minute interval via Bluetooth.
       </p>
-      <Readings />
+      <Co2Meter />
     </Container>
   );
 }
