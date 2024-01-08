@@ -3,17 +3,10 @@
 import useSWR from 'swr';
 
 import { fetcher } from 'lib/fetcher';
+import { Co2Reading } from 'services/types';
 
-type Reading = {
-  timestamp: number;
-  co2: number;
-  temperature: number;
-  humidity: number;
-  pressure: number;
-};
-
-export function Co2Meter() {
-  const { data: reading } = useSWR<Reading>('/api/co2', fetcher, {
+export function Co2Monitor() {
+  const { data: reading } = useSWR<Co2Reading>('/api/co2', fetcher, {
     refreshInterval: 30_000,
     revalidateOnFocus: true
   });

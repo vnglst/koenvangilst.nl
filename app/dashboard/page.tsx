@@ -6,6 +6,7 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import Icon from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
+import { getLastReading } from 'services/aranet';
 import { getGithubStats } from 'services/github';
 import {
   getTotalTodayViews,
@@ -132,20 +133,20 @@ function RealTimeMetricsPlaceholder() {
 async function RealTimeMetrics() {
   unstable_noStore();
 
+  const co2Reading = await getLastReading();
   const todaysViews = await getTotalTodayViews();
-  const weekViews = await getTotalWeekViews();
   const totalViews = await getTotalViews();
 
   return (
     <>
       <MetricCard
-        header="Daily Website Views"
-        metric={todaysViews}
-        link="/dashboard/stats"
+        header="Office Co2 level"
+        metric={co2Reading?.co2}
+        link="/dashboard/co2"
       />
       <MetricCard
-        header="Weekly Website Views"
-        metric={weekViews}
+        header="Today's Website Views"
+        metric={todaysViews}
         link="/dashboard/stats"
       />
       <MetricCard

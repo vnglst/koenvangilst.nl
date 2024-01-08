@@ -1,14 +1,14 @@
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 
-import { Co2Meter } from '../stats/(components)/Readings';
+import { Co2Monitor } from './(components)/Co2Monitor';
 
 export const metadata = {
   title: 'Office CO2 readings',
   description: 'Readings of the CO2 sensor in my office.'
 };
 
-export default async function AllLinks() {
+export default async function Page() {
   return (
     <Container centered>
       <Heading level={1} centered>
@@ -37,7 +37,7 @@ export default async function AllLinks() {
         </a>{' '}
         is reading the data on a 5 minute interval via Bluetooth.
       </p>
-      <Co2Meter />
+      <Co2Monitor />
     </Container>
   );
 }
