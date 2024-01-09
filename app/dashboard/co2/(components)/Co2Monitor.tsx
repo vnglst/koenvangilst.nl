@@ -3,18 +3,11 @@
 import useSWR from 'swr';
 
 import { fetcher } from 'lib/fetcher';
+import { Co2Reading } from 'services/types';
 
-type Reading = {
-  timestamp: number;
-  co2: number;
-  temperature: number;
-  humidity: number;
-  pressure: number;
-};
-
-export function Readings() {
-  const { data: reading, isLoading } = useSWR<Reading>('/api/co2', fetcher, {
-    refreshInterval: 1000,
+export function Co2Monitor() {
+  const { data: reading } = useSWR<Co2Reading>('/api/co2', fetcher, {
+    refreshInterval: 30_000,
     revalidateOnFocus: true
   });
 
@@ -29,8 +22,8 @@ export function Readings() {
   );
 
   return (
-    <div className="w-full">
-      <pre className="mb-6 w-full text-center text-gray-600 dark:text-gray-400">
+    <div className="not-prose w-full pb-4 pt-4">
+      <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">
         {timestamp}
       </pre>
       <div className="mb-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
@@ -53,13 +46,12 @@ type MetricCardProps = {
   unit: string;
 };
 
-// TODO: make re-usable and move to components
 function MetricCard({ header, metric, unit }: MetricCardProps) {
   return (
-    <div className="min-h-[102px] w-full rounded-lg border border-dashed border-gray-400 bg-white p-4 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div className="w-full rounded-lg border border-dashed border-gray-400 bg-white p-4 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex items-center">{header}</div>
       <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
-        {metric ? metric.toLocaleString() + ' ' + unit : ''}
+        {metric ? metric.toLocaleString() + ' ' + unit : <br />}
       </p>
     </div>
   );
