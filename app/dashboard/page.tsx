@@ -140,7 +140,7 @@ async function RealTimeMetrics() {
   return (
     <>
       <MetricCard
-        header="Office Co2 level"
+        header="Office CO2 level"
         metric={co2Reading?.co2}
         link="/dashboard/co2"
       />
