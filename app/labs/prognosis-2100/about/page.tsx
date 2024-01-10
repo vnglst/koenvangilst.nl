@@ -27,8 +27,7 @@ export default function Page() {
           change seriously.
         </p>
         <p>
-          The source code is open source and can be found on Github. This
-          website was created by{' '}
+          This website was created by{' '}
           <Link
             href="https://koenvangilst.nl/about"
             className="underline hover:text-slate-700 dark:hover:text-slate-200"
@@ -40,7 +39,7 @@ export default function Page() {
             Github
           </a>
           . React, TailwindCSS and the visualisation library Apache ECharts were
-          used to create this website..
+          used to create this.
         </p>
       </Prose>
     </div>
