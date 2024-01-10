@@ -14,15 +14,14 @@ export async function getLastReading() {
     .from('readings')
     .select('*')
     .order('timestamp', { ascending: false })
-    .limit(2);
+    .limit(1);
 
   if (error) {
-    console.error('Fetching readings failed', error);
-    return null;
+    throw new Error('Error fetching readings', { cause: error });
   }
 
   if (!data[0]) {
-    return null;
+    throw new Error('No readings found', { cause: error });
   }
 
   return data[0] as Co2Reading;

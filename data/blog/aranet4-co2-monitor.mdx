@@ -13,17 +13,20 @@ tags:
   - nextjs
 ---
 
-There's a joke [on Twitter](https://twitter.com/markdalgleish/status/1735476090230210653) on how a software developer opens a window:
- 
-1. Buy an expensive CO2 monitor
-2. Notice the high reading
-3. Open a window
+I recently got an Aranet4 Co<sub>2</sub> monitor and it's a delightful little gadget. It's small and simple and after inserting the 2 AA batteries I could immediately see the CO<sub>2</sub> levels on a clear little screen. I've [been told](https://twitter.com/PJUllrich/status/1737484637293711647) it's also one of the most accurate monitors on the market. Using an unofficial Python library and my Raspberry Pi I was also able to show the measurements on my website. You can [skip to the end](/blog/aranet4-co2-monitor#result) to see the result. Follow along if you're interested in doing something similar yourself.
 
-There’s truth in that, but I think it's missing a crucial step that involves an old Raspberry Pi. To address this missing step I wrote a quick tutorial on how to display real-time CO2 measurements on a website. You can skip to the [end below](/blog/aranet4-co2-monitor#conclusion) to see the result. 
+## Requirements
+
+The setup I'm using involves the following:
+
+- an [Aranet4](https://aranet.com/products/aranet4/) CO<sub>2</sub> monitor
+- a Raspberry Pi
+- a PostgreSQL database - I'm using [Supabase](https://supabase.com/)
+- a Next.JS website
 
 ## Getting started
 
-To get started install the following packages:
+Install the following packages on your Raspberry Pi:
 
 ```sh
 sudo apt install bluetooth pi-bluetooth bluez blueman
@@ -40,13 +43,13 @@ sudo bluetoothctl
 
 ## Python script
 
-I then adapted the Python script I found on [this blog](https://www.furidamu.org/blog/2023/03/04/saving-aranet4-data-to-raspberry-pi/) to get the current measurements of my Aranet4 monitor. I’m storing the data in a Postgresql database (hosted on Supabase) so that I can easily access it on my website. First, install the Python library [aranet4](https://github.com/Anrijs/Aranet4-Python):
+I adapted the Python script I found on [this blog](https://www.furidamu.org/blog/2023/03/04/saving-aranet4-data-to-raspberry-pi/) to get the current measurements of my Aranet4 monitor. I’m storing the data in a PostgreSQL database (hosted on Supabase) so that I can easily access it on my website. First, install the Python libraries [aranet4](https://github.com/Anrijs/Aranet4-Python) and `psycopg2`:
 
 ```sh
-pip install aranet4
+pip install aranet4 psycopg2
 ```
 
-Then I use the following Python script to store the latest measurement in a Postgresql database:
+Then I use the following Python script to store the latest measurement in a PostgreSQL database:
 
 
 ```python
@@ -150,10 +153,9 @@ The script runs every minute in a cronjob to make sure the measurements are alwa
 
 As you can see I've also included a cleanup script that deletes any entries older than a day. This is to make sure I don't run out of disk space on my free Supabase subscription.
 
+## Result
 
-## Conclusion
-
-The Aranet4 Co<sub>2</sub> monitor is a delightful little gadget. It's small and simple and after inserting the 2 AA batteries I could immediately see the CO<sub>2</sub> levels on its clear little screen. I've [been told](https://twitter.com/PJUllrich/status/1737484637293711647) it's also one of the most accurate monitors on the market. Using an unofficial Python library I was also able to easily show the measurements on my website. For those interested in how it works on the frontend it's a combination of a [React component](https://github.com/vnglst/koenvangilst.nl/edit/main/app/dashboard/co2/(components)/Co2Monitor.tsx) and a Next.JS [api route](app/api/co2/route.ts). 
+I'll leave out the front-end code in this tutorial as it is quite straightforward. For those interested in how it works it's a combination of a [React component](https://github.com/vnglst/koenvangilst.nl/edit/main/app/dashboard/co2/(components)/Co2Monitor.tsx) and a Next.JS api route that calls the following [service](https://github.com/vnglst/koenvangilst.nl/blob/main/services/aranet.ts). 
 
 Should the levels rise above the recommended threshold of 1000 ppm, don't hesitate to reach out to me on [Twitter](https://twitter.com/intent/tweet?text=@vnglst%20Open%20a%20window%20now!) or [Mastodon](https://elk.zone/hachyderm.io/@vnglst) to remind me to ventilate!
 
