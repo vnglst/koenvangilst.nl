@@ -36,15 +36,15 @@ export default function Home() {
       <section className="flex flex-col gap-6 md:flex-row">
         <FeaturedCard
           title="Rising Temperatures in The Netherlands"
-          slug="rising-temperatures"
+          path="/labs/rising-temperatures"
         />
         <FeaturedCard
           title="Why I Prefer Trunk-Based Development"
-          slug="trunkbased-development"
+          path="/blog/trunkbased-development"
         />
         <FeaturedCard
           title="Code Colocation is King"
-          slug="code-colocation-is-king"
+          path="/blog/code-colocation-is-king"
         />
       </section>
       <Link
@@ -58,10 +58,15 @@ export default function Home() {
   );
 }
 
-async function FeaturedCard({ title, slug }) {
+type FeatureCardProps = {
+  title: string;
+  path: string;
+};
+
+async function FeaturedCard({ title, path }: FeatureCardProps) {
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={path}
       className="rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 md:w-1/3 dark:bg-black"
     >
       <div className="up-hover flex h-full w-full flex-col justify-between">
@@ -70,7 +75,7 @@ async function FeaturedCard({ title, slug }) {
         </h3>
         <div className="flex items-center text-gray-800 dark:text-gray-200">
           <Icon icon="eye" className="h-6 w-6" />
-          <ViewCount className="ml-2 align-baseline" path={'/blog/' + slug} />
+          <ViewCount className="ml-2 align-baseline" path={path} />
         </div>
       </div>
     </Link>
