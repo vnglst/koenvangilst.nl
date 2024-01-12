@@ -36,7 +36,7 @@ export default function Home() {
       <section className="flex flex-col gap-6 md:flex-row">
         <FeaturedCard
           title="Rising Temperatures in The Netherlands"
-          path="/labs/rising-temperatures"
+          path="/blog/rising-temperatures"
         />
         <FeaturedCard
           title="Why I Prefer Trunk-Based Development"
