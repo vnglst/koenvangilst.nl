@@ -20,7 +20,7 @@ export function Footer() {
         href: 'https://twitter.com/vnglst',
         label: 'Twitter'
       },
-      { href: 'https://github.com/vngls', label: 'GitHub' },
+      { href: 'https://github.com/vnglst', label: 'GitHub' },
       {
         href: 'https://www.linkedin.com/in/vangilst/',
         label: 'LinkedIn'
