@@ -16,17 +16,20 @@ type Initial = {
   latitude: number;
   longitude: number;
   zoom: number;
-  showTreeloss: boolean;
+  showTreeLoss: boolean;
+  showTreeGain: boolean;
 };
 
 type ArcGISMapProps = {
   showTreeLoss: boolean;
+  showTreeGain: boolean;
   initial: Initial;
   handleCenterPointChange: (centerPoint: CenterPoint) => void;
 };
 
 const ArcGISMap = ({
   showTreeLoss,
+  showTreeGain,
   initial,
   handleCenterPointChange
 }: ArcGISMapProps) => {
@@ -43,12 +46,20 @@ const ArcGISMap = ({
       opacity: 0.5,
       id: 'tree_loss',
       title: 'Tree cover loss',
-      visible: initial.showTreeloss
+      visible: initial.showTreeLoss
+    });
+
+    const treeGainLayer = new WebTileLayer({
+      urlTemplate: `https://tiles.globalforestwatch.org/umd_tree_cover_gain_from_height/latest/dynamic/{level}/{col}/{row}.png?start_year=${startYear}&end_year=${endYear}`,
+      opacity: 0.5,
+      id: 'tree_gain',
+      title: 'Tree cover gain',
+      visible: false
     });
 
     mapRef.current = new Map({
       basemap: 'satellite',
-      layers: [treeLossLayer]
+      layers: [treeLossLayer, treeGainLayer]
     });
 
     mapViewRef.current = new MapView({
@@ -95,6 +106,16 @@ const ArcGISMap = ({
       });
     }
   }, [showTreeLoss]);
+
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.layers.forEach((layer) => {
+        if (layer.id === 'tree_gain') {
+          layer.visible = showTreeGain;
+        }
+      });
+    }
+  }, [showTreeGain]);
 
   useEffect(() => {
     let watcher: __esri.WatchHandle | undefined;

@@ -16,10 +16,12 @@ export function useMapSettings() {
     latitude: parseFloat(searchParams.get('latitude') || DEFAULT.latitude),
     longitude: parseFloat(searchParams.get('longitude') || DEFAULT.longitude),
     zoom: parseFloat(searchParams.get('zoom') || DEFAULT.zoom),
-    showTreeloss: searchParams.get('treeloss') === 'on'
+    showTreeLoss: searchParams.get('treeloss') === 'on',
+    showTreeGain: searchParams.get('treegain') === 'on'
   });
 
-  const showTreeloss = searchParams.get('treeloss') === 'on';
+  const showTreeLoss = searchParams.get('treeloss') === 'on';
+  const showTreeGain = searchParams.get('treegain') === 'on';
 
   const handleCenterPointChange = useCallback(
     (centerPoint: CenterPoint) => {
@@ -33,13 +35,19 @@ export function useMapSettings() {
   );
 
   const toggleTreeLossLayer = useCallback(() => {
-    updateParams({ treeloss: showTreeloss ? 'off' : 'on' });
-  }, [showTreeloss, updateParams]);
+    updateParams({ treeloss: showTreeLoss ? 'off' : 'on' });
+  }, [showTreeLoss, updateParams]);
+
+  const toggleTreeGainLayer = useCallback(() => {
+    updateParams({ treegain: showTreeGain ? 'off' : 'on' });
+  }, [showTreeGain, updateParams]);
 
   return {
     initial,
-    showTreeloss,
+    showTreeLoss,
+    showTreeGain,
     handleCenterPointChange,
-    toggleTreeLossLayer
+    toggleTreeLossLayer,
+    toggleTreeGainLayer
   };
 }
