@@ -10,7 +10,7 @@ import { PrognosisToggle } from './(components)/PrognosisToggle';
 export default async function Layout({ children }) {
   return (
     <Body>
-      <nav className="sticky top-0 z-20 flex items-center justify-center gap-4 overflow-hidden bg-white p-4 text-slate-700 md:px-8 dark:bg-black dark:text-slate-300">
+      <nav className="fixed left-0 right-0 top-0 z-10 flex items-center justify-start gap-4 bg-white bg-opacity-80 p-4 backdrop-saturate-50 md:px-8 dark:bg-black dark:bg-opacity-80">
         <Link
           href="/labs/prognosis-2100"
           className="block whitespace-nowrap rounded-md border-2 border-slate-900 bg-primary-bright px-3 py-1 text-2xl font-black text-slate-900 dark:border-white dark:text-slate-900"
