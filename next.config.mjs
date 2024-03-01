@@ -14,7 +14,7 @@ const commitHash = childProcess
  * @type {import('next').NextConfig}
  */
 const config = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   swcMinify: true,
   headers,

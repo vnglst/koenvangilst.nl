@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { Container } from './Container';
+import { Container } from './ContentContainer';
 import ExternalLink from './ExternalLink';
 
 export function Footer() {
@@ -35,9 +36,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mb-12 flex flex-col justify-center px-8">
-      <Container>
-        <div className="mb-16 mt-8 grid w-full grid-cols-1 justify-between gap-4 sm:grid-cols-4">
+    <footer className="flex flex-col justify-center px-8">
+      <div className="mx-auto mb-16 flex w-full max-w-[65ch] flex-col items-start justify-center px-8 py-16 md:px-0">
+        <div className="grid w-full grid-cols-1 justify-between gap-4 sm:grid-cols-4">
           {footerLinks.map((links, index) => (
             <FooterLinkGroup key={index}>
               {links.map(({ href, label }) => (
@@ -48,7 +49,7 @@ export function Footer() {
             </FooterLinkGroup>
           ))}
         </div>
-      </Container>
+      </div>
       <span className="my-4 text-right text-xs text-gray-500">
         v. {process.env.APP_VERSION} |{' '}
         <a

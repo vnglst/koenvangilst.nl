@@ -12,7 +12,7 @@ type IconProps = {
   className?: string;
 };
 
-export default function Icon({ icon, className }: IconProps) {
+export function Icon({ icon, className }: IconProps) {
   return (
     <svg className={`${className}`} fill="currentColor">
       <use xlinkHref={`/static/icons/${icon}.svg#${icon}`} />

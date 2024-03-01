@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Container } from './Container';
+import { Container } from './ContentContainer';
 import { Heading } from './Heading';
 import { MDXComponent } from './MDXComponent';
 import { Prose } from './Prose';
