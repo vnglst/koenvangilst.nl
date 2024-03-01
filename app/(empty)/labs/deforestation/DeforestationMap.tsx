@@ -38,7 +38,7 @@ export default function DeforestationMap() {
             onChange={settings.toggleTreeGainLayer}
             checked={settings.showTreeGain}
           >
-            Tree loss
+            Tree gain
           </Checkbox>
         </div>
       </div>
