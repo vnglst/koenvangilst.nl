@@ -18,36 +18,36 @@ export default function DeforestationMap() {
   const settings = useMapSettings();
 
   return (
-    <>
-      <div className="z-20 w-fit rounded-md bg-white bg-opacity-80 p-8 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
-        <Heading>Deforestation Check</Heading>
-        <Prose>
-          Keep track of deforestation in your area. Get a detailed view of
-          changes in forest cover over time.
-        </Prose>
-        <div className="mt-8 flex flex-wrap gap-6">
-          <Checkbox
-            color="pink"
-            onChange={settings.toggleTreeLossLayer}
-            checked={settings.showTreeLoss}
-          >
-            Tree loss
-          </Checkbox>
-          <Checkbox
-            color="blue"
-            onChange={settings.toggleTreeGainLayer}
-            checked={settings.showTreeGain}
-          >
-            Tree gain
-          </Checkbox>
-        </div>
-      </div>
+    <div className="flex h-full w-full flex-wrap gap-4">
       <ArcGISMap
         initial={settings.initial.current}
         showTreeLoss={settings.showTreeLoss}
         showTreeGain={settings.showTreeGain}
         handleCenterPointChange={settings.handleCenterPointChange}
       />
-    </>
+      <div className="h-fit w-fit rounded-md bg-white bg-opacity-80 p-8 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+        <Heading>Deforestation Check</Heading>
+        <Prose>
+          Keep track of deforestation in your area. Get a detailed view of
+          changes in forest cover over time.
+        </Prose>
+      </div>
+      <div className="ml-auto flex h-fit w-fit flex-col flex-wrap gap-8 rounded-md bg-white bg-opacity-80 p-8 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+        <Checkbox
+          color="pink"
+          onChange={settings.toggleTreeLossLayer}
+          checked={settings.showTreeLoss}
+        >
+          Tree loss
+        </Checkbox>
+        <Checkbox
+          color="blue"
+          onChange={settings.toggleTreeGainLayer}
+          checked={settings.showTreeGain}
+        >
+          Tree gain
+        </Checkbox>
+      </div>
+    </div>
   );
 }
