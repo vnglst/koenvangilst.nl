@@ -7,14 +7,10 @@ import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
 import Locate from '@arcgis/core/widgets/Locate';
 
+import { CenterPoint } from './types';
+
 const endYear = 2022;
 const startYear = endYear - 5;
-
-type CenterPoint = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
 
 type Initial = {
   latitude: number;

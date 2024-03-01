@@ -1,13 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
 import dynamic from 'next/dynamic';
 
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 
 import { LoadingMap } from './LoadingMap';
-import { useUpdateParams } from './useUpdateParams';
+import { useMapSettings } from './useMapSettings';
 
 const ArcGISMap = dynamic(() => import('./ArcGIS'), {
   ssr: false,
@@ -15,32 +14,7 @@ const ArcGISMap = dynamic(() => import('./ArcGIS'), {
 });
 
 export default function DeforestationMap() {
-  const { searchParams, updateParams } = useUpdateParams();
-
-  const initial = useRef({
-    latitude: parseFloat(searchParams.get('latitude') || '51.96796868185138'),
-    longitude: parseFloat(searchParams.get('longitude') || '5.153498231085372'),
-    zoom: parseFloat(searchParams.get('zoom') || '17'),
-    showTreeloss: searchParams.get('treeloss') === 'on'
-  });
-
-  const showTreeloss = searchParams.get('treeloss') === 'on';
-
-  const handleCenterPointChange = (centerPoint: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  }) => {
-    updateParams({
-      latitude: centerPoint.latitude.toString(),
-      longitude: centerPoint.longitude.toString(),
-      zoom: centerPoint.zoom.toString()
-    });
-  };
-
-  const toggleTreeLossLayer = () => {
-    updateParams({ treeloss: showTreeloss ? 'off' : 'on' });
-  };
+  const settings = useMapSettings();
 
   return (
     <>
@@ -51,14 +25,14 @@ export default function DeforestationMap() {
           changes in forest cover over time.
         </Prose>
 
-        <button onClick={toggleTreeLossLayer}>
-          Tree loss {showTreeloss ? 'on' : 'off'}
+        <button onClick={settings.toggleTreeLossLayer}>
+          Tree loss {settings.showTreeloss ? 'on' : 'off'}
         </button>
       </div>
       <ArcGISMap
-        initial={initial.current}
-        showTreeLoss={showTreeloss}
-        handleCenterPointChange={handleCenterPointChange}
+        initial={settings.initial.current}
+        showTreeLoss={settings.showTreeloss}
+        handleCenterPointChange={settings.handleCenterPointChange}
       />
     </>
   );
