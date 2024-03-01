@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 

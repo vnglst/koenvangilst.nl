@@ -1,7 +1,7 @@
 import { getClients } from 'cms/queries';
 import Link from 'next/link';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { ProjectLink } from 'components/ProjectLink';
 import { Prose } from 'components/Prose';

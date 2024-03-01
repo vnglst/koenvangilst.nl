@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { ViewCount } from 'components/ViewCount';

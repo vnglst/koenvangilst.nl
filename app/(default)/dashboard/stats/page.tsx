@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { getAllTimeList } from 'services/supabase';
 

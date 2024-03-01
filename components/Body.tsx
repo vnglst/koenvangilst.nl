@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 export function Body({ children }: PropsWithChildren) {
   return (
-    <body className="bg-white text-white dark:bg-black dark:text-black">
+    <body className="flex h-full flex-col bg-white text-white dark:bg-black dark:text-black">
       <script
         defer
         id="theme"

@@ -2,7 +2,7 @@ import { getSnippets } from 'cms/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 import { getViews } from 'services/supabase';

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Body } from 'components/Body';
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Footer } from 'components/Footer';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';

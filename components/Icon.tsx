@@ -4,7 +4,8 @@ const icons = [
   'eye',
   'external-link',
   'arrow-right',
-  'info'
+  'info',
+  'x'
 ];
 
 type IconProps = {

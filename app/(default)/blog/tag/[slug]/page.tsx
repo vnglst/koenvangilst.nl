@@ -2,7 +2,7 @@ import { getPosts } from 'cms/queries';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { BlogPostLink } from 'components/PostLink';
 import { Tag } from 'components/Tag';

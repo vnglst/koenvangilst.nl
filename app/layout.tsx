@@ -92,7 +92,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${montserrat.variable} ${inter.variable} min-w-[360px] scroll-smooth font-sans`}
+      className={`${montserrat.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link

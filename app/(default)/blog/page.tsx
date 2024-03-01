@@ -1,6 +1,6 @@
 import { getPosts } from 'cms/queries';
 
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 import { getViews, getViewsPerMonth } from 'services/supabase';

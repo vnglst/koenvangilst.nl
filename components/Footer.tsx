@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
-import { Container } from './ContentContainer';
 import ExternalLink from './ExternalLink';
 
 export function Footer() {

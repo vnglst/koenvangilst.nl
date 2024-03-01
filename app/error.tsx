@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 
 import { Body } from 'components/Body';
-import { Container } from 'components/ContentContainer';
+import { Container } from 'components/Container';
 import { Footer } from 'components/Footer';
 import { Heading } from 'components/Heading';
-import {Icon} from 'components/Icon';
+import { Icon } from 'components/Icon';
 import { Main } from 'components/Main';
 import { Nav } from 'components/Nav';
 import { Prose } from 'components/Prose';

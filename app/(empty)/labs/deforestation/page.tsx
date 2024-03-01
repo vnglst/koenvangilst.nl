@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function Deforestation() {
   return (
-    <div className="mt-20 flex h-full w-full px-4 text-black md:mt-32 md:px-8 dark:text-white">
+    <div className="flex h-full w-full bg-slate-200 px-4 pb-6 pt-20 text-black md:px-8 md:pt-28 dark:bg-slate-800 dark:text-white">
       <DeforestationMap />
     </div>
   );
