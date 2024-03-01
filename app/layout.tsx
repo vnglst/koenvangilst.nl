@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
-import Head from 'next/head';
 
 import { Tracking } from 'components/Tracking';
 

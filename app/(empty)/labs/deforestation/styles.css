@@ -3,3 +3,7 @@ html,
 body {
   font-family: var(--font-inter), sans-serif;
 }
+
+.esri-view-surface {
+  --esri-view-outline: none;
+}
