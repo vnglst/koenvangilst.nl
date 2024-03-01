@@ -17,8 +17,6 @@ export function Body({ children }: PropsWithChildren) {
           const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           const preferredTheme = localStorage.getItem('theme');
 
-          console.log('systemDark', systemDark, 'preferredTheme', preferredTheme);
-          
           if (preferredTheme) {
             if (preferredTheme === 'dark') {
               document.documentElement.classList.add('dark');

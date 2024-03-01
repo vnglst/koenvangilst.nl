@@ -16,19 +16,27 @@ type CenterPoint = {
   zoom: number;
 };
 
+type Initial = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  showTreeloss: boolean;
+};
+
 type ArcGISMapProps = {
-  showTreeLossLayer: boolean;
-  initialCenterPoint: CenterPoint;
+  showTreeLoss: boolean;
+  initial: Initial;
   handleCenterPointChange: (centerPoint: CenterPoint) => void;
 };
 
 const ArcGISMap = ({
-  showTreeLossLayer,
-  initialCenterPoint,
+  showTreeLoss,
+  initial,
   handleCenterPointChange
 }: ArcGISMapProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>();
+  const mapViewRef = useRef<MapView>();
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -38,7 +46,8 @@ const ArcGISMap = ({
       copyright: 'Global forest watch',
       opacity: 0.5,
       id: 'tree_loss',
-      title: 'Tree cover loss'
+      title: 'Tree cover loss',
+      visible: initial.showTreeloss
     });
 
     mapRef.current = new Map({
@@ -46,15 +55,10 @@ const ArcGISMap = ({
       layers: [treeLossLayer]
     });
 
-    const mapView = new MapView({
+    mapViewRef.current = new MapView({
       container: containerRef.current,
-      extent: {
-        xmin: 3.31497114423,
-        ymin: 50.803721015,
-        xmax: 7.09205325687,
-        ymax: 53.5104033474,
-        spatialReference: { wkid: 4326 }
-      },
+      center: [initial.longitude, initial.latitude],
+      zoom: initial.zoom,
       ui: { components: [] },
       navigation: {
         mouseWheelZoomEnabled: true,
@@ -70,49 +74,49 @@ const ArcGISMap = ({
     });
 
     const locate = new Locate({
-      view: mapView,
+      view: mapViewRef.current,
       goToOverride: function (view, options) {
         return view.goTo(options.target);
       }
     });
 
-    mapView.ui.add(locate, 'bottom-left');
-
-    const watcher = mapView.watch('stationary', () => {
-      const center = mapView.center;
-
-      if (!center) return;
-
-      handleCenterPointChange({
-        latitude: center.latitude,
-        longitude: center.longitude,
-        zoom: mapView.zoom
-      });
-    });
-
-    mapView.when(() => {
-      mapView.goTo(initialCenterPoint, { animate: true });
-    });
+    mapViewRef.current.ui.add(locate, 'bottom-left');
 
     return () => {
       // wait until the map is ready before destroying it
-      mapView.when(() => {
-        watcher.remove();
-        mapView.destroy();
+      mapViewRef.current?.when(() => {
+        mapViewRef.current?.destroy();
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initial]);
 
   useEffect(() => {
     if (mapRef.current) {
       mapRef.current.layers.forEach((layer) => {
         if (layer.id === 'tree_loss') {
-          layer.visible = showTreeLossLayer;
+          layer.visible = showTreeLoss;
         }
       });
     }
-  }, [showTreeLossLayer]);
+  }, [showTreeLoss]);
+
+  useEffect(() => {
+    let watcher: __esri.WatchHandle | undefined;
+
+    if (mapViewRef.current) {
+      watcher = mapViewRef.current.watch('center, zoom', () => {
+        handleCenterPointChange({
+          latitude: mapViewRef.current!.center.latitude,
+          longitude: mapViewRef.current!.center.longitude,
+          zoom: mapViewRef.current!.zoom
+        });
+      });
+    }
+
+    return () => {
+      watcher?.remove();
+    };
+  }, [handleCenterPointChange]);
 
   return <div ref={containerRef} className="absolute inset-0" />;
 };

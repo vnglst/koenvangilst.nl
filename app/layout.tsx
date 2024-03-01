@@ -2,10 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 import Head from 'next/head';
-import Script from 'next/script';
 
-import { Footer } from 'components/Footer';
-import { Nav } from 'components/Nav';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
@@ -95,16 +92,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${montserrat.variable} ${inter.variable} min-w-[360px] scroll-smooth font-sans md:overflow-x-scroll`}
+      className={`${montserrat.variable} ${inter.variable} min-w-[360px] scroll-smooth font-sans`}
     >
-      <Head>
-        <link rel="me" href="https://hachyderm.io/@vnglst" />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href="https://koenvangilst.nl/feed.xml"
-        />
-      </Head>
+      <link rel="me" href="https://hachyderm.io/@vnglst" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        href="https://koenvangilst.nl/feed.xml"
+      />
       {children}
       <Tracking />
     </html>

@@ -1,6 +1,7 @@
-import Container from './Container';
+import DeforestationMap from './DeforestationMap';
 
 import '@arcgis/core/assets/esri/themes/dark/main.css';
+import './styles.css';
 
 export const metadata = {
   title: 'Deforestation Tracker',
@@ -10,8 +11,8 @@ export const metadata = {
 
 export default async function Deforestation() {
   return (
-    <div className="flex h-full w-full p-4 text-black md:px-8 dark:text-white">
-      <Container />
+    <div className="mt-20 flex h-full w-full px-4 text-black md:mt-32 md:px-8 dark:text-white">
+      <DeforestationMap />
     </div>
   );
 }

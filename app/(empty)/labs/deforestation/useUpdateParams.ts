@@ -1,17 +1,18 @@
 import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export function useUpdateSearchParams() {
+export function useUpdateParams() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const updateParams = React.useCallback(
     (newParams: Record<string, string>) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const currentParams = new URLSearchParams(searchParams.toString());
       Object.entries(newParams).forEach(([key, value]) => {
-        params.set(key, value);
+        currentParams.set(key, value);
       });
-      router.replace(`?${params.toString()}`);
+
+      router.replace(`?${currentParams.toString()}`);
     },
     [router, searchParams]
   );
