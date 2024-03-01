@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
+import { Toggle } from 'components/Toggle';
 
 import { LoadingMap } from './LoadingMap';
 import { useMapSettings } from './useMapSettings';
@@ -24,10 +25,20 @@ export default function DeforestationMap() {
           Keep track of deforestation in your area. Get a detailed view of
           changes in forest cover over time.
         </Prose>
-
-        <button onClick={settings.toggleTreeLossLayer}>
-          Tree loss {settings.showTreeloss ? 'on' : 'off'}
-        </button>
+        <div className="mt-4 flex flex-wrap items-center gap-6">
+          <Toggle
+            checked={settings.showTreeloss}
+            onChange={settings.toggleTreeLossLayer}
+          >
+            <span className="ml-3">Tree loss</span>
+          </Toggle>
+          <Toggle
+            checked={settings.showTreeloss}
+            onChange={settings.toggleTreeLossLayer}
+          >
+            <span className="ml-3">Tree gain</span>
+          </Toggle>
+        </div>
       </div>
       <ArcGISMap
         initial={settings.initial.current}
