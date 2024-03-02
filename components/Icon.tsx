@@ -5,7 +5,8 @@ const icons = [
   'external-link',
   'arrow-right',
   'info',
-  'x'
+  'plus',
+  'minus'
 ];
 
 type IconProps = {
