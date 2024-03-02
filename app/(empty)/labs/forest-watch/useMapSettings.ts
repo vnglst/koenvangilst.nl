@@ -12,8 +12,8 @@ const DEFAULT = {
 export function useMapSettings() {
   const { searchParams, deleteParam, updateParams } = useUpdateParams();
 
-  const showTreeLoss = searchParams.get('treeloss') === 'on';
-  const showTreeGain = searchParams.get('treegain') === 'on';
+  const showTreeLoss = searchParams.get('treeloss') !== 'off';
+  const showTreeGain = searchParams.get('treegain') !== 'off';
   const update = searchParams.get('update') === 'on';
 
   const currentCenterPoint = useMemo(
@@ -27,8 +27,8 @@ export function useMapSettings() {
 
   const [initial, setInitial] = useState({
     ...currentCenterPoint,
-    showTreeLoss: searchParams.get('treeloss') === 'on',
-    showTreeGain: searchParams.get('treegain') === 'on'
+    showTreeLoss,
+    showTreeGain
   });
 
   useEffect(() => {
@@ -36,12 +36,12 @@ export function useMapSettings() {
 
     setInitial({
       ...currentCenterPoint,
-      showTreeLoss: searchParams.get('treeloss') === 'on',
-      showTreeGain: searchParams.get('treegain') === 'on'
+      showTreeLoss,
+      showTreeGain
     });
 
     deleteParam('update');
-  }, [update, currentCenterPoint, searchParams, deleteParam]);
+  }, [currentCenterPoint, deleteParam, showTreeGain, showTreeLoss, update]);
 
   const handleCenterPointChange = useCallback(
     (centerPoint: CenterPoint) => {
