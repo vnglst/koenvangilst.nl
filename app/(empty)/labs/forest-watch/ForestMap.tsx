@@ -29,7 +29,7 @@ export default function DeforestationMap() {
         showTreeGain={settings.showTreeGain}
         handleCenterPointChange={settings.handleCenterPointChange}
       />
-      <div className="relative h-fit max-h-[65vh] w-fit max-w-2xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+      <div className="relative h-fit max-h-[65vh] w-fit max-w-xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
         {isBoxVisible ? (
           <div className="bg-white p-8 dark:bg-transparent">
             <button
