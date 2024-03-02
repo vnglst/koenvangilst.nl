@@ -54,7 +54,6 @@ export default function DeforestationMap() {
                     Kootwijkerzand
                   </Link>
                 </li>
-                {/* forest-watch?latitude=52.30686991424529&longitude=5.478280494346572&zoom=14&treeloss=on&treegain=on */}
                 <li>
                   <Link href="./forest-watch?latitude=52.30686991424529&longitude=5.478280494346572&zoom=14&treeloss=on&treegain=on&update=on">
                     Forestry in Flevoland
