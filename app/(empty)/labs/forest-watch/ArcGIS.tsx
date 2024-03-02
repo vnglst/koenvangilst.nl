@@ -87,7 +87,7 @@ const ArcGISMap = ({
       }
     });
 
-    mapViewRef.current.ui.add(locate, 'bottom-left');
+    mapViewRef.current.ui.add(locate, 'bottom-right');
 
     return () => {
       // wait until the map is ready before destroying it

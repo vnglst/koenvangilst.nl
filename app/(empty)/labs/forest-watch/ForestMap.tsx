@@ -22,7 +22,7 @@ export default function DeforestationMap() {
   const [isBoxVisible, setBoxVisible] = useState(true);
 
   return (
-    <div className="flex h-full w-full flex-wrap gap-4">
+    <div className="flex h-fit w-full flex-wrap justify-between gap-4">
       <ArcGISMap
         initial={settings.initial}
         showTreeLoss={settings.showTreeLoss}
@@ -31,12 +31,15 @@ export default function DeforestationMap() {
       />
       <div className="relative h-fit max-h-[65vh] w-fit max-w-2xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
         {isBoxVisible ? (
-          <div className="p-8">
+          <div className="bg-white p-8 dark:bg-transparent">
             <button
               onClick={() => setBoxVisible(false)}
               className="absolute right-0 top-0 p-4"
             >
-              <Icon icon="minus" className="h-6 w-6 text-white" />
+              <Icon
+                icon="minus"
+                className="h-6 w-6 text-black dark:text-white"
+              />
             </button>
             <Heading>Forest Watch</Heading>
             <Prose>
@@ -87,11 +90,11 @@ export default function DeforestationMap() {
             onClick={() => setBoxVisible(true)}
             className="bg relative p-4"
           >
-            <Icon icon="plus" className="h-6 w-6 text-white" />
+            <Icon icon="plus" className="h-6 w-6 text-black dark:text-white" />
           </button>
         )}
       </div>
-      <div className="ml-auto mt-auto flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-white bg-opacity-80 p-4 text-sm backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+      <div className="flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-white bg-opacity-80 p-4 text-sm backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
         <Checkbox
           color="pink"
           onChange={settings.toggleTreeLossLayer}
