@@ -39,8 +39,8 @@ export default function Home() {
           path="/blog/rising-temperatures"
         />
         <FeaturedCard
-          title="Why I Prefer Trunk-Based Development"
-          path="/blog/trunkbased-development"
+          title="Forest Watch using satellite imagery"
+          path="/labs/forest-watch"
         />
         <FeaturedCard
           title="Code Colocation is King"

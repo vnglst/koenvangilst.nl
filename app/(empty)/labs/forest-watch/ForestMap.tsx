@@ -17,6 +17,33 @@ const ArcGISMap = dynamic(() => import('./ArcGIS'), {
   loading: LoadingMap
 });
 
+const LINKS = [
+  {
+    title: 'Lage Vuursche',
+    href: '/forest-watch?latitude=52.185893836834694&longitude=5.214140791854876&zoom=16&treeloss=on&treegain=on&update=on'
+  },
+  {
+    title: 'Kootwijkerzand',
+    href: '/forest-watch?latitude=52.15815145555043&longitude=5.776374163857386&zoom=14&treeloss=on&treegain=on&update=on'
+  },
+  {
+    title: 'Forestry in Flevoland',
+    href: '/forest-watch?latitude=52.30686991424529&longitude=5.478280494346572&zoom=14&treeloss=on&treegain=on&update=on'
+  },
+  {
+    title: 'Waldsterben in Germany',
+    href: '/forest-watch?latitude=51.75764087898883&longitude=10.531570078997898&zoom=11&treeloss=on&treegain=on&update=on'
+  },
+  {
+    title: 'Forestry in Romania',
+    href: '/forest-watch?latitude=46.73874069607526&longitude=22.67333743740213&zoom=13&treeloss=on&treegain=on&update=on'
+  },
+  {
+    title: 'Coal mine in Germany',
+    href: '/forest-watch?latitude=50.9419801632943&longitude=6.491740178673552&zoom=12&treeloss=on&treegain=on&update=on'
+  }
+];
+
 export default function DeforestationMap() {
   const settings = useMapSettings();
   const [isBoxVisible, setBoxVisible] = useState(true);
@@ -29,12 +56,12 @@ export default function DeforestationMap() {
         showTreeGain={settings.showTreeGain}
         handleCenterPointChange={settings.handleCenterPointChange}
       />
-      <div className="relative h-fit max-h-[65vh] w-fit max-w-xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+      <div className="relative h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
         {isBoxVisible ? (
-          <div className="bg-white p-8 dark:bg-transparent">
+          <div className="bg-white p-8 pt-10 dark:bg-transparent">
             <button
               onClick={() => setBoxVisible(false)}
-              className="absolute right-0 top-0 p-4"
+              className="absolute left-0 top-0 p-4"
             >
               <Icon
                 icon="minus"
@@ -47,36 +74,11 @@ export default function DeforestationMap() {
               in tree cover over time.
               <br />
               <ul>
-                <li>
-                  <Link href="./forest-watch?latitude=52.185893836834694&longitude=5.214140791854876&zoom=16&treeloss=on&treegain=on&update=on">
-                    Lage Vuursche
-                  </Link>
-                </li>
-                <li>
-                  <Link href="./forest-watch?latitude=52.15815145555043&longitude=5.776374163857386&zoom=14&treeloss=on&treegain=on&update=on">
-                    Kootwijkerzand
-                  </Link>
-                </li>
-                <li>
-                  <Link href="./forest-watch?latitude=52.30686991424529&longitude=5.478280494346572&zoom=14&treeloss=on&treegain=on&update=on">
-                    Forestry in Flevoland
-                  </Link>
-                </li>
-                <li>
-                  <Link href="./forest-watch?latitude=51.75764087898883&longitude=10.531570078997898&zoom=11&treeloss=on&treegain=on&update=on">
-                    Waldsterben in Germany
-                  </Link>
-                </li>
-                <li>
-                  <Link href="./forest-watch?latitude=46.73874069607526&longitude=22.67333743740213&zoom=13&treeloss=on&treegain=on&update=on">
-                    Forestry in Romania
-                  </Link>
-                </li>
-                <li>
-                  <Link href="./forest-watch?latitude=50.9419801632943&longitude=6.491740178673552&zoom=12&treeloss=on&treegain=on&update=on">
-                    Coal mine in Germany
-                  </Link>
-                </li>
+                {LINKS.map((link) => (
+                  <li key={link.title}>
+                    <Link href={link.href}>{link.title}</Link>
+                  </li>
+                ))}
               </ul>
               <small>
                 Tree cover loss and gain data is based on satellite imagery from
@@ -86,15 +88,16 @@ export default function DeforestationMap() {
             </Prose>
           </div>
         ) : (
-          <button
-            onClick={() => setBoxVisible(true)}
-            className="bg relative p-4"
-          >
+          <button onClick={() => setBoxVisible(true)} className="relative p-4">
             <Icon icon="plus" className="h-6 w-6 text-black dark:text-white" />
           </button>
         )}
       </div>
-      <div className="flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-white bg-opacity-80 p-4 text-sm backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+      <div
+        className={`${
+          isBoxVisible ? 'hidden' : 'flex'
+        } h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-white bg-opacity-80 p-4 text-sm backdrop-saturate-50 md:flex dark:bg-black dark:bg-opacity-80`}
+      >
         <Checkbox
           color="pink"
           onChange={settings.toggleTreeLossLayer}
