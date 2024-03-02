@@ -63,12 +63,12 @@ export default function DeforestationMap() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="./forest-watch?latitude=51.75764087898883&longitude=10.531570078997898&zoom=11&treeloss=on&treegain=off&update=on">
+                  <Link href="./forest-watch?latitude=51.75764087898883&longitude=10.531570078997898&zoom=11&treeloss=on&treegain=on&update=on">
                     Waldsterben in Germany
                   </Link>
                 </li>
                 <li>
-                  <Link href="./forest-watch?latitude=46.73874069607526&longitude=22.67333743740213&zoom=13&treeloss=on&treegain=off&update=on">
+                  <Link href="./forest-watch?latitude=46.73874069607526&longitude=22.67333743740213&zoom=13&treeloss=on&treegain=on&update=on">
                     Forestry in Romania
                   </Link>
                 </li>
