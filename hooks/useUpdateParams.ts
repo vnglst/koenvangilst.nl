@@ -17,5 +17,15 @@ export function useUpdateParams() {
     [router, searchParams]
   );
 
-  return { searchParams, updateParams };
+  const deleteParam = React.useCallback(
+    (param: string) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      currentParams.delete(param);
+
+      router.replace(`?${currentParams.toString()}`);
+    },
+    [router, searchParams]
+  );
+
+  return { searchParams, deleteParam, updateParams };
 }

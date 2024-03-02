@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import TileInfo from '@arcgis/core/layers/support/TileInfo';
 import WebTileLayer from '@arcgis/core/layers/WebTileLayer';
 import Map from '@arcgis/core/Map';
@@ -58,7 +58,7 @@ const ArcGISMap = ({
     });
 
     mapRef.current = new Map({
-      basemap: 'satellite',
+      basemap: 'hybrid',
       layers: [treeLossLayer, treeGainLayer]
     });
 
@@ -95,7 +95,8 @@ const ArcGISMap = ({
         mapViewRef.current?.destroy();
       });
     };
-  }, [initial]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (mapRef.current) {
@@ -118,22 +119,34 @@ const ArcGISMap = ({
   }, [showTreeGain]);
 
   useEffect(() => {
-    let watcher: __esri.WatchHandle | undefined;
+    if (!mapViewRef.current) return;
 
-    if (mapViewRef.current) {
-      watcher = mapViewRef.current.watch('center, zoom', () => {
-        handleCenterPointChange({
-          latitude: mapViewRef.current!.center.latitude,
-          longitude: mapViewRef.current!.center.longitude,
-          zoom: mapViewRef.current!.zoom
-        });
+    const watcher = mapViewRef.current.watch('stationary', (stationary) => {
+      if (!mapViewRef.current || !stationary) return;
+
+      handleCenterPointChange({
+        latitude: mapViewRef.current.center.latitude,
+        longitude: mapViewRef.current.center.longitude,
+        zoom: mapViewRef.current.zoom
       });
-    }
+    });
 
     return () => {
       watcher?.remove();
     };
   }, [handleCenterPointChange]);
+
+  useEffect(() => {
+    if (!mapViewRef.current) return;
+
+    mapViewRef.current.goTo(
+      {
+        center: [initial.longitude, initial.latitude],
+        zoom: initial.zoom
+      },
+      { animate: true, duration: 1000 }
+    );
+  }, [initial.latitude, initial.longitude, initial.zoom]);
 
   return <div ref={containerRef} className="absolute inset-0" />;
 };
