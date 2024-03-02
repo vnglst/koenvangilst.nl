@@ -30,7 +30,7 @@ export default function DeforestationMap() {
         handleCenterPointChange={settings.handleCenterPointChange}
       />
       {isBoxVisible && (
-        <div className="relative h-fit w-fit rounded-md bg-white bg-opacity-80 p-8 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+        <div className="relative h-fit max-h-[65vh] w-fit max-w-2xl overflow-auto rounded-md bg-white bg-opacity-80 p-8 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
           <button
             onClick={() => setBoxVisible(false)}
             className="absolute right-0 top-0 p-4"
@@ -69,6 +69,11 @@ export default function DeforestationMap() {
                 </Link>
               </li>
             </ul>
+            <small>
+              Tree cover loss and gain data is based on satellite imagery from
+              2017 to 2022. Build with GeoData from Global Forest Watch and
+              ArcGIS.
+            </small>
           </Prose>
         </div>
       )}
