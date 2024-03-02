@@ -10,7 +10,7 @@ import Locate from '@arcgis/core/widgets/Locate';
 import { CenterPoint } from './types';
 
 const endYear = 2022;
-const startYear = endYear - 5;
+const startYear = endYear - 10;
 
 type Initial = {
   latitude: number;

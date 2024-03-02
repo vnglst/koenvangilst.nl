@@ -1,12 +1,12 @@
-import DeforestationMap from './DeforestationMap';
+import DeforestationMap from './ForestMap';
 
 import '@arcgis/core/assets/esri/themes/dark/main.css';
 import './styles.css';
 
 export const metadata = {
-  title: 'Deforestation Tracker',
+  title: 'Forest Watch',
   description:
-    'Keep track of deforestation in your area. Get a detailed view of changes in forest cover over time.'
+    'Keep track of forests in your area. Get a detailed view of changes in forest cover over time.'
 };
 
 export default async function Deforestation() {

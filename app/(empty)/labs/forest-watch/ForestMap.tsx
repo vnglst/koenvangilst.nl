@@ -37,25 +37,35 @@ export default function DeforestationMap() {
           >
             <Icon icon="x" className="h-6 w-6 text-white" />
           </button>
-          <Heading>Deforestation Check</Heading>
+          <Heading>Forest Watch</Heading>
           <Prose>
-            Keep track of deforestation in your area. Get a detailed view of
-            changes in forest cover over time.
+            Keep track of forests in your area. Get a detailed view of changes
+            in tree cover over time.
             <br />
             <ul>
               <li>
-                <Link href="./deforestation?latitude=51.96778310929577&longitude=5.15488204138948&zoom=17&treeloss=on&treegain=on&update=on">
-                  Place I was born
+                <Link href="./forest-watch?latitude=52.185893836834694&longitude=5.214140791854876&zoom=16&treeloss=on&treegain=on&update=on">
+                  Lage Vuursche
                 </Link>
               </li>
               <li>
-                <Link href="./deforestation?latitude=50.172148105701275&longitude=10.732986184445075&zoom=17&treeloss=on&treegain=on&update=on">
-                  Altenstein
+                <Link href="./forest-watch?latitude=52.15815145555043&longitude=5.776374163857386&zoom=14&treeloss=on&treegain=on&update=on">
+                  Kootwijkerzand
                 </Link>
               </li>
               <li>
-                <Link href="./deforestation?latitude=52.1280165644353&longitude=5.186416729873873&zoom=17&treeloss=on&treegain=on&update=on">
-                  Where I live
+                <Link href="./forest-watch?latitude=51.75764087898883&longitude=10.531570078997898&zoom=11&treeloss=on&treegain=off&update=on">
+                  Waldsterben in Germany
+                </Link>
+              </li>
+              <li>
+                <Link href="./forest-watch?latitude=46.73874069607526&longitude=22.67333743740213&zoom=13&treeloss=on&treegain=off&update=on">
+                  Forestry in Romania
+                </Link>
+              </li>
+              <li>
+                <Link href="./forest-watch?latitude=50.9419801632943&longitude=6.491740178673552&zoom=12&treeloss=on&treegain=on&update=on">
+                  Coal mine in Germany
                 </Link>
               </li>
             </ul>
