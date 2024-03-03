@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { CONFIG } from './config';
 import DeforestationMap from './ForestMap';
-import { getBaseLayers } from './wayback-layers';
+import { getBaseLayers } from './getBaseLayers';
 
 import '@arcgis/core/assets/esri/themes/dark/main.css';
 import './styles.css';
