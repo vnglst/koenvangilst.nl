@@ -73,9 +73,21 @@ const ArcGISMap = ({
       },
       map: mapRef.current,
       constraints: {
+        /**
+         * The MapView's constraints.effectiveLODs will be null if the following statements are true
+         * - The map doesn't have a basemap, or
+         * - the basemap does not have a TileInfo,
+         * - AND the first layer added to the map does not have a TileInfo.
+         *
+         * If the effectiveLODs are null, it is not possible to set zoom on the MapView because the conversion is not possible.
+         * The zoom value will be -1 in this case. Setting scale will work.
+         * To address this, the MapView's constraints.lods can be defined at the time of its initialization by calling `TileInfo.create().lods`.
+         * @see https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html
+         */
         lods: TileInfo.create().lods,
         rotationEnabled: false,
         minZoom: 3,
+        // The maximum zoom level of wayback tiles is 17, we allow pixelated zooming 2 levels beyond that
         maxZoom: 19
       }
     });
