@@ -1,26 +1,22 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useUpdateParams } from 'hooks/useUpdateParams';
 
+import { CONFIG } from './config';
 import { CenterPoint } from './types';
-
-const DEFAULT = {
-  latitude: '51.96796868185138',
-  longitude: '5.153498231085372',
-  zoom: '17'
-};
 
 export function useMapSettings() {
   const { searchParams, deleteParam, updateParams } = useUpdateParams();
 
+  const yearsBack = searchParams.get('yearsBack') || CONFIG.yearsBack;
   const showTreeLoss = searchParams.get('treeloss') !== 'off';
   const showTreeGain = searchParams.get('treegain') !== 'off';
   const update = searchParams.get('update') === 'on';
 
   const currentCenterPoint = useMemo(
     () => ({
-      latitude: parseFloat(searchParams.get('latitude') || DEFAULT.latitude),
-      longitude: parseFloat(searchParams.get('longitude') || DEFAULT.longitude),
-      zoom: parseFloat(searchParams.get('zoom') || DEFAULT.zoom)
+      latitude: parseFloat(searchParams.get('latitude') || CONFIG.latitude),
+      longitude: parseFloat(searchParams.get('longitude') || CONFIG.longitude),
+      zoom: parseFloat(searchParams.get('zoom') || CONFIG.zoom)
     }),
     [searchParams]
   );
@@ -28,7 +24,8 @@ export function useMapSettings() {
   const [initial, setInitial] = useState({
     ...currentCenterPoint,
     showTreeLoss,
-    showTreeGain
+    showTreeGain,
+    yearsBack
   });
 
   useEffect(() => {
@@ -37,11 +34,19 @@ export function useMapSettings() {
     setInitial({
       ...currentCenterPoint,
       showTreeLoss,
-      showTreeGain
+      showTreeGain,
+      yearsBack
     });
 
     deleteParam('update');
-  }, [currentCenterPoint, deleteParam, showTreeGain, showTreeLoss, update]);
+  }, [
+    currentCenterPoint,
+    deleteParam,
+    showTreeGain,
+    showTreeLoss,
+    update,
+    yearsBack
+  ]);
 
   const handleCenterPointChange = useCallback(
     (centerPoint: CenterPoint) => {

@@ -1,16 +1,16 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Basemap from '@arcgis/core/Basemap';
 import TileInfo from '@arcgis/core/layers/support/TileInfo';
 import WebTileLayer from '@arcgis/core/layers/WebTileLayer';
+import WMTSLayer from '@arcgis/core/layers/WMTSLayer';
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
 import Locate from '@arcgis/core/widgets/Locate';
 
-import { CenterPoint } from './types';
-
-const endYear = 2022;
-const startYear = endYear - 5;
+import { CONFIG } from './config';
+import { BaseLayer, CenterPoint } from './types';
 
 type Initial = {
   latitude: number;
@@ -18,12 +18,14 @@ type Initial = {
   zoom: number;
   showTreeLoss: boolean;
   showTreeGain: boolean;
+  yearsBack: string;
 };
 
 type ArcGISMapProps = {
   showTreeLoss: boolean;
   showTreeGain: boolean;
   initial: Initial;
+  baseLayers: BaseLayer[];
   handleCenterPointChange: (centerPoint: CenterPoint) => void;
 };
 
@@ -31,8 +33,10 @@ const ArcGISMap = ({
   showTreeLoss,
   showTreeGain,
   initial,
+  baseLayers,
   handleCenterPointChange
 }: ArcGISMapProps) => {
+  const startYear = parseInt(CONFIG.endYear) - parseInt(initial.yearsBack);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>();
   const mapViewRef = useRef<MapView>();
@@ -41,7 +45,7 @@ const ArcGISMap = ({
     if (!containerRef.current) return;
 
     const treeLossLayer = new WebTileLayer({
-      urlTemplate: `https://tiles.globalforestwatch.org/umd_tree_cover_loss/latest/dynamic/{level}/{col}/{row}.png?start_year=${startYear}&end_year=${endYear}`,
+      urlTemplate: `https://tiles.globalforestwatch.org/umd_tree_cover_loss/latest/dynamic/{level}/{col}/{row}.png?start_year=${startYear}&end_year=${CONFIG.endYear}`,
       copyright: 'Global forest watch',
       opacity: 0.5,
       id: 'tree_loss',
@@ -50,16 +54,28 @@ const ArcGISMap = ({
     });
 
     const treeGainLayer = new WebTileLayer({
-      urlTemplate: `https://tiles.globalforestwatch.org/umd_tree_cover_gain_from_height/latest/dynamic/{level}/{col}/{row}.png?start_year=${startYear}&end_year=${endYear}`,
+      urlTemplate: `https://tiles.globalforestwatch.org/umd_tree_cover_gain_from_height/latest/dynamic/{level}/{col}/{row}.png?start_year=${startYear}&end_year=${CONFIG.endYear}`,
       opacity: 0.5,
       id: 'tree_gain',
       title: 'Tree cover gain',
       visible: false
     });
 
+    const activeBaseLayer = baseLayers.at(0)!;
+
+    const activeLayer = new WMTSLayer({
+      url: activeBaseLayer.url,
+      activeLayer: {
+        id: activeBaseLayer.id
+      }
+    });
+
+    const basemap = new Basemap({ baseLayers: [activeLayer] });
+
     mapRef.current = new Map({
-      basemap: 'hybrid',
-      layers: [treeLossLayer, treeGainLayer]
+      // basemap: 'hybrid',
+      basemap,
+      layers: [activeLayer, treeLossLayer, treeGainLayer]
     });
 
     mapViewRef.current = new MapView({
