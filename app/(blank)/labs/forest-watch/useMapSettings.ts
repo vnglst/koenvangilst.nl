@@ -4,6 +4,10 @@ import { useUpdateParams } from 'hooks/useUpdateParams';
 import { CONFIG } from './config';
 import { CenterPoint } from './types';
 
+/**
+ * All application state lives in the URL. This hook is responsible for
+ * reading and writing to the URL.
+ */
 export function useMapSettings() {
   const { searchParams, deleteParam, updateParams } = useUpdateParams();
 

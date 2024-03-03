@@ -1,0 +1,10 @@
+html,
+body {
+  /* This is a hacky workaround to revert the changes in font familiy that the ArcGIS styling does  */
+  font-family: var(--font-inter), sans-serif;
+}
+
+.esri-view-surface {
+  /* This removes the focus outline of the full screen canvas */
+  --esri-view-outline: none;
+}

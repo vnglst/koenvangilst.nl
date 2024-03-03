@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 
 import { CONFIG } from './config';
 import DeforestationMap from './ForestMap';
-import { LoadingMap } from './LoadingMap';
 import { getBaseLayers } from './wayback-layers';
 
 import '@arcgis/core/assets/esri/themes/dark/main.css';
@@ -17,12 +16,12 @@ export const metadata = {
 export default async function Deforestation() {
   const baseLayers = await getBaseLayers({
     url: CONFIG.url,
-    yearsBack: CONFIG.yearsBack
+    yearsBack: parseInt(CONFIG.yearsBack, 10)
   });
 
   return (
     <div className="flex h-full w-full bg-slate-200 px-4 pb-6 pt-20 text-black md:px-8 md:pt-28 dark:bg-slate-800 dark:text-white">
-      <Suspense fallback={<LoadingMap />}>
+      <Suspense>
         <DeforestationMap baseLayers={baseLayers} />
       </Suspense>
     </div>

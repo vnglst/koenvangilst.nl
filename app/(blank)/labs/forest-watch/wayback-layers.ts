@@ -5,6 +5,10 @@ type Init = {
   yearsBack: number;
 };
 
+/**
+ * This function fetches the base layers from the wayback url and adds the
+ * position property (on a scale of 0 - 100%) to each layer.
+ */
 export async function getBaseLayers(init: Init) {
   const response = await fetch(init.url);
   if (!response.ok) {
@@ -36,7 +40,7 @@ function parse(waybackConfig: WaybackConfig, yearsBack: number): BaseLayer[] {
   return sorted.filter((layer) => layer.date > oldestDateToKeep);
 }
 
-function calcPosition(date, yearsBack) {
+function calcPosition(date: Date, yearsBack: number) {
   const dateYearsAgo = new Date();
   dateYearsAgo.setFullYear(dateYearsAgo.getFullYear() - yearsBack);
   const diff = date.getTime() - dateYearsAgo.getTime();
