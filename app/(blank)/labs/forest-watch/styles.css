@@ -8,3 +8,13 @@ body {
   /* This removes the focus outline of the full screen canvas */
   --esri-view-outline: none;
 }
+
+.ping {
+  animation: ping 1.25s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  100% {
+    opacity: 0.1;
+  }
+}

@@ -16,7 +16,7 @@ export function useMapSettings() {
   const showTreeGain = searchParams.get('treegain') !== 'off';
   const update = searchParams.get('update') === 'on';
 
-  const currentCenterPoint = useMemo(
+  const centerPoint = useMemo(
     () => ({
       latitude: parseFloat(searchParams.get('latitude') || CONFIG.latitude),
       longitude: parseFloat(searchParams.get('longitude') || CONFIG.longitude),
@@ -26,7 +26,7 @@ export function useMapSettings() {
   );
 
   const [initial, setInitial] = useState({
-    ...currentCenterPoint,
+    ...centerPoint,
     showTreeLoss,
     showTreeGain,
     yearsBack
@@ -36,21 +36,14 @@ export function useMapSettings() {
     if (!update) return;
 
     setInitial({
-      ...currentCenterPoint,
+      ...centerPoint,
       showTreeLoss,
       showTreeGain,
       yearsBack
     });
 
     deleteParam('update');
-  }, [
-    currentCenterPoint,
-    deleteParam,
-    showTreeGain,
-    showTreeLoss,
-    update,
-    yearsBack
-  ]);
+  }, [centerPoint, deleteParam, showTreeGain, showTreeLoss, update, yearsBack]);
 
   const handleCenterPointChange = useCallback(
     (centerPoint: CenterPoint) => {
@@ -75,6 +68,7 @@ export function useMapSettings() {
     initial,
     showTreeLoss,
     showTreeGain,
+    centerPoint,
     handleCenterPointChange,
     toggleTreeLossLayer,
     toggleTreeGainLayer

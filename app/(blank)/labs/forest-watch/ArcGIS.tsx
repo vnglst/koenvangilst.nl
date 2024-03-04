@@ -25,7 +25,7 @@ type ArcGISMapProps = {
   showTreeLoss: boolean;
   showTreeGain: boolean;
   initial: Initial;
-  baseLayers: BaseLayer[];
+  active?: BaseLayer;
   handleCenterPointChange: (centerPoint: CenterPoint) => void;
 };
 
@@ -33,7 +33,7 @@ const ArcGISMap = ({
   showTreeLoss,
   showTreeGain,
   initial,
-  baseLayers,
+  active,
   handleCenterPointChange
 }: ArcGISMapProps) => {
   const startYear = parseInt(CONFIG.endYear) - parseInt(initial.yearsBack);
@@ -61,21 +61,22 @@ const ArcGISMap = ({
       visible: false
     });
 
-    const activeBaseLayer = baseLayers.at(0)!;
-
-    const activeLayer = new WMTSLayer({
-      url: activeBaseLayer.url,
-      activeLayer: {
-        id: activeBaseLayer.id
-      }
-    });
-
-    const basemap = new Basemap({ baseLayers: [activeLayer] });
+    const basemap = active
+      ? new Basemap({
+          baseLayers: [
+            new WMTSLayer({
+              url: active.url,
+              activeLayer: {
+                id: active.id
+              }
+            })
+          ]
+        })
+      : 'hybrid';
 
     mapRef.current = new Map({
-      // basemap: 'hybrid',
       basemap,
-      layers: [activeLayer, treeLossLayer, treeGainLayer]
+      layers: [treeLossLayer, treeGainLayer]
     });
 
     mapViewRef.current = new MapView({
@@ -175,6 +176,25 @@ const ArcGISMap = ({
       { animate: true, duration: 1000 }
     );
   }, [initial.latitude, initial.longitude, initial.zoom]);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    if (!active?.id || !active?.url) {
+      mapRef.current.basemap = 'hybrid' as any;
+    } else {
+      mapRef.current.basemap = new Basemap({
+        baseLayers: [
+          new WMTSLayer({
+            url: active.url,
+            activeLayer: {
+              id: active.id
+            }
+          })
+        ]
+      });
+    }
+  }, [active?.id, active?.url]);
 
   return <div ref={containerRef} className="absolute inset-0" />;
 };

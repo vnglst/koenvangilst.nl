@@ -10,7 +10,7 @@ const MAX_ZOOM_LEVEL_TILES = 17;
  * The final result is a list of release numbers that are unique for the given
  * center point.
  */
-export function getUniqueLayers(
+export async function getUniqueLayers(
   pointInfo: CenterPoint,
   baseLayers: BaseLayer[]
 ) {
@@ -30,7 +30,13 @@ export function getUniqueLayers(
     };
   });
 
-  return removeDuplicateCandidates(candidates);
+  const uniques = await removeDuplicateCandidates(candidates);
+  return baseLayers.map((layer) => {
+    return {
+      ...layer,
+      isChanged: uniques.includes(layer.releaseNumber)
+    };
+  });
 }
 
 const long2tile = (lon: number, zoom: number) => {

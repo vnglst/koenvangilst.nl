@@ -23,4 +23,5 @@ export type BaseLayer = {
   url: string;
   date: Date;
   position: string;
+  isChanged?: boolean;
 };
