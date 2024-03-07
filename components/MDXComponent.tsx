@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { cx } from 'lib/clsx';
 
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 const CustomLink = (props) => {
   const href = props.href;

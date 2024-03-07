@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@arcgis/core": "^4.28.10",
     "@supabase/supabase-js": "2.39.1",
     "@tailwindcss/typography": "0.5.10",
     "@types/lodash": "^4.14.202",
@@ -26,7 +27,7 @@
     "gray-matter": "4.0.3",
     "lodash": "^4.17.21",
     "mdx-bundler": "10.0.1",
-    "next": "14.0.4",
+    "next": "14.1.0",
     "postcss": "8.4.32",
     "prettier": "3.1.1",
     "prettier-plugin-tailwindcss": "0.5.9",
