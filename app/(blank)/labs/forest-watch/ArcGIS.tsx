@@ -8,7 +8,7 @@ import WMTSLayer from '@arcgis/core/layers/WMTSLayer';
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
 import Locate from '@arcgis/core/widgets/Locate';
-import { debounce } from 'lodash';
+import { useDebounce } from 'hooks/useDebounce';
 
 import { CONFIG } from './config';
 import { BaseLayer, CenterPoint } from './types';
@@ -148,24 +148,28 @@ const ArcGISMap = ({
     }
   }, [showTreeGain]);
 
+  const debouncedHandler = useDebounce(() => {
+    if (!mapViewRef.current) return;
+
+    handleCenterPointChange({
+      latitude: mapViewRef.current.center.latitude,
+      longitude: mapViewRef.current.center.longitude,
+      zoom: mapViewRef.current.zoom
+    });
+  }, 1300);
+
   useEffect(() => {
     if (!mapViewRef.current) return;
 
     const watcher = mapViewRef.current.watch('stationary', (stationary) => {
       if (!mapViewRef.current || !stationary) return;
-      const debouncedHandler = debounce(handleCenterPointChange, 1300);
-
-      debouncedHandler({
-        latitude: mapViewRef.current.center.latitude,
-        longitude: mapViewRef.current.center.longitude,
-        zoom: mapViewRef.current.zoom
-      });
+      debouncedHandler();
     });
 
     return () => {
       watcher?.remove();
     };
-  }, [handleCenterPointChange]);
+  }, []);
 
   useEffect(() => {
     if (!mapViewRef.current) return;
