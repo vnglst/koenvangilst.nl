@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function Prognosis2100() {
   return (
-    <div className="mb-10 grid w-full grid-cols-1 place-content-center gap-4 p-4 md:px-8 lg:grid-cols-2 2xl:grid-cols-3">
+    <div className="mb-10 grid min-h-screen w-full grid-cols-1 gap-4 p-4 md:px-8 lg:grid-cols-2 2xl:grid-cols-3">
       <WeatherAnomaly type="temperature" look="dashboard" />
       <Sealevel />
       <Co2Level />
