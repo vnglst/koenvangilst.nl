@@ -2,8 +2,6 @@ import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
-import { Footer } from 'components/Footer';
-import { Nav } from 'components/Nav';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
@@ -93,48 +91,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${montserrat.variable} ${inter.variable} min-w-[360px] scroll-smooth font-sans md:overflow-x-scroll`}
+      className={`${montserrat.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link
         rel="alternate"
         type="application/rss+xml"
         href="https://koenvangilst.nl/feed.xml"
-      ></link>
-      <body className="bg-white text-white dark:bg-black dark:text-black">
-        <script
-          defer
-          id="theme"
-          dangerouslySetInnerHTML={{
-            __html: `
-
-            // This script is responsible for setting the correct theme on page load.
-            // This has to be done in the head to avoid a flash of the wrong mode
-            // (sometimes also referred to as FOUC, or Flash of Unstyled Content).
-            // The theme is set by adding the 'dark' class to the <html> element.
-
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const preferredTheme = localStorage.getItem('theme');
-
-            if (preferredTheme) {
-              if (preferredTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-              }
-            } else if (systemDark) {
-              document.documentElement.classList.add('dark');
-            }
-          `
-          }}
-        />
-        <Nav />
-        <main
-          id="content"
-          className="flex min-h-screen flex-col break-words bg-gray-50 bg-gradient-to-b from-white to-gray-100 dark:bg-gray-900 dark:from-black dark:to-gray-900"
-        >
-          {children}
-        </main>
-        <Footer />
-      </body>
+      />
+      {children}
       <Tracking />
     </html>
   );

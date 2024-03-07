@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 
 import { Theme, useTheme } from './theme.store';
 

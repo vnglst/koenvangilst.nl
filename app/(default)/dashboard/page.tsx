@@ -4,14 +4,13 @@ import NextLink from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getLastReading } from 'services/aranet';
 import { getGithubStats } from 'services/github';
 import {
   getTotalTodayViews,
   getTotalViews,
-  getTotalWeekViews,
   getViewsPerDay
 } from 'services/supabase';
 import { getUnsplashStatistics } from 'services/unsplash';

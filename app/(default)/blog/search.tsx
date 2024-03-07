@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { Heading } from 'components/Heading';
-import Icon from 'components/Icon';
+import {Icon} from 'components/Icon';
 import { BlogPostLink } from 'components/PostLink';
 
 type Post = {

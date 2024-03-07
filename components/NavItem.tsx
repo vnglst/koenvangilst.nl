@@ -1,13 +1,13 @@
 'use client';
 
 import NextLink from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { cx } from 'lib/clsx';
 
 export function NavItem({ slug, text }: { slug: string; text: string }) {
-  const segment = useSelectedLayoutSegment();
-  const isActive = slug === segment;
+  const pathname = usePathname();
+  const isActive = pathname.includes(slug);
 
   return (
     <NextLink
@@ -25,8 +25,8 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
 }
 
 export function NavItemHome() {
-  const segment = useSelectedLayoutSegment();
-  const isActive = segment === null;
+  const pathname = usePathname();
+  const isActive = pathname === '/';
 
   return (
     <NextLink

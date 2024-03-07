@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 type Props = {
   href: string;

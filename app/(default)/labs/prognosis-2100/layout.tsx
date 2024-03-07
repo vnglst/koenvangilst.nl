@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 
 import { PrognosisToggle } from './(components)/PrognosisToggle';
 
 export default async function Layout({ children }) {
   return (
-    <>
+    <div className="pt-16">
       <nav className="sticky top-0 z-20 flex items-center justify-center gap-4 overflow-hidden bg-white p-4 text-slate-700 md:px-8 dark:bg-black dark:text-slate-300">
         <Link
           href="/labs/prognosis-2100"
@@ -20,6 +20,6 @@ export default async function Layout({ children }) {
         </Link>
       </nav>
       {children}
-    </>
+    </div>
   );
 }

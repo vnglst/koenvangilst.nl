@@ -1,8 +1,8 @@
 const contentSecurityPolicy = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
-    script-src-elem 'self' 'unsafe-inline';
-    child-src *.youtube.com *.twitter.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com https://js.arcgis.com;
+    script-src-elem 'self' blob: 'unsafe-inline' https://js.arcgis.com;
+    child-src 'self' blob: *.youtube.com *.twitter.com;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src i.imgur.com;
@@ -22,7 +22,7 @@ const securityHeaders = [
   },
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=()'
+    value: 'camera=(), microphone=()'
   },
   {
     key: 'Strict-Transport-Security',

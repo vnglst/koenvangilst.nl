@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 import { ViewCount } from 'components/ViewCount';
 
 export default function Home() {
