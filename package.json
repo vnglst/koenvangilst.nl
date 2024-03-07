@@ -14,7 +14,7 @@
   "dependencies": {
     "@supabase/supabase-js": "2.39.1",
     "@tailwindcss/typography": "0.5.10",
-    "@types/lodash": "^4.14.202",
+    "@types/lodash": "4.14.202",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "autoprefixer": "10.4.16",
@@ -24,7 +24,7 @@
     "eslint-config-next": "14.0.4",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "gray-matter": "4.0.3",
-    "lodash": "^4.17.21",
+    "lodash": "4.17.21",
     "mdx-bundler": "10.0.1",
     "next": "14.1.3",
     "postcss": "8.4.32",
@@ -38,11 +38,11 @@
     "rehype-prism-plus": "1.6.3",
     "rehype-slug": "6.0.0",
     "rss": "1.2.2",
-    "sharp": "^0.33.1",
+    "sharp": "0.33.1",
     "swr": "^2.2.4",
     "tailwindcss": "3.4.0",
     "typescript": "5.3.3",
-    "zod": "^3.22.4",
-    "zustand": "^4.4.7"
+    "zod": "3.22.4",
+    "zustand": "4.4.7"
   }
 }

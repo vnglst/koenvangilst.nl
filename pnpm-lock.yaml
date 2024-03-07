@@ -8,7 +8,7 @@ dependencies:
     specifier: 0.5.10
     version: 0.5.10(tailwindcss@3.4.0)
   '@types/lodash':
-    specifier: ^4.14.202
+    specifier: 4.14.202
     version: 4.14.202
   '@types/node':
     specifier: 20.10.5
@@ -38,7 +38,7 @@ dependencies:
     specifier: 4.0.3
     version: 4.0.3
   lodash:
-    specifier: ^4.17.21
+    specifier: 4.17.21
     version: 4.17.21
   mdx-bundler:
     specifier: 10.0.1
@@ -80,7 +80,7 @@ dependencies:
     specifier: 1.2.2
     version: 1.2.2
   sharp:
-    specifier: ^0.33.1
+    specifier: 0.33.1
     version: 0.33.1
   swr:
     specifier: ^2.2.4
@@ -92,10 +92,10 @@ dependencies:
     specifier: 5.3.3
     version: 5.3.3
   zod:
-    specifier: ^3.22.4
+    specifier: 3.22.4
     version: 3.22.4
   zustand:
-    specifier: ^4.4.7
+    specifier: 4.4.7
     version: 4.4.7(@types/react@18.2.45)(react@18.2.0)
 
 packages:
