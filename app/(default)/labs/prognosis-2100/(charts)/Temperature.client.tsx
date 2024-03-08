@@ -14,8 +14,8 @@ type TemperatureProps = {
 };
 
 export function TemperatureClient({ data, className }: TemperatureProps) {
-  const store = usePrognosisStore();
-  const options = generateOptions(data, store.showPrognosis);
+  const { showPrognosis } = usePrognosisStore();
+  const options = generateOptions(data, showPrognosis);
 
   return (
     <Chart
