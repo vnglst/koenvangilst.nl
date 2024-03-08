@@ -39,8 +39,8 @@ export default function Home() {
           path="/blog/rising-temperatures"
         />
         <FeaturedCard
-          title="Why I Prefer Trunk-Based Development"
-          path="/blog/trunkbased-development"
+          title="Pong Wars & Other Visualisations"
+          path="/labs/pong-wars"
         />
         <FeaturedCard
           title="Code Colocation is King"
@@ -70,7 +70,7 @@ async function FeaturedCard({ title, path }: FeatureCardProps) {
       className="rounded-xl border border-dashed border-gray-400 bg-gray-50 p-6 md:w-1/3 dark:bg-black"
     >
       <div className="up-hover flex h-full w-full flex-col justify-between">
-        <h3 className="mb-4 w-full text-lg font-medium tracking-tight text-gray-900 md:mb-6 md:text-lg dark:text-gray-100">
+        <h3 className="mb-4 w-full text-balance text-lg font-medium tracking-tight text-gray-900 md:mb-6 md:text-lg dark:text-gray-100">
           {title}
         </h3>
         <div className="flex items-center text-gray-800 dark:text-gray-200">
