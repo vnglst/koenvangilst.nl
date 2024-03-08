@@ -48,7 +48,7 @@ export default async function Portfolio() {
           <ProjectLink
             key={client.slug}
             title={client.name}
-            year={client.year}
+            publishedAt={client.year + '-01-01'}
             summary={client.summary}
             href={`/portfolio/${client.slug}`}
           />
