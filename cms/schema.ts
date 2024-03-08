@@ -74,7 +74,7 @@ export const ProjectMeta = z
     name: z.string(),
     url: z.string(),
     summary: z.string(),
-    year: z.number(),
+    publishedAt: z.string(),
     image: z.string().optional()
   })
   .strict();
