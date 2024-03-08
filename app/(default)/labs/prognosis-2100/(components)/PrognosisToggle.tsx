@@ -2,11 +2,10 @@
 
 import { Toggle } from 'components/Toggle';
 
-import { usePrognosis } from '../(store)/prognosis';
+import { usePrognosisStore } from '../(store)/prognosis';
 
 export function PrognosisToggle() {
-  const togglePrognosis = usePrognosis((state) => state.toggle);
-  const showPrognosis = usePrognosis((state) => state.showPrognosis);
+  const { showPrognosis, togglePrognosis } = usePrognosisStore();
 
   return (
     <Toggle

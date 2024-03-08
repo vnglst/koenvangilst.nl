@@ -14,8 +14,8 @@ type SealevelProps = {
 };
 
 export function SealevelClient({ data, className }: SealevelProps) {
-  const store = usePrognosisStore();
-  const options = generateOptions(data, store.showPrognosis);
+  const { showPrognosis } = usePrognosisStore();
+  const options = generateOptions(data, showPrognosis);
 
   return (
     <Chart
