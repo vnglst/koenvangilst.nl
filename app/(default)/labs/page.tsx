@@ -16,7 +16,8 @@ export const metadata = {
 
 export default async function Labs() {
   const sorted = (await getProjects()).sort(
-    (a, b) => Number(b.year) - Number(a.year)
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 
   return (
@@ -36,7 +37,7 @@ export default async function Labs() {
         return (
           <ProjectLink
             title={project.name}
-            year={project.year}
+            publishedAt={project.publishedAt}
             summary={project.summary}
             href={project.url}
             key={project.url}

@@ -16,7 +16,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <MarkdownLayout
-      publishedAt={project.year.toString()}
+      publishedAt={project.publishedAt.toString()}
       title={project.name}
       readingTime={project.readingTime}
       path={'/labs/' + project.slug}
