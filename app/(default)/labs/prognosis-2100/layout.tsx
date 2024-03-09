@@ -17,7 +17,7 @@ export default async function Layout({ children }) {
           <PrognosisToggle />
         </Suspense>
       </nav>
-      <Suspense>{children}</Suspense>
+      {children}
     </div>
   );
 }

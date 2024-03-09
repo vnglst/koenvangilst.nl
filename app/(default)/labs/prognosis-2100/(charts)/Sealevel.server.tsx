@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { z } from 'zod';
 
 import { fetcher } from 'lib/fetcher';
@@ -11,10 +12,12 @@ export async function Sealevel() {
   const data = await fetchData();
 
   return (
-    <SealevelClient
-      data={data}
-      className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-    />
+    <Suspense>
+      <SealevelClient
+        data={data}
+        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
+      />
+    </Suspense>
   );
 }
 

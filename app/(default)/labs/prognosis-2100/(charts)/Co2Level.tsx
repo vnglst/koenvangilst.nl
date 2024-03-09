@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { z } from 'zod';
 
 import { fetcher } from 'lib/fetcher';
@@ -11,10 +12,12 @@ export async function Co2Level() {
   const data = await fetchData();
 
   return (
-    <Co2LevelClient
-      data={data}
-      className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-    />
+    <Suspense>
+      <Co2LevelClient
+        data={data}
+        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
+      />
+    </Suspense>
   );
 }
 
