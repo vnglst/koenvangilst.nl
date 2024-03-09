@@ -12,7 +12,7 @@ export function useUpdateParams() {
         currentParams.set(key, value);
       });
 
-      router.replace(`?${currentParams.toString()}`);
+      router.replace(`?${currentParams.toString()}`, { scroll: false });
     },
     [router, searchParams]
   );
@@ -22,7 +22,7 @@ export function useUpdateParams() {
       const currentParams = new URLSearchParams(searchParams.toString());
       currentParams.delete(param);
 
-      router.replace(`?${currentParams.toString()}`);
+      router.replace(`?${currentParams.toString()}`, { scroll: false });
     },
     [router, searchParams]
   );
