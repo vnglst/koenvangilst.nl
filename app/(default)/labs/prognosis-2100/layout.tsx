@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { PrognosisToggle } from './(components)/PrognosisToggle';
@@ -12,9 +13,11 @@ export default async function Layout({ children }) {
         >
           Prognosis 2100
         </Link>
-        <PrognosisToggle />
+        <Suspense>
+          <PrognosisToggle />
+        </Suspense>
       </nav>
-      {children}
+      <Suspense>{children}</Suspense>
     </div>
   );
 }
