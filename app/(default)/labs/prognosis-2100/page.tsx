@@ -38,18 +38,6 @@ export default async function Prognosis2100() {
       <WeatherAnomaly type="temperature" look="dashboard" />
       <Sealevel />
       <Co2Level />
-      <Prose className="mt-auto p-2 md:py-6 md:pr-6">
-        <p>
-          This website was created by{' '}
-          <Link href="https://koenvangilst.nl/about">Koen van Gilst</Link>. The
-          source code can be found on{' '}
-          <a href="https://github.com/vnglst/koenvangilst.nl" target="_blank">
-            Github
-          </a>
-          . React, TailwindCSS and the visualisation library Apache ECharts were
-          used to create this.
-        </p>
-      </Prose>
     </div>
   );
 }
