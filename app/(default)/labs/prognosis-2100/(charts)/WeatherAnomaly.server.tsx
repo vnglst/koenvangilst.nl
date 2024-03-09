@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { z } from 'zod';
 
 import { fetcher } from 'lib/fetcher';
@@ -20,19 +21,17 @@ export async function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
   const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 
+  let Component: JSX.Element | null = null;
+
   if (type === 'sunshine') {
-    return <SunshineClient data={data} className={className} />;
+    Component = <SunshineClient data={data} className={className} />;
+  } else if (type === 'rain') {
+    Component = <RainClient data={data} className={className} />;
+  } else if (type === 'temperature') {
+    Component = <TemperatureClient data={data} className={className} />;
   }
 
-  if (type === 'rain') {
-    return <RainClient data={data} className={className} />;
-  }
-
-  if (type === 'temperature') {
-    return <TemperatureClient data={data} className={className} />;
-  }
-
-  return null;
+  return <Suspense fallback={<div>Loading...</div>}>{Component}</Suspense>;
 }
 
 async function fetchData() {
