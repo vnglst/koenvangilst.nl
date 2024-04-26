@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { cx } from 'lib/clsx';
 
 export function NavItem({ slug, text }: { slug: string; text: string }) {
-  const pathname = usePathname();
+  const pathname = usePathname()!;
   const isActive = pathname.includes(slug);
 
   return (
@@ -32,7 +32,7 @@ export function NavItemHome() {
     <NextLink
       href="/"
       className={
-        'mr-auto rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 sm:px-3 sm:py-2 dark:text-gray-400'
+        'mr-auto rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400 sm:px-3 sm:py-2'
       }
     >
       <svg

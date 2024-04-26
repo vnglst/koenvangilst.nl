@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export function useUpdateParams() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()!;
 
   const updateParams = React.useCallback(
     (newParams: Record<string, string>) => {
