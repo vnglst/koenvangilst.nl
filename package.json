@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "postbuild": "rm -rf .next/cache",
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint"
