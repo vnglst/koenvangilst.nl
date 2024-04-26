@@ -7,13 +7,13 @@ export async function getGithubStats(): Promise<GitHub> {
   try {
     const userResponse = await fetch(USER_STATS, {
       next: {
-        revalidate: 60 * 60
+        revalidate: 60 * 60 * 24
       }
     });
 
     const userReposResponse = await fetch(REPO_STATS, {
       next: {
-        revalidate: 60 * 60
+        revalidate: 60 * 60 * 24
       }
     });
 

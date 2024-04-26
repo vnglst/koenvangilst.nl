@@ -8,7 +8,7 @@ import { BlogPostLink } from 'components/PostLink';
 import { Tag } from 'components/Tag';
 import { desluggify } from 'lib/sluggify';
 
-export const revalidate = 60;
+export const revalidate = 60 * 60 * 24;
 
 type TagPageProps = {
   params: { slug: string };

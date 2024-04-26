@@ -14,7 +14,7 @@ export async function getUnsplashStatistics(): Promise<Unsplash> {
       headers: HEADERS,
       method: 'GET',
       next: {
-        revalidate: 60 * 60
+        revalidate: 60 * 60 * 24
       }
     });
 
