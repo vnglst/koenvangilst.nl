@@ -114,7 +114,7 @@ async function parseMDXFile(rawString: string) {
     source: rawString,
     cwd: path.join(process.cwd(), 'cms'),
     mdxOptions(options) {
-      const { rehypePlugins = [] } = options;
+      const rehypePlugins = options.remarkPlugins || [];
 
       options.rehypePlugins = [
         ...rehypePlugins,
