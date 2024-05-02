@@ -56,7 +56,7 @@ After some trial and error, I created the following prompt for Llama3:
 > You are a token categorizer. You categorize lists of tokens into types: code, lang, unknown. The types have the following definitions:
 > - code: tokens that are part of a programming language (such as Python, JavaScript abbreviated as "js", C#, etc.)
 > - lang: tokens that are part of some natural language.
-> - unknown: are single characters of tokens where the origin cannot be assessed.
+> - unknown: are single characters or tokens where the origin cannot be assessed.
 > 
 > The next categorization is lang. This specifies which language this is part of. The corresponding languages are:
 > 
