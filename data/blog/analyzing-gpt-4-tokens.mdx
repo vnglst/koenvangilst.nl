@@ -147,6 +147,6 @@ The reliability of Llama3's categorization is questionable, not due to its limit
 
 It is evident that GPT-4 has a stronger focus on English than I anticipated. Of course the main language of the internet is English, but I only counted 124 tokens that could be classified as Dutch words. This could partially explain why GPT-4 underperforms in my native language
 
-Surprisingly, the tokens are more code-centric than I expected. While one might assume a greater emphasis on natural language tokens across various languages, the data suggests a significant reliance on code, at least in training the tokenizer.
+Surprisingly, the tokens are more code-centric than I expected. While I assumed a greater emphasis on natural language tokens across various languages, the data suggests a reliance on code, at least in training the tokenizer.
 
-I hope you found this post enlightening. This was my initial venture into using a large language model for such a detailed categorization task. The implementation scripts are straightforward, yet they underscore the importance of robust error handling and recovery in computing tasks.
+I hope you found this post interesting. This was my first attempt at using a large language model for a categorization task. The implementation scripts are straightforward, but I had to invest more in error handling and recovery so that the analysis would keep running even when a prompt failed to deliver a parsable result.
