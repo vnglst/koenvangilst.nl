@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { getAllTimeList } from 'services/supabase';
+import { getLastMonthVisits } from 'services/supabase';
 
 export const revalidate = 60 * 60 * 24;
 
@@ -15,9 +15,8 @@ export const metadata = {
 export default async function AllLinks() {
   return (
     <Container>
-      <Heading level={1}>All links visits</Heading>
-      All links visits
-      <ul className="my-2 min-h-[3000px]">
+      <Heading level={1}>Monthly Visits</Heading>
+      <ul className="my-4 min-h-[3000px]">
         <Suspense>
           <LinksContainer />
         </Suspense>
@@ -27,7 +26,7 @@ export default async function AllLinks() {
 }
 
 async function LinksContainer() {
-  const list = await getAllTimeList();
+  const list = await getLastMonthVisits();
 
   return list.map((item, index) => (
     <li key={index} className="flex w-full py-1">
