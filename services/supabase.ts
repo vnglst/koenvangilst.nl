@@ -106,17 +106,17 @@ export async function getTotalViews(): Promise<number> {
   return list;
 }
 
-export async function getAllTimeList(): Promise<
+export async function getLastMonthVisits(): Promise<
   {
     url: string;
     views: number;
   }[]
 > {
   const { data: views, error } = await supabase
-    .from('totals')
-    .select('total, pathname')
-    .order('total', { ascending: false })
-    .filter('total', 'gt', 200);
+    .from('month')
+    .select('count, pathname')
+    .order('count', { ascending: false })
+    .filter('count', 'gt', 2);
 
   if (error) {
     console.error('Fetching total views failed', error);
@@ -125,7 +125,7 @@ export async function getAllTimeList(): Promise<
 
   const list = views.map((item) => ({
     url: item.pathname,
-    views: item.total
+    views: item.count
   }));
 
   return list;
