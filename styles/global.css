@@ -10,6 +10,16 @@
     min-width: min(calc(100% + 20vw), 100vw);
   }
 
+  .full-bleed-5 {
+    margin-left: -5vw;
+    min-width: min(calc(100% + 10vw), 100vw);
+  }
+
+  .full-bleed-10 {
+    margin-left: -10vw;
+    min-width: min(calc(100% + 20vw), 100vw);
+  }
+
   .full-bleed-20 {
     margin-left: -20vw;
     min-width: min(calc(100% + 40vw), 100vw);
