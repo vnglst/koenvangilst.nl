@@ -12,37 +12,37 @@ const theme = {
 };
 
 const categories = [
-  { name: 'Inland Water', percentage: 0.101461 + 0.000999, color: 'hsl(210, 58%, 71%)' },
+  { name: 'Lakes and Rivers', percentage: 0.101461 + 0.000999, color: 'hsl(210, 58%, 71%)' },
   {
-    name: 'Nature, Other',
+    name: 'Other Nature',
     percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
     color: 'hsl(159, 27%, 63%)'
   },
-  { name: 'Heath', percentage: 0.00459, color: 'hsl(159, 27%, 53%)' },
-  { name: 'Other Grass', percentage: 0.013264, color: 'hsl(159, 27%, 43%)' },
-  { name: 'Coniferous Forest', percentage: 0.038298, color: 'hsl(159, 27%, 43%)' },
-  { name: 'Deciduous Forest', percentage: 0.046588, color: 'hsl(159, 27%, 33%)' },
-  { name: 'Infrastructure', percentage: 0.052785 - 0.000548, color: 'hsl(0, 0%, 79%)' },
+  { name: 'Heathlands', percentage: 0.00459, color: 'hsl(159, 27%, 53%)' },
+  { name: 'Grasslands', percentage: 0.013264, color: 'hsl(159, 27%, 43%)' },
+  { name: 'Pine Forests', percentage: 0.038298, color: 'hsl(159, 27%, 43%)' },
+  { name: 'Broadleaf Forests', percentage: 0.046588, color: 'hsl(159, 27%, 33%)' },
+  { name: 'Roads and Railways', percentage: 0.052785 - 0.000548, color: 'hsl(0, 0%, 79%)' },
   { name: 'Solar Parks', percentage: 0.000548, color: 'hsl(51, 100%, 80%)' },
   {
-    name: 'Urban Area, Other',
+    name: 'Other Urban Areas',
     percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
     color: 'hsl(345, 43%, 73%)'
   },
   { name: 'Buildings', percentage: 0.006573 + 0.02495, color: 'hsl(345, 43%, 63%)' },
-  { name: 'Grass in Built-up Area', percentage: 0.067443 + 0.026991, color: 'hsl(345, 43%, 83%)' },
+  { name: 'Grass in Built-up Areas', percentage: 0.067443 + 0.026991, color: 'hsl(345, 43%, 83%)' },
   {
-    name: 'Agriculture, Other',
+    name: 'Other Agricultural Land',
     percentage: 0.543848 - 0.283128 - 0.05711 - 0.04463 - 0.006692 - 0.008295 - 0.003513 - 0.043472,
     color: 'hsl(51, 100%, 90%)'
   },
-  { name: 'Cereals', percentage: 0.043472, color: 'hsl(51, 100%, 85%)' },
+  { name: 'Cereal Crops', percentage: 0.043472, color: 'hsl(51, 100%, 85%)' },
   { name: 'Greenhouses', percentage: 0.003513, color: 'hsl(51, 100%, 80%)' },
   { name: 'Flower Bulbs', percentage: 0.008295, color: 'hsl(51, 100%, 75%)' },
-  { name: 'Fruit', percentage: 0.006692, color: 'hsl(51, 100%, 70%)' },
-  { name: 'Potatoes', percentage: 0.04463, color: 'hsl(51, 100%, 60%)' },
-  { name: 'Corn', percentage: 0.05711, color: 'hsl(51, 100%, 50%)' },
-  { name: 'Agricultural Grass', percentage: 0.283128, color: 'hsl(51, 100%, 40%)' }
+  { name: 'Fruit Orchards', percentage: 0.006692, color: 'hsl(51, 100%, 70%)' },
+  { name: 'Potato Fields', percentage: 0.04463, color: 'hsl(51, 100%, 60%)' },
+  { name: 'Corn Fields', percentage: 0.05711, color: 'hsl(51, 100%, 50%)' },
+  { name: 'Agricultural Grasslands', percentage: 0.283128, color: 'hsl(51, 100%, 40%)' }
 ];
 
 const labels = [

@@ -28,9 +28,12 @@ export default function Page() {
           <ExternalLink href="https://decorrespondent.nl/14856/goed-nieuws-de-groene-transitie-gaat-in-nederland-keihard-nu-de-rest-van-de-wereld-nog/5e12fe2f-d0a7-07ac-392a-393f6048c80e#:~:text=Geen%20enkel%20EU%2Dland%20wekt,zonnepanelen%20opgesteld%20dan%20heel%20Afrika.">
             more solar panels
           </ExternalLink>{' '}
-          than the entire continent of Africa . With growing pressure on space, how can we ensure there's room for
-          affordable housing, nature, and productive agriculture? This visualization sheds light on how the Netherlands
-          currently uses its land, sparking a fact-based discussion on optimizing land use for a sustainable future.
+          than the entire continent of Africa. Yet, solar parks occupy only one hexagon on the entire map.
+        </p>
+        <p>
+          With growing pressure on space, how can we ensure there's room for affordable housing, nature, and productive
+          agriculture? This visualization sheds light on how the Netherlands currently uses its land, sparking a
+          fact-based discussion on optimizing land use for a sustainable future.
         </p>
         <Heading level={2}>Technology</Heading>
         <p>
