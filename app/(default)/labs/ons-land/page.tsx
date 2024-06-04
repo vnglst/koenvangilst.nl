@@ -13,26 +13,36 @@ export default function Page() {
       <Heading level={1} className="my-8">
         Land Use in The Netherlands
       </Heading>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="h-[800px] w-full bg-gradient-to-b from-black to-[#181500]" />}>
         <LandUseChart />
       </Suspense>
       <Prose className="mt-8">
         <p>
-          This webpage visualizes land use in the Netherlands. Each hexagon represents 0.06% (26.647 hectares) of land
-          of the Netherlands. The color of the hexagon indicates the type of land use.
+          This webpage uses hexagons to visualize land use across the Netherlands. Each hexagon represents a tiny
+          fraction of the country's land, roughly 0.06% or 26.647 hectares. The color of each hexagon corresponds to a
+          specific type of land use.
         </p>
         <p>
-          The Netherlands is one of the most densely populated countries in the world. This is also reflected in a lot
-          of (political) discussion: with our limited space, do can we still build affordable houses, is there still a
-          place for nature and farming if our population keeps growing? The Netherland currently has{' '}
-          <ExternalLink href="https://decorrespondent.nl/14856/goed-nieuws-de-groene-transitie-gaat-in-nederland-keihard-nu-de-rest-van-de-wereld-nog/5e12fe2f-d0a7-07ac-392a-393f6048c80e#:~:text=Geen%20enkel%20EU%2Dland%20wekt,zonnepanelen%20opgesteld%20dan%20heel%20Afrika.">
-            more solar panels
-          </ExternalLink>{' '}
-          than the whole of Africa combined. I hope this visualization can help to have a more fact-based discussion.
-          Yes, every hectare is spoken for, but how we use it is up to us.
+          The Netherlands is one of the most densely populated countries in the world and as such it faces a constant
+          challenge: balancing competing demands for its limited land. With a growing population, can we ensure there's
+          space for affordable housing, nature, and productive agriculture? This visualization sheds light on how the
+          Netherlands currently uses its land, which I hope can lead to a fact-based discussion: how can we optimize
+          land use for a sustainable future?
         </p>
         <Heading level={2}>Data sources</Heading>
+        <p>
+          The data used in this visualization is from the{' '}
+          <ExternalLink href="https://www.wur.nl/nl/onderzoek-resultaten/onderzoeksinstituten/environmental-research/faciliteiten-producten/kaarten-en-gis-bestanden/landelijk-grondgebruik-nederland.htm">
+            Wageningen Environmental Research
+          </ExternalLink>
+          .
+        </p>
         <Heading level={2}>Technology used</Heading>
+        <p>
+          This visualisation is made with <ExternalLink href="https://d3js.org/">D3.js</ExternalLink>. The source code
+          of this visualization can be found in my website repository. For a simplified version using just an index.html
+          file, see the link in the visualisation.
+        </p>
       </Prose>
     </Container>
   );

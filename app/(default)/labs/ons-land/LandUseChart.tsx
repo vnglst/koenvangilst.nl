@@ -88,6 +88,11 @@ export const LandUseChart = () => {
         const hexData = hexbin(hexPoints);
 
         const totalHexagons = hexData.length;
+
+        console.log('1 hexagon represents', (1 / totalHexagons) * 100, '% of the total area');
+        // Total hectares of the Netherlands: 41,543,000
+        console.log('Hectare per hexagon:', 41543000 / totalHexagons, 'hectares');
+
         const colorScale = d3
           .scaleOrdinal()
           .domain(categories.map((c) => c.name))
