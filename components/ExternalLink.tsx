@@ -7,11 +7,7 @@ type Props = {
   rel?: string;
 };
 
-export default function ExternalLink({
-  href,
-  children,
-  rel
-}: PropsWithChildren<Props>) {
+export default function ExternalLink({ href, children, rel }: PropsWithChildren<Props>) {
   const extraRel = rel ? ` ${rel}` : '';
 
   return (
@@ -22,7 +18,7 @@ export default function ExternalLink({
       href={href}
     >
       {children}
-      <Icon icon="external-link" className="ml-2 inline h-4 w-4" />
+      <Icon icon="external-link" className="ml-1 inline h-4 w-4" />
     </a>
   );
 }
