@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { ArticleMetadata } from './ArticleMetadata';
 import { Container } from './Container';
 import { Heading } from './Heading';
 import { MDXComponent } from './MDXComponent';
@@ -37,31 +38,7 @@ export async function MarkdownLayout({
   return (
     <Container>
       <Heading level={1}>{title}</Heading>
-      <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
-        <div className="flex items-center">
-          <Image
-            alt="Koen van Gilst"
-            height={24}
-            width={24}
-            src="/avatar.jpg"
-            className="rounded-full"
-            priority
-          />
-          <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-            {'Koen van Gilst / '}
-            {new Date(publishedAt).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </p>
-        </div>
-        <p className="mt-2 min-w-32 text-sm text-gray-600 md:mt-0 dark:text-gray-400">
-          {readingTime.text}
-          {` • `}
-          <ViewCount path={path} />
-        </p>
-      </div>
+      <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} path={path} />
       <ul className="my-4 flex w-full flex-wrap gap-2">
         {tags?.map((tag: string) => (
           <li key={tag}>
@@ -100,7 +77,5 @@ function getEditUrl(path: string) {
 }
 
 function getDiscussUrl(path: string) {
-  return `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://koenvangilst.nl${path}`
-  )}`;
+  return `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://koenvangilst.nl${path}`)}`;
 }
