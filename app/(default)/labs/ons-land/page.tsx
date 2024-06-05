@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <Container>
       <Heading level={1}>Land Use in The Netherlands</Heading>
-      <ArticleMetadata publishedAt="06-06-2024" readingTimeText="1 minute" path="/labs/ons-land" />
+      <ArticleMetadata publishedAt="06-05-2024" readingTimeText="1 minute" path="/labs/ons-land" />
       <Suspense fallback={<div className="h-[800px] w-full bg-gradient-to-b from-black to-[#02071d]" />}>
         <LandUseChart />
       </Suspense>
