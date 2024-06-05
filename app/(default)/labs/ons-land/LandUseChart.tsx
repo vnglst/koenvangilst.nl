@@ -308,7 +308,7 @@ export const LandUseChart = () => {
   }, []);
 
   return (
-    <div className="full-bleed-5 flex flex-col items-center justify-center rounded-md bg-gradient-to-b from-black to-[#02071d] p-5 text-gray-200">
+    <div className="full-bleed-5 mt-10 flex flex-col items-center justify-center rounded-md bg-gradient-to-b from-black to-[#02071d] text-gray-200">
       <svg ref={svgRef} viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
     </div>
   );

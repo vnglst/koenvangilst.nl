@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 
+import { ArticleMetadata } from 'components/ArticleMetadata';
 import { Container } from 'components/Container';
 import ExternalLink from 'components/ExternalLink';
 import { Heading } from 'components/Heading';
@@ -9,10 +10,9 @@ import { LandUseChart } from './LandUseChart';
 
 export default function Page() {
   return (
-    <Container centered>
-      <Heading level={1} className="my-8">
-        Land Use in The Netherlands
-      </Heading>
+    <Container>
+      <Heading level={1}>Land Use in The Netherlands</Heading>
+      <ArticleMetadata publishedAt="06-06-2024" readingTimeText="1 minute" path="/labs/ons-land" />
       <Suspense fallback={<div className="h-[800px] w-full bg-gradient-to-b from-black to-[#02071d]" />}>
         <LandUseChart />
       </Suspense>
