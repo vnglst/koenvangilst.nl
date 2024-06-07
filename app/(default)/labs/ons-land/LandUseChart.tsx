@@ -277,7 +277,7 @@ export const LandUseChart = () => {
           .attr('font-size', '12px')
           .append('xhtml:div')
           .html(
-            `Data: <a target="_blank" href="https://www.wur.nl/nl/onderzoek-resultaten/onderzoeksinstituten/environmental-research/faciliteiten-producten/kaarten-en-gis-bestanden/landelijk-grondgebruik-nederland.htm" class="text-gray-300 underline underline-offset-2">WUR</a>`
+            `Data: <a target="_blank" href="https://research.wur.nl/en/publications/landelijk-grondgebruiksbestand-nederland-2021-lgn2021-achtergrond" class="text-gray-300 underline underline-offset-2">WUR</a>`
           );
 
         svg
