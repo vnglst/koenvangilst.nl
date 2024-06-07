@@ -40,7 +40,7 @@ export default function Page() {
           This visualisation is made with <ExternalLink href="https://d3js.org/">D3.js</ExternalLink>. The source code
           of this visualization can be found in my website repository. For a simplified version using just an index.html
           file, see the link in the visualisation. The data is from the{' '}
-          <ExternalLink href="https://www.wur.nl/nl/onderzoek-resultaten/onderzoeksinstituten/environmental-research/faciliteiten-producten/kaarten-en-gis-bestanden/landelijk-grondgebruik-nederland.htm">
+          <ExternalLink href="https://research.wur.nl/en/publications/landelijk-grondgebruiksbestand-nederland-2021-lgn2021-achtergrond">
             Wageningen Environmental Research.
           </ExternalLink>
         </p>
