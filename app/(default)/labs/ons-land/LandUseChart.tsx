@@ -46,10 +46,28 @@ const categories = [
 ];
 
 const labels = [
-  { label: 'Inland Water', displayLabel: true, labelTarget: { x: 660, y: 100 }, labelPosition: { x: 680, y: 50 } },
-  { label: 'Nature', displayLabel: true, labelTarget: { x: 700, y: 200 }, labelPosition: { x: 730, y: 200 } },
-  { label: 'Urban Area', displayLabel: true, labelTarget: { x: 650, y: 320 }, labelPosition: { x: 680, y: 320 } },
-  { label: 'Agriculture', displayLabel: true, labelTarget: { x: 535, y: 540 }, labelPosition: { x: 600, y: 540 } }
+  {
+    label: 'Inland Water',
+    perc: 10,
+    displayLabel: true,
+    labelTarget: { x: 660, y: 100 },
+    labelPosition: { x: 680, y: 50 }
+  },
+  { label: 'Nature', perc: 14, displayLabel: true, labelTarget: { x: 700, y: 200 }, labelPosition: { x: 730, y: 200 } },
+  {
+    label: 'Urban Area',
+    perc: 17,
+    displayLabel: true,
+    labelTarget: { x: 650, y: 320 },
+    labelPosition: { x: 680, y: 320 }
+  },
+  {
+    label: 'Agriculture',
+    perc: 54,
+    displayLabel: true,
+    labelTarget: { x: 535, y: 540 },
+    labelPosition: { x: 600, y: 540 }
+  }
 ];
 
 const width = 800;
@@ -221,6 +239,20 @@ export const LandUseChart = () => {
               .text(category.label)
               .attr('font-size', '18px')
               .attr('font-weight', 'bold')
+              .attr('fill', 'currentColor')
+              .attr('opacity', 0)
+              .transition()
+              .delay(totalHexagons * 0.7 + 750 + i * 300)
+              .duration(500)
+              .attr('opacity', 1);
+
+            // Percentage of labelled area
+            labelGroup
+              .append('text')
+              .attr('x', category.labelPosition.x + 10)
+              .attr('y', category.labelPosition.y + 20)
+              .text(`${category.perc}%`)
+              .attr('font-size', '14px')
               .attr('fill', 'currentColor')
               .attr('opacity', 0)
               .transition()

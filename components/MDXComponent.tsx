@@ -11,8 +11,7 @@ const CustomLink = (props) => {
   const href = props.href;
   const isExternalLink = href && href.startsWith('http');
 
-  if (isExternalLink)
-    return <a target="_blank" rel="noopener noreferrer" {...props} />;
+  if (isExternalLink) return <a target="_blank" rel="noopener noreferrer" {...props} />;
 
   return (
     <Link href={href} {...props}>
@@ -21,20 +20,13 @@ const CustomLink = (props) => {
   );
 };
 
-function RoundedImage({
-  fullBleed,
-  alt,
-  ...props
-}: ComponentProps<typeof Image> & { fullBleed?: boolean }) {
-  const className = cx(
-    'my-1 inline-block rounded-lg',
-    fullBleed && 'lg:full-bleed'
-  );
+function RoundedImage({ fullBleed, alt, ...props }: ComponentProps<typeof Image> & { fullBleed?: boolean }) {
+  const className = cx('my-1 inline-block rounded-lg', fullBleed && 'lg:full-bleed');
 
   return <Image alt={alt} {...props} className={className} />;
 }
 
-function Disclaimer({ children }) {
+export function Disclaimer({ children }) {
   return (
     <div className="rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
       {children}
@@ -58,10 +50,7 @@ type MDXComponentProps = {
   code: string;
 };
 
-export function MDXComponent({
-  additionalComponents,
-  code
-}: MDXComponentProps) {
+export function MDXComponent({ additionalComponents, code }: MDXComponentProps) {
   const components = {
     Image: RoundedImage,
     a: CustomLink,

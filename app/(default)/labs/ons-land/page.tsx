@@ -4,9 +4,15 @@ import { ArticleMetadata } from 'components/ArticleMetadata';
 import { Container } from 'components/Container';
 import ExternalLink from 'components/ExternalLink';
 import { Heading } from 'components/Heading';
+import { Disclaimer } from 'components/MDXComponent';
 import { Prose } from 'components/Prose';
 
 import { LandUseChart } from './LandUseChart';
+
+export const metadata = {
+  title: 'Ons Land',
+  description: ' A data visualization project that shows the distribution land use in the Netherlands.'
+};
 
 export default function Page() {
   return (
@@ -16,7 +22,7 @@ export default function Page() {
       <Suspense fallback={<div className="h-[800px] w-full bg-gradient-to-b from-black to-[#02071d]" />}>
         <LandUseChart />
       </Suspense>
-      <Prose className="mt-8">
+      <Prose className="my-8">
         <p>
           This webpage uses hexagons to visualize land use across the Netherlands. Each hexagon represents a small
           fraction of the country's land, roughly 0.06% or 26.647 hectares. The color of each hexagon corresponds to a
@@ -44,6 +50,11 @@ export default function Page() {
             Wageningen Environmental Research.
           </ExternalLink>
         </p>
+
+        <Disclaimer>
+          This visualization reached the Hacker News front page on June 8, 2024. If you're interested be sure to{' '}
+          <a href="https://news.ycombinator.com/item?id=40599763">head over to the discussion</a>.
+        </Disclaimer>
       </Prose>
     </Container>
   );
