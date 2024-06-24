@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 const meta = {
-  title: 'Koen van Gilst - TypeScript Developer',
-  description: `Passionate & entrepreneurial TypeScript developer from the Netherlands`,
+  title: 'Koen van Gilst - Web Development Lead',
+  description: `Innovative web developer from the Netherlands who likes to push the web beyond its limits.`,
   image: 'https://koenvangilst.nl/static/images/banner.png'
 };
 
@@ -94,11 +94,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       className={`${montserrat.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
-      <link
-        rel="alternate"
-        type="application/rss+xml"
-        href="https://koenvangilst.nl/feed.xml"
-      />
+      <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
       {children}
       <Tracking />
     </html>
