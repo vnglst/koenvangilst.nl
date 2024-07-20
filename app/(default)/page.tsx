@@ -34,7 +34,7 @@ export default function Home() {
       <section className="flex flex-col gap-6 md:flex-row">
         <FeaturedCard title="Rising Temperatures in The Netherlands" path="/blog/rising-temperatures" />
         <FeaturedCard title="Pong Wars & Other Visualisations" path="/labs/pong-wars" />
-        <FeaturedCard title="Code Colocation is King" path="/blog/code-colocation-is-king" />
+        <FeaturedCard title="Land Use in The Netherlands" path="/labs/ons-land" />
       </section>
       <Link
         href="/blog"
