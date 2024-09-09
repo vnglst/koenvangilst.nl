@@ -52,7 +52,7 @@ export function Footer() {
         v. {process.env.APP_VERSION} |{' '}
         <a
           className="underline"
-          href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH}`}
+          href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH?.substring(0, 7)}`}
         >
           {process.env.COMMIT_HASH}
         </a>
