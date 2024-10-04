@@ -51,7 +51,7 @@ export function Footer() {
       <span className="my-4 text-right text-xs text-gray-500">
         v. {process.env.APP_VERSION} |{' '}
         <a className="underline" href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH}`}>
-          {process.env.COMMIT_HASH?.substring(0, 7)}
+          {process.env.COMMIT_HASH?.substring(0, 7) || 'no commit hash'}
         </a>
       </span>
     </footer>
