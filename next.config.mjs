@@ -2,6 +2,7 @@
 import fs from 'fs';
 
 import { headers } from './config/next-headers.mjs';
+import { redirects } from './config/next-redirects.mjs';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
@@ -22,6 +23,7 @@ const config = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   swcMinify: true,
   headers,
+  redirects,
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
