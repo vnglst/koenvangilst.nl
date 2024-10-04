@@ -67,7 +67,7 @@ export const redirects = async () => {
     },
     {
       source: '/15',
-      destination: 'https://calendly.com/talk-to-koen/15min',
+      destination: 'https://cal.com/vnglst/15min',
       permanent: true
     },
     {
