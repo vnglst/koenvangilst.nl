@@ -10,18 +10,14 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 });
 
 export async function getLastReading() {
-  const { data, error } = await supabase
-    .from('readings')
-    .select('*')
-    .order('timestamp', { ascending: false })
-    .limit(1);
+  const { data, error } = await supabase.from('readings').select('*').order('timestamp', { ascending: false }).limit(1);
 
   if (error) {
     throw new Error('Error fetching readings', { cause: error });
   }
 
   if (!data[0]) {
-    throw new Error('No readings found', { cause: error });
+    return null;
   }
 
   return data[0] as Co2Reading;
