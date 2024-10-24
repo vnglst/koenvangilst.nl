@@ -21,14 +21,10 @@ export function ThemeToggle() {
       }
     };
 
-    window
-      .matchMedia(PREFERS_DARK)
-      .addEventListener('change', handleThemeChange);
+    window.matchMedia(PREFERS_DARK).addEventListener('change', handleThemeChange);
 
     return () => {
-      window
-        .matchMedia(PREFERS_DARK)
-        .removeEventListener('change', handleThemeChange);
+      window.matchMedia(PREFERS_DARK).removeEventListener('change', handleThemeChange);
     };
   }, [setTheme]);
 
