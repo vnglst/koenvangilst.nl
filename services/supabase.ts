@@ -13,10 +13,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
  * Retrieves the view count for a given pathname.
  */
 export async function getViews(pathnameRaw: string): Promise<number> {
-  const { data: views, error } = await supabase
-    .from('totals')
-    .select('total')
-    .eq('pathname', pathnameRaw);
+  const { data: views, error } = await supabase.from('totals').select('total').eq('pathname', pathnameRaw);
 
   if (error) {
     console.error('Fetching views failed', error);
@@ -34,10 +31,7 @@ export async function getViews(pathnameRaw: string): Promise<number> {
  * Retrieves the view count for a given pathname for a given month.
  */
 export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
-  const { data: views, error } = await supabase
-    .from('month')
-    .select('count')
-    .eq('pathname', pathnameRaw);
+  const { data: views, error } = await supabase.from('month').select('count').eq('pathname', pathnameRaw);
 
   if (error) {
     console.error('Fetching monthly views failed', error);
@@ -59,10 +53,7 @@ export async function getViewsPerDay(daysBack: number): Promise<View[]> {
     .from('perday')
     .select('created_at, count')
     // only get views for last x days
-    .gt(
-      'created_at',
-      new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString()
-    );
+    .gt('created_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());
 
   if (error) {
     console.error('Fetching daily views failed', error);
@@ -140,9 +131,7 @@ export async function trackView({ origin, pathname, ua }) {
     return;
   }
 
-  const { error } = await supabase
-    .from('visits')
-    .insert([{ origin, pathname, ua }]);
+  const { error } = await supabase.from('visits').insert([{ origin, pathname, ua }]);
 
   if (error) {
     console.error('Tracking view failed', error);

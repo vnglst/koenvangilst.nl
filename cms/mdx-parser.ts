@@ -10,30 +10,12 @@ import rehypeSlug from 'rehype-slug';
 
 import { sluggify } from 'lib/sluggify';
 
-import {
-  Client,
-  ClientMeta,
-  Post,
-  PostMeta,
-  Project,
-  ProjectMeta,
-  Snippet,
-  SnippetMeta
-} from './schema';
+import { Client, ClientMeta, Post, PostMeta, Project, ProjectMeta, Snippet, SnippetMeta } from './schema';
 
-type MetadataValidators =
-  | typeof SnippetMeta
-  | typeof PostMeta
-  | typeof ClientMeta
-  | typeof ProjectMeta;
+type MetadataValidators = typeof SnippetMeta | typeof PostMeta | typeof ClientMeta | typeof ProjectMeta;
 
-export async function loadAllMdx<Validated>(
-  dir: string,
-  Validator: MetadataValidators
-) {
-  const mdxFiles = fs
-    .readdirSync(dir)
-    .filter((file) => path.extname(file) === '.mdx');
+export async function loadAllMdx<Validated>(dir: string, Validator: MetadataValidators) {
+  const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
 
   const rawMetadata = mdxFiles.map((file) => {
     const slug = file.replace(/\.mdx$/, '');
@@ -64,11 +46,7 @@ export async function loadAllMdx<Validated>(
 
 type Validator = typeof Snippet | typeof Post | typeof Client | typeof Project;
 
-export async function loadSingleMdx<Validated>(
-  slug: string,
-  dir: string,
-  Validator: Validator
-) {
+export async function loadSingleMdx<Validated>(slug: string, dir: string, Validator: Validator) {
   const mdxFilePath = path.join(process.cwd(), dir, slug + '.mdx');
   const rawString = loadFile(mdxFilePath);
 

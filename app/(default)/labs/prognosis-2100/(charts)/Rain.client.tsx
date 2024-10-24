@@ -96,11 +96,7 @@ function generateOptions(data: Data) {
           if (value === null) return;
 
           const factor = (value - min) / (max - min);
-          const color = echarts.color.lerp(factor, [
-            '#cbf3ff',
-            '#44d6ff',
-            '#0022ff'
-          ]);
+          const color = echarts.color.lerp(factor, ['#cbf3ff', '#44d6ff', '#0022ff']);
 
           return {
             value,

@@ -15,17 +15,13 @@ export function ViewCount({ path, className }: ViewCountProps) {
     triggerOnce: true
   });
 
-  const { data: views } = useSWR<number>(
-    isOnScreen ? `/api/views?path=${path}` : null,
-    fetcher,
-    { revalidateOnFocus: true }
-  );
+  const { data: views } = useSWR<number>(isOnScreen ? `/api/views?path=${path}` : null, fetcher, {
+    revalidateOnFocus: true
+  });
 
   return (
     <span className={className} ref={setRef}>
-      <span className="fade-in" key={`${views}`}>{`${
-        views ? views.toLocaleString() : '–––'
-      } `}</span>
+      <span className="fade-in" key={`${views}`}>{`${views ? views.toLocaleString() : '–––'} `}</span>
       views
     </span>
   );

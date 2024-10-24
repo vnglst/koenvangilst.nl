@@ -1,14 +1,5 @@
 import { loadAllMdx, loadSingleMdx } from './mdx-parser';
-import {
-  Client,
-  ClientMeta,
-  Post,
-  PostMeta,
-  Project,
-  ProjectMeta,
-  Snippet,
-  SnippetMeta
-} from './schema';
+import { Client, ClientMeta, Post, PostMeta, Project, ProjectMeta, Snippet, SnippetMeta } from './schema';
 
 export async function getPosts() {
   return loadAllMdx<PostMeta>('data/blog', PostMeta);

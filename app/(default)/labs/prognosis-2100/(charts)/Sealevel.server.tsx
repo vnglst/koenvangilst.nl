@@ -5,18 +5,14 @@ import { fetcher } from 'lib/fetcher';
 
 import { SealevelClient } from './Sealevel.client';
 
-const DATA_URL =
-  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/sealevels.json';
+const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/sealevels.json';
 
 export async function Sealevel() {
   const data = await fetchData();
 
   return (
     <Suspense>
-      <SealevelClient
-        data={data}
-        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-      />
+      <SealevelClient data={data} className="aspect-[3/5] min-h-0 w-full md:aspect-square" />
     </Suspense>
   );
 }

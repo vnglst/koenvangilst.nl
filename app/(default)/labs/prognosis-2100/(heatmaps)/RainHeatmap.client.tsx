@@ -13,27 +13,14 @@ export function RainHeatmapClient({ data }: RainHeatmapProps) {
   const options = generateOptions(data);
 
   return (
-    <div className="lg:full-bleed-20 my-4 overflow-x-auto overflow-y-hidden rounded-xl border border-dashed border-gray-400 bg-white md:min-h-0 dark:border-none dark:bg-black">
+    <div className="lg:full-bleed-20 my-4 overflow-x-auto overflow-y-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black md:min-h-0">
       <Chart options={options} className="aspect-[5/1] min-h-[250px]" />
     </div>
   );
 }
 
 function generateOptions(heatmap: Data) {
-  const MONTHS = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
   return {
     grid: {
@@ -53,9 +40,7 @@ function generateOptions(heatmap: Data) {
     title: [
       {
         text: 'Monthly Rainfall Anomalies De Bilt',
-        subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(
-          heatmap.timestamp
-        )}`,
+        subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(heatmap.timestamp)}`,
         subtextStyle: {
           lineHeight: 18
         },
@@ -96,9 +81,7 @@ function generateOptions(heatmap: Data) {
       formatter: function (params: { value: HeatmapValue }) {
         const [year, month, value] = params.value;
         const monthStr = MONTHS[month];
-        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${mmFormatter(
-          value
-        )}</b>`;
+        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${mmFormatter(value)}</b>`;
       }
     },
     series: [

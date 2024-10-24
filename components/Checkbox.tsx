@@ -8,14 +8,7 @@ interface CheckboxProps {
   color?: 'blue' | 'pink' | 'primary-bright';
 }
 
-export function Checkbox({
-  label,
-  onChange,
-  checked,
-  className,
-  color,
-  children
-}: PropsWithChildren<CheckboxProps>) {
+export function Checkbox({ label, onChange, checked, className, color, children }: PropsWithChildren<CheckboxProps>) {
   let colorClass = '';
 
   switch (color) {
@@ -32,9 +25,7 @@ export function Checkbox({
   }
 
   return (
-    <label
-      className={`relative inline-flex cursor-pointer items-center ${className}`}
-    >
+    <label className={`relative inline-flex cursor-pointer items-center ${className}`}>
       <input
         type="checkbox"
         checked={checked}

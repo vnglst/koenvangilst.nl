@@ -7,8 +7,7 @@ import { RainClient } from './Rain.client';
 import { SunshineClient } from './Sunshine';
 import { TemperatureClient } from './Temperature.client';
 
-const DATA_URL =
-  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json';
+const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json';
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
