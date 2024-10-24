@@ -34,24 +34,28 @@ export default async function Blog() {
     })
   );
 
-  const mostPopularPosts = [...postsWithViews]
-    .sort((a, b) => b.viewsPerMonth - a.viewsPerMonth)
-    .slice(0, 6);
-
   const totalViews = postsWithViews.reduce((acc, post) => acc + post.views, 0);
+
+  const highlighted = [
+    'rising-temperatures',
+    'code-colocation-is-king',
+    'correspondence-vondel',
+    'keeping-code-complexity-in-check',
+    'ai-enhanced-learning'
+  ];
+  const highlightedPosts = postsWithViews.filter((post) => highlighted.includes(post.slug));
 
   return (
     <Container>
       <Prose>
         <Heading level={1}>Blog</Heading>
         <p>
-          I've been writing online since 2016, mostly about web development. In
-          total, I've written {sortedPosts.length} articles on this site. Use
-          the search below to filter by title. They've been viewed a total of{' '}
+          I've been writing online since 2016, mostly about web development. In total, I've written {sortedPosts.length}{' '}
+          articles on this site. Use the search below to filter by title. They've been viewed a total of{' '}
           {totalViews.toLocaleString()} times.
         </p>
       </Prose>
-      <Search posts={postsWithViews} placeholderPosts={mostPopularPosts} />
+      <Search posts={postsWithViews} placeholderPosts={highlightedPosts} />
     </Container>
   );
 }
