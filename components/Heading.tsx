@@ -15,8 +15,7 @@ export function Heading({
 }: PropsWithChildren<Props>) {
   const Tag = `h${level}`;
 
-  let className =
-    'font-bold tracking-tight leading-none text-black dark:text-white text-balance ';
+  let className = 'font-bold tracking-tight leading-none text-black dark:text-white text-balance ';
 
   switch (level) {
     case 1:

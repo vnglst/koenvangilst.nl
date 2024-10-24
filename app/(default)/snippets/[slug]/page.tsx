@@ -23,9 +23,7 @@ export default async function Page({ params }: PageProps) {
       <div className="mb-5 flex w-full justify-between">
         <div>
           <Heading level={1}>{snippet.title}</Heading>
-          <p className="text-gray-700 dark:text-gray-300">
-            {snippet.description}
-          </p>
+          <p className="text-gray-700 dark:text-gray-300">{snippet.description}</p>
         </div>
         <Image
           alt={snippet.title}

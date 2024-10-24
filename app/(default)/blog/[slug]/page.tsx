@@ -19,9 +19,7 @@ export default async function Page({ params }: Props) {
   let additionalComponents = {};
 
   try {
-    additionalComponents = await import(
-      'data/blog/' + params.slug + '.components.js'
-    );
+    additionalComponents = await import('data/blog/' + params.slug + '.components.js');
   } catch (e) {
     if (!e || e.code !== 'MODULE_NOT_FOUND') {
       throw e;

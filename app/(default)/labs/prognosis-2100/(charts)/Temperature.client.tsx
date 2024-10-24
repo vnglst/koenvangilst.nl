@@ -109,9 +109,7 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       }
     },
     legend: {
-      data: showPrognosis
-        ? ['10 year trend', 'Worst Case', 'Best Case']
-        : ['10 year trend'],
+      data: showPrognosis ? ['10 year trend', 'Worst Case', 'Best Case'] : ['10 year trend'],
       bottom: 10,
       left: 'center',
       selected: showPrognosis
@@ -153,14 +151,8 @@ function generateOptions(data: Data, showPrognosis: boolean) {
           if (value === null) return;
 
           const factor =
-            (value - data.min_temperature_anomaly) /
-            (data.max_temperature_anomaly - data.min_temperature_anomaly);
-          const color = echarts.color.lerp(factor, [
-            '#74e2ff',
-            '#cbf3ff',
-            '#ffcc6a',
-            '#ff9662'
-          ]);
+            (value - data.min_temperature_anomaly) / (data.max_temperature_anomaly - data.min_temperature_anomaly);
+          const color = echarts.color.lerp(factor, ['#74e2ff', '#cbf3ff', '#ffcc6a', '#ff9662']);
 
           return {
             value,

@@ -5,18 +5,14 @@ import { fetcher } from 'lib/fetcher';
 
 import { Co2LevelClient } from './Co2Level.client';
 
-const DATA_URL =
-  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/co2_levels.json';
+const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/co2_levels.json';
 
 export async function Co2Level() {
   const data = await fetchData();
 
   return (
     <Suspense>
-      <Co2LevelClient
-        data={data}
-        className="aspect-[3/5] min-h-0 w-full md:aspect-square"
-      />
+      <Co2LevelClient data={data} className="aspect-[3/5] min-h-0 w-full md:aspect-square" />
     </Suspense>
   );
 }

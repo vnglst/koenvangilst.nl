@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useOnScreen<T extends Element>({
-  rootMargin = '0px',
-  triggerOnce = false
-} = {}) {
+export function useOnScreen<T extends Element>({ rootMargin = '0px', triggerOnce = false } = {}) {
   const [ref, setRef] = useState<T | null>(null);
   const [isIntersecting, setIntersecting] = useState<boolean>(false);
 

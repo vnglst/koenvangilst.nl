@@ -28,9 +28,7 @@ export default function Error({ error }: ErrorProps) {
         <Container centered>
           <Prose>
             <Heading level={1}>Something went wrong!</Heading>
-            <p>
-              You've run into an error. Have you tried turning it off and on?
-            </p>
+            <p>You've run into an error. Have you tried turning it off and on?</p>
             <Link
               href="/"
               className="align-center flex w-fit text-gray-600 no-underline transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"

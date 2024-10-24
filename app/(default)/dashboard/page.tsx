@@ -8,17 +8,12 @@ import { Icon } from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getLastReading } from 'services/aranet';
 import { getGithubStats } from 'services/github';
-import {
-  getTotalTodayViews,
-  getTotalViews,
-  getViewsPerDay
-} from 'services/supabase';
+import { getTotalTodayViews, getTotalViews, getViewsPerDay } from 'services/supabase';
 import { getUnsplashStatistics } from 'services/unsplash';
 
 export const metadata = {
   title: 'Dashboard',
-  description:
-    'My personal dashboard, built with Next.js API routes deployed as serverless functions.',
+  description: 'My personal dashboard, built with Next.js API routes deployed as serverless functions.',
   alternates: {
     canonical: 'dashboard'
   }
@@ -39,23 +34,14 @@ export default async function Dashboard() {
       <Heading level={1}>Dashboard</Heading>
       <div className="mb-8">
         <p className="mb-4 text-gray-600 dark:text-gray-400">
-          This is my personal dashboard, built with React Server Components. I
-          use this dashboard to track various metrics across platforms like
-          Unsplash and GitHub. It also shows daily, weekly & total view counts
-          for my website.
+          This is my personal dashboard, built with React Server Components. I use this dashboard to track various
+          metrics across platforms like Unsplash and GitHub. It also shows daily, weekly & total view counts for my
+          website.
         </p>
       </div>
       <div className="mb-4 mt-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-        <MetricCard
-          header="Unsplash Downloads"
-          link={link}
-          metric={unsplashDownloads}
-        />
-        <MetricCard
-          header="Unsplash Views"
-          link={unsplashLink}
-          metric={unsplashViews}
-        />
+        <MetricCard header="Unsplash Downloads" link={link} metric={unsplashDownloads} />
+        <MetricCard header="Unsplash Views" link={unsplashLink} metric={unsplashViews} />
         <MetricCard header="GitHub Stars" link={link} metric={githubStars} />
         <Suspense fallback={<RealTimeMetricsPlaceholder />}>
           <RealTimeMetrics />
@@ -89,10 +75,7 @@ async function MetricCard({ header, link, metric }: Props) {
     <Link className={className} href={link}>
       <div className="up-hover">
         <div className="flex items-center">
-          {header}{' '}
-          {isExternalLink ? (
-            <Icon icon="external-link" className="ml-auto h-4 w-4" />
-          ) : null}
+          {header} {isExternalLink ? <Icon icon="external-link" className="ml-auto h-4 w-4" /> : null}
         </div>
         <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
           {metric > 0 ? metric.toLocaleString() : '-'}
@@ -102,18 +85,9 @@ async function MetricCard({ header, link, metric }: Props) {
   );
 }
 
-function ExternalLink({
-  href,
-  className,
-  children
-}: PropsWithChildren<{ href: string; className: string }>) {
+function ExternalLink({ href, className, children }: PropsWithChildren<{ href: string; className: string }>) {
   return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={href}
-      className={className}
-    >
+    <a target="_blank" rel="noopener noreferrer" href={href} className={className}>
       {children}
     </a>
   );
@@ -138,21 +112,9 @@ async function RealTimeMetrics() {
 
   return (
     <>
-      <MetricCard
-        header="Office CO2 level"
-        metric={co2Reading?.co2}
-        link="/dashboard/co2"
-      />
-      <MetricCard
-        header="Today's Website Views"
-        metric={todaysViews}
-        link="/dashboard/stats"
-      />
-      <MetricCard
-        header="Total Website Views"
-        metric={totalViews}
-        link="/dashboard/stats"
-      />
+      <MetricCard header="Office CO2 level" metric={co2Reading?.co2} link="/dashboard/co2" />
+      <MetricCard header="Today's Website Views" metric={todaysViews} link="/dashboard/stats" />
+      <MetricCard header="Total Website Views" metric={totalViews} link="/dashboard/stats" />
     </>
   );
 }
