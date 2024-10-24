@@ -33,7 +33,7 @@ export default function Home() {
       <Heading level={2}>Featured</Heading>
       <section className="flex flex-col gap-6 md:flex-row">
         <FeaturedCard title="Rising Temperatures in The Netherlands" path="/blog/rising-temperatures" />
-        <FeaturedCard title="Pong Wars & Other Visualisations" path="/labs/pong-wars#pong-wars" />
+        <FeaturedCard title="Time Flies & Other Visualisations" path="/labs/pong-wars" />
         <FeaturedCard title="Land Use in The Netherlands" path="/labs/ons-land" />
       </section>
       <Link

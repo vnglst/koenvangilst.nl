@@ -1,5 +1,5 @@
 ---
-name: Pong Wars & Other Visualisations
+name: Time Flies & Other Visualisations
 url: ./labs/pong-wars
 publishedAt: '2024-03-08'
 summary: A series of visualizations written in JavaScript with some HTML & CSS in one index.html.
@@ -8,7 +8,9 @@ image: /static/images/pong-wars.jpg
 
 Recently I've been having a lot of fun building visualizations in JavaScript using just the canvas and some HTML & CSS. Here's an overview of some of the things I made.
 
+- [Time Flies](#time-flies)
 - [Particle Life](#particle-life)
+- [Aarde](#aarde)
 - [Dancing Mosquitoes](#dancing-mosquitoes)
 - [Pong Wars](#pong-wars)
 - [Purple Rain](#purple-rain)
@@ -16,23 +18,63 @@ Recently I've been having a lot of fun building visualizations in JavaScript usi
 - [Rock Paper Scissors](#rock-paper-scissors)
 
 
+## Time Flies
+
+Insects, time and how it always seems to fly by too fast. Original idea by [Menno Anker](http://mennoanker.nl)
+
+<a href="https://time-flies.koenvangilst.nl" target="_blank">
+  <Image
+    alt={`time flies screenshot`}
+    src={`/static/images/time-flies.jpg`}
+    width={1958}
+    height={1452}
+  />
+</a>
+
 ## Particle Life
 
-This weekend's meditative coding session was dedicated to recreating Jeffery Ventrella's "Particle Life". As you can imagine, I had a lot of fun with it. So strange that I've never encountered this algorithm before!
+This weekend's coding session was dedicated to recreating Jeffery Ventrella's "Particle Life". I had a lot of fun with it. So strange that I've never encountered this algorithm before!
 
 <a href="https://particle-life.koenvangilst.nl/?matrix=-0.02%2C0.15%2C-0.09%2C-0.01%2C0.30%2C-0.87%2C-0.51%2C0.14%2C-0.83%2C0.21%2C-0.73%2C0.39%2C0.84%2C-0.34%2C0.83%2C0.00%2C0.75%2C-0.11%2C-0.35%2C-0.03%2C-0.82%2C-0.97%2C-0.76%2C-0.50%2C-0.32%2C-0.21%2C0.92%2C-0.87%2C0.99%2C-0.86%2C0.78%2C0.17%2C-0.87%2C-0.06%2C-0.49%2C-0.70" target="_blank">
   <Image
     alt={`particle life screenshot`}
     src={`/static/images/particle-life.png`}
-    width={1132}
-    height={1218}
+    width={1192}
+    height={1350}
+  />
+</a>
+
+## Aarde
+
+Old school artificial life. Inspired by [Tierra](https://en.wikipedia.org/wiki/Tierra_(computer_simulation)), in a much simplified form.
+
+The programming language in which the life forms are written has 5 instructions:
+
+- S - Program start 
+- E - Program end 
+- F - Find location to copy to 
+- C - Copy to location
+- J - Jump to start of program
+
+Every time a code is copied a mutation can occur. We start with the following simple life form:
+
+SFCJE
+
+The rest is evolution.
+
+<a href="https://aarde.koenvangilst.nl" target="_blank">
+  <Image
+    alt={`aarde screenshot`}
+    src={`/static/images/aarde.jpg`}
+    width={2188}
+    height={1610}
   />
 </a>
 
 
 ## Dancing Mosquitoes
 
-I created this on a dreary winter day. The rain and lack of sunlight got me thinking about hot summer evenings & the mesmerizing mosquito dance. This creation tries to capture that feeling. 
+I created this on a dreary winter day. The rain and lack of sunlight got me thinking about hot summer evenings & the mesmerizing mosquito dance. 
 
 <a href="https://dancing-mosquitoes.koenvangilst.nl" target="_blank">
   <Image
@@ -58,8 +100,6 @@ I first saw the idea for this [here](https://twitter.com/nicolasdnl/status/17497
   />
 </a>
 
-
-
 ## Purple Rain
 
 With Valentine’s Day around the corner, I created Purple Rain. It's a simple visualization of raindrops falling down the screen. The palette is based on the [Mindful Palette Nr. 38](https://twitter.com/AlexCristache/status/1749703514409111961) by Alex Cristache.
@@ -75,8 +115,7 @@ With Valentine’s Day around the corner, I created Purple Rain. It's a simple v
  
 ## Voronoi Virus
 
-When I was a kid in high school, a friend and I would exchange floppy disks with demos on them. At that time I was happy to be able to draw a couple of 
-circles on the screen so I was very impressed when he showed me his demo. It was similar to this and it even had movement. I couldn't believe he was able to do that (I still think he had help from his father!).
+When I was a kid in high school, a friend and I would exchange floppy disks with demos on them. At that time I was happy to be able to draw a couple of circles on the screen so I was very impressed when he showed me his demo. It was similar to this and it even had movement. I couldn't believe he was able to do that (I still think he had help from his father!).
 
 <a href="https://voronoi-virus.koenvangilst.nl" target="_blank">
   <Image
