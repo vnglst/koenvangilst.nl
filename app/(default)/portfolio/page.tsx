@@ -20,18 +20,18 @@ export default async function Portfolio() {
       <Prose>
         <Heading level={1}>Portfolio</Heading>
         <p>
-          Starting my career as a freelance web developer over a decade ago, I have participated in a wide array of
-          projects. These include developing a mobile application for a well-known global fashion brand, creating an
-          audioplayer designed for users with visual impairments, and engineering a web application tailored for
-          investment banking professionals. My focus has been on frontend development, using the power of React to craft
-          user friendly interfaces. In addition to my frontend expertise, I am also adept in backend development using
-          TypeScript and Node.js. For occasional side projects, I also enjoy in coding with Python and Elixir.{' '}
-          <Link href="/about">More about me...</Link>
+          I began my career as a freelance web developer over a decade ago, working on diverse projects such as
+          developing a mobile app for a global fashion brand, designing an audio player for users with visual
+          impairments, and engineering a web application for investment banking professionals. My primary focus has
+          always been on frontend development, utilizing React to create intuitive user interfaces. Beyond frontend
+          work, I am skilled in backend development with Python, TypeScript and Node.js and enjoy experimenting with
+          Elixir for side projects. <Link href="/about">More about me...</Link>
         </p>
         <p>
-          In 2022, I transitioned from my freelance career to a corporate role, taking on the position of Lead Frontend
-          Developer at Rabobank. Here, I continue to leverage my skill set, leading innovative projects and guiding a
-          team of developers.
+          In 2022, I transitioned from freelancing to a corporate setting as the Lead Frontend Developer at Rabobank.
+          Building on this experience, I now work as the Tech Lead GenAI, where I lead the technical development of
+          GenAI-driven solutions. In this role, I oversee technical projects and collaborate with cross-functional teams
+          to advance sustainable agriculture through innovative technology.
         </p>
       </Prose>
 

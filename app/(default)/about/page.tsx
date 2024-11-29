@@ -18,10 +18,10 @@ export default function About() {
       <Prose>
         <Heading level={1}>About Me</Heading>
         <p>
-          Hello! I'm Koen, an enthusiastic and entrepreneurial JavaScript developer from the Netherlands who likes to
-          push the web beyond its limits. I specialize in creating intuitive frontend experiences using React, Angular,
-          and Svelte, and am equally adept at handling backend environments with Node and TypeScript. I'm interested in
-          helping inspiring companies create innovative web apps that users love.
+          Hello! I'm Koen, an enthusiastic and entrepreneurial Tech Lead from the Netherlands who likes to push the web
+          beyond its limits. I specialize in creating intuitive frontend experiences using React, Angular, and Svelte,
+          and am equally adept at handling backend environments with Python and TypeScript. I'm interested in helping
+          inspiring companies create innovative web apps that users love.
         </p>
         <p>
           If you want to discuss an opportunity with me, feel free to{' '}
@@ -31,10 +31,10 @@ export default function About() {
           . Sometimes I'm available for hire for advice, mentoring or consulting.
         </p>
         <p>
-          Recently, I started on a new journey with Rabobank, stepping into the role of a lead frontend developer. In
-          this position, my aim is to guide others through Rabobank's sometimes complex environment, fostering a
-          community where developers can easily seek assistance, engage in code reviews and collectively grow. Of
-          course, I'll continue coding myself – an aspect of my career that I love and wouldn't dream of giving up!
+          Recently, I started on a new journey with Rabobank, stepping into the role of Tech Lead for GenAI. In this
+          position, my aim is to guide others through Rabobank's sometimes complex environment, fostering a community
+          where developers can easily seek assistance, engage in code reviews and collectively grow. Of course, I'll
+          continue coding myself – an aspect of my career that I love and wouldn't dream of giving up!
         </p>
 
         <Heading level={2}>Skills</Heading>
