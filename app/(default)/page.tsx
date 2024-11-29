@@ -13,10 +13,11 @@ export default function Home() {
         <div className="flex flex-col pr-8">
           <Heading level={1}>Koen van Gilst</Heading>
           <div className="mb-4 text-gray-700 dark:text-gray-200">
-            Web Development Lead at <span className="font-semibold">Rabobank</span>
+            Tech Lead at <span className="font-semibold">Rabobank</span>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
-            I'm an innovative web developer from the Netherlands who likes to push the web beyond its limits
+            I’m an innovative Tech Lead from the Netherlands, delivering GenAI to users in an intuitive and practical
+            way.
           </p>
         </div>
         <div className="relative mr-auto mt-4 w-[80px] sm:w-[176px]">
