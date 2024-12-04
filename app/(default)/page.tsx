@@ -16,8 +16,7 @@ export default function Home() {
             Tech Lead at <span className="font-semibold">Rabobank</span>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
-            I’m an innovative Tech Lead from the Netherlands, delivering GenAI to users in an intuitive and practical
-            way.
+            I’m an innovative Tech Lead from the Netherlands building GenAI apps that users love.
           </p>
         </div>
         <div className="relative mr-auto mt-4 w-[80px] sm:w-[176px]">
