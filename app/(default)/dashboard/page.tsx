@@ -6,9 +6,8 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
-import { getLastReading } from 'services/aranet';
 import { getGithubStats } from 'services/github';
-import { getTotalTodayViews, getTotalViews, getViewsPerDay } from 'services/supabase';
+import { getTotalViews, getViewsPerDay } from 'services/supabase';
 import { getUnsplashStatistics } from 'services/unsplash';
 
 export const metadata = {
@@ -94,29 +93,15 @@ function ExternalLink({ href, className, children }: PropsWithChildren<{ href: s
 }
 
 function RealTimeMetricsPlaceholder() {
-  return (
-    <>
-      <MetricCard />
-      <MetricCard />
-      <MetricCard />
-    </>
-  );
+  return <MetricCard />;
 }
 
 async function RealTimeMetrics() {
   unstable_noStore();
 
-  const co2Reading = await getLastReading();
-  const todaysViews = await getTotalTodayViews();
   const totalViews = await getTotalViews();
 
-  return (
-    <>
-      <MetricCard header="Office CO2 level" metric={co2Reading?.co2} link="/dashboard/co2" />
-      <MetricCard header="Today's Website Views" metric={todaysViews} link="/dashboard/stats" />
-      <MetricCard header="Total Website Views" metric={totalViews} link="/dashboard/stats" />
-    </>
-  );
+  return <MetricCard header="Total Website Views" metric={totalViews} link="/dashboard/stats" />;
 }
 
 async function VisualContainer() {

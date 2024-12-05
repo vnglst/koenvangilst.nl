@@ -74,6 +74,11 @@ export const redirects = async () => {
       source: '/blog/feed',
       destination: '/feed.xml',
       permanent: true
+    },
+    {
+      source: '/about',
+      destination: '/portfolio',
+      permanent: false
     }
   ];
 };
