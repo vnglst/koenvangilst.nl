@@ -28,7 +28,7 @@ export function Footer() {
     [
       {
         href: 'https://bsky.app/profile/vnglst.bsky.social',
-        label: 'BlueSky'
+        label: 'Bluesky'
       }
     ]
   ];
