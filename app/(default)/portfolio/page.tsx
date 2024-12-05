@@ -1,5 +1,4 @@
 import { getClients } from 'cms/queries';
-import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
@@ -20,18 +19,17 @@ export default async function Portfolio() {
       <Prose>
         <Heading level={1}>Portfolio</Heading>
         <p>
-          I began my career as a freelance web developer over a decade ago, working on diverse projects such as
-          developing a mobile app for a global fashion brand, designing an audio player for users with visual
-          impairments, and engineering a web application for investment banking professionals. My primary focus has been
-          on frontend development, utilizing React to create intuitive user interfaces. Beyond frontend work, I am
-          skilled in backend development with Python, TypeScript and Node.js and enjoy experimenting with Elixir for
-          side projects. <Link href="/about">More about me...</Link>
+          I began my career as a web developer, working on diverse projects such as developing a mobile app for a global
+          fashion brand, designing an audio player for users with visual impairments, and engineering a web application
+          for investment banking professionals. My primary focus has been on frontend development, utilizing React and
+          other frameworks to create intuitive user interfaces. Beyond frontend work, I am skilled in backend
+          development with Python, TypeScript and Node.js and enjoy experimenting with Elixir for side projects.
         </p>
         <p>
           In 2022, I transitioned from freelancing to a corporate setting as the Lead Frontend Developer at Rabobank.
-          Building on this experience, I now work as the Tech Lead GenAI, where I lead the technical development of
-          GenAI-driven solutions. In this role, I oversee technical projects and collaborate with cross-functional teams
-          to advance sustainable agriculture through innovative technology.
+          Building on this experience, I started a new role in 2024 as the Tech Lead GenAI, where I lead the technical
+          development of GenAI-driven solutions. In this role, I oversee technical projects and collaborate with
+          cross-functional teams to advance agrifinance through innovative technology.
         </p>
       </Prose>
 

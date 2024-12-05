@@ -6,20 +6,20 @@ export function Footer() {
   const footerLinks = [
     [
       { href: '/', label: 'Home' },
-      { href: '/about', label: 'About' },
       { href: '/dashboard', label: 'Dashboard' }
-    ],
-    [
-      { href: '/snippets', label: 'Snippets' },
-      { href: '/blog/collection-of-great-tweets', label: 'Quotes' },
-      { href: '/credits', label: 'Credits' }
     ],
     [
       {
         href: 'https://twitter.com/vnglst',
         label: 'Twitter'
       },
-      { href: 'https://github.com/vnglst', label: 'GitHub' },
+      { href: 'https://github.com/vnglst', label: 'GitHub' }
+    ],
+    [
+      {
+        href: 'https://hachyderm.io/@vnglst',
+        label: 'Mastodon'
+      },
       {
         href: 'https://www.linkedin.com/in/vangilst/',
         label: 'LinkedIn'
@@ -27,8 +27,8 @@ export function Footer() {
     ],
     [
       {
-        href: 'https://hachyderm.io/@vnglst',
-        label: 'Mastodon'
+        href: 'https://bsky.app/profile/vnglst.bsky.social',
+        label: 'BlueSky'
       }
     ]
   ];
