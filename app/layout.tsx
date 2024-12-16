@@ -2,6 +2,10 @@ import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
+import { Body } from 'components/Body';
+import { Footer } from 'components/Footer';
+import { Main } from 'components/Main';
+import { Nav } from 'components/Nav';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
@@ -95,7 +99,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
-      {children}
+      <Body>
+        <Nav />
+        <Main>{children}</Main>
+        <Footer />
+      </Body>
       <Tracking />
     </html>
   );

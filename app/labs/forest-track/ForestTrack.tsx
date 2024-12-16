@@ -8,7 +8,6 @@ import { Checkbox } from 'components/Checkbox';
 import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { Prose } from 'components/Prose';
-import { Toggle } from 'components/Toggle';
 import { cx } from 'lib/clsx';
 
 import { CONFIG, LINKS } from './config';
@@ -91,7 +90,7 @@ export default function ForestWatch({ baseLayers }: Props) {
                 className="h-6 w-6 text-black dark:text-white"
               />
             </button>
-            <Heading>Forest Watch</Heading>
+            <Heading>Forest Track</Heading>
             <Prose>
               Keep track of forests in your area. Get a detailed view of changes
               in tree cover over time.
