@@ -6,7 +6,6 @@ import { Heading } from './Heading';
 import { MDXComponent } from './MDXComponent';
 import { Prose } from './Prose';
 import { Tag } from './Tag';
-import { ViewCount } from './ViewCount';
 
 type Props = {
   publishedAt: string;
