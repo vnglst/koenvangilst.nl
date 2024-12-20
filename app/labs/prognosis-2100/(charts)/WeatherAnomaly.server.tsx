@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { type JSX, Suspense } from 'react';
 import { z } from 'zod';
 
 import { fetcher } from 'lib/fetcher';

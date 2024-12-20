@@ -13,12 +13,14 @@ const commitHash = process.env.SOURCE_COMMIT;
 const config = {
   reactStrictMode: false,
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  swcMinify: true,
   headers,
   redirects,
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
+  },
+  experimental: {
+    dynamicIO: true
   }
 };
 

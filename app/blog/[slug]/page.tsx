@@ -4,12 +4,13 @@ import { notFound } from 'next/navigation';
 import { MarkdownLayout } from 'components/MarkdownLayout';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const post = await getPost(params.slug);
 
   if (!post) {
@@ -40,7 +41,8 @@ export default async function Page({ params }: Props) {
   );
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const post = await getPost(params.slug);
 
   if (!post) {
@@ -67,5 +69,11 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  return (await getPosts()).map((snippet) => snippet.slug);
+  const posts = await getPosts();
+
+  return posts.map((snippet) => {
+    return {
+      slug: snippet.slug
+    };
+  });
 }

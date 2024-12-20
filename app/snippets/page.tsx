@@ -7,8 +7,6 @@ import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
 import { getViews } from 'services/supabase';
 
-export const revalidate = 60 * 60 * 24;
-
 export const metadata = {
   title: 'Code Snippets – Koen van Gilst',
   description:
