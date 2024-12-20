@@ -8,13 +8,12 @@ import { BlogPostLink } from 'components/PostLink';
 import { Tag } from 'components/Tag';
 import { desluggify } from 'lib/sluggify';
 
-export const revalidate = 60 * 60 * 24;
-
 type TagPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default async function TagPage({ params }: TagPageProps) {
+export default async function TagPage(props: TagPageProps) {
+  const params = await props.params;
   const allPosts = await getPosts();
   const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(params.slug));
   const uniqueTags = await getUniqueTagSlugs();
@@ -62,7 +61,8 @@ export async function generateStaticParams() {
   return uniqueTags.map((tag) => ({ params: { tag } }));
 }
 
-export function generateMetadata({ params }: TagPageProps): Metadata {
+export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
+  const params = await props.params;
   const tag = desluggify(params.slug);
 
   return {

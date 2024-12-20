@@ -7,8 +7,6 @@ import { getViews, getViewsPerMonth } from 'services/supabase';
 
 import { Search } from './search';
 
-export const revalidate = 60 * 60 * 24;
-
 export async function generateMetadata() {
   const posts = await getPosts();
 

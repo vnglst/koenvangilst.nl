@@ -12,8 +12,6 @@
           ["^react", "^@?\\w"],
           // Internal packages.
           ["^(components|api|lib|services)(/.*|$)"],
-          // Internal packages.
-          ["^(contentlayer)(/.*|$)"],
           // Side effect imports.
           ["^\\u0000"],
           // Parent imports. Put `..` last.

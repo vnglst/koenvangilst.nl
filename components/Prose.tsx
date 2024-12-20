@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { type JSX, PropsWithChildren } from 'react';
 
 type ProseProps = {
   as?: keyof JSX.IntrinsicElements;

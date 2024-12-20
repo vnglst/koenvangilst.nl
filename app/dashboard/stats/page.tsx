@@ -5,8 +5,6 @@ import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { getLastMonthVisits } from 'services/supabase';
 
-export const revalidate = 60 * 60 * 24;
-
 export const metadata = {
   title: 'All links visits',
   description: 'List of a links with visit stats.'

@@ -4,10 +4,11 @@ import { notFound } from 'next/navigation';
 import { MarkdownLayout } from 'components/MarkdownLayout';
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
   const client = await getClient(params.slug);
 
   if (!client) {
@@ -25,7 +26,8 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata(props: PageProps) {
+  const params = await props.params;
   const client = await getClient(params.slug);
 
   if (!client) {
@@ -42,5 +44,9 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  return (await getClients()).map((client) => client.slug);
+  const clients = await getClients();
+
+  return clients.map((client) => {
+    return { slug: client.slug };
+  });
 }

@@ -8,10 +8,11 @@ import { MDXComponent } from 'components/MDXComponent';
 import { Prose } from 'components/Prose';
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
   const snippet = await getSnippet(params.slug);
 
   if (!snippet) {
@@ -41,7 +42,8 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const snippet = await getSnippet(params.slug);
 
   if (!snippet) {
@@ -59,5 +61,9 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return (await getSnippets()).map((snippet) => snippet.slug);
+  const snippets = await getSnippets();
+
+  return snippets.map((snippet) => {
+    return { slug: snippet.slug };
+  });
 }

@@ -32,7 +32,7 @@
 }
 
 /* Remove outline for non-keyboard :focus */
-*:focus:not:focus-visible {
+*:focus:not(:focus-visible) {
   outline: none;
 }
 
