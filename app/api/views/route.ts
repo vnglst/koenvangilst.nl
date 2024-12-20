@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getViews } from 'services/supabase';
+import { supabase } from 'services/supabase.client';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -12,4 +12,22 @@ export async function GET(request: Request) {
 
   const views = await getViews(pathname);
   return NextResponse.json(views);
+}
+
+/**
+ * Retrieves the view count for a given pathname.
+ */
+async function getViews(pathnameRaw: string): Promise<number> {
+  const { data: views, error } = await supabase.from('totals').select('total').eq('pathname', pathnameRaw);
+
+  if (error) {
+    console.error('Fetching views failed', error);
+    return 0;
+  }
+
+  if (!views[0]) {
+    return 0;
+  }
+
+  return views[0].total;
 }

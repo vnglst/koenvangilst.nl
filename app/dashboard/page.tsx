@@ -1,5 +1,4 @@
 import { PropsWithChildren, Suspense } from 'react';
-import { unstable_noStore } from 'next/cache';
 import NextLink from 'next/link';
 
 import { Container } from 'components/Container';
@@ -7,7 +6,7 @@ import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getGithubStats } from 'services/github';
-import { getTotalViews, getViewsPerDay } from 'services/supabase';
+import { getTotalViews, getViewsPerDay } from 'services/views';
 import { getUnsplashStatistics } from 'services/unsplash';
 
 export const metadata = {
@@ -97,15 +96,12 @@ function RealTimeMetricsPlaceholder() {
 }
 
 async function RealTimeMetrics() {
-  unstable_noStore();
-
   const totalViews = await getTotalViews();
 
   return <MetricCard header="Total Website Views" metric={totalViews} link="/dashboard/stats" />;
 }
 
 async function VisualContainer() {
-  unstable_noStore();
   const visits = await getViewsPerDay(365);
   return <VisitsVisual visits={visits} />;
 }

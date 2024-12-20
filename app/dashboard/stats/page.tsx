@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { getLastMonthVisits } from 'services/supabase';
+import { getLastMonthVisits } from 'services/views';
 
 export const metadata = {
   title: 'All links visits',
