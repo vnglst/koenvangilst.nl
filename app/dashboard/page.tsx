@@ -6,8 +6,8 @@ import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { VisitsVisual } from 'components/VisitsVisual';
 import { getGithubStats } from 'services/github';
-import { getTotalViews, getViewsPerDay } from 'services/views';
 import { getUnsplashStatistics } from 'services/unsplash';
+import { getTotalViews, getViewsPerDay } from 'services/views';
 
 export const metadata = {
   title: 'Dashboard',

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 /**
  * Tracks a page view for a given pathname, also storing the user agent.
  */
-export async function trackView({ origin, pathname, ua }) {
+async function trackView({ origin, pathname, ua }) {
   if (process.env.NODE_ENV === 'development') {
     console.log('[Tracking pageview]:', pathname);
     return;
