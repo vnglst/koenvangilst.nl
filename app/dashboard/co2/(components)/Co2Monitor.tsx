@@ -45,7 +45,7 @@ function MetricCard({ header, metric, unit }: MetricCardProps) {
     <div className="w-full rounded-lg border border-dashed border-gray-400 bg-white p-4 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex items-center">{header}</div>
       <p className="spacing-sm mt-2 text-3xl font-bold text-black dark:text-white">
-        {metric ? metric.toLocaleString() + ' ' + unit : <br />}
+        {metric ? metric.toLocaleString() + ' ' + unit : 'no data'}
       </p>
     </div>
   );
