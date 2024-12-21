@@ -3,9 +3,9 @@ import { getPosts } from 'cms/queries';
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
+import { supabase } from 'services/supabase.client';
 
 import { Search } from './search';
-import { supabase } from 'services/supabase.client';
 
 export async function generateMetadata() {
   const posts = await getPosts();
