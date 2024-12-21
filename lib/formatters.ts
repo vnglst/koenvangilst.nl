@@ -39,13 +39,3 @@ export const dateFormatter = (value: string) => {
     year: 'numeric'
   });
 };
-
-export const dateTimeFormatter = (value: string) => {
-  return new Date(value).toLocaleDateString('en-UK', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  });
-};

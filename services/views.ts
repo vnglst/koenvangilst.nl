@@ -22,26 +22,6 @@ export async function getViews(pathnameRaw: string): Promise<number> {
 }
 
 /**
- * Retrieves the view count for a given pathname for a given month.
- */
-export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
-  'use cache';
-
-  const { data: views, error } = await supabase.from('month').select('count').eq('pathname', pathnameRaw);
-
-  if (error) {
-    console.error('Fetching monthly views failed', error);
-    return 0;
-  }
-
-  if (!views[0]) {
-    return 0;
-  }
-
-  return views[0].count;
-}
-
-/**
  * Retrieves a list of total website views per day.
  */
 export async function getViewsPerDay(daysBack: number): Promise<View[]> {
@@ -59,28 +39,6 @@ export async function getViewsPerDay(daysBack: number): Promise<View[]> {
   }
 
   return views;
-}
-
-/**
- * Retrieves a list of total website views of last week
- */
-export async function getTotalWeekViews(): Promise<number> {
-  'use cache';
-
-  return getViewsPerDay(7).then((views) => {
-    return views.reduce((prev, item) => prev + item.count, 0);
-  });
-}
-
-/**
- * Retrieves a list of total website views of today
- */
-export async function getTotalTodayViews(): Promise<number> {
-  'use cache';
-
-  return getViewsPerDay(1).then((views) => {
-    return views.reduce((prev, item) => prev + item.count, 0);
-  });
 }
 
 /**

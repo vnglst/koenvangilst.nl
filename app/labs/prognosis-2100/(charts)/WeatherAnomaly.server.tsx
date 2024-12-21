@@ -63,4 +63,3 @@ const Data = z.object({
 });
 
 export type Data = z.infer<typeof Data>;
-export type Anomalies = Data['rainfall_anomalies'];
