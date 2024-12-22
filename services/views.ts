@@ -1,13 +1,7 @@
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+'use cache';
 
-import { createClient } from '@supabase/supabase-js';
-
+import { supabase } from './supabase.client';
 import { View } from './types';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: { persistSession: false }
-});
 
 /**
  * Retrieves the view count for a given pathname.
@@ -28,27 +22,11 @@ export async function getViews(pathnameRaw: string): Promise<number> {
 }
 
 /**
- * Retrieves the view count for a given pathname for a given month.
- */
-export async function getViewsPerMonth(pathnameRaw: string): Promise<number> {
-  const { data: views, error } = await supabase.from('month').select('count').eq('pathname', pathnameRaw);
-
-  if (error) {
-    console.error('Fetching monthly views failed', error);
-    return 0;
-  }
-
-  if (!views[0]) {
-    return 0;
-  }
-
-  return views[0].count;
-}
-
-/**
  * Retrieves a list of total website views per day.
  */
 export async function getViewsPerDay(daysBack: number): Promise<View[]> {
+  'use cache';
+
   const { data: views, error } = await supabase
     .from('perday')
     .select('created_at, count')
@@ -64,27 +42,11 @@ export async function getViewsPerDay(daysBack: number): Promise<View[]> {
 }
 
 /**
- * Retrieves a list of total website views of last week
- */
-export async function getTotalWeekViews(): Promise<number> {
-  return getViewsPerDay(7).then((views) => {
-    return views.reduce((prev, item) => prev + item.count, 0);
-  });
-}
-
-/**
- * Retrieves a list of total website views of today
- */
-export async function getTotalTodayViews(): Promise<number> {
-  return getViewsPerDay(1).then((views) => {
-    return views.reduce((prev, item) => prev + item.count, 0);
-  });
-}
-
-/**
  * Retrieves a list of total website views for all time
  */
 export async function getTotalViews(): Promise<number> {
+  'use cache';
+
   const { data: views, error } = await supabase.from('totals').select('total');
 
   if (error) {
@@ -103,6 +65,8 @@ export async function getLastMonthVisits(): Promise<
     views: number;
   }[]
 > {
+  'use cache';
+
   const { data: views, error } = await supabase
     .from('month')
     .select('count, pathname')
@@ -120,20 +84,4 @@ export async function getLastMonthVisits(): Promise<
   }));
 
   return list;
-}
-
-/**
- * Tracks a page view for a given pathname, also storing the user agent.
- */
-export async function trackView({ origin, pathname, ua }) {
-  if (process.env.NODE_ENV === 'development') {
-    // console.log('[Tracking pageview]:', pathname);
-    return;
-  }
-
-  const { error } = await supabase.from('visits').insert([{ origin, pathname, ua }]);
-
-  if (error) {
-    console.error('Tracking view failed', error);
-  }
 }

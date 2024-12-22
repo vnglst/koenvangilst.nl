@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 import { Metadata, Viewport } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 
@@ -101,7 +101,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
       <Body>
         <Nav />
-        <Main>{children}</Main>
+        <Main>
+          <Suspense>{children}</Suspense>
+        </Main>
         <Footer />
       </Body>
       <Tracking />

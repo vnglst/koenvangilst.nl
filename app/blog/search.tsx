@@ -11,7 +11,6 @@ type Post = {
   summary: string;
   tags: string[];
   slug: string;
-  views: number;
 };
 
 type SearchProps = {

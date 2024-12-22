@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 import { Prose } from 'components/Prose';
-import { getViews } from 'services/supabase';
-
-export const revalidate = 60 * 60 * 24;
+import { getViews } from 'services/views';
 
 export const metadata = {
   title: 'Code Snippets – Koen van Gilst',

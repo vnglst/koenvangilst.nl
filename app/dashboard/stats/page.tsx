@@ -3,9 +3,7 @@ import Link from 'next/link';
 
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { getLastMonthVisits } from 'services/supabase';
-
-export const revalidate = 60 * 60 * 24;
+import { getLastMonthVisits } from 'services/views';
 
 export const metadata = {
   title: 'All links visits',

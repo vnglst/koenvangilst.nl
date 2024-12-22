@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { type JSX, Suspense } from 'react';
 import { z } from 'zod';
 
 import { fetcher } from 'lib/fetcher';
@@ -63,4 +63,3 @@ const Data = z.object({
 });
 
 export type Data = z.infer<typeof Data>;
-export type Anomalies = Data['rainfall_anomalies'];
