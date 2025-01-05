@@ -46,29 +46,6 @@ h1 {
   font-family: var(--font-montserrat), sans-serif;
 }
 
-.blink {
-  animation: blink-animation 1s step-start 1s infinite;
-}
-
-@keyframes blink-animation {
-  50% {
-    opacity: 0;
-  }
-}
-
-.fade-in {
-  animation: fade-entrance ease-in-out 0.2s both;
-}
-
-@keyframes fade-entrance {
-  0% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .up-hover:hover {
   transform: scale(1.02);
 }
