@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { Heading } from 'components/Heading';
 
 import { PhotoGrid } from './PhotoGrid';
-import { getPhotos } from './utils';
+import { getPhotos } from './getPhotos';
 
 export default async function Photography() {
   const photos = await getPhotos();

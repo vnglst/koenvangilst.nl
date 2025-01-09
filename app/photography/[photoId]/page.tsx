@@ -1,5 +1,5 @@
 import { PhotoModal } from '../@modal/(.)[photoId]/PhotoModal';
-import { getPhotos } from '../utils';
+import { getPhotos } from '../getPhotos';
 
 export const dynamic = 'force-static';
 

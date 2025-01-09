@@ -1,4 +1,4 @@
-import { getPhotos } from '../../utils';
+import { getPhotos } from '../../getPhotos';
 
 import { PhotoModal } from './PhotoModal';
 

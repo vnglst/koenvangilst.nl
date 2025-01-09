@@ -9,8 +9,18 @@ export async function getPhotos() {
   // keep only files that end with .jpg or .jpeg
   files = files.filter((filename) => /\.(jpg|jpeg)$/.test(filename));
 
-  // sort files on filename, but reverse the order
-  files.sort().reverse();
+  // Get file stats for each file
+  const filesWithStats = await Promise.all(
+    files.map(async (filename) => {
+      const filePath = path.join(photosDirectory, filename);
+      const stats = await fs.stat(filePath);
+      return { filename, createTime: stats.birthtime };
+    })
+  );
+
+  // Sort files by creation date, newest first
+  filesWithStats.sort((a, b) => b.createTime.getTime() - a.createTime.getTime());
+  files = filesWithStats.map((file) => file.filename);
 
   const photos = await Promise.all(
     files.map(async (filename) => {
