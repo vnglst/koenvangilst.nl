@@ -4,7 +4,10 @@ import sharp from 'sharp';
 
 export async function getPhotos() {
   const photosDirectory = path.join(process.cwd(), 'public/static/photography');
-  const files = await fs.readdir(photosDirectory);
+  let files = await fs.readdir(photosDirectory);
+
+  // keep only files that end with .jpg or .jpeg
+  files = files.filter((filename) => /\.(jpg|jpeg)$/.test(filename));
 
   // sort files on filename, but reverse the order
   files.sort().reverse();
@@ -14,9 +17,11 @@ export async function getPhotos() {
       const filePath = path.join(photosDirectory, filename);
       const metadata = await sharp(filePath).metadata();
       const aspectRatio = (metadata.width || 0) / (metadata.height || 0);
+      const id = encodeURIComponent(filename);
 
       return {
-        src: `/static/photography/${filename}`,
+        id,
+        src: `/static/photography/${encodeURIComponent(filename)}`,
         width: metadata.width || 0,
         height: metadata.height || 0,
         alt: filename.replace(/\.[^/.]+$/, ''),

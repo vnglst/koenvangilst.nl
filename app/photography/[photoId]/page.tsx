@@ -1,9 +1,17 @@
+import { PhotoModal } from '../@modal/(.)[photoId]/PhotoModal';
 import { getPhotos } from '../utils';
-import { PhotoModal } from './PhotoModal';
+
+export const dynamic = 'force-static';
+
+export async function generateStaticParams() {
+  return getPhotos().then((photos) => {
+    return photos.map((photo) => ({ slug: photo.id }));
+  });
+}
 
 export default async function PhotoPage({ params }: { params: Promise<{ photoId: string }> }) {
-  const { photoId } = await params;
   const photos = await getPhotos();
+  const photoId = (await params).photoId;
   const currentIndex = photos.findIndex((p) => p.src.includes(photoId));
   const photo = photos[currentIndex];
 
