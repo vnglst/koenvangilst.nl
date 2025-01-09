@@ -4,7 +4,9 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-export function PhotoModal({ photo, photos, currentIndex }) {
+import { Photo } from '../../types';
+
+export function PhotoModal({ photo, photos, currentIndex }: { photo: Photo; photos: Photo[]; currentIndex: number }) {
   const router = useRouter();
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -36,6 +38,16 @@ export function PhotoModal({ photo, photos, currentIndex }) {
     router.push('/photography', { scroll: false });
   }
 
+  function formatDate(dateString?: Date) {
+    if (!dateString) return '';
+
+    return new Date(dateString).toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
   return (
     <dialog
       ref={dialogRef}
@@ -48,15 +60,18 @@ export function PhotoModal({ photo, photos, currentIndex }) {
       >
         ✕
       </button>
-      <div className="flex h-full items-center justify-center p-4 md:p-8">
+      <div className="flex h-full flex-col items-center justify-center p-4 md:p-8">
         <Image
           src={photo.src}
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="max-h-[90vh] w-auto rounded-lg"
+          className="max-h-[85vh] w-auto rounded-lg"
           priority
         />
+        <div className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          {photo.location} • {formatDate(photo.createdAt)}
+        </div>
       </div>
     </dialog>
   );

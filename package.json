@@ -24,6 +24,7 @@
     "eslint": "8.57.0",
     "eslint-config-next": "15.1.4",
     "eslint-plugin-simple-import-sort": "12.1.1",
+    "exif-reader": "^2.0.1",
     "gray-matter": "4.0.3",
     "lodash": "4.17.21",
     "mdx-bundler": "10.0.3",

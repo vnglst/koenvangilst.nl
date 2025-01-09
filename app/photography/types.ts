@@ -5,4 +5,6 @@ export type Photo = {
   width: number;
   height: number;
   isVertical: boolean;
+  createdAt?: Date;
+  location?: string;
 };
