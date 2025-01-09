@@ -2,18 +2,19 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export function PhotoModal({ photo, photos, currentIndex }) {
   const router = useRouter();
+  const pathname = usePathname();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (!dialogRef.current?.open) {
+    if (!dialogRef.current?.open && pathname === `/photography/${photo.id}`) {
       document.body.style.overflow = 'hidden';
       dialogRef.current?.showModal();
     }
-  }, []);
+  }, [pathname, photo.id]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,6 +32,7 @@ export function PhotoModal({ photo, photos, currentIndex }) {
 
   function onDismiss() {
     document.body.style.overflow = 'scroll';
+    dialogRef.current?.close();
     router.push('/photography', { scroll: false });
   }
 
