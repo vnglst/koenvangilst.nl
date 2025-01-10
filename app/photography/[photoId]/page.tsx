@@ -1,7 +1,14 @@
+import { Metadata } from 'next';
+
 import { PhotoModal } from '../@modal/(.)[photoId]/PhotoModal';
 import { getPhotos } from '../getPhotos';
 
 export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: 'Photography',
+  description: 'A collection of photographs by Koen van Gilst'
+};
 
 export async function generateStaticParams() {
   return getPhotos().then((photos) => {
