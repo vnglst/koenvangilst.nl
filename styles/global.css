@@ -26,6 +26,13 @@
   }
 }
 
+dialog:modal {
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 ::selection {
   background-color: #5bc3eb;
   color: #fefefe;

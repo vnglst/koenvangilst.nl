@@ -52,25 +52,53 @@ export function PhotoModal({ photo, photos, currentIndex }: { photo: Photo; phot
     <dialog
       ref={dialogRef}
       onClose={onDismiss}
-      className="h-full w-full animate-fade-in bg-transparent p-0 backdrop:bg-white/80 backdrop:backdrop-blur-sm backdrop:dark:bg-black/80"
+      className="h-auto w-auto animate-fade-in bg-transparent backdrop:bg-black/95 backdrop:backdrop-blur-sm"
     >
-      <button
-        onClick={onDismiss}
-        className="fixed right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/50 text-black backdrop-blur-sm transition-colors hover:bg-white/70 dark:bg-black/50 dark:text-white dark:hover:bg-black/70"
-      >
-        ✕
-      </button>
       <div className="flex h-full flex-col items-center justify-center p-4 md:p-8">
+        <button
+          onClick={onDismiss}
+          className="backdrop-blur-xs fixed right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-black text-white hover:bg-white/90 hover:text-black"
+        >
+          ✕
+        </button>
         <Image
           src={photo.src}
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="max-h-[85vh] w-auto rounded-lg"
+          className="mx-auto max-h-[85vh] w-auto rounded-lg object-contain"
           priority
         />
-        <div className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-          {photo.location} • {formatDate(photo.createdAt)}
+        <div className="mt-3 flex w-full items-center justify-between gap-4">
+          {currentIndex > 0 ? (
+            <button
+              onClick={() => router.push(`/photography/${photos[currentIndex - 1].id}`, { scroll: false })}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
+              aria-label="Previous photo"
+            >
+              ←
+            </button>
+          ) : (
+            <div className="h-10 w-10" />
+          )}
+          <div className="text-center text-sm text-gray-400">
+            <div className="md:hidden">{photo.location}</div>
+            <div className="md:hidden">{formatDate(photo.createdAt)}</div>
+            <div className="hidden md:block">
+              {photo.location} • {formatDate(photo.createdAt)}
+            </div>
+          </div>
+          {currentIndex < photos.length - 1 ? (
+            <button
+              onClick={() => router.push(`/photography/${photos[currentIndex + 1].id}`, { scroll: false })}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
+              aria-label="Next photo"
+            >
+              →
+            </button>
+          ) : (
+            <div className="h-10 w-10" />
+          )}
         </div>
       </div>
     </dialog>
