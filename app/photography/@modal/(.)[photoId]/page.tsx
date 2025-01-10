@@ -1,6 +1,13 @@
+import { Metadata } from 'next';
+
 import { getPhotos } from '../../getPhotos';
 
 import { PhotoModal } from './PhotoModal';
+
+export const metadata: Metadata = {
+  title: 'Photography',
+  description: 'A collection of photographs by Koen van Gilst'
+};
 
 export default async function PhotoPage({ params }: { params: Promise<{ photoId: string }> }) {
   const photos = await getPhotos();
