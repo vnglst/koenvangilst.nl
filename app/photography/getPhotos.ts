@@ -17,8 +17,6 @@ export async function getPhotos() {
     })
   );
 
-  filesWithStats.sort((a, b) => b.createTime.getTime() - a.createTime.getTime());
-
   const photos = await Promise.all(
     filesWithStats.map(async (file) => {
       const filePath = path.join(photosDirectory, file.filename);
@@ -51,6 +49,9 @@ export async function getPhotos() {
       };
     })
   );
+
+  // Sort photos by createdAt date
+  photos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 
   return photos;
 }

@@ -1,10 +1,13 @@
 import { getClients, getPosts, getProjects, getSnippets } from 'cms/queries';
 
+import { getPhotos } from './photography/getPhotos';
+
 export default async function sitemap() {
   const allPosts = await getPosts();
   const allProjects = await getProjects();
   const allClients = await getClients();
   const allSnippets = await getSnippets();
+  const photos = await getPhotos();
 
   const pages = [
     'about',
@@ -33,6 +36,14 @@ export default async function sitemap() {
     })),
     ...allSnippets.map((snippet) => ({
       url: `https://koenvangilst.nl/snippets/${snippet.slug}`
+    })),
+    {
+      url: `https://koenvangilst.nl/photography`,
+      lastModified: new Date().toISOString()
+    },
+    ...photos.map((photo) => ({
+      url: `https://koenvangilst.nl/photography/${photo.id}`,
+      lastModified: photo.createdAt
     }))
   ];
 
