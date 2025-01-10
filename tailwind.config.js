@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'fade-in': 'fadeIn 2000ms ease-in-out',
+        'fade-in': 'fadeIn 200ms ease-in-out',
         blink: 'blink 1s step-start 1s infinite'
       },
       keyframes: {
