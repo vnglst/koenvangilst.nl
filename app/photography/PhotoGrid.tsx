@@ -28,6 +28,8 @@ export function PhotoGrid({ photos }: PhotoGridProps) {
               fill
               priority={photos.indexOf(photo) < 4}
               className="rounded-lg object-cover transition-opacity hover:opacity-90"
+              placeholder="blur"
+              blurDataURL={photo.blurDataURL}
             />
           </Link>
         );

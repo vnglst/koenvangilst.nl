@@ -12,6 +12,7 @@ export type PhotoType = {
   isVertical: boolean;
   createdAt?: Date;
   location?: string;
+  blurDataURL: string;
 };
 
 export async function getPhotos(): Promise<PhotoType[]> {
@@ -56,7 +57,8 @@ export async function getPhotos(): Promise<PhotoType[]> {
         alt: location,
         isVertical: aspectRatio < 1,
         createdAt: createdAt || file.createTime,
-        location
+        location,
+        blurDataURL: await getBlurDataURL(filePath)
       };
     })
   );
@@ -65,4 +67,9 @@ export async function getPhotos(): Promise<PhotoType[]> {
   photos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 
   return photos;
+}
+
+async function getBlurDataURL(imagePath: string) {
+  const buffer = await sharp(imagePath).resize(8, 8, { fit: 'inside' }).toBuffer();
+  return `data:image/jpeg;base64,${buffer.toString('base64')}`;
 }
