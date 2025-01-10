@@ -51,7 +51,7 @@ export function Photo({
     <div className="h-full w-full bg-black p-4 md:p-8">
       <Link
         href="/photography"
-        className="backdrop-blur-xs fixed right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-black text-white hover:bg-white/90 hover:text-black"
+        className="fixed right-5 top-5 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
       >
         ✕
       </Link>
@@ -61,9 +61,10 @@ export function Photo({
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className={`cursor-pointer rounded-lg ${
-            isFullScreen ? 'fixed h-screen w-screen object-cover' : 'max-h-[85vh] w-auto'
-          } object-contain`}
+          className={`cursor-pointer object-contain ${
+            isFullScreen ? 'fixed h-screen w-screen object-cover' : 'max-h-[85vh] w-auto rounded-lg'
+          }`}
+          role="button"
           onClick={() => setIsFullScreen(!isFullScreen)}
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
@@ -75,7 +76,7 @@ export function Photo({
         {currentIndex > 0 ? (
           <Link
             href={`/photography/${photos[currentIndex - 1].id}`}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            className="grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Previous photo"
           >
             ←
@@ -83,7 +84,7 @@ export function Photo({
         ) : (
           <div className="h-10 w-10" />
         )}
-        <div className="rounded-md bg-black/50 p-2 text-center text-sm text-gray-200 backdrop-blur-sm">
+        <div className="rounded-md bg-black/50 p-2 text-sm text-gray-200 backdrop-blur-sm">
           <div className="md:hidden">{photo.location}</div>
           <div className="md:hidden">{formatDate(photo.createdAt)}</div>
           <div className="hidden md:block">
@@ -93,7 +94,7 @@ export function Photo({
         {currentIndex < photos.length - 1 ? (
           <Link
             href={`/photography/${photos[currentIndex + 1].id}`}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            className="grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Next photo"
           >
             →
