@@ -52,9 +52,9 @@ export function PhotoModal({ photo, photos, currentIndex }: { photo: Photo; phot
     <dialog
       ref={dialogRef}
       onClose={onDismiss}
-      className="h-auto w-auto animate-fade-in bg-transparent backdrop:bg-black/95 backdrop:backdrop-blur-sm"
+      className="h-auto w-auto bg-transparent backdrop:bg-black/95 backdrop:backdrop-blur-sm"
     >
-      <div className="flex h-full flex-col items-center justify-center p-4 md:p-8">
+      <div className="flex h-full animate-fade-in flex-col items-center justify-center p-4 md:p-8">
         <button
           onClick={onDismiss}
           className="backdrop-blur-xs fixed right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-black text-white hover:bg-white/90 hover:text-black"
