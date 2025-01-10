@@ -7,6 +7,20 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      animation: {
+        'fade-in': 'fadeIn 200ms ease-in-out',
+        blink: 'blink 1s step-start 1s infinite'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' }
+        }
+      },
       colors: {
         primary: '#5bc3eb',
         'primary-bright': '#74e2ff'
