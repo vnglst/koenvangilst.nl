@@ -1,6 +1,8 @@
 import { getPosts } from 'cms/queries';
 import RSS from 'rss';
 
+import { getPhotos } from '../photography/getPhotos';
+
 export async function GET() {
   const feed = new RSS({
     title: 'Koen van Gilst',
@@ -9,6 +11,7 @@ export async function GET() {
   });
 
   const posts = await getPosts();
+  const photos = await getPhotos();
 
   posts.map((post) => {
     feed.item({
@@ -16,6 +19,16 @@ export async function GET() {
       url: `https://koenvangilst.nl/blog/${post.slug}`,
       date: post.publishedAt,
       description: post.summary
+    });
+  });
+
+  photos.forEach((photo) => {
+    feed.item({
+      title: `Photo: ${photo.location}`,
+      url: `https://koenvangilst.nl/photography/${photo.id}`,
+      description: `A photograph taken in ${photo.location}`,
+      date: photo.createdAt || new Date(),
+      enclosure: { url: `https://koenvangilst.nl${photo.src}` }
     });
   });
 

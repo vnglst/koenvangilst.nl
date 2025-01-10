@@ -16,8 +16,8 @@ const montserrat = Montserrat({
 });
 
 const meta = {
-  title: 'Koen van Gilst - Web Development Lead',
-  description: `Innovative web developer from the Netherlands who likes to push the web beyond its limits.`,
+  title: 'Koen van Gilst - Tech Lead',
+  description: `Innovative tech lead from the Netherlands who likes to push the web beyond its limits.`,
   image: 'https://koenvangilst.nl/static/images/banner.png'
 };
 
