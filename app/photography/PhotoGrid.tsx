@@ -10,7 +10,7 @@ type PhotoGridProps = {
 
 export function PhotoGrid({ photos }: PhotoGridProps) {
   return (
-    <div className="mt-4 grid auto-rows-[250px] grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:auto-rows-[300px]">
       <Suspense>
         {photos.map((photo) => {
           return (
@@ -19,7 +19,7 @@ export function PhotoGrid({ photos }: PhotoGridProps) {
               href={`/photography/${photo.id}`}
               passHref
               scroll={false}
-              className={`relative block ${photo.isVertical ? 'row-span-2' : 'row-span-1'}`}
+              className={`relative block aspect-square md:aspect-auto ${photo.isVertical ? 'row-span-2' : 'row-span-1'}`}
             >
               <Image
                 src={photo.src}
