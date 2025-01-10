@@ -1,14 +1,33 @@
 import { Metadata } from 'next';
 
-import { PhotoModal } from '../@modal/(.)[photoId]/PhotoModal';
+import { Container } from 'components/Container';
+
 import { getPhotos } from '../getPhotos';
+
+import { Photo } from './Photo';
 
 export const dynamic = 'force-static';
 
-export const metadata: Metadata = {
-  title: 'Photography',
-  description: 'A collection of photographs by Koen van Gilst'
+type Props = {
+  params: Promise<{
+    photoId: string;
+  }>;
 };
+
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
+  const photos = await getPhotos();
+  const photoId = params.photoId;
+  const currentIndex = photos.findIndex((p) => p.src.includes(photoId));
+  const photo = photos[currentIndex];
+
+  if (!photo) return null;
+
+  return {
+    title: `Photo: ${photo.location}`,
+    description: `A photograph taken in ${photo.location}`
+  };
+}
 
 export async function generateStaticParams() {
   return getPhotos().then((photos) => {
@@ -24,5 +43,9 @@ export default async function PhotoPage({ params }: { params: Promise<{ photoId:
 
   if (!photo) return null;
 
-  return <PhotoModal photo={photo} photos={photos} currentIndex={currentIndex} />;
+  return (
+    <Container footer={false} nav={false} useLayout={false}>
+      <Photo photo={photo} photos={photos} currentIndex={currentIndex} />
+    </Container>
+  );
 }

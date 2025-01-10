@@ -9,13 +9,15 @@ type ContainerProps = {
   centered?: boolean;
   footer?: boolean;
   nav?: boolean;
+  useLayout?: boolean;
 };
 
 export function Container({
   children,
   centered = false,
   footer = true,
-  nav = true
+  nav = true,
+  useLayout = true
 }: PropsWithChildren<ContainerProps>) {
   const classes = cx(
     'flex flex-col justify-center w-full max-w-[65ch] px-8 md:px-0 py-32 h-full min-h-screen',
@@ -26,9 +28,7 @@ export function Container({
     <>
       {nav && <Nav />}
       <Main>
-        <Suspense>
-          <div className={classes}>{children}</div>;
-        </Suspense>
+        <Suspense>{useLayout ? <div className={classes}>{children}</div> : children}</Suspense>
       </Main>
       {footer && <Footer />}
     </>
