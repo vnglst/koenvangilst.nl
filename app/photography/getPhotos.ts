@@ -3,7 +3,18 @@ import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
-export async function getPhotos() {
+export type PhotoType = {
+  id: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  isVertical: boolean;
+  createdAt?: Date;
+  location?: string;
+};
+
+export async function getPhotos(): Promise<PhotoType[]> {
   const photosDirectory = path.join(process.cwd(), 'public/static/photography');
   let files = await fs.readdir(photosDirectory);
 

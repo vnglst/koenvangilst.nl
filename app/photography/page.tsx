@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 
+import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
 
 import { getPhotos } from './getPhotos';
@@ -15,11 +16,9 @@ export default async function Photography() {
   const photos = await getPhotos();
 
   return (
-    <>
+    <Container footer={false} nav={true}>
       <Heading level={1}>Photography</Heading>
-      <Suspense fallback={<PhotoGrid photos={[]} />}>
-        <PhotoGrid photos={photos} />
-      </Suspense>
-    </>
+      <PhotoGrid photos={photos} />
+    </Container>
   );
 }

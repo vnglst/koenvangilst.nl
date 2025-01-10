@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { Photo } from './types';
+import { PhotoType } from './getPhotos';
 
 type PhotoGridProps = {
-  photos: Photo[];
+  photos: PhotoType[];
 };
 
 export function PhotoGrid({ photos }: PhotoGridProps) {

@@ -1,14 +1,12 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
 
-import { Nav } from 'components/Nav';
+import { Container } from 'components/Container';
 
 import { PrognosisToggle } from './(components)/PrognosisToggle';
 
 export default async function Layout({ children }) {
   return (
-    <>
-      <Nav />
+    <Container footer={false} nav={true} useLayout={false}>
       <div className="pt-16">
         <nav className="sticky top-0 z-20 flex items-center gap-4 overflow-hidden bg-white p-4 text-slate-700 dark:bg-black dark:text-slate-300 md:px-8">
           <Link
@@ -17,12 +15,10 @@ export default async function Layout({ children }) {
           >
             Prognosis 2100
           </Link>
-          <Suspense>
-            <PrognosisToggle />
-          </Suspense>
+          <PrognosisToggle />
         </nav>
         {children}
       </div>
-    </>
+    </Container>
   );
 }
