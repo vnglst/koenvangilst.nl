@@ -70,6 +70,6 @@ export async function getPhotos(): Promise<PhotoType[]> {
 }
 
 async function getBlurDataURL(imagePath: string) {
-  const buffer = await sharp(imagePath).resize(8, 8, { fit: 'inside' }).toBuffer();
+  const buffer = await sharp(imagePath).resize(10, 10, { fit: 'inside' }).jpeg({ quality: 70 }).toBuffer();
   return `data:image/jpeg;base64,${buffer.toString('base64')}`;
 }

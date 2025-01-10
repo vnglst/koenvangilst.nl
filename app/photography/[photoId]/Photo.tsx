@@ -54,19 +54,20 @@ export function Photo({
       >
         ✕
       </Link>
-      <div className="mx-auto flex h-full flex-col items-center justify-center">
+      <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
         <Image
           src={photo.src}
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="max-h-[85vh] w-full rounded-lg object-contain"
+          className="mt-auto max-h-[85vh] w-auto rounded-lg object-contain"
           style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
           priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
           placeholder="blur"
           blurDataURL={photo.blurDataURL}
         />
-        <div className="mt-5 flex w-full items-center justify-between gap-4">
+        <div className="mt-auto flex w-full items-center justify-between gap-4">
           {currentIndex > 0 ? (
             <Link
               href={`/photography/${photos[currentIndex - 1].id}`}
