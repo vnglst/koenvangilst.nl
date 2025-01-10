@@ -1,5 +1,3 @@
-'use cache';
-
 import { supabase } from './supabase.client';
 import { View } from './types';
 
@@ -25,8 +23,6 @@ export async function getViews(pathnameRaw: string): Promise<number> {
  * Retrieves a list of total website views per day.
  */
 export async function getViewsPerDay(daysBack: number): Promise<View[]> {
-  'use cache';
-
   const { data: views, error } = await supabase
     .from('perday')
     .select('created_at, count')
@@ -45,8 +41,6 @@ export async function getViewsPerDay(daysBack: number): Promise<View[]> {
  * Retrieves a list of total website views for all time
  */
 export async function getTotalViews(): Promise<number> {
-  'use cache';
-
   const { data: views, error } = await supabase.from('totals').select('total');
 
   if (error) {
@@ -65,8 +59,6 @@ export async function getLastMonthVisits(): Promise<
     views: number;
   }[]
 > {
-  'use cache';
-
   const { data: views, error } = await supabase
     .from('month')
     .select('count, pathname')

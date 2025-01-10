@@ -18,9 +18,6 @@ const config = {
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
-  },
-  experimental: {
-    dynamicIO: true
   }
 };
 
