@@ -66,10 +66,10 @@ export function PhotoModal({ photo, photos, currentIndex }: { photo: Photo; phot
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="mx-auto h-[85vh] max-h-[85vh] w-auto rounded-lg object-contain"
+          className="m-auto h-auto max-h-[85vh] w-auto rounded-lg object-contain"
           priority
         />
-        <div className="mt-3 flex w-full items-center justify-between gap-4">
+        <div className="mb-5 mt-auto flex w-full items-center justify-between gap-4">
           {currentIndex > 0 ? (
             <button
               onClick={() => router.push(`/photography/${photos[currentIndex - 1].id}`, { scroll: false })}
