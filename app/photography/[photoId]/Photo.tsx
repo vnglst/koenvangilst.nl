@@ -76,15 +76,15 @@ export function Photo({
         {currentIndex > 0 ? (
           <Link
             href={`/photography/${photos[currentIndex - 1].id}`}
-            className="grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            className="m-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Previous photo"
           >
             ←
           </Link>
         ) : (
-          <div className="h-10 w-10" />
+          <div className="m-auto h-10 w-10" />
         )}
-        <div className="rounded-md bg-black/50 p-2 text-sm text-gray-200 backdrop-blur-sm">
+        <div className="rounded-md bg-black/50 p-2 text-center text-sm text-gray-200 backdrop-blur-sm">
           <div className="md:hidden">{photo.location}</div>
           <div className="md:hidden">{formatDate(photo.createdAt)}</div>
           <div className="hidden md:block">
@@ -94,13 +94,13 @@ export function Photo({
         {currentIndex < photos.length - 1 ? (
           <Link
             href={`/photography/${photos[currentIndex + 1].id}`}
-            className="grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            className="m-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Next photo"
           >
             →
           </Link>
         ) : (
-          <div className="h-10 w-10" />
+          <div className="m-auto h-10 w-10" />
         )}
       </div>
     </div>
