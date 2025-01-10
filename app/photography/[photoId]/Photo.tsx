@@ -61,7 +61,6 @@ export function Photo({
           width={photo.width}
           height={photo.height}
           className="mt-auto max-h-[85vh] w-auto rounded-lg object-contain"
-          style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
           placeholder="blur"
