@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 import { Container } from 'components/Container';
@@ -16,7 +15,7 @@ export default async function Photography() {
   const photos = await getPhotos();
 
   return (
-    <Container footer={false} nav={true}>
+    <Container footer={false} nav={true} useLayout={true}>
       <Heading level={1}>Photography</Heading>
       <PhotoGrid photos={photos} />
     </Container>
