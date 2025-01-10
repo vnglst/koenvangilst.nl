@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,7 @@ export function Photo({
   currentIndex: number;
 }) {
   const router = useRouter();
+  const [isFullScreen, setIsFullScreen] = useState(true);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,43 +61,46 @@ export function Photo({
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="mt-auto max-h-[85vh] w-auto rounded-lg object-contain"
+          className={`cursor-pointer rounded-lg ${
+            isFullScreen ? 'fixed h-screen w-screen object-cover' : 'max-h-[85vh] w-auto'
+          } object-contain`}
+          onClick={() => setIsFullScreen(!isFullScreen)}
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
           placeholder="blur"
           blurDataURL={photo.blurDataURL}
         />
-        <div className="mt-auto flex w-full items-center justify-between gap-4">
-          {currentIndex > 0 ? (
-            <Link
-              href={`/photography/${photos[currentIndex - 1].id}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-400 backdrop-blur-sm hover:bg-white/90 hover:text-black"
-              aria-label="Previous photo"
-            >
-              ←
-            </Link>
-          ) : (
-            <div className="h-10 w-10" />
-          )}
-          <div className="text-center text-sm text-gray-400">
-            <div className="md:hidden">{photo.location}</div>
-            <div className="md:hidden">{formatDate(photo.createdAt)}</div>
-            <div className="hidden md:block">
-              {photo.location} • {formatDate(photo.createdAt)}
-            </div>
+      </div>
+      <div className="fixed bottom-5 left-0 flex w-full items-center justify-between gap-4 px-5">
+        {currentIndex > 0 ? (
+          <Link
+            href={`/photography/${photos[currentIndex - 1].id}`}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            aria-label="Previous photo"
+          >
+            ←
+          </Link>
+        ) : (
+          <div className="h-10 w-10" />
+        )}
+        <div className="rounded-md bg-black/50 p-2 text-center text-sm text-gray-200 backdrop-blur-sm">
+          <div className="md:hidden">{photo.location}</div>
+          <div className="md:hidden">{formatDate(photo.createdAt)}</div>
+          <div className="hidden md:block">
+            {photo.location} • {formatDate(photo.createdAt)}
           </div>
-          {currentIndex < photos.length - 1 ? (
-            <Link
-              href={`/photography/${photos[currentIndex + 1].id}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-400 backdrop-blur-sm hover:bg-white/90 hover:text-black"
-              aria-label="Next photo"
-            >
-              →
-            </Link>
-          ) : (
-            <div className="h-10 w-10" />
-          )}
         </div>
+        {currentIndex < photos.length - 1 ? (
+          <Link
+            href={`/photography/${photos[currentIndex + 1].id}`}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+            aria-label="Next photo"
+          >
+            →
+          </Link>
+        ) : (
+          <div className="h-10 w-10" />
+        )}
       </div>
     </div>
   );
