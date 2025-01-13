@@ -9,10 +9,7 @@ export function Footer() {
       { href: '/dashboard', label: 'Dashboard' }
     ],
     [
-      {
-        href: 'https://twitter.com/vnglst',
-        label: 'Twitter'
-      },
+      { href: '/photography', label: 'Photography' },
       { href: 'https://github.com/vnglst', label: 'GitHub' }
     ],
     [
@@ -29,6 +26,10 @@ export function Footer() {
       {
         href: 'https://bsky.app/profile/vnglst.bsky.social',
         label: 'Bluesky'
+      },
+      {
+        href: 'https://twitter.com/vnglst',
+        label: 'Twitter'
       }
     ]
   ];
