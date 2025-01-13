@@ -1,8 +1,8 @@
+import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { PhotoType } from './getPhotos';
-import { Suspense } from 'react';
 
 type PhotoGridProps = {
   photos: PhotoType[];
