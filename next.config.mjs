@@ -18,6 +18,9 @@ const config = {
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
+  },
+  images: {
+    minimumCacheTTL: 86400 // 1 day
   }
 };
 
