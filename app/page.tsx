@@ -1,3 +1,4 @@
+import Avatar from 'assets/avatar.jpg';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -24,7 +25,7 @@ export default function Home() {
             alt="Koen van Gilst"
             height={176}
             width={176}
-            src="/avatar.jpg"
+            src={Avatar}
             className="rounded-full grayscale filter"
             priority
           />
