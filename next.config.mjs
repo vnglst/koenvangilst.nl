@@ -20,7 +20,7 @@ const config = {
     COMMIT_HASH: commitHash
   },
   images: {
-    minimumCacheTTL: 86400 // 1 day
+    minimumCacheTTL: 31536000 // 1 year
   }
 };
 
