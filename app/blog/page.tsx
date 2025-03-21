@@ -31,16 +31,6 @@ export default async function Blog() {
     .like('pathname', '/blog/%')
     .then(({ data: views }) => views?.reduce((acc, view) => acc + view.total, 0));
 
-  const highlighted = [
-    'rising-temperatures',
-    'code-colocation-is-king',
-    'correspondence-vondel',
-    'keeping-code-complexity-in-check',
-    'ai-enhanced-learning'
-  ];
-
-  const highlightedPosts = sortedPosts.filter((post) => highlighted.includes(post.slug));
-
   return (
     <Container>
       <Prose>
@@ -51,7 +41,7 @@ export default async function Blog() {
           {totalViews.toLocaleString()} times.
         </p>
       </Prose>
-      <Search posts={sortedPosts} placeholderPosts={highlightedPosts} />
+      <Search posts={sortedPosts} />
     </Container>
   );
 }
