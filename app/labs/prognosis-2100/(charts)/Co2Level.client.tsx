@@ -20,7 +20,7 @@ export function Co2LevelClient({ data, className }: SealevelProps) {
   return (
     <Chart
       options={options}
-      className={`w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:border-none dark:bg-black ${className}`}
+      className={`w-full overflow-hidden border border-dashed border-gray-400 dark:border-none ${className}`}
     />
   );
 }

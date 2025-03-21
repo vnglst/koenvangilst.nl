@@ -7,8 +7,7 @@ import { Prose } from 'components/Prose';
 
 export const metadata = {
   title: 'Labs',
-  description:
-    'A list of coding experiments. Mostly small (educational) apps for my kids or to learn a new technology myself.',
+  description: 'A list of coding experiments. Mostly small side projects to learn about a new technology.',
   alternates: {
     canonical: 'labs'
   }
@@ -25,8 +24,8 @@ export default async function Labs() {
         <Heading level={1}>Code Labs</Heading>
         <p>
           Below, you'll find a collection of side projects I've been tinkering with. It's a mix of educational web apps,
-          Twitter bots, data visualisations and other fun creations. I mainly use these as playgrounds to dive deeper
-          into new tech or libraries, so the code is just me having a bit of fun.
+          data visualisations and other fun creations. I mainly use these as playgrounds to dive deeper into new tech or
+          libraries, so the code is just me having a bit of fun.
         </p>
       </Prose>
       <Heading level={2}>Side projects</Heading>

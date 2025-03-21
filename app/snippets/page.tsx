@@ -52,11 +52,7 @@ export default async function Snippets() {
 
 function SnippetLink({ title, description, slug, logo, views, ...rest }) {
   return (
-    <Link
-      href={`/snippets/${slug}`}
-      className="up-hover w-full rounded-xl border border-dashed border-gray-400 bg-gray-50 p-4 dark:bg-black"
-      {...rest}
-    >
+    <Link href={`/snippets/${slug}`} className="up-hover w-full border border-dashed border-gray-400 p-4" {...rest}>
       <div className="flex content-baseline justify-between">
         <Image alt={title} height={32} width={32} src={`/static/logos/${logo}`} className="rounded-full" />
         <span className="text-sm text-gray-600 dark:text-gray-400">{views} views</span>
