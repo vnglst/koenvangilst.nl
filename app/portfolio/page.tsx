@@ -16,7 +16,7 @@ export default async function Portfolio() {
         <p>
           I've had a long multifaceted career, with a degree in philosophy and a lifelong interest in technology and
           coding. My journey has taken me from the early days of hands-on coding to a leadership role where I not only
-          experiment with new ideas but also build and support innovative teams.Today, as a Tech Lead at Rabobank, I'm
+          experiment with new ideas but also build and support innovative teams. Today, as a Tech Lead at Rabobank, I'm
           driven by a clear mission: to build a better bank by fighting complexity and applying GenAI when it makes
           sense.
         </p>
