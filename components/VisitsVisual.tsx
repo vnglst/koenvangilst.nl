@@ -14,7 +14,7 @@ export function VisitsVisual({ visits }: VisitsVisualProps) {
   return (
     <Chart
       options={options}
-      className="aspect-video min-h-[80vh] w-full overflow-hidden rounded-xl border border-dashed border-gray-400 bg-white dark:bg-[#111827] md:min-h-0"
+      className="aspect-video min-h-[80vh] w-full overflow-hidden border border-dashed border-gray-400 md:min-h-0"
     />
   );
 }

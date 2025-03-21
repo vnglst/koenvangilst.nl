@@ -26,17 +26,13 @@ export function Footer() {
       {
         href: 'https://bsky.app/profile/vnglst.bsky.social',
         label: 'Bluesky'
-      },
-      {
-        href: 'https://twitter.com/vnglst',
-        label: 'Twitter'
       }
     ]
   ];
 
   return (
-    <footer className="flex flex-col justify-center px-8">
-      <div className="mx-auto mb-16 flex w-full max-w-[65ch] flex-col items-start justify-center px-8 py-16 md:px-0">
+    <footer className="flex flex-col justify-center border-t border-dashed border-gray-400 p-6">
+      <div className="mx-auto flex w-full max-w-[65ch] flex-col p-4 md:px-0">
         <div className="grid w-full grid-cols-1 justify-between gap-4 sm:grid-cols-4">
           {footerLinks.map((links, index) => (
             <FooterLinkGroup key={index}>
