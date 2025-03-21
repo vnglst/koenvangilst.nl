@@ -22,7 +22,7 @@ module.exports = {
         }
       },
       colors: {
-        primary: '#5bc3eb',
+        primary: '#199acc',
         'primary-bright': '#74e2ff'
       },
       fontFamily: {
@@ -33,11 +33,12 @@ module.exports = {
           css: {
             color: theme('colors.gray.700'),
             a: {
-              color: '#53ceff',
+              textDecoration: 'underline',
+              color: theme('colors.gray.900'),
               '&:hover': {
-                color: theme('colors.blue.300')
+                textDecoration: 'none'
               },
-              code: { color: '#53ceff' }
+              code: { color: theme('colors.gray.700') }
             },
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32]
@@ -51,10 +52,7 @@ module.exports = {
           css: {
             color: theme('colors.gray.200'),
             a: {
-              color: '#53ceff',
-              '&:hover': {
-                color: theme('colors.blue.300')
-              },
+              color: theme('colors.gray.200'),
               code: { color: '#53ceff' }
             },
             blockquote: {

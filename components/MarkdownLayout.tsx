@@ -59,10 +59,6 @@ export async function MarkdownLayout({
         <MDXComponent code={code} additionalComponents={additionalComponents} />
       </Prose>
       <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
-        <a href={getDiscussUrl(path)} target="_blank" rel="noopener noreferrer">
-          {'Discuss on Twitter'}
-        </a>
-        {` • `}
         <a href={getEditUrl(path)} target="_blank" rel="noopener noreferrer">
           {'Edit on GitHub'}
         </a>

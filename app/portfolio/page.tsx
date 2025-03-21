@@ -1,50 +1,38 @@
-import { getClients } from 'cms/queries';
-
 import { Container } from 'components/Container';
 import { Heading } from 'components/Heading';
-import { ProjectLink } from 'components/ProjectLink';
 import { Prose } from 'components/Prose';
 
 export const metadata = {
-  title: 'Portfolio',
+  title: 'About',
   description:
-    'Experienced Tech Lead at Rabobank with a background in web development and over a decade of experience. Specialized in GenAI, React for frontend design and TypeScript for backend API development.'
+    'Tech Lead at Rabobank with a philosophy degree and passion for technology. I drive innovation, build teams, and apply GenAI to simplify banking. Committed to fostering an engineering culture that values expertise and continuous learning.'
 };
 
 export default async function Portfolio() {
-  const sorted = (await getClients()).sort((a, b) => Number(b.year) - Number(a.year));
-
   return (
     <Container>
       <Prose>
-        <Heading level={1}>Portfolio</Heading>
+        <Heading level={1}>About</Heading>
         <p>
-          I began my career as a web developer, working on diverse projects such as developing a mobile app for a global
-          fashion brand, designing an audio player for users with visual impairments, and engineering a web application
-          for investment banking professionals. My primary focus has been on frontend development, utilizing React and
-          other frameworks to create intuitive user interfaces. Beyond frontend work, I am skilled in backend
-          development with Python, TypeScript and Node.js and enjoy experimenting with Elixir for side projects.
+          I've had a long multifaceted career, with a degree in philosophy and a lifelong interest in technology and
+          coding. My journey has taken me from the early days of hands-on coding to a leadership role where I not only
+          experiment with new ideas but also build and support innovative teams. Today, as a Tech Lead at Rabobank, I'm
+          driven by a clear mission: to build a better bank by fighting complexity and applying GenAI when it makes
+          sense.
         </p>
         <p>
-          In 2022, I transitioned from freelancing to a corporate setting as the Lead Frontend Developer at Rabobank.
-          Building on this experience, I started a new role in 2024 as the Tech Lead GenAI, where I lead the technical
-          development of GenAI-driven solutions. In this role, I oversee technical projects and collaborate with
-          cross-functional teams to advance agrifinance through innovative technology.
+          To do this I experiment with new ideas around GenAI and design early-stage technical tests to ensure solutions
+          are feasible. I build and support teams, recruit talent, and secure the necessary resources to move our
+          projects forward. By working closely with business lines and other technical stakeholders in the bank, I make
+          sure technical strategies are aligned with product goals, and I guide projects from initial experimentation to
+          a successful MVP.
+        </p>
+        <p>
+          At the core of my work is a commitment to stimulating an engineering culture that values craftsmanship,
+          technical expertise, and continuous learning. I strive to create environments where teams are empowered to use
+          the right technological solutions, enabling them to excel and help the Rabobank innovate with AI.
         </p>
       </Prose>
-
-      <Heading level={2}>Recent projects</Heading>
-      {sorted.map((client) => {
-        return (
-          <ProjectLink
-            key={client.slug}
-            title={client.name}
-            publishedAt={client.year + '-01-01'}
-            summary={client.summary}
-            href={`/portfolio/${client.slug}`}
-          />
-        );
-      })}
     </Container>
   );
 }

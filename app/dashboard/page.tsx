@@ -59,8 +59,7 @@ type Props = {
 };
 
 async function MetricCard({ header, link, metric }: Props) {
-  const className =
-    'min-h-[102px] bg-white dark:bg-gray-900 border border-dashed border-gray-400 rounded-lg p-4 w-full text-gray-900 dark:text-gray-100';
+  const className = 'min-h-[102px] border border-dashed border-gray-400 p-4 w-full text-gray-900 dark:text-gray-100';
 
   // Show placeholder if props are missing
   if (!metric || !header || !link) return <div className={className} />;

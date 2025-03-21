@@ -1,6 +1,6 @@
 {
   "name": "koenvangilst.nl",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Koen van Gilst's personal website",
   "private": true,
   "license": "MIT",
@@ -21,7 +21,7 @@
     "d3": "^7.9.0",
     "d3-hexbin": "^0.2.2",
     "echarts": "5.6.0",
-    "esbuild": "0.24.2",
+    "esbuild": "^0.25.0",
     "eslint": "8.57.0",
     "eslint-config-next": "15.1.4",
     "eslint-plugin-simple-import-sort": "12.1.1",
