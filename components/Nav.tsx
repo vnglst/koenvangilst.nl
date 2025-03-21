@@ -11,7 +11,7 @@ export function Nav() {
         Skip to content
       </a>
       <NavItemHome />
-      <NavItem slug="portfolio" text="Work" />
+      <NavItem slug="portfolio" text="About" />
       <NavItem slug="labs" text="Labs" />
       <NavItem slug="blog" text="Blog" />
       <ThemeToggle />
