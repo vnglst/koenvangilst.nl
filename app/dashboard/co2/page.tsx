@@ -30,7 +30,6 @@ export default async function Page() {
           is reading the data on a 1 minute interval via Bluetooth. I also wrote a{' '}
           <Link href="/blog/aranet4-co2-monitor">blog post</Link> about it. Should the levels rise above the recommended
           threshold of 1000 ppm, don't hesitate to reach out to me on{' '}
-          <a href="https://twitter.com/intent/tweet?text=@vnglst%20Open%20a%20window%20now!">Twitter</a> or{' '}
           <a href="https://elk.zone/hachyderm.io/@vnglst">Mastodon</a> to remind me to ventilate!
         </p>
       </Prose>
