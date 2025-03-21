@@ -19,7 +19,7 @@ export default async function Portfolio() {
       <Prose>
         <Heading level={1}>Portfolio</Heading>
         <p>
-          As Tech Lead GenAI at Rabobank, I lead the technical development of AI-driven solutions, overseeing projects
+          As a Tech Lead GenAI at Rabobank, I lead the technical development of AI-driven solutions, overseeing projects
           and collaborating with cross-functional teams. My background includes web development experience across
           diverse projects, from mobile apps for global fashion brands to specialized applications for investment
           banking. I've focused primarily on frontend development with React & Angular while maintaining skills in
