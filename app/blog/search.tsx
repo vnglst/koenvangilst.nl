@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import { Heading } from 'components/Heading';
 import { Icon } from 'components/Icon';
 import { BlogPostLink } from 'components/PostLink';
 
@@ -15,10 +14,9 @@ type Post = {
 
 type SearchProps = {
   posts: Post[];
-  placeholderPosts: Post[];
 };
 
-export function Search({ posts, placeholderPosts }: SearchProps) {
+export function Search({ posts }: SearchProps) {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Post[]>([]);
 
@@ -46,31 +44,15 @@ export function Search({ posts, placeholderPosts }: SearchProps) {
           value={query}
           onChange={handleSearch}
           placeholder="Search articles"
-          className="block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+          className="block w-full rounded-none border border-dashed border-gray-400 p-6 px-4 py-2 text-gray-900 dark:border-gray-900 dark:bg-black dark:bg-gray-800 dark:text-gray-100"
         />
         <Icon icon="search" className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="mt-8 flex flex-col gap-6">
         {!query ? (
-          <>
-            <Heading level={2} className="mb-1">
-              Featured
-            </Heading>
-            {placeholderPosts.map((post) => (
-              <BlogPostLink key={post.title} {...post} />
-            ))}
-            <Heading level={2} className="mb-1">
-              All Posts
-            </Heading>
-            {posts.map((post) => (
-              <BlogPostLink key={post.title} {...post} />
-            ))}
-          </>
+          posts.map((post) => <BlogPostLink key={post.title} {...post} />)
         ) : (
           <>
-            <Heading level={2} className="mb-1">
-              Search result
-            </Heading>
             {searchResults.map((post) => (
               <BlogPostLink key={post.title} {...post} />
             ))}
