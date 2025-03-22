@@ -50,7 +50,17 @@ export function ForestTrack({ baseLayers }: Props) {
       setActiveLayerIdx(undefined);
     } else {
       setShowWayback(true);
+      setBoxVisible(false);
       await updateLayers(settings.centerPoint);
+    }
+  }
+
+  function handleInfoBoxToggle() {
+    if (isBoxVisible) {
+      setBoxVisible(false);
+    } else {
+      setBoxVisible(true);
+      setShowWayback(false);
     }
   }
 
@@ -80,7 +90,7 @@ export function ForestTrack({ baseLayers }: Props) {
       <div className="relative h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
         {isBoxVisible ? (
           <div className="bg-white p-8 pt-10 dark:bg-transparent">
-            <button onClick={() => setBoxVisible(false)} className="absolute left-0 top-0 p-4">
+            <button onClick={handleInfoBoxToggle} className="absolute left-0 top-0 p-4">
               <Icon icon="minus" className="h-6 w-6 text-black dark:text-white" />
             </button>
             <Heading>Forest Track</Heading>
@@ -107,7 +117,7 @@ export function ForestTrack({ baseLayers }: Props) {
             </Prose>
           </div>
         ) : (
-          <button onClick={() => setBoxVisible(true)} className="relative p-4">
+          <button onClick={handleInfoBoxToggle} className="relative p-4">
             <Icon icon="plus" className="h-6 w-6 text-black dark:text-white" />
           </button>
         )}
