@@ -33,8 +33,8 @@ type ArcGISMapProps = {
 const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPointChange }: ArcGISMapProps) => {
   const startYear = parseInt(CONFIG.endYear) - parseInt(initial.yearsBack);
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<Map>();
-  const mapViewRef = useRef<MapView>();
+  const mapRef = useRef<Map>(null);
+  const mapViewRef = useRef<MapView>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -145,10 +145,12 @@ const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPo
   const debouncedHandler = useDebounce(() => {
     if (!mapViewRef.current) return;
 
+    const { center, zoom } = mapViewRef.current;
+
     handleCenterPointChange({
-      latitude: mapViewRef.current.center.latitude,
-      longitude: mapViewRef.current.center.longitude,
-      zoom: mapViewRef.current.zoom
+      latitude: center?.latitude ?? initial.latitude,
+      longitude: center?.longitude ?? initial.longitude,
+      zoom: zoom ?? initial.zoom
     });
   }, 1300);
 
