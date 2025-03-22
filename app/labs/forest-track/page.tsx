@@ -26,7 +26,7 @@ export default async function Page() {
     <Container footer={false} useLayout={false}>
       <div className="flex h-full h-screen w-full bg-slate-200 px-4 pb-6 pt-20 text-black dark:bg-slate-800 dark:text-white md:px-8 md:pt-28">
         <Suspense>
-          {!isDevelopment ? (
+          {isDevelopment ? (
             <ForestTrack baseLayers={baseLayers} />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center">
