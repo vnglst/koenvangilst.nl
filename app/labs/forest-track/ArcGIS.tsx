@@ -30,13 +30,7 @@ type ArcGISMapProps = {
   handleCenterPointChange: (centerPoint: CenterPoint) => void;
 };
 
-const ArcGISMap = ({
-  showTreeLoss,
-  showTreeGain,
-  initial,
-  active,
-  handleCenterPointChange
-}: ArcGISMapProps) => {
+const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPointChange }: ArcGISMapProps) => {
   const startYear = parseInt(CONFIG.endYear) - parseInt(initial.yearsBack);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>();
@@ -169,7 +163,7 @@ const ArcGISMap = ({
     return () => {
       watcher?.remove();
     };
-  }, []);
+  }, [debouncedHandler]);
 
   useEffect(() => {
     if (!mapViewRef.current) return;

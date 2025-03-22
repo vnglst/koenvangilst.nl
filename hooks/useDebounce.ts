@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 type Fn = () => void;
 
 export const useDebounce = (callback: Fn, time: number) => {
-  const ref = useRef<Fn>();
+  const ref = useRef<Fn>(null);
 
   useEffect(() => {
     ref.current = callback;
