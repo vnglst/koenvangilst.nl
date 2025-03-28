@@ -70,7 +70,3 @@ export async function MarkdownLayout({
 function getEditUrl(path: string) {
   return `https://github.com/vnglst/koenvangilst.nl/edit/main/data${path}.mdx`;
 }
-
-function getDiscussUrl(path: string) {
-  return `https://mobile.twitter.com/search?q=${encodeURIComponent(`https://koenvangilst.nl${path}`)}`;
-}
