@@ -17,7 +17,7 @@ export function Photo({
   currentIndex: number;
 }) {
   const router = useRouter();
-  const [isFullScreen, setIsFullScreen] = useState(true);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
