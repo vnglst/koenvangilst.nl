@@ -142,7 +142,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: '#74e2ff'
+            color: '#2196f3'
           },
           {
             offset: 1,
@@ -157,7 +157,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
             },
             {
               offset: 1,
-              color: '#74e2ff'
+              color: '#2196f3'
             }
           ])
         }

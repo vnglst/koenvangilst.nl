@@ -152,7 +152,7 @@ function generateOptions(data: Data, showPrognosis: boolean) {
 
           const factor =
             (value - data.min_temperature_anomaly) / (data.max_temperature_anomaly - data.min_temperature_anomaly);
-          const color = echarts.color.lerp(factor, ['#74e2ff', '#cbf3ff', '#ffcc6a', '#ff9662']);
+          const color = echarts.color.lerp(factor, ['#2196f3', '#cbf3ff', '#ffcc6a', '#ff9662']);
 
           return {
             value,

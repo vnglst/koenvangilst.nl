@@ -112,7 +112,7 @@ function generateOptions(visits: View[]) {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: '#74e2ff'
+            color: '#2196f3'
           },
           {
             offset: 1,

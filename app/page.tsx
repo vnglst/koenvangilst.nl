@@ -57,7 +57,7 @@ async function FeaturedCard({ title, path }: FeatureCardProps) {
   return (
     <Link href={path} className="border border-dashed border-gray-400 p-6 dark:bg-black md:w-1/3">
       <div className="up-hover flex h-full w-full flex-col justify-between">
-        <h3 className="mb-4 w-full text-balance text-lg font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6 md:text-lg">
+        <h3 className="mb-4 w-full text-balance font-sans font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6">
           {title}
         </h3>
         <div className="flex items-center text-gray-800 dark:text-gray-200">

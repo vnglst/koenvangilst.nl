@@ -1,6 +1,6 @@
-import { PropsWithChildren, Suspense } from 'react';
+import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
-import { Inter, Montserrat } from 'next/font/google';
+import { Inter, Fraunces } from 'next/font/google';
 
 import { Body } from 'components/Body';
 import { Tracking } from 'components/Tracking';
@@ -9,10 +9,10 @@ import 'styles/global.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const montserrat = Montserrat({
-  weight: '900',
+const fraunces = Fraunces({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
-  variable: '--font-montserrat'
+  variable: '--font-fraunces'
 });
 
 const meta = {
@@ -92,7 +92,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${montserrat.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
+      className={`${fraunces.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />

@@ -15,17 +15,17 @@ export function Heading({
 }: PropsWithChildren<Props>) {
   const Tag = `h${level}`;
 
-  let className = 'font-bold tracking-tight leading-none text-black dark:text-white text-balance ';
+  let className = 'font-bold tracking-tight leading-none text-slate-800 dark:text-slate-200 text-balance ';
 
   switch (level) {
     case 1:
-      className += 'my-3 text-4xl md:text-5xl';
+      className += 'my-3 text-3xl md:text-4xl';
       break;
     case 2:
-      className += 'mt-10 mb-6 text-2xl md:text-4xl';
+      className += 'mt-10 mb-6 text-2xl md:text-3xl';
       break;
     default:
-      className += 'mt-6 mb-4 text-xl md:text-3xl line';
+      className += 'mt-6 mb-4 text-xl md:text-2xl line';
       break;
   }
 
