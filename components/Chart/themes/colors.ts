@@ -1,6 +1,6 @@
 export const colors = {
   turquoise: '#red',
-  primaryBlue: '#74e2ff',
+  primaryBlue: '#2196f3',
   skyBlue: '#5ab1ef',
   sandyBrown: '#ffb980',
   lightCoral: '#d87a80',

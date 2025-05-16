@@ -49,8 +49,13 @@ dialog:modal {
   outline: 2px solid #199acc;
 }
 
-h1 {
-  font-family: var(--font-montserrat), sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-fraunces), serif;
 }
 
 .up-hover:hover {

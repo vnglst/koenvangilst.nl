@@ -22,11 +22,11 @@ module.exports = {
         }
       },
       colors: {
-        primary: '#199acc',
-        'primary-bright': '#74e2ff'
+        primary: '#2196f3'
       },
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans]
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        fraunces: ['var(--font-fraunces)', 'serif']
       },
       typography: (theme) => ({
         DEFAULT: {

@@ -73,7 +73,7 @@ function generateOptions(heatmap: Data) {
       left: 'center',
       type: 'continuous',
       inRange: {
-        color: ['#74e2ff', '#ffffff', '#ff9662']
+        color: ['#2196f3', '#ffffff', '#ff9662']
       }
     },
     tooltip: {

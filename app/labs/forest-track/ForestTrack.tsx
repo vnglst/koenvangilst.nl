@@ -133,7 +133,7 @@ export function ForestTrack({ baseLayers }: Props) {
         <Checkbox color="blue" onChange={settings.toggleTreeGainLayer} checked={settings.showTreeGain}>
           Tree gain
         </Checkbox>
-        <Checkbox color="primary-bright" onChange={handleToggleWayback} checked={showWayback}>
+        <Checkbox color="primary" onChange={handleToggleWayback} checked={showWayback}>
           History
         </Checkbox>
       </div>
@@ -160,7 +160,7 @@ export function ForestTrack({ baseLayers }: Props) {
                   const isActive = activeLayer?.releaseNumber === layer.releaseNumber;
                   const classes = cx(
                     'absolute h-3.5 w-3.5 cursor-pointer rounded-full transition-all duration-200 ease-in-out bg-opacity-10',
-                    isActive ? 'scale-150 bg-primary-bright bg-opacity-100' : 'bg-primary bg-opacity-100'
+                    isActive ? 'scale-150 bg-primary bg-opacity-100' : 'bg-primary bg-opacity-100'
                   );
 
                   return (

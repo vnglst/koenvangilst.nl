@@ -5,7 +5,7 @@ interface CheckboxProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
   className?: string;
-  color?: 'blue' | 'pink' | 'primary-bright';
+  color?: 'blue' | 'pink' | 'primary';
 }
 
 export function Checkbox({ label, onChange, checked, className, color, children }: PropsWithChildren<CheckboxProps>) {
@@ -18,9 +18,9 @@ export function Checkbox({ label, onChange, checked, className, color, children 
     case 'pink':
       colorClass = 'checked:bg-pink-400';
       break;
-    case 'primary-bright':
+    case 'primary':
     default:
-      colorClass = 'checked:bg-primary-bright';
+      colorClass = 'checked:bg-primary';
       break;
   }
 
