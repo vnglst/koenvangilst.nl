@@ -139,8 +139,8 @@ export function ForestTrack({ baseLayers }: Props) {
       </div>
 
       {showWayback ? (
-        <div className={`${isBoxVisible ? 'hidden' : 'flex'} mt-auto w-full justify-center md:flex`}>
-          <div className="flex w-full max-w-4xl flex-col gap-2 rounded-xl bg-black bg-opacity-70 p-4 backdrop-saturate-50">
+        <div className={`${isBoxVisible ? 'hidden' : 'flex'} pb-safe-bottom mt-auto w-full justify-center md:flex`}>
+          <div className="mb-4 flex w-full max-w-4xl flex-col gap-2 rounded-xl bg-black bg-opacity-70 p-4 backdrop-saturate-50 md:mb-0">
             <div className="flex justify-between p-2 text-white">
               {formatDate(activeLayer?.date) || '\u00A0'}
               {isLoading && <span className="ping">Loading...</span>}
