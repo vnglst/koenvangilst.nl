@@ -2,10 +2,10 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
-import { Icon } from 'components/Icon';
-import { Prose } from 'components/Prose';
+import { Heading } from 'components/content/Heading';
+import { Prose } from 'components/content/Prose';
+import { Container } from 'components/layout/Container';
+import { Icon } from 'components/ui/Icon';
 
 type ErrorProps = {
   error: Error & { digest?: string };

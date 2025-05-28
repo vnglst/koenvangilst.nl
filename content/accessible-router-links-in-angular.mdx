@@ -1,0 +1,67 @@
+---
+title: Accessible router links in Angular
+publishedAt: '2023-06-09'
+summary: About the routerLink directive and how to make sure it's accessible
+tags:
+  - article
+  - Angular
+  - html
+---
+
+I've recently had to opportunity to learn and work with the Angular framework within a team of experienced (and nice) frontend developers. To my surprise, there is a lot to like about Angular and I will write about that in a future post.
+
+Today, however, I'd like to discuss a feature of Angular that I think can be improved upon. I'm talking about the so-called [`routerLink`](https://angular.io/api/router/RouterLink#description) directive.
+
+For developers, this directive is a super convenient way to make any element a clickable navigation link in an app. You can use it on regular anchor tags, but also on divs, buttons, SVGs, images and even components. The only thing you're required to do is add `routerLink='/my-link'` to a tag or component. As I said, very convenient if you're a developer and in a hurry. But it's not always a good practice if you care about semantic HTML and accessibility.
+
+## Inaccessible routerLinks
+
+Let me explain why that is. First let's look at what happens if you use `routerLink` the correct way, by using it on an anchor tag:
+
+```javascript
+<a routerLink="/dashboard">Dashboard</a>
+```
+
+This works great. In the DOM you'll see an anchor tag that looks like this:
+
+```javascript
+<a routerlink="/dashboard" ng-reflect-router-link="/profile" href="/dashboard">
+  Dashboard
+</a>
+```
+
+This enables fast client-side navigation, it's accessible and all the other functionalities that users expect from links (like opening it in a new tab) just work.
+
+Now let's look at the example where a developer uses the `routerLink` directive on an `img` tag. Again, this is perfectly valid in Angular:
+
+```javascript
+<img src="/company-logo" routerLink="/" alt="company logo" />
+```
+
+The resulting DOM structure will look like this:
+
+```javascript
+<img
+  src="company-logo"
+  routerlink="/"
+  ng-reflect-router-link="/"
+  alt="company logo"
+  tabindex="0"
+  >
+```
+
+This image will act like a link, navigating the user back to the homepage. However, it won't be announced to the user as a link when using a screen reader and standard functionalities that users expect from a link (like opening it in a new tab) will not work. In short: it's an image unsuccessfully pretending to be a link.
+
+## How to fix this
+
+These problems can be relatively easily fixed by using an anchor tag for routerLinks and wrapping any other HTML tags (like images) in those. It's the task of the Angular developer to not succumb to the temptations of the powerful routerLink directive and only use it on anchor tags.
+
+I do think, however, that this is a problem that shouldn't exist in the first place. If you look at routing solutions from the React ecosystem you'll notice that their `<Link />` components are always extending anchor tags.[^1] In that way, the default way of adding links to an application is automatically accessible and semantically correct. Of course, there are ways to programmatically force router link behavior on other tags and components, but that's not recommended and not as easy to do.
+
+In the end, I think Angular should have chosen a similar path by letting the default way be accessible. It would, I have to agree, make the lives of Angular developers a bit harder, but as a result, users of Angular applications will have links that work in an accessible and reliable way.
+
+Realistically speaking this is not something Angular could fix without introducing a breaking change, but I think a note in their documentation about the recommended way of using `routerLinks` might be a quick win to make developers more aware of the issue.
+
+[^1]:
+    Most notably [React Router](https://reactrouter.com/en/main/components/link) and
+    [Next.js](https://nextjs.org/docs/pages/api-reference/components/link). [SvelteKit](https://kit.svelte.dev/docs/link-options) has a different approach where `<a>` elements are automatically upgraded to client-side navigation links. This is neat but also involves some magic that might not be obvious to developers.

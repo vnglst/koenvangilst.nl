@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
-import { Icon } from 'components/Icon';
-import { Prose } from 'components/Prose';
+import { Heading } from 'components/content/Heading';
+import { Prose } from 'components/content/Prose';
+import { Container } from 'components/layout/Container';
+import { Icon } from 'components/ui/Icon';
 
 export const metadata = {
   title: '404 – Not found'

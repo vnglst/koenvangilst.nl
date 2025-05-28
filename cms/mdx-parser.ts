@@ -10,9 +10,9 @@ import rehypeSlug from 'rehype-slug';
 
 import { sluggify } from 'lib/sluggify';
 
-import { Client, ClientMeta, Post, PostMeta, Project, ProjectMeta, Snippet, SnippetMeta } from './schema';
+import { Post, PostMeta } from './schema';
 
-type MetadataValidators = typeof SnippetMeta | typeof PostMeta | typeof ClientMeta | typeof ProjectMeta;
+type MetadataValidators = typeof PostMeta;
 
 export async function loadAllMdx<Validated>(dir: string, Validator: MetadataValidators) {
   const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
@@ -44,7 +44,7 @@ export async function loadAllMdx<Validated>(dir: string, Validator: MetadataVali
   });
 }
 
-type Validator = typeof Snippet | typeof Post | typeof Client | typeof Project;
+type Validator = typeof Post;
 
 export async function loadSingleMdx<Validated>(slug: string, dir: string, Validator: Validator) {
   const mdxFilePath = path.join(process.cwd(), dir, slug + '.mdx');
@@ -82,7 +82,7 @@ function loadFile(path: string) {
     const rawString = fs.readFileSync(path, 'utf-8');
     return rawString;
   } catch (error) {
-    console.log('Error loading file: ', error.message);
+    console.error('Error loading file: ', error.message);
     return null;
   }
 }
