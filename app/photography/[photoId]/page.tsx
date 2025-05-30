@@ -1,9 +1,6 @@
-import { Metadata } from 'next';
-
-import { Container } from 'components/Container';
+import { Container } from 'components/layout/Container';
 
 import { getPhotos } from '../getPhotos';
-
 import { Photo } from './Photo';
 
 export const dynamic = 'force-static';

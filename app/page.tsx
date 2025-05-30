@@ -1,70 +1,50 @@
-import Avatar from 'assets/avatar.jpg';
+import Avatar from 'app/avatar.jpg';
 import Image from 'next/image';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
-import { Icon } from 'components/Icon';
-import { ViewCount } from 'components/ViewCount';
+import { Heading } from 'components/content/Heading';
+import { Prose } from 'components/content/Prose';
+import { Container } from 'components/layout/Container';
+import { Link } from 'components/ui/Link';
+import { TagLink } from 'components/ui/Tag';
 
-export default function Home() {
+export async function generateMetadata() {
+  return {
+    title: 'Home | Koen van Gilst',
+    description:
+      "I'm Koen van Gilst, a software tinkerer and web enthusiast. Here you'll find my articles, coding experiments, side projects, and other work."
+  };
+}
+
+export default async function Home() {
   return (
-    <Container centered>
-      <section className="mb-4 flex flex-col-reverse items-start sm:flex-row">
-        <div className="flex flex-col pr-8">
-          <Heading level={1}>Koen van Gilst</Heading>
-          <div className="mb-4 text-gray-700 dark:text-gray-200">
-            Tech Lead at <span className="font-semibold">Rabobank</span>
-          </div>
-          <p className="text-gray-600 dark:text-gray-400">
-            I’m an innovative Tech Lead from the Netherlands building GenAI solutions that users love.
-          </p>
-        </div>
-        <div className="relative mr-auto mt-4 w-[80px] sm:w-[176px]">
+    <Container>
+      <section className="flex flex-col items-center">
+        <NextLink href="/about">
           <Image
             alt="Koen van Gilst"
             height={176}
             width={176}
             src={Avatar}
-            className="rounded-full grayscale filter"
+            className="rounded-full border-4 border-slate-900 grayscale filter dark:border-slate-100"
             priority
           />
+        </NextLink>
+        <Prose className="flex flex-col items-center">
+          <Heading level={1}>Koen van Gilst</Heading>
+          <p className="text-center">
+            I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
+            life using code. <Link href="/about">Read more</Link>
+          </p>
+        </Prose>
+
+        <div className="mt-8 flex flex-wrap justify-center gap-2">
+          <TagLink href="/lab?q=article">articles</TagLink>
+          <TagLink href="/lab?q=generative-art">coding experiments</TagLink>
+          <TagLink href="/lab?q=side-project">side projects</TagLink>
+          <TagLink href="/lab?q=work">work</TagLink>
         </div>
       </section>
-      <Heading level={2}>Featured</Heading>
-      <section className="flex flex-col gap-6 md:flex-row">
-        <FeaturedCard title="Rising Temperatures in The Netherlands" path="/blog/rising-temperatures" />
-        <FeaturedCard title="Time Flies & Other Visualisations" path="/labs/pong-wars" />
-        <FeaturedCard title="Land Use in The Netherlands" path="/labs/ons-land" />
-      </section>
-      <Link
-        href="/blog"
-        className="align-center my-8 flex w-fit text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        Read all posts
-        <Icon icon="arrow-right" className="ml-1 h-6 w-6" />
-      </Link>
     </Container>
-  );
-}
-
-type FeatureCardProps = {
-  title: string;
-  path: string;
-};
-
-async function FeaturedCard({ title, path }: FeatureCardProps) {
-  return (
-    <Link href={path} className="border border-dashed border-gray-400 p-6 dark:bg-black md:w-1/3">
-      <div className="up-hover flex h-full w-full flex-col justify-between">
-        <h3 className="mb-4 w-full text-balance font-sans font-medium tracking-tight text-gray-900 dark:text-gray-100 md:mb-6">
-          {title}
-        </h3>
-        <div className="flex items-center text-gray-800 dark:text-gray-200">
-          <Icon icon="eye" className="h-6 w-6" />
-          <ViewCount className="ml-2 align-baseline" path={path} />
-        </div>
-      </div>
-    </Link>
   );
 }

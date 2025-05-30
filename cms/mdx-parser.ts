@@ -10,16 +10,16 @@ import rehypeSlug from 'rehype-slug';
 
 import { sluggify } from 'lib/sluggify';
 
-import { Client, ClientMeta, Post, PostMeta, Project, ProjectMeta, Snippet, SnippetMeta } from './schema';
+import { Post, PostMeta } from './schema';
 
-type MetadataValidators = typeof SnippetMeta | typeof PostMeta | typeof ClientMeta | typeof ProjectMeta;
+const CONTENT_DIR = 'content';
 
-export async function loadAllMdx<Validated>(dir: string, Validator: MetadataValidators) {
-  const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
+export async function getPosts() {
+  const mdxFiles = fs.readdirSync(CONTENT_DIR).filter((file) => path.extname(file) === '.mdx');
 
   const rawMetadata = mdxFiles.map((file) => {
     const slug = file.replace(/\.mdx$/, '');
-    const mdxPath = path.join(process.cwd(), dir, file);
+    const mdxPath = path.join(process.cwd(), CONTENT_DIR, file);
     const rawString = fs.readFileSync(mdxPath, 'utf-8');
     const { data } = grayMatter(rawString);
 
@@ -33,21 +33,21 @@ export async function loadAllMdx<Validated>(dir: string, Validator: MetadataVali
     };
   });
 
-  return rawMetadata.map((item) => {
+  const validatedItems = rawMetadata.map((item) => {
     try {
-      return Validator.parse(item) as Validated;
+      return PostMeta.parse(item);
     } catch (error) {
       console.error('Error parsing item: ', item);
       console.error('Error: ', error.message);
       throw error;
     }
   });
+
+  return validatedItems.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
-type Validator = typeof Snippet | typeof Post | typeof Client | typeof Project;
-
-export async function loadSingleMdx<Validated>(slug: string, dir: string, Validator: Validator) {
-  const mdxFilePath = path.join(process.cwd(), dir, slug + '.mdx');
+export async function getPost(slug: string) {
+  const mdxFilePath = path.join(process.cwd(), CONTENT_DIR, slug + '.mdx');
   const rawString = loadFile(mdxFilePath);
 
   if (!rawString) {
@@ -69,9 +69,9 @@ export async function loadSingleMdx<Validated>(slug: string, dir: string, Valida
   };
 
   try {
-    return Validator.parse(rawFile) as Validated;
+    return Post.parse(rawFile);
   } catch (error) {
-    console.error('Error parsing file: ', dir + '/' + slug);
+    console.error('Error parsing file: ', CONTENT_DIR + '/' + slug);
     console.error('Error: ', error.message);
     throw error;
   }
@@ -82,7 +82,7 @@ function loadFile(path: string) {
     const rawString = fs.readFileSync(path, 'utf-8');
     return rawString;
   } catch (error) {
-    console.log('Error loading file: ', error.message);
+    console.error('Error loading file: ', error.message);
     return null;
   }
 }
