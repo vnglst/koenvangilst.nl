@@ -49,6 +49,17 @@ export const redirects = async () => {
       destination: '/lab/:slug*',
       permanent: true
     },
+    // Redirects for /portfolio to /lab
+    {
+      source: '/portfolio',
+      destination: '/lab',
+      permanent: true
+    },
+    {
+      source: '/portfolio/:slug*',
+      destination: '/lab/:slug*',
+      permanent: true
+    },
     // Redirects for /snippets to /lab
     {
       source: '/snippets',
