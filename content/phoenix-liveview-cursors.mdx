@@ -1,0 +1,616 @@
+---
+title: Phoenix LiveView Cursors
+publishedAt: '2022-03-15'
+image:
+  src: /static/screenshots/phoenix-live-cursors.jpg
+  alt: Screenshot of the end result
+  width: 2152
+  height: 1372
+  showAsHeader: false
+summary: Part 2 of my tutorial creating "live cursors" as seen in Figma. In this tutorial, I'll be using Phoenix LiveView to create the same feature.
+tags:
+  - article
+  - elixir
+  - phoenix
+  - liveview
+  - presence
+  - tailwind
+  - tutorial
+---
+
+In my [previous tutorial](/blog/phoenix-live-cursors) I created a feature called "live cursors" using Phoenix Channels and Presence. In this tutorial, I'll create the same functionality using [**Phoenix LiveView**](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html). LiveView is a relatively new feature in Phoenix and a lot of people are very excited about it. If you've followed along in the previous tutorial you'll discover how much simpler and more readable the implementation becomes when using LiveView.
+
+## What we're building
+
+We'll be building a simple, but compelling software feature I've seen in the design tools like Figma. In Figma, you can see the mouse cursors of other users working on the document. It's a cool functionality and Phoenix LiveView was made for this!
+
+The feature works like this: when users visit the website, they're automatically added to a web socket channel, get assigned a user name (with a corresponding color) and can send messages to other users using the input field. The result of this tutorial will look like this:
+
+<Image
+  alt={`Screenshot of the end result`}
+  src={`/static/screenshots/phoenix-live-cursors.jpg`}
+  width={2152}
+  height={1372}
+  priority
+/>
+
+## Getting started
+
+Create a new Phoenix project using the command line. We don't need a database to get started, so we'll not add Ecto:
+
+```bash
+mix phx.new liveview_cursors --no-ecto
+```
+
+<Disclaimer>
+  Note: you can also follow along [on
+  Github](https://github.com/vnglst/phoenix_cursors/commits/main). I've created
+  waypoints after every step of the tutorial. Every waypoint is a commit on
+  Github.
+</Disclaimer>
+
+We'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [my earlier tutorial](/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/liveview_cursors/commit/a680d3f849de34710d902ae2777fd99b86c0f6dc).
+
+You can see the results so far by running:
+
+```bash
+mix phx.server
+```
+
+This should show a browser window with a nice wallpaper filled with ice creams, hamburgers and french fries. Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
+
+## Using a LiveView to show a cursor
+
+To add our first LiveView to the application we have to implement a new `live` route in our `router.ex` file.
+
+```elixir {5}
+  scope "/", LiveviewCursorsWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
+    live "/cursors", Cursors
+  end
+```
+
+Next, in the folder `lib/liveview_cursors_web/live`, create a file `cursors.ex` with the following code. This'll be our LiveView.
+
+```elixir
+defmodule LiveviewCursorsWeb.Cursors do
+  use LiveviewCursorsWeb, :live_view
+
+  def mount(_params, _session, socket) do
+    updated =
+      socket
+      |> assign(:x, 50)
+      |> assign(:y, 50)
+
+    {:ok, updated}
+  end
+
+  def render(assigns) do
+    ~H"""
+    <ul class="list-none">
+      <li style={"color: deeppink; left: #{@x}%; top: #{@y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+        <svg
+        version="1.1"
+        width="25px"
+        height="25px"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 21 21">
+          <polygon
+          fill="black"
+          points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+          <polygon
+          fill="currentColor"
+          points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+          />
+        </svg>
+      </li>
+    </ul>
+    """
+  end
+end
+```
+
+Start the server and open the browser to the `/cursors` route. In the middle of the screen, you should see a static pink cursor. We've given it a static position (of 50%) in the `mount` function, but we're not updating it yet. That's no fun, of course, so let's make it more dynamic.
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/9c02ea98ac6ad6ddabf1b96f4bc17d42afae66e4" />
+
+## Tracking cursor movements
+
+The idea of LiveView is to do as much of the work on the server, but in some cases, this is not possible. In our example, we want to keep track of mouse movements on the client and send these to the server. You can't do that without at least some JavaScript.
+
+As an escape hatch Phoenix offers so-called **client hooks** with the `phx-hook` binding. These hooks are initialized on the client and allow us to write JavaScript to send events to the server. In our case, we'll use the hook to listen to `mousemove` events and send the changed coordinates to the server. In `assets/js/app.js` add the following code:
+
+```js {5-15,19}
+let csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute('content');
+
+let Hooks = {};
+
+Hooks.TrackClientCursor = {
+  mounted() {
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.pageX / window.innerWidth) * 100; // in %
+      const y = (e.pageY / window.innerHeight) * 100; // in %
+      this.pushEvent('cursor-move', { x, y });
+    });
+  }
+};
+
+let liveSocket = new LiveSocket('/live', Socket, {
+  hooks: Hooks,
+  params: { _csrf_token: csrfToken }
+});
+```
+
+To activate a hook in our LiveView template, we have to specify the hook name in the `phx-hook` binding. In our case, it doesn't matter to which element we bind it. Make sure to add an id to the element so that LiveView can identify it. We also need to handle the events coming from the client. In our LiveView file `cursors.ex` make the following changes:
+
+```elixir {11-18, 22,23}
+defmodule LiveviewCursorsWeb.Cursors do
+  use LiveviewCursorsWeb, :live_view
+  def mount(_params, _session, socket) do
+    updated =
+      socket
+      |> assign(:x, 50)
+      |> assign(:y, 50)
+    {:ok, updated}
+  end
+
+  def handle_event("cursor-move", %{"x" => x, "y" => y}, socket) do
+    updated =
+      socket
+      |> assign(:x, x)
+      |> assign(:y, y)
+
+    {:noreply, updated}
+  end
+
+  def render(assigns) do
+    ~H"""
+    <ul class="list-none" id="cursors" phx-hook="TrackClientCursor">
+      <li style={"color: deeppink; left: #{@x}%; top: #{@y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+        <svg
+        version="1.1"
+        width="25px"
+        height="25px"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 21 21">
+          <polygon
+          fill="black"
+          points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+          <polygon
+          fill="currentColor"
+          points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+          />
+        </svg>
+      </li>
+    </ul>
+    """
+  end
+end
+```
+
+If you start the server and open the browser again, you should see a pink cursor following your mouse movements.
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/5ceb53e1c94091ec4f07b7f81294b05c8a7d6851" />
+
+<Image
+  alt={`Screenshot of the cursor on the client`}
+  src={`/static/screenshots/phoenix-liveview-hook.jpg`}
+  width={1060}
+  height={1064}
+/>
+
+## Identifying users
+
+Showing a copy of your mouse cursor is nothing special. We want to be able to broadcast this information to every user in the channel and _at the same time_ keep track of who's in that channel. To make that happen we first need to be able to identify our users.
+
+We'll substitute real authentication with a simplified flow like this: When a user visits the website, a session is automatically created by assigning a random name to a user. After the session is created, we'll redirect to the `/cursors` route. There we can retrieve the user name from the session and display it under the cursor.
+
+Let's start with a utility function that generates a random name. Create the following file `lib/liveview_cursors/names.ex`:
+
+```elixir
+defmodule LiveviewCursorsWeb.Name do
+  def generate do
+    title = ~w(Sir Sr Prof Saint Ibn Lady Madam Mistress Herr Dr) |> Enum.random()
+
+    name =
+      [
+        ~w(B C D F G H J K L M N P Q R S T V W X Z),
+        ~w(o a i ij e ee u uu oo aj aa oe ou eu),
+        ~w(b c d f g h k l m n p q r s t v w x z),
+        ~w(o a i ij e ee u uu oo aj aa oe ou eu)
+      ]
+      |> Enum.map(fn l -> Enum.random(l) end)
+      |> Enum.join()
+
+    "#{title} #{name}"
+  end
+end
+```
+
+Next, update the controller for the root route to create a new session if there is none. After that redirect the user to the `/cursors` route. In `page_controller.ex` update the code to the following:
+
+```elixir {5-17}
+defmodule LiveviewCursorsWeb.PageController do
+  use LiveviewCursorsWeb, :controller
+
+  def index(conn, _params) do
+    session = conn |> get_session()
+
+    case session do
+      %{"user" => _user} ->
+        conn
+        |> redirect(to: "/cursors")
+
+      _ ->
+        conn
+        |> put_session(:user, LiveviewCursorsWeb.Name.generate())
+        |> configure_session(renew: true)
+        |> redirect(to: "/cursors")
+    end
+  end
+end
+```
+
+In our LiveView we also have to make sure a user has a valid session by checking if the `user` key is present. If it is, we'll display that name under the cursor. Make the following changes in `cursors.ex`:
+
+```elixir {4, 9, 14-17, 45}
+defmodule LiveviewCursorsWeb.Cursors do
+  use LiveviewCursorsWeb, :live_view
+
+  def mount(_params, %{"user" => user}, socket) do
+    updated =
+      socket
+      |> assign(:x, 50)
+      |> assign(:y, 50)
+      |> assign(:user, user)
+
+    {:ok, updated}
+  end
+
+  # if no user name, redirect to root to generate one
+  def mount(_params, _session, socket) do
+    {:ok, socket |> redirect(to: "/")}
+  end
+
+  def handle_event("cursor-move", %{"x" => x, "y" => y}, socket) do
+    updated =
+      socket
+      |> assign(:x, x)
+      |> assign(:y, y)
+    {:noreply, updated}
+  end
+  def render(assigns) do
+    ~H"""
+    <ul class="list-none" id="cursors" phx-hook="TrackClientCursor">
+      <li style={"color: deeppink; left: #{@x}%; top: #{@y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+        <svg
+        version="1.1"
+        width="25px"
+        height="25px"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 21 21">
+          <polygon
+          fill="black"
+          points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+          <polygon
+          fill="currentColor"
+          points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+          />
+        </svg>
+        <span style={"background-color: deeppink;"} class="mt-1 ml-4 px-1 text-sm text-white"><%= @user %></span>
+      </li>
+    </ul>
+    """
+```
+
+Restart the server and open the browser. You should see the pink cursor again, but this time with a random name assigned to it. This name should persist between page refreshes and when you close the browser (it is stored in a cookie).
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/0cc3b3578d5366378be369e7e53e46e1a8ceb9c8" />
+
+## Tracking who's online
+
+We'll be using Phoenix Presence to keep track of who's online in the channel. We'll store information about the user (coordinates and name) in the Presence channel. First, add Presence to our application. We can use the Phoenix generator for this:
+
+```bash
+mix phx.gen.presence
+```
+
+Make sure to also follow the instructions after executing the generator. Take a look at the waypoint below if you get stuck.
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/7d70e848b63dfc46c2e2d84e2f81599d626caa8d" />
+
+The next step in the tutorial will be the most difficult one. The good thing is: to make this work we only need to make changes in our LiveView in `cursors.ex`. Let's break it down:
+
+In the mount function of our LiveView we'll initialize Presence for our channel by executing `Presence.track`. In the body of the function, we'll specify the initial values for the current user. Make the following changes:
+
+```elixir {2, 5, 7-19, 22,23}
+defmodule LiveviewCursorsWeb.Cursors do
+  alias LiveviewCursorsWeb.Presence
+  use LiveviewCursorsWeb, :live_view
+
+  @cursorview "cursorview"
+  def mount(_params, %{"user" => user}, socket) do
+    Presence.track(self(), @cursorview, socket.id, %{
+      socket_id: socket.id,
+      x: 50,
+      y: 50,
+      name: user
+    })
+
+    LiveviewCursorsWeb.Endpoint.subscribe(@cursorview)
+
+    initial_users =
+      Presence.list(@cursorview)
+      |> Enum.map(fn {_, data} -> data[:metas] |> List.first() end)
+
+    updated =
+      socket
+      |> assign(:user, user)
+      |> assign(:users, initial_users)
+      |> assign(:socket_id, socket.id)
+
+    {:ok, updated}
+  end
+```
+
+At the end of the `mount` function, we're assigning the user, the list of users currently present and the socket id to the LiveView socket. We'll be using that information to render the list of users in the LiveView. Update the `render` function at the bottom of the file with the following:
+
+```elixir {4,5, 21-25}
+def render(assigns) do
+  ~H"""
+  <ul class="list-none" id="cursors" phx-hook="TrackClientCursor">
+    <%= for user <- @users do %>
+      <li style={"color: deeppink; left: #{user.x}%; top: #{user.y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+        <svg
+        version="1.1"
+        width="25px"
+        height="25px"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 21 21">
+          <polygon
+          fill="black"
+          points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+          <polygon
+          fill="currentColor"
+          points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+          />
+        </svg>
+        <span style={"background-color: deeppink;"} class="mt-1 ml-4 px-1 text-sm text-white">
+          <%= user.name %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+  """
+end
+```
+
+We're now also able to properly handle the `cursor-move` events coming from the client. If we receive this event we'll update the coordinates in the list of users in the Presence channel with the `socket.id` as an identifier. The code for this is as follows:
+
+```elixir
+def handle_event("cursor-move", %{"x" => x, "y" => y}, socket) do
+  key = socket.id
+  payload = %{x: x, y: y}
+
+  metas =
+    Presence.get_by_key(@cursorview, key)[:metas]
+    |> List.first()
+    |> Map.merge(payload)
+
+  Presence.update(self(), @cursorview, key, metas)
+
+  {:noreply, socket}
+end
+```
+
+The only thing left to do is make sure we update our LiveView the moment a user leaves or joins the channel. All we need to do for this is synchronize the LiveView socket with the information available in the Presence channel. The code for this is as follows:
+
+```elixir
+def handle_info(%{event: "presence_diff", payload: _payload}, socket) do
+  users =
+    Presence.list(@cursorview)
+    |> Enum.map(fn {_, data} -> data[:metas] |> List.first() end)
+
+  updated =
+    socket
+    |> assign(users: users)
+    |> assign(socket_id: socket.id)
+
+  {:noreply, updated}
+end
+```
+
+Phew! Let's see if that worked. Restart the server and open the browser. You should see the pink cursor again. To verify that multiple users are tracked correctly open up another browser window **either in a different browser or in private mode**. We need to make sure that we create a new session. Otherwise, you'll just see two you's.
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/68e580a755d0d8c52257d481e79e3602f8ffd4c2" />
+
+<Image
+  alt={`Screenshot of multiple users with Presence`}
+  src={`/static/screenshots/phoenix-liveview-presence.jpg`}
+  width={1300}
+  height={1346}
+/>
+
+## Adding colors
+
+We've now completed the most difficult part of this tutorial. The only thing left to do is some finishing touches. Let's make sure every user has a unique color based on his or her name. Let's create a function that returns a color based on the name of the user in `lib/liveview_cursors/colors.ex`:
+
+```elixir
+defmodule LiveviewCursorsWeb.Colors do
+  def getHSL(s) do
+    hue = to_charlist(s) |> Enum.sum() |> rem(360)
+    "hsl(#{hue}, 70%, 40%)"
+  end
+end
+```
+
+Instead of using `deeppink` as the color for every user, we use the calculated color instead:
+
+```elixir {5,6, 22}
+  def render(assigns) do
+    ~H"""
+    <ul class="list-none" id="cursors" phx-hook="TrackClientCursor">
+      <%= for user <- @users do %>
+        <% color = getHSL(user.name) %>
+        <li style={"color: #{color}; left: #{user.x}%; top: #{user.y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+          <svg
+          version="1.1"
+          width="25px"
+          height="25px"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 21 21">
+            <polygon
+            fill="black"
+            points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+            <polygon
+            fill="currentColor"
+            points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+            />
+          </svg>
+          <span style={"background-color: #{color};"} class="mt-1 ml-4 px-1 text-sm text-white">
+            <%= user.name %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+    """
+  end
+end
+```
+
+Don't forget to import the module in the `defmodule` block using `import LiveviewCursorsWeb.Colors`. If you restart the server you should see a different color for each user.
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/5a69d68504d1ce03a975b0b5acf6edb9fe878ec3" />
+
+## Sending messages
+
+Before users can send messages, we have to add a web form with input and submit elements. This is where Phoenix LiveView shines. If you add a `phx-submit` binding to the form, any submits are automatically sent to the server as an event. The code for this is as follows:
+
+```elixir {3-24, 47,48,49, 53}
+ def render(assigns) do
+  ~H"""
+    <section class="flex flex-col w-screen h-screen justify-center items-center text-center">
+      <form
+      id="msgform"
+      phx-submit="send_message"
+      class="rounded-xl bg-gradient-to-r to-pink-100 from-pink-50 p-8 drop-shadow-xl flex w-xs mx-auto space-x-3"
+      >
+        <input
+          class="flex-1 appearance-none border border-transparent py-2 px-4 bg-white text-gray-600 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent"
+          maxlength="30"
+          aria-label="Your message"
+          type="text"
+          id="msg"
+          name="msg"
+          placeholder="Say something"
+        />
+        <input
+          id="submit-msg"
+          type="submit"
+          class="flex-shrink-0 bg-pink-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200"
+          value="Change"
+        />
+      </form>
+      <ul class="list-none" id="cursors" phx-hook="TrackClientCursor">
+        <%= for user <- @users do %>
+          <% color = getHSL(user.name) %>
+          <li style={"color: #{color}; left: #{user.x}%; top: #{user.y}%"} class="flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden">
+            <svg
+            version="1.1"
+            width="25px"
+            height="25px"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 21 21">
+              <polygon
+              fill="black"
+              points="8.2,20.9 8.2,4.9 19.8,16.5 13,16.5 12.6,16.6" />
+              <polygon
+              fill="currentColor"
+              points="9.2,7.3 9.2,18.5 12.2,15.6 12.6,15.5 17.4,15.5"
+              />
+            </svg>
+            <span style={"background-color: #{color};"} class="mt-1 ml-4 px-1 text-sm text-white w-fit">
+              <%= user.name %>
+            </span>
+            <span style={"background-color: #{color};"} class="text-green-50 mt-1 py-0 px-1 text-sm text-left rounded-br-md opacity-80 fit-content">
+              <%= user.msg %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+    """
+  end
+```
+
+To avoid duplicating the code for updating a user in Presence we'll create a helper function `updatePresence` and we'll call that from our event handlers.
+
+```elixir
+  def handle_event("cursor-move", %{"x" => x, "y" => y}, socket) do
+    key = socket.id
+    payload = %{x: x, y: y}
+    updatePresence(socket.id, %{x: x, y: y})
+    {:noreply, socket}
+  end
+
+  def handle_event("send_message", %{"msg" => msg}, socket) do
+    updatePresence(socket.id, %{msg: msg})
+    {:noreply, socket}
+  end
+
+  def updatePresence(key, payload) do
+    metas =
+      Presence.get_by_key(@cursorview, key)[:metas]
+      |> List.first()
+      |> Map.merge(payload)
+
+    Presence.update(self(), @cursorview, key, metas)
+  end
+```
+
+When mounting the LiveView we also have to initialize the user message:
+
+```elixir {6}
+  def mount(_params, %{"user" => user}, socket) do
+    Presence.track(self(), @cursorview, socket.id, %{
+      socket_id: socket.id,
+      x: 50,
+      y: 50,
+      msg: "",
+      name: user
+    })
+    # ...
+```
+
+If you restart the server and open up a few tabs (in different browsers) you should see the following result:
+
+<Waypoint href="https://github.com/vnglst/liveview_cursors/commit/cc65084342e87322a7e52a46632e965dc98c8101" />
+
+<Image
+  alt={`Screenshot of the end result`}
+  src={`/static/screenshots/phoenix-live-cursors.jpg`}
+  width={2152}
+  height={1372}
+/>
+
+## Conclusion
+
+This concludes my tutorial in which I recreated the live cursors functionality using LiveView. Comparing this with my earlier approach where a large part of the implementation was happening on the client using JavaScript I found that LiveView offers considerable advantages:
+
+- all the code that makes the feature work, lives on the server
+- this means there's minimal switching between Elixir and JavaScript
+- you can update HTML + Tailwind classes close to where the data lives
+- so that code that frequently changes together, also lives close together
+- somehow this feels familiar to me as a React developer
+
+I hope you enjoyed this tutorial and if you have any questions or comments feel free to send me a message on Twitter using the link below. Any kind of feedback (tips, improvements, ideas) is appreciated.

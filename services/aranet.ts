@@ -3,7 +3,13 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ARANET_ANON_KEY;
 
 import { createClient } from '@supabase/supabase-js';
 
-import { Co2Reading } from './types';
+export type Co2Reading = {
+  timestamp: number;
+  co2: number;
+  temperature: number;
+  humidity: number;
+  pressure: number;
+};
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: false }

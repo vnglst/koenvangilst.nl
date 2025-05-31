@@ -1,0 +1,40 @@
+/* Prose component and typography overrides */
+
+.prose svg {
+  max-width: 100%;
+}
+
+.prose .anchor {
+  @apply invisible absolute;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: '#';
+}
+
+.prose .anchor:hover,
+.prose *:hover > .anchor {
+  @apply visible no-underline;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose pre:has(.code-highlight) {
+  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
+}
+
+.prose code.code-highlight {
+  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
+}
+
+.prose a.footnote-back {
+  @apply mx-1 border-none bg-transparent text-gray-500 dark:text-gray-300;
+}

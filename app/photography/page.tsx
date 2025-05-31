@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
+import { Heading } from 'components/content/Heading';
+import { Container } from 'components/layout/Container';
 
 import { getPhotos } from './getPhotos';
 import { PhotoGrid } from './PhotoGrid';
