@@ -1,3 +1,5 @@
+/* eslint-disable prefer-rest-params */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 type Argument = string | boolean | null | undefined;
 
 /**

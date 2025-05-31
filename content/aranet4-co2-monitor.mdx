@@ -1,0 +1,163 @@
+---
+title: Displaying Aranet4 CO2 readings on my website
+publishedAt: '2024-01-07'
+image:
+  src: /static/images/co2-monitor.jpg
+  alt: Screenshot showing readings of my CO2 monitor
+  width: 1348
+  height: 642
+  showAsHeader: false
+summary: Tutorial on how to display real-time CO2 measurements from an Aranet4 monitor on my website using a Raspberry Pi.
+tags:
+  - article
+  - python
+  - nextjs
+---
+
+I recently got an Aranet4 Co<sub>2</sub> monitor and it's a delightful little gadget. It's small and simple and after inserting the 2 AA batteries I could immediately see the CO<sub>2</sub> levels on a clear little screen. I've [been told](https://twitter.com/PJUllrich/status/1737484637293711647) it's also one of the most accurate monitors on the market. Using an unofficial Python library and my Raspberry Pi I was also able to show the measurements on my website. You can [skip to the end](/blog/aranet4-co2-monitor#result) to see the result. Follow along if you're interested in doing something similar yourself.
+
+## Requirements
+
+The setup I'm using involves the following:
+
+- an [Aranet4](https://aranet.com/products/aranet4/) CO<sub>2</sub> monitor
+- a Raspberry Pi
+- a PostgreSQL database - I'm using [Supabase](https://supabase.com/)
+- a Next.JS website
+
+## Getting started
+
+Install the following packages on your Raspberry Pi:
+
+```sh
+sudo apt install bluetooth pi-bluetooth bluez blueman
+```
+
+Then use `bluetoothctl` to pair with your Aranet4:
+
+```sh
+sudo bluetoothctl
+> scan on
+> pair $MAC
+> scan off
+```
+
+## Python script
+
+I adapted the Python script I found on [this blog](https://www.furidamu.org/blog/2023/03/04/saving-aranet4-data-to-raspberry-pi/) to get the current measurements of my Aranet4 monitor. I’m storing the data in a PostgreSQL database (hosted on Supabase) so that I can easily access it on my website. First, install the Python libraries [aranet4](https://github.com/Anrijs/Aranet4-Python) and `psycopg2`:
+
+```sh
+pip install aranet4 psycopg2
+```
+
+Then I use the following Python script to store the latest measurement in a PostgreSQL database:
+
+
+```python
+import configparser
+import time
+import aranet4
+import psycopg2
+import os
+from datetime import datetime
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR, 'config.ini'))
+
+NUM_RETRIES = int(config['SETTINGS']['num_retries'])
+DEVICES = dict(config['DEVICES'])
+
+DATABASE = {
+    'database': config['DATABASE']['database'],
+    'host': config['DATABASE']['host'],
+    'user': config['DATABASE']['user'],
+    'password': config['DATABASE']['password'],
+    'port': config['DATABASE']['port']
+}
+
+def create_table(cursor):
+    cursor.execute('''CREATE TABLE IF NOT EXISTS readings(
+      device TEXT,
+      timestamp INTEGER,
+      temperature REAL,
+      humidity INTEGER,
+      pressure REAL,
+      CO2 INTEGER,
+      PRIMARY KEY(device, timestamp)
+    )''')
+
+def get_readings(mac):
+    for attempt in range(NUM_RETRIES):
+        try:
+            return aranet4.client.get_current_readings(mac)
+        except Exception as e:
+            print('Attempt', attempt, 'failed, retrying:', e)
+    return None
+
+def insert_readings(cursor, name, readings):
+    data = (
+        name,
+        time.mktime(datetime.now().timetuple()),
+        readings.temperature,
+        readings.humidity,
+        readings.pressure,
+        readings.co2
+    )
+
+    print('Inserting', data)
+
+    cursor.execute(
+        'INSERT INTO readings VALUES(%s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING', data)
+
+def main():
+    with psycopg2.connect(**DATABASE) as conn:
+        cursor = conn.cursor()
+
+        create_table(cursor)
+        conn.commit()
+
+        for name, mac in DEVICES.items():
+            readings = get_readings(mac)
+            if readings is not None:
+                insert_readings(cursor, name, readings)
+                conn.commit()
+
+if __name__ == "__main__":
+    main()
+```
+
+The database credentials and configuration for the Aranet4 MAC addresses can be found in the `config.ini` file. Here's an example:
+
+```ini
+[DATABASE]
+database = postgres
+host = db.<your-id-here.supabase.co
+user = postgres
+password = <your db password here>
+port = 5432
+
+[DEVICES]
+office = <your-aranet4-address-here>
+
+[SETTINGS]
+num_retries = 2
+```
+
+The script runs every minute in a cronjob to make sure the measurements are always up to date.
+
+```sh
+* * * * * /usr/bin/python3 /home/pi/Code/aranet4/load_data.py >> /home/pi/Code/aranet4/logs/load_data.txt 2>&1
+0 9,21 * * * /usr/bin/python3 /home/pi/Code/aranet4/cleanup.py >> /home/pi/Code/aranet4/logs/cleanup.txt 2>&1
+```
+
+As you can see I've also included a cleanup script that deletes any entries older than a day. This is to make sure I don't run out of disk space on my free Supabase subscription.
+
+## Result
+
+I'll leave out the front-end code in this tutorial as it is quite straightforward. For those interested in how it works it's a combination of a [React component](https://github.com/vnglst/koenvangilst.nl/blob/new-design-v7/app/lab/co2/(components)/Co2Monitor.tsx) and a Next.JS api route that calls the following [service](https://github.com/vnglst/koenvangilst.nl/blob/main/services/aranet.ts). 
+
+Should the levels rise above the recommended threshold of 1000 ppm, don't hesitate to reach out to me on [Twitter](https://twitter.com/intent/tweet?text=@vnglst%20Open%20a%20window%20now!) or [Mastodon](https://elk.zone/hachyderm.io/@vnglst) to remind me to ventilate!
+
+<Co2Monitor />

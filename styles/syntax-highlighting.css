@@ -1,0 +1,90 @@
+/* Syntax highlighting styles for Prism.js */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.token.punctuation {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-green-500;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-purple-500;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-500;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-yellow-500;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply bg-gray-50 text-gray-800 dark:text-gray-50;
+}
+
+code[class*='language-'] {
+  @apply border-none p-0;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  scrollbar-width: none; /* Firefox */
+}
+
+.rehype-code-title {
+  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+.code-highlight {
+  float: left;
+  min-width: 100%;
+}
+
+.highlight-line {
+  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-3 dark:bg-gray-800;
+}

@@ -1,4 +1,7 @@
 @import './footnote.css';
+@import './prose.css';
+@import './syntax-highlighting.css';
+@import './theme.css';
 
 @tailwind base;
 @tailwind components;
@@ -6,23 +9,19 @@
 
 @layer utilities {
   .full-bleed {
-    margin-left: -10vw;
-    min-width: min(calc(100% + 20vw), 100vw);
+    --bleed-size: 10vw;
+    margin-left: calc(-1 * var(--bleed-size));
+    min-width: min(calc(100% + 2 * var(--bleed-size)), 100vw);
   }
 
   .full-bleed-5 {
-    margin-left: -5vw;
-    min-width: min(calc(100% + 10vw), 100vw);
+    --bleed-size: 5vw;
   }
-
   .full-bleed-10 {
-    margin-left: -10vw;
-    min-width: min(calc(100% + 20vw), 100vw);
+    --bleed-size: 10vw;
   }
-
   .full-bleed-20 {
-    margin-left: -20vw;
-    min-width: min(calc(100% + 40vw), 100vw);
+    --bleed-size: 20vw;
   }
 }
 
@@ -34,7 +33,7 @@ dialog:modal {
 }
 
 ::selection {
-  background-color: #199acc;
+  background-color: theme('colors.primary');
   color: #fefefe;
 }
 
@@ -46,7 +45,7 @@ dialog:modal {
 /* Add :focus-visible outline when navigating with keyboard */
 *:focus-visible {
   @apply rounded-md;
-  outline: 2px solid #199acc;
+  outline: 2px solid theme('colors.primary');
 }
 
 h1,
@@ -64,151 +63,6 @@ h6 {
 
 .up-hover {
   transition: all 0.2s ease-in-out;
-}
-
-/* ----- Tailwind prose overrides ----- */
-
-.prose svg {
-  max-width: 100%;
-}
-
-.prose .anchor {
-  @apply invisible absolute;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.prose a {
-  @apply transition-all;
-}
-
-.prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
-  content: '#';
-}
-
-.prose *:hover > .anchor {
-  @apply visible no-underline;
-}
-
-.prose pre:has(.code-highlight) {
-  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
-}
-
-.prose code.code-highlight {
-  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
-}
-
-.prose code.code-highlight {
-  @apply text-gray-800 dark:text-gray-200;
-}
-
-.prose a.footnote-back {
-  @apply border-none;
-  @apply bg-transparent;
-  @apply text-gray-500 dark:text-gray-300;
-  @apply mx-1;
-}
-
-/* ------------------- */
-
-.anchor:hover {
-  @apply visible no-underline;
-}
-
-/* Syntax highlighting, see https://www.npmjs.com/package/rehype-prism-plus#styling */
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
-.token.punctuation {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  @apply text-green-500;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  @apply text-purple-500;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  @apply text-yellow-500;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  @apply text-blue-500;
-}
-
-.token.function,
-.token.class-name {
-  @apply text-pink-500;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500;
-}
-
-code[class*='language-'],
-pre[class*='language-'] {
-  @apply bg-gray-50 text-gray-800 dark:text-gray-50;
-}
-
-code[class*='language-'] {
-  @apply border-none p-0;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  scrollbar-width: none; /* Firefox */
-}
-
-.rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
-}
-
-.rehype-code-title + pre {
-  @apply mt-0 rounded-t-none;
-}
-
-.code-highlight {
-  float: left; /* 1 */
-  min-width: 100%; /* 2 */
-}
-
-.highlight-line {
-  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-3 dark:bg-gray-800;
 }
 
 /* Remove Safari input shadow on mobile */

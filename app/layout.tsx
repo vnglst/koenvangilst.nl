@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
-import { Inter, Fraunces } from 'next/font/google';
+import { Fraunces, Inter } from 'next/font/google';
 
-import { Body } from 'components/Body';
+import { Body } from 'components/layout/Body';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';

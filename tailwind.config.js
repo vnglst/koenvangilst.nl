@@ -1,88 +1,23 @@
-const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
+import typography from '@tailwindcss/typography';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
-/** @type {import('tailwindcss').Config} \*/
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   mode: 'jit',
   content: ['./app/**/*.tsx', './components/**/*.tsx', './styles/**/*.css'],
   darkMode: 'class',
   theme: {
     extend: {
-      animation: {
-        'fade-in': 'fadeIn 200ms ease-in-out',
-        blink: 'blink 1s step-start 1s infinite'
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
-        },
-        blink: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' }
-        }
-      },
       colors: {
         primary: '#2196f3'
       },
       fontFamily: {
         sans: ['var(--font-inter)', ...fontFamily.sans],
         fraunces: ['var(--font-fraunces)', 'serif']
-      },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            color: theme('colors.gray.700'),
-            a: {
-              textDecoration: 'underline',
-              color: theme('colors.gray.900'),
-              '&:hover': {
-                textDecoration: 'none'
-              },
-              code: { color: theme('colors.gray.700') }
-            },
-            'h2,h3,h4': {
-              'scroll-margin-top': spacing[32]
-            },
-            code: { color: theme('colors.gray.700') },
-            'blockquote p:first-of-type::before': false,
-            'blockquote p:last-of-type::after': false
-          }
-        },
-        dark: {
-          css: {
-            color: theme('colors.gray.200'),
-            a: {
-              color: theme('colors.gray.200'),
-              code: { color: '#53ceff' }
-            },
-            blockquote: {
-              borderLeftColor: theme('colors.gray.700'),
-              color: theme('colors.gray.300')
-            },
-            'h2,h3,h4': {
-              color: theme('colors.gray.100'),
-              'scroll-margin-top': spacing[32]
-            },
-            hr: { borderColor: theme('colors.gray.700') },
-            ol: {
-              li: {
-                '&:before': { color: theme('colors.gray.500') }
-              }
-            },
-            ul: {
-              li: {
-                '&:before': { backgroundColor: theme('colors.gray.500') }
-              }
-            },
-            code: { color: theme('colors.gray.300') },
-            strong: { color: theme('colors.gray.100') }
-          }
-        }
-      })
+      }
     }
   },
-  variants: {
-    typography: ['dark']
-  },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [typography]
 };
+
+export default config;

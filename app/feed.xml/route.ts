@@ -1,4 +1,4 @@
-import { getPosts } from 'cms/queries';
+import { getPosts } from 'cms/mdx-parser';
 import RSS from 'rss';
 
 import { getPhotos } from '../photography/getPhotos';
@@ -16,7 +16,7 @@ export async function GET() {
   posts.map((post) => {
     feed.item({
       title: post.title,
-      url: `https://koenvangilst.nl/blog/${post.slug}`,
+      url: `https://koenvangilst.nl/lab/${post.slug}`,
       date: post.publishedAt,
       description: post.summary
     });
