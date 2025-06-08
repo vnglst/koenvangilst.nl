@@ -24,8 +24,10 @@ export function Link({ href, children, className, ...props }: LinkProps) {
   if (isExternal) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={combinedClassName} {...props}>
-        {children}
-        <Icon icon="external-link" className="ml-1 inline h-4 w-4" />
+        <span className="inline-flex items-center">
+          {children}
+          <Icon icon="external-link" className="ml-1 h-4 w-4" />
+        </span>
       </a>
     );
   }
