@@ -7,6 +7,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 
 import { sluggify } from 'lib/sluggify';
 
@@ -92,7 +93,10 @@ async function parseMDXFile(rawString: string) {
     source: rawString,
     cwd: path.join(process.cwd(), 'cms'),
     mdxOptions(options) {
-      const rehypePlugins = options.remarkPlugins || [];
+      const rehypePlugins = options.rehypePlugins || [];
+      const remarkPlugins = options.remarkPlugins || [];
+
+      options.remarkPlugins = [...remarkPlugins, remarkGfm];
 
       options.rehypePlugins = [
         ...rehypePlugins,
