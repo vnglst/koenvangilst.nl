@@ -33,6 +33,7 @@
     "rehype-code-titles": "1.2.0",
     "rehype-prism-plus": "2.0.1",
     "rehype-slug": "6.0.0",
+    "remark-gfm": "^4.0.1",
     "rss": "1.2.2",
     "sharp": "0.34.2",
     "swr": "2.3.3",
@@ -43,8 +44,8 @@
   "devDependencies": {
     "@tailwindcss/typography": "0.5.16",
     "@types/lodash": "4.17.17",
-    "@types/react": "19.1.6",
     "@types/node": "22.15.21",
+    "@types/react": "19.1.6",
     "autoprefixer": "10.4.21",
     "esbuild": "0.25.5",
     "eslint": "9.27.0",
