@@ -34,7 +34,3 @@
 .prose code.code-highlight {
   @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }
-
-.prose a.footnote-back {
-  @apply mx-1 border-none bg-transparent text-gray-500 dark:text-gray-300;
-}
