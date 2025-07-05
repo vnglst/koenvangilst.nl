@@ -4,6 +4,12 @@
   border-top: 1px solid #30363d;
 }
 
+/* Hide footnote back links completely */
+.footnotes a[data-footnote-backref],
+.footnotes a.data-footnote-backref {
+  display: none;
+}
+
 /* Place `[` and `]` around footnote references. */
 [data-footnote-ref]::before {
   content: '[';
