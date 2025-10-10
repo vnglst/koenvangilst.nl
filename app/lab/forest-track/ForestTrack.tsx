@@ -4,7 +4,6 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 
-import { Heading } from 'components/content/Heading';
 import { Prose } from 'components/content/Prose';
 import { Checkbox } from 'components/forms/Checkbox';
 import { Icon } from 'components/ui/Icon';
