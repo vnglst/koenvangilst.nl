@@ -39,32 +39,38 @@ export function Sidebar() {
               priority
             />
           </Link>
-          <h1 className="nimbus text-sm font-bold tracking-wide uppercase md:hidden">
+          <div className="nimbus text-sm font-bold tracking-wide uppercase md:hidden">
             <Link href="/">Koen van Gilst</Link>
-          </h1>
+          </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-row items-center space-x-2 pb-4 md:flex-col md:items-start md:space-x-0 md:px-0 md:pb-0">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cx(
-                'py-1 text-sm whitespace-nowrap transition-opacity md:pl-3',
-                'before:mr-2 before:hidden before:h-1 before:w-1 before:rounded-full before:transition-opacity md:before:inline-block',
-                isActive(item.href)
-                  ? 'text-primary dark:text-primary before:bg-primary font-medium before:opacity-100'
-                  : 'text-gray-700 before:opacity-0 hover:opacity-60 dark:text-gray-400'
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="flex flex-row items-center space-x-2 pb-4 md:flex-col md:items-start md:space-x-0 md:px-0 md:pb-0">
+          <nav aria-label="Main navigation">
+            <ul className="flex flex-row items-center space-x-2 md:flex-col md:items-start md:space-x-0">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={cx(
+                      'py-1 text-sm whitespace-nowrap transition-opacity md:pl-3',
+                      'before:mr-2 before:hidden before:h-1 before:w-1 before:rounded-full before:transition-opacity md:before:inline-block',
+                      isActive(item.href)
+                        ? 'text-primary dark:text-primary before:bg-primary font-medium before:opacity-100'
+                        : 'text-gray-700 before:opacity-0 hover:opacity-60 dark:text-gray-400'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <div className="ml-auto md:mt-6 md:ml-0 md:pl-6">
             <ThemeToggleText />
           </div>
-        </nav>
+        </div>
       </div>
     </aside>
   );
