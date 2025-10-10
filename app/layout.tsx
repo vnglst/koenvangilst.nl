@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
-import { Fraunces, Inter } from 'next/font/google';
+import { Inter, PT_Serif } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import { Body } from 'components/layout/Body';
 import { Tracking } from 'components/Tracking';
@@ -9,10 +10,17 @@ import 'styles/global.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const fraunces = Fraunces({
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+const ptSerif = PT_Serif({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-fraunces'
+  variable: '--font-serif'
+});
+
+const nimbus = localFont({
+  src: '../public/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.ttf',
+  variable: '--font-nimbus',
+  display: 'swap'
 });
 
 const meta = {
@@ -92,7 +100,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning={true}
-      className={`${fraunces.variable} ${inter.variable} h-full min-w-[360px] scroll-smooth font-sans`}
+      data-scroll-behavior="smooth"
+      className={`${ptSerif.variable} ${inter.variable} ${nimbus.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />

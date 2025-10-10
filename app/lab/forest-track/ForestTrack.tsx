@@ -88,13 +88,12 @@ export function ForestTrack({ baseLayers }: Props) {
         active={activeLayer}
         handleCenterPointChange={handleCenterPointchange}
       />
-      <div className="relative h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md bg-white bg-opacity-80 backdrop-saturate-50 dark:bg-black dark:bg-opacity-80">
+      <div className="bg-opacity-80 dark:bg-opacity-80 relative h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md backdrop-saturate-50 dark:bg-slate-950">
         {isBoxVisible ? (
-          <div className="bg-white p-8 pt-10 dark:bg-transparent">
-            <button onClick={handleInfoBoxToggle} className="absolute left-0 top-0 p-4">
+          <div className="bg-slate-50 p-8 pt-16 dark:bg-transparent">
+            <button onClick={handleInfoBoxToggle} className="absolute top-0 left-0 p-4">
               <Icon icon="minus" className="h-6 w-6 text-black dark:text-white" />
             </button>
-            <Heading>Forest Track</Heading>
             <Prose>
               Keep track of forests in your area. Get a detailed view of changes in tree cover over time.
               <br />
@@ -124,7 +123,7 @@ export function ForestTrack({ baseLayers }: Props) {
       <div
         className={`${
           isBoxVisible ? 'hidden' : 'flex'
-        } flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-black bg-opacity-70 p-4 text-sm text-white backdrop-saturate-50 md:flex`}
+        } bg-opacity-70 flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-slate-950 p-4 text-sm text-white backdrop-saturate-50 md:flex`}
       >
         <Checkbox color="pink" onChange={settings.toggleTreeLossLayer} checked={settings.showTreeLoss}>
           Tree loss
@@ -139,14 +138,14 @@ export function ForestTrack({ baseLayers }: Props) {
 
       {showWayback ? (
         <div className={`${isBoxVisible ? 'hidden' : 'flex'} pb-safe-bottom mt-auto w-full justify-center md:flex`}>
-          <div className="mb-4 flex w-full max-w-4xl flex-col gap-2 rounded-xl bg-black bg-opacity-70 p-4 backdrop-saturate-50 md:mb-0">
+          <div className="bg-opacity-70 mb-4 flex w-full max-w-4xl flex-col gap-2 rounded-xl bg-slate-950 p-4 backdrop-saturate-50 md:mb-0">
             <div className="flex justify-between p-2 text-white">
               {formatDate(activeLayer?.date) || '\u00A0'}
               {isLoading && <span className="ping">Loading...</span>}
               {hasError && <span className="text-red-500">Error loading layers</span>}
             </div>
             <div className="relative mb-5 h-3.5 w-full rounded-full bg-gray-800 p-0">
-              <div className="absolute left-5 right-5 hidden justify-between md:flex">
+              <div className="absolute right-5 left-5 hidden justify-between md:flex">
                 {years.map((year) => (
                   <div key={year}>
                     <div className="relative mx-auto h-3.5 w-0.5 border-l border-gray-400"></div>
@@ -154,7 +153,7 @@ export function ForestTrack({ baseLayers }: Props) {
                   </div>
                 ))}
               </div>
-              <ul className="absolute left-0 top-0 m-0 flex w-full list-none p-0">
+              <ul className="absolute top-0 left-0 m-0 flex w-full list-none p-0">
                 {layers.map((layer, idx) => {
                   const isActive = activeLayer?.releaseNumber === layer.releaseNumber;
                   const classes = cx(

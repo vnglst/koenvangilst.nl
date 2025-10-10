@@ -16,7 +16,7 @@ type AnomalyProps = {
 
 export async function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const data = await fetchData();
-  const classNameForBlog = 'lg:full-bleed my-4 aspect-[2/1] min-h-[60vh]';
+  const classNameForBlog = 'my-4 aspect-[2/1] min-h-[60vh]';
   const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
   const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 

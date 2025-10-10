@@ -1,50 +1,50 @@
-import Avatar from 'app/avatar.jpg';
-import Image from 'next/image';
-import NextLink from 'next/link';
-
-import { Heading } from 'components/content/Heading';
 import { Prose } from 'components/content/Prose';
 import { Container } from 'components/layout/Container';
 import { Link } from 'components/ui/Link';
-import { TagLink } from 'components/ui/Tag';
 
 export async function generateMetadata() {
   return {
-    title: 'Home | Koen van Gilst',
+    title: 'Koen van Gilst',
     description:
-      "I'm Koen van Gilst, a software tinkerer and web enthusiast. Here you'll find my articles, coding experiments, side projects, and other work."
+      'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming. I focus on AI, team building, and bridging business with technology to deliver real value.'
   };
 }
 
 export default async function Home() {
   return (
     <Container>
-      <section className="flex flex-col items-center">
-        <NextLink href="/about">
-          <Image
-            alt="Koen van Gilst"
-            height={176}
-            width={176}
-            src={Avatar}
-            className="rounded-full border-4 border-slate-900 grayscale filter dark:border-slate-100"
-            priority
-          />
-        </NextLink>
-        <Prose className="flex flex-col items-center">
-          <Heading level={1}>Koen van Gilst</Heading>
-          <p className="text-center">
-            I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
-            life using code. <Link href="/about">Read more</Link>
-          </p>
-        </Prose>
+      <div className="flex flex-1 items-start space-x-2">
+        <div className="w-full md:w-9/12">
+          <Prose className="-mt-[5px]">
+            <p>
+              I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
+              life using code.
+            </p>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
-          <TagLink href="/lab?q=article">articles</TagLink>
-          <TagLink href="/lab?q=generative-art">coding experiments</TagLink>
-          <TagLink href="/lab?q=side-project">side projects</TagLink>
-          <TagLink href="/lab?q=work">work</TagLink>
+            <p>
+              I have a diverse background, always at the intersection of technology and humanity, with a philosophy
+              degree and a lifelong passion for coding. I started programming at around 11, using GW-Basic and Turbo
+              Pascal. After my studies and working as a translator for years, I returned to programming as a web
+              developer. Now I am in a technical leadership role where I experiment with new AI ideas and build teams.
+            </p>
+
+            <p>
+              I currently work at Rabobank, where I help users getting their work done faster and with less friction. To
+              do this I experiment with GenAI by building technical prototypes and collaborating closely with business
+              stakeholders and engineers, guiding projects from initial experimentation to successful products in the
+              hands of our users.
+            </p>
+
+            <p>
+              So far, my work aligns with my passion for technology. In my spare time, I enjoy coding side projects that
+              often complement my professional work - a great way to stay up to date with trends and keep learning. On
+              this website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
+              <Link href="/lab?q=article">articles</Link>, and <Link href="/lab?q=generative-art">generative art</Link>{' '}
+              from over the years.
+            </p>
+          </Prose>
         </div>
-      </section>
+      </div>
     </Container>
   );
 }

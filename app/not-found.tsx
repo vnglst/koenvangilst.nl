@@ -9,9 +9,9 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <Container centered>
+    <Container>
       <Prose>
-        <Heading level={1}>404 - Not found</Heading>
+        <Heading level={2}>404 - Not found</Heading>
         <p>
           It seems you've found something that used to exist, or you spelled something wrong. I'm guessing you spelled
           something wrong. Can you double-check that URL?
