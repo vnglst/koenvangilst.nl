@@ -17,6 +17,7 @@
   "dependencies": {
     "@arcgis/core": "4.32.10",
     "@supabase/supabase-js": "2.49.8",
+    "@tailwindcss/postcss": "^4.1.14",
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
     "echarts": "5.6.0",
@@ -37,22 +38,20 @@
     "rss": "1.2.2",
     "sharp": "0.34.2",
     "swr": "2.3.3",
-    "tailwindcss": "3.4.17",
+    "tailwindcss": "^4.0.0",
     "zod": "3.25.30",
     "zustand": "5.0.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "0.5.16",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/lodash": "4.17.17",
     "@types/node": "22.15.21",
     "@types/react": "19.1.6",
-    "autoprefixer": "10.4.21",
     "esbuild": "0.25.5",
     "eslint": "9.27.0",
     "eslint-config-next": "15.3.2",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "knip": "5.58.1",
-    "postcss": "8.5.3",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "typescript": "5.8.3"
