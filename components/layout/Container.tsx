@@ -16,17 +16,11 @@ export function Container({ children, footer = true, sidebar = true }: PropsWith
       {sidebar && <Sidebar />}
       <Main>
         <Suspense>
-          <div className="mt-6 flex min-w-0 flex-auto flex-col md:mt-0">
-            <h1 className="nimbus mt-[9px] mb-4 hidden text-sm font-bold tracking-wide uppercase md:block">
-              <Link href="/">Koen van Gilst</Link>
-            </h1>
-            <div className="flex-auto">
-              <div className="flex flex-1 items-start space-x-4">
-                <div className="w-full md:w-9/12">{children}</div>
-              </div>
-            </div>
-            {footer && <Footer />}
-          </div>
+          <h1 className="nimbus mt-[9px] mb-4 hidden text-sm font-bold tracking-wide uppercase md:block">
+            <Link href="/">Koen van Gilst</Link>
+          </h1>
+          <div className="w-full md:w-9/12">{children}</div>
+          {footer && <Footer />}
         </Suspense>
       </Main>
     </div>
