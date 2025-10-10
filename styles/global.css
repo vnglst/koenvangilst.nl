@@ -1,11 +1,15 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 @import './footnote.css';
 @import './prose.css';
 @import './syntax-highlighting.css';
 @import './theme.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #2196f3;
+  --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-fraunces: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
 
 @layer utilities {
   .full-bleed {
@@ -33,7 +37,7 @@ dialog:modal {
 }
 
 ::selection {
-  background-color: theme('colors.primary');
+  background-color: var(--color-primary);
   color: #fefefe;
 }
 
@@ -44,8 +48,8 @@ dialog:modal {
 
 /* Add :focus-visible outline when navigating with keyboard */
 *:focus-visible {
-  @apply rounded-md;
-  outline: 2px solid theme('colors.primary');
+  border-radius: 0.375rem;
+  outline: 2px solid var(--color-primary);
 }
 
 h1,
@@ -85,6 +89,10 @@ table {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary dark:bg-gradient-to-b dark:from-primary dark:to-black;
+  background-color: var(--color-primary);
   border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:is(.dark *) {
+  background: linear-gradient(to bottom, var(--color-primary), black);
 }
