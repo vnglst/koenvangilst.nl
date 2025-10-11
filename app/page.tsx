@@ -13,7 +13,7 @@ export async function generateMetadata() {
 export default async function Home() {
   return (
     <Container>
-      <Prose className="-mt-[5px]">
+      <Prose>
         <p>
           I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
           life using code.

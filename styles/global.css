@@ -67,6 +67,11 @@ input[type='email'] {
   appearance: none;
 }
 
+/* Always show scrollbar to prevent layout shift */
+html {
+  overflow-y: scroll;
+}
+
 table {
   display: block;
   max-width: fit-content;
