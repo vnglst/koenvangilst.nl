@@ -57,14 +57,14 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-12 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
+    <footer className="mt-16 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
       <div className="mb-2 flex items-center justify-between">
         <div>© {currentYear} Koen van Gilst.</div>
         <div className="flex space-x-2">
           {footerLinks.map(({ href, label, icon }) => (
             <a
               key={href}
-              className="text-sm text-gray-500 transition hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+              className="text-sm text-gray-400 transition hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-300"
               target="_blank"
               rel="noopener noreferrer"
               href={href}

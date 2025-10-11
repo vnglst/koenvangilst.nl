@@ -39,34 +39,40 @@ export async function MarkdownLayout({
   additionalComponents
 }: Props) {
   return (
-    <Container>
-      <Heading level={1}>{title}</Heading>
-      <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
-      <ul className="my-4 flex w-full flex-wrap gap-2">
-        {tags?.map((tag: string) => (
-          <li key={tag}>
-            <TagLink href={`/tag/${sluggify(tag)}`}>{tag}</TagLink>
-          </li>
-        ))}
-      </ul>
-      <Prose as="section">
-        {image && image.showAsHeader ? (
-          <Image
-            alt={image.alt}
-            src={image.src}
-            width={image.width}
-            height={image.height}
-            className="inline-block rounded-lg"
-            priority
-          />
-        ) : null}
-        <MDXComponent code={code} additionalComponents={additionalComponents} />
-      </Prose>
-      <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
-        <Link href={getEditUrl(path)} className="font-normal">
-          Edit on GitHub
-        </Link>
-      </footer>
+    <Container showTitle={false}>
+      <article>
+        <header>
+          <Heading level={1}>{title}</Heading>
+          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
+          {tags && tags.length > 0 && (
+            <ul className="my-4 flex w-full flex-wrap gap-2">
+              {tags.map((tag: string) => (
+                <li key={tag}>
+                  <TagLink href={`/tag/${sluggify(tag)}`}>{tag}</TagLink>
+                </li>
+              ))}
+            </ul>
+          )}
+          {image && image.showAsHeader && (
+            <Image
+              alt={image.alt}
+              src={image.src}
+              width={image.width}
+              height={image.height}
+              className="inline-block rounded-lg"
+              priority
+            />
+          )}
+        </header>
+        <Prose as="section">
+          <MDXComponent code={code} additionalComponents={additionalComponents} />
+        </Prose>
+        <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
+          <Link href={getEditUrl(path)} className="font-normal">
+            Edit on GitHub
+          </Link>
+        </footer>
+      </article>
     </Container>
   );
 }
