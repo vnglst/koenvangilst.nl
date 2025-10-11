@@ -28,8 +28,8 @@ export function Sidebar() {
     <aside className="-mx-4 px-4 md:mx-0 md:w-[200px] md:flex-shrink-0 md:px-0">
       <div className="lg:sticky lg:top-20">
         {/* Logo and Name */}
-        <div className="mb-2 flex flex-row items-center space-x-4 md:mb-8 md:flex-col md:items-start md:space-x-0 md:pl-6">
-          <Link href="/" className="hidden transition-opacity hover:opacity-80 md:block">
+        <div className="mb-8 flex flex-row items-center space-x-4 md:mb-8 md:space-x-0 md:pl-6">
+          <Link href="/" className="transition-opacity hover:opacity-80">
             <Image
               alt="Koen van Gilst"
               height={48}
@@ -39,7 +39,7 @@ export function Sidebar() {
               priority
             />
           </Link>
-          <div className="nimbus text-sm font-bold tracking-wide uppercase md:hidden">
+          <div className="nimbus text-lg font-bold tracking-wide uppercase md:hidden">
             <Link href="/">Koen van Gilst</Link>
           </div>
         </div>

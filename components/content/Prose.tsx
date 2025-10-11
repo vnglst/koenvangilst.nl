@@ -8,5 +8,5 @@ type ProseProps = {
 };
 
 export function Prose({ children, as: Cmp = 'article', className }: PropsWithChildren<ProseProps>) {
-  return <Cmp className={cx('dark:prose-dark prose w-full max-w-full text-pretty', className)}>{children}</Cmp>;
+  return <Cmp className={cx('dark:prose-dark prose prose-lg md:prose-base w-full max-w-full text-pretty', className)}>{children}</Cmp>;
 }
