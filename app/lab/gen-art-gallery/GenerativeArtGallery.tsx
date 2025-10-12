@@ -160,9 +160,11 @@ export function GenerativeArtGallery() {
 
   return (
     <div className="relative">
-      {/* Navigation controls */}
-      <nav className="fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-4 py-2 backdrop-blur-sm">
-        <BackButton fallbackHref="/lab" className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60">
+      <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-4 py-2 backdrop-blur-sm">
+        <BackButton
+          fallbackHref="/lab"
+          className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60"
+        >
           Back to Lab
         </BackButton>
         <span className="text-white">|</span>
@@ -171,7 +173,6 @@ export function GenerativeArtGallery() {
         </span>
       </nav>
 
-      {/* Scroll indicator dots */}
       <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-2">
         {GENERATIVE_ART_PROJECTS.map((_, index) => (
           <button
@@ -185,7 +186,6 @@ export function GenerativeArtGallery() {
         ))}
       </div>
 
-      {/* Gallery container with snap scroll */}
       <div ref={containerRef} className="h-screen snap-y snap-mandatory overflow-y-scroll">
         {GENERATIVE_ART_PROJECTS.map((project, index) => (
           <LazyIframe key={project.slug} url={project.url} title={project.title} index={index} />
