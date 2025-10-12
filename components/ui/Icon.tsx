@@ -1,7 +1,24 @@
 import { cx } from 'lib/clsx';
 
 type IconProps = {
-  icon: 'search' | 'spinner' | 'eye' | 'external-link' | 'arrow-right' | 'info' | 'plus' | 'minus' | 'sun' | 'moon';
+  icon:
+    | 'search'
+    | 'spinner'
+    | 'eye'
+    | 'external-link'
+    | 'arrow-right'
+    | 'arrow-left'
+    | 'info'
+    | 'plus'
+    | 'minus'
+    | 'sun'
+    | 'moon'
+    | 'mail'
+    | 'bluesky'
+    | 'mastodon'
+    | 'github'
+    | 'linkedin'
+    | 'terminal';
   className?: string;
 };
 
