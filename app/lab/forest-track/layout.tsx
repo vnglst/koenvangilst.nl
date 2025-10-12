@@ -1,13 +1,10 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
-
-import { PrognosisToggle } from './(components)/PrognosisToggle';
 
 export default async function Layout({ children }) {
   return (
     <div className="relative min-h-screen">
       {/* Top Navigation Bar */}
-      <div className="sticky top-0 z-40 flex items-center justify-between bg-slate-50 p-4 shadow-sm md:px-8 dark:bg-slate-950">
+      <div className="fixed top-0 z-40 flex w-full items-center justify-between bg-slate-50 p-4 shadow-sm md:px-8 dark:bg-slate-950">
         {/* Back Button */}
         <Link
           href="/lab"
@@ -25,13 +22,11 @@ export default async function Layout({ children }) {
 
         {/* Title */}
         <h1 className="nimbus absolute left-1/2 -translate-x-1/2 text-xl font-bold tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
-          Prognosis 2100
+          Forest Track
         </h1>
 
-        {/* Toggle */}
-        <Suspense fallback={<div className="h-9 w-20" />}>
-          <PrognosisToggle />
-        </Suspense>
+        {/* Empty div for flex spacing */}
+        <div className="w-16" />
       </div>
 
       {children}

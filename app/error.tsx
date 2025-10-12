@@ -17,7 +17,7 @@ export default function Error({ error }: ErrorProps) {
   }, [error]);
 
   return (
-    <Container centered>
+    <Container>
       <Prose>
         <Heading level={1}>Something went wrong!</Heading>
         <p>You've run into an error. Have you tried turning it off and on?</p>

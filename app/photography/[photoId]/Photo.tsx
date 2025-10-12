@@ -48,10 +48,10 @@ export function Photo({
   }
 
   return (
-    <div className="h-full w-full bg-black p-4 md:p-8">
+    <div className="h-full w-full bg-slate-950 p-4 md:p-8">
       <Link
         href="/photography"
-        className="fixed right-5 top-5 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
+        className="fixed top-5 right-5 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
       >
         ✕
       </Link>

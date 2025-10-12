@@ -3,6 +3,7 @@
 import { dateFormatter, mmFormatter } from 'lib/formatters';
 
 import { Chart } from '../(charts)/Chart';
+import { ChartSection } from '../(charts)/ChartSection';
 import { Data, HeatmapValue } from './WeatherHeatmap.server';
 
 type RainHeatmapProps = {
@@ -13,9 +14,9 @@ export function RainHeatmapClient({ data }: RainHeatmapProps) {
   const options = generateOptions(data);
 
   return (
-    <div className="lg:full-bleed-20 my-4 overflow-x-auto overflow-y-hidden border border-dashed border-gray-400 dark:border-none md:min-h-0">
-      <Chart options={options} className="aspect-[5/1] min-h-[250px]" />
-    </div>
+    <ChartSection>
+      <Chart options={options} className="aspect-[5/1] min-h-[300px]" />
+    </ChartSection>
   );
 }
 

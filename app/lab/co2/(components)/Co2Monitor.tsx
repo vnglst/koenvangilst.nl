@@ -22,7 +22,7 @@ export function Co2Monitor() {
   );
 
   return (
-    <div className="not-prose w-full pb-4 pt-4">
+    <div className="not-prose w-full pt-4 pb-4">
       <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">{timestamp}</pre>
       <div className="mb-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         <MetricCard header="CO2" metric={reading?.co2} unit="ppm" />
