@@ -21,7 +21,7 @@ export default async function Layout({ children }) {
         </Link>
 
         {/* Title */}
-        <h1 className="nimbus absolute left-1/2 -translate-x-1/2 text-xl font-bold tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
+        <h1 className="nimbus absolute left-1/2 -translate-x-1/2 text-lg font-bold tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
           Forest Track
         </h1>
 
