@@ -1,5 +1,3 @@
-import { Prose } from 'components/content/Prose';
-
 import { Co2Level } from './(charts)/Co2Level';
 import { Sealevel } from './(charts)/Sealevel.server';
 import { WeatherAnomaly } from './(charts)/WeatherAnomaly.server';
@@ -13,7 +11,7 @@ export const metadata = {
 export default async function Prognosis2100() {
   return (
     <div className="mb-10 grid min-h-screen w-full grid-cols-1 gap-4 p-4 md:px-8 lg:grid-cols-2 2xl:grid-cols-3">
-      <Prose className="my-auto p-2 md:py-6 md:pr-8">
+      <div className="prose dark:prose-invert my-auto p-2 md:py-6 md:pr-8">
         <p>
           The year 2100 seems far away but it is not unlikely that my children will still be alive then. What will the
           Netherlands look like then? Will we have a warmer more subtropical climate? Will our dykes be high enough? And
@@ -29,7 +27,7 @@ export default async function Prognosis2100() {
           I hope that, as octogenarians, my children will be able to look back on our period as the tipping point when
           we started to tackle climate change seriously.
         </p>
-      </Prose>
+      </div>
       <WeatherAnomaly type="temperature" look="dashboard" />
       <Sealevel />
       <Co2Level />

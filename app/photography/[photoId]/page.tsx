@@ -1,5 +1,3 @@
-import { Container } from 'components/layout/Container';
-
 import { getPhotos } from '../getPhotos';
 import { Photo } from './Photo';
 
@@ -40,9 +38,5 @@ export default async function PhotoPage({ params }: { params: Promise<{ photoId:
 
   if (!photo) return null;
 
-  return (
-    <Container footer={false} nav={false} useLayout={false}>
-      <Photo photo={photo} photos={photos} currentIndex={currentIndex} />
-    </Container>
-  );
+  return <Photo photo={photo} photos={photos} currentIndex={currentIndex} />;
 }

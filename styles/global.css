@@ -10,26 +10,11 @@
 
 @theme {
   --color-primary: #2196f3;
-  --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-fraunces: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-@layer utilities {
-  .full-bleed {
-    --bleed-size: 10vw;
-    margin-left: calc(-1 * var(--bleed-size));
-    min-width: min(calc(100% + 2 * var(--bleed-size)), 100vw);
-  }
-
-  .full-bleed-5 {
-    --bleed-size: 5vw;
-  }
-  .full-bleed-10 {
-    --bleed-size: 10vw;
-  }
-  .full-bleed-20 {
-    --bleed-size: 20vw;
-  }
+  --font-family-sans:
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-family-serif: var(--font-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-family-nimbus: var(--font-nimbus), ui-sans-serif, system-ui, sans-serif;
 }
 
 dialog:modal {
@@ -61,7 +46,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-fraunces), serif;
+  font-family: var(--font-nimbus), sans-serif;
+}
+
+.nimbus {
+  font-family: var(--font-nimbus), sans-serif;
 }
 
 .up-hover:hover {
@@ -76,6 +65,11 @@ h6 {
 input[type='text'],
 input[type='email'] {
   appearance: none;
+}
+
+/* Always show scrollbar to prevent layout shift */
+html {
+  overflow-y: scroll;
 }
 
 table {

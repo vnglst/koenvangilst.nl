@@ -21,9 +21,9 @@ export function BlogPostLink({ title, summary, url, slug, publishedAt, showYear 
   return (
     <LinkComponent {...linkProps}>
       <article className="my-1 flex w-full flex-col items-baseline gap-2 p-1 md:flex-row">
-        <div className={showYear ? 'mr-5 text-left text-primary' : 'mr-5 hidden md:invisible md:block'}>{year}</div>
+        <div className={showYear ? 'text-primary mr-5 text-left' : 'mr-5 hidden md:invisible md:block'}>{year}</div>
         <div className="up-hover">
-          <h4 className="mb-2 w-full text-lg font-normal text-gray-900 dark:text-gray-100 md:text-xl">
+          <h4 className="mb-2 w-full text-lg font-normal text-gray-900 md:text-xl dark:text-gray-100">
             {title}
             {isExternal && <Icon icon="external-link" className="ml-2 inline h-4 w-4" />}
           </h4>

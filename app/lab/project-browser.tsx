@@ -21,11 +21,11 @@ type ProjectBrowserProps = {
 };
 
 const FEATURED_TAGS = [
-  { label: 'article', href: '?q=article' },
-  { label: 'generative-art', href: '?q=generative-art' },
-  { label: 'side-project', href: '?q=side-project' },
+  { label: 'articles', href: '?q=article' },
+  { label: 'generative art', href: '?q=generative-art' },
+  { label: 'side projects', href: '?q=side-project' },
   { label: 'work', href: '?q=work' },
-  { label: 'snippet', href: '?q=snippet' }
+  { label: 'snippets', href: '?q=snippet' }
 ];
 
 export function ProjectBrowser({ projects }: ProjectBrowserProps) {
@@ -58,7 +58,8 @@ function TagFilter({ currentQuery, tags }: TagFilterProps) {
 
   const handleTagClick = (tag: { label: string; href: string }) => (e: React.MouseEvent) => {
     e.preventDefault();
-    const isActive = currentQuery === tag.label || currentQuery === tag.label.replace('-', ' ');
+    const tagQuery = tag.href.split('?q=')[1] || '';
+    const isActive = currentQuery === tagQuery;
 
     if (isActive) {
       router.push('/lab');
@@ -70,7 +71,8 @@ function TagFilter({ currentQuery, tags }: TagFilterProps) {
   return (
     <section className="my-6 mb-12 flex flex-wrap justify-start gap-2">
       {tags.map((tag) => {
-        const isActive = currentQuery === tag.label || currentQuery === tag.label.replace('-', ' ');
+        const tagQuery = tag.href.split('?q=')[1] || '';
+        const isActive = currentQuery === tagQuery;
 
         return (
           <TagButton key={tag.label} onClick={handleTagClick(tag)} variant={isActive ? 'active' : 'default'}>

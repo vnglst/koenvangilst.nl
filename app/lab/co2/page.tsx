@@ -12,7 +12,7 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <Container centered>
+    <Container>
       <Heading level={1} centered>
         CO2 levels
       </Heading>

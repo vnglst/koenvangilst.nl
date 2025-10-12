@@ -1,37 +1,36 @@
 import { PropsWithChildren, Suspense } from 'react';
-
-import { cx } from 'lib/clsx';
+import Link from 'next/link';
 
 import { Footer } from './Footer';
 import { Main } from './Main';
-import { Nav } from './Nav';
+import { Sidebar } from './Sidebar';
 
 type ContainerProps = {
-  centered?: boolean;
   footer?: boolean;
-  nav?: boolean;
-  useLayout?: boolean;
+  sidebar?: boolean;
+  showTitle?: boolean;
 };
 
 export function Container({
   children,
-  centered = false,
   footer = true,
-  nav = true,
-  useLayout = true
+  sidebar = true,
+  showTitle = true
 }: PropsWithChildren<ContainerProps>) {
-  const classes = cx(
-    'flex flex-col justify-center w-full max-w-[65ch] px-8 py-32 md:px-0 h-full min-h-screen',
-    centered ? 'm-auto' : 'mx-auto'
-  );
-
   return (
-    <>
-      {nav && <Nav />}
+    <div className="mx-4 mt-8 mb-40 flex max-w-5xl flex-col md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
+      {sidebar && <Sidebar />}
       <Main>
-        <Suspense>{useLayout ? <div className={classes}>{children}</div> : children}</Suspense>
+        <Suspense>
+          {showTitle && (
+            <div className="nimbus mt-3 mb-9 hidden text-lg font-bold tracking-wide uppercase md:block">
+              <Link href="/">Koen van Gilst</Link>
+            </div>
+          )}
+          <div className="w-full md:w-9/12">{children}</div>
+          {footer && <Footer />}
+        </Suspense>
       </Main>
-      {footer && <Footer />}
-    </>
+    </div>
   );
 }

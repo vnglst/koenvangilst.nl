@@ -10,8 +10,15 @@ type Store = {
   setTheme: (theme: Theme) => void;
 };
 
+// Get initial theme from DOM on client side
+const getInitialTheme = (): Theme => {
+  if (typeof window === 'undefined') return Theme.Light;
+  const darkClass = document.documentElement.classList.contains('dark');
+  return darkClass ? Theme.Dark : Theme.Light;
+};
+
 export const useTheme = create<Store>((set) => ({
-  theme: Theme.Light, // Default to light theme
+  theme: getInitialTheme(),
   setTheme: (theme: Theme) => {
     set({ theme });
   }

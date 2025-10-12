@@ -7,8 +7,8 @@ import { cx } from 'lib/clsx';
 import { Icon } from '../ui/Icon';
 import { Link } from '../ui/Link';
 
-function RoundedImage({ fullBleed, alt, ...props }: ComponentProps<typeof Image> & { fullBleed?: boolean }) {
-  const className = cx('my-1 inline-block rounded-lg', fullBleed && 'lg:full-bleed');
+function RoundedImage({ alt, ...props }: ComponentProps<typeof Image>) {
+  const className = cx('my-1 inline-block rounded-lg');
 
   return <Image alt={alt} {...props} className={className} />;
 }
