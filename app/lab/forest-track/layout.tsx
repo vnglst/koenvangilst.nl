@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { Heading } from 'components/content/Heading';
+
 export default async function Layout({ children }) {
   return (
     <div className="relative min-h-screen">
@@ -21,9 +23,12 @@ export default async function Layout({ children }) {
         </Link>
 
         {/* Title */}
-        <h1 className="nimbus absolute left-1/2 -translate-x-1/2 text-lg font-bold tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
+        <Heading
+          level={1}
+          className="nimbus absolute left-1/2 -translate-x-1/2 text-lg tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100"
+        >
           Forest Track
-        </h1>
+        </Heading>
 
         {/* Empty div for flex spacing */}
         <div className="w-16" />

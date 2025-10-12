@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 
+import { Heading } from 'components/content/Heading';
 import { PrognosisToggle } from './(components)/PrognosisToggle';
 
 export default async function Layout({ children }) {
@@ -24,9 +25,12 @@ export default async function Layout({ children }) {
         </Link>
 
         {/* Title */}
-        <h1 className="nimbus absolute left-1/2 -translate-x-1/2 text-lg font-bold tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
+        <Heading
+          level={1}
+          className="nimbus absolute left-1/2 -translate-x-1/2 text-lg tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100"
+        >
           Prognosis 2100
-        </h1>
+        </Heading>
 
         {/* Toggle */}
         <Suspense fallback={<div className="h-9 w-20" />}>
