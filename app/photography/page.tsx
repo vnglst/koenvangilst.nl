@@ -14,7 +14,7 @@ export default async function Photography() {
   const photos = await getPhotos();
 
   return (
-    <Container footer={false}>
+    <Container footer>
       <PhotoGrid photos={photos} />
     </Container>
   );
