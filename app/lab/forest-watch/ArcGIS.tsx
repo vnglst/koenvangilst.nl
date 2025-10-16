@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import Basemap from '@arcgis/core/Basemap';
+import * as reactiveUtils from '@arcgis/core/core/reactiveUtils';
 import TileInfo from '@arcgis/core/layers/support/TileInfo';
 import WebTileLayer from '@arcgis/core/layers/WebTileLayer';
 import WMTSLayer from '@arcgis/core/layers/WMTSLayer';
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
-import Locate from '@arcgis/core/widgets/Locate';
 import { useDebounce } from 'hooks/useDebounce';
 
 import { CONFIG } from './config';
@@ -79,10 +79,6 @@ const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPo
       center: [initial.longitude, initial.latitude],
       zoom: initial.zoom,
       ui: { components: [] },
-      navigation: {
-        mouseWheelZoomEnabled: true,
-        browserTouchPanEnabled: true
-      },
       map: mapRef.current,
       constraints: {
         /**
@@ -104,14 +100,31 @@ const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPo
       }
     });
 
-    const locate = new Locate({
-      view: mapViewRef.current,
-      goToOverride: function (view, options) {
-        return view.goTo(options.target);
+    // Configure mouse wheel zoom using actionMap
+    if (mapViewRef.current.navigation) {
+      mapViewRef.current.navigation.actionMap = {
+        mouseWheel: 'zoom'
+      };
+    }
+
+    // Add locate button using HTML element approach (web component alternative)
+    const locateBtn = document.createElement('div');
+    locateBtn.className = 'esri-widget--button esri-widget esri-interactive';
+    locateBtn.title = 'Find my location';
+    locateBtn.innerHTML = '<span class="esri-icon-locate"></span>';
+    locateBtn.addEventListener('click', () => {
+      if (mapViewRef.current && 'geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          if (mapViewRef.current) {
+            mapViewRef.current.goTo({
+              center: [position.coords.longitude, position.coords.latitude],
+              zoom: 15
+            });
+          }
+        });
       }
     });
-
-    mapViewRef.current.ui.add(locate, 'bottom-right');
+    mapViewRef.current.ui.add(locateBtn, 'bottom-right');
 
     return () => {
       // wait until the map is ready before destroying it
@@ -157,26 +170,41 @@ const ArcGISMap = ({ showTreeLoss, showTreeGain, initial, active, handleCenterPo
   useEffect(() => {
     if (!mapViewRef.current) return;
 
-    const watcher = mapViewRef.current.watch('stationary', (stationary) => {
-      if (!mapViewRef.current || !stationary) return;
-      debouncedHandler();
-    });
+    const handle = reactiveUtils.watch(
+      () => mapViewRef.current?.stationary,
+      (stationary) => {
+        if (!mapViewRef.current || !stationary) return;
+        debouncedHandler();
+      }
+    );
 
     return () => {
-      watcher?.remove();
+      handle?.remove();
     };
   }, [debouncedHandler]);
 
   useEffect(() => {
     if (!mapViewRef.current) return;
 
-    mapViewRef.current.goTo(
-      {
-        center: [initial.longitude, initial.latitude],
-        zoom: initial.zoom
-      },
-      { animate: true, duration: 1000 }
-    );
+    // Wait for the view to be ready before navigating
+    mapViewRef.current
+      .when()
+      .then(() => {
+        if (!mapViewRef.current) return;
+        return mapViewRef.current.goTo(
+          {
+            center: [initial.longitude, initial.latitude],
+            zoom: initial.zoom
+          },
+          { animate: true, duration: 1000 }
+        );
+      })
+      .catch((error) => {
+        // Ignore errors if view is destroyed or not ready
+        if (error.name !== 'AbortError') {
+          console.error('Error navigating map:', error);
+        }
+      });
   }, [initial.latitude, initial.longitude, initial.zoom]);
 
   useEffect(() => {
