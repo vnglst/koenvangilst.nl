@@ -13,8 +13,6 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const isDevelopment = process.env.NODE_ENV === 'development';
-
   const baseLayers = await getBaseLayers({
     url: CONFIG.url,
     yearsBack: parseInt(CONFIG.yearsBack)
@@ -23,15 +21,7 @@ export default async function Page() {
   return (
     <div className="flex h-screen w-full bg-slate-200 px-4 pt-20 pb-6 text-black md:px-8 md:pt-24 dark:bg-slate-800 dark:text-white">
       <Suspense>
-        {isDevelopment ? (
-          <ForestTrack baseLayers={baseLayers} />
-        ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center">
-            <p className="max-w-md text-center">
-              This feature is currently not available. Check back later when it's ready for production.
-            </p>
-          </div>
-        )}
+        <ForestTrack baseLayers={baseLayers} />
       </Suspense>
     </div>
   );
