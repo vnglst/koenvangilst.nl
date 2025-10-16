@@ -1,14 +1,14 @@
 import { Suspense } from 'react';
 
 import { CONFIG } from './config';
-import { ForestTrack } from './ForestTrack';
+import { ForestWatch } from './ForestWatch';
 import { getBaseLayers } from './getBaseLayers';
 
 import '@arcgis/core/assets/esri/themes/dark/main.css';
 import './styles.css';
 
 export const metadata = {
-  title: 'Forest Track',
+  title: 'Forest Watch',
   description: 'Keep track of forests in your area. Get a detailed view of changes in forest cover over time.'
 };
 
@@ -21,7 +21,7 @@ export default async function Page() {
   return (
     <div className="flex h-screen w-full bg-slate-200 px-4 pt-20 pb-6 text-black md:px-8 md:pt-24 dark:bg-slate-800 dark:text-white">
       <Suspense>
-        <ForestTrack baseLayers={baseLayers} />
+        <ForestWatch baseLayers={baseLayers} />
       </Suspense>
     </div>
   );

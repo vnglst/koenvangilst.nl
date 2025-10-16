@@ -26,7 +26,7 @@ type Props = {
   baseLayers: BaseLayer[];
 };
 
-export function ForestTrack({ baseLayers }: Props) {
+export function ForestWatch({ baseLayers }: Props) {
   const settings = useMapSettings();
   const [isBoxVisible, setBoxVisible] = useState(true);
   const [activeLayerIdx, setActiveLayerIdx] = useState<number>();
