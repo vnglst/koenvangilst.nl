@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 
-import { Heading } from 'components/content/Heading';
+import { Icon } from 'components/ui/Icon';
 
 export default async function Layout({ children }) {
   return (
@@ -10,15 +10,13 @@ export default async function Layout({ children }) {
           href="/lab"
           className="flex items-center gap-2 text-sm font-medium text-gray-700 transition-opacity hover:opacity-60 dark:text-gray-300"
         >
+          <Icon icon="arrow-left" className="h-4 w-4" />
           Back
         </NextLink>
 
-        <Heading
-          level={1}
-          className="nimbus absolute left-1/2 -translate-x-1/2 text-lg tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100"
-        >
+        <h1 className="nimbus m-0 p-0 text-lg tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100">
           Forest Track
-        </Heading>
+        </h1>
 
         <div className="w-16" />
       </div>
