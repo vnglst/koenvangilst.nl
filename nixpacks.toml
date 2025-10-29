@@ -1,6 +1,0 @@
-# Nixpacks configuration
-# Use Node 22 (latest available LTS) instead of default Node 18
-
-[phases.setup]
-nixPkgs = ["nodejs_22", "npm-10_x"]
-
