@@ -1,0 +1,5 @@
+# Nixpacks configuration for koenvangilst.nl
+# Pin Node version via Nixpacks variable so the Node provider selects the right runtime
+
+[variables]
+NIXPACKS_NODE_VERSION = "24"
