@@ -15,6 +15,7 @@ const config = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   headers,
   redirects,
+  output: 'standalone', // Optimize for Docker deployments
   env: {
     APP_VERSION: pkg.version,
     COMMIT_HASH: commitHash
