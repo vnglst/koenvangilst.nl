@@ -37,7 +37,7 @@ export default async function Home() {
           So far, my work aligns with my passion for technology. In my spare time, I enjoy coding side projects that
           often complement my professional work - a great way to stay up to date with trends and keep learning. On this
           website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
-          <Link href="/lab?q=article">articles</Link>, and <Link href="/lab?q=generative-art">generative art</Link> from
+          <Link href="/lab?q=article">articles</Link>, and <Link href="/lab/gen-art-gallery">generative art</Link> from
           over the years.
         </p>
       </Prose>
