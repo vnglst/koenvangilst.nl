@@ -12,7 +12,6 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "postinstall": "npm rebuild sharp",
     "knip": "knip",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
