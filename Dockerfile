@@ -35,6 +35,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_CACHE_DIR=/data/cache
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
@@ -46,6 +47,8 @@ COPY --from=builder /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
+RUN mkdir -p ${NEXT_CACHE_DIR}
+RUN chown nextjs:nodejs ${NEXT_CACHE_DIR}
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
