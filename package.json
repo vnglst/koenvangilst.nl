@@ -9,10 +9,9 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "npm run optimize-photos && next build",
+    "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "optimize-photos": "node scripts/optimize-photos.js",
     "knip": "knip",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"

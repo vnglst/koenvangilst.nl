@@ -57,7 +57,7 @@ export function Photo({
       </Link>
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
         <Image
-          src={photo.src.includes('photography-optimized') ? `${photo.src}-medium.jpg` : photo.src}
+          src={photo.src}
           alt={photo.alt}
           width={photo.width}
           height={photo.height}

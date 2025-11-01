@@ -4,7 +4,6 @@
 node_modules
 public/sitemap.xml
 public/feed.xml
-public/static/photography-optimized
 tsconfig.tsbuildinfo
 .vercel
 .env
