@@ -24,7 +24,9 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
-RUN npm run build
+RUN --mount=type=cache,target=/app/.next/cache \
+	--mount=type=cache,target=/app/node_modules/.cache \
+	npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
