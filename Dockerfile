@@ -1,4 +1,5 @@
 # Multi-stage build for optimal image size and build speed
+ARG SOURCE_COMMIT=unknown
 FROM node:22-alpine AS base
 
 # Install dependencies only when needed
@@ -12,6 +13,7 @@ RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
+ARG SOURCE_COMMIT
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -20,15 +22,18 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
+ARG SOURCE_COMMIT
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
