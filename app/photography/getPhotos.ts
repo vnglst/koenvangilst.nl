@@ -17,7 +17,6 @@ export type PhotoType = {
 
 export async function getPhotos(): Promise<PhotoType[]> {
   const photosDirectory = path.join(process.cwd(), 'public/static/photography');
-  const optimizedDirectory = path.join(process.cwd(), 'public/static/photography-optimized');
   let files = await fs.readdir(photosDirectory);
 
   files = files.filter((filename) => /\.(jpg|jpeg)$/.test(filename));
@@ -33,7 +32,6 @@ export async function getPhotos(): Promise<PhotoType[]> {
   const photos = await Promise.all(
     filesWithStats.map(async (file) => {
       const filePath = path.join(photosDirectory, file.filename);
-      const baseName = path.parse(file.filename).name;
       const image = sharp(filePath);
       const metadata = await image.metadata();
       const aspectRatio = (metadata.width || 0) / (metadata.height || 0);
@@ -51,19 +49,9 @@ export async function getPhotos(): Promise<PhotoType[]> {
         }
       }
 
-      // Use optimized images (fallback to original if not found)
-      const hasOptimized = await fs
-        .access(path.join(optimizedDirectory, `${baseName}-medium.jpg`))
-        .then(() => true)
-        .catch(() => false);
-
-      const srcPath = hasOptimized
-        ? `/static/photography-optimized/${encodeURIComponent(baseName)}`
-        : `/static/photography/${encodeURIComponent(file.filename)}`;
-
       return {
         id,
-        src: srcPath,
+        src: `/static/photography/${encodeURIComponent(file.filename)}`,
         width: metadata.width || 0,
         height: metadata.height || 0,
         alt: location,
