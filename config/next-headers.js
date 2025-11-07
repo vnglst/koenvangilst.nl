@@ -8,6 +8,7 @@ const contentSecurityPolicy = `
     media-src i.imgur.com github.com *.s3.amazonaws.com;
     connect-src *;
     font-src 'self';
+  frame-ancestors 'self';
     frame-src 'self' svelte.dev codesandbox.io voronoi-virus.koenvangilst.nl dancing-mosquitoes.koenvangilst.nl pong-wars.koenvangilst.nl purple-rain.koenvangilst.nl particle-life.koenvangilst.nl time-flies.koenvangilst.nl aarde.koenvangilst.nl rock-paper-scissors.koenvangilst.nl;
 `;
 
@@ -27,10 +28,6 @@ const securityHeaders = [
   {
     key: 'Strict-Transport-Security',
     value: 'max-age=31536000; includeSubDomains; preload'
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY'
   },
   {
     key: 'X-Content-Type-Options',
