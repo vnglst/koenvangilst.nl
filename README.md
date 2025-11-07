@@ -4,13 +4,10 @@ The source code of my personal website and blog, built with modern web technolog
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) with React Server Components and App Router
+- **Framework**: [Next.js 16](https://nextjs.org/) with React Server Components and App Router
 - **Content**: [MDX](https://github.com/mdx-js/mdx) with [mdx-bundler](https://github.com/kentcdodds/mdx-bundler)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom design system
-- **Typography**: Inter and Fraunces fonts via Next.js fonts
-- **Data Validation**: [Zod](https://zod.dev/) for type-safe content schemas
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
-- **Image Processing**: [Sharp](https://sharp.pixelplumbing.com/) for optimized images
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 
 ## Project Structure
