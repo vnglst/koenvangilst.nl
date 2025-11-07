@@ -1,17 +1,5 @@
-<svg
-  id="spinner"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
->
-  <circle
-    stroke-opacity="0.25"
-    cx="11"
-    cy="12"
-    r="10"
-    stroke="currentColor"
-    stroke-width="4"
-  ></circle>
+<svg id="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  <circle stroke-opacity="0.25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
   <path
     stroke-opacity="0.75"
     fill="currentColor"
