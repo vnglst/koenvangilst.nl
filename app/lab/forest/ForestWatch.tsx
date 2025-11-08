@@ -17,7 +17,7 @@ import { BaseLayer, CenterPoint } from './types';
 import { useMapSettings } from './useMapSettings';
 import { formatDate, generateYears } from './utils';
 
-const ArcGISMap = dynamic(() => import('./ArcGIS'), {
+const LeafletMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
   loading: Loading
 });
@@ -80,7 +80,7 @@ export function ForestWatch({ baseLayers }: Props) {
 
   return (
     <div className="flex h-full w-full flex-wrap justify-between gap-4">
-      <ArcGISMap
+      <LeafletMap
         initial={settings.initial}
         showTreeLoss={settings.showTreeLoss}
         showTreeGain={settings.showTreeGain}
@@ -109,7 +109,7 @@ export function ForestWatch({ baseLayers }: Props) {
                 Tree cover loss and gain data is based on satellite imagery from{' '}
                 {parseInt(CONFIG.endYear) - parseInt(CONFIG.yearsBack)} to {CONFIG.endYear}. Build with geo data from{' '}
                 <Link href="https://www.globalforestwatch.org/">Global Forest Watch</Link> and{' '}
-                <Link href="https://www.arcgis.com/">ArcGIS</Link>.
+                <Link href="https://leafletjs.com/">Leaflet</Link>.
               </small>
             </Prose>
           </div>
