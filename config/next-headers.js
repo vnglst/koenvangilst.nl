@@ -1,7 +1,7 @@
 const contentSecurityPolicy = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com https://js.arcgis.com;
-    script-src-elem 'self' blob: 'unsafe-inline' https://js.arcgis.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com;
+    script-src-elem 'self' blob: 'unsafe-inline';
     child-src 'self' blob: *.youtube.com;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;

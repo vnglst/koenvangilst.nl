@@ -4,7 +4,6 @@ import { CONFIG } from './config';
 import { ForestWatch } from './ForestWatch';
 import { getBaseLayers } from './getBaseLayers';
 
-import '@arcgis/core/assets/esri/themes/dark/main.css';
 import './styles.css';
 
 export const metadata = {
