@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@plausible-analytics/tracker": "0.4.4",
-    "@tailwindcss/postcss": "4.1.16",
+    "@tailwindcss/postcss": "4.1.17",
     "@types/leaflet": "^1.9.21",
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
@@ -40,24 +40,28 @@
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.1",
     "rss": "1.2.2",
-    "sharp": "0.34.4",
+    "sharp": "0.34.5",
     "swr": "2.3.6",
-    "tailwindcss": "4.1.16",
+    "tailwindcss": "4.1.17",
     "zod": "4.1.12",
     "zustand": "5.0.8"
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.19",
     "@types/lodash": "4.17.20",
-    "@types/node": "24.9.2",
+    "@types/node": "24.10.0",
     "@types/react": "19.2.2",
-    "esbuild": "0.25.11",
-    "eslint": "9.39.0",
+    "esbuild": "0.25.12",
+    "eslint": "9.39.1",
     "eslint-config-next": "16.0.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "knip": "5.66.4",
+    "knip": "5.68.0",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.7.1",
     "typescript": "5.9.3"
+  },
+  "optionalDependencies": {
+    "@img/sharp-linuxmusl-x64": "0.34.5",
+    "@tailwindcss/oxide-linux-x64-musl": "^4.1.17"
   }
 }
