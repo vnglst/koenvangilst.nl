@@ -59,5 +59,8 @@
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.7.1",
     "typescript": "5.9.3"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-musl": "^4.1.17"
   }
 }
