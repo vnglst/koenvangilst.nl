@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -56,20 +55,24 @@ export function Photo({
         ✕
       </Link>
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
-        <Image
+        <img
           src={photo.src}
+          srcSet={photo.srcSet}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
+          loading="eager"
+          decoding="async"
           className={`cursor-pointer object-contain ${
             isFullScreen ? 'fixed h-screen w-screen object-cover' : 'max-h-[85vh] w-auto rounded-lg'
           }`}
           role="button"
           onClick={() => setIsFullScreen(!isFullScreen)}
-          priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
-          placeholder="blur"
-          blurDataURL={photo.blurDataURL}
+          style={{
+            backgroundImage: `url(${photo.blurDataURL})`,
+            backgroundSize: 'cover'
+          }}
         />
       </div>
       <div className="fixed bottom-5 left-0 flex w-full items-center justify-between gap-4 px-5">
