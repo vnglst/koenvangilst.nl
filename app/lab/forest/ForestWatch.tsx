@@ -87,7 +87,7 @@ export function ForestWatch({ baseLayers }: Props) {
         active={activeLayer}
         handleCenterPointChange={handleCenterPointchange}
       />
-      <div className="bg-opacity-80 dark:bg-opacity-80 relative h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md backdrop-saturate-50 dark:bg-slate-950">
+      <div className="bg-opacity-80 dark:bg-opacity-80 relative z-10 h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md backdrop-saturate-50 dark:bg-slate-950">
         {isBoxVisible ? (
           <div className="bg-slate-50 p-8 pt-16 dark:bg-transparent">
             <button onClick={handleInfoBoxToggle} className="absolute top-0 left-0 p-4">
@@ -122,7 +122,7 @@ export function ForestWatch({ baseLayers }: Props) {
       <div
         className={`${
           isBoxVisible ? 'hidden' : 'flex'
-        } bg-opacity-70 flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-slate-950 p-4 text-sm text-white backdrop-saturate-50 md:flex`}
+        } bg-opacity-70 relative z-10 flex h-fit w-fit flex-col flex-wrap gap-4 rounded-md bg-slate-950 p-4 text-sm text-white backdrop-saturate-50 md:flex`}
       >
         <Checkbox color="pink" onChange={settings.toggleTreeLossLayer} checked={settings.showTreeLoss}>
           Tree loss
@@ -136,7 +136,7 @@ export function ForestWatch({ baseLayers }: Props) {
       </div>
 
       {showWayback ? (
-        <div className={`${isBoxVisible ? 'hidden' : 'flex'} pb-safe-bottom mt-auto w-full justify-center md:flex`}>
+        <div className={`${isBoxVisible ? 'hidden' : 'flex'} pb-safe-bottom relative z-10 mt-auto w-full justify-center md:flex`}>
           <div className="bg-opacity-70 mb-4 flex w-full max-w-4xl flex-col gap-2 rounded-xl bg-slate-950 p-4 backdrop-saturate-50 md:mb-0">
             <div className="flex justify-between p-2 text-white">
               {formatDate(activeLayer?.date) || '\u00A0'}
