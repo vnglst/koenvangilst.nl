@@ -73,14 +73,23 @@ function BaseLayerComponent({ active }: { active?: BaseLayer }) {
 
     if (active?.url && active?.id) {
       // Add WMTS layer for historical imagery
-      const wmtsLayer = L.tileLayer(
-        `${active.url}/tile/{z}/{y}/{x}`,
-        {
-          attribution: 'World Imagery Wayback',
-          maxZoom: 19,
-          minZoom: 3
-        }
-      );
+      // Convert WMTS placeholders to Leaflet format
+      let tileUrl = active.url;
+
+      // Handle different WMTS placeholder formats
+      tileUrl = tileUrl
+        .replace('{level}', '{z}')
+        .replace('{col}', '{x}')
+        .replace('{row}', '{y}')
+        .replace('{TileMatrix}', '{z}')
+        .replace('{TileCol}', '{x}')
+        .replace('{TileRow}', '{y}');
+
+      const wmtsLayer = L.tileLayer(tileUrl, {
+        attribution: 'World Imagery Wayback',
+        maxZoom: 19,
+        minZoom: 3
+      });
       wmtsLayer.addTo(map);
       wmtsLayer.bringToBack();
     } else {
