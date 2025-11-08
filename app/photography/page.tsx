@@ -4,6 +4,7 @@ import { Container } from 'components/layout/Container';
 
 import { getPhotos } from './getPhotos';
 import { PhotoGrid } from './PhotoGrid';
+import { ScrollRestoration } from './ScrollRestoration';
 
 export const metadata: Metadata = {
   title: 'Photography',
@@ -15,6 +16,7 @@ export default async function Photography() {
 
   return (
     <Container footer>
+      <ScrollRestoration />
       <PhotoGrid photos={photos} />
     </Container>
   );
