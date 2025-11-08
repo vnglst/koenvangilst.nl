@@ -117,13 +117,39 @@ function LocateControl() {
   useEffect(() => {
     const LocateButton = L.Control.extend({
       onAdd: function () {
-        const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom');
-        btn.innerHTML = '📍';
+        const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom locate-button');
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </svg>
+        `;
         btn.style.backgroundColor = 'white';
-        btn.style.width = '30px';
-        btn.style.height = '30px';
+        btn.style.width = '34px';
+        btn.style.height = '34px';
         btn.style.cursor = 'pointer';
+        btn.style.border = '2px solid rgba(0,0,0,0.2)';
+        btn.style.borderRadius = '4px';
+        btn.style.display = 'flex';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        btn.style.padding = '0';
+        btn.style.transition = 'all 0.2s ease';
         btn.title = 'Find my location';
+
+        btn.onmouseover = function() {
+          btn.style.backgroundColor = '#f8f8f8';
+          btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+        };
+
+        btn.onmouseout = function() {
+          btn.style.backgroundColor = 'white';
+          btn.style.boxShadow = 'none';
+        };
 
         btn.onclick = function () {
           if ('geolocation' in navigator) {

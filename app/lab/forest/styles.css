@@ -26,6 +26,19 @@
   image-rendering: crisp-edges;
 }
 
+/* Locate button styling */
+.locate-button svg {
+  color: #334155;
+}
+
+.locate-button:hover svg {
+  color: #0f172a;
+}
+
+.locate-button:active {
+  transform: scale(0.95);
+}
+
 .ping {
   animation: ping 1.25s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
