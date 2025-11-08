@@ -17,6 +17,12 @@ export function Photo({
 }) {
   const router = useRouter();
   const [isFullScreen, setIsFullScreen] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Reset imageLoaded when photo changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [photo.id]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,6 +61,14 @@ export function Photo({
         ✕
       </Link>
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
+        {!imageLoaded && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-700 border-t-white" />
+              <p className="text-sm text-slate-400">Loading photo...</p>
+            </div>
+          </div>
+        )}
         <img
           src={photo.src}
           srcSet={photo.srcSet}
@@ -64,11 +78,12 @@ export function Photo({
           height={photo.height}
           loading="eager"
           decoding="async"
-          className={`cursor-pointer object-contain ${
+          className={`cursor-pointer object-contain transition-opacity duration-300 ${
             isFullScreen ? 'fixed h-screen w-screen object-cover' : 'max-h-[85vh] w-auto rounded-lg'
-          }`}
+          } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           role="button"
           onClick={() => setIsFullScreen(!isFullScreen)}
+          onLoad={() => setImageLoaded(true)}
           style={{
             backgroundImage: `url(${photo.blurDataURL})`,
             backgroundSize: 'cover'
