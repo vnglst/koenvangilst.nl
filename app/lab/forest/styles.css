@@ -1,12 +1,29 @@
 /* Remove tile borders and seams */
+.leaflet-tile-container img {
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .leaflet-tile {
-  border: none;
+  border: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.leaflet-tile-pane {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
-.leaflet-tile-container {
-  pointer-events: none;
+.leaflet-layer {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .ping {
