@@ -61,6 +61,7 @@
     "typescript": "5.9.3"
   },
   "optionalDependencies": {
+    "@img/sharp-linuxmusl-x64": "0.34.5",
     "@tailwindcss/oxide-linux-x64-musl": "^4.1.17"
   }
 }
