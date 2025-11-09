@@ -12,7 +12,7 @@ type Props = {
 export async function generateMetadata(props: Props) {
   const params = await props.params;
   const photos = await getPhotos();
-  const photoId = decodeURIComponent(params.photoId);
+  const photoId = params.photoId; // Already decoded by Next.js
   const currentIndex = photos.findIndex((p) => decodeURIComponent(p.id) === photoId);
   const photo = photos[currentIndex];
 
@@ -26,13 +26,13 @@ export async function generateMetadata(props: Props) {
 
 export async function generateStaticParams() {
   return getPhotos().then((photos) => {
-    return photos.map((photo) => ({ photoId: photo.id }));
+    return photos.map((photo) => ({ photoId: decodeURIComponent(photo.id) }));
   });
 }
 
 export default async function PhotoPage({ params }: { params: Promise<{ photoId: string }> }) {
   const photos = await getPhotos();
-  const photoId = decodeURIComponent((await params).photoId);
+  const photoId = (await params).photoId; // Already decoded by Next.js
   const currentIndex = photos.findIndex((p) => decodeURIComponent(p.id) === photoId);
   const photo = photos[currentIndex];
 
