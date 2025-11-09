@@ -20,10 +20,10 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
     setImageLoaded(false);
     setShowSpinner(false);
 
-    // Only show spinner if image takes more than 200ms to load
+    // Only show spinner if image takes more than 1000ms to load
     const timer = setTimeout(() => {
       setShowSpinner(true);
-    }, 200);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [selectedIndex]);
