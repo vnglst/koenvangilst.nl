@@ -11,12 +11,21 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullScreen, setIsFullScreen] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const selectedPhoto = selectedIndex !== null ? photos[selectedIndex] : null;
 
   // Reset image loaded state when photo changes
   useEffect(() => {
     setImageLoaded(false);
+    setShowSpinner(false);
+
+    // Only show spinner if image takes more than 200ms to load
+    const timer = setTimeout(() => {
+      setShowSpinner(true);
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, [selectedIndex]);
 
   // Lock body scroll when modal is open
@@ -113,7 +122,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
             ✕
           </button>
           <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
-            {!imageLoaded && (
+            {!imageLoaded && showSpinner && (
               <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
                   <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-700 border-t-white" />
