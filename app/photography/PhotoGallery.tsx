@@ -96,7 +96,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               alt={photo.alt}
               width={photo.width}
               height={photo.height}
-              loading={photo.id < 4 ? 'eager' : 'lazy'}
+              loading={photo.id < 2 ? 'eager' : 'lazy'}
               decoding="async"
               className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
               style={{

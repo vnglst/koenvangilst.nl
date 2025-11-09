@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: 'A collection of photographs by Koen van Gilst'
 };
 
+// Cache page data for 1 hour
+export const revalidate = 3600;
+
 export default async function Photography() {
   const photos = await getPhotos();
 

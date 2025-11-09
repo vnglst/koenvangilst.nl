@@ -19,7 +19,17 @@ export type PhotoType = {
 
 const WIDTHS = [384, 640, 750, 828, 1080, 1200, 1920, 2048, 2400];
 
+// Cache photos data - it rarely changes
+let cachedPhotos: PhotoType[] | null = null;
+let cacheTime = 0;
+const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
+
 export async function getPhotos(): Promise<PhotoType[]> {
+  // Return cached photos if available and fresh
+  if (cachedPhotos && Date.now() - cacheTime < CACHE_DURATION) {
+    return cachedPhotos;
+  }
+
   const photosDirectory = path.join(process.cwd(), 'public/static/photography');
   const optimizedDirectory = path.join(process.cwd(), 'public/static/photography-optimized');
 
@@ -81,6 +91,10 @@ export async function getPhotos(): Promise<PhotoType[]> {
     ...photo,
     id: index
   }));
+
+  // Update cache
+  cachedPhotos = photos;
+  cacheTime = Date.now();
 
   return photos;
 }
