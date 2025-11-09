@@ -4,26 +4,38 @@
 README.md
 .vscode
 .idea
+.editorconfig
 
 # Dependencies
 node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Next.js
 .next/
 out/
+build/
 
 # Testing
 coverage
+.nyc_output
+*.test.ts
+*.test.tsx
+*.test.js
+*.spec.ts
+*.spec.tsx
+*.spec.js
 
 # Misc
 .DS_Store
 *.pem
+Thumbs.db
 
 # Debug
 *.log
+.npm
 
 # Local env files
 .env*.local
@@ -31,3 +43,23 @@ coverage
 
 # Vercel
 .vercel
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Editor configs
+*.swp
+*.swo
+*~
