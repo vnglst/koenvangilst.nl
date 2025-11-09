@@ -31,22 +31,23 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedIndex !== null) {
-      document.body.style.overflow = 'hidden';
+      // Save current scroll position
+      const scrollY = window.scrollY;
       document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      document.body.style.height = '100%';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        // Restore scroll position when closing
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      };
     }
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-    };
   }, [selectedIndex]);
 
   // Keyboard navigation
