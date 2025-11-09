@@ -9,3 +9,8 @@ tsconfig.tsbuildinfo
 .vercel
 .env
 .vscode
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
