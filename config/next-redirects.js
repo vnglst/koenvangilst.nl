@@ -70,6 +70,12 @@ export const redirects = async () => {
       source: '/snippets/:slug*',
       destination: '/lab/:slug*',
       permanent: true
+    },
+    // Redirects for old photo routes to photography page
+    {
+      source: '/photography/photo/:photoId*',
+      destination: '/photography',
+      permanent: false
     }
   ];
 };

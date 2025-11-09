@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Container } from 'components/layout/Container';
 
 import { getPhotos } from './getPhotos';
-import { PhotoGrid } from './PhotoGrid';
+import { PhotoGallery } from './PhotoGallery';
 
 export const metadata: Metadata = {
   title: 'Photography',
@@ -15,7 +15,7 @@ export default async function Photography() {
 
   return (
     <Container footer>
-      <PhotoGrid photos={photos} />
+      <PhotoGallery photos={photos} />
     </Container>
   );
 }
