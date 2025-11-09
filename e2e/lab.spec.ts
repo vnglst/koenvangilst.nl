@@ -10,9 +10,7 @@ test.describe('Lab Page', () => {
     await page.goto('/lab');
 
     // Check for description text
-    await expect(
-      page.getByText(/collection of coding experiments, blog posts and side projects/i)
-    ).toBeVisible();
+    await expect(page.getByText(/collection of coding experiments, blog posts and side projects/i)).toBeVisible();
   });
 
   test('should display project list', async ({ page }) => {
