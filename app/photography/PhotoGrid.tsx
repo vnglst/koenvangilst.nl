@@ -11,12 +11,11 @@ export function PhotoGrid({ photos }: PhotoGridProps) {
   return (
     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:auto-rows-[300px]">
       <Suspense>
-        {photos.map((photo, index) => {
+        {photos.map((photo) => {
           return (
             <Link
-              key={photo.src}
-              href={`/photography/${photo.id}`}
-              passHref
+              key={photo.id}
+              href={`/photography/photo/${photo.id}`}
               scroll={false}
               className={`relative block aspect-square md:aspect-auto ${photo.isVertical ? 'row-span-2' : 'row-span-1'}`}
             >
@@ -27,7 +26,7 @@ export function PhotoGrid({ photos }: PhotoGridProps) {
                 alt={photo.alt}
                 width={photo.width}
                 height={photo.height}
-                loading={index < 4 ? 'eager' : 'lazy'}
+                loading={photo.id < 4 ? 'eager' : 'lazy'}
                 decoding="async"
                 className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
                 style={{

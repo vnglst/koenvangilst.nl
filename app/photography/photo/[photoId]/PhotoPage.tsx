@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { PhotoType } from '../getPhotos';
+import { PhotoType } from '../../getPhotos';
 
-export function Photo({
+export function PhotoPage({
   photo,
   photos,
   currentIndex
@@ -27,14 +27,14 @@ export function Photo({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        router.push('/photography', { scroll: false });
+        router.push('/photography');
       }
 
       if (e.key === 'ArrowLeft' && currentIndex > 0) {
-        router.push(`/photography/${photos[currentIndex - 1].id}`, { scroll: false });
+        router.push(`/photography/photo/${currentIndex - 1}`);
       }
       if (e.key === 'ArrowRight' && currentIndex < photos.length - 1) {
-        router.push(`/photography/${photos[currentIndex + 1].id}`, { scroll: false });
+        router.push(`/photography/photo/${currentIndex + 1}`);
       }
     };
 
@@ -53,7 +53,7 @@ export function Photo({
   }
 
   return (
-    <div className="h-full w-full bg-slate-950 p-4 md:p-8">
+    <div className="fixed inset-0 z-50 h-screen w-screen bg-slate-950 p-4 md:p-8">
       <Link
         href="/photography"
         className="fixed top-5 right-5 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-white/90 hover:text-black"
@@ -93,7 +93,7 @@ export function Photo({
       <div className="fixed bottom-5 left-0 flex w-full items-center justify-between gap-4 px-5">
         {currentIndex > 0 ? (
           <Link
-            href={`/photography/${photos[currentIndex - 1].id}`}
+            href={`/photography/photo/${currentIndex - 1}`}
             className="m-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Previous photo"
           >
@@ -111,7 +111,7 @@ export function Photo({
         </div>
         {currentIndex < photos.length - 1 ? (
           <Link
-            href={`/photography/${photos[currentIndex + 1].id}`}
+            href={`/photography/photo/${currentIndex + 1}`}
             className="m-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 text-sm text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
             aria-label="Next photo"
           >

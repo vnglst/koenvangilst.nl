@@ -4,7 +4,8 @@ import path from 'path';
 import sharp from 'sharp';
 
 export type PhotoType = {
-  id: string;
+  id: number; // Index-based ID for simple routing
+  filename: string;
   src: string;
   srcSet: string;
   alt: string;
@@ -33,13 +34,12 @@ export async function getPhotos(): Promise<PhotoType[]> {
     })
   );
 
-  const photos = await Promise.all(
+  const photosWithData = await Promise.all(
     filesWithStats.map(async (file) => {
       const filePath = path.join(photosDirectory, file.filename);
       const image = sharp(filePath);
       const metadata = await image.metadata();
       const aspectRatio = (metadata.width || 0) / (metadata.height || 0);
-      const id = encodeURIComponent(file.filename);
       const location = file.filename.replace(/\.[^/.]+$/, '').split('-')[0];
       const nameWithoutExt = file.filename.replace(/\.[^/.]+$/, '');
 
@@ -59,7 +59,7 @@ export async function getPhotos(): Promise<PhotoType[]> {
       const srcSet = await generateSrcSet(imageDir, nameWithoutExt, metadata.width || 0);
 
       return {
-        id,
+        filename: file.filename,
         src: `/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/original.jpg`,
         srcSet,
         width: metadata.width || 0,
@@ -74,7 +74,13 @@ export async function getPhotos(): Promise<PhotoType[]> {
   );
 
   // Sort photos by createdAt date
-  photos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+  photosWithData.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+
+  // Add index-based IDs after sorting
+  const photos = photosWithData.map((photo, index) => ({
+    ...photo,
+    id: index
+  }));
 
   return photos;
 }
