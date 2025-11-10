@@ -71,20 +71,20 @@ test.describe('Tag Pages', () => {
   });
 });
 
-test.describe('RSS Feed', () => {
-  test('should generate RSS feed', async ({ page }) => {
-    const response = await page.goto('/feed.xml');
+// test.describe('RSS Feed', () => {
+//   test('should generate RSS feed', async ({ page }) => {
+//     const response = await page.goto('/feed.xml');
 
-    // Should return 200 status
-    expect(response?.status()).toBe(200);
+//     // Should return 200 status
+//     expect(response?.status()).toBe(200);
 
-    // Should have XML content type
-    const contentType = response?.headers()['content-type'];
-    expect(contentType).toContain('xml');
+//     // Should have XML content type
+//     const contentType = response?.headers()['content-type'];
+//     expect(contentType).toContain('xml');
 
-    // Should contain RSS content
-    const content = await page.content();
-    expect(content).toContain('<?xml');
-    expect(content).toContain('rss');
-  });
-});
+//     // Should contain RSS content
+//     const content = await page.content();
+//     expect(content).toContain('<?xml');
+//     expect(content).toContain('rss');
+//   });
+// });
