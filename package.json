@@ -11,7 +11,7 @@
   "scripts": {
     "prebuild": "npm run build:css",
     "build": "npm run prebuild && eleventy",
-    "build:css": "npx @tailwindcss/cli@latest -i src/assets/css/styles.css -o _site/assets/css/styles.css",
+    "build:css": "npx @tailwindcss/cli@latest -i styles/global.css -o _site/assets/css/styles.css",
     "dev": "eleventy --serve",
     "start": "eleventy --serve",
     "knip": "knip",

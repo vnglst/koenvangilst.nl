@@ -9,15 +9,13 @@ layout: layouts/base.njk
 
     {# Metadata #}
     <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
-      {% if publishedAt %}
-      <time datetime="{{ publishedAt | htmlDateString }}">
-        {{ publishedAt | readableDate }}
+      {% if publishedAt or date %}
+      <time datetime="{{ (publishedAt or date) | htmlDateString }}">
+        {{ (publishedAt or date) | readableDate }}
       </time>
       {% endif %}
 
-      {% if readingTime %}
-      <span>{{ readingTime }}</span>
-      {% endif %}
+      <span>{{ content | readingTime }}</span>
     </div>
 
     {# Tags #}
@@ -53,7 +51,7 @@ layout: layouts/base.njk
   {# Footer #}
   <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
     <a
-      href="https://github.com/vnglst/koenvangilst.nl/edit/main/content/{{ page.fileSlug }}.md"
+      href="https://github.com/vnglst/koenvangilst.nl/edit/main/src/posts/{{ page.fileSlug }}.md"
       class="text-blue-600 dark:text-blue-400 hover:underline"
       target="_blank"
       rel="noopener noreferrer"

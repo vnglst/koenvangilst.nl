@@ -39,6 +39,15 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi
       .getFilteredByGlob("src/posts/**/*.md")
+      .map((post) => {
+        // Use publishedAt as primary date if available
+        if (post.data.publishedAt && !post.data.date) {
+          post.data.date = new Date(post.data.publishedAt);
+        } else if (post.data.publishedAt) {
+          post.data.date = new Date(post.data.publishedAt);
+        }
+        return post;
+      })
       .sort((a, b) => {
         return b.date - a.date;
       });
@@ -96,6 +105,20 @@ export default function (eleventyConfig) {
       .replace(/[^\w\s-]/g, '')
       .replace(/[\s_-]+/g, '-')
       .replace(/^-+|-+$/g, '');
+  });
+
+  eleventyConfig.addFilter("dateToRfc3339", (dateObj) => {
+    return new Date(dateObj).toISOString();
+  });
+
+  // Calculate reading time from content
+  eleventyConfig.addFilter("readingTime", (content) => {
+    if (!content) return "1 min read";
+    const wordsPerMinute = 200;
+    const text = content.replace(/<[^>]*>/g, ''); // Strip HTML
+    const wordCount = text.trim().split(/\s+/).length;
+    const minutes = Math.ceil(wordCount / wordsPerMinute);
+    return `${minutes} min read`;
   });
 
   // Shortcodes

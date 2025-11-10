@@ -1,0 +1,28 @@
+# Redirects for Netlify/Vercel
+# Old blog routes to /lab
+/blog              /lab              301
+/blog/*            /lab/:splat       301
+/blog/feed         /feed.xml         301
+
+# Old labs routes to /lab
+/labs              /lab              301
+/labs/*            /lab/:splat       301
+
+# Old projects routes to /lab
+/projects          /lab              301
+/projects/*        /lab/:splat       301
+
+# Old clients routes to /lab
+/clients           /lab              301
+/clients/*         /lab/:splat       301
+
+# Old portfolio routes to /lab
+/portfolio         /lab              301
+/portfolio/*       /lab/:splat       301
+
+# Old snippets routes to /lab
+/snippets          /lab              301
+/snippets/*        /lab/:splat       301
+
+# Old photo routes to photography page
+/photography/photo/*  /photography   302
