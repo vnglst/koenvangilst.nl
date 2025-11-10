@@ -1,0 +1,255 @@
+---
+title: API testing with Jest
+publishedAt: '2017-02-06'
+image:
+  src: /static/images/api-testing-jest.jpg
+  alt: Example screenshot passing Jest tests
+  width: 1348
+  height: 642
+  showAsHeader: true
+summary: Testing async API calls using Jest’s mocking features
+tags:
+  - article
+  - javascript
+  - testing
+date: '2017-02-06'
+layout: layouts/post.njk
+permalink: /lab/api-testing-with-jest/
+---
+
+<Disclaimer>
+  This article was written in 2017 and today there are much better ways to mock
+  API calls in Jest. I would recommend looking into a library called [Mock
+  Service Worker](https://mswjs.io/) to mock API calls.
+</Disclaimer>
+
+Jest is a great JavaScript testing framework by Facebook. It’s often used for testing React components, but it’s also a pretty good general-purpose testing framework. In this tutorial, I’ll give a quick and simple demo of its mocking capabilities for testing async functions.
+
+## Purpose of mocking
+
+Mocking async functions (like API calls) instead of testing with a real API is useful for a couple of reasons:
+
+- It’s faster: you don’t have to wait until the API response comes in and you don’t have to deal with rate limits.
+- It makes your tests `pure`, i.e. whether they fail or pass depends only on your code, and not on the data that the API returns.
+- It’s easier in the long run: no need to first login or set some state before you can start testing a certain endpoint.
+
+## Setting up Jest
+
+Configuring Jest [isn’t all that difficult](https://jestjs.io/docs/en/getting-started), but to get started quickly I’m using the official starter kit by Facebook, [create-react-app](https://github.com/facebook/create-react-app). This comes with a working Jest configuration out of the box!
+
+Install the create-react-app and create the app:
+
+```bash
+yarn global add create-react-app
+create-react-app mocking-with-jest
+cd mocking-with-jest/
+yarn start
+```
+
+This should open a browser window with a spinning React logo.
+
+Now start the Jest testing environment:
+
+```bash
+yarn test
+```
+
+You should see something like this:
+
+<Image
+  alt={`Screenshot passing Jest tests`}
+  src={`/static/images/passing-jest-tests.jpg`}
+  width={1230 / 2}
+  height={694 / 2}
+/>
+
+Congratulations, you’ve now got Jest up and running and are ready to start writing some tests!
+
+## Adding the API
+
+We’ll be using `rest.js` for making the API requests. `Rest.js` works well in the browser and Node.js.
+
+**Note (2018): Rest is no longer actively maintained. Use something like [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) instead.**
+
+```bash
+yarn add rest
+```
+
+Create a new folder `api` in the folder `src` and add the file `github.js` with the following code:
+
+```js
+
+const getUser = (user) => request(`https://api.github.com/users/${user}`);
+
+```
+
+Then also add `request.js` with the following code:
+
+```js
+const rest = require('rest');
+const mime = require('rest/interceptor/mime');
+
+```
+
+You’re now ready to make API requests using: `github.getUser(‘vnglst’)`. Let’s test this quickly in the browser. Replace the original contents in the file `App.js` with the following code:
+
+```js
+import './App.css';
+
+const renderLine = (user, key) => (
+  <li key={key}>
+    <b>{key}</b>: {user[key]}
+  </li>
+);
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: {} };
+  }
+
+  componentDidMount() {
+    getUser('vnglst').then((data) => {
+      this.setState({ user: data.entity });
+    });
+  }
+
+  render() {
+    const { user } = this.state;
+    return (
+      <div className="App">
+        <ul style={{ listStyle: 'none' }}>
+          {
+            // Loop over the object keys and render each key
+            Object.keys(user).map((key) => renderLine(user, key))
+          }
+        </ul>
+      </div>
+    );
+  }
+}
+
+```
+
+Use `yarn start` to open up a browser and see the result. You should see a simple list with my profile data. It works!
+
+## Writing tests
+
+We’re now ready to write some tests. Let’s first try to unit test the function getUser. Create a folder `__tests__` and in this folder a file `github.test.js` with the following code:
+
+```js
+/* eslint-env jest */
+
+const github = require('../github');
+
+// A simple example test
+describe('#getUser() using Promises', () => {
+  it('should load user data', () => {
+    return github.getUser('vnglst').then((data) => {
+      expect(data).toBeDefined();
+      expect(data.entity.name).toEqual('Koen van Gilst');
+    });
+  });
+});
+```
+
+Start Jest using `yarn test` and you should see the following error message:
+
+<Image
+  alt={`Failing Jest tests`}
+  src={`/static/images/failing-jest-tests.jpg`}
+  width={1506 / 2}
+  height={1192 / 2}
+/>
+
+What’s happening here? It turns out that using our `getUser` function in a Node environment (which Jest is using to run the tests) makes our request fail. So even though our function works in the browser, it fails in our tests! We could try and fix this, by adding a `User-Agent` header when we’re running this in a Node environment, but mocking would now be a better solution. Let’s set this up!
+
+## Creating a mock
+
+Create a folder `__mocks__` and in this folder a file `request.js` (this will be the mocked version of request.js in the parent folder):
+
+```js
+const fs = require('fs');
+
+const request = (url) =>
+  new Promise((resolve, reject) => {
+    // Get userID from supplied url string
+    const lastSlash = url.lastIndexOf('/');
+    const userID = url.substring(lastSlash + 1);
+    // Load user json data from a file in de subfolder for mock data
+    fs.readFile(
+      `./src/api/__mockData__/${userID}.json`,
+      'utf8',
+      (err, data) => {
+        if (err) reject(err);
+        // Parse the data as JSON and put in the key entity (just like the request library does)
+        resolve({ entity: JSON.parse(data) });
+      }
+    );
+  });
+
+```
+
+The mocked function expects a _userId.json_ (i.e. _vnglst.json_) file in a folder **mockData**. I’ve used my own Github username and data as an example here, but you can add as many example data as you need for your tests:
+
+```json
+{
+  "login": "vnglst",
+  "id": 3457693,
+  "avatar_url": "https://avatars.githubusercontent.com/u/3457693?v=3",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/vnglst",
+  "html_url": "https://github.com/vnglst",
+  "followers_url": "https://api.github.com/users/vnglst/followers",
+  "following_url": "https://api.github.com/users/vnglst/following{/other_user}",
+  "gists_url": "https://api.github.com/users/vnglst/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/vnglst/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/vnglst/subscriptions",
+  "organizations_url": "https://api.github.com/users/vnglst/orgs",
+  "repos_url": "https://api.github.com/users/vnglst/repos",
+  "events_url": "https://api.github.com/users/vnglst/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/vnglst/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "Koen van Gilst",
+  "company": null,
+  "blog": "www.koenvangilst.nl",
+  "location": "Utrecht, The Netherlands",
+  "email": "koen@koenvangilst.nl",
+  "hireable": true,
+  "bio": "Web Developer & Translator | JavaScript, Node, Express, React | Creator of @TermSearch ",
+  "public_repos": 45,
+  "public_gists": 17,
+  "followers": 21,
+  "following": 75,
+  "created_at": "2013-02-02T16:06:27Z",
+  "updated_at": "2017-02-04T14:24:18Z"
+}
+```
+
+To let Jest mock the request module, you have to add the following line to `github.test.js` file:
+
+```js
+jest.mock(‘../request’)
+```
+
+Now the simple unit test should pass and you’re ready to write more complicated tests!
+
+I hope you enjoyed this tutorial and feel free to ask me any questions. You can find me on Twitter as `@vnglst`. The source code of this tutorial can be found [here](https://github.com/vnglst/mocking-with-jest)
+
+This tutorial is based upon the [async example](https://jestjs.io/docs/en/tutorial-async) by the creators of Jest (and their example is probably better 😂). Be sure to also check out their other examples.
+
+## BONUS: testing using async/await
+
+If you’re using the `create-react-app` you can also use async/await to write your tests. This makes your tests easier to write and more readable:
+
+```js
+// The exact same test using async/await
+describe('#getUser() using async/await', () => {
+  it('should load user data', async () => {
+    const data = await github.getUser('vnglst');
+    expect(data).toBeDefined();
+    expect(data.entity.name).toEqual('Koen van Gilst');
+  });
+});
+```

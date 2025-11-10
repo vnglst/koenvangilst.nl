@@ -1,0 +1,17 @@
+---
+title: Clean code is a phase
+publishedAt: '2022-01-28'
+summary: Why it's better to be kind than to be clean.
+tags:
+  - article
+  - software design
+date: '2022-01-28'
+layout: layouts/post.njk
+permalink: /lab/clean-code-is-a-phase/
+---
+
+At some point in their career, every programmer will come across [Clean Code](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29) by Robert Martin. They'll read the book, apply the principles religiously, and convince teammates to do the same. They might get into a few discussions about it, maybe even a few fights, but after a while, they'll discover that other people have different coding styles, and that's fine. They'll find that it's more important to be respectful of others than to point out the boy scout rule and that it's better to be kind than to be clean.
+
+In the end, "clean code" is a phase most programmers go through, like adolescence, with its desire to find the one true way. But after that, most of us discover that the principles are pointless in and of themselves and that it's often preferable to ship "working software" instead.
+
+This doesn't mean that Clean Code is useless. It teaches us to think about our coding craft and to always evaluate if there's a better way to practice it. I've internalized some of the principles and patterns, and I enjoy rereading chapters of the book. And who knows: maybe there's another phase in my life as a programmer, in which I rediscover Clean Code and find out it actually **is** the one true way.

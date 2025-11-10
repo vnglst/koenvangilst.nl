@@ -1,0 +1,70 @@
+---
+title: 'Work update: Audiobook Player for Dedicon'
+publishedAt: '2017-07-01'
+summary: >-
+  As a Frontend developer for Stichting Dedicon, I created a player for their
+  audiobook collection. It's built specifically for users with visual
+  impairments.
+tags:
+  - work
+  - freelance
+date: '2017-07-01'
+layout: layouts/post.njk
+permalink: /lab/dedicon/
+---
+
+As a Frontend developer at Stichting Dedicon, I developed a specialized audiobook player for users with visual impairments. The Online Player (OLP) offers multiple reading assistance features including:
+
+- Text highlighting that syncs with human narration
+- Adjustable reading speed
+- Customizable font size and color schemes
+- Full compatibility with screen readers and braille displays
+
+This accessible design ensures that all users, regardless of visual ability, can enjoy Dedicon's audiobook collection comfortably.
+
+## Screenshots
+
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon1.jpg`}
+  width={1242 / 4}
+  height={2208 / 4}
+/>
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon2.jpg`}
+  width={1242 / 4}
+  height={2208 / 4}
+/>
+
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon3.jpg`}
+  width={1242 / 4}
+  height={2208 / 4}
+/>
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon4.jpg`}
+  width={1242 / 4}
+  height={2208 / 4}
+/>
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon5.jpg`}
+  width={1242 / 4}
+  height={2208 / 4}
+/>
+
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon6.jpg`}
+  width={1722 / 2}
+  height={1272 / 2}
+/>
+<Image
+  alt={``}
+  src={`/static/screenshots/dedicon7.jpg`}
+  width={1722 / 2}
+  height={1272 / 2}
+/>

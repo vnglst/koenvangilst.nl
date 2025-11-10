@@ -1,0 +1,60 @@
+---
+title: Git hash in Next.js
+summary: >-
+  A snippet to parse the git hash from the command line and add it as an
+  environment variable to a Next.js app.
+publishedAt: '2022-03-08'
+tags:
+  - snippet
+  - git
+  - nextjs
+  - javascript
+date: '2022-03-08'
+layout: layouts/post.njk
+permalink: /lab/git-hash/
+---
+
+It's often useful to have a Git hash shown somewhere to help determine which version
+you're looking at. This snippet will add to a Next.js app as an
+environment variable.
+
+```ts
+const pkg = require('./package.json');
+
+// starts a command line process to get the git hash
+const commitHash = require('child_process')
+  .execSync('git log --pretty=format:"%h" -n1')
+  .toString()
+  .trim();
+
+module.exports = {
+  // other configs
+  env: {
+    // add the package.json version and git hash to the environment
+    APP_VERSION: pkg.version,
+    COMMIT_HASH: commitHash
+  }
+};
+```
+
+You can then use it in your code like this (example taken from this website):
+
+```jsx
+<span className="text-gray-500 text-right text-xs my-4">
+  v. {process.env.APP_VERSION} |{' '}
+  <a
+    className="underline"
+    href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH}`}
+  >
+    {process.env.COMMIT_HASH}
+  </a>
+</span>
+```
+
+Or if you don't want to expose the hash in the frontend, you can attach it
+to the **window** object:
+
+```ts
+window.APP_VERSION = pkg.version;
+window.COMMIT_HASH = commitHash;
+```

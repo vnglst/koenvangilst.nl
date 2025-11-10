@@ -1,0 +1,100 @@
+---
+title: Can LLMs Recreate Van Gogh's Starry Night Using Only SVG?
+publishedAt: '2025-10-10'
+summary: >-
+  An experiment tracking how AI models from 2022 to 2025 have evolved in their
+  ability to recreate famous artworks using SVG. The results reveal how these
+  models understand visual composition and artistic style.
+tags:
+  - AI
+  - side-project
+date: '2025-10-10'
+layout: layouts/post.njk
+permalink: /lab/ai-art-evolution/
+---
+
+Here's an interesting experiment I recently did: Can AI models like ChatGPT recreate Van Gogh's Starry Night using only code?
+
+I created a [website](https://pelican.koenvangilst.nl/) to test this across multiple versions of large language models, from 2022 to 2025. The results show how much models have improved in just a few years.
+
+## The Original
+
+First, let's look at the masterpiece we're trying to recreate:
+
+<Image
+  alt="Van Gogh's Starry Night - the original painting"
+  src="/static/screenshots/ai-art-original-starry.jpg"
+  width={1200}
+  height={900}
+/>
+
+### GPT-3.5 (2022)
+
+<Image
+  alt="GPT-3.5's attempt at recreating Starry Night"
+  src="/static/screenshots/ai-art-gpt-35.jpg"
+  width={1200}
+  height={900}
+/>
+
+The earliest model produces what looks like a surprised emoji with some yellow dots. It knows "night sky" and "yellow things" but has no concept of composition or structure.
+
+### GPT-4 (2023)
+
+<Image
+  alt="GPT-4's attempt at recreating Starry Night"
+  src="/static/screenshots/ai-art-gpt-4.jpg"
+  width={1200}
+  height={900}
+/>
+
+GPT-4 gets some basic elements right: the hills and the stars. Simple but recognizable.
+
+### GPT-4o (2024)
+
+<Image
+  alt="GPT-4o's attempt at recreating Starry Night"
+  src="/static/screenshots/ai-art-gpt-4o.jpg"
+  width={1200}
+  height={900}
+/>
+
+The moon comes out, we see a black streak that is the cypress and there are two white swirls in the middle. Not pretty, but it contains the basics.
+
+### GPT-4.1 (2025)
+
+<Image
+  alt="GPT-4.1's attempt at recreating Starry Night"
+  src="/static/screenshots/ai-art-gpt-41.jpg"
+  width={1200}
+  height={900}
+/>
+
+The town appears, the cypress is recognizable as a tree and we see nice swirly streaks.
+
+### GPT-5 (2025)
+
+<Image
+  alt="GPT-5's attempt at recreating Starry Night"
+  src="/static/screenshots/ai-art-gpt-5.jpg"
+  width={1200}
+  height={900}
+/>
+
+All elements are there, and it's trying to capture the artistic style.
+
+## What This Reveals
+
+What fascinates me isn't just the improvement. It's how models come up with interpretations that have a kind of beauty. It's almost like... art?
+
+I tested this across multiple paintings:
+- [The Scream](https://pelican.koenvangilst.nl/group/)
+- [Rembrandt's Night Watch](https://pelican.koenvangilst.nl/group/58)
+- [Mondrian's Victory Boogie Woogie](https://pelican.koenvangilst.nl/group/54)
+- [Man on the Moon (photograph)](https://pelican.koenvangilst.nl/group/75)
+
+You can compare every model side-by-side in the [gallery](https://pelican.koenvangilst.nl/gallery).
+
+## Is this Creativity?
+
+These models weren't trained to draw. They learned from text and code. Their ability to reconstruct spatial and compositional knowledge shows how they combine and synthesize what they know. When art meets artificial intelligence, there's always a debate: Do you think these interpretations show that LLMs have creativity and "understand" something visually? Or is it all just next token prediction?

@@ -1,0 +1,34 @@
+---
+title: Is creativity nothing more than a little randomness?
+publishedAt: '2024-05-13'
+summary: >-
+  By using the randomness, AI can generate more surprising and engaging text,
+  similar to how some human thinkers benefit from unconventional approaches.
+  This post explores the concept of randomness in AI and its implications for
+  creativity.
+tags:
+  - article
+  - AI
+  - chatgpt
+date: '2024-05-13'
+layout: layouts/post.njk
+permalink: /lab/randomness-in-ai/
+---
+
+Large language models are fascinating constructs in many ways, but for me the most surprising aspect is the fact that their creativity is largely determined by adding a little randomness to their output.
+
+If you let an LLM generate text by always picking the most likely next word based on its training, the results will be predictable and dull. To fix this engineers introduced a touch of randomness. Instead of just choosing the top suggestion, techniques like **temperature sampling** force LLMs to explore less likely options. Temperature acts like a dial: a higher setting allows for more exploration of less likely but potentially interesting options, while a lower setting keeps things closer to the most probable path. This element of surprise is what injects a spark of "creativity" into the LLMs outputs.
+
+For example, when asked to complete the sentence "Once upon a time...", an LLM with the temperature set to 0 (no randomness) might complete it like this:
+
+> Once upon a time, in a land far, far away, there was a beautiful young girl who had become lost while traveling.
+
+Increasing the temperature results in more creative results. Like this one from Google Gemini, with a higher temperature setting:
+
+> Once upon a time in a whispering forest, where sunlight dappled the mossy floor and ancient trees murmured secrets in the breeze, lived a tiny firefly named Flick.
+
+It seems strange to me that creativity appears to be reducible to not doing something that is expected, but something else. Still, this concept of embracing the unexpected is also seen in human behaviour. For example in California there are people who have build a philosophy around this idea. When everyone thinks A, they defend !A. They hope this contrarian approach will lead them valuable new insights.
+
+I also know some people that have this interesting character trait to think differently, by not choosing the most likely idea, but the second or third one - or sometimes even the most unlikely idea. I've always admired thinkers like that and even though my discussions with them tended to be challenging, I still enjoyed them afterward because they would lead me to new perspectives on things I took for granted.
+
+This does not mean I'm going to add randomness to my thinking processes just because it seems to enhance creativity in computers. However, the concept of randomness and creativity in LLMs raises a fascinating question: Is true human creativity simply a matter of embracing the unexpected, or is there something more to it? Perhaps future research on AI can shed light on this very human quality.

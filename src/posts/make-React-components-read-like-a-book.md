@@ -1,0 +1,193 @@
+---
+title: React components should read like a book
+publishedAt: '2021-12-17'
+summary: How the ordering of functions can make component files easier to read.
+tags:
+  - article
+  - react
+  - javascript
+  - code readability
+date: '2021-12-17'
+layout: layouts/post.njk
+permalink: /lab/make-React-components-read-like-a-book/
+---
+
+Code readability can often be increased by making sure that **code reads like a book**, where the most **important things come first**.
+
+Consider the following React component, which is adapted from the (excellent) [new documentation website for React](https://beta.reactjs.org/). Look closely at how the code is structured, particularly in which order functions are defined and exported.
+
+```tsx
+
+let nextId = 3;
+
+const initialTasks = [
+  { id: 0, text: 'Philosopher’s Path', done: true },
+  { id: 1, text: 'Visit the temple', done: false },
+  { id: 2, text: 'Drink matcha', done: false }
+];
+
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [
+        ...tasks,
+        {
+          id: action.id,
+          text: action.text,
+          done: false
+        }
+      ];
+    }
+    case 'changed': {
+      return tasks.map((t) => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter((t) => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+function TaskBoard() {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  function handleAddTask(text) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      text: text
+    });
+  }
+
+  function handleChangeTask(task) {
+    dispatch({
+      type: 'changed',
+      task: task
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: 'deleted',
+      id: taskId
+    });
+  }
+
+  return (
+    <>
+      <h1>Day off in Kyoto</h1>
+      <AddTask onAddTask={handleAddTask} />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
+    </>
+  );
+}
+
+```
+
+Next, let's see if we can improve this!
+
+First, we make sure that the most important thing comes first. In most cases when you open a file you're looking for the **exported functions**, or (if available) the **default export**. So let's move that to the top.
+
+This will mean that we have to move some functions around. In JavaScript, you might feel obligated to define functions before they are used. Technically this is **not** a requirement ([function definitions are hoisted to the top of their scope](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)) and to improve readability it's often a good idea to define them **after** they've been used.
+
+Let's look at the improved snippet below:
+
+```tsx
+
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  function handleAddTask(text) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      text: text
+    });
+  }
+
+  function handleChangeTask(task) {
+    dispatch({
+      type: 'changed',
+      task: task
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: 'deleted',
+      id: taskId
+    });
+  }
+
+  return (
+    <>
+      <h1>Day off in Kyoto</h1>
+      <AddTask onAddTask={handleAddTask} />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
+    </>
+  );
+}
+
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [
+        ...tasks,
+        {
+          id: action.id,
+          text: action.text,
+          done: false
+        }
+      ];
+    }
+    case 'changed': {
+      return tasks.map((t) => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter((t) => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+let nextId = 3;
+
+const initialTasks = [
+  { id: 0, text: 'Philosopher’s Path', done: true },
+  { id: 1, text: 'Visit the temple', done: false },
+  { id: 2, text: 'Drink matcha', done: false }
+];
+```
+
+Notice how:
+
+- The most important function (the default export) is now mentioned "above the fold", i.e. immediately visible when you open the file.
+- When we start reading the component, the mentioned reducer function `taskReducer` is defined directly under the main component TaskBoard.
+- In the `taskReducer` the initial state variable is mentioned before it's defined below that function.
+
+I think these small improvements can make React component files more readable and (therefore) easier to maintain.
+
+Note: The code of the **improved** snippet above is taken from the [new React documentation website](https://beta.reactjs.org/learn/scaling-up-with-reducer-and-context).

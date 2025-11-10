@@ -1,0 +1,53 @@
+---
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+layout: layouts/base.njk
+eleventyComputed:
+  title: "Tag: {{ tag }}"
+  permalink: "/tag/{{ tag | slugify }}/"
+---
+
+<div class="max-w-6xl mx-auto px-4 py-8" id="content">
+  <h1 class="text-4xl md:text-5xl font-bold mb-8">Posts tagged "{{ tag }}"</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% set taggedPosts = collections.posts | filterByTag(tag) %}
+    {% for post in taggedPosts %}
+      <article class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+        <h2 class="text-xl font-bold mb-2">
+          <a href="{{ post.url }}" class="text-blue-600 dark:text-blue-400 hover:underline">
+            {{ post.data.title }}
+          </a>
+        </h2>
+
+        {% if post.data.publishedAt or post.date %}
+        <time datetime="{{ (post.data.publishedAt or post.date) | htmlDateString }}" class="text-sm text-gray-600 dark:text-gray-400">
+          {{ (post.data.publishedAt or post.date) | readableDate }}
+        </time>
+        {% endif %}
+
+        {% if post.data.summary %}
+        <p class="mt-3 text-gray-700 dark:text-gray-300">
+          {{ post.data.summary }}
+        </p>
+        {% endif %}
+
+        {% if post.data.tags and post.data.tags.length > 0 %}
+        <div class="mt-4 flex flex-wrap gap-2">
+          {% for tag in post.data.tags %}
+          <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-xs">
+            {{ tag }}
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="mt-8">
+    <a href="/lab/" class="text-blue-600 dark:text-blue-400 hover:underline">← Back to all posts</a>
+  </div>
+</div>

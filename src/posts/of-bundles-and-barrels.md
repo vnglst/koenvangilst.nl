@@ -1,0 +1,31 @@
+---
+title: Of Bundles and Barrels
+publishedAt: '2021-11-17'
+summary: Why index barrel files can lead to large bundle sizes
+tags:
+  - article
+  - code quality
+  - typescript
+date: '2021-11-17'
+layout: layouts/post.njk
+permalink: /lab/of-bundles-and-barrels/
+---
+
+Until recently I've been an unequivocal fan of so-called barrel files. They work like this:
+
+```ts
+// src/components/index.js
+```
+
+Which allows you to use components like this:
+
+```ts
+```
+
+Short and sweet! For this reason, I'm also a happy user of the VSCode plugin [Auto-barrel](https://marketplace.visualstudio.com/items?itemName=mikehanson.auto-barrel) which helps with creating/updating these barrel files.
+
+I did recently discover, however, that this pattern can have unwanted side effects. Re-exporting all your imports in an index file can result in large bundle sizes.
+
+I gave it a try on one of the projects I'm working on (using Next.js) and lo and behold: Removing the barrel in the `/components/ui` folder reduced the initial bundle size by more than 35kb. The culprit: In the `ui` folder was a `RichTextEditor` component of 35 kB. Since it was re-exported this was included on every page using a component from the ui folder.
+
+So be careful what you put in your barrels, if you care about bundle size!

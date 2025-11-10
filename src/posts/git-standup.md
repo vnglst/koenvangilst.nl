@@ -1,0 +1,18 @@
+---
+title: Git Standup Alias
+summary: A git alias to show a standup log for the specified author
+publishedAt: '2023-10-28'
+tags:
+  - snippet
+  - git
+  - bash
+date: '2023-10-28'
+layout: layouts/post.njk
+permalink: /lab/git-standup/
+---
+
+What have I been working on the last couple of days? I use this alias to show a standup log for the specified author (in this case myself).
+
+```bash
+standup = log --author=Koen --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+```

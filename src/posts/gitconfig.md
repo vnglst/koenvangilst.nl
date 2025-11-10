@@ -1,0 +1,36 @@
+---
+title: My gitconfig
+summary: A snippet I use to setup the aliases and global git config on new machines.
+publishedAt: '2022-09-01'
+tags:
+  - snippet
+  - git
+date: '2022-09-01'
+layout: layouts/post.njk
+permalink: /lab/gitconfig/
+---
+
+```ini
+[user]
+        email = <email>
+        name = Koen van Gilst
+[alias]
+        ac = !git add -A && git commit
+        amen = !git add --all && git commit --amend
+        ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+        changelog = log --pretty='- %s'
+        undo = reset --soft HEAD^
+[core]
+        ignorecase = true
+        editor = nano
+[pull]
+        ff = only
+[init]
+        defaultBranch = main
+[advice]
+        skippedCherryPicks = false
+[fetch]
+        prune = true
+[push]
+        autoSetupRemote = true
+```
