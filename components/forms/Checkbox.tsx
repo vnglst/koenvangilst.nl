@@ -31,7 +31,7 @@ export function Checkbox({
         checked={checked}
         onChange={onChange}
         className={cx(
-          'h-6 w-6 cursor-pointer appearance-none rounded-md border border-gray-300 checked:border-transparent focus:outline-none',
+          'h-6 w-6 cursor-pointer appearance-none rounded-lg border border-gray-300 checked:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all dark:border-gray-600 dark:focus:ring-blue-800',
           colorClass
         )}
       />
