@@ -1,0 +1,21 @@
+{
+  "title": "European Land Use Visualization",
+  "publishedAt": "2025-10-25",
+  "summary": "An expanded hexagonal map visualization comparing land use across multiple European countries, showing how water, nature, cities, and agriculture are distributed. See what makes Dutch land use special - or not.",
+  "tags": [
+    "data visualization",
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "data-visualization",
+    "side-project"
+  ],
+  "slug": "european-land-use",
+  "code": "var Component=(()=>{var c=Object.create;var i=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,w=Object.prototype.hasOwnProperty;var x=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),b=(t,e)=>{for(var n in e)i(t,n,{get:e[n],enumerable:!0})},r=(t,e,n,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of m(e))!w.call(t,s)&&s!==n&&i(t,s,{get:()=>e[s],enumerable:!(o=p(e,s))||o.enumerable});return t};var f=(t,e,n)=>(n=t!=null?c(g(t)):{},r(e||!t||!t.__esModule?i(n,\"default\",{value:t,enumerable:!0}):n,t)),v=t=>r(i({},\"__esModule\",{value:!0}),t);var u=x((D,l)=>{l.exports=_jsx_runtime});var _={};b(_,{default:()=>h,frontmatter:()=>y});var a=f(u()),y={title:\"European Land Use Visualization\",publishedAt:\"2025-10-25\",summary:\"An expanded hexagonal map visualization comparing land use across multiple European countries, showing how water, nature, cities, and agriculture are distributed. See what makes Dutch land use special - or not.\",tags:[\"data visualization\",\"side-project\"]};function d(t){let e={a:\"a\",p:\"p\",...t.components};return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(e.p,{children:\"We have a Dutch election coming up this week and how we use our limited land is a hotly debated topic. From housing, farming and renewable energie: it's all about the land.\"}),`\n`,(0,a.jsx)(e.p,{children:\"Last year I shared an animated hexagonal map of Dutch land use. I've now expanded this to include several more European countries, so you can see what makes Dutch land use so special - or not.\"}),`\n`,(0,a.jsxs)(e.p,{children:[\"Live demo: \",(0,a.jsx)(e.a,{href:\"https://onsland.koenvangilst.nl/\",children:\"https://onsland.koenvangilst.nl/\"})]}),`\n`,(0,a.jsx)(\"video\",{width:\"672\",height:\"577\",muted:!0,loop:!0,controls:!0,autoPlay:!0,playsInline:!0,children:(0,a.jsx)(\"source\",{src:\"https://github.com/user-attachments/assets/2e425a3a-3fa4-439e-a37d-18a6d4a0877b\",type:\"video/mp4\"})}),`\n`,(0,a.jsx)(e.p,{children:\"Each hex shows a certain land percentage. On the map you can see how this is split into Water, Nature, Cities, and Agriculture.\"}),`\n`,(0,a.jsx)(e.p,{children:\"If you want to help add more countries, I'd appreciate PRs on GitHub. The map rendering is already there, it only requires land use data which can be found in the SQLite database (at least for EU countries).\"}),`\n`,(0,a.jsxs)(e.p,{children:[\"Github: \",(0,a.jsx)(e.a,{href:\"https://github.com/vnglst/onsland\",children:\"https://github.com/vnglst/onsland\"})]})]})}function h(t={}){let{wrapper:e}=t.components||{};return e?(0,a.jsx)(e,{...t,children:(0,a.jsx)(d,{...t})}):d(t)}return v(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.735,
+    "time": 44100,
+    "words": 147
+  }
+}

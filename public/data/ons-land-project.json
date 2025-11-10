@@ -1,0 +1,22 @@
+{
+  "title": "Ons Land",
+  "url": "/lab/ons-land",
+  "publishedAt": "2024-06-06",
+  "summary": "An interactive data visualization project exploring how land is used across the Netherlands, highlighting the distribution of agriculture, nature reserves, urban areas, and infrastructure throughout the country.",
+  "tags": [
+    "data visualization",
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "data-visualization",
+    "side-project"
+  ],
+  "slug": "ons-land-project",
+  "code": "var Component=(()=>{var h=Object.create;var i=Object.defineProperty;var g=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var x=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var p=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),j=(t,e)=>{for(var n in e)i(t,n,{get:e[n],enumerable:!0})},s=(t,e,n,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let a of m(e))!f.call(t,a)&&a!==n&&i(t,a,{get:()=>e[a],enumerable:!(o=g(e,a))||o.enumerable});return t};var _=(t,e,n)=>(n=t!=null?h(x(t)):{},s(e||!t||!t.__esModule?i(n,\"default\",{value:t,enumerable:!0}):n,t)),b=t=>s(i({},\"__esModule\",{value:!0}),t);var c=p((w,u)=>{u.exports=_jsx_runtime});var y={};j(y,{default:()=>l,frontmatter:()=>v});var r=_(c()),v={title:\"Ons Land\",url:\"/lab/ons-land\",publishedAt:\"2024-06-06\",summary:\"An interactive data visualization project exploring how land is used across the Netherlands, highlighting the distribution of agriculture, nature reserves, urban areas, and infrastructure throughout the country.\",tags:[\"data visualization\",\"side-project\"]};function d(t){return(0,r.jsx)(r.Fragment,{})}function l(t={}){let{wrapper:e}=t.components||{};return e?(0,r.jsx)(e,{...t,children:(0,r.jsx)(d,{...t})}):d(t)}return b(y);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

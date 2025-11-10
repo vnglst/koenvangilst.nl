@@ -1,0 +1,20 @@
+{
+  "title": "Lumber Jack",
+  "url": "https://lumber-jack.netlify.app/",
+  "publishedAt": "2019-01-01",
+  "summary": "Weekend project to learn more about Mobx State Tree. Simple kids' game inspired by Stardew Valley and Monty Python. Don't forget to turn on the sound!",
+  "tags": [
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "side-project"
+  ],
+  "slug": "lumberjack",
+  "code": "var Component=(()=>{var l=Object.create;var a=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,y=Object.prototype.hasOwnProperty;var b=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),j=(t,e)=>{for(var n in e)a(t,n,{get:e[n],enumerable:!0})},u=(t,e,n,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of x(e))!y.call(t,o)&&o!==n&&a(t,o,{get:()=>e[o],enumerable:!(s=p(e,o))||s.enumerable});return t};var g=(t,e,n)=>(n=t!=null?l(f(t)):{},u(e||!t||!t.__esModule?a(n,\"default\",{value:t,enumerable:!0}):n,t)),h=t=>u(a({},\"__esModule\",{value:!0}),t);var i=b((D,m)=>{m.exports=_jsx_runtime});var _={};j(_,{default:()=>d,frontmatter:()=>M});var r=g(i()),M={title:\"Lumber Jack\",url:\"https://lumber-jack.netlify.app/\",publishedAt:\"2019-01-01\",summary:\"Weekend project to learn more about Mobx State Tree. Simple kids' game inspired by Stardew Valley and Monty Python. Don't forget to turn on the sound!\",tags:[\"side-project\"]};function c(t){return(0,r.jsx)(r.Fragment,{})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,r.jsx)(e,{...t,children:(0,r.jsx)(c,{...t})}):c(t)}return h(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "mijn-Lessen.nl",
+  "url": "https://mijn-lessen.vercel.app/",
+  "publishedAt": "2021-01-01",
+  "summary": "A web app built during the Covid-19 lockdown that helps parents and elementary school children create lessons collaboratively. Parents can support their kids with challenging topics and share interactive educational content with other families. (in Dutch)",
+  "tags": [
+    "side-project",
+    "kids",
+    "education"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "kids",
+    "education"
+  ],
+  "slug": "mijn-lessen-nl",
+  "code": "var Component=(()=>{var h=Object.create;var i=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var x=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var g=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),j=(t,e)=>{for(var n in e)i(t,n,{get:e[n],enumerable:!0})},o=(t,e,n,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let a of m(e))!f.call(t,a)&&a!==n&&i(t,a,{get:()=>e[a],enumerable:!(s=p(e,a))||s.enumerable});return t};var w=(t,e,n)=>(n=t!=null?h(x(t)):{},o(e||!t||!t.__esModule?i(n,\"default\",{value:t,enumerable:!0}):n,t)),_=t=>o(i({},\"__esModule\",{value:!0}),t);var l=g((k,c)=>{c.exports=_jsx_runtime});var v={};j(v,{default:()=>d,frontmatter:()=>b});var r=w(l()),b={title:\"mijn-Lessen.nl\",url:\"https://mijn-lessen.vercel.app/\",publishedAt:\"2021-01-01\",summary:\"A web app built during the Covid-19 lockdown that helps parents and elementary school children create lessons collaboratively. Parents can support their kids with challenging topics and share interactive educational content with other families. (in Dutch)\",tags:[\"side-project\",\"kids\",\"education\"]};function u(t){return(0,r.jsx)(r.Fragment,{})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,r.jsx)(e,{...t,children:(0,r.jsx)(u,{...t})}):u(t)}return _(v);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

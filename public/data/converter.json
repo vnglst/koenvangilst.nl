@@ -1,0 +1,20 @@
+{
+  "title": "Words to line prices",
+  "url": "https://converter.koenvangilst.nl/",
+  "publishedAt": "2016-01-01",
+  "summary": "A simple web app for translators that converts a price per word to a price per standard line (55 characters).",
+  "tags": [
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "side-project"
+  ],
+  "slug": "converter",
+  "code": "var Component=(()=>{var u=Object.create;var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,h=Object.prototype.hasOwnProperty;var _=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),g=(t,e)=>{for(var r in e)a(t,r,{get:e[r],enumerable:!0})},c=(t,e,r,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of x(e))!h.call(t,o)&&o!==r&&a(t,o,{get:()=>e[o],enumerable:!(s=d(e,o))||s.enumerable});return t};var j=(t,e,r)=>(r=t!=null?u(f(t)):{},c(e||!t||!t.__esModule?a(r,\"default\",{value:t,enumerable:!0}):r,t)),v=t=>c(a({},\"__esModule\",{value:!0}),t);var p=_((y,i)=>{i.exports=_jsx_runtime});var M={};g(M,{default:()=>m,frontmatter:()=>w});var n=j(p()),w={title:\"Words to line prices\",url:\"https://converter.koenvangilst.nl/\",publishedAt:\"2016-01-01\",summary:\"A simple web app for translators that converts a price per word to a price per standard line (55 characters).\",tags:[\"side-project\"]};function l(t){return(0,n.jsx)(n.Fragment,{})}function m(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(l,{...t})}):l(t)}return v(M);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Custom scrollbars",
+  "summary": "It's something you easily forget, but it's easy and looks so much better.",
+  "publishedAt": "2021-12-12",
+  "tags": [
+    "snippet",
+    "css"
+  ],
+  "tagsAsSlugs": [
+    "snippet",
+    "css"
+  ],
+  "slug": "styling-scrollbars",
+  "code": "var Component=(()=>{var m=Object.create;var t=Object.defineProperty;var h=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var N=Object.getPrototypeOf,k=Object.prototype.hasOwnProperty;var b=(s,e)=>()=>(e||s((e={exports:{}}).exports,e),e.exports),x=(s,e)=>{for(var a in e)t(s,a,{get:e[a],enumerable:!0})},o=(s,e,a,l)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let c of u(e))!k.call(s,c)&&c!==a&&t(s,c,{get:()=>e[c],enumerable:!(l=h(e,c))||l.enumerable});return s};var g=(s,e,a)=>(a=s!=null?m(N(s)):{},o(e||!s||!s.__esModule?t(a,\"default\",{value:s,enumerable:!0}):a,s)),y=s=>o(t({},\"__esModule\",{value:!0}),s);var i=b((w,r)=>{r.exports=_jsx_runtime});var _={};x(_,{default:()=>d,frontmatter:()=>f});var n=g(i()),f={title:\"Custom scrollbars\",summary:\"It's something you easily forget, but it's easy and looks so much better.\",publishedAt:\"2021-12-12\",tags:[\"snippet\",\"css\"]};function p(s){let e={code:\"code\",p:\"p\",pre:\"pre\",span:\"span\",...s.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsx)(e.p,{children:\"Here's an example of how to do it:\"}),`\n`,(0,n.jsx)(e.pre,{className:\"language-css\",children:(0,n.jsxs)(e.code,{className:\"language-css code-highlight\",children:[(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token selector\",children:(0,n.jsx)(e.span,{className:\"token pseudo-element\",children:\"::-webkit-scrollbar\"})}),\" \",(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"{\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token property\",children:\"width\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\":\"}),\" \",(0,n.jsx)(e.span,{className:\"token number\",children:\"6\"}),(0,n.jsx)(e.span,{className:\"token unit\",children:\"px\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\";\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token property\",children:\"height\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\":\"}),\" \",(0,n.jsx)(e.span,{className:\"token number\",children:\"12\"}),(0,n.jsx)(e.span,{className:\"token unit\",children:\"px\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\";\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"}\"}),`\n`]}),(0,n.jsx)(e.span,{className:\"code-line\",children:`\n`}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token selector\",children:(0,n.jsx)(e.span,{className:\"token pseudo-element\",children:\"::-webkit-scrollbar-thumb\"})}),\" \",(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"{\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token property\",children:\"background-color\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\":\"}),\" \",(0,n.jsx)(e.span,{className:\"token hexcode color\",children:\"#d9dadb\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\";\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token property\",children:\"border-radius\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\":\"}),\" \",(0,n.jsx)(e.span,{className:\"token number\",children:\"12\"}),(0,n.jsx)(e.span,{className:\"token unit\",children:\"px\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\";\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"}\"}),`\n`]})]})})]})}function d(s={}){let{wrapper:e}=s.components||{};return e?(0,n.jsx)(e,{...s,children:(0,n.jsx)(p,{...s})}):p(s)}return y(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.12,
+    "time": 7200,
+    "words": 24
+  }
+}

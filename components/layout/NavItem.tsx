@@ -1,17 +1,17 @@
 'use client';
 
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 
 import { cx } from 'lib/clsx';
 
 export function NavItem({ slug, text }: { slug: string; text: string }) {
-  const pathname = usePathname()!;
+  const location = useLocation();
+  const pathname = location.pathname;
   const isActive = pathname.includes(slug);
 
   return (
-    <NextLink
-      href={`/${slug}`}
+    <Link
+      to={`/${slug}`}
       className={cx(
         isActive
           ? 'rounded-none border-b-2 border-b-primary font-semibold text-gray-800 dark:text-gray-200'
@@ -20,17 +20,18 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
       )}
     >
       {text}
-    </NextLink>
+    </Link>
   );
 }
 
 export function NavItemHome() {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   const isActive = pathname === '/';
 
   return (
-    <NextLink
-      href="/"
+    <Link
+      to="/"
       className={
         'mr-auto rounded-lg p-1 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400 sm:px-3 sm:py-2'
       }
@@ -47,6 +48,6 @@ export function NavItemHome() {
           d="m275.2 358.4c-7.19 0-13.59 2.58-18.55 7.51-4.88 4.91-7.47 11.31-7.47 18.5v21.5c0 7.24 2.6 13.65 7.48 18.51 4.91 4.92 11.32 7.51 18.54 7.51h322.45c7.22 0 13.63-2.6 18.5-7.48 4.91-4.9 7.52-11.32 7.52-18.55 0-2.15 0-19.35 0-21.5 0-7.19-2.59-13.59-7.53-18.56-4.91-4.86-11.3-7.44-18.49-7.44-64.49 0-290.2 0-322.45 0z"
         />
       </svg>
-    </NextLink>
+    </Link>
   );
 }

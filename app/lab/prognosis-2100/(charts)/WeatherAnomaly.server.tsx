@@ -35,7 +35,7 @@ export async function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
 
 async function fetchData() {
   const data = await fetcher(DATA_URL, {
-    next: { revalidate: 60 * 60 * 24 * 30 } // monthly
+    cache: 'default' // Browser caching
   });
   const parsedData = Data.parse(data);
   return parsedData;

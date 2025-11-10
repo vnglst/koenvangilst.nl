@@ -1,5 +1,5 @@
 import React from 'react';
-import NextLink from 'next/link';
+import { Link } from 'react-router-dom';
 
 import { cx } from 'lib/clsx';
 
@@ -31,9 +31,9 @@ const getTagClasses = (variant: TagVariant = 'default') => {
 
 export function TagLink({ children, href, className, variant = 'default' }: TagLinkProps) {
   return (
-    <NextLink href={href} className={cx(getTagClasses(variant), className)}>
+    <Link to={href} className={cx(getTagClasses(variant), className)}>
       {children}
-    </NextLink>
+    </Link>
   );
 }
 

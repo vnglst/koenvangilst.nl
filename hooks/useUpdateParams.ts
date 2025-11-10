@@ -1,9 +1,9 @@
 import React from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useNavigate, useSearchParams as useRouterSearchParams } from 'react-router-dom';
 
 export function useUpdateParams() {
-  const router = useRouter();
-  const searchParams = useSearchParams()!;
+  const navigate = useNavigate();
+  const [searchParams] = useRouterSearchParams();
 
   const updateParams = React.useCallback(
     (newParams: Record<string, string>) => {
@@ -12,9 +12,9 @@ export function useUpdateParams() {
         currentParams.set(key, value);
       });
 
-      router.replace(`?${currentParams.toString()}`, { scroll: false });
+      navigate(`?${currentParams.toString()}`, { replace: true });
     },
-    [router, searchParams]
+    [navigate, searchParams]
   );
 
   const deleteParam = React.useCallback(
@@ -22,9 +22,9 @@ export function useUpdateParams() {
       const currentParams = new URLSearchParams(searchParams.toString());
       currentParams.delete(param);
 
-      router.replace(`?${currentParams.toString()}`, { scroll: false });
+      navigate(`?${currentParams.toString()}`, { replace: true });
     },
-    [router, searchParams]
+    [navigate, searchParams]
   );
 
   return { searchParams, deleteParam, updateParams };

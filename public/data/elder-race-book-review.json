@@ -1,0 +1,28 @@
+{
+  "title": "Elder Race, book review",
+  "publishedAt": "2024-01-01",
+  "summary": "I read \"Elder Race\" by Adrian Tchaikovsky, a sci-fi novel that explores the concept that any sufficiently advanced technology is indistinguishable from magic.",
+  "image": {
+    "src": "/static/images/elder-race.jpg",
+    "alt": "A high tower with two silhouettes in front of it.",
+    "width": 1195,
+    "height": 994,
+    "showAsHeader": true
+  },
+  "tags": [
+    "article",
+    "reading notes"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "reading-notes"
+  ],
+  "slug": "elder-race-book-review",
+  "code": "var Component=(()=>{var m=Object.create;var a=Object.defineProperty;var y=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,u=Object.prototype.hasOwnProperty;var p=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),v=(t,e)=>{for(var i in e)a(t,i,{get:e[i],enumerable:!0})},r=(t,e,i,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of f(e))!u.call(t,n)&&n!==i&&a(t,n,{get:()=>e[n],enumerable:!(s=y(e,n))||s.enumerable});return t};var w=(t,e,i)=>(i=t!=null?m(g(t)):{},r(e||!t||!t.__esModule?a(i,\"default\",{value:t,enumerable:!0}):i,t)),b=t=>r(a({},\"__esModule\",{value:!0}),t);var c=p((T,h)=>{h.exports=_jsx_runtime});var x={};v(x,{default:()=>d,frontmatter:()=>k});var o=w(c()),k={title:\"Elder Race, book review\",publishedAt:\"2024-01-01\",summary:'I read \"Elder Race\" by Adrian Tchaikovsky, a sci-fi novel that explores the concept that any sufficiently advanced technology is indistinguishable from magic.',image:{src:\"/static/images/elder-race.jpg\",alt:\"A high tower with two silhouettes in front of it.\",width:1195,height:994,showAsHeader:!0},tags:[\"article\",\"reading notes\"]};function l(t){let e={p:\"p\",...t.components};return(0,o.jsxs)(o.Fragment,{children:[(0,o.jsx)(e.p,{children:'I just read my first book of 2024, \"Elder Race\", by my new favorite sci-fi author Adrian Tchaikovsky. Having previously enjoyed his \"Children of Time\" trilogy, I found this book to be in a similar vein. The narrative follows an Earth anthropologist who, after losing contact with his technologically advanced society, ends up alone in a former human colony that has regressed to medieval times. The story delves into the concept, originally from Arthur C. Clarke, that any sufficiently advanced technology is indistinguishable from magic.'}),`\n`,(0,o.jsx)(e.p,{children:\"Told through alternating perspectives of the anthropologists Nyr and Lynesse, the novel explores how advanced technology becomes enigmatic and is only comprehensible in magical terms due to the absence of proper terminology. Without giving away too much of the plot, Tchaikovsky skilfully uses classic sci-fi themes to provide fresh insights into topics such as mental health, the human condition, and maintaining a moral high ground for objectivity.\"}),`\n`,(0,o.jsx)(e.p,{children:\"The story weaves around the idea (originally from Arthur C. Clarke) that any sufficiently advanced technology is indistinguishable from magic. By alternating the perspectives of the anthropologists Nyr and Lynesse it quickly becomes clear how advanced technology can only be understood in magical terms, as there is no proper terminology for it.\"}),`\n`,(0,o.jsx)(e.p,{children:\"I won't reveal too much of the rest of the story, but, as always, Tchaikovsky employs classic sci-fi themes to offer fresh insights into mental health, the human condition, and the pursuit of moral objectivity.\"}),`\n`,(0,o.jsx)(e.p,{children:\"If you like sci-fi stories that offer a new perspective on daily discussions I would recommend giving the Elder Race a try in 2024.\"})]})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,o.jsx)(e,{...t,children:(0,o.jsx)(l,{...t})}):l(t)}return b(x);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.315,
+    "time": 78900,
+    "words": 263
+  }
+}

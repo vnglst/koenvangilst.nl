@@ -1,0 +1,24 @@
+{
+  "title": "Generative Art Gallery",
+  "url": "/lab/gen-art-gallery",
+  "publishedAt": "2024-10-12",
+  "summary": "A gallery showing all my generative art projects in one place.",
+  "tags": [
+    "javascript",
+    "generative-art",
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "javascript",
+    "generative-art",
+    "side-project"
+  ],
+  "slug": "gen-art-gallery-project",
+  "code": "var Component=(()=>{var g=Object.create;var o=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var j=Object.getPrototypeOf,y=Object.prototype.hasOwnProperty;var d=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),f=(t,e)=>{for(var r in e)o(t,r,{get:e[r],enumerable:!0})},i=(t,e,r,l)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let a of x(e))!y.call(t,a)&&a!==r&&o(t,a,{get:()=>e[a],enumerable:!(l=p(e,a))||l.enumerable});return t};var _=(t,e,r)=>(r=t!=null?g(j(t)):{},i(e||!t||!t.__esModule?o(r,\"default\",{value:t,enumerable:!0}):r,t)),v=t=>i(o({},\"__esModule\",{value:!0}),t);var c=d((b,s)=>{s.exports=_jsx_runtime});var A={};f(A,{default:()=>u,frontmatter:()=>h});var n=_(c()),h={title:\"Generative Art Gallery\",url:\"/lab/gen-art-gallery\",publishedAt:\"2024-10-12\",summary:\"A gallery showing all my generative art projects in one place.\",tags:[\"javascript\",\"generative-art\",\"side-project\"]};function m(t){return(0,n.jsx)(n.Fragment,{})}function u(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(m,{...t})}):m(t)}return v(A);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

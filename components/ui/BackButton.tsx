@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 
 import { Icon } from './Icon';
 
@@ -11,16 +11,16 @@ type BackButtonProps = {
 };
 
 export function BackButton({ fallbackHref, className, children = 'Back' }: BackButtonProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     // Check if there's history to go back to
     if (window.history.length > 1) {
-      router.back();
+      navigate(-1);
     } else {
-      router.push(fallbackHref);
+      navigate(fallbackHref);
     }
   };
 

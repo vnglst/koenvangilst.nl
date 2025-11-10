@@ -1,0 +1,20 @@
+{
+  "title": "Help Terence!",
+  "url": "https://twitter.com/helpTerence",
+  "publishedAt": "2016-01-01",
+  "summary": "A Twitter bot raising emoji money for his trip around the world. A fun little experiment with social media and Twitter bots. [no longer active]. Technologies used: Express, MongoDB.",
+  "tags": [
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "side-project"
+  ],
+  "slug": "help-terence",
+  "code": "var Component=(()=>{var p=Object.create;var i=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var h=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var g=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),w=(t,e)=>{for(var r in e)i(t,r,{get:e[r],enumerable:!0})},a=(t,e,r,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of x(e))!f.call(t,o)&&o!==r&&i(t,o,{get:()=>e[o],enumerable:!(s=d(e,o))||s.enumerable});return t};var j=(t,e,r)=>(r=t!=null?p(h(t)):{},a(e||!t||!t.__esModule?i(r,\"default\",{value:t,enumerable:!0}):r,t)),T=t=>a(i({},\"__esModule\",{value:!0}),t);var m=g((y,c)=>{c.exports=_jsx_runtime});var M={};w(M,{default:()=>u,frontmatter:()=>_});var n=j(m()),_={title:\"Help Terence!\",url:\"https://twitter.com/helpTerence\",publishedAt:\"2016-01-01\",summary:\"A Twitter bot raising emoji money for his trip around the world. A fun little experiment with social media and Twitter bots. [no longer active]. Technologies used: Express, MongoDB.\",tags:[\"side-project\"]};function l(t){return(0,n.jsx)(n.Fragment,{})}function u(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(l,{...t})}):l(t)}return T(M);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import NextLink from 'next/link';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { cx } from 'lib/clsx';
 
@@ -33,8 +33,8 @@ export function Link({ href, children, className, ...props }: LinkProps) {
   }
 
   return (
-    <NextLink href={href} className={combinedClassName} {...props}>
+    <RouterLink to={href} className={combinedClassName} {...props}>
       {children}
-    </NextLink>
+    </RouterLink>
   );
 }

@@ -1,5 +1,4 @@
 import type { PostType } from 'cms/schema';
-import Image from 'next/image';
 
 import { sluggify } from 'lib/sluggify';
 
@@ -54,13 +53,12 @@ export async function MarkdownLayout({
             </ul>
           )}
           {image && image.showAsHeader && (
-            <Image
+            <img
               alt={image.alt}
               src={image.src}
               width={image.width}
               height={image.height}
               className="inline-block rounded-lg"
-              priority
             />
           )}
         </header>

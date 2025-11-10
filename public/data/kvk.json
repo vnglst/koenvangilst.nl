@@ -1,0 +1,19 @@
+{
+  "title": "Kamer van Koophandel, Frontend Engineer",
+  "publishedAt": "2018-01-01",
+  "summary": "At the Dutch Chamber of Commerce (KVK), I contributed as a frontend engineer in the development of the application that allows starting entrepreneurs (freelancers) to register their new businesses online. With online registration, the KVK meets the broad societal need to conduct transactions (with government entities) online.",
+  "tags": [
+    "work"
+  ],
+  "tagsAsSlugs": [
+    "work"
+  ],
+  "slug": "kvk",
+  "code": "var Component=(()=>{var p=Object.create;var s=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var u=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var b=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),K=(t,e)=>{for(var i in e)s(t,i,{get:e[i],enumerable:!0})},a=(t,e,i,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let r of g(e))!f.call(t,r)&&r!==i&&s(t,r,{get:()=>e[r],enumerable:!(o=m(e,r))||o.enumerable});return t};var w=(t,e,i)=>(i=t!=null?p(u(t)):{},a(e||!t||!t.__esModule?s(i,\"default\",{value:t,enumerable:!0}):i,t)),y=t=>a(s({},\"__esModule\",{value:!0}),t);var h=b((k,c)=>{c.exports=_jsx_runtime});var _={};K(_,{default:()=>d,frontmatter:()=>x});var n=w(h()),x={title:\"Kamer van Koophandel, Frontend Engineer\",publishedAt:\"2018-01-01\",summary:\"At the Dutch Chamber of Commerce (KVK), I contributed as a frontend engineer in the development of the application that allows starting entrepreneurs (freelancers) to register their new businesses online. With online registration, the KVK meets the broad societal need to conduct transactions (with government entities) online.\",tags:[\"work\"]};function l(t){let e={a:\"a\",em:\"em\",h2:\"h2\",p:\"p\",span:\"span\",...t.components},{Image:i}=e;return i||v(\"Image\",!0),(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.h2,{id:\"online-registratie\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#online-registratie\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"Online Registratie\"]}),`\n`,(0,n.jsxs)(e.p,{children:[\"At the Dutch Chamber of Commerce (KVK), I contributed as a frontend engineer in the development of the application that allows starting entrepreneurs (freelancers) to register their new businesses online. With \",(0,n.jsx)(e.em,{children:\"Online Registratie\"}),\", the KVK meets the broad societal need to conduct transactions (with government entities) online.\"]}),`\n`,(0,n.jsx)(e.p,{children:\"This application went live nationally at the end of 2019 and is used annually by more than 200,000 starting freelancers. Users rate this application highly (highest satisfaction score of the KVK).\"}),`\n`,(0,n.jsx)(e.p,{children:\"Since June 2020, it has also been possible for users to complete the registration entirely online. This uses a special technology that also carries out the identification process (with a passport check) entirely digitally. As a result, visiting one of the KVK offices is no longer required for registering a business.\"}),`\n`,(0,n.jsx)(i,{alt:\"\",src:\"/static/screenshots/screenshot-kvk.jpg\",width:2490/4,height:1382/4})]})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(l,{...t})}):l(t)}function v(t,e){throw new Error(\"Expected \"+(e?\"component\":\"object\")+\" `\"+t+\"` to be defined: you likely forgot to import, pass, or provide it.\")}return y(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.71,
+    "time": 42600,
+    "words": 142
+  }
+}

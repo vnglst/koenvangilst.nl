@@ -1,0 +1,23 @@
+{
+  "title": "New Job at Rabobank",
+  "publishedAt": "2022-09-01",
+  "summary": "Some career news! Today I'm joining Rabobank as a frontend lead for the Wholesale & Rural Innovation department.",
+  "tags": [
+    "article",
+    "personal",
+    "work"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "personal",
+    "work"
+  ],
+  "slug": "new-job",
+  "code": "var Component=(()=>{var m=Object.create;var r=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,p=Object.prototype.hasOwnProperty;var b=(e,n)=>()=>(n||e((n={exports:{}}).exports,n),n.exports),w=(e,n)=>{for(var o in n)r(e,o,{get:n[o],enumerable:!0})},s=(e,n,o,i)=>{if(n&&typeof n==\"object\"||typeof n==\"function\")for(let a of u(n))!p.call(e,a)&&a!==o&&r(e,a,{get:()=>n[a],enumerable:!(i=d(n,a))||i.enumerable});return e};var y=(e,n,o)=>(o=e!=null?m(g(e)):{},s(n||!e||!e.__esModule?r(o,\"default\",{value:e,enumerable:!0}):o,e)),k=e=>s(r({},\"__esModule\",{value:!0}),e);var h=b((x,l)=>{l.exports=_jsx_runtime});var v={};w(v,{default:()=>f,frontmatter:()=>I});var t=y(h()),I={title:\"New Job at Rabobank\",publishedAt:\"2022-09-01\",summary:\"Some career news! Today I'm joining Rabobank as a frontend lead for the Wholesale & Rural Innovation department.\",tags:[\"article\",\"personal\",\"work\"]};function c(e){let n={p:\"p\",...e.components};return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(n.p,{children:\"Some career news! Today I'm joining Rabobank as a frontend lead for the Wholesale & Rural Innovation department. Even though I've been working freelance for Rabobank for the last 1.5 years, it still feels like a big step to me. My entire professional life I've been a freelancer, and this will be my first full-time permanent position.\"}),`\n`,(0,t.jsx)(n.p,{children:\"So, why this change? First of all, freelance gigs are great fun, and I've learned a lot from them. But lately, I felt like I'm repeating the same trick over and over again. I needed a change. In my new role, I'll be helping others find their way around the complex technical environment of Rabobank so that they can get started more quickly. Right now, frontend devs work mostly in isolation from their frontend colleagues within a multidisciplinary team. I hope to create a sense of community so that developers can more easily ask colleagues for help, do code reviews, share code snippets and generally learn from each other.\"}),`\n`,(0,t.jsx)(n.p,{children:\"Another reason is the relevance of what Rabobank is doing. I think this bank is at the center of the most important challenges of our time: how can we make sure there's enough affordable food for everyone, without also destroying our planet? And can we make sure that being a farmer is still a fulfilling and rewarding job? Of course, as a front-end engineer, I will be focusing on the technical challenges of the innovation projects at Wholesale & Rural. But since the projects, I'm contributing to are focused on finding solutions for those problems, that also makes my work more meaningful.\"})]})}function f(e={}){let{wrapper:n}=e.components||{};return n?(0,t.jsx)(n,{...e,children:(0,t.jsx)(c,{...e})}):c(e)}return k(v);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.34,
+    "time": 80400,
+    "words": 268
+  }
+}

@@ -20,7 +20,7 @@ export async function WeatherHeatmap({ type }) {
 
 async function fetchHeatmapData() {
   const data = await fetcher(DATA_URL, {
-    next: { revalidate: 60 * 60 * 24 * 30 } // monthly
+    cache: 'default' // Browser caching
   });
   const parsedData = Data.parse(data);
   return parsedData;

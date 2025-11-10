@@ -1,0 +1,24 @@
+{
+  "title": "Tafels.app",
+  "url": "https://tafels-app.netlify.app/",
+  "publishedAt": "2020-01-01",
+  "summary": "A new year, a new JavaScript framework! Using svelte I created this PWA to help my kids with math. The goal was to create an app-like experience, using micro animations, full offline support, prefetching JavaScript and server-side rendering.",
+  "tags": [
+    "side-project",
+    "pwa",
+    "svelte"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "pwa",
+    "svelte"
+  ],
+  "slug": "tafels-app",
+  "code": "var Component=(()=>{var f=Object.create;var r=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var h=Object.getOwnPropertyNames;var u=Object.getPrototypeOf,w=Object.prototype.hasOwnProperty;var g=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports),v=(e,t)=>{for(var n in t)r(e,n,{get:t[n],enumerable:!0})},o=(e,t,n,s)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let a of h(t))!w.call(e,a)&&a!==n&&r(e,a,{get:()=>t[a],enumerable:!(s=d(t,a))||s.enumerable});return e};var x=(e,t,n)=>(n=e!=null?f(u(e)):{},o(t||!e||!e.__esModule?r(n,\"default\",{value:e,enumerable:!0}):n,e)),y=e=>o(r({},\"__esModule\",{value:!0}),e);var c=g((j,p)=>{p.exports=_jsx_runtime});var A={};v(A,{default:()=>m,frontmatter:()=>k});var i=x(c()),k={title:\"Tafels.app\",url:\"https://tafels-app.netlify.app/\",publishedAt:\"2020-01-01\",summary:\"A new year, a new JavaScript framework! Using svelte I created this PWA to help my kids with math. The goal was to create an app-like experience, using micro animations, full offline support, prefetching JavaScript and server-side rendering.\",tags:[\"side-project\",\"pwa\",\"svelte\"]};function l(e){let t={p:\"p\",...e.components};return(0,i.jsx)(t.p,{children:\"A new year, a new JavaScript framework! Using svelte I created this PWA to help my kids with math. The goal was to create an app-like experience, using micro animations, full offline support, prefetching JavaScript and server-side rendering.\"})}function m(e={}){let{wrapper:t}=e.components||{};return t?(0,i.jsx)(t,{...e,children:(0,i.jsx)(l,{...e})}):l(e)}return y(A);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.19,
+    "time": 11400,
+    "words": 38
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Why a plant-based diet is a good idea",
+  "publishedAt": "2023-02-21",
+  "image": {
+    "src": "/static/images/plantbased.jpg",
+    "alt": "A plant leaf surrounded by a circle of animals and dairy products",
+    "width": 1024,
+    "height": 1024,
+    "showAsHeader": true
+  },
+  "summary": "My arguments in favor of eating less meat.",
+  "tags": [
+    "article",
+    "personal",
+    "farming",
+    "climate change",
+    "food"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "personal",
+    "farming",
+    "climate-change",
+    "food"
+  ],
+  "slug": "plantbased-diet",
+  "code": "var Component=(()=>{var h=Object.create;var i=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,p=Object.prototype.hasOwnProperty;var y=(n,e)=>()=>(e||n((e={exports:{}}).exports,e),e.exports),b=(n,e)=>{for(var a in e)i(n,a,{get:e[a],enumerable:!0})},r=(n,e,a,s)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let t of g(e))!p.call(n,t)&&t!==a&&i(n,t,{get:()=>e[t],enumerable:!(s=u(e,t))||s.enumerable});return n};var w=(n,e,a)=>(a=n!=null?h(f(n)):{},r(e||!n||!n.__esModule?i(a,\"default\",{value:n,enumerable:!0}):a,n)),v=n=>r(i({},\"__esModule\",{value:!0}),n);var d=y((_,l)=>{l.exports=_jsx_runtime});var j={};b(j,{default:()=>m,frontmatter:()=>x});var o=w(d()),x={title:\"Why a plant-based diet is a good idea\",publishedAt:\"2023-02-21\",image:{src:\"/static/images/plantbased.jpg\",alt:\"A plant leaf surrounded by a circle of animals and dairy products\",width:1024,height:1024,showAsHeader:!0},summary:\"My arguments in favor of eating less meat.\",tags:[\"article\",\"personal\",\"farming\",\"climate change\",\"food\"]};function c(n){let e={a:\"a\",li:\"li\",ol:\"ol\",p:\"p\",...n.components};return(0,o.jsxs)(o.Fragment,{children:[(0,o.jsxs)(e.p,{children:[\"Over the last couple of years, I've become more conscious of my diet and how it's affecting the world around us. I\\u2019ve come to realize that it\\u2019s not just meat that\\u2019s a problem, but dairy as well. The book \",(0,o.jsx)(e.a,{href:\"https://koenvangilst.nl/blog/regenesis-reading-notes\",children:\"Regenesis\"}),\" by George Monbiot has played an important role in that.\"]}),`\n`,(0,o.jsx)(e.p,{children:\"Key arguments for a more plant-based diet have been:\"}),`\n`,(0,o.jsxs)(e.ol,{children:[`\n`,(0,o.jsx)(e.li,{children:\"Eating animals is a highly inefficient way to produce food. We\\u2019re currently feeding our cows and pigs the grain and maize that many people around the world can no longer afford due to the global food crisis.\"}),`\n`,(0,o.jsx)(e.li,{children:\"Livestock is polluting our environment. It emits many times more greenhouse gases than food grown as crops. The manure produced by the millions of livestock animals is destroying our ecology and polluting our water.\"}),`\n`,(0,o.jsx)(e.li,{children:\"Intensive livestock farming is cruel and immoral. Cows, pigs and chickens are being held in the most terrible of circumstances.\"}),`\n`,(0,o.jsx)(e.li,{children:\"Livestock farming is a dangerous source of new pandemics, so-called zoonosis: infectious diseases that jump from animals to humans. Examples of these are ebola, salmonella, Spanish flu, swine flu and Covid-19.\"}),`\n`]}),`\n`,(0,o.jsx)(e.p,{children:\"I\\u2019m constantly re-adjusting my view on this and I\\u2019m open to new insights so feel free to reach out to me if you have any other insights or recommendations.\"})]})}function m(n={}){let{wrapper:e}=n.components||{};return e?(0,o.jsx)(e,{...n,children:(0,o.jsx)(c,{...n})}):c(n)}return v(j);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.07,
+    "time": 64200,
+    "words": 214
+  }
+}

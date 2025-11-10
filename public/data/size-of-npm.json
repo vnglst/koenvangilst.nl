@@ -1,0 +1,22 @@
+{
+  "title": "Size of NPM",
+  "url": "https://size-of-npm.netlify.app/",
+  "publishedAt": "2018-01-01",
+  "summary": "I thought it might be (mildly) interesting to keep track of how the NPM node_modules folder grows over time. This website keeps track of the size of the top 100 npm packages. It's been running for a while now and the results are... frightening?",
+  "tags": [
+    "side-project",
+    "data-visualization"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "data-visualization"
+  ],
+  "slug": "size-of-npm",
+  "code": "var Component=(()=>{var m=Object.create;var i=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var c=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,g=Object.prototype.hasOwnProperty;var w=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports),k=(e,t)=>{for(var n in t)i(e,n,{get:t[n],enumerable:!0})},a=(e,t,n,s)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let o of c(t))!g.call(e,o)&&o!==n&&i(e,o,{get:()=>t[o],enumerable:!(s=u(t,o))||s.enumerable});return e};var b=(e,t,n)=>(n=e!=null?m(d(e)):{},a(t||!e||!e.__esModule?i(n,\"default\",{value:e,enumerable:!0}):n,e)),x=e=>a(i({},\"__esModule\",{value:!0}),e);var p=w((z,h)=>{h.exports=_jsx_runtime});var M={};k(M,{default:()=>l,frontmatter:()=>_});var r=b(p()),_={title:\"Size of NPM\",url:\"https://size-of-npm.netlify.app/\",publishedAt:\"2018-01-01\",summary:\"I thought it might be (mildly) interesting to keep track of how the NPM node_modules folder grows over time. This website keeps track of the size of the top 100 npm packages. It's been running for a while now and the results are... frightening?\",tags:[\"side-project\",\"data-visualization\"]};function f(e){let t={p:\"p\",...e.components};return(0,r.jsx)(t.p,{children:\"I thought it might be (mildly) interesting to keep track of how the NPM node_modules folder grows over time. This website keeps track of the size of the top 100 npm packages. It's been running for a while now and the results are... frightening?\"})}function l(e={}){let{wrapper:t}=e.components||{};return t?(0,r.jsx)(t,{...e,children:(0,r.jsx)(f,{...e})}):f(e)}return x(M);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.22,
+    "time": 13200,
+    "words": 44
+  }
+}

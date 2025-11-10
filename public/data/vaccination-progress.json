@@ -1,0 +1,22 @@
+{
+  "title": "Vaccination progress",
+  "url": "https://twitter.com/VacciVoortgang",
+  "publishedAt": "2021-01-01",
+  "summary": "A Twitter bot that tweets the latest vaccination progress for the Netherlands. Recently updated to also show the number of people that received a booster shot.",
+  "tags": [
+    "side-project",
+    "twitter"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "twitter"
+  ],
+  "slug": "vaccination-progress",
+  "code": "var Component=(()=>{var d=Object.create;var n=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,w=Object.prototype.hasOwnProperty;var b=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),x=(t,e)=>{for(var o in e)n(t,o,{get:e[o],enumerable:!0})},c=(t,e,o,a)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let r of m(e))!w.call(t,r)&&r!==o&&n(t,r,{get:()=>e[r],enumerable:!(a=u(e,r))||a.enumerable});return t};var g=(t,e,o)=>(o=t!=null?d(f(t)):{},c(e||!t||!t.__esModule?n(o,\"default\",{value:t,enumerable:!0}):o,t)),_=t=>c(n({},\"__esModule\",{value:!0}),t);var h=b((A,i)=>{i.exports=_jsx_runtime});var v={};x(v,{default:()=>l,frontmatter:()=>j});var s=g(h()),j={title:\"Vaccination progress\",url:\"https://twitter.com/VacciVoortgang\",publishedAt:\"2021-01-01\",summary:\"A Twitter bot that tweets the latest vaccination progress for the Netherlands. Recently updated to also show the number of people that received a booster shot.\",tags:[\"side-project\",\"twitter\"]};function p(t){let e={p:\"p\",...t.components};return(0,s.jsx)(e.p,{children:\"A Twitter bot that tweets the latest vaccination progress for the Netherlands. Recently updated to also show the number of people that received a booster shot...\"})}function l(t={}){let{wrapper:e}=t.components||{};return e?(0,s.jsx)(e,{...t,children:(0,s.jsx)(p,{...t})}):p(t)}return _(v);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.13,
+    "time": 7800,
+    "words": 26
+  }
+}

@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import NextLink from 'next/link';
+import { lazy, Suspense, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { Prose } from 'components/content/Prose';
 import { Checkbox } from 'components/forms/Checkbox';
@@ -17,10 +16,7 @@ import { BaseLayer, CenterPoint } from './types';
 import { useMapSettings } from './useMapSettings';
 import { formatDate, generateYears } from './utils';
 
-const LeafletMap = dynamic(() => import('./LeafletMap'), {
-  ssr: false,
-  loading: Loading
-});
+const LeafletMap = lazy(() => import('./LeafletMap'));
 
 type Props = {
   baseLayers: BaseLayer[];
@@ -80,13 +76,15 @@ export function ForestWatch({ baseLayers }: Props) {
 
   return (
     <div className="flex h-full w-full flex-wrap justify-between gap-4">
-      <LeafletMap
-        initial={settings.initial}
-        showTreeLoss={settings.showTreeLoss}
-        showTreeGain={settings.showTreeGain}
-        active={activeLayer}
-        handleCenterPointChange={handleCenterPointchange}
-      />
+      <Suspense fallback={<Loading />}>
+        <LeafletMap
+          initial={settings.initial}
+          showTreeLoss={settings.showTreeLoss}
+          showTreeGain={settings.showTreeGain}
+          active={activeLayer}
+          handleCenterPointChange={handleCenterPointchange}
+        />
+      </Suspense>
       <div className="bg-opacity-80 dark:bg-opacity-80 relative z-10 h-fit max-h-[600px] w-fit max-w-xl overflow-auto rounded-md backdrop-saturate-50 dark:bg-slate-950">
         {isBoxVisible ? (
           <div className="bg-slate-50 p-8 pt-16 dark:bg-transparent">
@@ -99,9 +97,9 @@ export function ForestWatch({ baseLayers }: Props) {
               <ul>
                 {LINKS.map((link) => (
                   <li key={link.title}>
-                    <NextLink href={link.href} scroll={false}>
+                    <RouterLink to={link.href}>
                       {link.title}
-                    </NextLink>
+                    </RouterLink>
                   </li>
                 ))}
               </ul>

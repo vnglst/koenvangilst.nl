@@ -1,0 +1,22 @@
+{
+  "title": "Prognosis 2100",
+  "url": "/lab/prognosis-2100",
+  "publishedAt": "2024-02-01",
+  "summary": "Imagining the Netherlands in 2100, this page provides an overview of the impacts of climate change. It's a personal project, driven by my desire to show what the year 2100 could look like when my kids are in their 80s.",
+  "tags": [
+    "side-project",
+    "data-visualization"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "data-visualization"
+  ],
+  "slug": "prognosis-2100-project",
+  "code": "var Component=(()=>{var h=Object.create;var a=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var x=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),y=(t,e)=>{for(var n in e)a(t,n,{get:e[n],enumerable:!0})},s=(t,e,n,i)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of p(e))!f.call(t,o)&&o!==n&&a(t,o,{get:()=>e[o],enumerable:!(i=u(e,o))||i.enumerable});return t};var j=(t,e,n)=>(n=t!=null?h(g(t)):{},s(e||!t||!t.__esModule?a(n,\"default\",{value:t,enumerable:!0}):n,t)),v=t=>s(a({},\"__esModule\",{value:!0}),t);var c=x((k,m)=>{m.exports=_jsx_runtime});var _={};y(_,{default:()=>d,frontmatter:()=>w});var r=j(c()),w={title:\"Prognosis 2100\",url:\"/lab/prognosis-2100\",publishedAt:\"2024-02-01\",summary:\"Imagining the Netherlands in 2100, this page provides an overview of the impacts of climate change. It's a personal project, driven by my desire to show what the year 2100 could look like when my kids are in their 80s.\",tags:[\"side-project\",\"data-visualization\"]};function l(t){return(0,r.jsx)(r.Fragment,{})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,r.jsx)(e,{...t,children:(0,r.jsx)(l,{...t})}):l(t)}return v(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}
