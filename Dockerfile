@@ -17,11 +17,23 @@ FROM base AS builder
 ARG SOURCE_COMMIT
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+
+# Copy only source photos and generation script first for better caching
+# This layer will only rebuild if photos or the script changes
+COPY public/static/photography ./public/static/photography
+COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
+COPY package.json ./package.json
+
+# Pre-generate responsive images - cached unless photos change
+RUN npm run prebuild
+
+# Now copy the rest of the source code
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
+# Build Next.js (prebuild already ran, so it will skip image generation)
 RUN --mount=type=cache,target=/app/.next/cache \
 	--mount=type=cache,target=/app/node_modules/.cache \
 	npm run build
