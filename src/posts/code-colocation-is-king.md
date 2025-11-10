@@ -1,0 +1,52 @@
+---
+title: Code Colocation is King
+publishedAt: '2021-11-14'
+image:
+  src: /static/images/code-colocation.jpg
+  alt: >-
+    A man sitting in front of a computer screen and lots of interconnected
+    windows above him
+  width: 1024
+  height: 1024
+  showAsHeader: true
+summary: A simple principle to help structure code better
+tags:
+  - article
+  - software design
+date: '2021-11-14'
+layout: layouts/post.njk
+permalink: /lab/code-colocation-is-king/
+---
+
+One of the things I struggled with when I started as a programmer was where to put my code. It was not something I could easily find in tutorials, and for a long time, I wondered why everyone was so focused on how to get framework X to do Y when all I wanted to know was where to put the code that does Y.
+
+Turns out that "where to put code" is one of the hard things in software engineering, and there are no silver bullets. That's part of the reason why there are so few easy tutorials on this subject.
+
+Most of the code structuring patterns out there (the MVC pattern or patterns recommended by libraries) make sense in their way, but they often fail to tell you what to do in day-to-day cases. For instance, when you have a simple utility function that's only used in one place, where should you put it? In the global `/utils` folder?
+
+Over the years, I've learned that the following principle helps to structure code in a way that's easy to understand and maintain: **keep the code that changes together close together**.
+
+This means that if you have a helper function that's specific to the feature you're writing in `featureA/Table.tsx`, it's a good idea to keep this function close at hand. So put it either inside the `Table.tsx` file or right next to it if you have several helper functions. This way, when you have to change or understand the functionality of featureA, all the code you need is close by.
+
+For this blog post, I've chosen **Code Colocation is King** as a title, but it's more often called **the principle of proximity**:
+
+> The principle of proximity focuses on how well organized your code is with respect to readability and change. Proximity implies that functions that are changed together are moved closer together. Proximity is both a design principle and a heuristic for refactoring hotspots toward code that's easier to understand.
+
+— [Software Design X-Rays by Adam Tornhill](https://pragprog.com/titles/atevol/software-design-x-rays/)
+
+So think about the Proximity Principle the next time you're in doubt:
+
+- whether it makes sense to move a function to the global `helpers` folder
+- where the tests of the component you've just written should live
+- whether component styling should be in a global `/styles` folder, or next to the implementation
+- if the code that manages state should be moved to a separate file with all the other state updates
+
+Like I said at the beginning of this post: There are no silver bullets for structuring code. And the proximity principle does not always tell you exactly where to put code. But when you're in doubt, it tells you to keep code close to where it's relevant -- until you've found a good reason not to do so anymore.
+
+<Disclaimer>
+  This article reached the Hacker News front page on Feb. 3rd 2022. It got a lot
+  of good feedback there and I'd like to revisit this theme in a future post.
+  Until then be sure to [head over to the discussion on Hacker
+  News](https://news.ycombinator.com/item?id=30166318) for some interesting
+  comments.
+</Disclaimer>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Koen van Gilst" }}</title>
+
+  {# Meta tags #}
+  <meta name="description" content="{{ description or summary or 'Koen van Gilst - Software engineer, writing about web development, data visualization, and creative coding' }}">
+
+  {# Open Graph #}
+  <meta property="og:title" content="{{ title or 'Koen van Gilst' }}">
+  <meta property="og:description" content="{{ description or summary or 'Software engineer, writing about web development, data visualization, and creative coding' }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:url" content="https://koenvangilst.nl{{ page.url }}">
+  {% if image and image.src %}
+  <meta property="og:image" content="https://koenvangilst.nl{{ image.src }}">
+  {% endif %}
+
+  {# Twitter Card #}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or 'Koen van Gilst' }}">
+  <meta name="twitter:description" content="{{ description or summary or 'Software engineer, writing about web development, data visualization, and creative coding' }}">
+  {% if image and image.src %}
+  <meta name="twitter:image" content="https://koenvangilst.nl{{ image.src }}">
+  {% endif %}
+
+  {# Favicons #}
+  <link rel="icon" type="image/x-icon" href="/static/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="/static/favicons/site.webmanifest">
+
+  {# RSS Feed #}
+  <link rel="alternate" type="application/rss+xml" title="Koen van Gilst - RSS Feed" href="/feed.xml">
+
+  {# Fonts #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  {# Styles #}
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  {# Dark mode script - runs before render to prevent flash #}
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  {# Plausible Analytics #}
+  <script defer data-domain="koenvangilst.nl" src="https://plausible.io/js/script.js"></script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+  {% include "components/nav.njk" %}
+
+  <main class="min-h-screen">
+    {{ content | safe }}
+  </main>
+
+  {% include "components/footer.njk" %}
+
+  {# Dark mode toggle script #}
+  <script src="/assets/js/theme-toggle.js"></script>
+</body>
+</html>

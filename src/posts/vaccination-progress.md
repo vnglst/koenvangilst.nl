@@ -1,0 +1,17 @@
+---
+title: Vaccination progress
+url: 'https://twitter.com/VacciVoortgang'
+publishedAt: '2021-01-01'
+summary: >-
+  A Twitter bot that tweets the latest vaccination progress for the Netherlands.
+  Recently updated to also show the number of people that received a booster
+  shot.
+tags:
+  - side-project
+  - twitter
+date: '2021-01-01'
+layout: layouts/post.njk
+permalink: /lab/vaccination-progress/
+---
+
+A Twitter bot that tweets the latest vaccination progress for the Netherlands. Recently updated to also show the number of people that received a booster shot...

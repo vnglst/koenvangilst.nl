@@ -1,6 +1,6 @@
 *.log
 .DS_Store
-.next
+_site
 node_modules
 public/sitemap.xml
 public/feed.xml

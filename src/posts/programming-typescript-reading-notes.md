@@ -1,0 +1,298 @@
+---
+title: Reading notes Programming TypeScript
+publishedAt: '2019-08-11'
+summary: Stuff I don't want to forget from the Book Programming TypeScript.
+tags:
+  - article
+  - typescript
+  - reading notes
+date: '2019-08-11'
+layout: layouts/post.njk
+permalink: /lab/programming-typescript-reading-notes/
+---
+
+While on holiday I read `Programming TypeScript` by Boris Cherny. It's excellent. Below you'll find some of my reading notes (stuff I don't want to forget).
+
+## Type literals
+
+```ts
+let b = 5678; // type = number
+const c = 5678; // type = 5678
+```
+
+## Numeric separator
+
+For example:
+
+```ts
+let oneMillion = 1_000_0000;
+```
+
+## Structurally typed
+
+JavaScript (and TypeScript) are structurally typed. This means that it's not the name of the object that determines its type (this would be nominally typed) but the properties that the object has. Structural typing is also known as duck typing (i.e. if it walks and swims like a duck, the object is of the type duck).
+
+## Index signatures
+
+```ts
+let a: {
+  b: number;
+  c?: string; // optional property
+  [key: number]: boolean; // index signature
+};
+
+a = { b: 10, 1: true, 100: false }; // example
+```
+
+## Tuples
+
+Tuples are a subtype of an array. They've got a fixed length and each index has a known type. For example:
+
+```ts
+let b: [string, string, number] = ['koen', 'van gilst', 1978];
+```
+
+Cherny advises using tuples often: they allow you to safely encode heterogeneous lists with fixed lengths.
+
+## Immutable arrays
+
+```ts
+let as: readonly number[] = [1, 2, 3];
+```
+
+This could be very useful in a React/Redux context: To avoid accidental mutations of the state object.
+
+## Undefined
+
+- `undefined`: variable is not defined (yet)
+- `null`: variable has no value
+- `void`: return type of function that does not return anything
+- `never`: return type of function that never returns (exception or infinite loop)
+
+## Enums
+
+Cherny explains that it's best to stay away from Enums in TypeScript, because of all the pitfalls. There are plenty of other ways to express yourself.
+
+## Parameter vs argument
+
+A parameter is the data needed by the function to run. An argument is the data you pass to the function when invoking it.
+
+## Typing functions
+
+```ts
+type Log = (msg: string, userId?: string) => void;
+
+let log: Log = (msg, userId = 'Not signed in') => {
+  console.log(msg + userId);
+};
+```
+
+_Contextual typing_ infers from the context that `msg` has to be a string.
+
+## Function overloading
+
+Let's a function do two different things based on the call signature. For example:
+
+```ts
+type Reserve = {
+  (from: Date, to: Date, dest: string): Reservation;
+  (from: Date, dest: string): Reservation;
+};
+
+let reserve: Reserve = (
+  from: Date,
+  toOrDestination: Date | string,
+  destination?: string
+) => {
+  if (toOrDestination instanceof Date && destination !== undefined) {
+    // Book a one-way trip
+  } else if (typeof toOrDestination === 'string') {
+    // Book a round trip
+  }
+};
+```
+
+## Typing properties on functions
+
+Consider the following code which assigns a property `wasCalled` to the function `warnUser`
+
+```ts
+function warnUser(warning) {
+  if (warnUser.wasCalled) {
+    return;
+  }
+  warnUser.wasCalled = true;
+  alert(warning);
+}
+warnUser.wasCalled = false;
+```
+
+This can be typed with TypeScript as follows:
+
+```ts
+type WarnUser = {
+  (warning: string): void; // the function
+  wasCalled: boolean; // property
+};
+```
+
+## Generics
+
+With generics, we can keep type constraints on functions even if we don't know exactly what the type of the variable is going to be when we invoke the function. For example, this is what a typed version of the array filter function would look like:
+
+```ts
+filter([ 1 , 2 , 3 , 4 ], el => el < 3) // example usage, evaluates to [1, 2]
+
+type Filter = {
+    <T>(array: T[], f: (item: T) = > boolean): T[]
+}
+```
+
+Here we're defining a `generic` called `T`. Then we say that the function `filter` expects an array of elements with type `T` (could be a string, boolean or some object) and a function with an element of type `T` as a parameter and a return value of type `boolean`. The result of the function is, again, an array of elements with type `T`.
+
+Here's another example from the book. This is the typing for the `map` function, using two generics `T` and `U`.
+
+```ts
+function map<T, U>(array: T[], f: (item: T) => U): U[] {
+  let result = [];
+  for (let i = 0; i < array.length; i++) {
+    result[i] = f(array[i]);
+  }
+  return result;
+}
+```
+
+## Variadic functions
+
+Functions that take any number of arguments.
+
+## Type-driven development
+
+A style of programming where you sketch out type signatures first and fill in values later.
+
+## Private vs protected
+
+Consider the following code:
+
+```ts
+type Color = 'Black' | 'White';
+type File = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
+type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+class Position {
+  constructor(private file: File, private rank: Rank) {}
+}
+
+class Piece {
+  protected position: Position;
+  constructor(private readonly color: Color, file: File, rank: Rank) {
+    this.position = new Position(file, rank);
+  }
+}
+```
+
+- You don't have to reassign arguments in the `constructor` function to `this` to make them part of the class. You can use the keywords `private`, `public` and `private` for that (i.e. less typing).
+- _Private_ means "that code within a Piece instance can read and write to it, but code outside of a Piece instance can’t. Different instances of Piece can access each other’s private members; instances of any other class - even a subclass of Piece - can’t."
+- _Protected_ is similar to private, but it "makes the property visible both to instances of Piece and to instances of any subclass of Piece."
+- A _public_ property is accessible from anywhere.
+
+## Abstracts
+
+Using the `abstract` keyword in front of a class means that you can't instantiate that class directly, you first have to extend it using a new class.
+
+```ts
+// ...
+abstract class Piece {
+  // ...
+  moveTo(position: Position) {
+    this.position = position;
+  }
+  abstract canMoveTo(position: Position): boolean;
+}
+```
+
+Using the `abstract` keyword in front of a class method tells any class that extends `Piece` that they should implement a `canMoveTo` method with that signature.
+
+## Interfaces
+
+Like aliases interfaces let you define types of things. Interfaces don’t have to extend other interfaces. An interface can extend any shape: an object type, a class, or another interface.
+
+```ts
+type Cake = {
+  calories: number;
+  sweet: boolean;
+  tasty: boolean;
+};
+```
+
+## Decorators
+
+Are similar to Higher Order Components in React: they work like functions that change (decorate) the behavior of the class you're decorating. They offer a succinct syntax to do this using:
+
+```ts
+@serializable
+class APIPayload {
+  getValue(): Payload {
+    // ...
+  }
+}
+```
+
+Which would be equivalent to:
+
+```ts
+let APIPayload = serializable(
+  class APIPayload {
+    getValue(): Payload {
+      // ...
+    }
+  }
+);
+```
+
+However, since decorators are still experimental in JavaScript (and also in TypeScript) (see: https://github.com/tc39/proposal-decorators) Cherny recommends sticking to ordinary functions until decorators become stable.
+
+## Builder pattern
+
+The builder pattern is a commonly used API style in JavaScript that looks like this:
+
+```ts
+new RequestBuilder()
+  .setURL('/users')
+  .setMethod('get')
+  .setData({ firstName: 'Anna' })
+  .send();
+```
+
+Cherny shows how to build this in a type-safe way using TypeScript:
+
+```ts
+class RequestBuilder {
+  private data: object | null = null;
+  private method: 'get' | 'post' | null = null;
+  private url: string | null = null;
+
+  setMethod(method: 'get' | 'post'): this {
+    this.method = method;
+    return this;
+  }
+
+  setData(data: object): this {
+    this.data = data;
+    return this;
+  }
+
+  setURL(url: string): this {
+    this.url = url;
+    return this;
+  }
+
+  send() {
+    // ...
+  }
+}
+```
+
+---
+
+All quotations from [Programming TypeScript: Making Your JavaScript Applications Scale](https://www.amazon.com/Programming-TypeScript-Making-JavaScript-Applications/dp/1492037656)

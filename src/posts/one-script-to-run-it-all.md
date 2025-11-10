@@ -1,0 +1,29 @@
+---
+title: One command to run it all
+publishedAt: '2021-12-10'
+summary: Why mocking all external requests for your app is worth it.
+tags:
+  - article
+  - javascript
+  - react
+  - testing
+date: '2021-12-10'
+layout: layouts/post.njk
+permalink: /lab/one-script-to-run-it-all/
+---
+
+One of the more annoying things I've experienced as a front-end developer in complex corporate environments is that it's often surprisingly hard to get the app to start. APIs might not be available, have no access because of proxies, you need a plugin etc. etc.
+
+To avoid this frustration on my most recent project I've started with a script that allows me to always (in any environment, even without an internet connection!) start the app using one command:
+
+```bash
+yarn start:mocked
+```
+
+This requires mocking the external services (APIs, authentication) which are more work. But I'm 100% sure this has paid itself off many times over.
+
+These mocks can also be reused for integration tests. This gives me a lot more confidence when doing large-scale refactors or deploying new features. Another benefit of this approach: When tests do fail I can just start the mocked version of the app to see why the tests are failing (in the browser). No more debugging endless streams of Jest error logs.
+
+To mock API calls in both the browser and in tests I've used a library called Mock Service Worker and a custom mock for the Microsoft Authentication Library. Both are a bit tricky to set up, but the MSW library is [well-documented](https://mswjs.io/).
+
+And about mocking the Microsoft Authentication Library I'll write soon, it's easier than you'd think.

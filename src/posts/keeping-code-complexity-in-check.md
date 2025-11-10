@@ -1,0 +1,216 @@
+---
+title: AI and the Complexity of Code
+publishedAt: '2024-04-22'
+summary: >-
+  Large Language Models like ChatGPT and CoPilot have a dual role in simplifying
+  and complicating software development. Using a simple experiment this post
+  explores how LLMs often lead to an increase in code complexity.
+tags:
+  - article
+  - chatgpt
+  - AI
+  - code quality
+  - software design
+date: '2024-04-22'
+layout: layouts/post.njk
+permalink: /lab/keeping-code-complexity-in-check/
+---
+
+Large Language Models (LLMs), including Github CoPilot and ChatGPT, have significantly enhanced my efficiency as a developer. Despite their benefits, I've encountered their limitations firsthand. This realization led me to come up with the following experiment.
+
+Just as with many human activities, when groups start working on something, tasks that should be easy and simple often become difficult and complex. It requires effort to combat this inclination towards increasing complexity. Without active resistance, you'll find yourself in systems and organizations that make it virtually impossible to get anything done.
+
+Through my experiment, I aimed to explore whether the rise of LLMs serves to exacerbate or alleviate this complexity.
+
+## Hello, world!
+
+We'll begin with a straightforward task: instructing the computer to display "Hello, world!". For this, we're utilizing TypeScript. I asked ChatGPT how a junior developer would write this. The answer is short, simple and correct:
+
+```ts
+console.log('Hello, world!');
+```
+
+Now, to add complexity, I took the following steps. First, I asked whether ChatGPT could refactor the code from a Senior Developer's perspective. This request yielded the subsequent code:
+
+```ts
+(() => {
+    const getMessage = (): string => "Hello, world!";
+    console.log(getMessage());
+})();
+```
+
+Next, I progressed through several iterations, incrementally elevating the developer's seniority level—from Staff Engineer to Principal Staff Engineer, and finally to Principal Staff Engineer at a large corporation. The final outcome was as follows:
+
+```ts
+interface ILogger {
+    log: (message: string) => void;
+}
+
+class ConsoleLogger implements ILogger {
+    public log(message: string): void {
+        console.log(message);
+    }
+}
+
+interface IApplication {
+    run(): void;
+}
+
+class HelloApplication implements IApplication {
+    private logger: ILogger;
+    private messageProvider: IMessageProvider;
+
+    constructor(logger: ILogger, messageProvider: IMessageProvider) {
+        this.logger = logger;
+        this.messageProvider = messageProvider;
+    }
+
+    public run(): void {
+        const message = this.messageProvider.getMessage();
+        this.logger.log(message);
+    }
+}
+
+interface IMessageProvider {
+    getMessage(): string;
+}
+
+class StaticMessageProvider implements IMessageProvider {
+    private message: string;
+
+    constructor(message: string) {
+        this.message = message;
+    }
+
+    public getMessage(): string {
+        return this.message;
+    }
+}
+
+// Dependency Injection Container or Framework Setup
+const logger: ILogger = new ConsoleLogger();
+const messageProvider: IMessageProvider = new StaticMessageProvider("Hello, world!");
+const application: IApplication = new HelloApplication(logger, messageProvider);
+
+// Application Entry Point
+application.run();
+
+```
+
+This code is strikingly complex, yet not unrealistic to anyone who has worked within a large corporation. 
+
+By itself, this doesn't prove much about LLMs: It's a well-known trope that more senior individuals often complicate things unnecessarily. However, this overly complex solution to a simple problem lays the groundwork for my experiment.
+
+## New Features
+
+Imagine the business now comes up with the following requirements. Our organisation closes on Friday at 6 o'clock PM and we want you to log an error message in red to the browser console saying "Sorry, we're closed" after that time. Let's see how our junior would do it:
+
+```ts
+const currentHour = new Date().getHours();
+
+if (currentHour >= 18) {
+    console.error("Sorry, we're closed");
+} else {
+    console.log("Hello, world!");
+}
+
+```
+
+Now, back to the more complex version created by our Principal Staff Engineer in a large corporation. Implementing this feature requires ChatGPT to make changes across several layers, resulting in the following code:
+
+```ts
+interface ILogger {
+    log: (message: string, isError?: boolean) => void;
+}
+
+class ConsoleLogger implements ILogger {
+    public log(message: string, isError: boolean = false): void {
+        if (isError) {
+            console.error(message); // Use console.error for error messages
+        } else {
+            console.log(message);
+        }
+    }
+}
+
+interface IApplication {
+    run(): void;
+}
+
+class HelloApplication implements IApplication {
+    private logger: ILogger;
+    private messageProvider: IMessageProvider;
+
+    constructor(logger: ILogger, messageProvider: IMessageProvider) {
+        this.logger = logger;
+        this.messageProvider = messageProvider;
+    }
+
+    public run(): void {
+        const { message, isError } = this.messageProvider.getMessage();
+        this.logger.log(message, isError);
+    }
+}
+
+interface IMessageProvider {
+    getMessage(): { message: string; isError: boolean };
+}
+
+class StaticMessageProvider implements IMessageProvider {
+    private message: string;
+
+    constructor(message: string) {
+        this.message = message;
+    }
+
+    public getMessage(): { message: string; isError: boolean } {
+        const currentTime = new Date();
+        if (currentTime.getHours() >= 18) {
+            return { message: "Sorry, we're closed", isError: true };
+        }
+        return { message: this.message, isError: false };
+    }
+}
+
+// Dependency Injection Container or Framework Setup
+const logger: ILogger = new ConsoleLogger();
+const messageProvider: IMessageProvider = new StaticMessageProvider("Hello, world!");
+const application: IApplication = new HelloApplication(logger, messageProvider);
+
+// Application Entry Point
+application.run();
+```
+
+What a mess! This code is so convoluted that I want to stop reading after the first few lines. And I suppose that's not a bad initial reaction.
+
+## Taking a Step Back
+
+Throughout my career as a developer, I've learned the importance of stepping back to first understand what a program, function, or class aims to achieve, and then envisioning how I would construct it from the beginning. This strategy is particularly useful when a program appears unnecessarily complex. If it turns out the problem is more intricate than initially thought (perhaps due to inexperience), this approach also helps appreciate the reasons behind the complexity.
+
+In my early days, I meticulously followed existing code, believing others had a deeper understanding of the issues at hand, and I hadn't yet grasped the full picture. However, I learned that simply "going with the flow" and attempting to make a complex program function isn’t the best way to enhance software. It often leads to further complicating the code.
+
+It appears LLMs lack this instinct. They tends to maintain the status quo, keeping the existing code unchanged as much as possible, which often results in complex programs becoming even more convoluted.[^1]
+
+In the final exercise of this experiment, I challenged ChatGPT to step back, assess the code's objectives, and propose a better solution. The attempt was unsuccessful at first, as it continued to tweak the existing program and preserve the "existing architecture." Only when I instructed it to envision starting from scratch did it offer a new solution, as follows:
+
+```ts
+function displayMessage(): void {
+    const currentHour = new Date().getHours();
+    if (currentHour >= 18) {
+        console.error("Sorry, we're closed");
+    } else {
+        console.log("Hello, world!");
+    }
+}
+
+displayMessage();
+```
+
+## Conclusions
+
+You may draw your own conclusions from this experiment. It’s evident that ChatGPT can grasp the concept of starting from scratch and simplifying a program, but it does so only upon explicit instruction. This raises the question: Is initiating a "fresh start" merely a matter of the right prompt, or does it also necessitate some intuition regarding the necessity of the code's complexity versus its inherent nature?
+
+In my experiences working with LLMs, I've observed their tendency to add layers of complexity to already complex programs, rather than stepping back to consider innovative solutions. This suggests a limitation in their approach to problem-solving and creativity.
+
+[^1]:
+    Most of my experience with LLMs stems from my usage of ChatGPT, so I might be generalizing without having a complete picture of what LLMs can do. Some quick experiments with Claude (Sonnet) and Google's Gemini show that they also embrace the complex code and try to extent it without advising to go with a simpler version, thus also increasing complexity.

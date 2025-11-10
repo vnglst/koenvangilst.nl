@@ -1,0 +1,22 @@
+---
+title: Progressively enhanced dark mode
+publishedAt: '2023-04-16'
+summary: Adding a dark theme to my website using NextJS 13 and React Server Components
+tags:
+  - article
+  - nextjs
+  - react
+  - dark mode
+  - server components
+date: '2023-04-16'
+layout: layouts/post.njk
+permalink: /lab/progressively-enhanced-dark-mode/
+---
+
+I made an interesting and somewhat disappointing discovery today. I wanted to add a progressively enhanced dark mode to my website using a cookie (for persisting the user preference) and the `Sec-CH-Prefers-Color-Scheme` header. That way I could detect and select the correct color theme without using any client-side JavaScript. That seemed pretty cool and it works perfectly with the new NextJS 13 app folder and React Server Components.
+
+There is, however, a catch. When I want to render my blog post routes NextJS shows the following error: `Dynamic server usage: headers`. Since I was using headers in my root `layout.tsx` it was not possible to statically generate my blog posts.
+
+This makes sense of course: It's not possible to know ahead of time what kind of response the user is expecting since that depends on their headers/cookies.
+
+Still, it's unclear to me what this means in terms of performance and costs. Will this mean that I opt out of any edge caching offered by Vercel? Will that make my website slow around the globe? Will it increase my server costs? It seems a pity that using something so fundamental to the web like a header or a cookie has so much impact on how a web framework behaves.

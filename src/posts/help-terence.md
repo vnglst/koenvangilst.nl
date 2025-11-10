@@ -1,0 +1,15 @@
+---
+title: Help Terence!
+url: 'https://twitter.com/helpTerence'
+publishedAt: '2016-01-01'
+summary: >-
+  A Twitter bot raising emoji money for his trip around the world. A fun little
+  experiment with social media and Twitter bots. [no longer active].
+  Technologies used: Express, MongoDB.
+tags:
+  - side-project
+date: '2016-01-01'
+layout: layouts/post.njk
+permalink: /lab/help-terence/
+---
+
