@@ -1,16 +1,15 @@
 import { ComponentProps } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
-import Image from 'next/image';
 
 import { cx } from 'lib/clsx';
 
 import { Icon } from '../ui/Icon';
 import { Link } from '../ui/Link';
 
-function RoundedImage({ alt, ...props }: ComponentProps<typeof Image>) {
+function RoundedImage({ alt, ...props }: ComponentProps<'img'>) {
   const className = cx('my-1 inline-block rounded-lg');
 
-  return <Image alt={alt} {...props} className={className} />;
+  return <img alt={alt} {...props} className={className} />;
 }
 
 export function Disclaimer({ children }: { children: React.ReactNode }) {

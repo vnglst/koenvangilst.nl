@@ -1,5 +1,5 @@
 import { PropsWithChildren, Suspense } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 import { Footer } from './Footer';
 import { Main } from './Main';
@@ -24,7 +24,7 @@ export function Container({
         <Suspense>
           {showTitle && (
             <div className="nimbus mt-3 mb-9 hidden text-lg font-bold tracking-wide uppercase md:block">
-              <Link href="/">Koen van Gilst</Link>
+              <Link to="/">Koen van Gilst</Link>
             </div>
           )}
           <div className="w-full md:w-9/12">{children}</div>

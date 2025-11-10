@@ -14,3 +14,8 @@ tsconfig.tsbuildinfo
 /test-results/
 /playwright-report/
 /playwright/.cache/
+# Legacy Next.js files (no longer used)
+next.config.js.old
+next-env.d.ts.old
+.next/
+out/
