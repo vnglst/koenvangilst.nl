@@ -1,0 +1,23 @@
+{
+  "title": "Cleaning up local branches",
+  "summary": "A bash script that deletes all local branches not found on the remote.",
+  "publishedAt": "2022-02-10",
+  "tags": [
+    "snippet",
+    "git",
+    "bash"
+  ],
+  "tagsAsSlugs": [
+    "snippet",
+    "git",
+    "bash"
+  ],
+  "slug": "git-delete-branch-not-on-remote",
+  "code": "var Component=(()=>{var d=Object.create;var r=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var u=Object.getPrototypeOf,N=Object.prototype.hasOwnProperty;var f=(a,e)=>()=>(e||a((e={exports:{}}).exports,e),e.exports),k=(a,e)=>{for(var s in e)r(a,s,{get:e[s],enumerable:!0})},l=(a,e,s,c)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let t of g(e))!N.call(a,t)&&t!==s&&r(a,t,{get:()=>e[t],enumerable:!(c=m(e,t))||c.enumerable});return a};var b=(a,e,s)=>(s=a!=null?d(u(a)):{},l(e||!a||!a.__esModule?r(s,\"default\",{value:a,enumerable:!0}):s,a)),x=a=>l(r({},\"__esModule\",{value:!0}),a);var i=f((w,o)=>{o.exports=_jsx_runtime});var _={};k(_,{default:()=>h,frontmatter:()=>v});var n=b(i()),v={title:\"Cleaning up local branches\",summary:\"A bash script that deletes all local branches not found on the remote.\",publishedAt:\"2022-02-10\",tags:[\"snippet\",\"git\",\"bash\"]};function p(a){let e={code:\"code\",p:\"p\",pre:\"pre\",span:\"span\",...a.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsx)(e.pre,{className:\"language-bash\",children:(0,n.jsx)(e.code,{className:\"language-bash code-highlight\",children:(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token function\",children:\"git\"}),\" branch \",(0,n.jsx)(e.span,{className:\"token parameter variable\",children:\"-vv\"}),\" \",(0,n.jsx)(e.span,{className:\"token operator\",children:\"|\"}),\" \",(0,n.jsx)(e.span,{className:\"token function\",children:\"grep\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:\"': gone]'\"}),(0,n.jsx)(e.span,{className:\"token operator\",children:\"|\"}),\"  \",(0,n.jsx)(e.span,{className:\"token function\",children:\"grep\"}),\" \",(0,n.jsx)(e.span,{className:\"token parameter variable\",children:\"-v\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:'\"\\\\*\"'}),\" \",(0,n.jsx)(e.span,{className:\"token operator\",children:\"|\"}),\" \",(0,n.jsx)(e.span,{className:\"token function\",children:\"awk\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:\"'{ print $1; }'\"}),\" \",(0,n.jsx)(e.span,{className:\"token operator\",children:\"|\"}),\" \",(0,n.jsx)(e.span,{className:\"token function\",children:\"xargs\"}),\" \",(0,n.jsx)(e.span,{className:\"token parameter variable\",children:\"-r\"}),\" \",(0,n.jsx)(e.span,{className:\"token function\",children:\"git\"}),\" branch \",(0,n.jsx)(e.span,{className:\"token parameter variable\",children:\"-d\"}),`\n`]})})}),`\n`,(0,n.jsx)(e.p,{children:`Useful for cleaning up a local repository with lots of stale branches.\nThe script can also be used with the -D flag (instead of -d).\nThis will delete all local branches, even if they have any unmerged changes.`})]})}function h(a={}){let{wrapper:e}=a.components||{};return e?(0,n.jsx)(e,{...a,children:(0,n.jsx)(p,{...a})}):p(a)}return x(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.31,
+    "time": 18600,
+    "words": 62
+  }
+}

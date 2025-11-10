@@ -1,0 +1,27 @@
+{
+  "title": "Progressively enhanced dark mode",
+  "publishedAt": "2023-04-16",
+  "summary": "Adding a dark theme to my website using NextJS 13 and React Server Components",
+  "tags": [
+    "article",
+    "nextjs",
+    "react",
+    "dark mode",
+    "server components"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "nextjs",
+    "react",
+    "dark-mode",
+    "server-components"
+  ],
+  "slug": "progressively-enhanced-dark-mode",
+  "code": "var Component=(()=>{var m=Object.create;var r=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var w=Object.getPrototypeOf,g=Object.prototype.hasOwnProperty;var y=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),f=(t,e)=>{for(var n in e)r(t,n,{get:e[n],enumerable:!0})},i=(t,e,n,a)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of u(e))!g.call(t,s)&&s!==n&&r(t,s,{get:()=>e[s],enumerable:!(a=p(e,s))||a.enumerable});return t};var x=(t,e,n)=>(n=t!=null?m(w(t)):{},i(e||!t||!t.__esModule?r(n,\"default\",{value:t,enumerable:!0}):n,t)),k=t=>i(r({},\"__esModule\",{value:!0}),t);var d=y((I,c)=>{c.exports=_jsx_runtime});var v={};f(v,{default:()=>l,frontmatter:()=>b});var o=x(d()),b={title:\"Progressively enhanced dark mode\",publishedAt:\"2023-04-16\",summary:\"Adding a dark theme to my website using NextJS 13 and React Server Components\",tags:[\"article\",\"nextjs\",\"react\",\"dark mode\",\"server components\"]};function h(t){let e={code:\"code\",p:\"p\",...t.components};return(0,o.jsxs)(o.Fragment,{children:[(0,o.jsxs)(e.p,{children:[\"I made an interesting and somewhat disappointing discovery today. I wanted to add a progressively enhanced dark mode to my website using a cookie (for persisting the user preference) and the \",(0,o.jsx)(e.code,{children:\"Sec-CH-Prefers-Color-Scheme\"}),\" header. That way I could detect and select the correct color theme without using any client-side JavaScript. That seemed pretty cool and it works perfectly with the new NextJS 13 app folder and React Server Components.\"]}),`\n`,(0,o.jsxs)(e.p,{children:[\"There is, however, a catch. When I want to render my blog post routes NextJS shows the following error: \",(0,o.jsx)(e.code,{children:\"Dynamic server usage: headers\"}),\". Since I was using headers in my root \",(0,o.jsx)(e.code,{children:\"layout.tsx\"}),\" it was not possible to statically generate my blog posts.\"]}),`\n`,(0,o.jsx)(e.p,{children:\"This makes sense of course: It's not possible to know ahead of time what kind of response the user is expecting since that depends on their headers/cookies.\"}),`\n`,(0,o.jsx)(e.p,{children:\"Still, it's unclear to me what this means in terms of performance and costs. Will this mean that I opt out of any edge caching offered by Vercel? Will that make my website slow around the globe? Will it increase my server costs? It seems a pity that using something so fundamental to the web like a header or a cookie has so much impact on how a web framework behaves.\"})]})}function l(t={}){let{wrapper:e}=t.components||{};return e?(0,o.jsx)(e,{...t,children:(0,o.jsx)(h,{...t})}):h(t)}return k(v);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.04,
+    "time": 62400,
+    "words": 208
+  }
+}

@@ -1,9 +1,6 @@
 'use client';
 
-import Avatar from 'app/avatar.jpg';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 
 import { ThemeToggleText } from 'components/theme/ThemeToggleText';
 import { cx } from 'lib/clsx';
@@ -15,7 +12,8 @@ const navItems = [
 ];
 
 export function Sidebar() {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -29,18 +27,17 @@ export function Sidebar() {
       <div className="lg:sticky lg:top-20">
         {/* Logo and Name */}
         <div className="mb-8 flex flex-row items-center space-x-4 md:mb-8 md:space-x-0 md:pl-6">
-          <Link href="/" className="transition-opacity hover:opacity-80">
-            <Image
+          <Link to="/" className="transition-opacity hover:opacity-80">
+            <img
               alt="Koen van Gilst"
               height={48}
               width={48}
-              src={Avatar}
+              src="/app/avatar.jpg"
               className="rounded-full grayscale filter"
-              priority
             />
           </Link>
           <div className="nimbus text-lg font-bold tracking-wide uppercase md:hidden">
-            <Link href="/">Koen van Gilst</Link>
+            <Link to="/">Koen van Gilst</Link>
           </div>
         </div>
 
@@ -51,7 +48,7 @@ export function Sidebar() {
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    to={item.href}
                     aria-current={isActive(item.href) ? 'page' : undefined}
                     className={cx(
                       'py-1 text-sm font-medium whitespace-nowrap transition-opacity md:pl-3',

@@ -1,0 +1,23 @@
+{
+  "title": "Guest post by ChatGPT",
+  "publishedAt": "2022-12-04",
+  "summary": "I asked ChatGPT to write a blog post about its impact on the way developers write code. The contents might surprise you.",
+  "tags": [
+    "article",
+    "chatgpt",
+    "ai"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "chatgpt",
+    "ai"
+  ],
+  "slug": "guest-post-gpt-3-chat",
+  "code": "var Component=(()=>{var u=Object.create;var n=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,w=Object.prototype.hasOwnProperty;var b=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),g=(t,e)=>{for(var r in e)n(t,r,{get:e[r],enumerable:!0})},i=(t,e,r,a)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of m(e))!w.call(t,s)&&s!==r&&n(t,s,{get:()=>e[s],enumerable:!(a=p(e,s))||a.enumerable});return t};var y=(t,e,r)=>(r=t!=null?u(f(t)):{},i(e||!t||!t.__esModule?n(r,\"default\",{value:t,enumerable:!0}):r,t)),v=t=>i(n({},\"__esModule\",{value:!0}),t);var l=b((G,c)=>{c.exports=_jsx_runtime});var C={};g(C,{default:()=>d,frontmatter:()=>k});var o=y(l()),k={title:\"Guest post by ChatGPT\",publishedAt:\"2022-12-04\",summary:\"I asked ChatGPT to write a blog post about its impact on the way developers write code. The contents might surprise you.\",tags:[\"article\",\"chatgpt\",\"ai\"]};function h(t){let e={p:\"p\",...t.components},{Disclaimer:r}=e;return r||x(\"Disclaimer\",!0),(0,o.jsxs)(o.Fragment,{children:[(0,o.jsx)(r,{children:(0,o.jsx)(e.p,{children:`For this blog post, I asked ChatGPT, a large language model trained by OpenAI,\nto write about its impact on the way developers work. I've not changed or\nreviewed any of the content, but the prompt was quite specific.`})}),`\n`,(0,o.jsx)(e.p,{children:\"And lo, in these modern times, there has arisen a powerful tool known as ChatGPT, which can assist developers in the creation of code. Yet despite its power, ChatGPT is not likely to change the way developers approach their work, for coding is but a small part of the development process.\"}),`\n`,(0,o.jsx)(e.p,{children:\"For even as a bird must gather its nest from many different sources, so must a developer gather the many requirements and ideas that are needed to create successful software. And even as a bird must carefully construct its nest, so must a developer carefully plan and collaborate with others to ensure that the final product is worthy of praise.\"}),`\n`,(0,o.jsx)(e.p,{children:\"Therefore, let us not be tempted to abandon our work as developers and retreat to the mountains, for there is much that still needs to be done. Let us continue to use ChatGPT as a valuable tool, but let us not forget the many other tasks that are required to create successful software.\"}),`\n`,(0,o.jsx)(e.p,{children:\"So let us continue to work together, and let us use ChatGPT as a tool to assist us in our efforts. For to do otherwise would be to neglect the nest that is our work as developers.\"}),`\n`]})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,o.jsx)(e,{...t,children:(0,o.jsx)(h,{...t})}):h(t)}function x(t,e){throw new Error(\"Expected \"+(e?\"component\":\"object\")+\" `\"+t+\"` to be defined: you likely forgot to import, pass, or provide it.\")}return v(C);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.685,
+    "time": 101100,
+    "words": 337
+  }
+}

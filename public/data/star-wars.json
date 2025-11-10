@@ -1,0 +1,26 @@
+{
+  "title": "Star Wars",
+  "url": "https://star-wars-intro.netlify.app/",
+  "publishedAt": "2017-01-01",
+  "summary": "Star Wars or Star Trek? Why not both? Using just CSS and a little bit of JavaScript I recreated these classic science fiction intros.",
+  "tags": [
+    "side-project",
+    "css",
+    "javascript",
+    "visualization"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "css",
+    "javascript",
+    "visualization"
+  ],
+  "slug": "star-wars",
+  "code": "var Component=(()=>{var S=Object.create;var s=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var h=Object.getPrototypeOf,m=Object.prototype.hasOwnProperty;var j=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),x=(t,e)=>{for(var r in e)s(t,r,{get:e[r],enumerable:!0})},o=(t,e,r,i)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of f(e))!m.call(t,n)&&n!==r&&s(t,n,{get:()=>e[n],enumerable:!(i=d(e,n))||i.enumerable});return t};var b=(t,e,r)=>(r=t!=null?S(h(t)):{},o(e||!t||!t.__esModule?s(r,\"default\",{value:t,enumerable:!0}):r,t)),y=t=>o(s({},\"__esModule\",{value:!0}),t);var l=j((C,c)=>{c.exports=_jsx_runtime});var _={};x(_,{default:()=>u,frontmatter:()=>W});var a=b(l()),W={title:\"Star Wars\",url:\"https://star-wars-intro.netlify.app/\",publishedAt:\"2017-01-01\",summary:\"Star Wars or Star Trek? Why not both? Using just CSS and a little bit of JavaScript I recreated these classic science fiction intros.\",tags:[\"side-project\",\"css\",\"javascript\",\"visualization\"]};function p(t){let e={p:\"p\",...t.components};return(0,a.jsx)(e.p,{children:\"Star Wars or Star Trek? Why not both? Using just CSS and a little bit of JavaScript I recreated these classic science fiction intros.\"})}function u(t={}){let{wrapper:e}=t.components||{};return e?(0,a.jsx)(e,{...t,children:(0,a.jsx)(p,{...t})}):p(t)}return y(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.12,
+    "time": 7200,
+    "words": 24
+  }
+}

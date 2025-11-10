@@ -1,0 +1,23 @@
+{
+  "title": "Use trash instead of rm",
+  "summary": "Stop using rm -rf node_modules, use Trash instead.",
+  "publishedAt": "2022-11-04",
+  "tags": [
+    "snippet",
+    "bash",
+    "terminal"
+  ],
+  "tagsAsSlugs": [
+    "snippet",
+    "bash",
+    "terminal"
+  ],
+  "slug": "trash-instead-of-rm",
+  "code": "var Component=(()=>{var m=Object.create;var i=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,N=Object.prototype.hasOwnProperty;var g=(s,e)=>()=>(e||s((e={exports:{}}).exports,e),e.exports),k=(s,e)=>{for(var a in e)i(s,a,{get:e[a],enumerable:!0})},c=(s,e,a,l)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let t of p(e))!N.call(s,t)&&t!==a&&i(s,t,{get:()=>e[t],enumerable:!(l=u(e,t))||l.enumerable});return s};var b=(s,e,a)=>(a=s!=null?m(f(s)):{},c(e||!s||!s.__esModule?i(a,\"default\",{value:s,enumerable:!0}):a,s)),x=s=>c(i({},\"__esModule\",{value:!0}),s);var r=g((j,o)=>{o.exports=_jsx_runtime});var w={};k(w,{default:()=>h,frontmatter:()=>_});var n=b(r()),_={title:\"Use trash instead of rm\",summary:\"Stop using rm -rf node_modules, use Trash instead.\",publishedAt:\"2022-11-04\",tags:[\"snippet\",\"bash\",\"terminal\"]};function d(s){let e={a:\"a\",code:\"code\",li:\"li\",p:\"p\",pre:\"pre\",span:\"span\",ul:\"ul\",...s.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.p,{children:[\"Based on \",(0,n.jsx)(e.a,{href:\"https://mobile.twitter.com/wesbos/status/1588520765380612098\",children:\"this excellent \\u{1F525} tip\"}),` by Wes Bos\nand the ensuing Twitter thread I've added the following to my `,(0,n.jsx)(e.code,{children:\".zshrc\"}),\":\"]}),`\n`,(0,n.jsx)(e.pre,{className:\"language-bash\",children:(0,n.jsxs)(e.code,{className:\"language-bash code-highlight\",children:[(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token function-name function\",children:\"trash\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"(\"}),(0,n.jsx)(e.span,{className:\"token punctuation\",children:\")\"}),\" \",(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"{\"}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token builtin class-name\",children:\"echo\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:'\"\\u{1F5D1}\\uFE0F Moving files to Trash can...\"'}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"  \",(0,n.jsx)(e.span,{className:\"token function\",children:\"mv\"}),\" \",(0,n.jsxs)(e.span,{className:\"token string\",children:['\"',(0,n.jsx)(e.span,{className:\"token variable\",children:\"$@\"}),'\"']}),\" \",(0,n.jsxs)(e.span,{className:\"token string\",children:['\"',(0,n.jsx)(e.span,{className:\"token environment constant\",children:\"$HOME\"}),'/.trash\"']}),`\n`]}),(0,n.jsxs)(e.span,{className:\"code-line\",children:[(0,n.jsx)(e.span,{className:\"token punctuation\",children:\"}\"}),`\n`]})]})}),`\n`,(0,n.jsxs)(e.p,{children:[\"Now instead of using the destructive \",(0,n.jsx)(e.code,{children:\"rm -rf node_modules\"}),` I use\n`,(0,n.jsx)(e.code,{children:\"trash node_modules\"}),\" to delete files. This is:\"]}),`\n`,(0,n.jsxs)(e.ul,{children:[`\n`,(0,n.jsx)(e.li,{children:\"faster - milliseconds instead of minutes\"}),`\n`,(0,n.jsx)(e.li,{children:\"safer - you can always restore files if you make a mistake\"}),`\n`]}),`\n`,(0,n.jsxs)(e.p,{children:[\"Another option would be to install the \",(0,n.jsx)(e.a,{href:\"https://github.com/sindresorhus/trash-cli\",children:\"Node.js based cli\"}),\" by @sindresorhus.\"]})]})}function h(s={}){let{wrapper:e}=s.components||{};return e?(0,n.jsx)(e,{...s,children:(0,n.jsx)(d,{...s})}):d(s)}return x(w);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.43,
+    "time": 25800,
+    "words": 86
+  }
+}

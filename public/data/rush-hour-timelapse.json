@@ -1,0 +1,24 @@
+{
+  "title": "Rush hour timelapse",
+  "url": "https://twitter.com/altijdfiles",
+  "publishedAt": "2016-01-01",
+  "summary": "A Twitter bot that creates daily timelapse videos of the traffic jams in the Netherlands. No longer active, but you can still see some of the old time-lapses.",
+  "tags": [
+    "side-project",
+    "visualization",
+    "twitter"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "visualization",
+    "twitter"
+  ],
+  "slug": "rush-hour-timelapse",
+  "code": "var Component=(()=>{var h=Object.create;var i=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var p=Object.getPrototypeOf,j=Object.prototype.hasOwnProperty;var x=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),y=(t,e)=>{for(var o in e)i(t,o,{get:e[o],enumerable:!0})},r=(t,e,o,n)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of f(e))!j.call(t,s)&&s!==o&&i(t,s,{get:()=>e[s],enumerable:!(n=d(e,s))||n.enumerable});return t};var b=(t,e,o)=>(o=t!=null?h(p(t)):{},r(e||!t||!t.__esModule?i(o,\"default\",{value:t,enumerable:!0}):o,t)),v=t=>r(i({},\"__esModule\",{value:!0}),t);var c=x((g,l)=>{l.exports=_jsx_runtime});var _={};y(_,{default:()=>u,frontmatter:()=>w});var a=b(c()),w={title:\"Rush hour timelapse\",url:\"https://twitter.com/altijdfiles\",publishedAt:\"2016-01-01\",summary:\"A Twitter bot that creates daily timelapse videos of the traffic jams in the Netherlands. No longer active, but you can still see some of the old time-lapses.\",tags:[\"side-project\",\"visualization\",\"twitter\"]};function m(t){let e={p:\"p\",...t.components};return(0,a.jsx)(e.p,{children:\"A Twitter bot that creates daily timelapse videos of the traffic jams in the Netherlands. No longer active, but you can still see some of the old time-lapses.\"})}function u(t={}){let{wrapper:e}=t.components||{};return e?(0,a.jsx)(e,{...t,children:(0,a.jsx)(m,{...t})}):m(t)}return v(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.14,
+    "time": 8400,
+    "words": 28
+  }
+}

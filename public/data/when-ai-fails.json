@@ -1,0 +1,21 @@
+{
+  "title": "When AI Fails",
+  "publishedAt": "2025-02-01",
+  "summary": "A project dedicated to documenting the funny, interesting, and sometimes outright stupid ways in which AI can fail.",
+  "tags": [
+    "genai",
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "genai",
+    "side-project"
+  ],
+  "slug": "when-ai-fails",
+  "code": "var Component=(()=>{var m=Object.create;var a=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var b=(i,e)=>()=>(e||i((e={exports:{}}).exports,e),e.exports),A=(i,e)=>{for(var t in e)a(i,t,{get:e[t],enumerable:!0})},h=(i,e,t,l)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of u(e))!f.call(i,s)&&s!==t&&a(i,s,{get:()=>e[s],enumerable:!(l=p(e,s))||l.enumerable});return i};var x=(i,e,t)=>(t=i!=null?m(g(i)):{},h(e||!i||!i.__esModule?a(t,\"default\",{value:i,enumerable:!0}):t,i)),w=i=>h(a({},\"__esModule\",{value:!0}),i);var c=b((M,r)=>{r.exports=_jsx_runtime});var E={};A(E,{default:()=>d,frontmatter:()=>y});var n=x(c()),y={title:\"When AI Fails\",publishedAt:\"2025-02-01\",summary:\"A project dedicated to documenting the funny, interesting, and sometimes outright stupid ways in which AI can fail.\",tags:[\"genai\",\"side-project\"]};function o(i){let e={a:\"a\",code:\"code\",h2:\"h2\",li:\"li\",p:\"p\",span:\"span\",ul:\"ul\",...i.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.p,{children:[(0,n.jsx)(e.code,{children:\"When AI Fails\"}),\" is a project dedicated to documenting the funny, interesting, and sometimes outright stupid ways in which AI can fail. Despite the advancements in artificial intelligence, there are still many scenarios where AI systems produce unexpected or incorrect results. This project aims to highlight these instances and provide insights into the limitations and challenges of AI.\"]}),`\n`,(0,n.jsxs)(e.h2,{id:\"example-failures\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#example-failures\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"Example Failures\"]}),`\n`,(0,n.jsxs)(e.ul,{children:[`\n`,(0,n.jsx)(e.li,{children:(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails/blob/main/playing-set/README.md\",children:\"Set Game AI Failures\"})}),`\n`,(0,n.jsx)(e.li,{children:(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails/blob/main/elephants-hiding/README.md\",children:\"Moshi tells a joke\"})}),`\n`,(0,n.jsx)(e.li,{children:(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails/blob/main/pencils-in-trees/README.md\",children:\"Pencils in Trees\"})}),`\n`,(0,n.jsx)(e.li,{children:(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails/blob/main/three-headed-monkey/README.md\",children:\"Three-Headed Monkey\"})}),`\n`,(0,n.jsx)(e.li,{children:(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails/blob/main/shepards-dog/README.md\",children:\"Shepherd's Dog\"})}),`\n`]}),`\n`,(0,n.jsxs)(e.p,{children:[\"The repo is available on \",(0,n.jsx)(e.a,{href:\"https://github.com/vnglst/when-ai-fails\",children:\"GitHub\"})]})]})}function d(i={}){let{wrapper:e}=i.components||{};return e?(0,n.jsx)(e,{...i,children:(0,n.jsx)(o,{...i})}):o(i)}return w(E);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.435,
+    "time": 26100,
+    "words": 87
+  }
+}

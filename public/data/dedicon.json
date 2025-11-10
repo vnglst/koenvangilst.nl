@@ -1,0 +1,21 @@
+{
+  "title": "Work update: Audiobook Player for Dedicon",
+  "publishedAt": "2017-07-01",
+  "summary": "As a Frontend developer for Stichting Dedicon, I created a player for their audiobook collection. It's built specifically for users with visual impairments.",
+  "tags": [
+    "work",
+    "freelance"
+  ],
+  "tagsAsSlugs": [
+    "work",
+    "freelance"
+  ],
+  "slug": "dedicon",
+  "code": "var Component=(()=>{var p=Object.create;var o=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var m=Object.getPrototypeOf,f=Object.prototype.hasOwnProperty;var b=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),j=(t,e)=>{for(var n in e)o(t,n,{get:e[n],enumerable:!0})},c=(t,e,n,r)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of g(e))!f.call(t,s)&&s!==n&&o(t,s,{get:()=>e[s],enumerable:!(r=u(e,s))||r.enumerable});return t};var w=(t,e,n)=>(n=t!=null?p(m(t)):{},c(e||!t||!t.__esModule?o(n,\"default\",{value:t,enumerable:!0}):n,t)),y=t=>c(o({},\"__esModule\",{value:!0}),t);var l=b((D,a)=>{a.exports=_jsx_runtime});var _={};j(_,{default:()=>h,frontmatter:()=>x});var i=w(l()),x={title:\"Work update: Audiobook Player for Dedicon\",publishedAt:\"2017-07-01\",summary:\"As a Frontend developer for Stichting Dedicon, I created a player for their audiobook collection. It's built specifically for users with visual impairments.\",tags:[\"work\",\"freelance\"]};function d(t){let e={a:\"a\",h2:\"h2\",li:\"li\",p:\"p\",span:\"span\",ul:\"ul\",...t.components},{Image:n}=e;return n||k(\"Image\",!0),(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(e.p,{children:\"As a Frontend developer at Stichting Dedicon, I developed a specialized audiobook player for users with visual impairments. The Online Player (OLP) offers multiple reading assistance features including:\"}),`\n`,(0,i.jsxs)(e.ul,{children:[`\n`,(0,i.jsx)(e.li,{children:\"Text highlighting that syncs with human narration\"}),`\n`,(0,i.jsx)(e.li,{children:\"Adjustable reading speed\"}),`\n`,(0,i.jsx)(e.li,{children:\"Customizable font size and color schemes\"}),`\n`,(0,i.jsx)(e.li,{children:\"Full compatibility with screen readers and braille displays\"}),`\n`]}),`\n`,(0,i.jsx)(e.p,{children:\"This accessible design ensures that all users, regardless of visual ability, can enjoy Dedicon's audiobook collection comfortably.\"}),`\n`,(0,i.jsxs)(e.h2,{id:\"screenshots\",children:[(0,i.jsx)(e.a,{className:\"anchor\",href:\"#screenshots\",children:(0,i.jsx)(e.span,{className:\"icon icon-link\"})}),\"Screenshots\"]}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon1.jpg\",width:1242/4,height:2208/4}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon2.jpg\",width:1242/4,height:2208/4}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon3.jpg\",width:1242/4,height:2208/4}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon4.jpg\",width:1242/4,height:2208/4}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon5.jpg\",width:1242/4,height:2208/4}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon6.jpg\",width:1722/2,height:1272/2}),`\n`,(0,i.jsx)(n,{alt:\"\",src:\"/static/screenshots/dedicon7.jpg\",width:1722/2,height:1272/2})]})}function h(t={}){let{wrapper:e}=t.components||{};return e?(0,i.jsx)(e,{...t,children:(0,i.jsx)(d,{...t})}):d(t)}function k(t,e){throw new Error(\"Expected \"+(e?\"component\":\"object\")+\" `\"+t+\"` to be defined: you likely forgot to import, pass, or provide it.\")}return y(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.725,
+    "time": 43500,
+    "words": 145
+  }
+}

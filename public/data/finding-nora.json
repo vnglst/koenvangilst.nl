@@ -1,0 +1,20 @@
+{
+  "title": "Finding Nora",
+  "url": "https://nora.netlify.app/",
+  "publishedAt": "2018-01-01",
+  "summary": "I made this app to test what you can accomplish with current PWA technology (especially on iOS). My kids loved it, I hope you do too! 🎉",
+  "tags": [
+    "side-project"
+  ],
+  "tagsAsSlugs": [
+    "side-project"
+  ],
+  "slug": "finding-nora",
+  "code": "var Component=(()=>{var m=Object.create;var a=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var h=Object.getOwnPropertyNames;var y=Object.getPrototypeOf,x=Object.prototype.hasOwnProperty;var f=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),g=(t,e)=>{for(var o in e)a(t,o,{get:e[o],enumerable:!0})},s=(t,e,o,i)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let r of h(e))!x.call(t,r)&&r!==o&&a(t,r,{get:()=>e[r],enumerable:!(i=d(e,r))||i.enumerable});return t};var _=(t,e,o)=>(o=t!=null?m(y(t)):{},s(e||!t||!t.__esModule?a(o,\"default\",{value:t,enumerable:!0}):o,t)),j=t=>s(a({},\"__esModule\",{value:!0}),t);var p=f((A,c)=>{c.exports=_jsx_runtime});var w={};g(w,{default:()=>l,frontmatter:()=>M});var n=_(p()),M={title:\"Finding Nora\",url:\"https://nora.netlify.app/\",publishedAt:\"2018-01-01\",summary:\"I made this app to test what you can accomplish with current PWA technology (especially on iOS). My kids loved it, I hope you do too! \\u{1F389}\",tags:[\"side-project\"]};function u(t){return(0,n.jsx)(n.Fragment,{})}function l(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(u,{...t})}):u(t)}return j(w);})();\n;return Component;",
+  "readingTime": {
+    "text": "0 min read",
+    "minutes": 0,
+    "time": 0,
+    "words": 0
+  }
+}

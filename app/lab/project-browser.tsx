@@ -1,8 +1,9 @@
 'use client';
 
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useUpdateParams } from 'hooks/useUpdateParams';
-import { useRouter } from 'next/navigation';
 
 import { BlogPostLink } from 'components/ui/PostLink';
 import { TagButton } from 'components/ui/Tag';
@@ -53,7 +54,7 @@ type TagFilterProps = {
 };
 
 function TagFilter({ currentQuery, tags }: TagFilterProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleTagClick = (tag: { label: string; href: string }) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,9 +62,9 @@ function TagFilter({ currentQuery, tags }: TagFilterProps) {
     const isActive = currentQuery === tagQuery;
 
     if (isActive) {
-      router.push('/lab');
+      navigate('/lab');
     } else {
-      router.push(tag.href);
+      navigate(tag.href);
     }
   };
 

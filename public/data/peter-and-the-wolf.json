@@ -1,0 +1,24 @@
+{
+  "title": "Peter and the Wolf",
+  "url": "https://peter-and-the-wolf.netlify.app/",
+  "publishedAt": "2018-01-01",
+  "summary": "Progressive Web App for kids, based upon the classical piece \"Peter and the Wolf\" by Prokofiev. Turns out that making large mp3s available offline is harder than I thought.",
+  "tags": [
+    "side-project",
+    "pwa",
+    "kids"
+  ],
+  "tagsAsSlugs": [
+    "side-project",
+    "pwa",
+    "kids"
+  ],
+  "slug": "peter-and-the-wolf",
+  "code": "var Component=(()=>{var f=Object.create;var r=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var d=Object.getOwnPropertyNames;var m=Object.getPrototypeOf,b=Object.prototype.hasOwnProperty;var g=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports),k=(e,t)=>{for(var n in t)r(e,n,{get:t[n],enumerable:!0})},i=(e,t,n,s)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let o of d(t))!b.call(e,o)&&o!==n&&r(e,o,{get:()=>t[o],enumerable:!(s=u(t,o))||s.enumerable});return e};var x=(e,t,n)=>(n=e!=null?f(m(e)):{},i(t||!e||!e.__esModule?r(n,\"default\",{value:e,enumerable:!0}):n,e)),P=e=>i(r({},\"__esModule\",{value:!0}),e);var p=g((_,l)=>{l.exports=_jsx_runtime});var y={};k(y,{default:()=>c,frontmatter:()=>v});var a=x(p()),v={title:\"Peter and the Wolf\",url:\"https://peter-and-the-wolf.netlify.app/\",publishedAt:\"2018-01-01\",summary:'Progressive Web App for kids, based upon the classical piece \"Peter and the Wolf\" by Prokofiev. Turns out that making large mp3s available offline is harder than I thought.',tags:[\"side-project\",\"pwa\",\"kids\"]};function h(e){let t={p:\"p\",...e.components};return(0,a.jsx)(t.p,{children:'Progressive Web App for kids, based upon the classical piece \"Peter and the Wolf\" by Prokofiev. Turns out that making large mp3s available offline is harder than I thought.'})}function c(e={}){let{wrapper:t}=e.components||{};return t?(0,a.jsx)(t,{...e,children:(0,a.jsx)(h,{...e})}):h(e)}return P(y);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.145,
+    "time": 8700,
+    "words": 29
+  }
+}

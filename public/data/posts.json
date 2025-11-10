@@ -1,0 +1,1680 @@
+[
+  {
+    "title": "European Land Use Visualization",
+    "publishedAt": "2025-10-25",
+    "summary": "An expanded hexagonal map visualization comparing land use across multiple European countries, showing how water, nature, cities, and agriculture are distributed. See what makes Dutch land use special - or not.",
+    "tags": [
+      "data visualization",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "data-visualization",
+      "side-project"
+    ],
+    "slug": "european-land-use",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.735,
+      "time": 44100,
+      "words": 147
+    }
+  },
+  {
+    "title": "Can LLMs Recreate Van Gogh's Starry Night Using Only SVG?",
+    "publishedAt": "2025-10-10",
+    "summary": "An experiment tracking how AI models from 2022 to 2025 have evolved in their ability to recreate famous artworks using SVG. The results reveal how these models understand visual composition and artistic style.",
+    "tags": [
+      "AI",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "ai",
+      "side-project"
+    ],
+    "slug": "ai-art-evolution",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.86,
+      "time": 111600,
+      "words": 372
+    }
+  },
+  {
+    "title": "A New Metaphor for AI",
+    "summary": "A post about a better metaphor for AI than the dominant \"Terminator\" narrative. What we can learn from the history of automata and scientific progress.",
+    "publishedAt": "2025-07-04",
+    "tags": [
+      "ai",
+      "article"
+    ],
+    "tagsAsSlugs": [
+      "ai",
+      "article"
+    ],
+    "slug": "new-metaphor-for-ai",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.65,
+      "time": 159000,
+      "words": 530
+    }
+  },
+  {
+    "title": "When AI Fails",
+    "publishedAt": "2025-02-01",
+    "summary": "A project dedicated to documenting the funny, interesting, and sometimes outright stupid ways in which AI can fail.",
+    "tags": [
+      "genai",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "genai",
+      "side-project"
+    ],
+    "slug": "when-ai-fails",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.435,
+      "time": 26100,
+      "words": 87
+    }
+  },
+  {
+    "title": "United Nations Speeches",
+    "publishedAt": "2025-01-01",
+    "summary": "A side-project that analyzes diplomatic relationships through speeches during the 2024 UN General Assembly.",
+    "tags": [
+      "genai",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "genai",
+      "side-project"
+    ],
+    "slug": "united-nations",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.7,
+      "time": 42000,
+      "words": 140
+    }
+  },
+  {
+    "title": "Promotion: Tech Lead GenAI at Rabobank",
+    "publishedAt": "2024-11-01",
+    "summary": "As Tech Lead GenAI at Rabobank's Wholesale & Rural Innovation department, I lead the technical side of GenAI-driven solutions, focusing on innovation and collaboration to advance agrifinance.",
+    "tags": [
+      "work",
+      "rabobank"
+    ],
+    "tagsAsSlugs": [
+      "work",
+      "rabobank"
+    ],
+    "slug": "rabobank-genai",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.15,
+      "time": 69000,
+      "words": 230
+    }
+  },
+  {
+    "title": "Generative Art Gallery",
+    "url": "/lab/gen-art-gallery",
+    "publishedAt": "2024-10-12",
+    "summary": "A gallery showing all my generative art projects in one place.",
+    "tags": [
+      "javascript",
+      "generative-art",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "javascript",
+      "generative-art",
+      "side-project"
+    ],
+    "slug": "gen-art-gallery-project",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Joost van den Vondel's correspondence",
+    "publishedAt": "2024-07-19",
+    "summary": "An experiment with GenAI to automate manual tasks in creating a critical edition of Joost van den Vondel's correspondence.",
+    "image": {
+      "src": "/static/screenshots/vondel.png",
+      "alt": "Screenshot showing an impression of the Vondel correspondence website",
+      "width": 2688,
+      "height": 1956,
+      "showAsHeader": true
+    },
+    "tags": [
+      "side-project",
+      "ai",
+      "chatgpt"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "ai",
+      "chatgpt"
+    ],
+    "slug": "correspondence-vondel",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.485,
+      "time": 89100,
+      "words": 297
+    }
+  },
+  {
+    "title": "Ons Land",
+    "url": "/lab/ons-land",
+    "publishedAt": "2024-06-06",
+    "summary": "An interactive data visualization project exploring how land is used across the Netherlands, highlighting the distribution of agriculture, nature reserves, urban areas, and infrastructure throughout the country.",
+    "tags": [
+      "data visualization",
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "data-visualization",
+      "side-project"
+    ],
+    "slug": "ons-land-project",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Is creativity nothing more than a little randomness?",
+    "publishedAt": "2024-05-13",
+    "summary": "By using the randomness, AI can generate more surprising and engaging text, similar to how some human thinkers benefit from unconventional approaches. This post explores the concept of randomness in AI and its implications for creativity.",
+    "tags": [
+      "article",
+      "AI",
+      "chatgpt"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "ai",
+      "chatgpt"
+    ],
+    "slug": "randomness-in-ai",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.17,
+      "time": 130200,
+      "words": 434
+    }
+  },
+  {
+    "title": "Analyzing GPT-4 Tokens",
+    "publishedAt": "2024-05-02",
+    "summary": "For this article I used Llama3 to analyze GPT-4 tokens, revealing a strong bias towards English and code.",
+    "tags": [
+      "article",
+      "data visualization",
+      "AI"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "data-visualization",
+      "ai"
+    ],
+    "slug": "analyzing-gpt-4-tokens",
+    "readingTime": {
+      "text": "5 min read",
+      "minutes": 4.73,
+      "time": 283800,
+      "words": 946
+    }
+  },
+  {
+    "title": "AI and the Complexity of Code",
+    "publishedAt": "2024-04-22",
+    "summary": "Large Language Models like ChatGPT and CoPilot have a dual role in simplifying and complicating software development. Using a simple experiment this post explores how LLMs often lead to an increase in code complexity.",
+    "tags": [
+      "article",
+      "chatgpt",
+      "AI",
+      "code quality",
+      "software design"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "chatgpt",
+      "ai",
+      "code-quality",
+      "software-design"
+    ],
+    "slug": "keeping-code-complexity-in-check",
+    "readingTime": {
+      "text": "6 min read",
+      "minutes": 5.74,
+      "time": 344400,
+      "words": 1148
+    }
+  },
+  {
+    "title": "Prognosis 2100",
+    "url": "/lab/prognosis-2100",
+    "publishedAt": "2024-02-01",
+    "summary": "Imagining the Netherlands in 2100, this page provides an overview of the impacts of climate change. It's a personal project, driven by my desire to show what the year 2100 could look like when my kids are in their 80s.",
+    "tags": [
+      "side-project",
+      "data-visualization"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "data-visualization"
+    ],
+    "slug": "prognosis-2100-project",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Displaying Aranet4 CO2 readings on my website",
+    "publishedAt": "2024-01-07",
+    "image": {
+      "src": "/static/images/co2-monitor.jpg",
+      "alt": "Screenshot showing readings of my CO2 monitor",
+      "width": 1348,
+      "height": 642,
+      "showAsHeader": false
+    },
+    "summary": "Tutorial on how to display real-time CO2 measurements from an Aranet4 monitor on my website using a Raspberry Pi.",
+    "tags": [
+      "side-project",
+      "python",
+      "nextjs"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "python",
+      "nextjs"
+    ],
+    "slug": "aranet4-co2-monitor",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.895,
+      "time": 173700,
+      "words": 579
+    }
+  },
+  {
+    "title": "Elder Race, book review",
+    "publishedAt": "2024-01-01",
+    "summary": "I read \"Elder Race\" by Adrian Tchaikovsky, a sci-fi novel that explores the concept that any sufficiently advanced technology is indistinguishable from magic.",
+    "image": {
+      "src": "/static/images/elder-race.jpg",
+      "alt": "A high tower with two silhouettes in front of it.",
+      "width": 1195,
+      "height": 994,
+      "showAsHeader": true
+    },
+    "tags": [
+      "article",
+      "reading notes"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "reading-notes"
+    ],
+    "slug": "elder-race-book-review",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.315,
+      "time": 78900,
+      "words": 263
+    }
+  },
+  {
+    "title": "Rising Temperatures in The Netherlands",
+    "publishedAt": "2023-12-16",
+    "summary": "Visualizing the weather anomalies in rainfall, sunshine and temperature in the Netherlands using data from the Dutch Meteorological Institute (KNMI).",
+    "image": {
+      "src": "/static/images/weather-anomalies.jpg",
+      "alt": "Graph showing temperature anomalies in the Netherlands",
+      "width": 2558,
+      "height": 1640,
+      "showAsHeader": false
+    },
+    "tags": [
+      "article",
+      "climate change",
+      "data visualization"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "climate-change",
+      "data-visualization"
+    ],
+    "slug": "rising-temperatures",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.16,
+      "time": 129600,
+      "words": 432
+    }
+  },
+  {
+    "title": "Why I Prefer Trunk-Based Development",
+    "publishedAt": "2023-11-10",
+    "image": {
+      "src": "/static/images/trunkbased.jpg",
+      "alt": "A picture of a tree with branches generated by DALL-E",
+      "width": 1024,
+      "height": 1024,
+      "showAsHeader": true
+    },
+    "summary": "Moving away from the structured Git Flow to a more continuous approach with only one main branch.",
+    "tags": [
+      "article",
+      "git",
+      "continuous deployment",
+      "trunk-based development"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "git",
+      "continuous-deployment",
+      "trunk-based-development"
+    ],
+    "slug": "trunkbased-development",
+    "readingTime": {
+      "text": "7 min read",
+      "minutes": 6.83,
+      "time": 409800,
+      "words": 1366
+    }
+  },
+  {
+    "title": "Git Standup Alias",
+    "summary": "A git alias to show a standup log for the specified author",
+    "publishedAt": "2023-10-28",
+    "tags": [
+      "snippet",
+      "git",
+      "bash"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "git",
+      "bash"
+    ],
+    "slug": "git-standup",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.21,
+      "time": 12600,
+      "words": 42
+    }
+  },
+  {
+    "title": "Accessible router links in Angular",
+    "publishedAt": "2023-06-09",
+    "summary": "About the routerLink directive and how to make sure it's accessible",
+    "tags": [
+      "article",
+      "Angular",
+      "html"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "angular",
+      "html"
+    ],
+    "slug": "accessible-router-links-in-angular",
+    "readingTime": {
+      "text": "4 min read",
+      "minutes": 3.04,
+      "time": 182400,
+      "words": 608
+    }
+  },
+  {
+    "title": "Progressively enhanced dark mode",
+    "publishedAt": "2023-04-16",
+    "summary": "Adding a dark theme to my website using NextJS 13 and React Server Components",
+    "tags": [
+      "article",
+      "nextjs",
+      "react",
+      "dark mode",
+      "server components"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "nextjs",
+      "react",
+      "dark-mode",
+      "server-components"
+    ],
+    "slug": "progressively-enhanced-dark-mode",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.04,
+      "time": 62400,
+      "words": 208
+    }
+  },
+  {
+    "title": "AI Enhanced Education",
+    "publishedAt": "2023-04-02",
+    "summary": "During the pandemic, I worked on a side project to help parents create lessons for their kids, but it was too time-consuming to create those lessons. Now, with LLMs, I revisited the idea.",
+    "tags": [
+      "article",
+      "AI",
+      "learning"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "ai",
+      "learning"
+    ],
+    "slug": "ai-enhanced-learning",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.22,
+      "time": 133200,
+      "words": 444
+    }
+  },
+  {
+    "title": "Why a plant-based diet is a good idea",
+    "publishedAt": "2023-02-21",
+    "image": {
+      "src": "/static/images/plantbased.jpg",
+      "alt": "A plant leaf surrounded by a circle of animals and dairy products",
+      "width": 1024,
+      "height": 1024,
+      "showAsHeader": true
+    },
+    "summary": "My arguments in favor of eating less meat.",
+    "tags": [
+      "article",
+      "personal",
+      "farming",
+      "climate change",
+      "food"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "personal",
+      "farming",
+      "climate-change",
+      "food"
+    ],
+    "slug": "plantbased-diet",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.07,
+      "time": 64200,
+      "words": 214
+    }
+  },
+  {
+    "title": "Guest post by ChatGPT",
+    "publishedAt": "2022-12-04",
+    "summary": "I asked ChatGPT to write a blog post about its impact on the way developers write code. The contents might surprise you.",
+    "tags": [
+      "article",
+      "chatgpt",
+      "ai"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "chatgpt",
+      "ai"
+    ],
+    "slug": "guest-post-gpt-3-chat",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.685,
+      "time": 101100,
+      "words": 337
+    }
+  },
+  {
+    "title": "Reading Notes Regenesis",
+    "publishedAt": "2022-11-27",
+    "summary": "Regenesis: Feeding the World without Devouring the Planet. By George Monbiot.",
+    "tags": [
+      "article",
+      "farming",
+      "climate change",
+      "food",
+      "reading notes"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "farming",
+      "climate-change",
+      "food",
+      "reading-notes"
+    ],
+    "slug": "regenesis-reading-notes",
+    "readingTime": {
+      "text": "4 min read",
+      "minutes": 3.295,
+      "time": 197700,
+      "words": 659
+    }
+  },
+  {
+    "title": "Plotting the age of parliament with Livebook",
+    "publishedAt": "2022-11-24",
+    "summary": "A tutorial for Livebook, an interactive coding notebook for the Elixir programing language.",
+    "tags": [
+      "article",
+      "elixir",
+      "livebook",
+      "data visualization"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "elixir",
+      "livebook",
+      "data-visualization"
+    ],
+    "slug": "livebook-average-age-of-parliament",
+    "readingTime": {
+      "text": "8 min read",
+      "minutes": 7.3,
+      "time": 438000,
+      "words": 1460
+    }
+  },
+  {
+    "title": "Use trash instead of rm",
+    "summary": "Stop using rm -rf node_modules, use Trash instead.",
+    "publishedAt": "2022-11-04",
+    "tags": [
+      "snippet",
+      "bash",
+      "terminal"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "bash",
+      "terminal"
+    ],
+    "slug": "trash-instead-of-rm",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.43,
+      "time": 25800,
+      "words": 86
+    }
+  },
+  {
+    "title": "Decoding a JWT token",
+    "summary": "Using jq to decode JWT tokens from the command line.",
+    "publishedAt": "2022-10-08",
+    "tags": [
+      "snippet",
+      "security"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "security"
+    ],
+    "slug": "jwt-token",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.305,
+      "time": 18300,
+      "words": 61
+    }
+  },
+  {
+    "title": "My gitconfig",
+    "summary": "A snippet I use to setup the aliases and global git config on new machines.",
+    "publishedAt": "2022-09-01",
+    "tags": [
+      "snippet",
+      "git"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "git"
+    ],
+    "slug": "gitconfig",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.385,
+      "time": 23100,
+      "words": 77
+    }
+  },
+  {
+    "title": "New Job at Rabobank",
+    "publishedAt": "2022-09-01",
+    "summary": "Some career news! Today I'm joining Rabobank as a frontend lead for the Wholesale & Rural Innovation department.",
+    "tags": [
+      "article",
+      "personal",
+      "work"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "personal",
+      "work"
+    ],
+    "slug": "new-job",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.34,
+      "time": 80400,
+      "words": 268
+    }
+  },
+  {
+    "title": "Phoenix LiveView Cursors",
+    "publishedAt": "2022-03-15",
+    "image": {
+      "src": "/static/screenshots/phoenix-live-cursors.jpg",
+      "alt": "Screenshot of the end result",
+      "width": 2152,
+      "height": 1372,
+      "showAsHeader": false
+    },
+    "summary": "Part 2 of my tutorial creating \"live cursors\" as seen in Figma. In this tutorial, I'll be using Phoenix LiveView to create the same feature.",
+    "tags": [
+      "article",
+      "elixir",
+      "phoenix",
+      "liveview",
+      "presence",
+      "tailwind",
+      "tutorial"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "elixir",
+      "phoenix",
+      "liveview",
+      "presence",
+      "tailwind",
+      "tutorial"
+    ],
+    "slug": "phoenix-liveview-cursors",
+    "readingTime": {
+      "text": "14 min read",
+      "minutes": 13.66,
+      "time": 819600,
+      "words": 2732
+    }
+  },
+  {
+    "title": "Git hash in Next.js",
+    "summary": "A snippet to parse the git hash from the command line and add it as an environment variable to a Next.js app.",
+    "publishedAt": "2022-03-08",
+    "tags": [
+      "snippet",
+      "git",
+      "nextjs",
+      "javascript"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "git",
+      "nextjs",
+      "javascript"
+    ],
+    "slug": "git-hash",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.715,
+      "time": 42900,
+      "words": 143
+    }
+  },
+  {
+    "title": "Support Ukraine banner",
+    "summary": "Add a stand with Ukraine banner using this TailwindCSS snippet",
+    "publishedAt": "2022-03-05",
+    "tags": [
+      "snippet",
+      "css",
+      "tailwind"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "css",
+      "tailwind"
+    ],
+    "slug": "ukraine-banner",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.425,
+      "time": 25500,
+      "words": 85
+    }
+  },
+  {
+    "title": "On returning to the office",
+    "publishedAt": "2022-02-13",
+    "summary": "Some advice from the Stoic philosopher Seneca for workers returning to the office after the pandemic.",
+    "tags": [
+      "article",
+      "stoicism",
+      "philosophy",
+      "office"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "stoicism",
+      "philosophy",
+      "office"
+    ],
+    "slug": "on-returning-to-the-office",
+    "readingTime": {
+      "text": "5 min read",
+      "minutes": 4.415,
+      "time": 264900,
+      "words": 883
+    }
+  },
+  {
+    "title": "Cleaning up local branches",
+    "summary": "A bash script that deletes all local branches not found on the remote.",
+    "publishedAt": "2022-02-10",
+    "tags": [
+      "snippet",
+      "git",
+      "bash"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "git",
+      "bash"
+    ],
+    "slug": "git-delete-branch-not-on-remote",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.31,
+      "time": 18600,
+      "words": 62
+    }
+  },
+  {
+    "title": "Live user cursors with Phoenix Presence",
+    "publishedAt": "2022-02-01",
+    "image": {
+      "src": "/static/screenshots/phoenix-live-cursors.jpg",
+      "alt": "Screenshot of the end result",
+      "width": 2152,
+      "height": 1372,
+      "showAsHeader": false
+    },
+    "summary": "A tutorial for creating live cursors as seen in Figma. A step-by-step guide focused on beginners (I'm learning Phoenix myself).",
+    "tags": [
+      "article",
+      "phoenix",
+      "elixir",
+      "tutorial",
+      "liveview"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "phoenix",
+      "elixir",
+      "tutorial",
+      "liveview"
+    ],
+    "slug": "phoenix-live-cursors",
+    "readingTime": {
+      "text": "13 min read",
+      "minutes": 12.67,
+      "time": 760200,
+      "words": 2534
+    }
+  },
+  {
+    "title": "Clean code is a phase",
+    "publishedAt": "2022-01-28",
+    "summary": "Why it's better to be kind than to be clean.",
+    "tags": [
+      "article",
+      "software design"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "software-design"
+    ],
+    "slug": "clean-code-is-a-phase",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.07,
+      "time": 64200,
+      "words": 214
+    }
+  },
+  {
+    "title": "Adding Tailwind CSS to a Phoenix project",
+    "publishedAt": "2021-12-27",
+    "summary": "With the official mix task it has become very easy to add Tailwind to any Phoenix project. To make it even more straightforward I've written this quick step-by-step guide.",
+    "tags": [
+      "article",
+      "elixir",
+      "phoenix",
+      "tailwind",
+      "css"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "elixir",
+      "phoenix",
+      "tailwind",
+      "css"
+    ],
+    "slug": "adding-tailwind-to-phoenix",
+    "readingTime": {
+      "text": "5 min read",
+      "minutes": 4.225,
+      "time": 253500,
+      "words": 845
+    }
+  },
+  {
+    "title": "React components should read like a book",
+    "publishedAt": "2021-12-17",
+    "summary": "How the ordering of functions can make component files easier to read.",
+    "tags": [
+      "article",
+      "react",
+      "javascript",
+      "code readability"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "react",
+      "javascript",
+      "code-readability"
+    ],
+    "slug": "make-React-components-read-like-a-book",
+    "readingTime": {
+      "text": "4 min read",
+      "minutes": 3.09,
+      "time": 185400,
+      "words": 618
+    }
+  },
+  {
+    "title": "accent-color",
+    "summary": "Nice looking radios and checkboxes with native css styling",
+    "publishedAt": "2021-12-12",
+    "tags": [
+      "snippet",
+      "css"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "css"
+    ],
+    "slug": "css-accent-color",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.705,
+      "time": 42300,
+      "words": 141
+    }
+  },
+  {
+    "title": "Custom scrollbars",
+    "summary": "It's something you easily forget, but it's easy and looks so much better.",
+    "publishedAt": "2021-12-12",
+    "tags": [
+      "snippet",
+      "css"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "css"
+    ],
+    "slug": "styling-scrollbars",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.12,
+      "time": 7200,
+      "words": 24
+    }
+  },
+  {
+    "title": "One command to run it all",
+    "publishedAt": "2021-12-10",
+    "summary": "Why mocking all external requests for your app is worth it.",
+    "tags": [
+      "article",
+      "javascript",
+      "react",
+      "testing"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "javascript",
+      "react",
+      "testing"
+    ],
+    "slug": "one-script-to-run-it-all",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.125,
+      "time": 67500,
+      "words": 225
+    }
+  },
+  {
+    "title": "useStorage",
+    "summary": "A React hook that uses localStorage (or sessionStorage) to persist component state.",
+    "publishedAt": "2021-12-10",
+    "tags": [
+      "snippet",
+      "react",
+      "typescript"
+    ],
+    "tagsAsSlugs": [
+      "snippet",
+      "react",
+      "typescript"
+    ],
+    "slug": "useStorage",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.485,
+      "time": 89100,
+      "words": 297
+    }
+  },
+  {
+    "title": "Of Bundles and Barrels",
+    "publishedAt": "2021-11-17",
+    "summary": "Why index barrel files can lead to large bundle sizes",
+    "tags": [
+      "article",
+      "code quality",
+      "typescript"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "code-quality",
+      "typescript"
+    ],
+    "slug": "of-bundles-and-barrels",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.895,
+      "time": 53700,
+      "words": 179
+    }
+  },
+  {
+    "title": "Code Colocation is King",
+    "publishedAt": "2021-11-14",
+    "image": {
+      "src": "/static/images/code-colocation.jpg",
+      "alt": "A man sitting in front of a computer screen and lots of interconnected windows above him",
+      "width": 1024,
+      "height": 1024,
+      "showAsHeader": true
+    },
+    "summary": "A simple principle to help structure code better",
+    "tags": [
+      "article",
+      "software design"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "software-design"
+    ],
+    "slug": "code-colocation-is-king",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.605,
+      "time": 156300,
+      "words": 521
+    }
+  },
+  {
+    "title": "mijn-Lessen.nl",
+    "url": "https://mijn-lessen.vercel.app/",
+    "publishedAt": "2021-01-01",
+    "summary": "A web app built during the Covid-19 lockdown that helps parents and elementary school children create lessons collaboratively. Parents can support their kids with challenging topics and share interactive educational content with other families. (in Dutch)",
+    "tags": [
+      "side-project",
+      "kids",
+      "education"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "kids",
+      "education"
+    ],
+    "slug": "mijn-lessen-nl",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Vaccination progress",
+    "url": "https://twitter.com/VacciVoortgang",
+    "publishedAt": "2021-01-01",
+    "summary": "A Twitter bot that tweets the latest vaccination progress for the Netherlands. Recently updated to also show the number of people that received a booster shot.",
+    "tags": [
+      "side-project",
+      "twitter"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "twitter"
+    ],
+    "slug": "vaccination-progress",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.13,
+      "time": 7800,
+      "words": 26
+    }
+  },
+  {
+    "title": "Using Svelte to create a scroll video effect",
+    "publishedAt": "2020-11-18",
+    "summary": "Tutorial on how to create a scroll video effect using Svelte’s powerful bind command.",
+    "tags": [
+      "svelte",
+      "tutorial",
+      "article"
+    ],
+    "tagsAsSlugs": [
+      "svelte",
+      "tutorial",
+      "article"
+    ],
+    "slug": "tutorial-svelte-scroll-video",
+    "readingTime": {
+      "text": "6 min read",
+      "minutes": 5.29,
+      "time": 317400,
+      "words": 1058
+    }
+  },
+  {
+    "title": "Tafels.app",
+    "url": "https://tafels-app.netlify.app/",
+    "publishedAt": "2020-01-01",
+    "summary": "A new year, a new JavaScript framework! Using svelte I created this PWA to help my kids with math. The goal was to create an app-like experience, using micro animations, full offline support, prefetching JavaScript and server-side rendering.",
+    "tags": [
+      "side-project",
+      "pwa",
+      "svelte"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "pwa",
+      "svelte"
+    ],
+    "slug": "tafels-app",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.19,
+      "time": 11400,
+      "words": 38
+    }
+  },
+  {
+    "title": "Programming quotes",
+    "publishedAt": "2019-09-22",
+    "summary": "A collection of great programming quotes",
+    "tags": [
+      "article",
+      "software design"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "software-design"
+    ],
+    "slug": "collection-of-great-tweets",
+    "readingTime": {
+      "text": "4 min read",
+      "minutes": 3.415,
+      "time": 204900,
+      "words": 683
+    }
+  },
+  {
+    "title": "mobx-state-tree",
+    "publishedAt": "2019-09-22",
+    "summary": "A first look at the state management library mobx-state-tree and a comparison with Redux Saga.",
+    "tags": [
+      "article",
+      "react"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "react"
+    ],
+    "slug": "mobx-state-tree",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.715,
+      "time": 102900,
+      "words": 343
+    }
+  },
+  {
+    "title": "303 See Other",
+    "publishedAt": "2019-08-25",
+    "summary": "Last week I learned a few things about how redirects and 303 status codes are handled in the browser.",
+    "tags": [
+      "article",
+      "restful",
+      "http"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "restful",
+      "http"
+    ],
+    "slug": "303-see-other",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.57,
+      "time": 154200,
+      "words": 514
+    }
+  },
+  {
+    "title": "Accessible SVGs in React",
+    "publishedAt": "2019-08-23",
+    "summary": "How to let screenreaders read the title of an SVG using React",
+    "tags": [
+      "article",
+      "accessibility",
+      "svg",
+      "react"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "accessibility",
+      "svg",
+      "react"
+    ],
+    "slug": "accessible-svgs",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.16,
+      "time": 129600,
+      "words": 432
+    }
+  },
+  {
+    "title": "Brutalist CSS",
+    "publishedAt": "2019-08-17",
+    "summary": "196 bytes of minimal CSS",
+    "tags": [
+      "article",
+      "css",
+      "design"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "css",
+      "design"
+    ],
+    "slug": "brutalist-css",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.335,
+      "time": 20100,
+      "words": 67
+    }
+  },
+  {
+    "title": "Forgit me nots",
+    "publishedAt": "2019-08-11",
+    "summary": "Git commands I keep forgetting",
+    "tags": [
+      "article",
+      "git"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "git"
+    ],
+    "slug": "for-git-me-nots",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.02,
+      "time": 121200,
+      "words": 404
+    }
+  },
+  {
+    "title": "Reading notes Programming TypeScript",
+    "publishedAt": "2019-08-11",
+    "summary": "Stuff I don't want to forget from the Book Programming TypeScript.",
+    "tags": [
+      "article",
+      "typescript",
+      "reading notes"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "typescript",
+      "reading-notes"
+    ],
+    "slug": "programming-typescript-reading-notes",
+    "readingTime": {
+      "text": "7 min read",
+      "minutes": 6.365,
+      "time": 381900,
+      "words": 1273
+    }
+  },
+  {
+    "title": "Using React Hooks with canvas",
+    "publishedAt": "2019-03-16",
+    "image": {
+      "src": "/static/images/hooks.jpg",
+      "alt": "Badly drawn letters spelling HOOKS",
+      "width": 916,
+      "height": 387,
+      "showAsHeader": true
+    },
+    "summary": "An intro to the React hooks useState, useRef and useEffect",
+    "tags": [
+      "article",
+      "react",
+      "hooks",
+      "canvas"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "react",
+      "hooks",
+      "canvas"
+    ],
+    "slug": "react-hooks-with-canvas",
+    "readingTime": {
+      "text": "11 min read",
+      "minutes": 10.81,
+      "time": 648600,
+      "words": 2162
+    }
+  },
+  {
+    "title": "Reading notes Accelerate",
+    "publishedAt": "2019-01-01",
+    "summary": "Accelerate gives a scientific analysis of what makes IT organizations successful. I've listed the most important ones (from a developer perspective)",
+    "tags": [
+      "article",
+      "reading notes"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "reading-notes"
+    ],
+    "slug": "accelerate-reading-notes",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.985,
+      "time": 179100,
+      "words": 597
+    }
+  },
+  {
+    "title": "Lumber Jack",
+    "url": "https://lumber-jack.netlify.app/",
+    "publishedAt": "2019-01-01",
+    "summary": "Weekend project to learn more about Mobx State Tree. Simple kids' game inspired by Stardew Valley and Monty Python. Don't forget to turn on the sound!",
+    "tags": [
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "side-project"
+    ],
+    "slug": "lumberjack",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Reading notes CSS In Depth",
+    "publishedAt": "2018-10-01",
+    "summary": "Review of a book for programmers who have always considered CSS to be an (unpleasant) afterthought",
+    "tags": [
+      "article",
+      "css",
+      "reading notes"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "css",
+      "reading-notes"
+    ],
+    "slug": "css-in-depth-reading-notes",
+    "readingTime": {
+      "text": "4 min read",
+      "minutes": 3.725,
+      "time": 223500,
+      "words": 745
+    }
+  },
+  {
+    "title": "Finding Nora",
+    "url": "https://nora.netlify.app/",
+    "publishedAt": "2018-01-01",
+    "summary": "I made this app to test what you can accomplish with current PWA technology (especially on iOS). My kids loved it, I hope you do too! 🎉",
+    "tags": [
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "side-project"
+    ],
+    "slug": "finding-nora",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Kamer van Koophandel, Frontend Engineer",
+    "publishedAt": "2018-01-01",
+    "summary": "At the Dutch Chamber of Commerce (KVK), I contributed as a frontend engineer in the development of the application that allows starting entrepreneurs (freelancers) to register their new businesses online. With online registration, the KVK meets the broad societal need to conduct transactions (with government entities) online.",
+    "tags": [
+      "work"
+    ],
+    "tagsAsSlugs": [
+      "work"
+    ],
+    "slug": "kvk",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.71,
+      "time": 42600,
+      "words": 142
+    }
+  },
+  {
+    "title": "Peter and the Wolf",
+    "url": "https://peter-and-the-wolf.netlify.app/",
+    "publishedAt": "2018-01-01",
+    "summary": "Progressive Web App for kids, based upon the classical piece \"Peter and the Wolf\" by Prokofiev. Turns out that making large mp3s available offline is harder than I thought.",
+    "tags": [
+      "side-project",
+      "pwa",
+      "kids"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "pwa",
+      "kids"
+    ],
+    "slug": "peter-and-the-wolf",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.145,
+      "time": 8700,
+      "words": 29
+    }
+  },
+  {
+    "title": "Size of NPM",
+    "url": "https://size-of-npm.netlify.app/",
+    "publishedAt": "2018-01-01",
+    "summary": "I thought it might be (mildly) interesting to keep track of how the NPM node_modules folder grows over time. This website keeps track of the size of the top 100 npm packages. It's been running for a while now and the results are... frightening?",
+    "tags": [
+      "side-project",
+      "data-visualization"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "data-visualization"
+    ],
+    "slug": "size-of-npm",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.22,
+      "time": 13200,
+      "words": 44
+    }
+  },
+  {
+    "title": "Work update: Audiobook Player for Dedicon",
+    "publishedAt": "2017-07-01",
+    "summary": "As a Frontend developer for Stichting Dedicon, I created a player for their audiobook collection. It's built specifically for users with visual impairments.",
+    "tags": [
+      "work",
+      "freelance"
+    ],
+    "tagsAsSlugs": [
+      "work",
+      "freelance"
+    ],
+    "slug": "dedicon",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.725,
+      "time": 43500,
+      "words": 145
+    }
+  },
+  {
+    "title": "API testing with Jest",
+    "publishedAt": "2017-02-06",
+    "image": {
+      "src": "/static/images/api-testing-jest.jpg",
+      "alt": "Example screenshot passing Jest tests",
+      "width": 1348,
+      "height": 642,
+      "showAsHeader": true
+    },
+    "summary": "Testing async API calls using Jest’s mocking features",
+    "tags": [
+      "article",
+      "javascript",
+      "testing"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "javascript",
+      "testing"
+    ],
+    "slug": "api-testing-with-jest",
+    "readingTime": {
+      "text": "6 min read",
+      "minutes": 5.45,
+      "time": 327000,
+      "words": 1090
+    }
+  },
+  {
+    "title": "Tommy Hilfiger, Fullstack Engineer",
+    "publishedAt": "2017-01-01",
+    "summary": "For Tommy Hilfiger I worked as a full-stack JavaScript engineer on their loyalty app MyTommy. The app is built in React Native for both iPhone and Android, with a restful Node/Express API on the backend.",
+    "tags": [
+      "work"
+    ],
+    "tagsAsSlugs": [
+      "work"
+    ],
+    "slug": "hilfiger",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.83,
+      "time": 49800,
+      "words": 166
+    }
+  },
+  {
+    "title": "Star Trek",
+    "url": "https://star-trek.netlify.app/",
+    "publishedAt": "2017-01-01",
+    "summary": "Star Wars or Star Trek? Why not both? Using just CSS and a little bit of JavaScript I recreated these classic science fiction intros.",
+    "tags": [
+      "side-project",
+      "css",
+      "visualization"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "css",
+      "visualization"
+    ],
+    "slug": "star-trek",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.12,
+      "time": 7200,
+      "words": 24
+    }
+  },
+  {
+    "title": "Star Wars",
+    "url": "https://star-wars-intro.netlify.app/",
+    "publishedAt": "2017-01-01",
+    "summary": "Star Wars or Star Trek? Why not both? Using just CSS and a little bit of JavaScript I recreated these classic science fiction intros.",
+    "tags": [
+      "side-project",
+      "css",
+      "javascript",
+      "visualization"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "css",
+      "javascript",
+      "visualization"
+    ],
+    "slug": "star-wars",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.12,
+      "time": 7200,
+      "words": 24
+    }
+  },
+  {
+    "title": "Generating PDF's with Express",
+    "publishedAt": "2016-11-03",
+    "summary": "A fun little tutorial of how to create a PDF using a web form, Express and PDFKit",
+    "tags": [
+      "article",
+      "Node.js",
+      "Express",
+      "JavaScript"
+    ],
+    "tagsAsSlugs": [
+      "article",
+      "nodejs",
+      "express",
+      "javascript"
+    ],
+    "slug": "generating-a-pdf-with-express",
+    "readingTime": {
+      "text": "3 min read",
+      "minutes": 2.5,
+      "time": 150000,
+      "words": 500
+    }
+  },
+  {
+    "title": "Words to line prices",
+    "url": "https://converter.koenvangilst.nl/",
+    "publishedAt": "2016-01-01",
+    "summary": "A simple web app for translators that converts a price per word to a price per standard line (55 characters).",
+    "tags": [
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "side-project"
+    ],
+    "slug": "converter",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Help Terence!",
+    "url": "https://twitter.com/helpTerence",
+    "publishedAt": "2016-01-01",
+    "summary": "A Twitter bot raising emoji money for his trip around the world. A fun little experiment with social media and Twitter bots. [no longer active]. Technologies used: Express, MongoDB.",
+    "tags": [
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "side-project"
+    ],
+    "slug": "help-terence",
+    "readingTime": {
+      "text": "0 min read",
+      "minutes": 0,
+      "time": 0,
+      "words": 0
+    }
+  },
+  {
+    "title": "Rush hour timelapse",
+    "url": "https://twitter.com/altijdfiles",
+    "publishedAt": "2016-01-01",
+    "summary": "A Twitter bot that creates daily timelapse videos of the traffic jams in the Netherlands. No longer active, but you can still see some of the old time-lapses.",
+    "tags": [
+      "side-project",
+      "visualization",
+      "twitter"
+    ],
+    "tagsAsSlugs": [
+      "side-project",
+      "visualization",
+      "twitter"
+    ],
+    "slug": "rush-hour-timelapse",
+    "readingTime": {
+      "text": "1 min read",
+      "minutes": 0.14,
+      "time": 8400,
+      "words": 28
+    }
+  },
+  {
+    "title": "Wikipedia edits door de Nederlandse overheid",
+    "publishedAt": "2014-01-01",
+    "summary": "Twitter bot inspired by @congressedits that monitors and Tweets any edits made to Wikipedia by the Dutch government. It's been in the news quite a few times (de Volkskrant) and the account has more followers than I do. (in Dutch)",
+    "tags": [
+      "side-project"
+    ],
+    "tagsAsSlugs": [
+      "side-project"
+    ],
+    "slug": "overheidedits",
+    "readingTime": {
+      "text": "2 min read",
+      "minutes": 1.975,
+      "time": 118500,
+      "words": 395
+    }
+  }
+]

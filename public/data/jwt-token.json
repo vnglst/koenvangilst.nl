@@ -1,0 +1,21 @@
+{
+  "title": "Decoding a JWT token",
+  "summary": "Using jq to decode JWT tokens from the command line.",
+  "publishedAt": "2022-10-08",
+  "tags": [
+    "snippet",
+    "security"
+  ],
+  "tagsAsSlugs": [
+    "snippet",
+    "security"
+  ],
+  "slug": "jwt-token",
+  "code": "var Component=(()=>{var m=Object.create;var o=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,g=Object.prototype.hasOwnProperty;var j=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),k=(t,e)=>{for(var s in e)o(t,s,{get:e[s],enumerable:!0})},c=(t,e,s,r)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let a of u(e))!g.call(t,a)&&a!==s&&o(t,a,{get:()=>e[a],enumerable:!(r=p(e,a))||r.enumerable});return t};var x=(t,e,s)=>(s=t!=null?m(f(t)):{},c(e||!t||!t.__esModule?o(s,\"default\",{value:t,enumerable:!0}):s,t)),b=t=>c(o({},\"__esModule\",{value:!0}),t);var l=j((y,i)=>{i.exports=_jsx_runtime});var N={};k(N,{default:()=>h,frontmatter:()=>w});var n=x(l()),w={title:\"Decoding a JWT token\",summary:\"Using jq to decode JWT tokens from the command line.\",publishedAt:\"2022-10-08\",tags:[\"snippet\",\"security\"]};function d(t){let e={a:\"a\",code:\"code\",p:\"p\",pre:\"pre\",span:\"span\",...t.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.p,{children:[\"I know a lot of people just use the \",(0,n.jsx)(e.a,{href:\"https://jwt.io\",children:\"jwt.io\"}),` website for decoding JWT tokens, but to me that always feels unsecure.\nIt's definitely safer to use a command line tool on your own computer for that. I use the following `,(0,n.jsx)(e.a,{href:\"https://stedolan.github.io/jq/\",children:\"jq\"}),\" command for that.\"]}),`\n`,(0,n.jsx)(e.pre,{className:\"language-bash\",children:(0,n.jsx)(e.code,{className:\"language-bash code-highlight\",children:(0,n.jsxs)(e.span,{className:\"code-line\",children:[\"jq \",(0,n.jsx)(e.span,{className:\"token parameter variable\",children:\"-R\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:`'split(\".\") | .[1] | @base64d | fromjson'`}),\" \",(0,n.jsx)(e.span,{className:\"token operator\",children:\"<<<\"}),\" \",(0,n.jsx)(e.span,{className:\"token string\",children:'\".... paste token here....\"'}),`\n`]})})})]})}function h(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(d,{...t})}):d(t)}return b(N);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.305,
+    "time": 18300,
+    "words": 61
+  }
+}

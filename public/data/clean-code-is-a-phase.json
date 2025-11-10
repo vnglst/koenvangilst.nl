@@ -1,0 +1,21 @@
+{
+  "title": "Clean code is a phase",
+  "publishedAt": "2022-01-28",
+  "summary": "Why it's better to be kind than to be clean.",
+  "tags": [
+    "article",
+    "software design"
+  ],
+  "tagsAsSlugs": [
+    "article",
+    "software-design"
+  ],
+  "slug": "clean-code-is-a-phase",
+  "code": "var Component=(()=>{var p=Object.create;var s=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var u=Object.getPrototypeOf,b=Object.prototype.hasOwnProperty;var g=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports),y=(t,e)=>{for(var a in e)s(t,a,{get:e[a],enumerable:!0})},i=(t,e,a,r)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let o of f(e))!b.call(t,o)&&o!==a&&s(t,o,{get:()=>e[o],enumerable:!(r=m(e,o))||r.enumerable});return t};var w=(t,e,a)=>(a=t!=null?p(u(t)):{},i(e||!t||!t.__esModule?s(a,\"default\",{value:t,enumerable:!0}):a,t)),v=t=>i(s({},\"__esModule\",{value:!0}),t);var c=g((j,h)=>{h.exports=_jsx_runtime});var x={};y(x,{default:()=>d,frontmatter:()=>k});var n=w(c()),k={title:\"Clean code is a phase\",publishedAt:\"2022-01-28\",summary:\"Why it's better to be kind than to be clean.\",tags:[\"article\",\"software design\"]};function l(t){let e={a:\"a\",p:\"p\",strong:\"strong\",...t.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.p,{children:[\"At some point in their career, every programmer will come across \",(0,n.jsx)(e.a,{href:\"https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29\",children:\"Clean Code\"}),\" by Robert Martin. They'll read the book, apply the principles religiously, and convince teammates to do the same. They might get into a few discussions about it, maybe even a few fights, but after a while, they'll discover that other people have different coding styles, and that's fine. They'll find that it's more important to be respectful of others than to point out the boy scout rule and that it's better to be kind than to be clean.\"]}),`\n`,(0,n.jsx)(e.p,{children:`In the end, \"clean code\" is a phase most programmers go through, like adolescence, with its desire to find the one true way. But after that, most of us discover that the principles are pointless in and of themselves and that it's often preferable to ship \"working software\" instead.`}),`\n`,(0,n.jsxs)(e.p,{children:[\"This doesn't mean that Clean Code is useless. It teaches us to think about our coding craft and to always evaluate if there's a better way to practice it. I've internalized some of the principles and patterns, and I enjoy rereading chapters of the book. And who knows: maybe there's another phase in my life as a programmer, in which I rediscover Clean Code and find out it actually \",(0,n.jsx)(e.strong,{children:\"is\"}),\" the one true way.\"]})]})}function d(t={}){let{wrapper:e}=t.components||{};return e?(0,n.jsx)(e,{...t,children:(0,n.jsx)(l,{...t})}):l(t)}return v(x);})();\n;return Component;",
+  "readingTime": {
+    "text": "2 min read",
+    "minutes": 1.07,
+    "time": 64200,
+    "words": 214
+  }
+}

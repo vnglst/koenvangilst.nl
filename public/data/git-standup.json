@@ -1,0 +1,23 @@
+{
+  "title": "Git Standup Alias",
+  "summary": "A git alias to show a standup log for the specified author",
+  "publishedAt": "2023-10-28",
+  "tags": [
+    "snippet",
+    "git",
+    "bash"
+  ],
+  "tagsAsSlugs": [
+    "snippet",
+    "git",
+    "bash"
+  ],
+  "slug": "git-standup",
+  "code": "var Component=(()=>{var d=Object.create;var r=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,b=Object.prototype.hasOwnProperty;var f=(a,e)=>()=>(e||a((e={exports:{}}).exports,e),e.exports),N=(a,e)=>{for(var t in e)r(a,t,{get:e[t],enumerable:!0})},l=(a,e,t,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let n of u(e))!b.call(a,n)&&n!==t&&r(a,n,{get:()=>e[n],enumerable:!(o=m(e,n))||o.enumerable});return a};var x=(a,e,t)=>(t=a!=null?d(g(a)):{},l(e||!a||!a.__esModule?r(t,\"default\",{value:a,enumerable:!0}):t,a)),C=a=>l(r({},\"__esModule\",{value:!0}),a);var i=f((j,c)=>{c.exports=_jsx_runtime});var _={};N(_,{default:()=>h,frontmatter:()=>k});var s=x(i()),k={title:\"Git Standup Alias\",summary:\"A git alias to show a standup log for the specified author\",publishedAt:\"2023-10-28\",tags:[\"snippet\",\"git\",\"bash\"]};function p(a){let e={code:\"code\",p:\"p\",pre:\"pre\",span:\"span\",...a.components};return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)(e.p,{children:\"What have I been working on the last couple of days? I use this alias to show a standup log for the specified author (in this case myself).\"}),`\n`,(0,s.jsx)(e.pre,{className:\"language-bash\",children:(0,s.jsx)(e.code,{className:\"language-bash code-highlight\",children:(0,s.jsxs)(e.span,{className:\"code-line\",children:[\"standup \",(0,s.jsx)(e.span,{className:\"token operator\",children:\"=\"}),\" log \",(0,s.jsx)(e.span,{className:\"token parameter variable\",children:\"--author\"}),(0,s.jsx)(e.span,{className:\"token operator\",children:\"=\"}),\"Koen \",(0,s.jsx)(e.span,{className:\"token parameter variable\",children:\"--graph\"}),\" \",(0,s.jsx)(e.span,{className:\"token parameter variable\",children:\"--pretty\"}),(0,s.jsx)(e.span,{className:\"token operator\",children:\"=\"}),\"format:\",(0,s.jsx)(e.span,{className:\"token string\",children:\"'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\"}),` --abbrev-commit\n`]})})})]})}function h(a={}){let{wrapper:e}=a.components||{};return e?(0,s.jsx)(e,{...a,children:(0,s.jsx)(p,{...a})}):p(a)}return C(_);})();\n;return Component;",
+  "readingTime": {
+    "text": "1 min read",
+    "minutes": 0.21,
+    "time": 12600,
+    "words": 42
+  }
+}
