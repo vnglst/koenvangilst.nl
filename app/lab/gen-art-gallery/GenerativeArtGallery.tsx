@@ -174,15 +174,15 @@ export function GenerativeArtGallery() {
 
   return (
     <div className="relative">
-      <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-4 py-2 backdrop-blur-sm">
+      <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
         <BackButton
           fallbackHref="/lab"
           className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60"
         >
-          Back to Lab
+          <span className="hidden sm:inline">Back to Lab</span>
         </BackButton>
-        <span className="text-white">|</span>
-        <span className="text-sm text-white">
+        <span className="hidden text-white sm:inline">|</span>
+        <span className="text-xs text-white sm:text-sm">
           {currentIndex + 1} / {GENERATIVE_ART_PROJECTS.length}
         </span>
       </nav>
