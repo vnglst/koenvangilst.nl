@@ -1,16 +1,26 @@
 'use client';
 
+import React from 'react';
 import { useRouter } from 'next/navigation';
 
+import { Button } from './Button';
 import { Icon } from './Icon';
 
 type BackButtonProps = {
   fallbackHref: string;
   className?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
   children?: React.ReactNode;
 };
 
-export function BackButton({ fallbackHref, className, children = 'Back' }: BackButtonProps) {
+export function BackButton({
+  fallbackHref,
+  className,
+  variant = 'ghost',
+  size = 'md',
+  children = 'Back'
+}: BackButtonProps) {
   const router = useRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,9 +35,9 @@ export function BackButton({ fallbackHref, className, children = 'Back' }: BackB
   };
 
   return (
-    <button onClick={handleClick} className={className}>
+    <Button onClick={handleClick} variant={variant} size={size} className={className} aria-label="Go back">
       <Icon icon="arrow-left" className="h-4 w-4" />
       {children}
-    </button>
+    </Button>
   );
 }
