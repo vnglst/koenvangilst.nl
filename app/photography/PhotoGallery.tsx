@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { IconButton } from 'components/ui/IconButton';
 import { PhotoType } from './getPhotos';
 
 type PhotoGalleryProps = {
@@ -112,16 +113,18 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       {/* Modal */}
       {selectedPhoto && selectedIndex !== null && (
         <div className="fixed inset-0 top-0 left-0 z-50 h-dvh w-screen overflow-hidden overscroll-none bg-slate-950 p-4 md:p-8">
-          <button
+          <IconButton
             onClick={() => {
               setSelectedIndex(null);
               setIsFullScreen(true);
             }}
-            className="fixed top-3 right-3 z-20 grid h-14 w-14 place-items-center rounded-full bg-black/50 text-xl text-white backdrop-blur-sm hover:bg-white/90 hover:text-black md:top-5 md:right-5"
+            className="fixed top-3 right-3 z-20 text-xl md:top-5 md:right-5"
+            variant="overlay"
+            size="lg"
             aria-label="Close"
           >
             ✕
-          </button>
+          </IconButton>
           <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
             {!imageLoaded && showSpinner && (
               <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -154,13 +157,15 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
           </div>
           <div className="fixed bottom-3 left-0 flex w-full items-center justify-between gap-4 px-3 md:bottom-5 md:px-5">
             {selectedIndex > 0 ? (
-              <button
+              <IconButton
                 onClick={() => setSelectedIndex(selectedIndex - 1)}
-                className="m-auto grid h-14 w-14 place-items-center rounded-full bg-black/50 text-lg text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+                className="m-auto text-lg"
+                variant="overlay"
+                size="lg"
                 aria-label="Previous photo"
               >
                 ←
-              </button>
+              </IconButton>
             ) : (
               <div className="m-auto h-14 w-14" />
             )}
@@ -172,13 +177,15 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               </div>
             </div>
             {selectedIndex < photos.length - 1 ? (
-              <button
+              <IconButton
                 onClick={() => setSelectedIndex(selectedIndex + 1)}
-                className="m-auto grid h-14 w-14 place-items-center rounded-full bg-black/50 text-lg text-gray-200 backdrop-blur-sm hover:bg-white/90 hover:text-black"
+                className="m-auto text-lg"
+                variant="overlay"
+                size="lg"
                 aria-label="Next photo"
               >
                 →
-              </button>
+              </IconButton>
             ) : (
               <div className="m-auto h-14 w-14" />
             )}
