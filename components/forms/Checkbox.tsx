@@ -19,7 +19,7 @@ export function Checkbox({
   children
 }: PropsWithChildren<CheckboxProps>) {
   const colorClass = {
-    blue: 'checked:bg-blue-700',
+    blue: 'checked:bg-blue-600',
     pink: 'checked:bg-pink-400',
     primary: 'checked:bg-primary'
   }[color];
@@ -31,7 +31,7 @@ export function Checkbox({
         checked={checked}
         onChange={onChange}
         className={cx(
-          'h-6 w-6 cursor-pointer appearance-none rounded-lg border border-gray-300 checked:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all dark:border-gray-600 dark:focus:ring-blue-800',
+          'h-6 w-6 cursor-pointer appearance-none rounded-lg border border-gray-300 checked:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all dark:border-gray-600 dark:focus:ring-blue-700',
           colorClass
         )}
       />

@@ -73,7 +73,7 @@
 }
 
 .dark .prose a code {
-  color: #53ceff;
+  color: #64b5f6; /* blue-300 */
 }
 
 .dark .prose blockquote {
