@@ -17,7 +17,7 @@ export function Link({ href, children, className, ...props }: LinkProps) {
   const isExternal = href && href.startsWith('http');
 
   const variantClasses =
-    'underline font-bold text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400';
+    'underline font-bold text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400';
 
   const combinedClassName = cx(variantClasses, className);
 

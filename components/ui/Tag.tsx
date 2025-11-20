@@ -23,7 +23,7 @@ const getTagClasses = (variant: TagVariant = 'default') => {
   const baseClasses = 'rounded-lg px-3 py-1 text-sm font-semibold no-underline transition-all';
 
   if (variant === 'active') {
-    return `${baseClasses} bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700`;
+    return `${baseClasses} bg-blue-400 text-white hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600`;
   }
 
   return `${baseClasses} bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200`;

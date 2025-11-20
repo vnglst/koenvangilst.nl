@@ -177,7 +177,7 @@ export function GenerativeArtGallery() {
       <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
         <BackButton
           fallbackHref="/lab"
-          className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60"
+          className="flex items-center gap-2 text-sm text-white transition-opacity hover:bg-transparent hover:opacity-60 focus:ring-white/50 dark:hover:bg-transparent"
         >
           <span className="hidden sm:inline">Back to Lab</span>
         </BackButton>
