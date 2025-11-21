@@ -14,9 +14,9 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
       href={`/${slug}`}
       className={cx(
         isActive
-          ? 'rounded-none border-b-2 border-b-primary font-semibold text-gray-800 dark:text-gray-200'
-          : 'font-normal text-gray-600 dark:text-gray-400',
-        'inline-block p-1 transition-all duration-300 sm:px-3 sm:py-2'
+          ? 'bg-gray-200 font-semibold text-gray-800 ring-primary dark:bg-gray-700 dark:text-gray-200'
+          : 'font-normal text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
+        'inline-block rounded-lg p-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 sm:px-3 sm:py-2'
       )}
     >
       {text}
