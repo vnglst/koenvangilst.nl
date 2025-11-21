@@ -23,7 +23,6 @@ type ProjectBrowserProps = {
 const FEATURED_TAGS = [
   { label: 'articles', href: '?q=article' },
   { label: 'side projects', href: '?q=side-project' },
-  { label: 'work', href: '?q=work' },
   { label: 'snippets', href: '?q=snippet' }
 ];
 
