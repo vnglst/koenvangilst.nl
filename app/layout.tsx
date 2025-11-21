@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { Metadata, Viewport } from 'next';
-import { IBM_Plex_Sans, PT_Serif } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import { Body } from 'components/layout/Body';
@@ -8,17 +7,58 @@ import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
 
-const ibmPlexSans = IBM_Plex_Sans({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-sans'
+const ibmPlexSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/ibm-plex-sans-400.ttf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/ibm-plex-sans-500.ttf',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/ibm-plex-sans-600.ttf',
+      weight: '600',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/ibm-plex-sans-700.ttf',
+      weight: '700',
+      style: 'normal'
+    }
+  ],
+  variable: '--font-sans',
+  display: 'swap'
 });
 
-const ptSerif = PT_Serif({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-serif'
+const ptSerif = localFont({
+  src: [
+    {
+      path: '../public/fonts/pt-serif-400.ttf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/pt-serif-400-italic.ttf',
+      weight: '400',
+      style: 'italic'
+    },
+    {
+      path: '../public/fonts/pt-serif-700.ttf',
+      weight: '700',
+      style: 'normal'
+    },
+    {
+      path: '../public/fonts/pt-serif-700-italic.ttf',
+      weight: '700',
+      style: 'italic'
+    }
+  ],
+  variable: '--font-serif',
+  display: 'swap'
 });
 
 const nimbus = localFont({
