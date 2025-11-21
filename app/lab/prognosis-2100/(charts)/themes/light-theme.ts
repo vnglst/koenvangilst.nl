@@ -7,7 +7,7 @@ export const lightTheme = {
   textStyle: {
     fontSize: 12
     // Setting fontFamily doesn't work for Canvas renderer.
-    // fontFamily: 'var(--font-inter), sans-serif',
+    // fontFamily: 'var(--font-sans), sans-serif',
   },
   title: {
     padding: 20,
@@ -17,7 +17,7 @@ export const lightTheme = {
       fontSize: 16,
       fontWeight: 'normal'
       // Setting fontFamily doesn't work for Canvas renderer.
-      // fontFamily: 'var(--font-inter), sans-serif'
+      // fontFamily: 'var(--font-sans), sans-serif'
     },
     subtextStyle: {
       fontSize: 12

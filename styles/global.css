@@ -20,7 +20,7 @@
   --color-blue-800: #1565c0;
 
   --font-family-sans:
-    var(--font-inter), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
   --font-family-serif: var(--font-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-family-nimbus: var(--font-nimbus), ui-sans-serif, system-ui, sans-serif;

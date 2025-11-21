@@ -16,7 +16,7 @@ export const darkTheme = {
   ]),
   textStyle: {
     // Setting fontFamily doesn't work for Canvas renderer.
-    // fontFamily: 'var(--font-inter), sans-serif',
+    // fontFamily: 'var(--font-sans), sans-serif',
     color: '#cbd5e1',
     fontSize: 12
   },
@@ -28,7 +28,7 @@ export const darkTheme = {
       fontSize: 16,
       fontWeight: 'normal'
       // Setting fontFamily doesn't work for Canvas renderer.
-      // fontFamily: 'var(--font-inter), sans-serif'
+      // fontFamily: 'var(--font-sans), sans-serif'
     },
     subtextStyle: {
       color: '#94a3b8',
