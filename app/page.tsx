@@ -30,7 +30,7 @@ export default async function Home() {
           I currently work at <Link href="https://www.rabobank.com">Rabobank</Link>, where I help users getting their
           work done faster and with less friction. To do this I experiment with GenAI by building technical prototypes
           and collaborating closely with business stakeholders and engineers, guiding projects from initial
-          experimentation to successful products in the hands of our users.
+          experimentation to successful products.
         </p>
 
         <p>
