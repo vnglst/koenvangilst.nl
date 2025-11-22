@@ -57,6 +57,7 @@ async function generateResponsiveImages() {
 
     // Check if all images already exist and are up-to-date
     const originalOutputPath = path.join(imageOutputDir, 'original.jpg');
+    const originalWebpPath = path.join(imageOutputDir, 'original.webp');
     const needsRegeneration = await isImageOutdated(inputPath, originalOutputPath);
 
     if (!needsRegeneration) {
@@ -84,8 +85,10 @@ async function generateResponsiveImages() {
         continue;
       }
 
-      const outputPath = path.join(imageOutputDir, `${width}.jpg`);
+      const jpegOutputPath = path.join(imageOutputDir, `${width}.jpg`);
+      const webpOutputPath = path.join(imageOutputDir, `${width}.webp`);
 
+      // Generate JPEG version
       await sharp(inputPath)
         .resize(width, null, {
           withoutEnlargement: true,
@@ -96,9 +99,21 @@ async function generateResponsiveImages() {
           progressive: true,
           mozjpeg: true
         })
-        .toFile(outputPath);
+        .toFile(jpegOutputPath);
 
-      console.log(`  Generated: ${width}w`);
+      // Generate WebP version
+      await sharp(inputPath)
+        .resize(width, null, {
+          withoutEnlargement: true,
+          fit: 'inside'
+        })
+        .webp({
+          quality: 85,
+          effort: 6
+        })
+        .toFile(webpOutputPath);
+
+      console.log(`  Generated: ${width}w (JPEG + WebP)`);
     }
 
     // Also copy the original with optimized settings
@@ -110,7 +125,15 @@ async function generateResponsiveImages() {
       })
       .toFile(originalOutputPath);
 
-    console.log(`  Generated: original (optimized)`);
+    // Generate WebP version of original
+    await sharp(inputPath)
+      .webp({
+        quality: 90,
+        effort: 6
+      })
+      .toFile(originalWebpPath);
+
+    console.log(`  Generated: original (JPEG + WebP)`);
   }
 
   console.log(`✅ Image generation complete! (Processed: ${processedCount}, Skipped: ${skippedCount})`);
