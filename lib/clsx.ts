@@ -1,21 +1,19 @@
-/* eslint-disable prefer-rest-params */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 type Argument = string | boolean | null | undefined;
 
 /**
  * Conditionally join classNames into a single string
- * @param {...String} args The expressions to evaluate
- * @returns {String} The joined classNames
+ * @param args The expressions to evaluate
+ * @returns The joined classNames
  */
-function cx(...args: Argument[]): string;
-function cx(): string {
-  let str = '',
-    i = 0,
-    arg: unknown;
+function cx(...args: Argument[]): string {
+  let str = '';
 
-  for (; i < arguments.length; ) {
-    if ((arg = arguments[i++]) && typeof arg === 'string') {
-      str && (str += ' ');
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg && typeof arg === 'string') {
+      if (str) {
+        str += ' ';
+      }
       str += arg;
     }
   }
