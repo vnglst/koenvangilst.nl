@@ -144,13 +144,13 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
             <picture>
               <source
                 srcSet={selectedPhoto.srcSetWebp}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
+                sizes="100vw"
                 type="image/webp"
               />
               <img
                 src={selectedPhoto.src}
                 srcSet={selectedPhoto.srcSet}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
+                sizes="100vw"
                 alt={selectedPhoto.alt}
                 width={selectedPhoto.width}
                 height={selectedPhoto.height}
