@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { IconButton } from 'components/ui/IconButton';
+
 import { PhotoType } from './getPhotos';
 
 type PhotoGalleryProps = {

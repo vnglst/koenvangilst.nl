@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 const theme = {
   textLight: '#f4f4f4',
@@ -72,7 +72,7 @@ const width = 800;
 const height = 800;
 const hexRadius = 7;
 
-export const LandUseChart = () => {
+const LandUseChartComponent = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -169,7 +169,7 @@ export const LandUseChart = () => {
           .attr('fill', theme.bgLight)
           .attr('stroke', theme.bgLight)
           .attr('stroke-width', 0.1)
-          .on('mouseenter', function (event, d) {
+          .on('mouseenter', function (_event, d) {
             const category = hexColors[hexData.indexOf(d)];
             highlightHexagons(category);
           })
@@ -363,3 +363,5 @@ export const LandUseChart = () => {
     </div>
   );
 };
+
+export const LandUseChart = memo(LandUseChartComponent);

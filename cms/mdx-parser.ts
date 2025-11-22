@@ -2,13 +2,13 @@ import fs from 'fs';
 import grayMatter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
-import calculateReadingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
+import { calculateReadingTime } from 'lib/reading-time';
 import { sluggify } from 'lib/sluggify';
 
 import { Post, PostMeta } from './schema';
