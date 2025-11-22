@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-import { hexbin as d3Hexbin } from 'd3-hexbin';
+import { useEffect, useRef, useState } from 'react';
 
 const theme = {
   textLight: '#f4f4f4',
@@ -76,23 +74,35 @@ const hexRadius = 7;
 
 export const LandUseChart = () => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const projection = d3
-      .geoMercator()
-      .center([5.5, 52.2])
-      .scale(9000)
-      .translate([width / 2, height / 2]);
+    const loadVisualization = async () => {
+      // Dynamic imports - d3 libraries only loaded when this component renders
+      const [d3Module, d3HexbinModule] = await Promise.all([
+        import('d3'),
+        import('d3-hexbin')
+      ]);
 
-    d3.json('/static/json/netherlands.json')
-      .then((geoData) => {
-        const svg = d3.select(svgRef.current);
-        const hexbin = d3Hexbin()
-          .radius(hexRadius)
-          .extent([
-            [0, 0],
-            [width, height]
-          ]);
+      const d3 = d3Module;
+      const d3Hexbin = d3HexbinModule.hexbin;
+
+      const projection = d3
+        .geoMercator()
+        .center([5.5, 52.2])
+        .scale(9000)
+        .translate([width / 2, height / 2]);
+
+      d3.json('/static/json/netherlands.json')
+        .then((geoData) => {
+          setIsLoading(false);
+          const svg = d3.select(svgRef.current);
+          const hexbin = d3Hexbin()
+            .radius(hexRadius)
+            .extent([
+              [0, 0],
+              [width, height]
+            ]);
 
         const hexCenters: number[][] = [];
         for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
@@ -335,13 +345,21 @@ export const LandUseChart = () => {
           .html(
             `Visualisation by <a target="_blank" href="https://koenvangilst.nl" class="text-gray-300 underline underline-offset-2">Koen van Gilst</a>`
           );
-      })
-      .catch((error) => console.error('Error loading or processing data:', error));
+        })
+        .catch((error) => console.error('Error loading or processing data:', error));
+    };
+
+    loadVisualization();
   }, []);
 
   return (
     <div className="mt-5 flex flex-col items-center justify-center rounded-md bg-gradient-to-b from-black to-[#02071d] p-5 text-gray-200">
-      <svg ref={svgRef} viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+      {isLoading && (
+        <div className="flex h-[800px] w-full items-center justify-center">
+          <div className="text-gray-400">Loading visualization...</div>
+        </div>
+      )}
+      <svg ref={svgRef} viewBox="0 0 800 800" preserveAspectRatio="xMidYMid" style={{ opacity: isLoading ? 0 : 1 }}></svg>
     </div>
   );
 };

@@ -2,8 +2,40 @@
 
 import { dateFormatter, mmFormatter } from 'lib/formatters';
 
-import { Chart, echarts } from './Chart';
+import { Chart } from './Chart';
 import { Data } from './WeatherAnomaly.server';
+
+// Simple color interpolation function
+function lerpColor(factor: number, colors: string[]): string {
+  if (factor <= 0) return colors[0];
+  if (factor >= 1) return colors[colors.length - 1];
+
+  const scaledFactor = factor * (colors.length - 1);
+  const index = Math.floor(scaledFactor);
+  const localFactor = scaledFactor - index;
+
+  if (index >= colors.length - 1) return colors[colors.length - 1];
+
+  const color1 = colors[index];
+  const color2 = colors[index + 1];
+
+  const hex1 = color1.replace('#', '');
+  const hex2 = color2.replace('#', '');
+
+  const r1 = parseInt(hex1.substring(0, 2), 16);
+  const g1 = parseInt(hex1.substring(2, 4), 16);
+  const b1 = parseInt(hex1.substring(4, 6), 16);
+
+  const r2 = parseInt(hex2.substring(0, 2), 16);
+  const g2 = parseInt(hex2.substring(2, 4), 16);
+  const b2 = parseInt(hex2.substring(4, 6), 16);
+
+  const r = Math.round(r1 + (r2 - r1) * localFactor);
+  const g = Math.round(g1 + (g2 - g1) * localFactor);
+  const b = Math.round(b1 + (b2 - b1) * localFactor);
+
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}
 
 type RainProps = {
   data: Data;
@@ -96,21 +128,28 @@ function generateOptions(data: Data) {
           if (value === null) return;
 
           const factor = (value - min) / (max - min);
-          const color = echarts.color.lerp(factor, ['#cbf3ff', '#44d6ff', '#0022ff']);
+          const color = lerpColor(factor, ['#cbf3ff', '#44d6ff', '#0022ff']);
 
           return {
             value,
             itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color
-                },
-                {
-                  offset: 1,
-                  color
-                }
-              ]),
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color
+                  },
+                  {
+                    offset: 1,
+                    color
+                  }
+                ]
+              },
               borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
             }
           };
