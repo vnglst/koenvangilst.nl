@@ -1,19 +1,24 @@
-import { echarts } from '../Chart';
 import { colors } from './colors';
 
 export const darkTheme = {
   darkMode: true,
   color: Object.values(colors),
-  backgroundColor: new echarts.graphic.RadialGradient(0, 0, 8, [
-    {
-      offset: 0,
-      color: '#111827'
-    },
-    {
-      offset: 1,
-      color: '#204051'
-    }
-  ]),
+  backgroundColor: {
+    type: 'radial',
+    x: 0,
+    y: 0,
+    r: 8,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#111827'
+      },
+      {
+        offset: 1,
+        color: '#204051'
+      }
+    ]
+  },
   textStyle: {
     // Setting fontFamily doesn't work for Canvas renderer.
     // fontFamily: 'var(--font-sans), sans-serif',

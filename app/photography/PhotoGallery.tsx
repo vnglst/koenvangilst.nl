@@ -91,21 +91,28 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
             onClick={() => setSelectedIndex(index)}
             className={`relative block aspect-square md:aspect-auto ${photo.isVertical ? 'row-span-2' : 'row-span-1'}`}
           >
-            <img
-              src={photo.src}
-              srcSet={photo.srcSet}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              loading={photo.id < 2 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
-              style={{
-                backgroundImage: `url(${photo.blurDataURL})`,
-                backgroundSize: 'cover'
-              }}
-            />
+            <picture>
+              <source
+                srcSet={photo.srcSetWebp}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                type="image/webp"
+              />
+              <img
+                src={photo.src}
+                srcSet={photo.srcSet}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                loading={photo.id < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
+                style={{
+                  backgroundImage: `url(${photo.blurDataURL})`,
+                  backgroundSize: 'cover'
+                }}
+              />
+            </picture>
           </button>
         ))}
       </div>
@@ -134,26 +141,33 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
                 </div>
               </div>
             )}
-            <img
-              src={selectedPhoto.src}
-              srcSet={selectedPhoto.srcSet}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 2400px"
-              alt={selectedPhoto.alt}
-              width={selectedPhoto.width}
-              height={selectedPhoto.height}
-              loading="eager"
-              decoding="async"
-              className={`cursor-pointer object-contain transition-opacity duration-300 ${
-                isFullScreen ? 'fixed inset-0 h-dvh w-screen object-cover' : 'max-h-[85dvh] w-auto rounded-lg'
-              } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              role="button"
-              onClick={() => setIsFullScreen(!isFullScreen)}
-              onLoad={() => setImageLoaded(true)}
-              style={{
-                backgroundImage: `url(${selectedPhoto.blurDataURL})`,
-                backgroundSize: 'cover'
-              }}
-            />
+            <picture>
+              <source
+                srcSet={selectedPhoto.srcSetWebp}
+                sizes="100vw"
+                type="image/webp"
+              />
+              <img
+                src={selectedPhoto.src}
+                srcSet={selectedPhoto.srcSet}
+                sizes="100vw"
+                alt={selectedPhoto.alt}
+                width={selectedPhoto.width}
+                height={selectedPhoto.height}
+                loading="eager"
+                decoding="async"
+                className={`cursor-pointer object-contain transition-opacity duration-300 ${
+                  isFullScreen ? 'fixed inset-0 h-dvh w-screen object-cover' : 'max-h-[85dvh] w-auto rounded-lg'
+                } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                role="button"
+                onClick={() => setIsFullScreen(!isFullScreen)}
+                onLoad={() => setImageLoaded(true)}
+                style={{
+                  backgroundImage: `url(${selectedPhoto.blurDataURL})`,
+                  backgroundSize: 'cover'
+                }}
+              />
+            </picture>
           </div>
           <div className="fixed bottom-3 left-0 flex w-full items-center justify-between gap-4 px-3 md:bottom-5 md:px-5">
             {selectedIndex > 0 ? (

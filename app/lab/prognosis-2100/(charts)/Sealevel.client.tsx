@@ -5,7 +5,7 @@ import { colors } from 'app/lab/prognosis-2100/(charts)/themes/colors';
 import { dateFormatter } from 'lib/formatters';
 
 import { usePrognosisStore } from '../(store)/prognosis';
-import { Chart, echarts } from './Chart';
+import { Chart } from './Chart';
 import { DataType } from './Sealevel.server';
 
 type SealevelProps = {
@@ -139,27 +139,41 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         emphasis: {
           focus: 'series'
         },
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: '#2196f3'
-          },
-          {
-            offset: 1,
-            color: '#cbf3ff'
-          }
-        ]),
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
             {
               offset: 0,
-              color: '#19c9ff'
+              color: '#2196f3'
             },
             {
               offset: 1,
-              color: '#2196f3'
+              color: '#cbf3ff'
             }
-          ])
+          ]
+        },
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: '#19c9ff'
+              },
+              {
+                offset: 1,
+                color: '#2196f3'
+              }
+            ]
+          }
         }
       },
       ...(showPrognosis ? prognosisMarklines : [])

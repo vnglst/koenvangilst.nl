@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 import { ArticleMetadata } from 'components/content/ArticleMetadata';
 import { Heading } from 'components/content/Heading';
@@ -7,7 +8,9 @@ import { Prose } from 'components/content/Prose';
 import { Container } from 'components/layout/Container';
 import { Link } from 'components/ui/Link';
 
-import { LandUseChart } from './LandUseChart';
+const LandUseChart = dynamic(() => import('./LandUseChart').then((mod) => mod.LandUseChart), {
+  loading: () => <div className="h-[800px] w-full bg-gradient-to-b from-black to-[#02071d]" />
+});
 
 export const metadata = {
   title: 'Ons Land',

@@ -148,6 +148,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
       className={`${ptSerif.variable} ${ibmPlexSans.variable} ${nimbus.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
       <link rel="preconnect" href="https://plausible.koenvangilst.nl" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/ibm-plex-sans-600.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
       <Body>{children}</Body>

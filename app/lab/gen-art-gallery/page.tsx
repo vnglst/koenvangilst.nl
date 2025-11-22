@@ -1,4 +1,12 @@
-import { GenerativeArtGallery } from './GenerativeArtGallery';
+import dynamic from 'next/dynamic';
+
+const GenerativeArtGallery = dynamic(() => import('./GenerativeArtGallery').then((mod) => mod.GenerativeArtGallery), {
+  loading: () => (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-gray-500 dark:text-gray-400">Loading gallery...</div>
+    </div>
+  )
+});
 
 export async function generateMetadata() {
   return {

@@ -8,6 +8,7 @@ export type PhotoType = {
   filename: string;
   src: string;
   srcSet: string;
+  srcSetWebp: string;
   alt: string;
   width: number;
   height: number;
@@ -66,12 +67,13 @@ export async function getPhotos(): Promise<PhotoType[]> {
 
       // Generate srcSet from pre-generated images
       const imageDir = path.join(optimizedDirectory, nameWithoutExt);
-      const srcSet = await generateSrcSet(imageDir, nameWithoutExt, metadata.width || 0);
+      const { srcSet, srcSetWebp } = await generateSrcSets(imageDir, nameWithoutExt, metadata.width || 0);
 
       return {
         filename: file.filename,
         src: `/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/original.jpg`,
         srcSet,
+        srcSetWebp,
         width: metadata.width || 0,
         height: metadata.height || 0,
         alt: location,
@@ -99,25 +101,47 @@ export async function getPhotos(): Promise<PhotoType[]> {
   return photos;
 }
 
-async function generateSrcSet(imageDir: string, nameWithoutExt: string, originalWidth: number): Promise<string> {
-  const srcSetParts: string[] = [];
+async function generateSrcSets(
+  imageDir: string,
+  nameWithoutExt: string,
+  originalWidth: number
+): Promise<{ srcSet: string; srcSetWebp: string }> {
+  const srcSetJpegParts: string[] = [];
+  const srcSetWebpParts: string[] = [];
 
   for (const width of WIDTHS) {
     if (width > originalWidth) continue;
 
-    const imagePath = path.join(imageDir, `${width}.jpg`);
+    const jpegPath = path.join(imageDir, `${width}.jpg`);
+    const webpPath = path.join(imageDir, `${width}.webp`);
+
     try {
-      await fs.access(imagePath);
-      srcSetParts.push(`/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/${width}.jpg ${width}w`);
+      await fs.access(jpegPath);
+      srcSetJpegParts.push(`/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/${width}.jpg ${width}w`);
+    } catch {
+      // Image doesn't exist, skip
+    }
+
+    try {
+      await fs.access(webpPath);
+      srcSetWebpParts.push(`/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/${width}.webp ${width}w`);
     } catch {
       // Image doesn't exist, skip
     }
   }
 
   // Add original as fallback
-  srcSetParts.push(`/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/original.jpg ${originalWidth}w`);
+  srcSetJpegParts.push(
+    `/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/original.jpg ${originalWidth}w`
+  );
+  srcSetWebpParts.push(
+    `/static/photography-optimized/${encodeURIComponent(nameWithoutExt)}/original.webp ${originalWidth}w`
+  );
 
-  return srcSetParts.join(', ');
+  return {
+    srcSet: srcSetJpegParts.join(', '),
+    srcSetWebp: srcSetWebpParts.join(', ')
+  };
 }
 
 async function getBlurDataURL(imagePath: string) {
