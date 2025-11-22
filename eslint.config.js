@@ -1,28 +1,38 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname
-});
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
 const eslintConfig = [
   {
-    ignores: ['.next/**/*', 'node_modules/**/*', '*.config.js', '*.config.ts']
+    ignores: [
+      '.next/**/*',
+      'node_modules/**/*',
+      '*.config.js',
+      '*.config.ts',
+      '*.config.mjs',
+      'dist/**/*',
+      'build/**/*'
+    ]
   },
-  // Use only the Next.js core-web-vitals config without the problematic typescript config
-  ...compat.extends('next/core-web-vitals'),
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     plugins: {
       'simple-import-sort': simpleImportSort
     },
     rules: {
+      // Disable rules that conflict with TypeScript
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
+      ],
+
+      // Import sorting
       'simple-import-sort/exports': 'warn',
-      'react/no-unescaped-entities': 'off',
       'simple-import-sort/imports': [
         'warn',
         {
@@ -35,6 +45,23 @@ const eslintConfig = [
           ]
         }
       ]
+    }
+  },
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        Buffer: 'readonly',
+        module: 'readonly',
+        require: 'readonly'
+      }
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off'
     }
   }
 ];

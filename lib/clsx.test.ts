@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect,it } from 'vitest';
+
 import { cx } from './clsx';
 
 describe('cx', () => {
@@ -46,11 +47,12 @@ describe('cx', () => {
   });
 
   it('should handle Tailwind-style class names', () => {
+    const isHidden = false;
     const result = cx(
       'flex',
       'items-center',
       'justify-center',
-      false && 'hidden',
+      isHidden && 'hidden',
       'bg-gray-100',
       'dark:bg-gray-800'
     );
