@@ -5,7 +5,8 @@
  * @returns Reading time estimation
  */
 export function calculateReadingTime(text: string, wordsPerMinute = 200) {
-  const words = text.trim().split(/\s+/).length;
+  const trimmed = text.trim();
+  const words = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
   const minutes = words / wordsPerMinute;
   const readingTime = Math.ceil(minutes);
 
