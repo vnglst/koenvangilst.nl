@@ -3,7 +3,6 @@ import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 
 import { Body } from 'components/layout/Body';
-import { ThemeProvider } from 'components/theme/theme.store';
 import { Tracking } from 'components/Tracking';
 
 import 'styles/global.css';
@@ -153,9 +152,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <link rel="preload" href="/fonts/ibm-plex-sans-600.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
-      <ThemeProvider>
-        <Body>{children}</Body>
-      </ThemeProvider>
+      <Body>{children}</Body>
       <Tracking />
     </html>
   );

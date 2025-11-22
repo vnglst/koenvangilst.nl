@@ -1,18 +1,14 @@
-'use client';
-
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { create } from 'zustand';
 
 export enum Theme {
   Light = 'light',
   Dark = 'dark'
 }
 
-type ThemeContextType = {
+type Store = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
 };
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 // Get initial theme from DOM on client side
 const getInitialTheme = (): Theme => {
@@ -21,23 +17,9 @@ const getInitialTheme = (): Theme => {
   return darkClass ? Theme.Dark : Theme.Light;
 };
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-export function useTheme<T>(selector?: (state: ThemeContextType) => T): T {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider');
+export const useTheme = create<Store>((set) => ({
+  theme: getInitialTheme(),
+  setTheme: (theme: Theme) => {
+    set({ theme });
   }
-  if (selector) {
-    return selector(context);
-  }
-  return context as T;
-}
+}));
