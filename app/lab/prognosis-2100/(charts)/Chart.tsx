@@ -1,14 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import type * as echartsType from 'echarts/core';
+// Type imports don't increase bundle size
+import type { ECBasicOption } from 'echarts/types/dist/shared';
+
 import { Theme, useTheme } from 'components/theme/theme.store';
+import { merge } from 'lib/merge';
 
 import { darkTheme } from './themes/dark-theme';
 import { lightTheme } from './themes/light-theme';
-
-// Type imports don't increase bundle size
-import type { ECBasicOption } from 'echarts/types/dist/shared';
-import type * as echartsType from 'echarts/core';
 
 type ChartProps = {
   options: ECBasicOption;
@@ -28,7 +29,7 @@ const DEFAULT_OPTIONS: ECBasicOption = {
   }
 };
 
-export function Chart({ options, className }: ChartProps) {
+const ChartComponent = ({ options, className }: ChartProps) => {
   const mode = useTheme((state) => state.theme);
   const chartRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,14 +55,12 @@ export function Chart({ options, className }: ChartProps) {
           TooltipComponent,
           VisualMapComponent
         },
-        { CanvasRenderer },
-        { default: merge }
+        { CanvasRenderer }
       ] = await Promise.all([
         import('echarts/core'),
         import('echarts/charts'),
         import('echarts/components'),
-        import('echarts/renderers'),
-        import('lodash/merge')
+        import('echarts/renderers')
       ]);
 
       // Register required components
@@ -119,4 +118,6 @@ export function Chart({ options, className }: ChartProps) {
       <div ref={chartRef} className={className} style={{ opacity: isLoading ? 0 : 1 }} />
     </div>
   );
-}
+};
+
+export const Chart = memo(ChartComponent);

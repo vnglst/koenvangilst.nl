@@ -1,4 +1,4 @@
-import React, { ChangeEvent, PropsWithChildren } from 'react';
+import { ChangeEvent, PropsWithChildren } from 'react';
 
 import { cx } from 'lib/clsx';
 
