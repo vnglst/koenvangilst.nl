@@ -1,5 +1,5 @@
 import { getPosts } from 'cms/mdx-parser';
-import RSS from 'rss';
+import { RSS } from 'lib/rss';
 
 import { getPhotos } from '../photography/getPhotos';
 

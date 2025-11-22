@@ -1,12 +1,11 @@
 'use client';
 
-import useSWR from 'swr';
-
+import { useFetch } from 'hooks/useFetch';
 import { fetcher } from 'lib/fetcher';
 import { Co2Reading } from 'services/aranet';
 
 export function Co2Monitor() {
-  const { data: reading } = useSWR<Co2Reading>('/api/co2', fetcher, {
+  const { data: reading } = useFetch<Co2Reading>('/api/co2', fetcher, {
     refreshInterval: 30_000,
     revalidateOnFocus: true
   });
