@@ -4,8 +4,11 @@
  * @param source The source object to merge
  * @returns The merged object
  */
-export function merge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
-  const output = { ...target };
+export function merge<T extends Record<string, unknown>, U extends Record<string, unknown>>(
+  target: T,
+  source: U
+): T & U {
+  const output = { ...target } as Record<string, unknown>;
 
   for (const key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -13,14 +16,14 @@ export function merge<T extends Record<string, unknown>>(target: T, source: Part
       const targetValue = output[key];
 
       if (isObject(sourceValue) && isObject(targetValue)) {
-        output[key] = merge(targetValue as Record<string, unknown>, sourceValue as Record<string, unknown>) as T[Extract<keyof T, string>];
+        output[key] = merge(targetValue, sourceValue);
       } else {
-        output[key] = sourceValue as T[Extract<keyof T, string>];
+        output[key] = sourceValue;
       }
     }
   }
 
-  return output;
+  return output as T & U;
 }
 
 function isObject(item: unknown): item is Record<string, unknown> {
