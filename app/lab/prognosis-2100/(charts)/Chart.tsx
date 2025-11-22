@@ -1,45 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { BarChart, HeatmapChart, LineChart } from 'echarts/charts';
-import {
-  DataZoomComponent,
-  GraphicComponent,
-  GridComponent,
-  LegendComponent,
-  MarkLineComponent,
-  TitleComponent,
-  ToolboxComponent,
-  TooltipComponent,
-  VisualMapComponent
-} from 'echarts/components';
-import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-import { ECBasicOption } from 'echarts/types/dist/shared';
-import merge from 'lodash/merge';
-
-echarts.use([
-  BarChart,
-  LineChart,
-  LegendComponent,
-  DataZoomComponent,
-  GraphicComponent,
-  GridComponent,
-  HeatmapChart,
-  MarkLineComponent,
-  CanvasRenderer,
-  TitleComponent,
-  ToolboxComponent,
-  TooltipComponent,
-  VisualMapComponent
-]);
-
-export { echarts };
-
+import { useEffect, useRef, useState } from 'react';
 import { Theme, useTheme } from 'components/theme/theme.store';
 
 import { darkTheme } from './themes/dark-theme';
 import { lightTheme } from './themes/light-theme';
+
+// Type imports don't increase bundle size
+import type { ECBasicOption } from 'echarts/types/dist/shared';
+import type * as echartsType from 'echarts/core';
 
 type ChartProps = {
   options: ECBasicOption;
@@ -62,27 +31,92 @@ const DEFAULT_OPTIONS: ECBasicOption = {
 export function Chart({ options, className }: ChartProps) {
   const mode = useTheme((state) => state.theme);
   const chartRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!chartRef.current) return;
 
-    echarts.registerTheme(Theme.Light, lightTheme);
-    echarts.registerTheme(Theme.Dark, darkTheme);
+    let chart: ReturnType<typeof echartsType.init> | null = null;
 
-    const chart = echarts.init(chartRef.current, mode, { renderer: 'canvas' });
-    chart.setOption(merge(options, DEFAULT_OPTIONS));
+    const loadChart = async () => {
+      // Dynamic imports - echarts will only be loaded when this component renders
+      const [
+        echarts,
+        { BarChart, HeatmapChart, LineChart },
+        {
+          DataZoomComponent,
+          GraphicComponent,
+          GridComponent,
+          LegendComponent,
+          MarkLineComponent,
+          TitleComponent,
+          ToolboxComponent,
+          TooltipComponent,
+          VisualMapComponent
+        },
+        { CanvasRenderer },
+        { default: merge }
+      ] = await Promise.all([
+        import('echarts/core'),
+        import('echarts/charts'),
+        import('echarts/components'),
+        import('echarts/renderers'),
+        import('lodash/merge')
+      ]);
 
-    const handleResize = () => chart.resize();
-    window.addEventListener('resize', handleResize);
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    mediaQuery.addEventListener('change', handleResize);
+      // Register required components
+      echarts.use([
+        BarChart,
+        LineChart,
+        LegendComponent,
+        DataZoomComponent,
+        GraphicComponent,
+        GridComponent,
+        HeatmapChart,
+        MarkLineComponent,
+        CanvasRenderer,
+        TitleComponent,
+        ToolboxComponent,
+        TooltipComponent,
+        VisualMapComponent
+      ]);
+
+      echarts.registerTheme(Theme.Light, lightTheme);
+      echarts.registerTheme(Theme.Dark, darkTheme);
+
+      if (!chartRef.current) return;
+
+      chart = echarts.init(chartRef.current, mode, { renderer: 'canvas' });
+      chart.setOption(merge(options, DEFAULT_OPTIONS));
+      setIsLoading(false);
+
+      const handleResize = () => chart?.resize();
+      window.addEventListener('resize', handleResize);
+      const mediaQuery = window.matchMedia('(max-width: 768px)');
+      mediaQuery.addEventListener('change', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        mediaQuery.removeEventListener('change', handleResize);
+      };
+    };
+
+    const cleanup = loadChart();
 
     return () => {
-      chart.dispose();
-      window.removeEventListener('resize', handleResize);
-      mediaQuery.removeEventListener('change', handleResize);
+      cleanup.then((cleanupFn) => cleanupFn?.());
+      chart?.dispose();
     };
-  }, [chartRef, mode, options]);
+  }, [mode, options]);
 
-  return <div ref={chartRef} className={className} />;
+  return (
+    <div className="relative">
+      {isLoading && (
+        <div className={`${className} flex items-center justify-center bg-gray-100 dark:bg-gray-800`}>
+          <div className="text-gray-500 dark:text-gray-400">Loading chart...</div>
+        </div>
+      )}
+      <div ref={chartRef} className={className} style={{ opacity: isLoading ? 0 : 1 }} />
+    </div>
+  );
 }
