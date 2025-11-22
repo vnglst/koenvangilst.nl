@@ -10,22 +10,22 @@ import 'styles/global.css';
 const ibmPlexSans = localFont({
   src: [
     {
-      path: '../public/fonts/ibm-plex-sans-400.ttf',
+      path: '../public/fonts/ibm-plex-sans-400.woff2',
       weight: '400',
       style: 'normal'
     },
     {
-      path: '../public/fonts/ibm-plex-sans-500.ttf',
+      path: '../public/fonts/ibm-plex-sans-500.woff2',
       weight: '500',
       style: 'normal'
     },
     {
-      path: '../public/fonts/ibm-plex-sans-600.ttf',
+      path: '../public/fonts/ibm-plex-sans-600.woff2',
       weight: '600',
       style: 'normal'
     },
     {
-      path: '../public/fonts/ibm-plex-sans-700.ttf',
+      path: '../public/fonts/ibm-plex-sans-700.woff2',
       weight: '700',
       style: 'normal'
     }
@@ -37,22 +37,22 @@ const ibmPlexSans = localFont({
 const ptSerif = localFont({
   src: [
     {
-      path: '../public/fonts/pt-serif-400.ttf',
+      path: '../public/fonts/pt-serif-400.woff2',
       weight: '400',
       style: 'normal'
     },
     {
-      path: '../public/fonts/pt-serif-400-italic.ttf',
+      path: '../public/fonts/pt-serif-400-italic.woff2',
       weight: '400',
       style: 'italic'
     },
     {
-      path: '../public/fonts/pt-serif-700.ttf',
+      path: '../public/fonts/pt-serif-700.woff2',
       weight: '700',
       style: 'normal'
     },
     {
-      path: '../public/fonts/pt-serif-700-italic.ttf',
+      path: '../public/fonts/pt-serif-700-italic.woff2',
       weight: '700',
       style: 'italic'
     }
@@ -62,7 +62,7 @@ const ptSerif = localFont({
 });
 
 const nimbus = localFont({
-  src: '../public/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.ttf',
+  src: '../public/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
   variable: '--font-nimbus',
   display: 'swap'
 });
@@ -147,6 +147,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       data-scroll-behavior="smooth"
       className={`${ptSerif.variable} ${ibmPlexSans.variable} ${nimbus.variable} h-full min-w-[360px] scroll-smooth font-sans`}
     >
+      <link rel="preconnect" href="https://plausible.koenvangilst.nl" crossOrigin="anonymous" />
       <link rel="me" href="https://hachyderm.io/@vnglst" />
       <link rel="alternate" type="application/rss+xml" href="https://koenvangilst.nl/feed.xml" />
       <Body>{children}</Body>

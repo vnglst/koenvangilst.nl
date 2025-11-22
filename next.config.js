@@ -11,7 +11,7 @@ const commitHash = process.env.SOURCE_COMMIT;
  * @type {import('next').NextConfig}
  */
 const config = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   headers,
   redirects,
@@ -22,6 +22,10 @@ const config = {
   },
   images: {
     minimumCacheTTL: 31536000 // 1 year
+  },
+  compress: true, // Enable gzip compression
+  experimental: {
+    optimizePackageImports: ['lodash', 'd3', 'echarts'] // Auto-optimize imports
   }
 };
 
