@@ -23,7 +23,7 @@ export default async function Home() {
           I have a diverse background, always at the intersection of technology and humanity, with a philosophy degree
           and a lifelong passion for coding. I started programming at around 11, using GW-Basic and Turbo Pascal. After
           working as a web developer for many years I'm now in a technical leadership role where I'm enabling teams 
-          innovate with AI.
+          to innovate with AI.
         </p>
 
         <p>
