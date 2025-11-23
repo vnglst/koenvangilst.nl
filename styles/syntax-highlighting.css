@@ -65,8 +65,9 @@ code[class*='language-'] {
 }
 
 pre[class*='language-'] {
-  max-width: calc(100vw - 2rem);
+  max-width: calc(100vw - 4rem);
   overflow-x: auto;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
