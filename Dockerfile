@@ -18,13 +18,20 @@ ARG SOURCE_COMMIT
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 
-# Copy only source photos and generation script first for better caching
-# This layer will only rebuild if photos or the script changes
-COPY public/static/photography ./public/static/photography
+# Copy photo processing scripts and manifest
+COPY scripts/photo-hash.mjs ./scripts/photo-hash.mjs
 COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
 COPY package.json ./package.json
 
-# Pre-generate responsive images - cached unless photos change
+# Copy source photos - this layer rebuilds if any photo changes
+COPY public/static/photography ./public/static/photography
+
+# Pre-generate responsive images with smart hash-based caching
+# The generate-images script checks photo hash before processing:
+# - If hash matches manifest: skips generation entirely (fast!)
+# - If hash differs: regenerates only changed/new photos
+# - If no manifest exists: generates all photos
+# This avoids expensive image processing when photos haven't changed
 RUN npm run prebuild
 
 # Now copy the rest of the source code

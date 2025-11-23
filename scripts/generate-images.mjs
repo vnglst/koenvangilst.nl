@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
+import { hasPhotosChanged, generatePhotoHash, savePhotoHash } from './photo-hash.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,14 @@ async function isImageOutdated(inputPath, outputPath) {
 
 async function generateResponsiveImages() {
   console.log('🖼️  Starting image generation...');
+
+  // Check if photos have changed using hash-based caching
+  const photosChanged = await hasPhotosChanged();
+
+  if (!photosChanged) {
+    console.log('✅ All photos are up-to-date (hash matches), skipping generation');
+    return;
+  }
 
   // Create output directory
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
@@ -137,6 +146,11 @@ async function generateResponsiveImages() {
   }
 
   console.log(`✅ Image generation complete! (Processed: ${processedCount}, Skipped: ${skippedCount})`);
+
+  // Save the hash manifest for future caching
+  const manifest = await generatePhotoHash();
+  await savePhotoHash(manifest);
+  console.log(`💾 Saved photo manifest (hash: ${manifest.hash.slice(0, 8)}...)`);
 }
 
 generateResponsiveImages().catch((error) => {
