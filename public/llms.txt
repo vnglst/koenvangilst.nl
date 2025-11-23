@@ -1,0 +1,30 @@
+# Koen van Gilst
+
+> Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming. This website showcases technical articles, side projects, generative art, and photography.
+
+Koen van Gilst is a software tinkerer and web enthusiast who creates beautiful, fun, and educational projects using code. With a diverse background at the intersection of technology and humanity, he combines a philosophy degree with lifelong coding experience. Currently in a technical leadership role, Koen enables teams to innovate with AI while maintaining an active presence in web development through side projects and continuous learning.
+
+## About
+
+- [Homepage](https://koenvangilst.nl/): Introduction and background
+- [Blog & Projects](https://koenvangilst.nl/lab): Central hub for technical articles and side projects
+- [Photography](https://koenvangilst.nl/photography): Photography portfolio with EXIF data
+
+## Key Projects
+
+- [Generative Art Gallery](https://koenvangilst.nl/lab/gen-art-gallery): Creative coding and generative art showcase
+- [Prognosis 2100](https://koenvangilst.nl/lab/prognosis-2100): Interactive climate data visualization
+- [Ons Land](https://koenvangilst.nl/lab/ons-land): Dutch land usage visualization
+- [CO2 Monitor](https://koenvangilst.nl/lab/co2): Real-time CO2 monitoring project
+
+## Articles
+
+- [Side Projects](https://koenvangilst.nl/lab?q=side-project): Coding experiments and personal projects
+- [AI Articles](https://koenvangilst.nl/lab?q=AI): Articles about artificial intelligence
+- [All Articles](https://koenvangilst.nl/lab?q=article): Technical writing on web development, React, and more
+
+## Optional
+
+- [RSS Feed](https://koenvangilst.nl/feed.xml): Subscribe to blog posts and photography updates
+- [Sitemap](https://koenvangilst.nl/sitemap.xml): Full site structure
+- [robots.txt](https://koenvangilst.nl/robots.txt): Crawler directives
