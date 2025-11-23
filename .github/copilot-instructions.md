@@ -39,3 +39,17 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - Docker multi-stage builds with standalone output
 - Self-hosted analytics via Plausible (dynamic import to avoid SSR issues)
 
+## Pre-commit Checks
+
+**IMPORTANT**: Before committing code changes, ALWAYS run the following checks:
+
+```bash
+npm run type-check  # TypeScript type checking
+npm run lint        # ESLint
+npm run test        # Vitest tests
+```
+
+If any of these fail, fix the issues before committing. This ensures code quality and prevents broken builds from being deployed.
+
+**Exception**: When dependencies are not installed (e.g., in CI or lightweight environments), these checks may be skipped, but should be run in local development before pushing.
+

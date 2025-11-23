@@ -25,12 +25,16 @@ The `/llms.txt` file includes a section called "LLM Usage Feedback" that instruc
 
 - **Rate Limiting**: 10 requests per minute per IP address
 - **Input Sanitization**: All inputs are sanitized to prevent injection attacks
-- **Log Rotation**: Automatically rotates after 1000 entries
+- **Log Rotation**: Automatically rotates after 10,000 entries
 - **Size Limits**: Maximum field lengths enforced
+- **Docker Support**: Logs persist in `/data/logs` when deployed (Coolify/Docker)
 
 ### 4. Logging
 
-Logs are stored in `logs/llm-reports.jsonl` (JSONL format - one JSON object per line)
+**Local development**: Logs stored in `logs/llm-reports.jsonl`
+**Production (Docker/Coolify)**: Logs stored in `/data/logs/llm-reports.jsonl`
+
+Format: JSONL (one JSON object per line)
 
 Each log entry contains:
 - `timestamp`: ISO 8601 timestamp
@@ -77,11 +81,39 @@ wc -l logs/llm-reports.jsonl
 
 ## Log Rotation
 
-When the log file reaches 1000 entries, it automatically rotates:
-- Current log: `logs/llm-reports.jsonl`
-- Archived log: `logs/llm-reports-[timestamp].jsonl`
+When the log file reaches 10,000 entries, it automatically rotates:
+- **Local**: `logs/llm-reports.jsonl` → `logs/llm-reports-[timestamp].jsonl`
+- **Docker**: `/data/logs/llm-reports.jsonl` → `/data/logs/llm-reports-[timestamp].jsonl`
 
 Old logs are preserved and can be analyzed separately.
+
+## Docker/Coolify Deployment
+
+The application is configured to persist logs in Docker:
+
+1. **Log Location**: `/data/logs/llm-reports.jsonl` (in production)
+2. **Permissions**: Owned by `nextjs:nodejs` user
+3. **Volume**: Ensure `/data` is mounted in Coolify for persistence across deployments
+4. **Rotation**: Archives created as `/data/logs/llm-reports-[timestamp].jsonl`
+
+### Accessing Logs in Docker
+
+```bash
+# Via docker exec
+docker exec -it <container_name> cat /data/logs/llm-reports.jsonl
+
+# Via Coolify dashboard
+# Navigate to your service → Terminal, then:
+cat /data/logs/llm-reports.jsonl | tail -n 100
+
+# Copy logs out of container
+docker cp <container_name>:/data/logs/llm-reports.jsonl ./llm-reports.jsonl
+
+# View with jq for pretty printing
+docker exec -it <container_name> sh -c "cat /data/logs/llm-reports.jsonl | tail -n 50"
+```
+
+**Note**: Coolify should automatically mount `/data` as a persistent volume. Verify this in your Coolify service configuration to ensure logs persist across container restarts and deployments.
 
 ## Privacy Considerations
 

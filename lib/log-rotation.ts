@@ -2,8 +2,15 @@ import { writeFile, readFile, rename } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 
-const MAX_LOG_ENTRIES = 1000;
-const LOG_DIR = path.join(process.cwd(), 'logs');
+const MAX_LOG_ENTRIES = 10000;
+
+// Use /data/logs in production (Docker/Coolify with persistent volume)
+// Use logs/ for local development
+const LOG_DIR =
+  process.env.NODE_ENV === 'production'
+    ? '/data/logs'
+    : path.join(process.cwd(), 'logs');
+
 const LOG_FILE = path.join(LOG_DIR, 'llm-reports.jsonl');
 
 export interface LLMReport {

@@ -60,6 +60,10 @@ RUN chown nextjs:nodejs .next
 RUN mkdir -p ${NEXT_CACHE_DIR}
 RUN chown nextjs:nodejs ${NEXT_CACHE_DIR}
 
+# Create logs directory for LLM honeypot (persisted via Coolify volume)
+RUN mkdir -p /data/logs
+RUN chown nextjs:nodejs /data/logs
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
