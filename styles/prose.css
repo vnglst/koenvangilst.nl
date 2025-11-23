@@ -9,7 +9,14 @@
 }
 
 .prose pre {
-  @apply overflow-x-auto max-w-full;
+  max-width: calc(100vw - 2rem);
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .prose pre {
+    max-width: 100%;
+  }
 }
 
 .prose .anchor {

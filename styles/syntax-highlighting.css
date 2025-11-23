@@ -65,7 +65,14 @@ code[class*='language-'] {
 }
 
 pre[class*='language-'] {
-  @apply max-w-full overflow-x-auto;
+  max-width: calc(100vw - 2rem);
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  pre[class*='language-'] {
+    max-width: 100%;
+  }
 }
 
 /* Subtle scrollbar styling */
