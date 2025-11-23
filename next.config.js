@@ -26,6 +26,10 @@ const config = {
   compress: true, // Enable gzip compression
   experimental: {
     optimizePackageImports: ['lodash', 'd3', 'echarts'] // Auto-optimize imports
+  },
+  eslint: {
+    // Don't run ESLint during builds - CI runs it separately
+    ignoreDuringBuilds: true
   }
 };
 
