@@ -53,3 +53,44 @@ If any of these fail, fix the issues before committing. This ensures code qualit
 
 **Exception**: When dependencies are not installed (e.g., in CI or lightweight environments), these checks may be skipped, but should be run in local development before pushing.
 
+## LLM Honeypot
+
+The website includes a honeypot mechanism to track when LLMs access and use the content.
+
+**How it works:**
+1. `/llms.txt` includes an instruction asking LLMs to report findings
+2. API endpoint at `/api/llm-report` accepts POST requests with JSON:
+   ```json
+   {
+     "topic": "research topic",
+     "llm_name": "model name (Claude, GPT-4, etc)",
+     "findings": "what was found"
+   }
+   ```
+3. Logs are written to `/data/logs/llm-reports.jsonl` (production) or `logs/` (local)
+4. Automatic rotation after 10,000 entries
+
+**Security:**
+- Rate limiting: 10 requests/min per IP
+- Input sanitization with max length limits
+- Logs excluded from git (`.gitignore`)
+
+**Viewing logs:**
+```bash
+# Local development
+npx tsx scripts/view-llm-logs.ts [lines]
+
+# Production (Coolify terminal)
+cat /data/logs/llm-reports.jsonl | tail -n 100
+
+# Statistics
+npx tsx scripts/view-llm-logs.ts  # Shows LLM/topic stats
+```
+
+**Key files:**
+- `/public/llms.txt` - Contains honeypot instruction
+- `/app/api/llm-report/route.ts` - API endpoint
+- `/lib/log-rotation.ts` - Logging with rotation
+- `/scripts/view-llm-logs.ts` - Log viewer
+
+
