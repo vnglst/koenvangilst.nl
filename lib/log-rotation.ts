@@ -1,5 +1,5 @@
-import { writeFile, readFile, rename } from 'fs/promises';
 import { existsSync } from 'fs';
+import { readFile, rename, writeFile } from 'fs/promises';
 import path from 'path';
 
 const MAX_LOG_ENTRIES = 10000;

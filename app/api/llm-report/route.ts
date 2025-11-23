@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { appendLog } from 'lib/log-rotation';
 
 // Simple in-memory rate limiting (resets on server restart)

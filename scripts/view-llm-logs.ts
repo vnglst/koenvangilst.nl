@@ -4,8 +4,8 @@
  * Usage: npx tsx scripts/view-llm-logs.ts [number_of_lines]
  */
 
-import { readFile, stat } from 'fs/promises';
 import { existsSync } from 'fs';
+import { readFile, stat } from 'fs/promises';
 import path from 'path';
 
 const LOG_FILE = path.join(process.cwd(), 'logs', 'llm-reports.jsonl');
@@ -37,7 +37,7 @@ async function viewLogs() {
         console.log(`│ Findings: ${report.findings}`);
       }
       console.log('└─────────────────────────────────────\n');
-    } catch (e) {
+    } catch {
       console.log(`Invalid JSON: ${line}\n`);
     }
   }
@@ -56,7 +56,7 @@ async function viewLogs() {
 
       llmCounts.set(llm, (llmCounts.get(llm) || 0) + 1);
       topicCounts.set(topic, (topicCounts.get(topic) || 0) + 1);
-    } catch (e) {
+    } catch {
       // Skip invalid lines
     }
   }
