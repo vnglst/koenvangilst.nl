@@ -65,7 +65,7 @@ code[class*='language-'] {
 }
 
 pre[class*='language-'] {
-  @apply overflow-x-auto max-w-full;
+  @apply max-w-full overflow-x-auto;
 }
 
 /* Subtle scrollbar styling */

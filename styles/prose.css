@@ -1,7 +1,15 @@
 /* Prose component and typography overrides */
 
+.prose {
+  @apply min-w-0;
+}
+
 .prose svg {
   max-width: 100%;
+}
+
+.prose pre {
+  @apply overflow-x-auto max-w-full;
 }
 
 .prose .anchor {
