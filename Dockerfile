@@ -21,14 +21,7 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy package metadata
 COPY package.json ./package.json
 
-
-# Copy source photos - this layer rebuilds if any photo changes
-COPY public/static/photography ./public/static/photography
-
-# Ensure the optimized directory exists for the volume mount
-RUN mkdir -p ./public/static/photography-optimized
-
-# Now copy the rest of the source code
+# Copy the rest of the source code (excluding photos, they'll be copied in runner stage)
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -51,13 +44,23 @@ ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+RUN apk add --no-cache su-exec
 
 # Copy necessary files from builder
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/scripts ./scripts
 
-# Set permissions for directories that need write access
-RUN chown -R nextjs:nodejs /app/public/static/photography-optimized
+# Copy source photos directly (not needed in builder, only for post-deploy script)
+COPY public/static/photography ./public/static/photography
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+# Make entrypoint executable
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Ensure photography-optimized directory exists and set permissions
+RUN mkdir -p /app/public/static/photography-optimized && \
+    chown -R nextjs:nodejs /app/public/static/photography-optimized
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
@@ -70,11 +73,11 @@ RUN chown nextjs:nodejs ${NEXT_CACHE_DIR}
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-USER nextjs
-
 EXPOSE 3000
 
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+# Use entrypoint to fix volume permissions, then run as nextjs user
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
