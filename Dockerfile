@@ -22,11 +22,12 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
 COPY package.json ./package.json
 
+
 # Copy source photos - this layer rebuilds if any photo changes
 COPY public/static/photography ./public/static/photography
 
-# Pre-generate responsive images (skips any that already exist)
-RUN npm run prebuild
+# Ensure the optimized directory exists for the volume mount
+RUN mkdir -p ./public/static/photography-optimized
 
 # Now copy the rest of the source code
 COPY . .
