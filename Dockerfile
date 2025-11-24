@@ -72,7 +72,7 @@ RUN mkdir -p /app/public/static/photography-optimized && \
     chown -R nextjs:nodejs /app/public/static/photography-optimized
 
 # Set the correct permission for prerender cache
-RUN mkdir .next
+RUN mkdir -p .next
 RUN chown nextjs:nodejs .next
 RUN mkdir -p ${NEXT_CACHE_DIR}
 RUN chown nextjs:nodejs ${NEXT_CACHE_DIR}
