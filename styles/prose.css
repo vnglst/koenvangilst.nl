@@ -1,7 +1,23 @@
 /* Prose component and typography overrides */
 
+.prose {
+  @apply min-w-0;
+}
+
 .prose svg {
   max-width: 100%;
+}
+
+.prose pre {
+  max-width: calc(100vw - 4rem);
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .prose pre {
+    max-width: 100%;
+  }
 }
 
 .prose .anchor {

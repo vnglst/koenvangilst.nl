@@ -64,12 +64,42 @@ code[class*='language-'] {
   @apply border-none p-0;
 }
 
+pre[class*='language-'] {
+  max-width: calc(100vw - 4rem);
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  pre[class*='language-'] {
+    max-width: 100%;
+  }
+}
+
+/* Subtle scrollbar styling */
 pre::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+pre::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
 }
 
 pre {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgb(209 213 219) rgb(243 244 246); /* gray-300 on gray-100 */
+}
+
+.dark pre {
+  scrollbar-color: rgb(75 85 99) rgb(31 41 55); /* gray-600 on gray-800 */
 }
 
 .rehype-code-title {
@@ -81,8 +111,7 @@ pre {
 }
 
 .code-highlight {
-  float: left;
-  min-width: 100%;
+  @apply block w-full;
 }
 
 .highlight-line {
