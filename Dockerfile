@@ -56,6 +56,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/scripts ./scripts
 
+# Set permissions for directories that need write access
+RUN chown -R nextjs:nodejs /app/public/static/photography-optimized
+
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
