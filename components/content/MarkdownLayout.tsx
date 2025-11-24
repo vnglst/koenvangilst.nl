@@ -59,7 +59,7 @@ export async function MarkdownLayout({
               src={image.src}
               width={image.width}
               height={image.height}
-              className="inline-block rounded-lg"
+              className="my-5 inline-block rounded-lg"
               priority
             />
           )}
