@@ -121,12 +121,12 @@ I can view logs directly in the container:
 ```bash
 # Via Coolify terminal
 cat /data/logs/llm-reports.jsonl | tail -n 100
-```
 
-Or I wrote a TypeScript viewer that shows statistics:
+# Or with jq for pretty formatting
+cat /data/logs/llm-reports.jsonl | jq
 
-```bash
-npx tsx scripts/view-llm-logs.ts
+# Count total entries
+wc -l /data/logs/llm-reports.jsonl
 ```
 
 ## Discovery mechanisms

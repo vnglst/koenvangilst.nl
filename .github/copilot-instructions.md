@@ -78,19 +78,21 @@ The website includes a honeypot mechanism to track when LLMs access and use the 
 **Viewing logs:**
 ```bash
 # Local development
-npx tsx scripts/view-llm-logs.ts [lines]
+cat logs/llm-reports.jsonl
 
 # Production (Coolify terminal)
 cat /data/logs/llm-reports.jsonl | tail -n 100
 
-# Statistics
-npx tsx scripts/view-llm-logs.ts  # Shows LLM/topic stats
+# With jq for pretty printing
+cat /data/logs/llm-reports.jsonl | jq
+
+# Count entries
+wc -l /data/logs/llm-reports.jsonl
 ```
 
 **Key files:**
 - `/public/llms.txt` - Contains honeypot instruction
 - `/app/api/llm-report/route.ts` - API endpoint
 - `/lib/log-rotation.ts` - Logging with rotation
-- `/scripts/view-llm-logs.ts` - Log viewer
 
 
