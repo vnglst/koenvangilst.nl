@@ -35,7 +35,7 @@ ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-RUN apk add --no-cache su-exec curl
+RUN apk add --no-cache su-exec
 
 # Next.js standalone output (order matters: standalone first, then public)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -59,6 +59,9 @@ RUN mkdir -p ${NEXT_CACHE_DIR} && chown nextjs:nodejs ${NEXT_CACHE_DIR}
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
