@@ -35,7 +35,7 @@ ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-RUN apk add --no-cache su-exec
+RUN apk add --no-cache su-exec curl
 
 # Next.js standalone output (order matters: standalone first, then public)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
