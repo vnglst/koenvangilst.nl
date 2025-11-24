@@ -3,10 +3,7 @@
 .token.comment,
 .token.prolog,
 .token.doctype,
-.token.cdata {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
+.token.cdata,
 .token.punctuation {
   @apply text-gray-700 dark:text-gray-300;
 }
@@ -30,11 +27,15 @@
   @apply text-purple-500;
 }
 
+/* Yellow-highlighted syntactic elements */
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string {
+.style .token.string,
+.token.regex,
+.token.important,
+.token.variable {
   @apply text-yellow-500;
 }
 
@@ -49,11 +50,7 @@
   @apply text-pink-500;
 }
 
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500;
-}
+/* (regex, important, variable merged into yellow group above) */
 
 code[class*='language-'],
 pre[class*='language-'] {
@@ -65,7 +62,7 @@ code[class*='language-'] {
 }
 
 pre[class*='language-'] {
-  max-width: calc(100vw - 4rem);
+  max-width: 100%;
   overflow-x: auto;
   box-sizing: border-box;
 }
@@ -86,7 +83,7 @@ pre::-webkit-scrollbar-track {
 }
 
 pre::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded;
+  @apply rounded bg-gray-300 dark:bg-gray-600;
 }
 
 pre::-webkit-scrollbar-thumb:hover {
@@ -116,4 +113,12 @@ pre {
 
 .highlight-line {
   @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-3 dark:bg-gray-800;
+}
+
+.prose pre:has(.code-highlight) {
+  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
+}
+
+.prose code.code-highlight {
+  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }
