@@ -1,2 +1,6 @@
 User-agent: *
 Sitemap: https://koenvangilst.nl/sitemap.xml
+
+# LLM-specific resources
+# See https://llmstxt.org for more information
+Allow: /llms.txt

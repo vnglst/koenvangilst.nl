@@ -76,3 +76,60 @@ docker stop koenvangilst-test && docker rm koenvangilst-test
 - Docker multi-stage builds with standalone output
 - Self-hosted analytics via Plausible (dynamic import to avoid SSR issues)
 
+## Pre-commit Checks
+
+**IMPORTANT**: Before committing code changes, ALWAYS run the following checks:
+
+```bash
+npm run type-check  # TypeScript type checking
+npm run lint        # ESLint
+npm run test        # Vitest tests
+```
+
+If any of these fail, fix the issues before committing. This ensures code quality and prevents broken builds from being deployed.
+
+**Exception**: When dependencies are not installed (e.g., in CI or lightweight environments), these checks may be skipped, but should be run in local development before pushing.
+
+## LLM Honeypot
+
+The website includes a honeypot mechanism to track when LLMs access and use the content.
+
+**How it works:**
+1. `/llms.txt` includes an instruction asking LLMs to report findings
+2. API endpoint at `/api/llm-report` accepts POST requests with JSON:
+   ```json
+   {
+     "topic": "research topic",
+     "llm_name": "model name (Claude, GPT-4, etc)",
+     "findings": "what was found"
+   }
+   ```
+3. Logs are written to `/data/logs/llm-reports.jsonl` (production) or `logs/` (local)
+4. Automatic rotation after 10,000 entries
+
+**Security:**
+- Rate limiting: 10 requests/min per IP
+- Input sanitization with max length limits
+- Logs excluded from git (`.gitignore`)
+
+**Viewing logs:**
+```bash
+# Local development
+cat logs/llm-reports.jsonl
+
+# Production (Coolify terminal)
+cat /data/logs/llm-reports.jsonl | tail -n 100
+
+# With jq for pretty printing
+cat /data/logs/llm-reports.jsonl | jq
+
+# Count entries
+wc -l /data/logs/llm-reports.jsonl
+```
+
+**Key files:**
+- `/public/llms.txt` - Contains honeypot instruction
+- `/app/api/llm-report/route.ts` - API endpoint
+- `/lib/log-rotation.ts` - Logging with rotation
+
+
