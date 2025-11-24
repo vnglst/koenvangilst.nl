@@ -1,44 +1,29 @@
-# Multi-stage build for optimal image size and build speed
 ARG SOURCE_COMMIT=unknown
 FROM node:24-alpine AS base
 
-# Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-# Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
 	npm ci
 
-# Rebuild the source code only when needed
 FROM base AS builder
 ARG SOURCE_COMMIT
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-
-# Copy only source photos and generation script first for better caching
-# This layer will only rebuild if photos or the script changes
-COPY public/static/photography ./public/static/photography
-COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
 COPY package.json ./package.json
 
-# Pre-generate responsive images - cached unless photos change
-RUN npm run prebuild
-
-# Now copy the rest of the source code
+# Photos copied in runner stage only (not needed for build)
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
-# Build Next.js (prebuild already ran, so it will skip image generation)
 RUN --mount=type=cache,target=/app/.next/cache \
 	--mount=type=cache,target=/app/node_modules/.cache \
 	npm run build
 
-# Production image, copy all the files and run next
 FROM base AS runner
 ARG SOURCE_COMMIT
 WORKDIR /app
@@ -50,26 +35,30 @@ ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+RUN apk add --no-cache su-exec
 
-# Copy necessary files from builder
-COPY --from=builder /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-RUN mkdir -p ${NEXT_CACHE_DIR}
-RUN chown nextjs:nodejs ${NEXT_CACHE_DIR}
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
+# Next.js standalone output (order matters: standalone first, then public)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-USER nextjs
+# Source photos for post-deploy image generation
+COPY public/static/photography ./public/static/photography
+COPY --from=builder /app/scripts ./scripts
+
+# Entrypoint fixes volume permissions at runtime
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Set permissions for writable directories
+RUN mkdir -p /app/public/static/photography-optimized && \
+    chown -R nextjs:nodejs /app/public/static/photography-optimized
+RUN mkdir -p .next && chown nextjs:nodejs .next
+RUN mkdir -p ${NEXT_CACHE_DIR} && chown nextjs:nodejs ${NEXT_CACHE_DIR}
 
 EXPOSE 3000
-
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
