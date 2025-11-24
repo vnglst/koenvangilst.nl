@@ -23,6 +23,9 @@ COPY scripts/photo-hash.mjs ./scripts/photo-hash.mjs
 COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
 COPY package.json ./package.json
 
+# Copy the photo manifest for hash-based caching
+COPY .photo-manifest.json ./
+
 # Copy source photos - this layer rebuilds if any photo changes
 COPY public/static/photography ./public/static/photography
 
