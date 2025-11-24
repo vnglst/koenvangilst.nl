@@ -22,9 +22,9 @@ export async function generatePhotoHash() {
     files.map(async (filename) => {
       const filePath = path.join(INPUT_DIR, filename);
       const stats = await fs.stat(filePath);
-      // Use filename, size, and mtime for hash
-      // This is faster than hashing entire file contents
-      return `${filename}:${stats.size}:${stats.mtimeMs}`;
+      // Use filename and size for hash (stable across Docker COPY operations)
+      // Don't use mtime as Docker changes it when copying files
+      return `${filename}:${stats.size}`;
     })
   );
 
