@@ -1,7 +1,17 @@
 /* Prose component and typography overrides */
 
+.prose {
+  @apply min-w-0;
+}
+
 .prose svg {
   max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .prose pre {
+    max-width: 100%;
+  }
 }
 
 .prose .anchor {
@@ -25,12 +35,4 @@
 
 .prose a {
   @apply transition-all;
-}
-
-.prose pre:has(.code-highlight) {
-  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
-}
-
-.prose code.code-highlight {
-  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }

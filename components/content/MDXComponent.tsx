@@ -15,8 +15,8 @@ function RoundedImage({ alt, ...props }: ComponentProps<typeof Image>) {
 
 export function Disclaimer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
-      {children}
+    <div className="overflow-x-auto rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
+      <div className="min-w-0">{children}</div>
     </div>
   );
 }
@@ -32,19 +32,10 @@ function Waypoint({ href }: { href: string }) {
   );
 }
 
-type MDXComponentProps = {
-  additionalComponents?: Record<string, React.ComponentType>;
-  code: string;
-};
+type MDXComponentProps = { additionalComponents?: Record<string, React.ComponentType>; code: string };
 
 export function MDXComponent({ additionalComponents, code }: MDXComponentProps) {
-  const components = {
-    Image: RoundedImage,
-    a: Link,
-    Disclaimer,
-    Waypoint,
-    ...additionalComponents
-  };
+  const components = { Image: RoundedImage, a: Link, Disclaimer, Waypoint, ...additionalComponents };
 
   const Cmp = getMDXComponent(code);
   return <Cmp components={components} />;

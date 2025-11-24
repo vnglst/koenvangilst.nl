@@ -3,10 +3,7 @@
 .token.comment,
 .token.prolog,
 .token.doctype,
-.token.cdata {
-  @apply text-gray-700 dark:text-gray-300;
-}
-
+.token.cdata,
 .token.punctuation {
   @apply text-gray-700 dark:text-gray-300;
 }
@@ -30,11 +27,15 @@
   @apply text-purple-500;
 }
 
+/* Yellow-highlighted syntactic elements */
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string {
+.style .token.string,
+.token.regex,
+.token.important,
+.token.variable {
   @apply text-yellow-500;
 }
 
@@ -49,11 +50,7 @@
   @apply text-pink-500;
 }
 
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500;
-}
+/* (regex, important, variable merged into yellow group above) */
 
 code[class*='language-'],
 pre[class*='language-'] {
@@ -64,12 +61,42 @@ code[class*='language-'] {
   @apply border-none p-0;
 }
 
+pre[class*='language-'] {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  pre[class*='language-'] {
+    max-width: 100%;
+  }
+}
+
+/* Subtle scrollbar styling */
 pre::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+pre::-webkit-scrollbar-thumb {
+  @apply rounded bg-gray-300 dark:bg-gray-600;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
 }
 
 pre {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgb(209 213 219) rgb(243 244 246); /* gray-300 on gray-100 */
+}
+
+.dark pre {
+  scrollbar-color: rgb(75 85 99) rgb(31 41 55); /* gray-600 on gray-800 */
 }
 
 .rehype-code-title {
@@ -81,10 +108,17 @@ pre {
 }
 
 .code-highlight {
-  float: left;
-  min-width: 100%;
+  @apply block w-full;
 }
 
 .highlight-line {
   @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-3 dark:bg-gray-800;
+}
+
+.prose pre:has(.code-highlight) {
+  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
+}
+
+.prose code.code-highlight {
+  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
 }
