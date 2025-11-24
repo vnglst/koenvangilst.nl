@@ -9,6 +9,7 @@
     "node": ">=24"
   },
   "scripts": {
+    "predev": "node scripts/generate-images.mjs",
     "build": "next build",
     "dev": "next dev",
     "start": "next start",

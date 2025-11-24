@@ -18,8 +18,7 @@ ARG SOURCE_COMMIT
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 
-# Copy image generation script and package metadata
-COPY scripts/generate-images.mjs ./scripts/generate-images.mjs
+# Copy package metadata
 COPY package.json ./package.json
 
 
