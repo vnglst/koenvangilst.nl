@@ -27,7 +27,7 @@ export function Container({
               <Link href="/">Koen van Gilst</Link>
             </div>
           )}
-          <div className="w-full md:w-9/12">{children}</div>
+          <div className="w-full min-w-0 md:w-9/12">{children}</div>
           {footer && <Footer />}
         </Suspense>
       </Main>
