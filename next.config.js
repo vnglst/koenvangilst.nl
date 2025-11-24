@@ -26,7 +26,9 @@ const config = {
   compress: true, // Enable gzip compression
   experimental: {
     optimizePackageImports: ['lodash', 'd3', 'echarts'] // Auto-optimize imports
-  }
+  },
+  // Ensure sharp is included in standalone build for post-deploy script
+  serverExternalPackages: ['sharp']
 };
 
 export default config;
