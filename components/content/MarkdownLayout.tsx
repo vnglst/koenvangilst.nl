@@ -40,7 +40,7 @@ export async function MarkdownLayout({
 }: Props) {
   return (
     <Container showTitle={false}>
-      <article>
+      <article className="w-full max-w-[700px]">
         <header>
           <Heading level={1}>{title}</Heading>
           <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
