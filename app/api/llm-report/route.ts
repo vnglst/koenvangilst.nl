@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { appendLog } from 'lib/log-rotation';
-
-// Simple in-memory rate limiting (resets on server restart)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 10;
+// Plausible Analytics configuration
+const PLAUSIBLE_ENDPOINT = 'https://plausible.koenvangilst.nl/api/event';
+const PLAUSIBLE_DOMAIN = 'koenvangilst.nl';
 
 /**
  * Get client IP from request
@@ -26,67 +23,55 @@ function getClientIP(request: NextRequest): string {
 }
 
 /**
- * Check rate limit for IP
+ * Send event to Plausible Analytics
  */
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetTime) {
-    // Create new record or reset
-    rateLimitMap.set(ip, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW
+async function sendToPlausible(data: {
+  ip: string;
+  topic: string;
+  llmName: string;
+  findings: string;
+  userAgent: string;
+}): Promise<void> {
+  try {
+    await fetch(PLAUSIBLE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': data.userAgent,
+        'X-Forwarded-For': data.ip
+      },
+      body: JSON.stringify({
+        name: 'LLM Report',
+        url: 'https://koenvangilst.nl/api/llm-report',
+        domain: PLAUSIBLE_DOMAIN,
+        props: {
+          topic: data.topic,
+          llm_name: data.llmName,
+          findings: data.findings.slice(0, 500) // Limit findings length
+        }
+      })
     });
-    return true;
+  } catch (error) {
+    console.error('Failed to send event to Plausible:', error);
+    // Don't throw - we don't want to fail the request if analytics fails
   }
-
-  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
-    return false;
-  }
-
-  record.count++;
-  return true;
 }
 
 /**
- * Clean up old rate limit entries periodically
+ * Handle any HTTP method and send event to Plausible
  */
-function cleanupRateLimits() {
-  const now = Date.now();
-  for (const [ip, record] of rateLimitMap.entries()) {
-    if (now > record.resetTime) {
-      rateLimitMap.delete(ip);
-    }
-  }
-}
-
-// Cleanup every 5 minutes
-setInterval(cleanupRateLimits, 5 * 60 * 1000);
-
-export async function POST(request: NextRequest) {
+async function handleRequest(request: NextRequest) {
   try {
     const ip = getClientIP(request);
 
-    // Check rate limit
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Rate limit exceeded. Please try again later.'
-        },
-        { status: 429 }
-      );
-    }
-
-    // Parse request body
+    // Parse request body (if present)
     const body = await request.json().catch(() => ({}));
 
     // Extract and validate data
     const { topic, llm_name, findings } = body;
 
-    // Log the report
-    await appendLog({
+    // Send the report to Plausible Analytics
+    await sendToPlausible({
       ip,
       topic: topic || 'not specified',
       llmName: llm_name || 'unknown',
@@ -114,16 +99,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Handle GET requests (optional - for debugging)
-export async function GET() {
-  return NextResponse.json({
-    message: 'LLM Report endpoint is active. Please use POST to submit reports.',
-    endpoint: '/api/llm-report',
-    method: 'POST',
-    expectedFields: {
-      topic: 'string - The topic or subject you were researching',
-      llm_name: 'string - The name of the LLM (e.g., Claude, GPT-4, etc.)',
-      findings: 'string - Brief description of what information was found'
-    }
-  });
-}
+// Export for all HTTP methods
+export const GET = handleRequest;
+export const POST = handleRequest;
+export const PUT = handleRequest;

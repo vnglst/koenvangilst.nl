@@ -55,7 +55,6 @@ RUN mkdir -p /app/public/static/photography-optimized && \
     chown -R nextjs:nodejs /app/public/static/photography-optimized
 RUN mkdir -p .next && chown nextjs:nodejs .next
 RUN mkdir -p ${NEXT_CACHE_DIR} && chown nextjs:nodejs ${NEXT_CACHE_DIR}
-RUN mkdir -p /data/logs && chown nextjs:nodejs /data/logs
 
 EXPOSE 3000
 ENV PORT=3000

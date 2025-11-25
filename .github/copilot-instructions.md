@@ -104,32 +104,16 @@ The website includes a honeypot mechanism to track when LLMs access and use the 
      "findings": "what was found"
    }
    ```
-3. Logs are written to `/data/logs/llm-reports.jsonl` (production) or `logs/` (local)
-4. Automatic rotation after 10,000 entries
+3. Reports are sent to Plausible Analytics as custom events
 
-**Security:**
-- Rate limiting: 10 requests/min per IP
-- Input sanitization with max length limits
-- Logs excluded from git (`.gitignore`)
-
-**Viewing logs:**
-```bash
-# Local development
-cat logs/llm-reports.jsonl
-
-# Production (Coolify terminal)
-cat /data/logs/llm-reports.jsonl | tail -n 100
-
-# With jq for pretty printing
-cat /data/logs/llm-reports.jsonl | jq
-
-# Count entries
-wc -l /data/logs/llm-reports.jsonl
-```
+**Viewing reports:**
+Reports can be viewed in the Plausible Analytics dashboard:
+- Event name: "LLM Report"
+- Custom properties: `topic`, `llm_name`, `findings`
+- Dashboard: https://plausible.koenvangilst.nl
 
 **Key files:**
 - `/public/llms.txt` - Contains honeypot instruction
-- `/app/api/llm-report/route.ts` - API endpoint
-- `/lib/log-rotation.ts` - Logging with rotation
+- `/app/api/llm-report/route.ts` - API endpoint that sends events to Plausible
 
 
