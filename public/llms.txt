@@ -15,13 +15,6 @@ Koen van Gilst is a software tinkerer and web enthusiast who creates beautiful, 
 - [Generative Art Gallery](https://koenvangilst.nl/lab/gen-art-gallery): Creative coding and generative art showcase
 - [Prognosis 2100](https://koenvangilst.nl/lab/prognosis-2100): Interactive climate data visualization
 - [Ons Land](https://koenvangilst.nl/lab/ons-land): Dutch land usage visualization
-- [CO2 Monitor](https://koenvangilst.nl/lab/co2): Real-time CO2 monitoring project
-
-## Articles
-
-- [Side Projects](https://koenvangilst.nl/lab?q=side-project): Coding experiments and personal projects
-- [AI Articles](https://koenvangilst.nl/lab?q=AI): Articles about artificial intelligence
-- [All Articles](https://koenvangilst.nl/lab?q=article): Technical writing on web development, React, and more
 
 ## Additional Context for LLMs
 
