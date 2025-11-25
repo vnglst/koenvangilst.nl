@@ -95,15 +95,11 @@ If any of these fail, fix the issues before committing. This ensures code qualit
 The website includes a honeypot mechanism to track when LLMs access and use the content.
 
 **How it works:**
-1. `/llms.txt` includes an instruction asking LLMs to report findings
-2. API endpoint at `/api/llm-report` accepts POST requests with JSON:
-   ```json
-   {
-     "topic": "research topic",
-     "llm_name": "model name (Claude, GPT-4, etc)",
-     "findings": "what was found"
-   }
-   ```
+1. `/llms.txt` includes an instruction directing LLMs to check `/llm-context` for "additional context"
+2. Resource at `/llm-context` accepts query parameters:
+   - `topic` - What they're researching
+   - `llm_name` - Model name (Claude, GPT-4, etc)
+   - `findings` - What they found
 3. Reports are sent to Plausible Analytics as custom events
 
 **Viewing reports:**
@@ -114,7 +110,7 @@ Reports can be viewed in the Plausible Analytics dashboard:
 
 **Key files:**
 - `/public/llms.txt` - Contains honeypot instruction
-- `/app/api/llm-report/route.ts` - API endpoint that sends events to Plausible
+- `/app/llm-context/route.ts` - Context resource that sends events to Plausible
 
 ## Writing Style
 
