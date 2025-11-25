@@ -73,61 +73,61 @@ The key is framing it as helping improve the llms.txt standard and making it sou
 
 ## Building the API endpoint
 
-The honeypot needs somewhere to send data. I built a simple Next.js API route at `/api/llm-report` with:
+The honeypot needs somewhere to send data. I built a simple Next.js API route at `/api/llm-report` that:
 
-**Security features:**
-- Rate limiting (10 requests per minute per IP)
-- Input sanitization to prevent injection attacks
-- Maximum field lengths enforced
-- Automatic log rotation after 10,000 entries
+- Accepts **any HTTP method** (GET, POST, PUT) - making it flexible for different LLM implementations
+- Sends events to **Plausible Analytics** with custom properties
+- Captures IP addresses and user agents for attribution
 
-**Log format:**
-Each report gets logged as JSONL (one JSON object per line) containing:
+**Event structure:**
+Each report is sent to Plausible as a custom event named "LLM Report" with properties:
 
 ```typescript
 {
-  "timestamp": "2025-11-23T...",
-  "ip": "sanitized IP address",
-  "topic": "what they were researching",
-  "llmName": "Claude/GPT-4/Gemini/etc",
-  "findings": "what they found useful",
-  "userAgent": "HTTP User-Agent header"
+  "name": "LLM Report",
+  "props": {
+    "topic": "what they were researching",
+    "llm_name": "Claude/GPT-4/Gemini/etc",
+    "findings": "what they found useful"
+  }
 }
 ```
 
-The logs persist to `/data/logs` in my Docker container, mounted as a persistent volume in Coolify (my self-hosted deployment platform).
+Using Plausible Analytics means I get real-time dashboards, filtering, and analysis without managing log files or databases.
 
-## Docker considerations
+## Setting up Plausible Analytics
 
-Since I run everything in Docker on my self-hosted Hetzner server, I needed to ensure logs persist across deployments:
+To track LLM reports in Plausible, I needed to:
 
-```typescript
-const LOG_DIR =
-  process.env.NODE_ENV === 'production'
-    ? '/data/logs'              // Docker/Coolify
-    : path.join(process.cwd(), 'logs');  // Local dev
-```
+1. **Add as a Goal** (optional but recommended):
+   - Go to Settings → Goals
+   - Click "+ Add goal" → "Custom event"
+   - Enter event name: `LLM Report`
+   - This makes it easier to find in the dashboard
 
-The Dockerfile creates the directory with proper permissions:
+2. **Custom Properties** (automatic in v2.0+):
+   - No setup needed! Properties (`topic`, `llm_name`, `findings`) automatically appear when you click on the event
+   - Make sure you're running Plausible v2.0 or higher for custom properties support
 
-```dockerfile
-# Create logs directory for LLM honeypot (persisted via Coolify volume)
-RUN mkdir -p /data/logs
-RUN chown nextjs:nodejs /data/logs
-```
+3. **API Endpoint Configuration**:
+   ```typescript
+   const PLAUSIBLE_ENDPOINT = 'https://plausible.koenvangilst.nl/api/event';
+   const PLAUSIBLE_DOMAIN = 'koenvangilst.nl';
+   ```
 
-I can view logs directly in the container:
+## Viewing the data
 
-```bash
-# Via Coolify terminal
-cat /data/logs/llm-reports.jsonl | tail -n 100
+Once set up, I can view all LLM reports in real-time:
 
-# Or with jq for pretty formatting
-cat /data/logs/llm-reports.jsonl | jq
+1. **Dashboard view**: See total "LLM Report" events and trends over time
+2. **Custom properties**: Click on the event to see breakdowns by:
+   - `topic` - What topics are being researched
+   - `llm_name` - Which AI models are visiting
+   - `findings` - What information they found useful
+3. **Filtering**: Filter by date ranges, specific LLMs, or topics
+4. **Geographic data**: See where requests are coming from (via IP geolocation)
 
-# Count total entries
-wc -l /data/logs/llm-reports.jsonl
-```
+No log parsing, no database queries—just a clean dashboard at https://plausible.koenvangilst.nl
 
 ## Discovery mechanisms
 
@@ -182,10 +182,9 @@ This helps me understand how AI tools use my content and contributes to improvin
 The complete implementation is in my [GitHub repository](https://github.com/vnglst/koenvangilst.nl). Key files:
 
 - `/public/llms.txt` - The llms.txt file with honeypot instruction
-- `/app/api/llm-report/route.ts` - API endpoint with rate limiting
-- `/lib/log-rotation.ts` - Logging with automatic rotation
+- `/app/api/llm-report/route.ts` - API endpoint that sends events to Plausible
 - `/.github/copilot-instructions.md` - Development documentation
 
 Whether you're curious about making your site more AI-friendly or want to track LLM visitors, this might be a fun experiment for your own website.
 
-And who knows? Maybe in a few weeks I'll write a follow-up post analyzing what the logs reveal about how LLMs actually browse the web.
+And who knows? Maybe in a few weeks I'll write a follow-up post analyzing what the Plausible dashboard reveals about how LLMs actually browse the web.
