@@ -67,8 +67,16 @@ async function handleRequest(request: NextRequest) {
     // Parse request body (if present)
     const body = await request.json().catch(() => ({}));
 
-    // Extract and validate data
-    const { topic, llm_name, findings } = body;
+    // Extract from query parameters (preferred for GET requests)
+    const { searchParams } = new URL(request.url);
+    const topicParam = searchParams.get('topic');
+    const llmNameParam = searchParams.get('llm_name');
+    const findingsParam = searchParams.get('findings');
+
+    // Extract and validate data - prefer query params over body
+    const topic = topicParam || body.topic;
+    const llm_name = llmNameParam || body.llm_name;
+    const findings = findingsParam || body.findings;
 
     // Send the report to Plausible Analytics
     await sendToPlausible({
