@@ -116,4 +116,10 @@ Reports can be viewed in the Plausible Analytics dashboard:
 - `/public/llms.txt` - Contains honeypot instruction
 - `/app/api/llm-report/route.ts` - API endpoint that sends events to Plausible
 
+## Writing Style
 
+When writing or editing blog posts and documentation:
+
+- **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
+- **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
+- **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌
