@@ -42,7 +42,7 @@ async function sendToPlausible(data: {
       },
       body: JSON.stringify({
         name: 'LLM Report',
-        url: 'https://koenvangilst.nl/api/llm-report',
+        url: 'https://koenvangilst.nl/llm-context',
         domain: PLAUSIBLE_DOMAIN,
         props: {
           topic: data.topic,
