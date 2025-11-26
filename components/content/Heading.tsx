@@ -23,7 +23,7 @@ export function Heading({
       className += 'my-3 text-3xl md:text-4xl';
       break;
     case 2:
-      className += 'my-3 text-xl md:text-2xl font-sans font-medium';
+      className += 'my-3 my-3 text-xl md:text-2xl font-sans font-medium';
       break;
     default:
       className += 'my-3 text-lg md:text-xl font-sans font-medium';
