@@ -29,11 +29,18 @@ export default async function Home() {
         </p>
 
         <p>
-          In my spare time, I enjoy coding side projects that often complement my professional 
+          In my spare time, I enjoy coding side projects that often complement my professional
           work - a great way to stay up to date with trends and keep learning. On this
           website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
           <Link href="/lab?q=article">articles</Link>, and <Link href="/lab/gen-art-gallery">generative art</Link> from
           over the years.
+        </p>
+
+        <p>
+          I'm particularly proud of two recent projects: <Link href="https://pelican.koenvangilst.nl">Pelican</Link>,
+          which tracks how AI models have evolved in recreating famous artworks using only SVG code, and{' '}
+          <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive visualization exploring
+          land use across the Netherlands.
         </p>
       </Prose>
     </Container>
