@@ -32,7 +32,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="my-16 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
+    <footer className="my-16 text-sm text-gray-400 dark:text-gray-500">
       <div className="mb-2 flex items-center justify-between">
         <div>© {currentYear} Koen van Gilst</div>
         <div className="flex space-x-2">
