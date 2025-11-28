@@ -54,8 +54,8 @@ export function Sidebar() {
                     href={item.href}
                     aria-current={isActive(item.href) ? 'page' : undefined}
                     className={cx(
-                      'py-1 text-sm font-medium whitespace-nowrap transition-opacity md:pl-3',
-                      'before:mr-2 before:hidden before:h-1 before:w-1 before:rounded-full before:transition-opacity md:before:inline-block',
+                      'py-1.5 text-base font-medium whitespace-nowrap transition-opacity md:pl-3',
+                      'before:mr-2 before:hidden before:h-1.5 before:w-1.5 before:rounded-full before:transition-opacity md:before:inline-block',
                       isActive(item.href)
                         ? 'text-primary dark:text-primary before:bg-primary before:opacity-100'
                         : 'text-gray-800 before:opacity-0 hover:opacity-70 dark:text-gray-300'
