@@ -1,3 +1,4 @@
+import { Heading } from 'components/content/Heading';
 import { Prose } from 'components/content/Prose';
 import { Container } from 'components/layout/Container';
 import { Link } from 'components/ui/Link';
@@ -13,6 +14,7 @@ export async function generateMetadata() {
 export default async function Home() {
   return (
     <Container>
+      <Heading level={1}>Koen van Gilst</Heading>
       <Prose>
         <p>
           I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
