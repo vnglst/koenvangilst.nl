@@ -3,6 +3,7 @@ import { PropsWithChildren, Suspense } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Main } from './Main';
+import { Sidebar } from './Sidebar';
 
 type ContainerProps = {
   footer?: boolean;
@@ -11,11 +12,15 @@ type ContainerProps = {
 export function Container({ children, footer = true }: PropsWithChildren<ContainerProps>) {
   return (
     <>
+      {/* Mobile header only */}
       <Header />
-      <div className="mx-auto max-w-5xl px-4 pt-24 pb-16 md:px-6 md:pt-32">
+
+      {/* Desktop layout with sidebar */}
+      <div className="mx-4 mt-20 mb-40 flex max-w-4xl flex-col md:mt-20 md:flex-row lg:mx-auto lg:mt-32">
+        <Sidebar />
         <Main>
           <Suspense>
-            <div className="w-full">{children}</div>
+            <div className="w-full md:w-9/12">{children}</div>
             {footer && <Footer />}
           </Suspense>
         </Main>
