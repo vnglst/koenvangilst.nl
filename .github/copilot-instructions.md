@@ -31,13 +31,17 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - **Build optimization**: BuildKit cache mounts are configured for `/app/.next/cache` with persistent IDs
 - **Expected build time**: ~4 minutes (3.7min Turbopack compilation + deps/checks) - this is normal for Next.js 16 on the server
 
+### Coolify Configuration
+
+Enable "Include Source Commit in Build" in Advanced settings to display commit hash in footer.
+
 ## Testing Docker Builds Locally
 
 Before deploying to Coolify, test the Docker build locally:
 
 ### Build the image
 ```bash
-docker build -t koenvangilst-test .
+docker build --build-arg SOURCE_COMMIT=$(git rev-parse HEAD) -t koenvangilst-test .
 ```
 
 ### Run the container

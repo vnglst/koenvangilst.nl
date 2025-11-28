@@ -1,4 +1,5 @@
-ARG SOURCE_COMMIT=unknown
+ARG COMMIT_SHA=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA}
 FROM node:24-alpine AS base
 
 FROM base AS deps
@@ -9,7 +10,8 @@ RUN --mount=type=cache,target=/root/.npm \
 	npm ci
 
 FROM base AS builder
-ARG SOURCE_COMMIT
+ARG COMMIT_SHA=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA}
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json ./package.json
@@ -17,21 +19,16 @@ COPY package.json ./package.json
 # Photos copied in runner stage only (not needed for build)
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV SOURCE_COMMIT=${SOURCE_COMMIT}
-
 RUN --mount=type=cache,target=/app/.next/cache \
 	--mount=type=cache,target=/app/node_modules/.cache \
-	npm run build
+	NEXT_TELEMETRY_DISABLED=1 SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
 
 FROM base AS runner
-ARG SOURCE_COMMIT
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_CACHE_DIR=/data/cache
-ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
