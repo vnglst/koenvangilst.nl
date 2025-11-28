@@ -37,8 +37,8 @@ export default async function Home() {
         </p>
 
         <p>
-          I'm particularly proud of two recent projects: <Link href="https://pelican.koenvangilst.nl">Pelican</Link>,
-          which tracks how AI models have evolved in recreating famous artworks using only SVG code, and{' '}
+          I'm particularly proud of two recent projects: <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link>,
+          a gallery showcasing how AI models from 2022 to 2025 have evolved in recreating famous artworks using SVG, and{' '}
           <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive visualization exploring
           land use across the Netherlands.
         </p>
