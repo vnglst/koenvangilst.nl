@@ -17,7 +17,7 @@ export default async function Photography() {
   const photos = await getPhotos();
 
   return (
-    <Container footer>
+    <Container footer wide>
       <PhotoGallery photos={photos} />
     </Container>
   );

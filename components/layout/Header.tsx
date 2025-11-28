@@ -1,10 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import Avatar from 'app/avatar.jpg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
 import { ThemeToggleText } from 'components/theme/ThemeToggleText';
 import { cx } from 'lib/clsx';
@@ -27,7 +27,7 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md md:hidden dark:border-gray-800 dark:bg-slate-950/80">
+    <header className="fixed top-0 right-0 left-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md md:hidden dark:border-gray-800 dark:bg-slate-950/80">
       <div className="mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo and Name */}
@@ -40,9 +40,6 @@ export function Header() {
               className="rounded-full grayscale filter"
               priority
             />
-            <span className="nimbus hidden text-base font-bold uppercase tracking-wide sm:inline">
-              Koen van Gilst
-            </span>
           </Link>
 
           {/* Right side: Theme toggle and mobile menu */}
@@ -65,11 +62,7 @@ export function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                {mobileMenuOpen ? (
-                  <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
+                {mobileMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
               </svg>
             </button>
           </div>

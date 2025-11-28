@@ -86,12 +86,12 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   return (
     <>
       {/* Photo Grid */}
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:auto-rows-[300px]">
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {photos.map((photo, index) => (
           <button
             key={photo.id}
             onClick={() => setSelectedIndex(index)}
-            className={`relative block aspect-square md:aspect-auto ${photo.isVertical ? 'row-span-2' : 'row-span-1'}`}
+            className="relative block aspect-square"
           >
             <picture>
               <source
