@@ -1,4 +1,5 @@
-ARG SOURCE_COMMIT=${COMMIT_SHA:-unknown}
+ARG COMMIT_SHA=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA}
 FROM node:24-alpine AS base
 
 FROM base AS deps
@@ -9,7 +10,8 @@ RUN --mount=type=cache,target=/root/.npm \
 	npm ci
 
 FROM base AS builder
-ARG SOURCE_COMMIT
+ARG COMMIT_SHA=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA}
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json ./package.json
@@ -25,7 +27,8 @@ RUN --mount=type=cache,target=/app/.next/cache \
 	npm run build
 
 FROM base AS runner
-ARG SOURCE_COMMIT
+ARG COMMIT_SHA=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA}
 WORKDIR /app
 
 ENV NODE_ENV=production
