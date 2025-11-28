@@ -33,15 +33,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 
 ### Coolify Configuration
 
-**IMPORTANT**: To display the commit hash in the website footer, you must enable "Include Source Commit in Build" in Coolify:
-
-1. Go to your application in Coolify
-2. Navigate to **Advanced** settings
-3. Enable **"Include Source Commit in Build"**
-
-This setting passes `SOURCE_COMMIT` as a build argument. It's disabled by default in Coolify to preserve Docker build cache between commits, but is required for the commit hash to be embedded in the Next.js build.
-
-**Trade-off**: Enabling this will invalidate Docker cache on every commit (since the hash changes), which may slightly increase build times (~30s-1min), but is necessary for displaying the commit hash on the website.
+Enable "Include Source Commit in Build" in Advanced settings to display commit hash in footer.
 
 ## Testing Docker Builds Locally
 

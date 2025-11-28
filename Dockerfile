@@ -19,22 +19,16 @@ COPY package.json ./package.json
 # Photos copied in runner stage only (not needed for build)
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV SOURCE_COMMIT=${SOURCE_COMMIT}
-
 RUN --mount=type=cache,target=/app/.next/cache \
 	--mount=type=cache,target=/app/node_modules/.cache \
-	npm run build
+	NEXT_TELEMETRY_DISABLED=1 SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
 
 FROM base AS runner
-ARG COMMIT_SHA=unknown
-ARG SOURCE_COMMIT=${COMMIT_SHA}
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_CACHE_DIR=/data/cache
-ENV SOURCE_COMMIT=${SOURCE_COMMIT}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
