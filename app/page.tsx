@@ -17,7 +17,7 @@ export default async function Home() {
       <Heading level={1}>Koen van Gilst</Heading>
       <Prose>
         <p>
-          I'm a software tinkerer and web enthusiast who loves bringing beautiful, fun, and educational creations to
+          I'm a software engineer and web enthusiast who loves bringing beautiful, fun, and educational creations to
           life using code.
         </p>
 
