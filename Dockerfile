@@ -1,4 +1,4 @@
-ARG SOURCE_COMMIT=unknown
+ARG SOURCE_COMMIT=${COMMIT_SHA:-unknown}
 FROM node:24-alpine AS base
 
 FROM base AS deps

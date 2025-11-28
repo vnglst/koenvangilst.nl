@@ -33,14 +33,11 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 
 ### Coolify Configuration
 
-**IMPORTANT**: In Coolify, configure the following build argument to display the commit hash on the website:
+The Dockerfile automatically uses Coolify's `COMMIT_SHA` environment variable to embed the git commit hash during build time. This is displayed in the footer of the website without any manual configuration required.
 
+If you need to override this (e.g., for testing), you can set a custom build argument:
 - **Build Argument**: `SOURCE_COMMIT`
-- **Value**: Set to the Coolify environment variable `$COMMIT_SHA` (Coolify automatically provides this)
-- **Location**: In Coolify UI, go to your application → Build → Build Arguments
-- **Format**: `SOURCE_COMMIT=$COMMIT_SHA`
-
-This ensures the git commit hash is embedded during build time and displayed in the footer of the website.
+- **Value**: Your custom commit hash
 
 ## Testing Docker Builds Locally
 
