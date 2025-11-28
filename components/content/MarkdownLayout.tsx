@@ -39,7 +39,7 @@ export async function MarkdownLayout({
   additionalComponents
 }: Props) {
   return (
-    <Container showTitle={false}>
+    <Container>
       <article className="w-full max-w-[700px]">
         <header>
           <Heading level={1}>{title}</Heading>

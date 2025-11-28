@@ -1,5 +1,6 @@
 import { getPosts } from 'cms/mdx-parser';
 
+import { Heading } from 'components/content/Heading';
 import { Prose } from 'components/content/Prose';
 import { Container } from 'components/layout/Container';
 
@@ -18,6 +19,7 @@ export default async function Labs() {
 
   return (
     <Container>
+      <Heading level={1}>Articles & Experiments</Heading>
       <Prose>
         <p>
           Below, you'll find a collection of coding experiments, blog posts and side projects I've been thinkering with.
