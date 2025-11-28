@@ -16,7 +16,7 @@ export function NavItem({ slug, text }: { slug: string; text: string }) {
         isActive
           ? 'bg-gray-200 font-semibold text-gray-800 ring-primary dark:bg-gray-700 dark:text-gray-200'
           : 'font-normal text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
-        'inline-block rounded-lg px-5 py-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300'
+        'inline-block rounded-lg px-5 py-3 text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300'
       )}
     >
       {text}
@@ -35,7 +35,7 @@ export function NavItemHome() {
         'mr-auto rounded-lg px-5 py-3 font-normal text-gray-600 ring-primary transition-all hover:ring-2 dark:text-gray-400'
       }
     >
-      <svg height="24" width="24" role="img" viewBox="0 0 640 512" aria-label="terminal with blinking cursor">
+      <svg height="28" width="28" role="img" viewBox="0 0 640 512" aria-label="terminal with blinking cursor">
         <path
           className={cx(isActive ? 'text-primary' : 'text-gray-600 dark:text-gray-400')}
           fill="currentColor"
