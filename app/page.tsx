@@ -39,8 +39,8 @@ export default async function Home() {
         <p>
           I'm particularly proud of two recent projects: <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link>,
           a gallery showcasing how AI models from 2022 to 2025 have evolved in recreating famous artworks using SVG, and{' '}
-          <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive visualization exploring
-          land use across the Netherlands.
+          <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive hexagonal map visualization
+          comparing land use across European countries.
         </p>
       </Prose>
     </Container>
