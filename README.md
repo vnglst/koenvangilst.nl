@@ -107,3 +107,17 @@ Visit `http://localhost:3000` to see the site in development mode.
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run type-check` - TypeScript type checking
+
+## Docker Deployment
+
+To build and run the application in Docker:
+
+```bash
+# Build the image with the current commit hash
+docker build --build-arg SOURCE_COMMIT=$(git rev-parse HEAD) -t koenvangilst .
+
+# Run the container
+docker run -d -p 3000:3000 --name koenvangilst koenvangilst
+```
+
+The `SOURCE_COMMIT` build argument embeds the git commit hash into the application, which is displayed in the footer of the website.
