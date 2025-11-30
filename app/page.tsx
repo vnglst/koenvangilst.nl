@@ -17,28 +17,14 @@ export default async function Home() {
       <Heading level={1}>Koen van Gilst</Heading>
       <Prose>
         <p>
-          I'm a software engineer and web enthusiast who loves bringing beautiful, fun, and educational creations to
-          life using code.
+          I'm a software engineer with a philosophy degree and a lifelong passion for creating software - two interests that have shaped how I               think about technology. I started programming around 11 with GW-Basic and Turbo Pascal, and even though I've pursued many other                  interests since, my fascination has never faded. After years as a web developer, I'm now in a technical leadership role, helping                 teams build software with AI.
         </p>
 
         <p>
-          I have a diverse background, always at the intersection of technology and humanity, with a philosophy degree
-          and a lifelong passion for coding. I started programming at around 11, using GW-Basic and Turbo Pascal. After
-          working as a web developer for many years I'm now in a technical leadership role where I'm enabling teams 
-          to innovate with AI.
-        </p>
-
-        <p>
-          In my spare time, I enjoy coding side projects that often complement my professional
-          work - a great way to stay up to date with trends and keep learning. On this
-          website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
-          <Link href="/lab?q=article">articles</Link>, and <Link href="/lab/gen-art-gallery">generative art</Link> from
-          over the years.
-        </p>
-
-        <p>
+          On this website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
+          <Link href="/lab?q=article">articles</Link>, and <Link href="/lab/gen-art-gallery">generative art</Link>. 
           I'm particularly proud of two recent projects: <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link>,
-          a gallery showcasing how AI models from 2022 to 2025 have evolved in recreating famous artworks using SVG, and{' '}
+          a gallery comparing how different AI models (2022–2025) recreate famous paintings as SVG code, and{' '}
           <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive hexagonal map visualization
           comparing land use across European countries.
         </p>
