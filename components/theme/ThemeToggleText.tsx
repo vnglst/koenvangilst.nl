@@ -51,7 +51,7 @@ export function ThemeToggleText() {
   return (
     <button
       onClick={handleClick}
-      className="text-gray-700 transition-opacity hover:opacity-60 dark:text-gray-400"
+      className="pt-2 pr-2 pb-2 text-gray-700 transition-opacity hover:cursor-pointer hover:opacity-60 dark:text-gray-400"
       aria-label={`Switch to ${theme === Theme.Dark ? 'light' : 'dark'} mode`}
     >
       <Icon icon={theme === Theme.Dark ? 'moon' : 'sun'} className="h-4 w-4" />
