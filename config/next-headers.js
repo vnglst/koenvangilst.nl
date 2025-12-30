@@ -8,7 +8,7 @@ const contentSecurityPolicy = `
     media-src i.imgur.com github.com *.s3.amazonaws.com;
     connect-src *;
     font-src 'self';
-    frame-src 'self' svelte.dev codesandbox.io voronoi-virus.koenvangilst.nl dancing-mosquitoes.koenvangilst.nl pong-wars.koenvangilst.nl purple-rain.koenvangilst.nl particle-life.koenvangilst.nl time-flies.koenvangilst.nl aarde.koenvangilst.nl rock-paper-scissors.koenvangilst.nl;
+    frame-src 'self' svelte.dev codesandbox.io tetris-time.koenvangilst.nl voronoi-virus.koenvangilst.nl dancing-mosquitoes.koenvangilst.nl pong-wars.koenvangilst.nl purple-rain.koenvangilst.nl particle-life.koenvangilst.nl time-flies.koenvangilst.nl aarde.koenvangilst.nl rock-paper-scissors.koenvangilst.nl;
 `;
 
 const securityHeaders = [
