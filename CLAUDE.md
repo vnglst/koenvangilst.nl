@@ -1,5 +1,9 @@
 # Claude Code Instructions
 
+## About This Site
+
+Personal website built with Next.js, self-hosted on Hetzner. Contains blog posts, data visualizations, and a generative art gallery. Follows a strict self-hosting and open-source philosophy.
+
 ## Content Security Policy (CSP)
 
 When adding new projects to the generative art gallery, you **must** update the Content Security Policy to allow iframe embedding.
@@ -18,23 +22,8 @@ CSP headers are configured in: `/config/next-headers.js`
 If adding `example-viz.koenvangilst.nl`:
 
 ```javascript
-frame-src 'self' svelte.dev codesandbox.io example-viz.koenvangilst.nl tetris-time.koenvangilst.nl voronoi-virus.koenvangilst.nl ...;
+frame-src 'self' svelte.dev codesandbox.io example-viz.koenvangilst.nl ...;
 ```
-
-### Current Allowed Domains
-
-The following domains are currently whitelisted for iframe embedding:
-- svelte.dev
-- codesandbox.io
-- tetris-time.koenvangilst.nl
-- voronoi-virus.koenvangilst.nl
-- dancing-mosquitoes.koenvangilst.nl
-- pong-wars.koenvangilst.nl
-- purple-rain.koenvangilst.nl
-- particle-life.koenvangilst.nl
-- time-flies.koenvangilst.nl
-- aarde.koenvangilst.nl
-- rock-paper-scissors.koenvangilst.nl
 
 ### What Happens If You Forget
 
