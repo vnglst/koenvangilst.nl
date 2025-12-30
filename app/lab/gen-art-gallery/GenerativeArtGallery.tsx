@@ -8,6 +8,11 @@ import { Icon } from 'components/ui/Icon';
 
 const GENERATIVE_ART_PROJECTS = [
   {
+    title: 'Tetris Time',
+    url: 'https://tetris-time.koenvangilst.nl',
+    slug: 'tetris-time'
+  },
+  {
     title: 'Voronoi Virus',
     url: 'https://voronoi-virus.koenvangilst.nl',
     slug: 'voronoi-virus'
