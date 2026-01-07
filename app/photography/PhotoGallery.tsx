@@ -112,14 +112,8 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
           </button>
         </>
       )}
-      {!isVisible && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-950 text-white">
-          <p className="text-sm">{photo.location}</p>
-        </div>
-      )}
-
       {/* Photo info overlay */}
-      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-8 pb-6">
+      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
         <div className="text-center">
           <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
           <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
