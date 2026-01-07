@@ -17,6 +17,7 @@ type LazyPhotoProps = {
 function LazyPhoto({ photo, index }: LazyPhotoProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,25 +69,33 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
               </div>
             </div>
           )}
-          <picture className="h-full w-full">
-            <source srcSet={photo.srcSetWebp} sizes="100vw" type="image/webp" />
-            <img
-              src={photo.src}
-              srcSet={photo.srcSet}
-              sizes="100vw"
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-contain"
-              onLoad={() => setHasLoaded(true)}
-              style={{
-                backgroundImage: `url(${photo.blurDataURL})`,
-                backgroundSize: 'cover'
-              }}
-            />
-          </picture>
+          <button
+            onClick={() => setIsZoomed(!isZoomed)}
+            className="h-full w-full cursor-zoom-in focus:outline-none"
+            style={{ cursor: isZoomed ? 'zoom-out' : 'zoom-in' }}
+          >
+            <picture className="h-full w-full">
+              <source srcSet={photo.srcSetWebp} sizes="100vw" type="image/webp" />
+              <img
+                src={photo.src}
+                srcSet={photo.srcSet}
+                sizes="100vw"
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                loading="lazy"
+                decoding="async"
+                className={`h-full w-full transition-all duration-500 ease-out ${
+                  isZoomed ? 'scale-150 object-cover' : 'scale-100 object-contain'
+                }`}
+                onLoad={() => setHasLoaded(true)}
+                style={{
+                  backgroundImage: `url(${photo.blurDataURL})`,
+                  backgroundSize: 'cover'
+                }}
+              />
+            </picture>
+          </button>
         </>
       )}
       {!isVisible && (
@@ -111,18 +120,18 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const scrollToPhoto = (index: number) => {
+  const scrollToPhoto = (index: number, smooth = true) => {
     const element = document.getElementById(`photo-${index}`);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: smooth ? 'smooth' : 'instant' });
     }
   };
 
-  // Scroll to start index on mount
+  // Scroll to start index on mount (instant, no animation)
   useEffect(() => {
     if (startIndex > 0) {
       // Small delay to ensure DOM is ready
-      setTimeout(() => scrollToPhoto(startIndex), 100);
+      setTimeout(() => scrollToPhoto(startIndex, false), 100);
     }
   }, [startIndex]);
 
