@@ -27,6 +27,10 @@ function Photo({ photo }: { photo: PhotoType }) {
         alt={photo.alt}
         className="h-full w-full object-contain"
         loading="lazy"
+        style={{
+          backgroundImage: `url(${photo.blurDataURL})`,
+          backgroundSize: 'cover'
+        }}
       />
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
         <div className="text-center">
@@ -83,6 +87,10 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
             alt={photo.alt}
             className="h-full w-full object-cover transition-opacity hover:opacity-90"
             loading={index < 6 ? 'eager' : 'lazy'}
+            style={{
+              backgroundImage: `url(${photo.blurDataURL})`,
+              backgroundSize: 'cover'
+            }}
           />
         </button>
       ))}
