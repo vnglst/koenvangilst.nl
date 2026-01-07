@@ -103,15 +103,15 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
               }}
             />
           </picture>
+          {/* Photo info overlay */}
+          <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
+            <div className="text-center">
+              <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
+              <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
+            </div>
+          </div>
         </>
       )}
-      {/* Photo info overlay */}
-      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
-        <div className="text-center">
-          <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
-          <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
-        </div>
-      </div>
     </div>
   );
 }
