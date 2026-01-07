@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 
-import { Container } from 'components/layout/Container';
-
 import { getPhotos } from './getPhotos';
 import { PhotoGallery } from './PhotoGallery';
 
@@ -16,9 +14,5 @@ export const revalidate = 3600;
 export default async function Photography() {
   const photos = await getPhotos();
 
-  return (
-    <Container footer wide>
-      <PhotoGallery photos={photos} />
-    </Container>
-  );
+  return <PhotoGallery photos={photos} />;
 }

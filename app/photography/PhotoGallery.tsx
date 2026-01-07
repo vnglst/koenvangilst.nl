@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { IconButton } from 'components/ui/IconButton';
+import { BackButton } from 'components/ui/BackButton';
 
 import { PhotoType } from './getPhotos';
 
@@ -10,74 +10,39 @@ type PhotoGalleryProps = {
   photos: PhotoType[];
 };
 
-export function PhotoGallery({ photos }: PhotoGalleryProps) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [isFullScreen, setIsFullScreen] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
-  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
+type LazyPhotoProps = {
+  photo: PhotoType;
+  index: number;
+};
 
-  const selectedPhoto = selectedIndex !== null ? photos[selectedIndex] : null;
+function LazyPhoto({ photo, index }: LazyPhotoProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Minimum swipe distance (in px) to trigger navigation
-  const minSwipeDistance = 50;
-
-  // Reset image loaded state when photo changes
   useEffect(() => {
-    setImageLoaded(false);
-    setShowSpinner(false);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        rootMargin: '100px',
+        threshold: 0.01
+      }
+    );
 
-    // Only show spinner if image takes more than 1000ms to load
-    const timer = setTimeout(() => {
-      setShowSpinner(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [selectedIndex]);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (selectedIndex !== null) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-
-      return () => {
-        // Restore scroll position when closing
-        const scrollY = document.body.style.top;
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      };
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
-  }, [selectedIndex]);
 
-  // Keyboard navigation
-  useEffect(() => {
-    if (selectedIndex === null) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedIndex(null);
-        setIsFullScreen(true);
-      }
-      if (e.key === 'ArrowLeft' && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1);
-      }
-      if (e.key === 'ArrowRight' && selectedIndex < photos.length - 1) {
-        setSelectedIndex(selectedIndex + 1);
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
       }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, photos.length]);
+  }, []);
 
   function formatDate(dateString?: Date) {
     if (!dateString) return '';
@@ -88,170 +53,129 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
     });
   }
 
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
-    });
-  };
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-screen w-full snap-start snap-always items-center justify-center bg-slate-950"
+      id={`photo-${index}`}
+    >
+      {isVisible && (
+        <>
+          {!hasLoaded && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950">
+              <div className="text-center text-white">
+                <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-slate-700 border-t-white" />
+                <p className="text-sm">Loading photo...</p>
+              </div>
+            </div>
+          )}
+          <picture className="h-full w-full">
+            <source srcSet={photo.srcSetWebp} sizes="100vw" type="image/webp" />
+            <img
+              src={photo.src}
+              srcSet={photo.srcSet}
+              sizes="100vw"
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-contain"
+              onLoad={() => setHasLoaded(true)}
+              style={{
+                backgroundImage: `url(${photo.blurDataURL})`,
+                backgroundSize: 'cover'
+              }}
+            />
+          </picture>
+        </>
+      )}
+      {!isVisible && (
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-950 text-white">
+          <p className="text-sm">{photo.location}</p>
+        </div>
+      )}
 
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
-    });
-    // Prevent default scrolling behavior
-    e.preventDefault();
-  };
+      {/* Photo info overlay */}
+      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+        <div className="text-center text-sm text-white">
+          <div>{photo.location}</div>
+          <div className="text-xs text-white/80">{formatDate(photo.createdAt)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || selectedIndex === null) return;
+export function PhotoGallery({ photos }: PhotoGalleryProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const distanceX = touchStart.x - touchEnd.x;
-    const distanceY = touchStart.y - touchEnd.y;
-    const isHorizontalSwipe = Math.abs(distanceX) > Math.abs(distanceY);
-
-    // Horizontal swipe
-    if (isHorizontalSwipe) {
-      // Swipe left (next photo)
-      if (distanceX > minSwipeDistance && selectedIndex < photos.length - 1) {
-        setSelectedIndex(selectedIndex + 1);
-      }
-      // Swipe right (previous photo or close if first photo)
-      if (distanceX < -minSwipeDistance) {
-        if (selectedIndex > 0) {
-          setSelectedIndex(selectedIndex - 1);
-        } else {
-          // Return to overview if swiping right on first photo
-          setSelectedIndex(null);
-          setIsFullScreen(true);
-        }
-      }
+  const scrollToPhoto = (index: number) => {
+    const element = document.getElementById(`photo-${index}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-    // Vertical swipe
-    else {
-      // Swipe up (next photo, like TikTok scrolling forward)
-      if (distanceY > minSwipeDistance && selectedIndex < photos.length - 1) {
-        setSelectedIndex(selectedIndex + 1);
-      }
-      // Swipe down (previous photo or close if first photo, like TikTok)
-      if (distanceY < -minSwipeDistance) {
-        if (selectedIndex > 0) {
-          setSelectedIndex(selectedIndex - 1);
-        } else {
-          // Return to overview if swiping down on first photo
-          setSelectedIndex(null);
-          setIsFullScreen(true);
-        }
-      }
-    }
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            const index = parseInt(id.split('-')[1]);
+            setCurrentIndex(index);
+          }
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.5
+      }
+    );
+
+    const photoElements = document.querySelectorAll('[id^="photo-"]');
+    photoElements.forEach((photo) => observer.observe(photo));
+
+    return () => {
+      photoElements.forEach((photo) => observer.unobserve(photo));
+    };
+  }, []);
 
   return (
-    <>
-      {/* Photo Grid */}
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {photos.map((photo, index) => (
+    <div className="relative">
+      <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
+        <BackButton
+          fallbackHref="/"
+          className="flex items-center gap-2 text-sm text-white transition-opacity hover:bg-transparent hover:opacity-60 focus:ring-white/50 dark:hover:bg-transparent"
+        >
+          <span className="hidden sm:inline">Back</span>
+        </BackButton>
+        <span className="hidden text-white sm:inline">|</span>
+        <span className="text-xs text-white sm:text-sm">
+          {currentIndex + 1} / {photos.length}
+        </span>
+      </nav>
+
+      <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-2">
+        {photos.map((_, index) => (
           <button
-            key={photo.id}
-            onClick={() => setSelectedIndex(index)}
-            className="relative block aspect-square"
-          >
-            <picture>
-              <source
-                srcSet={photo.srcSetWebp}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                type="image/webp"
-              />
-              <img
-                src={photo.src}
-                srcSet={photo.srcSet}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                loading={photo.id < 2 ? 'eager' : 'lazy'}
-                decoding="async"
-                className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
-                style={{
-                  backgroundImage: `url(${photo.blurDataURL})`,
-                  backgroundSize: 'cover'
-                }}
-              />
-            </picture>
-          </button>
+            key={index}
+            onClick={() => scrollToPhoto(index)}
+            className={`h-2 w-2 rounded-full transition-all ${
+              currentIndex === index ? 'scale-125 bg-white' : 'bg-white/50 hover:bg-white/75'
+            }`}
+            aria-label={`Go to photo ${index + 1}`}
+          />
         ))}
       </div>
 
-      {/* Modal */}
-      {selectedPhoto && selectedIndex !== null && (
-        <div
-          className="fixed inset-0 top-0 left-0 z-50 h-dvh w-screen overflow-hidden overscroll-none bg-slate-950 p-4 md:p-8"
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
-          <IconButton
-            onClick={() => {
-              setSelectedIndex(null);
-              setIsFullScreen(true);
-            }}
-            className="fixed top-3 right-3 z-20 text-xl md:top-5 md:right-5"
-            variant="overlay"
-            size="lg"
-            aria-label="Close"
-          >
-            ✕
-          </IconButton>
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center">
-            {!imageLoaded && showSpinner && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-700 border-t-white" />
-                  <p className="text-sm text-slate-400">Loading photo...</p>
-                </div>
-              </div>
-            )}
-            <picture>
-              <source
-                srcSet={selectedPhoto.srcSetWebp}
-                sizes="100vw"
-                type="image/webp"
-              />
-              <img
-                src={selectedPhoto.src}
-                srcSet={selectedPhoto.srcSet}
-                sizes="100vw"
-                alt={selectedPhoto.alt}
-                width={selectedPhoto.width}
-                height={selectedPhoto.height}
-                loading="eager"
-                decoding="async"
-                className={`cursor-pointer object-contain transition-opacity duration-300 ${
-                  isFullScreen ? 'fixed inset-0 h-dvh w-screen object-cover' : 'max-h-[85dvh] w-auto rounded-lg'
-                } ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                role="button"
-                onClick={() => setIsFullScreen(!isFullScreen)}
-                onLoad={() => setImageLoaded(true)}
-                style={{
-                  backgroundImage: `url(${selectedPhoto.blurDataURL})`,
-                  backgroundSize: 'cover'
-                }}
-              />
-            </picture>
-          </div>
-          <div className="fixed bottom-3 left-1/2 -translate-x-1/2 px-3 md:bottom-5">
-            <div className="rounded-md bg-black/50 p-2 text-center text-sm text-gray-200 backdrop-blur-sm">
-              <div className="md:hidden">{selectedPhoto.location}</div>
-              <div className="md:hidden">{formatDate(selectedPhoto.createdAt)}</div>
-              <div className="hidden md:block">
-                {selectedPhoto.location} • {formatDate(selectedPhoto.createdAt)}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+      <div ref={containerRef} className="h-screen snap-y snap-mandatory overflow-y-scroll">
+        {photos.map((photo, index) => (
+          <LazyPhoto key={photo.id} photo={photo} index={index} />
+        ))}
+      </div>
+    </div>
   );
 }
