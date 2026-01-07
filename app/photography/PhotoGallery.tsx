@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { PhotoType } from './getPhotos';
@@ -8,7 +9,7 @@ type PhotoGalleryProps = {
   photos: PhotoType[];
 };
 
-function Photo({ photo }: { photo: PhotoType }) {
+function Photo({ photo, index }: { photo: PhotoType; index: number }) {
   function formatDate(dateString?: Date) {
     if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -19,7 +20,7 @@ function Photo({ photo }: { photo: PhotoType }) {
   }
 
   return (
-    <div className="relative h-screen w-full snap-start snap-always bg-slate-950">
+    <div id={`photo-${index}`} className="relative h-screen w-full snap-start snap-always bg-slate-950">
       <img
         src={photo.src}
         srcSet={photo.srcSet}
@@ -42,8 +43,15 @@ function Photo({ photo }: { photo: PhotoType }) {
   );
 }
 
-function FullScreenGallery({ photos }: { photos: PhotoType[] }) {
+function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
   const router = useRouter();
+
+  useEffect(() => {
+    const element = document.getElementById(`photo-${startIndex}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'instant' });
+    }
+  }, [startIndex]);
 
   return (
     <div className="fixed inset-0 bg-slate-950">
@@ -57,8 +65,8 @@ function FullScreenGallery({ photos }: { photos: PhotoType[] }) {
 
       {/* Photo container */}
       <div className="h-screen snap-y snap-mandatory overflow-y-scroll">
-        {photos.map((photo) => (
-          <Photo key={photo.id} photo={photo} />
+        {photos.map((photo, index) => (
+          <Photo key={photo.id} photo={photo} index={index} />
         ))}
       </div>
     </div>
@@ -69,17 +77,22 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const photoParam = searchParams.get('photo');
+  const selectedIndex = photoParam ? parseInt(photoParam, 10) : 0;
 
   // Show full-screen gallery
   if (photoParam !== null) {
-    return <FullScreenGallery photos={photos} />;
+    return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
   }
 
   // Show grid overview
   return (
     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {photos.map((photo, index) => (
-        <button key={photo.id} onClick={() => router.push(`/photography?photo=${index}`)} className="relative block aspect-square overflow-hidden rounded-lg">
+        <button
+          key={photo.id}
+          onClick={() => router.push(`/photography?photo=${index}`)}
+          className="relative block aspect-square overflow-hidden rounded-lg"
+        >
           <img
             src={photo.src}
             srcSet={photo.srcSet}
