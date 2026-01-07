@@ -96,10 +96,10 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
       )}
 
       {/* Photo info overlay */}
-      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-        <div className="text-center text-sm text-white">
-          <div>{photo.location}</div>
-          <div className="text-xs text-white/80">{formatDate(photo.createdAt)}</div>
+      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-8 pb-6">
+        <div className="text-center">
+          <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
+          <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
         </div>
       </div>
     </div>
@@ -126,6 +126,7 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
     }
   }, [startIndex]);
 
+  // Track current photo with intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -151,19 +152,44 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
     };
   }, []);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        router.push('/photography');
+      } else if (e.key === 'ArrowDown' || e.key === ' ') {
+        if (currentIndex < photos.length - 1) {
+          scrollToPhoto(currentIndex + 1);
+        }
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        if (currentIndex > 0) {
+          scrollToPhoto(currentIndex - 1);
+        }
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentIndex, photos.length, router]);
+
   const handleClose = () => {
     router.push('/photography');
   };
 
+  const progressPercentage = ((currentIndex + 1) / photos.length) * 100;
+
   return (
     <div className="relative">
+      {/* Top navigation bar */}
       <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
         <button
           onClick={handleClose}
           className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60"
         >
           <span>←</span>
-          <span className="hidden sm:inline">Back to Overview</span>
+          <span className="hidden sm:inline">Back</span>
         </button>
         <span className="hidden text-white sm:inline">|</span>
         <span className="text-xs text-white sm:text-sm">
@@ -171,17 +197,12 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
         </span>
       </nav>
 
-      <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-2">
-        {photos.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToPhoto(index)}
-            className={`h-2 w-2 rounded-full transition-all ${
-              currentIndex === index ? 'scale-125 bg-white' : 'bg-white/50 hover:bg-white/75'
-            }`}
-            aria-label={`Go to photo ${index + 1}`}
-          />
-        ))}
+      {/* Vertical progress bar */}
+      <div className="fixed top-0 right-0 z-50 h-screen w-1 bg-white/10">
+        <div
+          className="w-full bg-white/60 transition-all duration-300 ease-out"
+          style={{ height: `${progressPercentage}%` }}
+        />
       </div>
 
       <div ref={containerRef} className="h-screen snap-y snap-mandatory overflow-y-scroll">
