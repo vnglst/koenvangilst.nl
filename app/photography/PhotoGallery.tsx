@@ -26,6 +26,9 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+        } else {
+          // Reset zoom when photo is no longer visible
+          setIsZoomed(!photo.isVertical);
         }
       },
       {
@@ -43,7 +46,7 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
         observer.unobserve(containerRef.current);
       }
     };
-  }, []);
+  }, [photo.isVertical]);
 
   // Delay showing spinner to avoid flash on cached images
   useEffect(() => {
