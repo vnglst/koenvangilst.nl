@@ -15,8 +15,13 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const [isFullScreen, setIsFullScreen] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
 
   const selectedPhoto = selectedIndex !== null ? photos[selectedIndex] : null;
+
+  // Minimum swipe distance (in px) to trigger navigation
+  const minSwipeDistance = 50;
 
   // Reset image loaded state when photo changes
   useEffect(() => {
@@ -83,6 +88,52 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
     });
   }
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd || selectedIndex === null) return;
+
+    const distanceX = touchStart.x - touchEnd.x;
+    const distanceY = touchStart.y - touchEnd.y;
+    const isHorizontalSwipe = Math.abs(distanceX) > Math.abs(distanceY);
+
+    // Horizontal swipe
+    if (isHorizontalSwipe) {
+      // Swipe left (next photo)
+      if (distanceX > minSwipeDistance && selectedIndex < photos.length - 1) {
+        setSelectedIndex(selectedIndex + 1);
+      }
+      // Swipe right (previous photo)
+      if (distanceX < -minSwipeDistance && selectedIndex > 0) {
+        setSelectedIndex(selectedIndex - 1);
+      }
+    }
+    // Vertical swipe
+    else {
+      // Swipe up (previous photo, like TikTok going back)
+      if (distanceY > minSwipeDistance && selectedIndex > 0) {
+        setSelectedIndex(selectedIndex - 1);
+      }
+      // Swipe down (next photo, like TikTok scrolling forward)
+      if (distanceY < -minSwipeDistance && selectedIndex < photos.length - 1) {
+        setSelectedIndex(selectedIndex + 1);
+      }
+    }
+  };
+
   return (
     <>
       {/* Photo Grid */}
@@ -121,7 +172,12 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
 
       {/* Modal */}
       {selectedPhoto && selectedIndex !== null && (
-        <div className="fixed inset-0 top-0 left-0 z-50 h-dvh w-screen overflow-hidden overscroll-none bg-slate-950 p-4 md:p-8">
+        <div
+          className="fixed inset-0 top-0 left-0 z-50 h-dvh w-screen overflow-hidden overscroll-none bg-slate-950 p-4 md:p-8"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <IconButton
             onClick={() => {
               setSelectedIndex(null);
