@@ -101,6 +101,8 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY
     });
+    // Prevent default scrolling behavior
+    e.preventDefault();
   };
 
   const onTouchEnd = () => {
@@ -116,20 +118,32 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       if (distanceX > minSwipeDistance && selectedIndex < photos.length - 1) {
         setSelectedIndex(selectedIndex + 1);
       }
-      // Swipe right (previous photo)
-      if (distanceX < -minSwipeDistance && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1);
+      // Swipe right (previous photo or close if first photo)
+      if (distanceX < -minSwipeDistance) {
+        if (selectedIndex > 0) {
+          setSelectedIndex(selectedIndex - 1);
+        } else {
+          // Return to overview if swiping right on first photo
+          setSelectedIndex(null);
+          setIsFullScreen(true);
+        }
       }
     }
     // Vertical swipe
     else {
-      // Swipe up (previous photo, like TikTok going back)
-      if (distanceY > minSwipeDistance && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1);
-      }
-      // Swipe down (next photo, like TikTok scrolling forward)
-      if (distanceY < -minSwipeDistance && selectedIndex < photos.length - 1) {
+      // Swipe up (next photo, like TikTok scrolling forward)
+      if (distanceY > minSwipeDistance && selectedIndex < photos.length - 1) {
         setSelectedIndex(selectedIndex + 1);
+      }
+      // Swipe down (previous photo or close if first photo, like TikTok)
+      if (distanceY < -minSwipeDistance) {
+        if (selectedIndex > 0) {
+          setSelectedIndex(selectedIndex - 1);
+        } else {
+          // Return to overview if swiping down on first photo
+          setSelectedIndex(null);
+          setIsFullScreen(true);
+        }
       }
     }
   };
@@ -227,20 +241,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               />
             </picture>
           </div>
-          <div className="fixed bottom-3 left-0 flex w-full items-center justify-between gap-4 px-3 md:bottom-5 md:px-5">
-            {selectedIndex > 0 ? (
-              <IconButton
-                onClick={() => setSelectedIndex(selectedIndex - 1)}
-                className="m-auto text-lg"
-                variant="overlay"
-                size="lg"
-                aria-label="Previous photo"
-              >
-                ←
-              </IconButton>
-            ) : (
-              <div className="m-auto h-14 w-14" />
-            )}
+          <div className="fixed bottom-3 left-1/2 -translate-x-1/2 px-3 md:bottom-5">
             <div className="rounded-md bg-black/50 p-2 text-center text-sm text-gray-200 backdrop-blur-sm">
               <div className="md:hidden">{selectedPhoto.location}</div>
               <div className="md:hidden">{formatDate(selectedPhoto.createdAt)}</div>
@@ -248,19 +249,6 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
                 {selectedPhoto.location} • {formatDate(selectedPhoto.createdAt)}
               </div>
             </div>
-            {selectedIndex < photos.length - 1 ? (
-              <IconButton
-                onClick={() => setSelectedIndex(selectedIndex + 1)}
-                className="m-auto text-lg"
-                variant="overlay"
-                size="lg"
-                aria-label="Next photo"
-              >
-                →
-              </IconButton>
-            ) : (
-              <div className="m-auto h-14 w-14" />
-            )}
           </div>
         </div>
       )}
