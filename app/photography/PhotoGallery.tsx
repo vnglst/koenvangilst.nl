@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
-import { BackButton } from 'components/ui/BackButton';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { PhotoType } from './getPhotos';
 
@@ -107,9 +106,10 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
   );
 }
 
-export function PhotoGallery({ photos }: PhotoGalleryProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const scrollToPhoto = (index: number) => {
     const element = document.getElementById(`photo-${index}`);
@@ -117,6 +117,14 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Scroll to start index on mount
+  useEffect(() => {
+    if (startIndex > 0) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => scrollToPhoto(startIndex), 100);
+    }
+  }, [startIndex]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -143,15 +151,20 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
     };
   }, []);
 
+  const handleClose = () => {
+    router.push('/photography');
+  };
+
   return (
     <div className="relative">
       <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
-        <BackButton
-          fallbackHref="/"
-          className="flex items-center gap-2 text-sm text-white transition-opacity hover:bg-transparent hover:opacity-60 focus:ring-white/50 dark:hover:bg-transparent"
+        <button
+          onClick={handleClose}
+          className="flex items-center gap-2 text-sm text-white transition-opacity hover:opacity-60"
         >
-          <span className="hidden sm:inline">Back</span>
-        </BackButton>
+          <span>←</span>
+          <span className="hidden sm:inline">Back to Overview</span>
+        </button>
         <span className="hidden text-white sm:inline">|</span>
         <span className="text-xs text-white sm:text-sm">
           {currentIndex + 1} / {photos.length}
@@ -176,6 +189,54 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
           <LazyPhoto key={photo.id} photo={photo} index={index} />
         ))}
       </div>
+    </div>
+  );
+}
+
+export function PhotoGallery({ photos }: PhotoGalleryProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const photoParam = searchParams.get('photo');
+  const selectedIndex = photoParam !== null ? parseInt(photoParam, 10) : null;
+
+  const openPhoto = (index: number) => {
+    router.push(`/photography?photo=${index}`);
+  };
+
+  // Show full-screen gallery if a photo is selected
+  if (selectedIndex !== null && !isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < photos.length) {
+    return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
+  }
+
+  // Show grid overview
+  return (
+    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {photos.map((photo, index) => (
+        <button key={photo.id} onClick={() => openPhoto(index)} className="relative block aspect-square">
+          <picture>
+            <source
+              srcSet={photo.srcSetWebp}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              type="image/webp"
+            />
+            <img
+              src={photo.src}
+              srcSet={photo.srcSet}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading={photo.id < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+              className="h-full w-full rounded-lg object-cover transition-opacity hover:opacity-90"
+              style={{
+                backgroundImage: `url(${photo.blurDataURL})`,
+                backgroundSize: 'cover'
+              }}
+            />
+          </picture>
+        </button>
+      ))}
     </div>
   );
 }
