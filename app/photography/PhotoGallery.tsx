@@ -18,7 +18,6 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-  const [isZoomed, setIsZoomed] = useState(!photo.isVertical); // Start zoomed for horizontal photos
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,9 +25,6 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-        } else {
-          // Reset zoom when photo is no longer visible
-          setIsZoomed(!photo.isVertical);
         }
       },
       {
@@ -46,7 +42,7 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
         observer.unobserve(containerRef.current);
       }
     };
-  }, [photo.isVertical]);
+  }, []);
 
   // Delay showing spinner to avoid flash on cached images
   useEffect(() => {
@@ -86,33 +82,27 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
               </div>
             </div>
           )}
-          <button
-            onClick={() => setIsZoomed(!isZoomed)}
-            className="h-full w-full cursor-zoom-in focus:outline-none"
-            style={{ cursor: isZoomed ? 'zoom-out' : 'zoom-in' }}
-          >
-            <picture className="h-full w-full">
-              <source srcSet={photo.srcSetWebp} sizes="100vw" type="image/webp" />
-              <img
-                src={photo.src}
-                srcSet={photo.srcSet}
-                sizes="100vw"
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                loading="lazy"
-                decoding="async"
-                className={`h-full w-full transition-all duration-500 ease-out ${
-                  isZoomed ? 'scale-150 object-cover' : 'scale-100 object-contain'
-                } ${hasLoaded ? 'opacity-100' : 'opacity-0'}`}
-                onLoad={() => setHasLoaded(true)}
-                style={{
-                  backgroundImage: `url(${photo.blurDataURL})`,
-                  backgroundSize: 'cover'
-                }}
-              />
-            </picture>
-          </button>
+          <picture className="h-full w-full">
+            <source srcSet={photo.srcSetWebp} sizes="100vw" type="image/webp" />
+            <img
+              src={photo.src}
+              srcSet={photo.srcSet}
+              sizes="100vw"
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              decoding="async"
+              className={`h-full w-full object-contain transition-opacity duration-300 ${
+                hasLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setHasLoaded(true)}
+              style={{
+                backgroundImage: `url(${photo.blurDataURL})`,
+                backgroundSize: 'cover'
+              }}
+            />
+          </picture>
         </>
       )}
       {/* Photo info overlay */}
