@@ -18,7 +18,7 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(!photo.isVertical); // Start zoomed for horizontal photos
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
