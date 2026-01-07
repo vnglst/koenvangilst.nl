@@ -17,6 +17,7 @@ type LazyPhotoProps = {
 function LazyPhoto({ photo, index }: LazyPhotoProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +45,19 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
     };
   }, []);
 
+  // Delay showing spinner to avoid flash on cached images
+  useEffect(() => {
+    if (!isVisible || hasLoaded) return;
+
+    const timer = setTimeout(() => {
+      if (!hasLoaded) {
+        setShowSpinner(true);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [isVisible, hasLoaded]);
+
   function formatDate(dateString?: Date) {
     if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -61,7 +75,7 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
     >
       {isVisible && (
         <>
-          {!hasLoaded && (
+          {!hasLoaded && showSpinner && (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950">
               <div className="text-center text-white">
                 <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-slate-700 border-t-white" />
@@ -87,7 +101,7 @@ function LazyPhoto({ photo, index }: LazyPhotoProps) {
                 decoding="async"
                 className={`h-full w-full transition-all duration-500 ease-out ${
                   isZoomed ? 'scale-150 object-cover' : 'scale-100 object-contain'
-                }`}
+                } ${hasLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setHasLoaded(true)}
                 style={{
                   backgroundImage: `url(${photo.blurDataURL})`,
