@@ -166,7 +166,7 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        router.push('/photography');
+        router.replace('/photography');
       } else if (e.key === 'ArrowDown' || e.key === ' ') {
         if (currentIndex < photos.length - 1) {
           scrollToPhoto(currentIndex + 1);
@@ -185,7 +185,8 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
   }, [currentIndex, photos.length, router]);
 
   const handleClose = () => {
-    router.push('/photography');
+    // Navigate back to grid view
+    router.replace('/photography');
   };
 
   const progressPercentage = ((currentIndex + 1) / photos.length) * 100;
