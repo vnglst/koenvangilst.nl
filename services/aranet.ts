@@ -6,7 +6,3 @@ export type Co2Reading = {
   pressure: number;
 };
 
-export async function getLastReading() {
-  // Service disabled, see git history for implementation
-  return null;
-}
