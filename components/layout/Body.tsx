@@ -4,7 +4,6 @@ export function Body({ children }: PropsWithChildren) {
   return (
     <body className="bg-slate-50 text-gray-800 antialiased dark:bg-slate-950 dark:text-gray-100">
       <script
-        defer
         id="theme"
         dangerouslySetInnerHTML={{
           __html: `
