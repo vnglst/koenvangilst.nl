@@ -32,3 +32,20 @@ If you forget to add the domain to CSP, the browser will block the iframe with a
 ```
 Framing 'https://example-viz.koenvangilst.nl/' violates the following Content Security Policy directive: "frame-src ..."
 ```
+
+## Dependency Analysis with Knip
+
+This project uses `knip` for detecting unused dependencies and exports. Run with `npm run knip`.
+
+### Known False Positives
+
+Knip cannot follow dynamic imports, so it incorrectly reports these as unused:
+
+- `content/*.components.js` - MDX component files loaded dynamically in `app/lab/[slug]/page.tsx`
+- `app/lab/prognosis-2100/(heatmaps)/*.tsx` - Heatmap components used via the components files
+- `app/lab/prognosis-2100/(charts)/ChartSection.tsx` - Used by heatmap components
+- `hoursFormatter` in `lib/formatters.ts` - Used by SunshineHeatmap.client.tsx
+
+### Before Deleting "Unused" Files
+
+Always run `npm run build` after deleting files reported by knip to verify they're truly unused. The build will fail if dynamically imported files are missing.

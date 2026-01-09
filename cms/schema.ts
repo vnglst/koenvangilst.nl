@@ -31,5 +31,4 @@ export const Post = PostMeta.extend({
   })
 });
 
-export type PostMetaType = z.infer<typeof PostMeta>;
 export type PostType = z.infer<typeof Post>;
