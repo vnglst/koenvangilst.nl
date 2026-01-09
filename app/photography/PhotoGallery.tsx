@@ -53,6 +53,39 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
     }
   }, [startIndex]);
 
+  useEffect(() => {
+    function getCurrentPhotoIndex() {
+      const scrollContainer = document.querySelector('.snap-y');
+      if (!scrollContainer) return 0;
+      const scrollTop = scrollContainer.scrollTop;
+      const photoHeight = window.innerHeight;
+      return Math.round(scrollTop / photoHeight);
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        router.replace('/photography');
+        return;
+      }
+
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        const currentIndex = getCurrentPhotoIndex();
+        const nextIndex = event.key === 'ArrowDown' ? currentIndex + 1 : currentIndex - 1;
+
+        if (nextIndex >= 0 && nextIndex < photos.length) {
+          const element = document.getElementById(`photo-${nextIndex}`);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [router, photos.length]);
+
   return (
     <div className="fixed inset-0 bg-slate-950">
       {/* Back button */}
