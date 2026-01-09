@@ -39,12 +39,13 @@ This project uses `knip` for detecting unused dependencies and exports. Run with
 
 ### Known False Positives
 
-Knip cannot follow dynamic imports, so it incorrectly reports these as unused:
+Knip cannot follow dynamic imports or detect Docker/deployment usage, so it incorrectly reports these as unused:
 
 - `content/*.components.js` - MDX component files loaded dynamically in `app/lab/[slug]/page.tsx`
 - `app/lab/prognosis-2100/(heatmaps)/*.tsx` - Heatmap components used via the components files
 - `app/lab/prognosis-2100/(charts)/ChartSection.tsx` - Used by heatmap components
 - `hoursFormatter` in `lib/formatters.ts` - Used by SunshineHeatmap.client.tsx
+- `scripts/generate-images.mjs` - Used by Docker deployment (copied in Dockerfile)
 
 ### Before Deleting "Unused" Files
 
