@@ -8,14 +8,14 @@ import { Icon } from '../ui/Icon';
 import { Link } from '../ui/Link';
 
 function RoundedImage({ alt, label, ...props }: ComponentProps<typeof Image> & { label?: React.ReactNode }) {
-  const className = cx('my-1 inline-block rounded-lg');
+  const className = cx('mt-1 mb-0 inline-block rounded-lg');
 
   if (!label) {
     return <Image alt={alt} {...props} className={className} />;
   }
 
   return (
-    <figure className="my-1 inline-block">
+    <figure className="mt-1 mb-0 inline-block">
       <Image alt={alt} {...props} className={className} />
       <figcaption className="mt-1 text-center text-gray-600 dark:text-gray-400">{label}</figcaption>
     </figure>
