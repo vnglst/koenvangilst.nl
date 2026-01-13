@@ -1,0 +1,38 @@
+---
+title: Coding is Dead
+publishedAt: '2026-01-13'
+summary: 'From typing over starfield code as a kid to letting AI agents build features - reflecting on how coding is changing and what it means for software engineers.'
+tags:
+  - ai
+  - article
+---
+
+<Image
+  alt="Origin Systems logo with tagline 'We create worlds' against a starfield background"
+  src="/static/images/we-create-worlds.jpg"
+  width={2560}
+  height={1440}
+  priority
+/>
+
+I remember seeing Origin Systems tagline when playing Ultima and thinking: "I also want to create worlds!". I ended up trying, but as a kid I never got much further than creating the [starfield](https://star-trek.netlify.app/) that you see behind the logo. And that was after months of painstakingly typing over what seemed like nonsense to me to paint just a few pixels on the screen. Unlikely as this may seem, it was the beginning of my passion for creating things with code.
+
+Ever since the rise of LLMs and their ability to write code, I've been experimenting with them and only recently did I start doubting whether I'd still be programming in the near future. I'm not alone in my exploration, even the most [famous programmers](https://github.com/torvalds/AudioNoise) are now letting AI write some of the software for them and [many agree](https://newsletter.pragmaticengineer.com/p/when-ai-writes-almost-all-code-what) that the way we code is changing fast.
+
+At the start of 2025, I was excited about what LLMs enabled me to do. I was able to create fun little visualizations like [Pong Wars](https://pong-wars.koenvangilst.nl/) and [Time Flies](https://time-flies.koenvangilst.nl/). I could realize a [land use map](https://onsland.koenvangilst.nl/) of the Netherlands within an afternoon. It made me feel immensely powerful as a programmer. The way I worked was still similar to the original coding by hand. The only difference was that parts of the code were now written by the LLM, as a form of autocomplete. The LLM was helping me a lot, but I was still very much aware of all the code and what it did.
+
+This gradually changed by the end of 2025. By now I'm writing instructions, telling the agent what to build and less and less how to build it. I'm not reading that much code anymore. Sometimes, I still have to step in and try to debug something, but this is happening less and less. At this stage, I still get involved when it comes to security concerns, architecture, design patterns and deciding on APIs, databases, languages, etc. So my old programming skills are more valuable than ever and with these new AI agents I'm now able to tackle much more ambitious projects within much less time.
+
+Erik Mus on LinkedIn recently vibe coded an [interactive snow map](https://winterkaart.com/) of the Netherlands. Users fill in how much snow they measure outside, the map averages it and shows a height map. He built it in a couple of hours with Cursor. Erik has no engineering background and he just delivered a simple software prototype within an afternoon.[^1] I think that's awesome, but what does this mean for my coding skills? Apparently they're becoming less and less relevant. Does this mean that the party is over for us programmers and that we're no longer the magical gatekeepers of the digital economy?
+
+## Coding at work
+
+At work the impact of all this seems limited right now. This might be because the tools available to engineers are not as powerful as what's available outside. We do have Github Copilot, but - for obvious reasons - this does not include the powerful "accept all" agentic modes that can autonomously build entire features. So this could be part of the reason, but there's more to it than that.
+
+First of all AI coding agents are particularly good at greenfield projects that have been done a million times before in some shape or form. It becomes more challenging if you go off the beaten track. This could be something as simple as an in-house component library or things that work just a little different within the technical context of a big organization. And we all know large corporations are full of these deviations.
+
+Another aspect is that within large companies the coding part was never the most difficult thing about creating long-lived software. It still trips ambitious, young people up how much talking, validating and aligning you need to do before you can even touch the code. I've also had that opinion and I still often feel this frustration, but I also learned the hard way that if you don't do this right you end up creating software that's not going anywhere.
+
+So, coming back to the original question, is this the beginning of the end of coding? What we'll see in the near future is that "coding by hand" will go the way of the dodo, replaced for everyone, also within large banks, by autocomplete. Next comes debugging, upgrading packages and maybe even new feature building. Our jobs as engineers will involve more and more reviewing, testing and iterating. And after that, if the trend continues I can now totally imagine that in a few years time only few people will still do the coding themselves. Software engineering will still be a (high paid) job as I think the skills translate really well into this new domain of developing software with AI, but it would mean that coding is dead.
+
+[^1]: After posting it on [LinkedIn](https://www.linkedin.com/posts/erikmus_zaterdag-had-ik-een-idee-en-een-paar-uur-activity-7413967112781631488-mPBX?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAAEDSTUBgtM3R4fBB_2Zpn17MkYiD9ZpKr4) users pointed out that the API endpoints were unprotected and that his website was not secure. This was fixed with the help of some friendly engineers shortly thereafter. So yeah, current AI agents are not able to write secure & complete software autonomously and right now you still need oversight from (experienced) engineers.
