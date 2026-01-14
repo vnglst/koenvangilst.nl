@@ -24,11 +24,14 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch aggregate stats for the specific page
+    // Using custom date range from site start (2010-01-01) to today for all-time stats
+    const today = new Date().toISOString().split('T')[0];
     const response = await fetch(
       `${PLAUSIBLE_BASE_URL}/api/v1/stats/aggregate?` +
         new URLSearchParams({
           site_id: PLAUSIBLE_SITE_ID,
-          period: 'all', // Get all-time stats
+          period: 'custom',
+          date: `2010-01-01,${today}`, // All-time stats from site inception
           metrics: 'visitors,pageviews',
           filters: `event:page==${page}`
         }),
