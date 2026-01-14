@@ -6,7 +6,7 @@ export default async function sitemap() {
   const allPosts = await getPosts();
   const photos = await getPhotos();
 
-  const pages = ['', 'about', 'lab', 'dashboard', 'dashboard/stats', 'llms.txt'];
+  const pages = ['', 'about', 'lab', 'llms.txt'];
 
   const urls = [
     ...pages.map((page) => ({
