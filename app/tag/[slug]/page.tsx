@@ -64,13 +64,29 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
   const params = await props.params;
   const tag = desluggify(params.slug);
+  const allPosts = await getPosts();
+  const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(params.slug));
+
+  // Generate dynamic OG image for tag page
+  const ogImageUrl = `https://koenvangilst.nl/og?title=${encodeURIComponent(`Posts about ${tag}`)}&description=${encodeURIComponent(`${posts.length} post${posts.length === 1 ? '' : 's'} about ${tag}`)}&type=tag`;
 
   return {
     title: `Posts about ${tag}`,
     description: `All posts about ${tag}`,
     openGraph: {
       title: `Posts about ${tag}`,
-      description: `All posts about ${tag}`
+      description: `All posts about ${tag}`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [ogImageUrl]
     }
   };
 }

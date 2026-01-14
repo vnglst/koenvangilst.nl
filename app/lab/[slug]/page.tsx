@@ -49,21 +49,30 @@ export async function generateMetadata(props: Props) {
     notFound();
   }
 
+  // Generate dynamic OG image with post details
+  const ogImageUrl = `https://koenvangilst.nl/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.summary)}&type=blog`;
+
   return {
     title: post.title,
     description: post.summary,
     openGraph: {
-      images: `https://koenvangilst.nl${post.image?.src}`
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',
       site: '@vnglst',
       title: post.title,
       description: post.summary,
-      images: post.image?.src ? [post.image.src] : []
+      images: [ogImageUrl]
     },
     alternates: {
-      canonical: 'lab/' + post.slug
+      canonical: `https://koenvangilst.nl/lab/${post.slug}`
     }
   };
 }
