@@ -44,10 +44,9 @@ export async function MarkdownLayout({
       <article className="w-full max-w-[700px]">
         <header>
           <Heading level={1}>{title}</Heading>
-          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
-          <div className="mb-2 text-sm">
+          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text}>
             <PageViews path={path} />
-          </div>
+          </ArticleMetadata>
           {tags && tags.length > 0 && (
             <ul className="my-4 flex w-full flex-wrap gap-2">
               {tags.map((tag: string) => (
