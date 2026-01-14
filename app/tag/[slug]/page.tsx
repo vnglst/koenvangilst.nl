@@ -70,7 +70,18 @@ export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
     description: `All posts about ${tag}`,
     openGraph: {
       title: `Posts about ${tag}`,
-      description: `All posts about ${tag}`
+      description: `All posts about ${tag}`,
+      images: [
+        {
+          url: 'https://koenvangilst.nl/static/images/banner.png',
+          width: 1820,
+          height: 904
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: ['https://koenvangilst.nl/static/images/banner.png']
     }
   };
 }

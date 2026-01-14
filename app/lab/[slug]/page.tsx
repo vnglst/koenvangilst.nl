@@ -49,21 +49,38 @@ export async function generateMetadata(props: Props) {
     notFound();
   }
 
+  // Fallback to banner image if post doesn't have one
+  const defaultImage = {
+    url: 'https://koenvangilst.nl/static/images/banner.png',
+    width: 1820,
+    height: 904
+  };
+
+  const ogImage = post.image?.src
+    ? {
+        url: `https://koenvangilst.nl${post.image.src}`,
+        width: post.image.width,
+        height: post.image.height
+      }
+    : defaultImage;
+
+  const twitterImage = post.image?.src ? post.image.src : defaultImage.url;
+
   return {
     title: post.title,
     description: post.summary,
     openGraph: {
-      images: `https://koenvangilst.nl${post.image?.src}`
+      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       site: '@vnglst',
       title: post.title,
       description: post.summary,
-      images: post.image?.src ? [post.image.src] : []
+      images: [twitterImage]
     },
     alternates: {
-      canonical: 'lab/' + post.slug
+      canonical: `https://koenvangilst.nl/lab/${post.slug}`
     }
   };
 }
