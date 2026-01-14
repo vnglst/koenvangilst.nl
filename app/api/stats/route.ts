@@ -44,10 +44,7 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       console.error('Plausible API error:', response.status, await response.text());
-      return NextResponse.json(
-        { error: 'Failed to fetch stats from Plausible' },
-        { status: response.status }
-      );
+      return NextResponse.json({ error: 'Failed to fetch stats from Plausible' }, { status: response.status });
     }
 
     const data = await response.json();
