@@ -33,7 +33,7 @@ export default async function Page(props: Props) {
       title={post.title}
       readingTime={post.readingTime}
       tags={post.tags}
-      path={'/' + post.slug}
+      path={'/lab/' + post.slug}
       image={post.image}
       code={post.code}
       additionalComponents={additionalComponents}
