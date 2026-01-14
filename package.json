@@ -21,6 +21,7 @@
   "dependencies": {
     "@plausible-analytics/tracker": "0.4.4",
     "@tailwindcss/postcss": "4.1.18",
+    "@vercel/og": "^0.8.6",
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
     "echarts": "6.0.0",
