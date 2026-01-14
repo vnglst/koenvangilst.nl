@@ -4,6 +4,12 @@
   @apply min-w-0;
 }
 
+.prose img,
+.prose figure {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
 .prose svg {
   max-width: 100%;
 }
