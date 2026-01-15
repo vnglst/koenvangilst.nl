@@ -11,7 +11,8 @@ import { cx } from 'lib/clsx';
 const navItems = [
   { href: '/', label: 'About' },
   { href: '/lab', label: 'Lab' },
-  { href: '/photography', label: 'Photography' }
+  { href: '/photography', label: 'Photography' },
+  { href: '/dashboard', label: 'Dashboard' }
 ];
 
 export function Sidebar() {

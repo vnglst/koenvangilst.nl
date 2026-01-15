@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import useSWR from 'swr';
 import { fetcher } from 'lib/fetcher';
 import { StatsSection } from './StatsSection';
+import { AggregateStats } from './AggregateStats';
+import { VisitorTrendsChart } from './VisitorTrendsChart';
 
 type PageStat = {
   page: string;
@@ -17,6 +20,12 @@ type StatsResponse = {
 };
 
 const TIME_PERIODS = [
+  { key: '30d', label: 'Last 30 Days', chartPeriod: '30d' as const },
+  { key: '7d', label: 'Last 7 Days', chartPeriod: '7d' as const },
+  { key: '12mo', label: 'Last 12 Months', chartPeriod: '12mo' as const }
+] as const;
+
+const TOP_PAGES_PERIODS = [
   { key: 'all', label: 'All Time', description: 'Most visited pages since site inception' },
   { key: 'year', label: 'This Year', description: 'Top pages from the last 12 months' },
   { key: 'month', label: 'This Month', description: 'Most popular pages this month' },
@@ -24,11 +33,42 @@ const TIME_PERIODS = [
 ] as const;
 
 export function DashboardStats() {
+  const [selectedPeriod, setSelectedPeriod] = useState<(typeof TIME_PERIODS)[number]>(TIME_PERIODS[0]);
+
   return (
     <div className="space-y-8">
-      {TIME_PERIODS.map((period) => (
-        <StatsPeriod key={period.key} period={period.key} label={period.label} description={period.description} />
-      ))}
+      {/* Period Selector */}
+      <div className="flex flex-wrap gap-2">
+        {TIME_PERIODS.map((period) => (
+          <button
+            key={period.key}
+            onClick={() => setSelectedPeriod(period)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              selectedPeriod.key === period.key
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+            }`}
+          >
+            {period.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Aggregate Stats Cards */}
+      <AggregateStats period={selectedPeriod.key} />
+
+      {/* Visitor Trends Chart */}
+      <VisitorTrendsChart period={selectedPeriod.chartPeriod} title={`Visitor Trends - ${selectedPeriod.label}`} />
+
+      {/* Top Pages by Period */}
+      <div className="mt-12">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Most Visited Pages</h2>
+        <div className="space-y-8">
+          {TOP_PAGES_PERIODS.map((period) => (
+            <StatsPeriod key={period.key} period={period.key} label={period.label} description={period.description} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
