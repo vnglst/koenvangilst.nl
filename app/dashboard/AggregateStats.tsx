@@ -33,20 +33,17 @@ export function AggregateStats({ period = '30d' }: AggregateStatsProps) {
 
   if (error || data?.error) {
     return (
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <div className="col-span-full text-red-600 dark:text-red-400">Failed to load stats</div>
+      <div className="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="col-span-full text-red-600 dark:text-red-400 p-4">Failed to load stats</div>
       </div>
     );
   }
 
   if (!data) {
     return (
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {[...Array(4)].map((_, i) => (
-          <div
-            key={i}
-            className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm"
-          >
+          <div key={i} className="border border-dashed border-gray-400 dark:border-none p-4 md:p-6">
             <div className="animate-pulse space-y-3">
               <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-24"></div>
               <div className="h-8 bg-gray-200 dark:bg-gray-800 rounded w-32"></div>
@@ -64,12 +61,12 @@ export function AggregateStats({ period = '30d' }: AggregateStatsProps) {
   };
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       <StatsCard
         title="Total Visitors"
         value={data.stats.visitors.toLocaleString()}
         icon={
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -83,7 +80,7 @@ export function AggregateStats({ period = '30d' }: AggregateStatsProps) {
         title="Page Views"
         value={data.stats.pageviews.toLocaleString()}
         icon={
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -103,7 +100,7 @@ export function AggregateStats({ period = '30d' }: AggregateStatsProps) {
         title="Bounce Rate"
         value={`${data.stats.bounce_rate.toFixed(1)}%`}
         icon={
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -117,7 +114,7 @@ export function AggregateStats({ period = '30d' }: AggregateStatsProps) {
         title="Avg. Visit Duration"
         value={formatDuration(data.stats.visit_duration)}
         icon={
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

@@ -36,14 +36,14 @@ export function DashboardStats() {
   const [selectedPeriod, setSelectedPeriod] = useState<(typeof TIME_PERIODS)[number]>(TIME_PERIODS[0]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Period Selector */}
       <div className="flex flex-wrap gap-2">
         {TIME_PERIODS.map((period) => (
           <button
             key={period.key}
             onClick={() => setSelectedPeriod(period)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-colors ${
               selectedPeriod.key === period.key
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -61,9 +61,11 @@ export function DashboardStats() {
       <VisitorTrendsChart period={selectedPeriod.chartPeriod} title={`Visitor Trends - ${selectedPeriod.label}`} />
 
       {/* Top Pages by Period */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Most Visited Pages</h2>
-        <div className="space-y-8">
+      <div className="mt-8 md:mt-12">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 md:mb-6">
+          Most Visited Pages
+        </h2>
+        <div className="space-y-6 md:space-y-8">
           {TOP_PAGES_PERIODS.map((period) => (
             <StatsPeriod key={period.key} period={period.key} label={period.label} description={period.description} />
           ))}
@@ -101,40 +103,53 @@ function StatsPeriod({ period, label, description }: StatsPeriodProps) {
 
   return (
     <StatsSection title={label} description={description} isLoading={false}>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Rank</th>
-              <th className="text-left py-3 px-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Page</th>
-              <th className="text-right py-3 px-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Visitors</th>
-              <th className="text-right py-3 px-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Page Views
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.results.map((stat, index) => (
-              <tr key={stat.page} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
-                <td className="py-3 px-2 text-sm text-gray-600 dark:text-gray-400">#{index + 1}</td>
-                <td className="py-3 px-2">
-                  <a
-                    href={stat.page}
-                    className="text-blue-600 dark:text-blue-400 hover:underline text-sm break-all"
-                  >
-                    {stat.page}
-                  </a>
-                </td>
-                <td className="py-3 px-2 text-right text-sm text-gray-900 dark:text-gray-100 font-medium">
-                  {stat.visitors.toLocaleString()}
-                </td>
-                <td className="py-3 px-2 text-right text-sm text-gray-900 dark:text-gray-100 font-medium">
-                  {stat.pageviews.toLocaleString()}
-                </td>
+      <div className="overflow-x-auto -mx-4 md:mx-0">
+        <div className="inline-block min-w-full align-middle">
+          <table className="min-w-full">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                <th className="text-left py-2 md:py-3 px-2 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                  #
+                </th>
+                <th className="text-left py-2 md:py-3 px-2 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                  Page
+                </th>
+                <th className="text-right py-2 md:py-3 px-2 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                  Visitors
+                </th>
+                <th className="text-right py-2 md:py-3 px-2 text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                  Views
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.results.map((stat, index) => (
+                <tr
+                  key={stat.page}
+                  className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+                >
+                  <td className="py-2 md:py-3 px-2 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                    {index + 1}
+                  </td>
+                  <td className="py-2 md:py-3 px-2">
+                    <a
+                      href={stat.page}
+                      className="text-blue-600 dark:text-blue-400 hover:underline text-xs md:text-sm break-all line-clamp-2 md:line-clamp-none"
+                    >
+                      {stat.page}
+                    </a>
+                  </td>
+                  <td className="py-2 md:py-3 px-2 text-right text-xs md:text-sm text-gray-900 dark:text-gray-100 font-medium whitespace-nowrap">
+                    {stat.visitors.toLocaleString()}
+                  </td>
+                  <td className="py-2 md:py-3 px-2 text-right text-xs md:text-sm text-gray-900 dark:text-gray-100 font-medium whitespace-nowrap">
+                    {stat.pageviews.toLocaleString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </StatsSection>
   );

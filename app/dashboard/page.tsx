@@ -1,23 +1,22 @@
 import { Metadata } from 'next';
-import { Main } from 'components/layout/Main';
-import { Heading } from 'components/content/Heading';
 import { DashboardStats } from './DashboardStats';
 
 export const metadata: Metadata = {
   title: 'Dashboard - Koen van Gilst',
-  description: 'Analytics dashboard showing the most visited pages'
+  description: 'Analytics dashboard showing visitor statistics and most visited pages'
 };
 
 export default function DashboardPage() {
   return (
-    <Main>
-      <div className="mb-8">
-        <Heading level={1}>Dashboard</Heading>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">
-          Overview of the most visited pages across different time periods
+    <div className="mb-10 min-h-screen w-full p-4 md:px-8">
+      <div className="prose dark:prose-invert mb-8">
+        <h1>Analytics Dashboard</h1>
+        <p>
+          Overview of visitor statistics and the most visited pages across different time periods. Data is collected
+          via Plausible Analytics, a privacy-friendly analytics platform.
         </p>
       </div>
       <DashboardStats />
-    </Main>
+    </div>
   );
 }

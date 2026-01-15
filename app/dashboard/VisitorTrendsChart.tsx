@@ -34,7 +34,7 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
 
   if (error || data?.error) {
     return (
-      <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
+      <div className="w-full overflow-hidden border border-dashed border-gray-400 dark:border-none p-6">
         <p className="text-red-600 dark:text-red-400">Failed to load chart data</p>
       </div>
     );
@@ -42,8 +42,8 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
 
   if (!data) {
     return (
-      <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
-        <div className="h-[400px] flex items-center justify-center">
+      <div className="w-full overflow-hidden border border-dashed border-gray-400 dark:border-none">
+        <div className="h-[300px] md:h-[400px] flex items-center justify-center">
           <div className="text-gray-500 dark:text-gray-400">Loading chart...</div>
         </div>
       </div>
@@ -54,11 +54,27 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
   const visitors = data.results.map((item) => item.visitors);
   const pageviews = data.results.map((item) => item.pageviews);
 
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+
   const options: ECBasicOption = {
+    grid: {
+      top: 100,
+      bottom: 80,
+      left: 15,
+      right: 15
+    },
     title: {
       text: title,
-      left: 'left',
-      top: 10
+      subtext: `Data from Plausible Analytics • www.koenvangilst.nl • ${currentDate}`,
+      subtextStyle: {
+        lineHeight: 18
+      },
+      top: 10,
+      left: 10
     },
     tooltip: {
       trigger: 'axis',
@@ -68,24 +84,29 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
     },
     legend: {
       data: ['Visitors', 'Page Views'],
-      top: 10,
-      right: 60
+      bottom: 10,
+      left: 'center'
     },
     xAxis: {
       type: 'category',
       boundaryGap: false,
       data: dates,
+      splitLine: {
+        show: false
+      },
       axisLabel: {
         rotate: 45,
         formatter: (value: string) => {
-          // Format date for better readability
           const date = new Date(value);
           return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }
       }
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
+      splitLine: {
+        show: false
+      }
     },
     series: [
       {
@@ -93,11 +114,44 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
         type: 'line',
         data: visitors,
         smooth: true,
-        lineStyle: {
-          width: 3
+        emphasis: {
+          focus: 'series'
+        },
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: '#2196f3'
+            },
+            {
+              offset: 1,
+              color: '#cbf3ff'
+            }
+          ]
         },
         areaStyle: {
-          opacity: 0.3
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: '#19c9ff'
+              },
+              {
+                offset: 1,
+                color: '#2196f3'
+              }
+            ]
+          }
         }
       },
       {
@@ -105,19 +159,52 @@ export function VisitorTrendsChart({ period = '30d', title = 'Visitor Trends' }:
         type: 'line',
         data: pageviews,
         smooth: true,
-        lineStyle: {
-          width: 3
+        emphasis: {
+          focus: 'series'
+        },
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: '#64b5f6'
+            },
+            {
+              offset: 1,
+              color: '#e3f2fd'
+            }
+          ]
         },
         areaStyle: {
-          opacity: 0.2
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: '#90caf9'
+              },
+              {
+                offset: 1,
+                color: '#64b5f6'
+              }
+            ]
+          }
         }
       }
     ]
   };
 
   return (
-    <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
-      <Chart options={options} className="h-[400px] w-full" />
+    <div className="w-full overflow-hidden border border-dashed border-gray-400 dark:border-none">
+      <Chart options={options} className="h-[300px] md:h-[400px] w-full" />
     </div>
   );
 }
