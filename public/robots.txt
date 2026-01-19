@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /
 Sitemap: https://koenvangilst.nl/sitemap.xml
 
 # LLM-specific resources
