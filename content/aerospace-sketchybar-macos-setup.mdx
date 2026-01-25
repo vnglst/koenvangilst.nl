@@ -1,0 +1,264 @@
+---
+title: Omarchy-Inspired Setup for macOS
+publishedAt: '2026-01-25'
+summary: How to set up a keyboard-driven tiling window manager on macOS using AeroSpace and SketchyBar.
+tags:
+  - article
+  - macos
+  - productivity
+---
+
+After watching the [Omarchy](https://omarchy.org/) intro video, I wanted that clean, keyboard-driven environment. The problem? I'm stuck on macOS. I use it for work, for the ecosystem and other practical reasons. So I wanted to replicate the experience as closely as possible on macOS.
+
+## Why AeroSpace over yabai
+
+I tried [yabai](https://github.com/koekeishiya/yabai) first, but on macOS Tahoe (26), accessibility permissions don't work reliably. [AeroSpace](https://github.com/nikitabobko/AeroSpace) doesn't have this problem. It works within macOS's security model without requiring SIP to be disabled.
+
+## Installation
+
+Install via [Homebrew](https://brew.sh/):
+
+```bash
+# Install AeroSpace
+brew install --cask nikitabobko/tap/aerospace
+
+# Install SketchyBar
+brew tap FelixKratz/formulae
+brew install sketchybar
+
+# Install font
+brew install --cask font-hack-nerd-font
+```
+
+Open AeroSpace from Finder once to grant accessibility permissions. Unlike yabai, this actually works.
+
+## Configuration
+
+Create `~/.config/aerospace/aerospace.toml`:
+
+```toml
+start-at-login = true
+
+# SketchyBar integration
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.right = 10
+outer.bottom = 10
+outer.top = 10
+
+[mode.main.binding]
+
+# Navigation (vim keys)
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move windows
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+
+# Monitors
+alt-comma = 'focus-monitor left'
+alt-period = 'focus-monitor right'
+alt-shift-comma = 'move-node-to-monitor left'
+alt-shift-period = 'move-node-to-monitor right'
+
+# Actions
+alt-f = 'fullscreen'
+alt-t = 'layout floating tiling'
+alt-b = 'balance-sizes'
+alt-r = 'layout tiles horizontal vertical'
+
+# Resize
+ctrl-alt-h = 'resize width -50'
+ctrl-alt-j = 'resize height +50'
+ctrl-alt-k = 'resize height -50'
+ctrl-alt-l = 'resize width +50'
+
+# Launch iTerm
+alt-enter = 'exec-and-forget open -a iTerm'
+
+# Workspace assignments
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = ['move-node-to-workspace 5', 'layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+```
+
+To find app IDs: `aerospace list-apps`
+
+## SketchyBar Setup
+
+[SketchyBar](https://github.com/FelixKratz/SketchyBar) replaces the native macOS menu bar:
+
+```bash
+mkdir -p ~/.config/sketchybar/plugins
+cp /opt/homebrew/opt/sketchybar/share/sketchybar/examples/sketchybarrc ~/.config/sketchybar/
+chmod +x ~/.config/sketchybar/sketchybarrc
+```
+
+Edit `~/.config/sketchybar/sketchybarrc`:
+
+```bash
+SPACE_ICONS=("1" "2" "3" "4" "5")
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid="$(($i+1))"
+  space=(
+    icon="${SPACE_ICONS[i]}"
+    icon.padding_left=7
+    icon.padding_right=7
+    background.color=0x40ffffff
+    background.corner_radius=5
+    background.height=25
+    label.drawing=off
+    click_script="aerospace workspace $sid"
+  )
+  sketchybar --add item space."$sid" left \
+             --set space."$sid" "${space[@]}"
+done
+
+# Workspace change listener
+sketchybar --add event aerospace_workspace_change \
+           --add item aerospace_listener left \
+           --set aerospace_listener drawing=off \
+                 script="$PLUGIN_DIR/aerospace.sh" \
+           --subscribe aerospace_listener aerospace_workspace_change
+```
+
+Create `~/.config/sketchybar/plugins/aerospace.sh`:
+
+```bash
+#!/bin/bash
+
+if [ "$SENDER" = "aerospace_workspace_change" ]; then
+    FOCUSED_WORKSPACE="$FOCUSED_WORKSPACE"
+else
+    FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+fi
+
+for i in {1..5}; do
+    if [ "$FOCUSED_WORKSPACE" = "$i" ]; then
+        sketchybar --set space.$i background.color=0xffffffff icon.color=0xff000000
+    else
+        sketchybar --set space.$i background.color=0x40ffffff icon.color=0xffffffff
+    fi
+done
+```
+
+Make it executable: `chmod +x ~/.config/sketchybar/plugins/aerospace.sh`
+
+Reload: `sketchybar --reload`
+
+Hide the native menu bar in System Settings → Control Center → "Automatically hide and show the menu bar."
+
+## Why alt instead of cmd
+
+Using `cmd` as the modifier conflicts with macOS shortcuts:
+- `cmd+h` hides apps
+- `cmd+f` is browser search
+- `cmd+shift+3/4/5` are screenshots
+
+`alt` (Option) has no conflicts and works better.
+
+## iTerm Integration
+
+Configure [iTerm2](https://iterm2.com/) to prefer tabs:
+
+```bash
+defaults write com.googlecode.iterm2 OpenTmuxWindowsIn -int 2
+defaults write com.googlecode.iterm2 OpenFileInNewWindows -bool false
+```
+
+Now `alt+enter` launches iTerm or creates a new tab if already running.
+
+## Multi-Monitor Setup
+
+With 2 monitors, you get 10 independent workspaces (5 per monitor):
+- `alt+.` focuses the right monitor
+- `alt+,` focuses the left monitor
+- `alt+1-5` switches workspaces on the focused monitor
+
+Each monitor shows its active workspace in SketchyBar.
+
+## Key Differences from yabai
+
+**i3-style vs BSP:** AeroSpace uses [i3](https://i3wm.org/)-style tiling where windows in a container split equally. Unlike yabai's BSP, new windows don't automatically split existing ones. You move them manually with `alt+shift+hjkl`.
+
+**No SIP required:** AeroSpace works through accessibility APIs without disabling System Integrity Protection.
+
+**macOS Tahoe support:** Explicitly tested on macOS 26 where yabai's accessibility permissions fail.
+
+## Workspace Layout
+
+1. **iTerm** - terminal work
+2. **Browser** - documentation
+3. **VSCode** - coding
+4. **Claude** - AI assistance
+5. **Notes, Messages, Finder, Spotify** - everything else
+
+Apps automatically route to their workspace on launch.
+
+---
+
+*Inspired by [Christopher Penkin's yabai setup](https://www.penkin.me/development/tools/productivity/configuration/2025/11/28/building-omarchy-inspired-setup-macos.html). Full config: [github.com/vnglst/dotfiles](https://github.com/vnglst/dotfiles)*
