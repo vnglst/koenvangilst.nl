@@ -9,18 +9,38 @@ tags:
 
 I've been collecting articles about AI agents lately. Some people are ecstatic about 10x productivity gains. Others [warn](https://lucumr.pocoo.org/2026/1/18/agent-psychosis/) about developers losing themselves in endless agentic sessions at 3am. But these aren't contradictory stories. They're describing the same thing from different angles.
 
-Peter Steinberger [said](https://steipete.me/posts/2025/shipping-at-inference-speed) something that stuck with me: "These days I don't read much code anymore. I watch the stream and sometimes look at key parts." I find myself doing the same. I write instructions, tell the agent what to build. The strange part? My programming skills matter more than ever. I'm just not using them to type characters anymore.
+Peter Steinberger [said](https://steipete.me/posts/2025/shipping-at-inference-speed) something that stuck with me:
 
-DHH is [ready to promote](https://world.hey.com/dhh/promoting-ai-agents-3ee04945) AI agents to production work. But then adds: "I'm nowhere close to having agents write 90%+ of the code... if I hold the line on quality and cohesion." That qualifier is everything. The [tension](https://lucumr.pocoo.org/2026/1/18/agent-psychosis/) is real: AI agents make you incredibly productive, but only if you don't turn off your brain and let them generate whatever seems plausible.
+> These days I don't read much code anymore. I watch the stream and sometimes look at key parts, but I gotta be honest - most code I don't read. I do know where which components are and how things are structured and how the overall system is designed, and that's usually all that's needed.
 
-There's an economic principle called Jevons' Paradox. When you make something more efficient, you don't use less of it - you use more. Better steam engines didn't reduce coal consumption in the 1800s. They enabled so many new applications that coal consumption exploded.
+I find myself doing the same. I write instructions, tell the agent what to build. The strange part? My programming skills matter more than ever. I'm just not using them to type characters anymore. I'm using them to make architectural decisions, to know when something feels wrong, to understand how pieces fit together. The knowledge didn't disappear - it just moved up a level of abstraction.
 
-The same thing is happening with code. AI agents write code faster than humans ever could. So do we need fewer developers? No. We need more. Because the bottleneck was never typing speed. It was [understanding](https://russmiles.substack.com/p/you-cannot-outsource-understanding). The AI can generate the syntax, but someone still needs to understand what it means, why it's there, how it fits together. Every line of generated code is still a line that someone must understand, test, integrate, and operate.
+DHH is [ready to promote](https://world.hey.com/dhh/promoting-ai-agents-3ee04945) AI agents to production work:
 
-The bottleneck shifted from implementation to specification. From typing to communication. Tickets rarely contain all the requirements. You need to ask questions that reveal assumptions people didn't know they had. Make calls on things nobody thought to specify. These things used to be optional for individual contributors. Now they're non-negotiable.
+> Yes, I'm ready to give the current crop of AI agents a promotion. They're no longer just here to help me learn, answer my questions, or check my work. They're fully capable of producing production-grade contributions to real-life code bases.
 
-And here's the uncomfortable part: we won't be able to AI our way into better communication skills. Good communication requires empathy. Understanding that you cannot outsource.
+But then adds his qualifier:
 
-The risk isn't that AI will replace us. The risk is that we'll turn off our critical thinking and let agents generate whatever seems plausible. At 3am, running your tenth parallel agent session, convincing yourself you've never been more productive - that's when you need to step away from the machine.
+> I'm nowhere close to the claims of having agents write 90%+ of the code, as I see some boast about online. I don't know what code they're writing to hit those rates, but that's way off what I'm able to achieve, if I hold the line on quality and cohesion.
 
-So coding might be dead soon, but the job is still there now. With less typing, more thinking. Less implementation, more understanding. For me the fun part was never really the typing anyway.
+That qualifier is everything. The [tension](https://lucumr.pocoo.org/2026/1/18/agent-psychosis/) is real: AI agents make you incredibly productive, but only if you don't turn off your brain and let them generate whatever seems plausible. I've caught myself at 2am, running multiple agent sessions in parallel, convincing myself I'm shipping features at lightning speed, only to realize the next morning that half of it needed to be rewritten because I stopped thinking critically about what was being generated.
+
+There's an economic principle called Jevons' Paradox. When you make something more efficient, you don't use less of it - you use more. Better steam engines didn't reduce coal consumption in the 1800s. They enabled so many new applications that coal consumption exploded. The same thing is happening with code. AI agents write code faster than humans ever could. So do we need fewer developers? No. We need more. Because the bottleneck was never typing speed. It was [understanding](https://russmiles.substack.com/p/you-cannot-outsource-understanding):
+
+> Software is not a department. It is not a service line. It is the medium of modern business itself. Trying to remove developers from it is like trying to remove oxygen from air because breathing costs too much. You can automate syntax, not semantics. You can accelerate creation, but not comprehension.
+
+Every line of generated code is still a line that someone must understand, test, integrate, and operate. The problem is not one of production, but understanding and problem solving. This is why all those predictions about AI eliminating programming jobs feel backwards to me - they're solving for the wrong bottleneck. We were never constrained by how fast we could type. We were constrained by how well we could think through problems, understand domains, and make tradeoffs. AI doesn't remove those constraints. If anything, it makes them more visible.
+
+The bottleneck [shifted](https://www.qu8n.com/posts/most-important-software-engineering-skill-2026) from implementation to specification. From typing to communication:
+
+> In real life, tickets rarely contain all the requirements. To do so, you might need to: Ask questions that reveal assumptions people didn't know they had. Facilitate trade-off discussions. Push back on scope without burning bridges. Make calls on things nobody thought to specify. Doing these things well used to be optional for individual contributors. Certain teams would enable engineers to thrive being an average communicator but excellent coder. Now, the non-coding parts are becoming a non-negotiable.
+
+And here's the uncomfortable part: we won't be able to AI our way into better communication skills. Good communication requires empathy. Understanding that you cannot outsource. I've watched engineers who were brilliant implementers struggle in this new reality because they never developed the habit of clarifying requirements, questioning assumptions, or explaining tradeoffs to non-technical stakeholders. The AI can't help them with that.
+
+The real risk isn't that AI will replace us. The risk is that we'll turn off our critical thinking and let agents generate whatever seems plausible. Armin Ronacher [captures](https://lucumr.pocoo.org/2026/1/18/agent-psychosis/) this perfectly:
+
+> All I know is that when I watch someone at 3am, running their tenth parallel agent session, telling me they've never been more productive — in that moment I don't see productivity. I see someone who might need to step away from the machine for a bit. And I wonder how often that someone is me.
+
+I've been there. It's seductive. The agents are so capable, so confident, so ready to build whatever you ask. But capability without judgment is just sophisticated randomness. 
+
+So coding might be dead soon, but the job is still there. With less typing, more thinking. Less implementation, more understanding. For me the fun part was never really the typing anyway.
