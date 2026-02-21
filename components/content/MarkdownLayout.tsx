@@ -81,5 +81,6 @@ export async function MarkdownLayout({
 }
 
 function getEditUrl(path: string) {
-  return `https://github.com/vnglst/koenvangilst.nl/edit/main/content${path}.mdx`;
+  const slug = path.split('/').pop();
+  return `https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`;
 }
