@@ -16,7 +16,8 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "@plausible-analytics/tracker": "0.4.4",
@@ -52,12 +53,18 @@
     "esbuild": "0.27.2",
     "eslint": "9.39.2",
     "eslint-plugin-simple-import-sort": "12.1.1",
+    "husky": "^9.1.7",
     "knip": "5.82.1",
+    "lint-staged": "^16.3.0",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "typescript": "5.9.3",
     "typescript-eslint": "8.54.0",
     "vitest": "4.0.18"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write",
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "optionalDependencies": {
     "@img/sharp-linuxmusl-x64": "0.34.5",
