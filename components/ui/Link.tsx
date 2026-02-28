@@ -13,6 +13,27 @@ type BaseProps = {
 
 type LinkProps = BaseProps & Omit<ComponentProps<'a'>, keyof BaseProps>;
 
+function ExternalLinkContent({ children }: { children: React.ReactNode }) {
+  const icon = <Icon icon="external-link" className="ml-1 inline h-4 w-4 align-text-bottom" />;
+
+  if (typeof children === 'string') {
+    const lastSpace = children.lastIndexOf(' ');
+    if (lastSpace !== -1) {
+      return (
+        <>
+          {children.slice(0, lastSpace + 1)}
+          <span className="whitespace-nowrap">
+            {children.slice(lastSpace + 1)}
+            {icon}
+          </span>
+        </>
+      );
+    }
+  }
+
+  return <>{children}{icon}</>;
+}
+
 export function Link({ href, children, className, ...props }: LinkProps) {
   const isExternal = href && href.startsWith('http');
 
@@ -23,11 +44,8 @@ export function Link({ href, children, className, ...props }: LinkProps) {
 
   if (isExternal) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={combinedClassName} {...props}>
-        <span className="inline-flex items-center">
-          {children}
-          <Icon icon="external-link" className="ml-1 h-4 w-4" />
-        </span>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cx(combinedClassName, 'break-all')} {...props}>
+        <ExternalLinkContent>{children}</ExternalLinkContent>
       </a>
     );
   }
