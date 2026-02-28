@@ -1,0 +1,29 @@
+---
+title: Stacked Game of Life
+publishedAt: '2026-02-28'
+image:
+  src: /static/images/stacked-game-of-life.jpg
+  alt: Screenshot of the Stacked Game of Life showing glowing 3D cubes
+  width: 1608
+  height: 1140
+  showAsHeader: true
+summary: A 3D visualization of Conway's Game of Life where dead cells sink into a glowing history stack
+tags:
+  - generative-art
+  - side-project
+  - typescript
+  - threejs
+---
+
+New visualization. This time it's a classic that I've implemented many times before: [Conway's Game of Life](https://stacked-game-of-life.koenvangilst.nl).
+
+The rules this game are beautifully simple: A cell lives if it has enough neighbors (2 or 3). It dies if it's lonely (fewer than 2) or if it's too crowded (more than 3). If an empty space has exactly 3 neighbors, a new cell is born.
+
+The algorithm is as minimal as it gets, but the results are complex, interesting and unlimited. It was even proven that Game of Life is [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), meaning you can in theory solve any computational problem with it.
+
+My version adds a twist: when a cell dies it doesn't disappear immediately. Instead it sinks down into a glowing 3D history stack, lingering for a few more generations as a fading shadow. It gives the whole thing a nice Matrix-like feel.
+
+Built with Three.js, TypeScript and with Claude Code.
+
+- Live demo: [https://stacked-game-of-life.koenvangilst.nl](https://stacked-game-of-life.koenvangilst.nl)
+- Source: [github.com/vnglst/stacked-game-of-life](https://github.com/vnglst/stacked-game-of-life)
