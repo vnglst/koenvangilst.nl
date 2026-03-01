@@ -31,7 +31,12 @@ function ExternalLinkContent({ children }: { children: React.ReactNode }) {
     }
   }
 
-  return <>{children}{icon}</>;
+  return (
+    <>
+      {children}
+      {icon}
+    </>
+  );
 }
 
 export function Link({ href, children, className, ...props }: LinkProps) {
@@ -44,7 +49,13 @@ export function Link({ href, children, className, ...props }: LinkProps) {
 
   if (isExternal) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={cx(combinedClassName, 'break-all')} {...props}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cx(combinedClassName, 'break-words')}
+        {...props}
+      >
         <ExternalLinkContent>{children}</ExternalLinkContent>
       </a>
     );
