@@ -23,15 +23,26 @@ export default async function Home() {
           web developer, I'm now in a technical leadership role helping teams build software with AI.
         </p>
 
-        <p>
-          On this website, you'll find a selection of my <Link href="/lab?q=side-project">side projects</Link>,{' '}
-          <Link href="/lab?q=article">articles</Link>, and <Link href="/lab/gen-art-gallery">generative art</Link>. I'm
-          particularly proud of two recent projects:{' '}
-          <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link>, a gallery comparing how different AI
-          models (2022–2025) recreate famous paintings as SVG code, and{' '}
-          <Link href="https://onsland.koenvangilst.nl">Ons Land</Link>, an interactive hexagonal map visualization
-          comparing land use across European countries.
-        </p>
+        <p>On this website, you'll find a selection of my work:</p>
+        <ul>
+          <li>
+            <Link href="/lab?q=side-project">Side projects</Link>
+          </li>
+          <li>
+            <Link href="/lab?q=article">Articles</Link>
+          </li>
+          <li>
+            <Link href="/lab/gen-art-gallery">Generative art</Link>
+          </li>
+          <li>
+            <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link> — comparing how different AI models
+            (2022–2025) recreate famous paintings as SVG code
+          </li>
+          <li>
+            <Link href="https://onsland.koenvangilst.nl">Ons Land</Link> — an interactive hexagonal map visualization
+            comparing land use across European countries
+          </li>
+        </ul>
       </Prose>
     </Container>
   );
