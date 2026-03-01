@@ -8,6 +8,11 @@ import { Icon } from 'components/ui/Icon';
 
 const GENERATIVE_ART_PROJECTS = [
   {
+    title: 'Stacked Game of Life',
+    url: 'https://stacked-game-of-life.koenvangilst.nl',
+    slug: 'stacked-game-of-life'
+  },
+  {
     title: 'Tetris Time',
     url: 'https://tetris-time.koenvangilst.nl',
     slug: 'tetris-time'
