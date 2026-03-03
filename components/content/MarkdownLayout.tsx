@@ -9,7 +9,6 @@ import { TagLink } from '../ui/Tag';
 import { ArticleMetadata } from './ArticleMetadata';
 import { Heading } from './Heading';
 import { MDXComponent } from './MDXComponent';
-import { PageViews } from './PageViews';
 import { Prose } from './Prose';
 
 type Props = {
@@ -44,9 +43,7 @@ export async function MarkdownLayout({
       <article className="w-full max-w-[700px]">
         <header>
           <Heading level={1}>{title}</Heading>
-          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text}>
-            <PageViews path={path} />
-          </ArticleMetadata>
+          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
           {tags && tags.length > 0 && (
             <ul className="my-4 flex w-full flex-wrap gap-2">
               {tags.map((tag: string) => (
