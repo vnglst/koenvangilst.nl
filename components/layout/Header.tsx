@@ -78,12 +78,15 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 className={cx(
-                  'block px-4 py-3 text-base font-medium transition-colors',
+                  'flex items-center px-4 py-3 text-base font-medium transition-colors',
                   isActive(item.href)
                     ? 'text-primary dark:text-primary bg-gray-50 dark:bg-gray-900'
                     : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-900'
                 )}
               >
+                <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
+                  &gt;
+                </span>
                 {item.label}
               </Link>
             ))}
