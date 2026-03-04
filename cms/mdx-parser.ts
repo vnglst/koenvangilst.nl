@@ -92,6 +92,11 @@ async function parseMDXFile(rawString: string) {
   return await bundleMDX({
     source: rawString,
     cwd: path.join(process.cwd(), 'cms'),
+    esbuildOptions(options) {
+      options.target = 'es2020';
+      options.minify = true;
+      return options;
+    },
     mdxOptions(options) {
       const rehypePlugins = options.rehypePlugins || [];
       const remarkPlugins = options.remarkPlugins || [];

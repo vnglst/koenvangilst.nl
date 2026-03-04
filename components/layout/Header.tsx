@@ -39,6 +39,7 @@ export function Header() {
               src={Avatar}
               className="rounded-full grayscale filter"
               priority
+              sizes="36px"
             />
           </Link>
 

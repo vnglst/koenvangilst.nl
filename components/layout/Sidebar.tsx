@@ -37,6 +37,7 @@ export function Sidebar() {
               src={Avatar}
               className="rounded-full grayscale filter"
               priority
+              sizes="48px"
             />
           </Link>
         </div>

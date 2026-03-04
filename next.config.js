@@ -21,14 +21,17 @@ const config = {
     COMMIT_HASH: commitHash
   },
   images: {
-    minimumCacheTTL: 31536000 // 1 year
+    minimumCacheTTL: 31536000, // 1 year
+    formats: ['image/webp', 'image/avif'] // Enable modern image formats
   },
   compress: true, // Enable gzip compression
   experimental: {
-    optimizePackageImports: ['lodash', 'd3', 'echarts'] // Auto-optimize imports
+    optimizePackageImports: ['lodash', 'd3', 'echarts', 'zustand'], // Auto-optimize imports
+    webpackBuildWorker: true // Enable parallel webpack builds
   },
   // Ensure sharp is included in standalone build for post-deploy script
-  serverExternalPackages: ['sharp']
+  serverExternalPackages: ['sharp'],
+  poweredByHeader: false // Remove X-Powered-By header for security
 };
 
 export default config;
