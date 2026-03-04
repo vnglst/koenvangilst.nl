@@ -2,11 +2,6 @@ import { Icon } from 'components/ui/Icon';
 
 const footerLinks = [
   {
-    href: 'mailto:koen@koenvangilst.nl',
-    label: 'mail',
-    icon: 'mail' as const
-  },
-  {
     href: 'https://bsky.app/profile/vnglst.bsky.social',
     label: 'bluesky',
     icon: 'bluesky' as const
