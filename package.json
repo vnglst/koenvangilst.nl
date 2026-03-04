@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@plausible-analytics/tracker": "0.4.4",
-    "@tailwindcss/postcss": "4.1.18",
-    "@vercel/og": "^0.8.6",
+    "@tailwindcss/postcss": "4.2.1",
+    "@vercel/og": "^0.11.0",
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
     "echarts": "6.0.0",
@@ -34,32 +34,32 @@
     "react-dom": "19.2.4",
     "rehype-autolink-headings": "7.1.0",
     "rehype-code-titles": "1.2.1",
-    "rehype-prism-plus": "2.0.1",
+    "rehype-prism-plus": "2.0.2",
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.1",
     "sharp": "0.34.5",
-    "swr": "2.3.8",
-    "tailwindcss": "4.1.18",
+    "swr": "2.4.1",
+    "tailwindcss": "4.2.1",
     "zod": "4.3.6",
-    "zustand": "5.0.10"
+    "zustand": "5.0.11"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "10.0.1",
     "@tailwindcss/typography": "0.5.19",
-    "@types/node": "25.1.0",
-    "@types/react": "19.2.10",
+    "@types/node": "25.3.3",
+    "@types/react": "19.2.14",
     "@vitest/ui": "4.0.18",
-    "baseline-browser-mapping": "^2.9.19",
-    "esbuild": "0.27.2",
-    "eslint": "9.39.2",
+    "baseline-browser-mapping": "^2.10.0",
+    "esbuild": "0.27.3",
+    "eslint": "10.0.2",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "^9.1.7",
-    "knip": "5.82.1",
-    "lint-staged": "^16.3.0",
+    "knip": "5.85.0",
+    "lint-staged": "^16.3.2",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.54.0",
+    "typescript-eslint": "8.56.1",
     "vitest": "4.0.18"
   },
   "lint-staged": {
@@ -68,6 +68,6 @@
   },
   "optionalDependencies": {
     "@img/sharp-linuxmusl-x64": "0.34.5",
-    "@tailwindcss/oxide-linux-x64-musl": "4.1.18"
+    "@tailwindcss/oxide-linux-x64-musl": "4.2.1"
   }
 }
