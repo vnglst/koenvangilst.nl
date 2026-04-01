@@ -1,29 +1,15 @@
 ---
-title: AI and the Future of Engineering
+title: Growing a Better World... Together with AI
 publishedAt: '2026-03-31'
-summary: 'Notes from my talk at the AI Circle meetup on vibe coding, the changing role of engineers, and why AI should be an exoskeleton — not a replacement.'
+summary: 'Notes from my talk at the AI Circle on vibe coding, the changing role of engineers, and why AI should be an exoskeleton — not a replacement.'
 tags:
   - ai
   - article
 ---
 
-Last week I gave a talk at an AI Circle meetup about how AI is changing the way we engineer. It covered a lot of ground — from my personal experiments with vibe coding to what I'm seeing at Rabobank — and I wanted to write down the main ideas while they're still fresh.
+<GrowingVines />
 
-## Vibe coding: fun, powerful, limited
-
-[Andrej Karpathy](https://x.com/karpathy) coined the term "vibe coding" about a year ago. The idea: you use a coding agent, accept everything it produces, look at the result, and move on. You don't read the code. You just vibe.
-
-I've been doing a version of this with my side projects. Two years ago I built [Pong Wars](https://pong-wars.koenvangilst.nl/) with GitHub Copilot — back then still mostly autocomplete. It became a bit of an internet sensation, with people recreating it in dozens of languages and platforms. That encouragement led me to build more: [Time Flies](https://time-flies.koenvangilst.nl/), where flies form the digits of the current time, and most recently [Tetris Time](https://tetris-time.koenvangilst.nl/), a countdown timer where tetrominoes assemble into digits.
-
-The Tetris project is the interesting one. I tried the pure vibe coding approach first — just asked Claude Code to build it. It didn't work. After an hour of back and forth I was nowhere. So I did what I've always done when stuck: I wrote the specs first. I asked Claude to write all the tests for the backtracking algorithm, then implement the algorithm to pass those tests. It came back after 15 minutes with everything green. Test-driven development — a practice from the pre-AI era — was the thing that made it work.
-
-## What's happening at Rabobank
-
-GitHub Copilot has been available to all 8,000 engineers at Rabobank since 2023. About 25% are actively using it. The engineers love it: faster navigation, less cognitive load, better code discovery. There's a solid business case behind it too.
-
-More recently, a team built a prototype that automates the full cycle: a user story on the board gets picked up by an AI agent, implemented, reviewed by specialized AI agents (security, accessibility), and then presented to a human engineer for final approval. When this was demoed internally, the chat exploded — excitement mixed with security concerns, doubt about real value, and worry about what it means for developers who only do reviews.
-
-That last part stuck with me. What if the final human review becomes a rubber stamp? The code quality might be fine, but we'd lose something important: engineers who actually understand the systems they're responsible for.
+Yesterday I gave a talk at the AI Circle where I shared some vibe coded side projects and insights on working with AI — both outside of work and within a large organization. The title was "Growing a better world... together with AI", which aligns not just with Rabobank's famous slogan, but also with my perspective on how we should use AI: as an exoskeleton to enhance the capabilities of our human engineers, not as a robot replacement.
 
 ## The link between code and understanding
 
@@ -31,31 +17,21 @@ Barry O'Reilly, a software architect, put it better than I could:
 
 > GenAI requires the context first to generate the code. The agile movement, for all its cultish flaws, realised that developers generate their context by coding. [...] GenAI creates a condition where developers cannot generate their context, cannot relate the code to the problem as deeply as they did before. The link is broken.
 
-This isn't abstract. The Dutch toeslagenaffaire and the British Post Office scandal are examples of what happens when systems become black boxes — when nobody truly understands how the algorithm works, who it affects, and why. Those systems were built without AI, but if we start outsourcing all coding to agents, the risk of comprehension debt only grows.
-
-As engineers, we have a moral obligation to understand what we build.
-
-## AI makes us faster, but coding was never the bottleneck
-
-Here's something that might sound counterintuitive. When people at Rabobank asked me how much faster our innovation team would go with tools like Claude Code, my honest answer was: not much faster.
-
-AI can make the coding part 10x faster. But coding was never the bottleneck. Getting sign-off, aligning teams, avoiding miscommunications, navigating security reviews, architecture decisions, budgets — that's where the time goes. The context around the code is much bigger than the code itself.
-
-Where AI _does_ make a massive difference is prototyping. Instead of going to stakeholders with a PowerPoint, you can now build a working prototype during a brainstorming session. We've been doing this in our team and it's been transformative for alignment and validation.
+The Dutch toeslagenaffaire and the British Post Office scandal are examples of what happens when systems become black boxes — when nobody truly understands how the algorithm works, who it affects, and why. Those systems were built without AI, but if we start outsourcing all coding to agents, the risk of comprehension debt only grows.
 
 ## Exoskeleton, not robot
 
-I think there are two mental models for using AI in engineering.
+<RobotVsExoskeleton />
 
-The first is **Just AI**: vibe coding end to end, outsourcing your understanding, taking shortcuts. This can work for throwaway projects, but for production systems it leads to cognitive decline. When something breaks in production and you don't understand the system, the only thing you can do is ask the AI and hope it knows the answer.
+Relying too much on AI means taking shortcuts, outsourcing your understanding and eventually facing cognitive decline. When something breaks in production and you don't understand the system, the only thing you can do is ask the AI and hope it knows the answer.
 
-The second is **AI + Human**: agentic coding where you orchestrate the agents, guide them, keep them in check. You use AI to understand parts of the system you're not familiar with. A backend developer uses it to understand the frontend. A web engineer uses it to navigate cloud infrastructure. You get a holistic understanding instead of a narrower one.
+Using AI as an [exoskeleton](https://www.kasava.dev/blog/ai-as-exoskeleton) (think Iron Man) makes you more capable. You orchestrate the agents, guide them, keep them in check. A backend developer uses AI to understand the frontend. A web engineer uses it to navigate cloud infrastructure. You get a holistic understanding of the system instead of a narrower one. You increase your ability to understand the system as a whole and own the accountability.
 
-Think of it as an exoskeleton rather than a robot replacement. It makes you stronger, faster, less tired — but you're still the one doing the work and making the decisions.
+["Computer says no"](/blog/computer-says-no) should not be an acceptable answer for an engineer — and AI can empower us to understand our ever more complex systems.
 
 ## Advice
 
-**For engineers:** Nobody can predict the future — not even Andrej Karpathy, not even Eric Schmidt. What we do know is that software engineering best practices still work. TDD, modular design, code reviews, refactoring — these translate directly into orchestrating AI agents well. Work on your communication skills too. As development gets faster, being able to explain what works, what doesn't, and why becomes more valuable than ever. And own the accountability. "The computer says no" is not an acceptable answer.
+**For engineers:** Nobody can predict the future — not even Andrej Karpathy. What we do know is that software engineering best practices still work. TDD, modular design, code reviews, refactoring — these translate directly into orchestrating AI agents well. Work on your communication skills too. As development gets faster, being able to explain what works, what doesn't, and why becomes more valuable than ever. And own the accountability. "The computer says no" is not an acceptable answer.
 
 **For tech leads:** Enable experimentation. Get the latest tools into your engineers' hands so they can learn how to use them before everything changes. Focus on enhancement, not replacement — give your engineers the tools to be 10x engineers, don't try to remove them from the picture. And watch out for burnout. There's FOMO from seeing everyone build side projects on weekends, uncertainty from pundits predicting the end of engineering jobs, and a new phenomenon called [AI brain fry](https://hbr.org/2026/03/when-using-ai-leads-to-brain-fry) — where engineers juggling multiple AI agents in parallel get overwhelmed by constant context switching and difficult decisions.
 
