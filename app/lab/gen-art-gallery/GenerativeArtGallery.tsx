@@ -68,6 +68,7 @@ type LazyIframeProps = {
 function LazyIframe({ url, title, index }: LazyIframeProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,6 +76,8 @@ function LazyIframe({ url, title, index }: LazyIframeProps) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+        } else {
+          setIsInteracting(false);
         }
       },
       {
@@ -113,10 +116,17 @@ function LazyIframe({ url, title, index }: LazyIframeProps) {
           <iframe
             src={url}
             title={title}
-            className="h-full w-full border-0"
+            className={`h-full w-full border-0 ${isInteracting ? '' : 'pointer-events-none'}`}
             loading="lazy"
             onLoad={() => setHasLoaded(true)}
           />
+          {!isInteracting && hasLoaded && (
+            <button
+              className="absolute inset-0 z-10 cursor-pointer"
+              onClick={() => setIsInteracting(true)}
+              aria-label={`Click to interact with ${title}`}
+            />
+          )}
         </>
       )}
       {!isVisible && (
