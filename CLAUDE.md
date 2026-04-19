@@ -2,6 +2,41 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Guidelines
+
+### Think Before Coding
+
+- State assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them — don't pick silently.
+- If a simpler approach exists, say so.
+- If something is unclear, stop and ask.
+
+### Simplicity First
+
+- Minimum code that solves the problem. Nothing speculative.
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" that wasn't requested.
+
+### Surgical Changes
+
+- Touch only what you must. Don't "improve" adjacent code.
+- Match existing style, even if you'd do it differently.
+- Remove imports/variables/functions that YOUR changes made unused.
+- Every changed line should trace directly to the request.
+
+### Goal-Driven Execution
+
+- Define success criteria before starting.
+- Transform tasks into verifiable goals.
+- Loop until verified.
+
+### Close the Feedback Loop First
+
+- Before solving, build a way to observe.
+- A tight feedback loop is the foundation of execution.
+- Prefer building a reproduction script before the real implementation.
+
 ## About This Site
 
 Personal website built with Next.js, self-hosted on Hetzner. Contains blog posts, data visualizations, and a generative art gallery. Follows a strict self-hosting and open-source philosophy.
@@ -35,6 +70,7 @@ Posts are statically generated at build time via `app/lab/[slug]/page.tsx`.
 All blog/lab content is under `/lab`. Old routes (`/blog`, `/projects`, `/snippets`, etc.) permanently redirect there via `config/next-redirects.js`.
 
 Key routes:
+
 - `/lab` — post listing
 - `/lab/[slug]` — individual post
 - `/lab/gen-art-gallery` — iframe-based generative art gallery
