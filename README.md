@@ -1,6 +1,6 @@
 # koenvangilst.nl
 
-The source code of my personal website and blog, built with modern web technologies.
+The source code of my personal website and blog.
 
 ## Tech Stack
 
