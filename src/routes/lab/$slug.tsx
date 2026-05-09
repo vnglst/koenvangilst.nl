@@ -2,6 +2,10 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { getPost } from '#/cms/mdx-parser'
 import { MarkdownLayout } from '#/components/content/MarkdownLayout'
+import { Container } from '#/components/layout/Container'
+import { Prose } from '#/components/content/Prose'
+import { Heading } from '#/components/content/Heading'
+import { Link } from '#/components/ui/Link'
 
 const getLabPost = createServerFn({ method: 'GET' })
   .inputValidator((data: { slug: string }) => data)
@@ -24,13 +28,45 @@ const getLabPost = createServerFn({ method: 'GET' })
 
 export const Route = createFileRoute('/lab/$slug')({
   loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.title ?? ''} | Koen van Gilst` },
-      { name: 'description', content: loaderData?.summary ?? '' },
-    ],
-  }),
-  notFoundComponent: () => <div className="p-8">Post not found</div>,
+  head: ({ loaderData }) => {
+    const ogImage = loaderData
+      ? `https://koenvangilst.nl/og?title=${encodeURIComponent(loaderData.title)}&description=${encodeURIComponent(loaderData.summary)}&type=blog`
+      : undefined
+    return {
+      meta: [
+        { title: `${loaderData?.title ?? ''} | Koen van Gilst` },
+        { name: 'description', content: loaderData?.summary ?? '' },
+        ...(ogImage
+          ? [
+              { property: 'og:title', content: loaderData!.title },
+              { property: 'og:description', content: loaderData!.summary },
+              { property: 'og:image', content: ogImage },
+              { property: 'og:type', content: 'article' },
+              { name: 'twitter:card', content: 'summary_large_image' },
+              { name: 'twitter:site', content: '@vnglst' },
+              { name: 'twitter:title', content: loaderData!.title },
+              { name: 'twitter:description', content: loaderData!.summary },
+              { name: 'twitter:image', content: ogImage },
+            ]
+          : []),
+      ],
+      links: loaderData
+        ? [{ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` }]
+        : [],
+    }
+  },
+  notFoundComponent: () => (
+    <Container>
+      <Prose>
+        <Heading level={2}>404 - Not found</Heading>
+        <p>
+          It seems you've found something that used to exist, or you spelled something wrong. I'm
+          guessing you spelled something wrong. Can you double-check that URL?
+        </p>
+        <Link href="/">Return Home</Link>
+      </Prose>
+    </Container>
+  ),
   component: PostPage,
 })
 
@@ -48,7 +84,18 @@ function PostPage() {
   const Component = mod?.default
 
   if (!Component) {
-    return <div className="p-8">Post not found</div>
+    return (
+      <Container>
+        <Prose>
+          <Heading level={2}>404 - Not found</Heading>
+          <p>
+            It seems you've found something that used to exist, or you spelled something wrong. I'm
+            guessing you spelled something wrong. Can you double-check that URL?
+          </p>
+          <Link href="/">Return Home</Link>
+        </Prose>
+      </Container>
+    )
   }
 
   return (

@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { useEffect } from 'react'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
@@ -12,6 +13,10 @@ import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
 import { Tracking } from '#/components/Tracking'
+import { Container } from '#/components/layout/Container'
+import { Prose } from '#/components/content/Prose'
+import { Heading } from '#/components/content/Heading'
+import { Link } from '#/components/ui/Link'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -62,6 +67,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       { rel: 'manifest', href: '/static/favicons/site.webmanifest' },
     ],
   }),
+  notFoundComponent: NotFoundPage,
+  errorComponent: ErrorPage,
   shellComponent: RootDocument,
 })
 
@@ -103,6 +110,37 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function NotFoundPage() {
+  return (
+    <Container>
+      <Prose>
+        <Heading level={2}>404 - Not found</Heading>
+        <p>
+          It seems you've found something that used to exist, or you spelled something wrong. I'm
+          guessing you spelled something wrong. Can you double-check that URL?
+        </p>
+        <Link href="/">Return Home</Link>
+      </Prose>
+    </Container>
+  )
+}
+
+function ErrorPage({ error }: { error: Error }) {
+  useEffect(() => {
+    console.error(error)
+  }, [error])
+
+  return (
+    <Container>
+      <Prose>
+        <Heading level={1}>Something went wrong!</Heading>
+        <p>You've run into an error. Have you tried turning it off and on?</p>
+        <Link href="/">Return Home</Link>
+      </Prose>
+    </Container>
   )
 }
 

@@ -7,6 +7,11 @@ import type { PhotoType } from '#/data/photos';
 
 const WIDTHS = [384, 640, 750, 828, 1080, 1200, 1920, 2048, 2400];
 
+/** Convert a photo base name to a URL-safe directory name (must match generate-images.mjs) */
+function sanitizeName(name: string): string {
+  return name.replace(/,\s*/g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+}
+
 let cachedPhotos: PhotoType[] | null = null;
 let cacheTime = 0;
 const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
@@ -46,8 +51,8 @@ export async function getPhotos(): Promise<PhotoType[]> {
       }
       if (!createdAt) createdAt = file.createTime.toISOString();
 
-      const imageDir = path.join(optimizedDir, nameWithoutExt);
-      const encoded = encodeURIComponent(nameWithoutExt);
+      const safeName = sanitizeName(nameWithoutExt);
+      const imageDir = path.join(optimizedDir, safeName);
       const srcSetJpegParts: string[] = [];
       const srcSetWebpParts: string[] = [];
 
@@ -55,22 +60,22 @@ export async function getPhotos(): Promise<PhotoType[]> {
         if (width > (metadata.width || 0)) continue;
         try {
           await fs.access(path.join(imageDir, `${width}.jpg`));
-          srcSetJpegParts.push(`/static/photography-optimized/${encoded}/${width}.jpg ${width}w`);
+          srcSetJpegParts.push(`/static/photography-optimized/${safeName}/${width}.jpg ${width}w`);
         } catch {}
         try {
           await fs.access(path.join(imageDir, `${width}.webp`));
-          srcSetWebpParts.push(`/static/photography-optimized/${encoded}/${width}.webp ${width}w`);
+          srcSetWebpParts.push(`/static/photography-optimized/${safeName}/${width}.webp ${width}w`);
         } catch {}
       }
-      srcSetJpegParts.push(`/static/photography-optimized/${encoded}/original.jpg ${metadata.width || 0}w`);
-      srcSetWebpParts.push(`/static/photography-optimized/${encoded}/original.webp ${metadata.width || 0}w`);
+      srcSetJpegParts.push(`/static/photography-optimized/${safeName}/original.jpg ${metadata.width || 0}w`);
+      srcSetWebpParts.push(`/static/photography-optimized/${safeName}/original.webp ${metadata.width || 0}w`);
 
       const blurBuffer = await sharp(filePath).resize(10, 10, { fit: 'inside' }).jpeg({ quality: 70 }).toBuffer();
 
       return {
         id: 0,
         filename: file.filename,
-        src: `/static/photography-optimized/${encoded}/original.jpg`,
+        src: `/static/photography-optimized/${safeName}/original.jpg`,
         srcSet: srcSetJpegParts.join(', '),
         srcSetWebp: srcSetWebpParts.join(', '),
         width: metadata.width || 0,

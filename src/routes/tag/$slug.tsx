@@ -24,13 +24,20 @@ const getTagData = createServerFn({ method: 'GET' })
 
 export const Route = createFileRoute('/tag/$slug')({
   loader: async ({ params }) => getTagData({ data: params.slug }),
-  head: ({ params }) => {
+  head: ({ params, loaderData }) => {
     const tag = desluggify(params.slug);
+    const postCount = loaderData?.posts.length ?? 0;
+    const ogImage = `https://koenvangilst.nl/og?title=${encodeURIComponent(`Posts about ${tag}`)}&description=${encodeURIComponent(`${postCount} post${postCount === 1 ? '' : 's'} about ${tag}`)}&type=tag`;
     return {
       meta: [
         { title: `Posts about ${tag} | Koen van Gilst` },
-        { name: 'description', content: `All posts about ${tag}` }
-      ]
+        { name: 'description', content: `All posts about ${tag}` },
+        { property: 'og:title', content: `Posts about ${tag}` },
+        { property: 'og:description', content: `All posts about ${tag}` },
+        { property: 'og:image', content: ogImage },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: ogImage },
+      ],
     };
   },
   component: TagPage

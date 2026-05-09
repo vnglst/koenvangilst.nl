@@ -9,13 +9,23 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "start": "node dist/server/server.js",
+    "start": "srvx dist/server/server.js",
     "preview": "vite preview",
     "test": "vitest run",
     "type-check": "tsc --noEmit",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "knip": "knip"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,mjs,json,md,css}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
@@ -67,7 +77,10 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "knip": "^6.12.2",
+    "lint-staged": "^17.0.4",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "typescript": "^6.0.3",
