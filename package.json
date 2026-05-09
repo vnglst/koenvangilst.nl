@@ -1,5 +1,6 @@
 {
-  "name": "my-tanstack-app",
+  "name": "koenvangilst.nl",
+  "version": "9.0.0",
   "private": true,
   "type": "module",
   "imports": {
@@ -67,6 +68,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9.20.0",
     "jsdom": "^28.1.0",
+    "playwright": "^1.59.1",
     "prettier": "^3.8.1",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
