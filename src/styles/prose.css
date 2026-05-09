@@ -1,0 +1,44 @@
+/* Prose component and typography overrides */
+
+.prose {
+  @apply min-w-0;
+}
+
+.prose img,
+.prose figure {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.prose svg {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .prose pre {
+    max-width: 100%;
+  }
+}
+
+.prose .anchor {
+  @apply invisible absolute;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: '#';
+}
+
+.prose .anchor:hover,
+.prose *:hover > .anchor {
+  @apply visible no-underline;
+}
+
+.prose a {
+  @apply transition-all;
+}

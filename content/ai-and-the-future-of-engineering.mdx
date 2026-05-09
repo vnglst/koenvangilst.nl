@@ -1,0 +1,55 @@
+---
+title: Growing a Better World... Together with AI
+publishedAt: '2026-04-01'
+summary: 'Notes from my talk at the AI Circle on vibe coding, the changing role of engineers, and why AI should be an exoskeleton — not a replacement.'
+tags:
+  - ai
+  - article
+---
+
+import { Comparison } from './ai-and-the-future-of-engineering/Comparison'
+import { GrowingVines } from './ai-and-the-future-of-engineering/GrowingVines'
+import { RobotVsExoskeleton } from './ai-and-the-future-of-engineering/RobotVsExoskeleton'
+
+
+
+Yesterday I gave a talk to around 50 people in corporate tech and I shared some vibe coded side projects[^1] and insights on working with AI — both outside of work and within a large organization. The title was "Growing a better world... together with AI", which aligns not just with Rabobank's famous slogan[^2], but also with my perspective on how we should use AI: as an exoskeleton to enhance the capabilities of our human engineers, not as a robot replacement.
+
+Below are some of the highlights from the talks, including some of the animations and illustrations that I made specifically for the talk.
+
+## The link between code and understanding
+
+Many organisations are looking for ways to automate the software engineering lifecycle with AI. The idea: engineers provide requirements in the form of a prompt, AI takes care of writing the code. The goal: remove the human from the process and fully automate software development. I see the appeal of this vision (way faster development), but I think it could lead to organisations losing even more understanding of their systems.
+
+Barry O'Reilly, a software architect, put it better than I could:
+
+> GenAI requires the context first to generate the code. The agile movement, for all its cultish flaws, realised that developers generate their context by coding. [...] GenAI creates a condition where developers cannot generate their context, cannot relate the code to the problem as deeply as they did before. The link is broken.
+
+The Dutch toeslagenaffaire and the British Post Office scandal are examples of what happens when systems become black boxes — when nobody truly understands how the algorithm works, who it affects, and why. Those systems were built without AI, but if we start outsourcing all coding to agents, the risk of comprehension debt only grows.
+
+## Exoskeleton, not robot
+
+<RobotVsExoskeleton />
+
+Relying too much on AI means taking shortcuts, outsourcing your understanding and eventually facing cognitive decline. When something breaks in production and you don't understand the system, the only thing you can do is ask the AI and hope it knows the answer.
+
+Using AI as an exoskeleton[^3] (think Iron Man) makes you more capable. You orchestrate the agents, guide them, keep them in check. A backend developer uses AI to understand the frontend. A web engineer uses it to navigate cloud infrastructure. You get a holistic understanding of the system instead of a narrower one. You increase your ability to understand the system as a whole and own the accountability.
+
+["Computer says no"](/blog/computer-says-no) should not be an acceptable answer for an engineer — and AI can empower us to understand our ever more complex systems.
+
+<Comparison />
+
+## Advice
+
+**For engineers:** Nobody can predict the future, so don't worry if you hear predictions that next year all engineers will be out of a job. What we do know is that software engineering best practices still work. TDD, modular design, code reviews, refactoring — these translate directly into orchestrating AI agents well. Work on your communication skills too. As development gets faster, being able to explain what works, what doesn't, and why becomes more valuable than ever. And own the accountability. "The computer says no" is not an acceptable answer.
+
+**For tech leads:** Enable experimentation. Get the latest tools into your engineers' hands so they can learn how to use them before everything changes. Focus on enhancement, not replacement — give your engineers the tools to be 10x engineers, don't try to remove them from the picture. And watch out for burnout. There's FOMO from seeing everyone build side projects on weekends, uncertainty from pundits predicting the end of engineering jobs, and a new phenomenon called AI brain fry[^4] — where engineers juggling multiple AI agents in parallel get overwhelmed by constant context switching and difficult decisions.
+
+## Looking ahead
+
+I don't know what the future of engineering looks like. But I'm fairly confident that the engineers who will thrive are the ones who use AI to deepen their understanding rather than replace it. The ones who stay curious, keep their fundamentals sharp, and remember that they're accountable for the systems they build — no matter who or what wrote the code.
+
+[^1]: See my [generative art gallery](/lab/gen-art-gallery) for Pong Wars, Time Flies and Tetris Time.
+[^2]: [www.rabobank.com](https://www.rabobank.com/)
+[^3]: The exoskeleton metaphor for AI is well described in [AI as Exoskeleton](https://www.kasava.dev/blog/ai-as-exoskeleton) by Kasava.
+[^4]: Harvard Business Review, [When Using AI Leads to Brain Fry](https://hbr.org/2026/03/when-using-ai-leads-to-brain-fry).
