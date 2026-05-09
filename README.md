@@ -1,217 +1,130 @@
-Welcome to your new TanStack Start app! 
+# koenvangilst.nl
 
-# Getting Started
+The source code of my personal website and blog.
 
-To run this application:
+## Tech Stack
+
+- **Framework**: [TanStack Start](https://tanstack.com/start) with [TanStack Router](https://tanstack.com/router) (file-based routing)
+- **Runtime**: [React 19](https://react.dev/) with server functions via Vite
+- **Content**: [MDX](https://github.com/mdx-js/mdx) with [@mdx-js/rollup](https://mdxjs.com/packages/rollup/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom design system
+- **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
+- **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
+- **Testing**: [Vitest](https://vitest.dev/)
+
+## Project Structure
+
+```
+├── src/
+│   ├── routes/             # TanStack Router file-based routes
+│   │   ├── __root.tsx     # Root layout with fonts and metadata
+│   │   ├── index.tsx      # Homepage
+│   │   ├── about.tsx      # About page
+│   │   ├── lab/           # Blog posts and projects showcase
+│   │   ├── photography/   # Photography portfolio
+│   │   ├── feed[.]xml.ts  # RSS feed generation
+│   │   └── sitemap[.]xml.ts # Dynamic sitemap generation
+│   ├── cms/               # Content Management System
+│   │   ├── mdx-parser.ts  # MDX file parsing and processing
+│   │   └── schema.ts      # Zod schemas for content validation
+│   ├── components/        # Reusable React components
+│   │   ├── content/       # Content-specific components (MDX, articles)
+│   │   ├── forms/         # Form components
+│   │   ├── layout/        # Layout components (Container, etc.)
+│   │   ├── theme/         # Theme and dark mode components
+│   │   └── ui/            # UI primitives (buttons, links, etc.)
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utility functions
+│   ├── services/          # External service integrations
+│   └── styles/            # Global CSS styles
+├── content/               # MDX blog posts and articles
+│   └── *.mdx             # Individual blog posts with frontmatter
+├── public/                # Static assets
+└── scripts/               # Build and deployment scripts
+```
+
+## Content Management
+
+### MDX Processing Pipeline
+
+1. **Content Discovery**: MDX files are read from the `/content` directory
+2. **Frontmatter Parsing**: [gray-matter](https://github.com/jonschlinkert/gray-matter) extracts metadata
+3. **Schema Validation**: Zod ensures content structure integrity with type safety
+4. **MDX Compilation**: [@mdx-js/rollup](https://mdxjs.com/packages/rollup/) processes MDX with custom components
+5. **Enhancement**: Rehype plugins add code highlighting, auto-linking headings, and more
+
+### Content Schema
+
+Each blog post includes structured frontmatter:
+
+```yaml
+---
+title: 'Post Title'
+publishedAt: '2024-01-01'
+summary: 'Brief description for SEO and previews'
+tags: ['article', 'technology']
+image:
+  src: '/static/images/post.jpg'
+  alt: 'Image description'
+  width: 1200
+  height: 630
+  showAsHeader: true
+---
+```
+
+### Custom MDX Components
+
+- **Images**: Responsive images with automatic sizing
+- **Links**: Enhanced links with external link indicators
+- **Code Blocks**: Syntax highlighted with copy functionality
+- **Interactive Elements**: Custom React components for demos
+
+## Features
+
+- **Server-Side Rendering**: Full SSR via TanStack Start for optimal performance
+- **RSS Feed**: Automatically generated from blog posts
+- **Sitemap**: Dynamic sitemap including all content
+- **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images
+- **Dark Mode**: System-preference aware theme switching
+- **Reading Time**: Calculated for each blog post
+- **Tag System**: Categorized content with slug-based URLs
+- **SEO Optimized**: Meta tags, Open Graph, and structured data
+- **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
+
+## Running Locally
 
 ```bash
+git clone https://github.com/vnglst/koenvangilst.nl.git
+cd koenvangilst.nl
 npm install
 npm run dev
 ```
 
-# Building For Production
+Visit `http://localhost:3000` to see the site in development mode.
 
-To build this application for production:
+## Development Scripts
 
-```bash
-npm run build
-```
+- `npm run dev` - Start development server (port 3000)
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run type-check` - TypeScript type checking
+- `npm run lint` - Run ESLint
+- `npm run test` - Run Vitest tests
+- `npm run format` - Format with Prettier and auto-fix lint
+- `npm run check` - Check formatting with Prettier
 
-## Testing
+## Docker Deployment
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-npm run test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+The app is self-hosted on Hetzner Cloud via [Coolify](https://coolify.io/). To build and run locally with Docker:
 
 ```bash
-npm run lint
-npm run format
-npm run check
+# Build the image with the current commit hash
+docker build --build-arg SOURCE_COMMIT=$(git rev-parse HEAD) -t koenvangilst .
+
+# Run the container
+docker run -d -p 3000:3000 --name koenvangilst koenvangilst
 ```
 
+The `SOURCE_COMMIT` build argument embeds the git commit hash into the application, displayed in the footer.
 
-## Deploy to Cloudflare Workers
-
-This project uses the Cloudflare Vite plugin (configured in `vite.config.ts`) and `wrangler.jsonc`:
-
-1. Install Wrangler: `npm install -g wrangler`
-2. Authenticate: `wrangler login`
-3. Deploy: `npx wrangler deploy`
-
-For production env vars, run `wrangler secret put MY_VAR` for each secret listed in `.env.example`. Public (non-secret) vars go in `wrangler.jsonc` under `vars`.
-
-KV, D1, R2, and Durable Object bindings are configured in `wrangler.jsonc` — see https://developers.cloudflare.com/workers/wrangler/configuration/.
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+After the container starts, responsive images are generated automatically via `scripts/generate-images.mjs`.
