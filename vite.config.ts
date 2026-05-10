@@ -15,10 +15,12 @@ import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 
 const commitHash = (() => {
+  // Prefer SOURCE_COMMIT injected by Docker/CI (git history not available in builder)
+  if (process.env.SOURCE_COMMIT) return process.env.SOURCE_COMMIT;
   try {
-    return execSync('git rev-parse HEAD').toString().trim()
+    return execSync('git rev-parse HEAD').toString().trim();
   } catch {
-    return 'unknown'
+    return 'unknown';
   }
 })()
 
