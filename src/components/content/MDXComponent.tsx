@@ -10,12 +10,12 @@ function RoundedImage({ alt = '', label, ...props }: ComponentProps<'img'> & { l
   const className = cx('mt-1 mb-0 inline-block rounded-lg');
 
   if (!label) {
-    return <img alt={alt} {...props} className={className} />;
+    return <img alt={alt} loading="lazy" {...props} className={className} />;
   }
 
   return (
     <figure className="mt-1 mb-0 inline-block">
-      <img alt={alt} {...props} className={className} />
+      <img alt={alt} loading="lazy" {...props} className={className} />
       <figcaption className="mt-1 text-center text-gray-600 dark:text-gray-400">{label}</figcaption>
     </figure>
   );

@@ -38,10 +38,13 @@ export const Route = createFileRoute('/lab/$slug')({
         { name: 'description', content: loaderData?.summary ?? '' },
         ...(ogImage
           ? [
+              { property: 'og:url', content: `https://koenvangilst.nl/lab/${loaderData!.slug}` },
               { property: 'og:title', content: loaderData!.title },
               { property: 'og:description', content: loaderData!.summary },
               { property: 'og:image', content: ogImage },
               { property: 'og:type', content: 'article' },
+              { property: 'article:published_time', content: loaderData!.publishedAt },
+              { property: 'article:author', content: 'Koen van Gilst' },
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:site', content: '@vnglst' },
               { name: 'twitter:title', content: loaderData!.title },

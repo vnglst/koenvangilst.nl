@@ -38,7 +38,7 @@ export const Route = createFileRoute('/feed.xml')({
         return new Response(feed.xml({ indent: true }), {
           headers: {
             'Content-Type': 'application/rss+xml; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600'
+            'Cache-Control': 'public, max-age=86400'
           }
         });
       }

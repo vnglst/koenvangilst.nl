@@ -3,11 +3,7 @@ import {
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-import { useEffect } from 'react'
-
-import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import { Suspense, lazy, useEffect } from 'react'
 
 import appCss from '../styles.css?url'
 
@@ -17,6 +13,11 @@ import { Container } from '#/components/layout/Container'
 import { Prose } from '#/components/content/Prose'
 import { Heading } from '#/components/content/Heading'
 import { Link } from '#/components/ui/Link'
+
+// DevTools are only bundled in development — tree-shaken away in production
+const DevTools = import.meta.env.DEV
+  ? lazy(() => import('#/components/DevTools').then((m) => ({ default: m.DevTools })))
+  : null
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -87,6 +88,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="bg-slate-50 text-gray-800 antialiased dark:bg-slate-950 dark:text-gray-100">
+        {/* Skip to main content for keyboard/screen reader users */}
+        <a
+          href="#content"
+          className="absolute left-2 top-2 z-[100] -translate-y-20 rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-900 dark:text-white"
+        >
+          Skip to main content
+        </a>
         {/* Inline theme detection to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{
@@ -101,16 +109,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
         {children}
         <Tracking />
-        <TanStackDevtools
-          config={{ position: 'bottom-right' }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            TanStackQueryDevtools,
-          ]}
-        />
+        {DevTools && (
+          <Suspense fallback={null}>
+            <DevTools />
+          </Suspense>
+        )}
         <Scripts />
       </body>
     </html>

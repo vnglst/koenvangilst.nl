@@ -56,6 +56,7 @@ export function MarkdownLayout({
               src={image.src}
               width={image.width}
               height={image.height}
+              fetchPriority="high"
               className="my-5 inline-block rounded-lg"
             />
           )}

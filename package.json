@@ -10,7 +10,7 @@
     "dev": "vite dev --port 3000",
     "predev": "node scripts/generate-photos-data.mjs",
     "build": "vite build",
-    "start": "srvx --entry dist/server/server.js --static ../client",
+    "start": "srvx --entry dist/server/server.js",
     "preview": "vite preview",
     "test": "vitest run",
     "type-check": "tsc --noEmit",
