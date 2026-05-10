@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import useSWR from 'swr';
+import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { fetcher } from '#/lib/fetcher';
@@ -16,7 +16,7 @@ type AnomalyProps = {
 };
 
 export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
-  const { data, error } = useSWR(DATA_URL, fetcher);
+  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetcher(DATA_URL) });
 
   const classNameForBlog = 'my-4 aspect-[1/1]';
   const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';

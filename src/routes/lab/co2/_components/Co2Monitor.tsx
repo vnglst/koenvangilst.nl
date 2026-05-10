@@ -1,11 +1,13 @@
-import useSWR from 'swr'
+import { useQuery } from '@tanstack/react-query'
 import { fetcher } from '#/lib/fetcher'
 import type { Co2Reading } from '#/services/aranet'
 
 export function Co2Monitor() {
-  const { data: reading } = useSWR<Co2Reading>('/api/co2', fetcher, {
-    refreshInterval: 30_000,
-    revalidateOnFocus: true,
+  const { data: reading } = useQuery<Co2Reading>({
+    queryKey: ['/api/co2'],
+    queryFn: () => fetcher('/api/co2'),
+    refetchInterval: 30_000,
+    refetchOnWindowFocus: true,
   })
 
   const timestamp = reading ? (

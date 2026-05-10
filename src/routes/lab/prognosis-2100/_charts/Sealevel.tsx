@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { fetcher } from '#/lib/fetcher';
@@ -8,7 +8,7 @@ import { SealevelClient } from './SealevelChart';
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/sealevels.json';
 
 export function Sealevel() {
-  const { data, error } = useSWR(DATA_URL, fetcher);
+  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetcher(DATA_URL) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load sea level data</div>;
   if (!data) return <div className="aspect-[3/5] animate-pulse bg-gray-100 dark:bg-gray-800 md:aspect-square" />;
