@@ -3,6 +3,33 @@ import { createReadStream, existsSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { Readable } from 'node:stream'
 
+const COMPRESSIBLE = /^(text\/|application\/(javascript|json|xml|manifest)|image\/svg)/
+
+// Streaming compression via Web Streams API (Node 18+) — never buffers, stream-safe
+function tryCompress(req: Request, res: Response): Response {
+  const ct = res.headers.get('content-type') ?? ''
+  if (!COMPRESSIBLE.test(ct) || !res.body) return res
+
+  const accept = req.headers.get('accept-encoding') ?? ''
+  const headers = new Headers(res.headers)
+  headers.delete('content-length') // length changes after compression
+  headers.set('Vary', 'Accept-Encoding')
+
+  if (accept.includes('gzip')) {
+    headers.set('Content-Encoding', 'gzip')
+    return new Response(res.body.pipeThrough(new CompressionStream('gzip')), {
+      status: res.status, statusText: res.statusText, headers,
+    })
+  }
+  if (accept.includes('deflate')) {
+    headers.set('Content-Encoding', 'deflate')
+    return new Response(res.body.pipeThrough(new CompressionStream('deflate')), {
+      status: res.status, statusText: res.statusText, headers,
+    })
+  }
+  return res
+}
+
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com",
@@ -147,7 +174,7 @@ export default {
         if (request.method === 'HEAD') {
           return new Response(null, { status: staticResponse.status, headers: staticResponse.headers })
         }
-        return staticResponse
+        return tryCompress(request, staticResponse)
       }
     }
 
@@ -157,10 +184,11 @@ export default {
     for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
       headers.set(key, value)
     }
-    return new Response(response.body, {
+    const ssrResponse = new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
       headers,
     })
+    return tryCompress(request, ssrResponse)
   },
 }
