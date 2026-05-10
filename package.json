@@ -53,6 +53,7 @@
     "remark-mdx-frontmatter": "^5.2.0",
     "satori": "^0.26.0",
     "sharp": "^0.34.5",
+    "exif-reader": "^2.0.3",
     "tailwindcss": "^4.3.0",
     "zod": "^4.4.3",
     "zustand": "^5.0.13"
@@ -73,7 +74,6 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.3.0",
-    "exif-reader": "^2.0.3",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "knip": "^6.12.2",
