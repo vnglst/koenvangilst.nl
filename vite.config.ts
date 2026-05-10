@@ -13,6 +13,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
+import { remarkWordCount } from './src/lib/remark-word-count'
 
 const commitHash = (() => {
   // Prefer SOURCE_COMMIT injected by Docker/CI (git history not available in builder)
@@ -54,6 +55,7 @@ const config = defineConfig({
       remarkPlugins: [
         remarkGfm,
         remarkFrontmatter,
+        remarkWordCount,
         [remarkMdxFrontmatter, { name: 'frontmatter' }],
       ],
       rehypePlugins: [
