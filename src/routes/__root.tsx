@@ -41,6 +41,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       // Preload critical fonts to prevent FOUT (Flash of Unstyled Text)
       { rel: 'preload', href: '/fonts/ibm-plex-sans-400.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
       { rel: 'preload', href: '/fonts/ibm-plex-sans-500.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      { rel: 'preload', href: '/fonts/ibm-plex-sans-600.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
       { rel: 'preload', href: '/fonts/ibm-plex-sans-700.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
       { rel: 'preload', href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
       {
@@ -52,7 +53,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         rel: 'alternate',
         type: 'application/rss+xml',
-        href: 'https://koenvangilst.nl/feed.xml',
+        href: '/feed.xml',
       },
       {
         rel: 'icon',

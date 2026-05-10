@@ -6,6 +6,18 @@ import satori from 'satori';
 
 const FONT_PATH = path.join(process.cwd(), 'public/fonts/IBMPlexSans-Bold.ttf');
 
+// Cache font bytes at module load time — avoids a 196 KB disk read on every /og request.
+let cachedFontData: Buffer | null = null;
+function loadFont(): Buffer | null {
+  if (cachedFontData) return cachedFontData;
+  try {
+    cachedFontData = fs.readFileSync(FONT_PATH);
+    return cachedFontData;
+  } catch {
+    return null;
+  }
+}
+
 export const Route = createFileRoute('/og')({
   server: {
     handlers: {
@@ -18,10 +30,8 @@ export const Route = createFileRoute('/og')({
             'Innovative tech lead from the Netherlands who likes to push the web beyond its limits.';
           const type = url.searchParams.get('type') || 'blog';
 
-          let fontData: Buffer;
-          try {
-            fontData = fs.readFileSync(FONT_PATH);
-          } catch {
+          const fontData = loadFont();
+          if (!fontData) {
             return new Response(null, { status: 302, headers: { Location: '/banner.png' } });
           }
 
