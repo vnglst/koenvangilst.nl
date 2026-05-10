@@ -29,10 +29,9 @@ RUN --mount=type=cache,target=/root/.npm \
 FROM node:24-alpine AS runner
 WORKDIR /app
 
-# Node.js listens on localhost:3001 (internal); Nginx listens on 0.0.0.0:3000 (external)
 ENV NODE_ENV=production
-ENV PORT=3001
-ENV HOSTNAME=127.0.0.1
+# Note: PORT and HOSTNAME for Node.js are set inline in docker-entrypoint.sh
+# to prevent container platforms (Coolify) from overriding them.
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
