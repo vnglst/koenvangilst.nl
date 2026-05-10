@@ -11,4 +11,9 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
-\n# Generated images (created at Docker build time by scripts/generate-images.mjs)\npublic/static/photography-optimized/
+
+# Generated images (created at deploy time by scripts/generate-images.mjs)
+public/static/photography-optimized/
+
+# Generated photo metadata (created at deploy time by scripts/generate-photos-data.mjs)
+public/static/photos-data.json
