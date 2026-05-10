@@ -84,7 +84,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className="h-full min-w-[360px] scroll-smooth font-sans"
+      className="h-full min-w-[360px] font-sans"
     >
       <head>
         <HeadContent />
