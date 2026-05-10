@@ -18,19 +18,23 @@ function formatDate(dateString?: string) {
 
 function Photo({ photo, index }: { photo: PhotoType; index: number }) {
   return (
-    <div id={`photo-${index}`} className="relative h-screen w-full snap-start snap-always bg-slate-950">
-      <img
-        src={photo.src}
-        srcSet={photo.srcSet}
-        sizes="100vw"
-        alt={photo.alt}
-        className="h-full w-full object-contain"
-        loading="lazy"
-        style={{
-          backgroundImage: `url(${photo.blurDataURL})`,
-          backgroundSize: 'cover'
-        }}
-      />
+    <div
+      id={`photo-${index}`}
+      className="relative h-screen w-full snap-start snap-always"
+      style={{ backgroundColor: '#020617', backgroundImage: `url(${photo.blurDataURL})`, backgroundSize: 'cover' }}
+    >
+      <picture>
+        {photo.srcSetWebp && <source type="image/webp" srcSet={photo.srcSetWebp} sizes="100vw" />}
+        <img
+          src={photo.src}
+          srcSet={photo.srcSet}
+          sizes="100vw"
+          alt={photo.alt}
+          className="h-full w-full object-contain"
+          loading={index < 2 ? 'eager' : 'lazy'}
+          fetchPriority={index === 0 ? 'high' : 'auto'}
+        />
+      </picture>
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
         <div className="text-center">
           <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
@@ -118,19 +122,26 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
           key={photo.id}
           onClick={() => navigate({ to: '/photography', search: { photo: String(index) } })}
           className="relative block aspect-square overflow-hidden rounded-lg"
+          style={{ backgroundImage: `url(${photo.blurDataURL})`, backgroundSize: 'cover' }}
         >
-          <img
-            src={photo.src}
-            srcSet={photo.srcSet}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            alt={photo.alt}
-            className="h-full w-full object-cover transition-opacity hover:opacity-90"
-            loading={index < 6 ? 'eager' : 'lazy'}
-            style={{
-              backgroundImage: `url(${photo.blurDataURL})`,
-              backgroundSize: 'cover'
-            }}
-          />
+          <picture>
+            {photo.srcSetWebp && (
+              <source
+                type="image/webp"
+                srcSet={photo.srcSetWebp}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            )}
+            <img
+              src={photo.src}
+              srcSet={photo.srcSet}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              alt={photo.alt}
+              className="h-full w-full object-cover transition-opacity hover:opacity-90"
+              loading={index < 6 ? 'eager' : 'lazy'}
+              fetchPriority={index < 3 ? 'high' : 'auto'}
+            />
+          </picture>
         </button>
       ))}
     </div>

@@ -37,6 +37,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
+      // Preload critical fonts to prevent FOUT (Flash of Unstyled Text)
+      { rel: 'preload', href: '/fonts/ibm-plex-sans-400.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      { rel: 'preload', href: '/fonts/ibm-plex-sans-700.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      { rel: 'preload', href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
       {
         rel: 'preconnect',
         href: 'https://plausible.koenvangilst.nl',

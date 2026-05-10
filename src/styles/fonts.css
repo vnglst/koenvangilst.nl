@@ -3,7 +3,7 @@
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/ibm-plex-sans-400.woff2') format('woff2');
 }
 
@@ -11,7 +11,7 @@
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/ibm-plex-sans-500.woff2') format('woff2');
 }
 
@@ -19,7 +19,7 @@
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/ibm-plex-sans-600.woff2') format('woff2');
 }
 
@@ -27,7 +27,7 @@
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/ibm-plex-sans-700.woff2') format('woff2');
 }
 
@@ -36,7 +36,7 @@
   font-family: 'PT Serif';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/pt-serif-400.woff2') format('woff2');
 }
 
@@ -44,7 +44,7 @@
   font-family: 'PT Serif';
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/pt-serif-400-italic.woff2') format('woff2');
 }
 
@@ -52,7 +52,7 @@
   font-family: 'PT Serif';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/pt-serif-700.woff2') format('woff2');
 }
 
@@ -60,7 +60,7 @@
   font-family: 'PT Serif';
   font-style: italic;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/pt-serif-700-italic.woff2') format('woff2');
 }
 
@@ -69,7 +69,7 @@
   font-family: 'Nimbus Sans';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2') format('woff2');
 }
 
