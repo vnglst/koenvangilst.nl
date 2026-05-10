@@ -59,4 +59,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/health || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["node_modules/.bin/srvx", "server/server.js"]
+CMD ["node_modules/.bin/srvx", "--entry", "server/server.js", "--static", "../client"]

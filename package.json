@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "start": "srvx dist/server/server.js",
+    "start": "srvx --entry dist/server/server.js --static ../client",
     "preview": "vite preview",
     "test": "vitest run",
     "type-check": "tsc --noEmit",
