@@ -21,7 +21,7 @@ export const PostMeta = z
   })
   .strict();
 
-export const Post = PostMeta.extend({
+const Post = PostMeta.extend({
   code: z.string(),
   readingTime: z.object({
     text: z.string(),

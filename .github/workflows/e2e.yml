@@ -1,0 +1,88 @@
+name: E2E Smoke Tests
+
+on:
+  # Run smoke tests against a deployed URL (triggered externally after deploy)
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Target URL to smoke test (e.g. https://pr210.web.koenvangilst.nl)'
+        required: false
+        default: 'http://localhost:3000'
+
+  # Also run against a local Docker build on every push to main/tanstack-start
+  push:
+    branches: ['main', 'tanstack-start']
+
+jobs:
+  smoke:
+    name: E2E Smoke Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      # When dispatched with a custom URL, test against it directly
+      - name: Run smoke tests (external URL)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.base_url != 'http://localhost:3000'
+        run: npm run test:e2e
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url }}
+
+      # Otherwise build and start a local Docker container to test against
+      - name: Build Docker image
+        if: github.event_name == 'push'
+        run: |
+          docker build \
+            --build-arg SOURCE_COMMIT=${{ github.sha }} \
+            -t koenvangilst-test .
+
+      - name: Generate photo data and run container
+        if: github.event_name == 'push'
+        run: |
+          # Start container
+          docker run -d --name koenvangilst-test -p 3000:3000 koenvangilst-test
+          # Wait for health endpoint
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000/health; then
+              echo "Server is up"
+              break
+            fi
+            echo "Waiting... ($i/30)"
+            sleep 2
+          done
+
+      - name: Run smoke tests (local Docker)
+        if: github.event_name == 'push'
+        run: npm run test:e2e
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Dump container logs on failure
+        if: failure() && github.event_name == 'push'
+        run: docker logs koenvangilst-test 2>&1 || true
+
+      - name: Cleanup Docker container
+        if: always() && github.event_name == 'push'
+        run: docker stop koenvangilst-test && docker rm koenvangilst-test || true
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

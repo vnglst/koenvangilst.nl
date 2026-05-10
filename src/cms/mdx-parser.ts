@@ -51,4 +51,3 @@ export function getPost(slug: string) {
   };
 }
 
-export type PostWithComponent = NonNullable<ReturnType<typeof getPost>>;

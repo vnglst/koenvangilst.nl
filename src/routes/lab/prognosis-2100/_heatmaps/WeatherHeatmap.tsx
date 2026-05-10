@@ -32,5 +32,5 @@ const Data = z.object({
 });
 
 export type Data = z.infer<typeof Data>;
-export type Heatmap = Data['rainfall_heatmap'];
+type Heatmap = Data['rainfall_heatmap'];
 export type HeatmapValue = Heatmap[0];

@@ -1,7 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { PhotoType } from '#/data/photos';
+export type PhotoType = {
+  id: number;
+  filename: string;
+  src: string;
+  srcSet: string;
+  srcSetWebp: string;
+  alt: string;
+  width: number;
+  height: number;
+  isVertical: boolean;
+  createdAt?: string;
+  location?: string;
+  blurDataURL: string;
+};
 
 const DATA_FILE = path.join(process.cwd(), 'public/static/photos-data.json');
 

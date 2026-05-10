@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { getPosts } from '#/cms/mdx-parser';
-import { getPhotos } from '#/data/photos';
+import { getPhotos } from '#/lib/photos';
 
 const BASE_URL = 'https://koenvangilst.nl';
 
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/sitemap.xml')({
     handlers: {
       GET: async () => {
         const posts = await getPosts();
-        const photos = getPhotos();
+        const photos = await getPhotos();
 
         const pages = ['', 'lab', 'photography'];
 

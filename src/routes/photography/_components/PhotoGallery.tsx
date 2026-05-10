@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
-import type { PhotoType } from '#/data/photos';
+import type { PhotoType } from '#/lib/photos';
 
 type PhotoGalleryProps = {
   photos: PhotoType[];
