@@ -1,5 +1,3 @@
-'use client';
-
 const leftItems = ['vibe coding', 'outsourcing understanding', 'shortcuts', 'cognitive decline', 'cognitive debt'];
 const rightItems = [
   'agentic coding',
