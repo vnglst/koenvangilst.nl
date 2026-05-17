@@ -1,7 +1,10 @@
+import { getPosts } from 'cms/mdx-parser';
+
 import { Heading } from 'components/content/Heading';
 import { Prose } from 'components/content/Prose';
 import { Container } from 'components/layout/Container';
 import { Link } from 'components/ui/Link';
+import { dateFormatter } from 'lib/formatters';
 
 export async function generateMetadata() {
   return {
@@ -12,39 +15,39 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
+  const recentArticles = (await getPosts()).filter((post) => post.tags.includes('article')).slice(0, 5);
+
   return (
     <Container>
       <Heading level={1}>Koen van Gilst</Heading>
-      <Prose>
+      <Prose className="mb-4">
         <p>
-          I'm a software engineer with a philosophy degree and a lifelong passion for creating software. 
-          I started programming around 11 with GW-Basic and Turbo Pascal, and even though I've pursued 
-          many other interests since, my fascination with making computer do cool stuff with code has 
-          never faded. After many years as a web developer, I'm now in a technical leadership role 
-          helping teams build AI solutions for Rabobank.
+          I'm a software engineer with a philosophy degree and a lifelong passion for creating software. I started
+          programming around 11 with GW-Basic and Turbo Pascal, and even though I've pursued many other interests since,
+          my fascination with making computers do "cool stuff" has never faded. After many years as a web developer, I'm
+          now in a technical leadership role helping teams build AI solutions for Rabobank.
         </p>
-
-        <p>On this website, you'll find a selection of my work:</p>
-        <ul>
-          <li>
-            <Link href="/lab?q=side-project">Side projects</Link>
-          </li>
-          <li>
-            <Link href="/lab?q=article">Articles</Link>
-          </li>
-          <li>
-            <Link href="/lab/gen-art-gallery">Generative art</Link>
-          </li>
-          <li>
-            <Link href="https://pelican.koenvangilst.nl">Pelican Art Gallery</Link> — comparing how different AI models
-            (2022–2025) recreate famous paintings as SVG code
-          </li>
-          <li>
-            <Link href="https://onsland.koenvangilst.nl">Ons Land</Link> — an interactive hexagonal map visualization
-            comparing land use across European countries
-          </li>
-        </ul>
       </Prose>
+
+      <p className="mt-8 mb-4 text-base font-bold text-gray-900 dark:text-gray-100">Recent articles</p>
+
+      <section>
+        <ul className="space-y-2">
+          {recentArticles.map((article) => (
+            <li
+              key={article.slug}
+              className="flex items-baseline gap-3 overflow-hidden text-base text-gray-900 dark:text-gray-100"
+            >
+              <span className="w-24 shrink-0 text-gray-600 tabular-nums dark:text-gray-400">
+                {dateFormatter(article.publishedAt)}
+              </span>
+              <Link className="min-w-0 flex-1 truncate font-normal" href={article.url || `/lab/${article.slug}`}>
+                {article.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </Container>
   );
 }
