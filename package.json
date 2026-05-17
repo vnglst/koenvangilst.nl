@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@plausible-analytics/tracker": "0.4.5",
-    "@tailwindcss/postcss": "4.2.4",
+    "@tailwindcss/postcss": "^4.3.0",
     "@vercel/og": "^0.11.1",
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
@@ -39,7 +39,7 @@
     "remark-gfm": "4.0.1",
     "sharp": "0.34.5",
     "swr": "2.4.1",
-    "tailwindcss": "4.2.4",
+    "tailwindcss": "^4.3.0",
     "zod": "4.4.3",
     "zustand": "5.0.13"
   },
