@@ -23,9 +23,9 @@ export default async function Home() {
       <Prose className="mb-4">
         <p>
           I'm a software engineer with a philosophy degree and a lifelong passion for creating software. I started
-          programming around 11 with GW-Basic and Turbo Pascal, and even though I've pursued many other interests since,
-          my fascination with making computers do "cool stuff" has never faded. After many years as a web developer, I'm
-          now in a technical leadership role helping teams build AI solutions for Rabobank.
+          programming at an early age using GW-Basic and Turbo Pascal, and even though I've had many more interests, my
+          fascination for making computers do "cool stuff" has never faded. After many years as a web developer, I'm now
+          in a technical leadership role helping teams build AI solutions for Rabobank.
         </p>
       </Prose>
 
