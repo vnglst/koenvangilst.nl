@@ -6,19 +6,22 @@ if [ -d "/app/public/static/photography-optimized" ]; then
   chown -R appuser:nodejs /app/public/static/photography-optimized
 fi
 
-# Generate optimized images (idempotent — skips files that already exist)
-echo "Running image generation..."
-su-exec appuser:nodejs node /app/scripts/generate-images.mjs
-
-# Generate photo metadata JSON (EXIF, srcSet, blur placeholders)
-echo "Generating photo metadata..."
-su-exec appuser:nodejs node /app/scripts/generate-photos-data.mjs
-
 # Start Node.js SSR server in background (localhost:3001 — internal only).
 # PORT and HOSTNAME are set inline to override any env vars injected by the
 # container platform (e.g. Coolify sets PORT=3000 at runtime).
 echo "Starting Node.js SSR server on 127.0.0.1:3001..."
 su-exec appuser:nodejs env PORT=3001 HOSTNAME=127.0.0.1 node_modules/.bin/srvx --entry server/server.js &
+
+# Generate optimized images and photo metadata in the background so healthchecks
+# can pass while the long-running photography warmup continues.
+(
+  set -e
+  echo "Running image generation..."
+  su-exec appuser:nodejs node /app/scripts/generate-images.mjs
+
+  echo "Generating photo metadata..."
+  su-exec appuser:nodejs node /app/scripts/generate-photos-data.mjs
+) &
 
 # Start Nginx in foreground as the main process (becomes effective PID 1)
 echo "Starting Nginx on 0.0.0.0:3000..."
