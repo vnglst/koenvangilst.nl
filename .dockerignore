@@ -1,0 +1,36 @@
+# VCS and local tooling
+.git
+.github/
+.husky/
+.claude/
+.vscode/
+.idea/
+
+# Dependencies and generated output
+node_modules/
+dist/
+.next/
+.vite/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local environment files and logs
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Files not needed in the production image build context
+e2e/
+playwright.config.ts
+AGENTS.md
+CLAUDE.md
+
+# OS cruft
+.DS_Store
