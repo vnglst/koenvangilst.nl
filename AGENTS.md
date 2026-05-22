@@ -1,7 +1,9 @@
 <!-- intent-skills:start -->
+
 ## Skill Loading
 
 Before substantial work:
+
 - Skill check: run `npx @tanstack/intent@latest list`, or use skills already listed in context.
 - Skill guidance: if one local skill clearly matches the task, run `npx @tanstack/intent@latest load <package>#<skill>` and follow the returned `SKILL.md`.
 - Monorepos: when working across packages, run the skill check from the workspace root and prefer the local skill for the package being changed.
@@ -53,9 +55,16 @@ npm run dev          # Local dev server (port 3000)
 npm run build        # Production build → dist/
 npm run start        # Run built server: node dist/server/server.js
 npm run test         # Vitest unit tests
+npm run test:e2e     # Playwright end-to-end tests
 npm run type-check   # tsc --noEmit
 npm run lint         # ESLint
 ```
+
+## Validation Expectations
+
+- Always run `npm run type-check`, `npm run lint`, and `npm run test` before committing code changes.
+- For large refactors or broad changes - especially routing, layout, rendering, image, or other cross-page behavior changes - also run `npm run test:e2e`.
+- Treat the Playwright suite as required regression coverage for the site's main user flows when the change touches multiple surfaces.
 
 ## Docker / Deployment
 
@@ -72,6 +81,7 @@ docker stop koenvangilst-test && docker rm koenvangilst-test
 ```
 
 Build output goes to `.output/`:
+
 - `.output/server/index.mjs` — Node.js HTTP server (Nitro/h3)
 - `.output/public/` — static assets served by the server
 
@@ -116,6 +126,7 @@ Coolify is configured on a separate Raspberry Pi 5. Set "Include Source Commit i
 ### Environment Variables
 
 Injected at build time via `define` in `vite.config.ts`:
+
 - `import.meta.env.VITE_COMMIT_HASH` — git SHA (used in Footer)
 - `import.meta.env.VITE_APP_VERSION` — package.json version (used in Footer)
 
@@ -123,15 +134,16 @@ These are baked in at build time, not runtime env vars.
 
 ## What Was Not Migrated 1:1
 
-| Feature | Reason | Status |
-|---|---|---|
-| Next.js `localFont` | Not available outside Next.js | Replaced with CSS `@font-face` rules in `styles/fonts.css` |
-| Next.js Image optimization | `next/image` auto-resizes/optimizes; replaced with plain `<img>` | The legacy `scripts/generate-images.mjs` pre-generates responsive sizes at container startup |
-| Per-post `.components.js` dynamic imports | Legacy dynamically imports per-post component files at request time; Vite build-time MDX uses static imports instead | MDX files import their custom components directly with static `import` |
+| Feature                                   | Reason                                                                                                               | Status                                                                                       |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Next.js `localFont`                       | Not available outside Next.js                                                                                        | Replaced with CSS `@font-face` rules in `styles/fonts.css`                                   |
+| Next.js Image optimization                | `next/image` auto-resizes/optimizes; replaced with plain `<img>`                                                     | The legacy `scripts/generate-images.mjs` pre-generates responsive sizes at container startup |
+| Per-post `.components.js` dynamic imports | Legacy dynamically imports per-post component files at request time; Vite build-time MDX uses static imports instead | MDX files import their custom components directly with static `import`                       |
 
 ## Build Output
 
 Build outputs to `dist/`:
+
 - `dist/server/server.js` — Node.js HTTP server (Nitro/h3)
 - `dist/public/` — static assets served by the server
 
@@ -147,5 +159,3 @@ All original TODOs have been resolved:
 - ✅ Per-post MDX component imports (static `import` in each MDX file)
 - ✅ All routes tested with Playwright + curl (100% pass rate)
 - ✅ Legacy-source cleaned up
-
-

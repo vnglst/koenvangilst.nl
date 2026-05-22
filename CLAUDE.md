@@ -51,9 +51,16 @@ npm run type-check   # TypeScript check (no emit)
 npm run lint         # ESLint
 npm run format       # Prettier + ESLint auto-fix
 npm run test         # Vitest (single run)
+npm run test:e2e     # Playwright end-to-end tests
 npx vitest           # Vitest in watch mode
 npm run knip         # Detect unused dependencies/exports
 ```
+
+## Validation
+
+- Always run `npm run type-check`, `npm run lint`, and `npm run test` before committing code changes.
+- For large refactors or broad changes - especially routing, layout, rendering, image, or other cross-page behavior changes - also run `npm run test:e2e`.
+- Use the Playwright suite as a required regression check when a change affects multiple user flows.
 
 ## Architecture
 
