@@ -1,5 +1,3 @@
-'use client';
-
 import { useMemo } from 'react';
 
 const LEAF_FILLS = ['#1a5c28', '#2e7d32', '#388e3c', '#52b768', '#7ec887', '#a5d6a7', '#c8e6c9'];

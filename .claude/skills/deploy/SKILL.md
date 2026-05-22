@@ -42,7 +42,7 @@ Build the site to verify it compiles successfully:
 npm run build
 ```
 
-Expected: Build completes with 92 static pages generated.
+Expected: Build completes successfully.
 
 ### 3. Commit Changes (if any)
 

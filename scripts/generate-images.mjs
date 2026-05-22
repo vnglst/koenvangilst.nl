@@ -10,6 +10,11 @@ const WIDTHS = [384, 640, 750, 828, 1080, 1200, 1920, 2048, 2400];
 const INPUT_DIR = path.join(__dirname, '../public/static/photography');
 const OUTPUT_DIR = path.join(__dirname, '../public/static/photography-optimized');
 
+/** Convert a photo base name to a URL-safe directory name */
+function sanitizeName(name) {
+  return name.replace(/,\s*/g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+}
+
 async function fileExists(filePath) {
   try {
     await fs.access(filePath);
@@ -37,7 +42,8 @@ async function generateResponsiveImages() {
   for (const filename of files) {
     const inputPath = path.join(INPUT_DIR, filename);
     const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
-    const imageOutputDir = path.join(OUTPUT_DIR, nameWithoutExt);
+    const safeName = sanitizeName(nameWithoutExt);
+    const imageOutputDir = path.join(OUTPUT_DIR, safeName);
 
     // Get original image metadata
     const image = sharp(inputPath);
