@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 
 import type { PhotoType } from '#/lib/photos'
@@ -63,6 +63,11 @@ function FullScreenGallery({
   startIndex: number
 }) {
   const navigate = useNavigate()
+  const [slideOverlay, setSlideOverlay] = useState<{
+    photo: PhotoType
+    direction: 'left' | 'right'
+  } | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const element = document.getElementById(`photo-${startIndex}`)
@@ -70,6 +75,14 @@ function FullScreenGallery({
       element.scrollIntoView({ behavior: 'instant' })
     }
   }, [startIndex])
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     function getCurrentPhotoIndex() {
@@ -86,15 +99,11 @@ function FullScreenGallery({
         return
       }
 
-      if (
-        event.key === 'ArrowDown' ||
-        event.key === 'ArrowUp' ||
-        event.key === 'ArrowRight' ||
-        event.key === 'ArrowLeft'
-      ) {
+      // Up/Down: keep existing smooth scroll behavior
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
         event.preventDefault()
         const currentIndex = getCurrentPhotoIndex()
-        const isNext = event.key === 'ArrowDown' || event.key === 'ArrowRight'
+        const isNext = event.key === 'ArrowDown'
         const nextIndex = isNext ? currentIndex + 1 : currentIndex - 1
 
         if (nextIndex >= 0 && nextIndex < photos.length) {
@@ -103,12 +112,41 @@ function FullScreenGallery({
             element.scrollIntoView({ behavior: 'smooth' })
           }
         }
+        return
+      }
+
+      // Left/Right: slide animation to prev/next photo
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        event.preventDefault()
+
+        // Prevent overlapping transitions
+        if (slideOverlay) return
+
+        const currentIndex = getCurrentPhotoIndex()
+        const isNext = event.key === 'ArrowRight'
+        const nextIndex = isNext ? currentIndex + 1 : currentIndex - 1
+
+        if (nextIndex >= 0 && nextIndex < photos.length) {
+          const direction = isNext ? 'right' : 'left'
+          setSlideOverlay({
+            photo: photos[nextIndex],
+            direction,
+          })
+
+          timeoutRef.current = setTimeout(() => {
+            setSlideOverlay(null)
+            const element = document.getElementById(`photo-${nextIndex}`)
+            if (element) {
+              element.scrollIntoView({ behavior: 'instant' })
+            }
+          }, 300)
+        }
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [navigate, photos.length])
+  }, [navigate, photos, photos.length, slideOverlay])
 
   return (
     <div className="fixed inset-0 bg-slate-950">
@@ -123,6 +161,18 @@ function FullScreenGallery({
           <Photo key={photo.id} photo={photo} index={index} />
         ))}
       </div>
+
+      {slideOverlay && (
+        <div
+          className={`fixed inset-0 z-40 ${
+            slideOverlay.direction === 'right'
+              ? 'animate-slide-in-right'
+              : 'animate-slide-in-left'
+          }`}
+        >
+          <Photo photo={slideOverlay.photo} index={-1} />
+        </div>
+      )}
     </div>
   )
 }
