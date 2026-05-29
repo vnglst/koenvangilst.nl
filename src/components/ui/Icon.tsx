@@ -1,4 +1,4 @@
-import { cx } from '#/lib/clsx';
+import { cx } from '#/lib/clsx'
 
 type IconProps = {
   icon:
@@ -18,14 +18,14 @@ type IconProps = {
     | 'mastodon'
     | 'github'
     | 'linkedin'
-    | 'terminal';
-  className?: string;
-};
+    | 'terminal'
+  className?: string
+}
 
 export function Icon({ icon, className }: IconProps) {
   return (
     <svg className={cx(className)} fill="currentColor">
-      <use xlinkHref={`/static/icons/${icon}.svg#${icon}`} />
+      <use href={`/static/icons/${icon}.svg#${icon}`} />
     </svg>
-  );
+  )
 }
