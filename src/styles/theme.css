@@ -27,6 +27,32 @@
   animation: blink 1s step-start 1s infinite;
 }
 
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 300ms ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 300ms ease-out forwards;
+}
+
 /* Typography styles for light mode */
 .prose {
   color: rgb(55 65 81); /* gray-700 */
