@@ -1,19 +1,19 @@
-import { useEffect } from 'react';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useEffect } from 'react'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 
-import type { PhotoType } from '#/lib/photos';
+import type { PhotoType } from '#/lib/photos'
 
 type PhotoGalleryProps = {
-  photos: PhotoType[];
-};
+  photos: PhotoType[]
+}
 
 function formatDate(dateString?: string) {
-  if (!dateString) return '';
+  if (!dateString) return ''
   return new Date(dateString).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
-  });
+    year: 'numeric',
+  })
 }
 
 function Photo({ photo, index }: { photo: PhotoType; index: number }) {
@@ -21,10 +21,16 @@ function Photo({ photo, index }: { photo: PhotoType; index: number }) {
     <div
       id={`photo-${index}`}
       className="relative h-screen w-full snap-start snap-always"
-      style={{ backgroundColor: '#020617', backgroundImage: `url(${photo.blurDataURL})`, backgroundSize: 'cover' }}
+      style={{
+        backgroundColor: '#020617',
+        backgroundImage: `url(${photo.blurDataURL})`,
+        backgroundSize: 'cover',
+      }}
     >
       <picture>
-        {photo.srcSetWebp && <source type="image/webp" srcSet={photo.srcSetWebp} sizes="100vw" />}
+        {photo.srcSetWebp && (
+          <source type="image/webp" srcSet={photo.srcSetWebp} sizes="100vw" />
+        )}
         <img
           src={photo.src}
           srcSet={photo.srcSet}
@@ -37,56 +43,72 @@ function Photo({ photo, index }: { photo: PhotoType; index: number }) {
       </picture>
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pb-12 pt-16">
         <div className="text-center">
-          <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
-          <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
+          <div className="text-base font-light tracking-wide text-white">
+            {photo.location}
+          </div>
+          <div className="mt-1 text-xs font-light text-white/70">
+            {formatDate(photo.createdAt)}
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
-  const navigate = useNavigate();
+function FullScreenGallery({
+  photos,
+  startIndex,
+}: {
+  photos: PhotoType[]
+  startIndex: number
+}) {
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const element = document.getElementById(`photo-${startIndex}`);
+    const element = document.getElementById(`photo-${startIndex}`)
     if (element) {
-      element.scrollIntoView({ behavior: 'instant' });
+      element.scrollIntoView({ behavior: 'instant' })
     }
-  }, [startIndex]);
+  }, [startIndex])
 
   useEffect(() => {
     function getCurrentPhotoIndex() {
-      const scrollContainer = document.querySelector('.snap-y');
-      if (!scrollContainer) return 0;
-      const scrollTop = scrollContainer.scrollTop;
-      const photoHeight = window.innerHeight;
-      return Math.round(scrollTop / photoHeight);
+      const scrollContainer = document.querySelector('.snap-y')
+      if (!scrollContainer) return 0
+      const scrollTop = scrollContainer.scrollTop
+      const photoHeight = window.innerHeight
+      return Math.round(scrollTop / photoHeight)
     }
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        navigate({ to: '/photography', search: {} });
-        return;
+        navigate({ to: '/photography', search: {} })
+        return
       }
 
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-        event.preventDefault();
-        const currentIndex = getCurrentPhotoIndex();
-        const nextIndex = event.key === 'ArrowDown' ? currentIndex + 1 : currentIndex - 1;
+      if (
+        event.key === 'ArrowDown' ||
+        event.key === 'ArrowUp' ||
+        event.key === 'ArrowRight' ||
+        event.key === 'ArrowLeft'
+      ) {
+        event.preventDefault()
+        const currentIndex = getCurrentPhotoIndex()
+        const isNext = event.key === 'ArrowDown' || event.key === 'ArrowRight'
+        const nextIndex = isNext ? currentIndex + 1 : currentIndex - 1
 
         if (nextIndex >= 0 && nextIndex < photos.length) {
-          const element = document.getElementById(`photo-${nextIndex}`);
+          const element = document.getElementById(`photo-${nextIndex}`)
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: 'smooth' })
           }
         }
       }
     }
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [navigate, photos.length]);
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [navigate, photos.length])
 
   return (
     <div className="fixed inset-0 bg-slate-950">
@@ -102,17 +124,17 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 export function PhotoGallery({ photos }: PhotoGalleryProps) {
-  const navigate = useNavigate();
-  const search = useSearch({ from: '/photography/' });
-  const photoParam = (search as Record<string, string | undefined>).photo;
-  const selectedIndex = photoParam ? parseInt(photoParam, 10) : 0;
+  const navigate = useNavigate()
+  const search = useSearch({ from: '/photography/' })
+  const photoParam = (search as Record<string, string | undefined>).photo
+  const selectedIndex = photoParam ? parseInt(photoParam, 10) : 0
 
   if (photoParam !== undefined) {
-    return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
+    return <FullScreenGallery photos={photos} startIndex={selectedIndex} />
   }
 
   return (
@@ -120,9 +142,14 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       {photos.map((photo, index) => (
         <button
           key={photo.id}
-          onClick={() => navigate({ to: '/photography', search: { photo: String(index) } })}
+          onClick={() =>
+            navigate({ to: '/photography', search: { photo: String(index) } })
+          }
           className="relative block aspect-square overflow-hidden rounded-lg"
-          style={{ backgroundImage: `url(${photo.blurDataURL})`, backgroundSize: 'cover' }}
+          style={{
+            backgroundImage: `url(${photo.blurDataURL})`,
+            backgroundSize: 'cover',
+          }}
         >
           <picture>
             {photo.srcSetWebp && (
@@ -145,5 +172,5 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
         </button>
       ))}
     </div>
-  );
+  )
 }
