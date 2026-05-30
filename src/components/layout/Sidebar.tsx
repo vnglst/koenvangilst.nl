@@ -1,23 +1,23 @@
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router';
 
-import { ThemeToggleText } from '#/components/theme/ThemeToggleText'
-import { cx } from '#/lib/clsx'
+import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
+import { cx } from '#/lib/clsx';
 
 const navItems = [
   { href: '/', label: 'About' },
   { href: '/lab', label: 'Lab' },
-  { href: '/photography', label: 'Photography' },
-]
+  { href: '/photography', label: 'Photography' }
+];
 
 export function Sidebar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return pathname === '/'
+      return pathname === '/';
     }
-    return pathname.startsWith(href)
-  }
+    return pathname.startsWith(href);
+  };
 
   return (
     <aside className="hidden w-[200px] flex-shrink-0 md:block">
@@ -48,17 +48,10 @@ export function Sidebar() {
                       'flex items-center py-1 pl-3 text-sm font-medium whitespace-nowrap transition-opacity',
                       isActive(item.href)
                         ? 'text-primary dark:text-primary'
-                        : 'text-gray-800 hover:opacity-70 dark:text-gray-300',
+                        : 'text-gray-800 hover:opacity-70 dark:text-gray-300'
                     )}
                   >
-                    <span
-                      className={cx(
-                        'mr-2 w-2',
-                        isActive(item.href)
-                          ? 'animate-blink text-primary'
-                          : 'invisible',
-                      )}
-                    >
+                    <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
                       &gt;
                     </span>
                     {item.label}
@@ -73,5 +66,5 @@ export function Sidebar() {
         </div>
       </div>
     </aside>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-type Argument = string | number | boolean | null | undefined
+type Argument = string | number | boolean | null | undefined;
 
 /**
  * Conditionally join classNames into a single string
@@ -6,18 +6,18 @@ type Argument = string | number | boolean | null | undefined
  * @returns The joined classNames
  */
 function cx(...args: Argument[]): string {
-  let str = ''
+  let str = '';
 
   for (const arg of args) {
     if (arg && typeof arg === 'string') {
       if (str) {
-        str += ' '
+        str += ' ';
       }
-      str += arg
+      str += arg;
     }
   }
 
-  return str
+  return str;
 }
 
-export { cx }
+export { cx };

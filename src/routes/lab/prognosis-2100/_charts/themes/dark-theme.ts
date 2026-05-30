@@ -1,4 +1,4 @@
-import { colors } from './colors'
+import { colors } from './colors';
 
 export const darkTheme = {
   darkMode: true,
@@ -11,19 +11,19 @@ export const darkTheme = {
     colorStops: [
       {
         offset: 0,
-        color: '#111827',
+        color: '#111827'
       },
       {
         offset: 1,
-        color: '#204051',
-      },
-    ],
+        color: '#204051'
+      }
+    ]
   },
   textStyle: {
     // Setting fontFamily doesn't work for Canvas renderer.
     // fontFamily: 'var(--font-sans), sans-serif',
     color: '#cbd5e1',
-    fontSize: 12,
+    fontSize: 12
   },
   title: {
     padding: 20,
@@ -31,41 +31,41 @@ export const darkTheme = {
     textStyle: {
       color: '#fff',
       fontSize: 16,
-      fontWeight: 'normal',
+      fontWeight: 'normal'
       // Setting fontFamily doesn't work for Canvas renderer.
       // fontFamily: 'var(--font-sans), sans-serif'
     },
     subtextStyle: {
       color: '#94a3b8',
-      fontSize: 12,
+      fontSize: 12
     },
-    bottom: 200,
+    bottom: 200
   },
   bar: {
     itemStyle: {
-      borderRadius: [15, 15, 0, 0],
-    },
+      borderRadius: [15, 15, 0, 0]
+    }
   },
   grid: {
     top: '20%',
     left: '3%',
     right: '4%',
     bottom: '13%',
-    containLabel: true,
+    containLabel: true
   },
   visualMap: {
     textStyle: {
-      color: '#fff',
-    },
+      color: '#fff'
+    }
   },
   toolbox: {
     iconStyle: {
-      borderColor: '#fff',
-    },
+      borderColor: '#fff'
+    }
   },
   legend: {
     textStyle: {
-      color: '#fff',
-    },
-  },
-}
+      color: '#fff'
+    }
+  }
+};

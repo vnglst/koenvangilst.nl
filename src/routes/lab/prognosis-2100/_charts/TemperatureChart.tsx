@@ -1,60 +1,60 @@
-''
+'';
 
-import { colors } from './themes/colors'
+import { colors } from './themes/colors';
 
-import { dateFormatter, temperatureFormatter } from '#/lib/formatters'
+import { dateFormatter, temperatureFormatter } from '#/lib/formatters';
 
-import { usePrognosisStore } from '../_store/prognosis'
-import { Chart } from './Chart'
-import type { Data } from './WeatherAnomaly'
+import { usePrognosisStore } from '../_store/prognosis';
+import { Chart } from './Chart';
+import type { Data } from './WeatherAnomaly';
 
 // Simple color interpolation function
 function lerpColor(factor: number, colors: string[]): string {
-  if (factor <= 0) return colors[0]
-  if (factor >= 1) return colors[colors.length - 1]
+  if (factor <= 0) return colors[0];
+  if (factor >= 1) return colors[colors.length - 1];
 
-  const scaledFactor = factor * (colors.length - 1)
-  const index = Math.floor(scaledFactor)
-  const localFactor = scaledFactor - index
+  const scaledFactor = factor * (colors.length - 1);
+  const index = Math.floor(scaledFactor);
+  const localFactor = scaledFactor - index;
 
-  if (index >= colors.length - 1) return colors[colors.length - 1]
+  if (index >= colors.length - 1) return colors[colors.length - 1];
 
-  const color1 = colors[index]
-  const color2 = colors[index + 1]
+  const color1 = colors[index];
+  const color2 = colors[index + 1];
 
-  const hex1 = color1.replace('#', '')
-  const hex2 = color2.replace('#', '')
+  const hex1 = color1.replace('#', '');
+  const hex2 = color2.replace('#', '');
 
-  const r1 = parseInt(hex1.substring(0, 2), 16)
-  const g1 = parseInt(hex1.substring(2, 4), 16)
-  const b1 = parseInt(hex1.substring(4, 6), 16)
+  const r1 = parseInt(hex1.substring(0, 2), 16);
+  const g1 = parseInt(hex1.substring(2, 4), 16);
+  const b1 = parseInt(hex1.substring(4, 6), 16);
 
-  const r2 = parseInt(hex2.substring(0, 2), 16)
-  const g2 = parseInt(hex2.substring(2, 4), 16)
-  const b2 = parseInt(hex2.substring(4, 6), 16)
+  const r2 = parseInt(hex2.substring(0, 2), 16);
+  const g2 = parseInt(hex2.substring(2, 4), 16);
+  const b2 = parseInt(hex2.substring(4, 6), 16);
 
-  const r = Math.round(r1 + (r2 - r1) * localFactor)
-  const g = Math.round(g1 + (g2 - g1) * localFactor)
-  const b = Math.round(b1 + (b2 - b1) * localFactor)
+  const r = Math.round(r1 + (r2 - r1) * localFactor);
+  const g = Math.round(g1 + (g2 - g1) * localFactor);
+  const b = Math.round(b1 + (b2 - b1) * localFactor);
 
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
 type TemperatureProps = {
-  data: Data
-  className: string
-}
+  data: Data;
+  className: string;
+};
 
 export function TemperatureClient({ data, className }: TemperatureProps) {
-  const { showPrognosis } = usePrognosisStore()
-  const options = generateOptions(data, showPrognosis)
+  const { showPrognosis } = usePrognosisStore();
+  const options = generateOptions(data, showPrognosis);
 
   return (
     <Chart
       options={options}
       className={`w-full overflow-hidden border border-dashed border-gray-400 dark:border-none ${className}`}
     />
-  )
+  );
 }
 
 function generateOptions(data: Data, showPrognosis: boolean) {
@@ -65,21 +65,21 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       markLine: {
         symbol: 'none',
         lineStyle: {
-          color: colors.red,
+          color: colors.red
         },
         data: [
           [
             {
               xAxis: '2023',
-              yAxis: data.last_temperature_trend,
+              yAxis: data.last_temperature_trend
             },
-            { xAxis: '2100', yAxis: data.temperature_worst_case },
-          ],
-        ],
+            { xAxis: '2100', yAxis: data.temperature_worst_case }
+          ]
+        ]
       },
       itemStyle: {
-        color: colors.red,
-      },
+        color: colors.red
+      }
     },
     {
       name: 'Best Case',
@@ -87,23 +87,23 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       markLine: {
         symbol: 'none',
         lineStyle: {
-          color: colors.limeGreen,
+          color: colors.limeGreen
         },
         data: [
           [
             {
               xAxis: '2023',
-              yAxis: data.last_temperature_trend,
+              yAxis: data.last_temperature_trend
             },
-            { xAxis: '2100', yAxis: data.temperature_best_case },
-          ],
-        ],
+            { xAxis: '2100', yAxis: data.temperature_best_case }
+          ]
+        ]
       },
       itemStyle: {
-        color: colors.limeGreen,
-      },
-    },
-  ]
+        color: colors.limeGreen
+      }
+    }
+  ];
 
   return {
     grid: {
@@ -111,39 +111,37 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       bottom: 50,
       left: 15,
       right: 15,
-      containLabel: true,
+      containLabel: true
     },
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'temperature-anomalies',
-        },
-      },
+          name: 'temperature-anomalies'
+        }
+      }
     },
     title: [
       {
         text: 'Temperature Anomalies in De Bilt',
         subtext: `Deviations from 20th century average of ${temperatureFormatter(
-          data.mean_temperature,
+          data.mean_temperature
         )}.\nKNMI • www.koenvangilst.nl • ${dateFormatter(data.timestamp)}`,
         subtextStyle: {
-          lineHeight: 18,
+          lineHeight: 18
         },
         top: 0,
-        left: 0,
-      },
+        left: 0
+      }
     ],
     tooltip: {
       valueFormatter: temperatureFormatter,
       trigger: 'item',
       axisPointer: {
-        type: 'cross',
-      },
+        type: 'cross'
+      }
     },
     legend: {
-      data: showPrognosis
-        ? ['10 year trend', 'Worst Case', 'Best Case']
-        : ['10 year trend'],
+      data: showPrognosis ? ['10 year trend', 'Worst Case', 'Best Case'] : ['10 year trend'],
       bottom: 10,
       left: 'center',
       selected: showPrognosis
@@ -151,17 +149,17 @@ function generateOptions(data: Data, showPrognosis: boolean) {
             Anomaly: false,
             '10 year trend': true,
             'Worst Case': true,
-            'Best Case': true,
+            'Best Case': true
           }
         : {
-            '10 year trend': false,
-          },
+            '10 year trend': false
+          }
     },
     xAxis: {
       data: showPrognosis ? data.forecast_years : data.years,
       splitLine: {
-        show: false,
-      },
+        show: false
+      }
     },
     yAxis: {
       min: -2,
@@ -170,12 +168,12 @@ function generateOptions(data: Data, showPrognosis: boolean) {
       splitLine: {
         show: false,
         lineStyle: {
-          type: 'dashed',
-        },
+          type: 'dashed'
+        }
       },
       axisLabel: {
-        formatter: (value: number) => `${Math.round(value)} °C`,
-      },
+        formatter: (value: number) => `${Math.round(value)} °C`
+      }
     },
     series: [
       {
@@ -183,14 +181,8 @@ function generateOptions(data: Data, showPrognosis: boolean) {
         type: 'bar',
         data: data.temperature_anomalies.map((value) => {
           const factor =
-            (value - data.min_temperature_anomaly) /
-            (data.max_temperature_anomaly - data.min_temperature_anomaly)
-          const color = lerpColor(factor, [
-            '#2196f3',
-            '#cbf3ff',
-            '#ffcc6a',
-            '#ff9662',
-          ])
+            (value - data.min_temperature_anomaly) / (data.max_temperature_anomaly - data.min_temperature_anomaly);
+          const color = lerpColor(factor, ['#2196f3', '#cbf3ff', '#ffcc6a', '#ff9662']);
 
           return {
             value,
@@ -204,21 +196,21 @@ function generateOptions(data: Data, showPrognosis: boolean) {
                 colorStops: [
                   {
                     offset: 0,
-                    color,
+                    color
                   },
                   {
                     offset: 1,
-                    color,
-                  },
-                ],
+                    color
+                  }
+                ]
               },
-              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15],
-            },
-          }
+              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
+            }
+          };
         }),
         emphasis: {
-          focus: 'series',
-        },
+          focus: 'series'
+        }
       },
       {
         name: '10 year trend',
@@ -226,10 +218,10 @@ function generateOptions(data: Data, showPrognosis: boolean) {
         data: data.temperature_trend,
         smooth: true,
         emphasis: {
-          focus: 'series',
-        },
+          focus: 'series'
+        }
       },
-      ...(showPrognosis ? prognosisMarklines : []),
-    ],
-  }
+      ...(showPrognosis ? prognosisMarklines : [])
+    ]
+  };
 }

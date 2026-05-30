@@ -1,49 +1,43 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetcher } from '#/lib/fetcher'
-import type { Co2Reading } from '#/services/aranet'
+import { useQuery } from '@tanstack/react-query';
+import { fetcher } from '#/lib/fetcher';
+import type { Co2Reading } from '#/services/aranet';
 
 export function Co2Monitor() {
   const { data: reading } = useQuery<Co2Reading>({
     queryKey: ['/api/co2'],
     queryFn: () => fetcher('/api/co2'),
     refetchInterval: 30_000,
-    refetchOnWindowFocus: true,
-  })
+    refetchOnWindowFocus: true
+  });
 
   const timestamp = reading ? (
     new Date(reading.timestamp * 1000).toLocaleTimeString('en-UK', {
       day: 'numeric',
       month: 'short',
-      year: 'numeric',
+      year: 'numeric'
     })
   ) : (
     <br />
-  )
+  );
 
   return (
     <div className="not-prose w-full pt-4 pb-4">
-      <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">
-        {timestamp}
-      </pre>
+      <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">{timestamp}</pre>
       <div className="mb-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         <MetricCard header="CO2" metric={reading?.co2} unit="ppm" />
-        <MetricCard
-          header="Temperature"
-          metric={reading?.temperature}
-          unit="°C"
-        />
+        <MetricCard header="Temperature" metric={reading?.temperature} unit="°C" />
         <MetricCard header="Humidity" metric={reading?.humidity} unit="%" />
         <MetricCard header="Pressure" metric={reading?.pressure} unit="hPa" />
       </div>
     </div>
-  )
+  );
 }
 
 type MetricCardProps = {
-  header: string
-  metric?: number
-  unit: string
-}
+  header: string;
+  metric?: number;
+  unit: string;
+};
 
 function MetricCard({ header, metric, unit }: MetricCardProps) {
   return (
@@ -53,5 +47,5 @@ function MetricCard({ header, metric, unit }: MetricCardProps) {
         {metric ? metric.toLocaleString() + ' ' + unit : 'no data'}
       </p>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { GenerativeArtGallery } from './_components/GenerativeArtGallery'
+import { createFileRoute } from '@tanstack/react-router';
+import { GenerativeArtGallery } from './_components/GenerativeArtGallery';
 
 export const Route = createFileRoute('/lab/gen-art-gallery/')({
   head: () => ({
@@ -7,14 +7,13 @@ export const Route = createFileRoute('/lab/gen-art-gallery/')({
       { title: 'Generative Art Gallery | Koen van Gilst' },
       {
         name: 'description',
-        content:
-          'A full-screen gallery of generative art projects by Koen van Gilst.',
-      },
-    ],
+        content: 'A full-screen gallery of generative art projects by Koen van Gilst.'
+      }
+    ]
   }),
-  component: GalleryPage,
-})
+  component: GalleryPage
+});
 
 function GalleryPage() {
-  return <GenerativeArtGallery />
+  return <GenerativeArtGallery />;
 }

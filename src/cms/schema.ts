@@ -1,4 +1,4 @@
-import * as z from 'zod'
+import * as z from 'zod';
 
 export const PostMeta = z
   .object({
@@ -14,13 +14,13 @@ export const PostMeta = z
         alt: z.string(),
         width: z.number(),
         height: z.number(),
-        showAsHeader: z.boolean().optional(),
+        showAsHeader: z.boolean().optional()
       })
       .optional(),
     tags: z.array(z.string()),
-    tagsAsSlugs: z.array(z.string()),
+    tagsAsSlugs: z.array(z.string())
   })
-  .strict()
+  .strict();
 
 const Post = PostMeta.extend({
   code: z.string(),
@@ -28,8 +28,8 @@ const Post = PostMeta.extend({
     text: z.string(),
     minutes: z.number(),
     time: z.number(),
-    words: z.number(),
-  }),
-})
+    words: z.number()
+  })
+});
 
-export type PostType = z.infer<typeof Post>
+export type PostType = z.infer<typeof Post>;

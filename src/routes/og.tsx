@@ -1,20 +1,20 @@
-import { Resvg } from '@resvg/resvg-js'
-import { createFileRoute } from '@tanstack/react-router'
-import fs from 'node:fs'
-import path from 'node:path'
-import satori from 'satori'
+import { Resvg } from '@resvg/resvg-js';
+import { createFileRoute } from '@tanstack/react-router';
+import fs from 'node:fs';
+import path from 'node:path';
+import satori from 'satori';
 
-const FONT_PATH = path.join(process.cwd(), 'public/fonts/IBMPlexSans-Bold.ttf')
+const FONT_PATH = path.join(process.cwd(), 'public/fonts/IBMPlexSans-Bold.ttf');
 
 // Cache font bytes at module load time — avoids a 196 KB disk read on every /og request.
-let cachedFontData: Buffer | null = null
+let cachedFontData: Buffer | null = null;
 function loadFont(): Buffer | null {
-  if (cachedFontData) return cachedFontData
+  if (cachedFontData) return cachedFontData;
   try {
-    cachedFontData = fs.readFileSync(FONT_PATH)
-    return cachedFontData
+    cachedFontData = fs.readFileSync(FONT_PATH);
+    return cachedFontData;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -23,20 +23,19 @@ export const Route = createFileRoute('/og')({
     handlers: {
       GET: async ({ request }) => {
         try {
-          const url = new URL(request.url)
-          const title =
-            url.searchParams.get('title') || 'Koen van Gilst - Tech Lead'
+          const url = new URL(request.url);
+          const title = url.searchParams.get('title') || 'Koen van Gilst - Tech Lead';
           const description =
             url.searchParams.get('description') ||
-            'Innovative tech lead from the Netherlands who likes to push the web beyond its limits.'
-          const type = url.searchParams.get('type') || 'blog'
+            'Innovative tech lead from the Netherlands who likes to push the web beyond its limits.';
+          const type = url.searchParams.get('type') || 'blog';
 
-          const fontData = loadFont()
+          const fontData = loadFont();
           if (!fontData) {
             return new Response(null, {
               status: 302,
-              headers: { Location: '/banner.png' },
-            })
+              headers: { Location: '/banner.png' }
+            });
           }
 
           const svg = await satori(
@@ -49,18 +48,16 @@ export const Route = createFileRoute('/og')({
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
                 backgroundColor: '#fff',
-                padding: '80px',
+                padding: '80px'
               }}
             >
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div
                   style={{
                     width: '8px',
                     height: '40px',
                     backgroundColor: '#199acc',
-                    borderRadius: '4px',
+                    borderRadius: '4px'
                   }}
                 />
                 <span
@@ -68,7 +65,7 @@ export const Route = createFileRoute('/og')({
                     fontSize: 32,
                     fontWeight: 600,
                     color: '#199acc',
-                    letterSpacing: '-0.02em',
+                    letterSpacing: '-0.02em'
                   }}
                 >
                   koenvangilst.nl
@@ -79,7 +76,7 @@ export const Route = createFileRoute('/og')({
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '24px',
-                  maxWidth: '1000px',
+                  maxWidth: '1000px'
                 }}
               >
                 <h1
@@ -89,7 +86,7 @@ export const Route = createFileRoute('/og')({
                     lineHeight: 1.1,
                     color: '#1a1a1a',
                     margin: 0,
-                    letterSpacing: '-0.03em',
+                    letterSpacing: '-0.03em'
                   }}
                 >
                   {title}
@@ -100,7 +97,7 @@ export const Route = createFileRoute('/og')({
                     lineHeight: 1.4,
                     color: '#666',
                     margin: 0,
-                    fontWeight: 400,
+                    fontWeight: 400
                   }}
                 >
                   {description}
@@ -112,7 +109,7 @@ export const Route = createFileRoute('/og')({
                     fontSize: 24,
                     color: '#999',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.1em'
                   }}
                 >
                   {type === 'tag' ? 'TAG' : 'BLOG POST'}
@@ -127,31 +124,31 @@ export const Route = createFileRoute('/og')({
                   name: 'IBM Plex Sans',
                   data: fontData,
                   weight: 700,
-                  style: 'normal',
-                },
-              ],
-            },
-          )
+                  style: 'normal'
+                }
+              ]
+            }
+          );
 
           const resvg = new Resvg(svg, {
-            fitTo: { mode: 'width', value: 1200 },
-          })
-          const pngData = resvg.render().asPng()
+            fitTo: { mode: 'width', value: 1200 }
+          });
+          const pngData = resvg.render().asPng();
 
           return new Response(Buffer.from(pngData), {
             headers: {
               'Content-Type': 'image/png',
-              'Cache-Control': 'public, max-age=86400, immutable',
-            },
-          })
+              'Cache-Control': 'public, max-age=86400, immutable'
+            }
+          });
         } catch (e) {
-          console.error('OG image generation failed:', e)
+          console.error('OG image generation failed:', e);
           return new Response(null, {
             status: 302,
-            headers: { Location: '/banner.png' },
-          })
+            headers: { Location: '/banner.png' }
+          });
         }
-      },
-    },
-  },
-})
+      }
+    }
+  }
+});

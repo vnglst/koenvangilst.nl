@@ -104,15 +104,15 @@ The implementation accepts data from either query parameters or POST body, but t
 
 ```typescript
 // Extract from query parameters (preferred for GET requests)
-const { searchParams } = new URL(request.url)
-const topicParam = searchParams.get('topic')
-const llmNameParam = searchParams.get('llm_name')
-const findingsParam = searchParams.get('findings')
+const { searchParams } = new URL(request.url);
+const topicParam = searchParams.get('topic');
+const llmNameParam = searchParams.get('llm_name');
+const findingsParam = searchParams.get('findings');
 
 // Extract and validate data - prefer query params over body
-const topic = topicParam || body.topic
-const llm_name = llmNameParam || body.llm_name
-const findings = findingsParam || body.findings
+const topic = topicParam || body.topic;
+const llm_name = llmNameParam || body.llm_name;
+const findings = findingsParam || body.findings;
 ```
 
 **Why this works:**
@@ -138,8 +138,8 @@ To track LLM reports in Plausible, I needed to:
 
 3. **API Endpoint Configuration**:
    ```typescript
-   const PLAUSIBLE_ENDPOINT = 'https://plausible.koenvangilst.nl/api/event'
-   const PLAUSIBLE_DOMAIN = 'koenvangilst.nl'
+   const PLAUSIBLE_ENDPOINT = 'https://plausible.koenvangilst.nl/api/event';
+   const PLAUSIBLE_DOMAIN = 'koenvangilst.nl';
    ```
 
 ## Viewing the data
@@ -163,7 +163,7 @@ To help both traditional crawlers and LLMs find the llms.txt file, I added it to
 **1. Sitemap** (`/sitemap.xml`)
 
 ```typescript
-const pages = ['', 'about', 'lab', 'llms.txt']
+const pages = ['', 'about', 'lab', 'llms.txt'];
 ```
 
 **2. robots.txt**

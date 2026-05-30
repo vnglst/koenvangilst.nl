@@ -17,9 +17,8 @@ tags:
 ---
 
 <Disclaimer>
-  Don't forget to also read the [second part of this
-  tutorial](/blog/phoenix-liveview-cursors), where I implement a similar
-  functionality using Phoenix LiveView!
+  Don't forget to also read the [second part of this tutorial](/blog/phoenix-liveview-cursors), where I implement a
+  similar functionality using Phoenix LiveView!
 </Disclaimer>
 
 For the past few months, I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I hadn't had a chance to get my hands dirty and write some actual Elixir code.
@@ -51,15 +50,13 @@ I'll be using Tailwind CSS for styling and you can quickly add that to the proje
 I've also added a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
 
 ```html
-<section
-  class="flex flex-col w-screen h-screen justify-center items-center text-center"
->
+<section class="flex h-screen w-screen flex-col items-center justify-center text-center">
   <form
     id="msgform"
-    class="rounded-xl bg-gradient-to-r to-pink-100 from-pink-50 p-8 drop-shadow-xl flex w-xs mx-auto space-x-3"
+    class="mx-auto flex w-xs space-x-3 rounded-xl bg-gradient-to-r from-pink-50 to-pink-100 p-8 drop-shadow-xl"
   >
     <input
-      class="flex-1 appearance-none border border-transparent py-2 px-4 bg-white text-gray-600 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent"
+      class="flex-1 appearance-none rounded-lg border border-transparent bg-white px-4 py-2 text-base text-gray-600 placeholder-gray-400 shadow-md focus:border-transparent focus:ring-2 focus:ring-pink-600 focus:outline-none"
       maxlength="30"
       aria-label="Your message"
       type="text"
@@ -70,7 +67,7 @@ I've also added a nice background and some basic HTML. Replace the contents of t
     <input
       id="submit-msg"
       type="submit"
-      class="flex-shrink-0 bg-pink-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200"
+      class="flex-shrink-0 rounded-lg bg-pink-600 px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-pink-700 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200 focus:outline-none"
       value="Change"
     />
   </form>
@@ -96,8 +93,8 @@ It should look like this:
 Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
 
 <Disclaimer>
-  Note: you can also follow along with this tutorial on GitHub. Visit the list
-  of commits here: https://github.com/vnglst/phoenix_cursors/commits/main
+  Note: you can also follow along with this tutorial on GitHub. Visit the list of commits here:
+  https://github.com/vnglst/phoenix_cursors/commits/main
 </Disclaimer>
 
 ## Tracking mouse movements
@@ -124,7 +121,7 @@ For the front-end integration, you need to import the `user_socket.js` in your `
 ```js {3}
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
-import './user_socket.js'
+import './user_socket.js';
 
 // You can include dependencies in two ways.
 //
@@ -133,22 +130,22 @@ import './user_socket.js'
 To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First, we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
 
 ```js {1, 6-10}
-let channel = socket.channel('cursor:lobby', {})
+let channel = socket.channel('cursor:lobby', {});
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp)
+    console.log('Joined successfully', resp);
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth
-      const y = e.pageY / window.innerHeight
-      channel.push('move', { x, y })
-    })
+      const x = e.pageX / window.innerWidth;
+      const y = e.pageY / window.innerHeight;
+      channel.push('move', { x, y });
+    });
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp)
-  })
+    console.log('Unable to join', resp);
+  });
 
-export default socket
+export default socket;
 ```
 
 This listens for changes in the mouse cursor position and sends those as events to the Phoenix channel.
@@ -181,11 +178,10 @@ We'll add a template function to the file `user_socket.js`:
 
 ```js
 function cursorTemplate({ x, y, name }) {
-  const li = document.createElement('li')
-  li.classList =
-    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300'
-  li.style.left = x + 'px'
-  li.style.top = y + 'px'
+  const li = document.createElement('li');
+  li.classList = 'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300';
+  li.style.left = x + 'px';
+  li.style.top = y + 'px';
 
   li.innerHTML = `
     <svg
@@ -204,43 +200,43 @@ function cursorTemplate({ x, y, name }) {
         />
     </svg>
     <span class="mt-1 ml-4 px-1 text-sm text-pink-300" />
-  `
+  `;
 
-  li.lastChild.textContent = name
+  li.lastChild.textContent = name;
 
-  return li
+  return li;
 }
 ```
 
 And we listen for 'move' events on the channel:
 
 ```js {13-22}
-let channel = socket.channel('cursor:lobby', {})
+let channel = socket.channel('cursor:lobby', {});
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp)
+    console.log('Joined successfully', resp);
 
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth
-      const y = e.pageY / window.innerHeight
-      channel.push('move', { x, y })
-    })
+      const x = e.pageX / window.innerWidth;
+      const y = e.pageY / window.innerHeight;
+      channel.push('move', { x, y });
+    });
 
     channel.on('move', ({ x, y }) => {
-      const ul = document.createElement('ul')
+      const ul = document.createElement('ul');
       const cursorLi = cursorTemplate({
         x: x * window.innerWidth,
         y: y * window.innerHeight,
-        name: '???',
-      })
-      ul.appendChild(cursorLi)
-      document.getElementById('cursor-list').innerHTML = ul.innerHTML
-    })
+        name: '???'
+      });
+      ul.appendChild(cursorLi);
+      document.getElementById('cursor-list').innerHTML = ul.innerHTML;
+    });
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp)
-  })
+    console.log('Unable to join', resp);
+  });
 ```
 
 If you open up two browser tabs next to each other you can see the cursor moving around. However, the moment you
@@ -307,8 +303,8 @@ In `user_socket.js` we'll update the code that initializes the socket to use the
 
 ```js {2}
 let socket = new Socket('/socket', {
-  params: { token: sessionStorage.userToken },
-})
+  params: { token: sessionStorage.userToken }
+});
 ```
 
 When a user connects to the socket we can verify the authenticity by checking the token. Once
@@ -397,46 +393,46 @@ in `lib/phoenix_cursors/application.ex`:
 In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online/present.
 
 ```js {1, 18, 24-40}
-import { Socket, Presence } from 'phoenix'
+import { Socket, Presence } from 'phoenix';
 
 let socket = new Socket('/socket', {
-  params: { token: sessionStorage.userToken },
-})
+  params: { token: sessionStorage.userToken }
+});
 
-socket.connect()
+socket.connect();
 
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp)
+    console.log('Joined successfully', resp);
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth
-      const y = e.pageY / window.innerHeight
-      channel.push('move', { x, y })
-    })
+      const x = e.pageX / window.innerWidth;
+      const y = e.pageY / window.innerHeight;
+      channel.push('move', { x, y });
+    });
     // remove the code that updates cursor positions on the move event
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp)
-  })
+    console.log('Unable to join', resp);
+  });
 
-const presence = new Presence(channel)
+const presence = new Presence(channel);
 
 presence.onSync(() => {
-  const ul = document.createElement('ul')
+  const ul = document.createElement('ul');
 
   presence.list((name, { metas: [firstDevice] }) => {
-    const { x, y } = firstDevice
+    const { x, y } = firstDevice;
     const cursorLi = cursorTemplate({
       name,
       x: x * window.innerWidth,
-      y: y * window.innerHeight,
-    })
-    ul.appendChild(cursorLi)
-  })
+      y: y * window.innerHeight
+    });
+    ul.appendChild(cursorLi);
+  });
 
-  document.getElementById('cursor-list').innerHTML = ul.innerHTML
-})
+  document.getElementById('cursor-list').innerHTML = ul.innerHTML;
+});
 ```
 
 After users join the channel we set up their presence in the channel. When a user sends a `move` event, we update the Presence state. Update `cursor_channel` to the following:
@@ -531,27 +527,26 @@ And in the front end we use this color for rendering the list of user cursors. I
 
 ```js {2, 3, 7}
 presence.list((name, { metas: [firstDevice] }) => {
-  const { x, y, color } = firstDevice
+  const { x, y, color } = firstDevice;
   const cursorLi = cursorTemplate({
     name,
     x: x * window.innerWidth,
     y: y * window.innerHeight,
-    color,
-  })
-  ul.appendChild(cursorLi)
-})
+    color
+  });
+  ul.appendChild(cursorLi);
+});
 ```
 
 Update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
 
 ```js {1,4,7,25,28}
 function cursorTemplate({ x, y, name, color }) {
-  const li = document.createElement('li')
-  li.classList =
-    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden'
-  li.style.left = x + 'px'
-  li.style.top = y + 'px'
-  li.style.color = color
+  const li = document.createElement('li');
+  li.classList = 'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden';
+  li.style.left = x + 'px';
+  li.style.top = y + 'px';
+  li.style.color = color;
 
   li.innerHTML = `
     <svg
@@ -570,12 +565,12 @@ function cursorTemplate({ x, y, name, color }) {
         />
     </svg>
     <span class="mt-1 ml-4 px-1 text-sm text-white" />
-  `
+  `;
 
-  li.lastChild.style.backgroundColor = color
-  li.lastChild.textContent = name
+  li.lastChild.style.backgroundColor = color;
+  li.lastChild.textContent = name;
 
-  return li
+  return li;
 }
 ```
 
@@ -602,8 +597,8 @@ In the [diff](https://github.com/vnglst/phoenix_cursors/commit/a0bd79fc40165ff35
 you'll find all the necessary code changes to get the chat functionality working.
 
 <Disclaimer>
-  Many thanks to [Dmitri Don](https://twitter.com/DmitriDon) for giving this
-  tutorial a try and reporting any mistakes and unclarities.
+  Many thanks to [Dmitri Don](https://twitter.com/DmitriDon) for giving this tutorial a try and reporting any mistakes
+  and unclarities.
 </Disclaimer>
 
 [^1]:

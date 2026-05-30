@@ -15,9 +15,8 @@ tags:
 ---
 
 <Disclaimer>
-  This article was written in 2017 and today there are much better ways to mock
-  API calls in Jest. I would recommend looking into a library called [Mock
-  Service Worker](https://mswjs.io/) to mock API calls.
+  This article was written in 2017 and today there are much better ways to mock API calls in Jest. I would recommend
+  looking into a library called [Mock Service Worker](https://mswjs.io/) to mock API calls.
 </Disclaimer>
 
 Jest is a great JavaScript testing framework by Facebook. It’s often used for testing React components, but it’s also a pretty good general-purpose testing framework. In this tutorial, I’ll give a quick and simple demo of its mocking capabilities for testing async functions.
@@ -75,49 +74,49 @@ yarn add rest
 Create a new folder `api` in the folder `src` and add the file `github.js` with the following code:
 
 ```js
-import request from './request'
+import request from './request';
 
-const getUser = (user) => request(`https://api.github.com/users/${user}`)
+const getUser = (user) => request(`https://api.github.com/users/${user}`);
 
-export { getUser }
+export { getUser };
 ```
 
 Then also add `request.js` with the following code:
 
 ```js
-const rest = require('rest')
-const mime = require('rest/interceptor/mime')
+const rest = require('rest');
+const mime = require('rest/interceptor/mime');
 
-export default rest.wrap(mime)
+export default rest.wrap(mime);
 ```
 
 You’re now ready to make API requests using: `github.getUser(‘vnglst’)`. Let’s test this quickly in the browser. Replace the original contents in the file `App.js` with the following code:
 
 ```js
-import React, { Component } from 'react'
-import './App.css'
-import { getUser } from './api/github'
+import React, { Component } from 'react';
+import './App.css';
+import { getUser } from './api/github';
 
 const renderLine = (user, key) => (
   <li key={key}>
     <b>{key}</b>: {user[key]}
   </li>
-)
+);
 
 class App extends Component {
   constructor(props) {
-    super(props)
-    this.state = { user: {} }
+    super(props);
+    this.state = { user: {} };
   }
 
   componentDidMount() {
     getUser('vnglst').then((data) => {
-      this.setState({ user: data.entity })
-    })
+      this.setState({ user: data.entity });
+    });
   }
 
   render() {
-    const { user } = this.state
+    const { user } = this.state;
     return (
       <div className="App">
         <ul style={{ listStyle: 'none' }}>
@@ -127,11 +126,11 @@ class App extends Component {
           }
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
 ```
 
 Use `yarn start` to open up a browser and see the result. You should see a simple list with my profile data. It works!
@@ -143,27 +142,22 @@ We’re now ready to write some tests. Let’s first try to unit test the functi
 ```js
 /* eslint-env jest */
 
-const github = require('../github')
+const github = require('../github');
 
 // A simple example test
 describe('#getUser() using Promises', () => {
   it('should load user data', () => {
     return github.getUser('vnglst').then((data) => {
-      expect(data).toBeDefined()
-      expect(data.entity.name).toEqual('Koen van Gilst')
-    })
-  })
-})
+      expect(data).toBeDefined();
+      expect(data.entity.name).toEqual('Koen van Gilst');
+    });
+  });
+});
 ```
 
 Start Jest using `yarn test` and you should see the following error message:
 
-<Image
-  alt={`Failing Jest tests`}
-  src={`/static/images/failing-jest-tests.jpg`}
-  width={1506 / 2}
-  height={1192 / 2}
-/>
+<Image alt={`Failing Jest tests`} src={`/static/images/failing-jest-tests.jpg`} width={1506 / 2} height={1192 / 2} />
 
 What’s happening here? It turns out that using our `getUser` function in a Node environment (which Jest is using to run the tests) makes our request fail. So even though our function works in the browser, it fails in our tests! We could try and fix this, by adding a `User-Agent` header when we’re running this in a Node environment, but mocking would now be a better solution. Let’s set this up!
 
@@ -172,26 +166,22 @@ What’s happening here? It turns out that using our `getUser` function in a Nod
 Create a folder `__mocks__` and in this folder a file `request.js` (this will be the mocked version of request.js in the parent folder):
 
 ```js
-const fs = require('fs')
+const fs = require('fs');
 
 const request = (url) =>
   new Promise((resolve, reject) => {
     // Get userID from supplied url string
-    const lastSlash = url.lastIndexOf('/')
-    const userID = url.substring(lastSlash + 1)
+    const lastSlash = url.lastIndexOf('/');
+    const userID = url.substring(lastSlash + 1);
     // Load user json data from a file in de subfolder for mock data
-    fs.readFile(
-      `./src/api/__mockData__/${userID}.json`,
-      'utf8',
-      (err, data) => {
-        if (err) reject(err)
-        // Parse the data as JSON and put in the key entity (just like the request library does)
-        resolve({ entity: JSON.parse(data) })
-      },
-    )
-  })
+    fs.readFile(`./src/api/__mockData__/${userID}.json`, 'utf8', (err, data) => {
+      if (err) reject(err);
+      // Parse the data as JSON and put in the key entity (just like the request library does)
+      resolve({ entity: JSON.parse(data) });
+    });
+  });
 
-export default request
+export default request;
 ```
 
 The mocked function expects a _userId.json_ (i.e. _vnglst.json_) file in a folder **mockData**. I’ve used my own Github username and data as an example here, but you can add as many example data as you need for your tests:
@@ -251,9 +241,9 @@ If you’re using the `create-react-app` you can also use async/await to write y
 // The exact same test using async/await
 describe('#getUser() using async/await', () => {
   it('should load user data', async () => {
-    const data = await github.getUser('vnglst')
-    expect(data).toBeDefined()
-    expect(data.entity.name).toEqual('Koen van Gilst')
-  })
-})
+    const data = await github.getUser('vnglst');
+    expect(data).toBeDefined();
+    expect(data.entity.name).toEqual('Koen van Gilst');
+  });
+});
 ```

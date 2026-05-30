@@ -9,17 +9,17 @@ tags:
 ---
 
 ````ts
-import { useState } from 'react'
+import { useState } from 'react';
 
 type UseStorage = <T>(
   key: string,
   initialState: T,
   opts?: {
-    serialize?: typeof JSON.stringify
-    deserialize?: typeof JSON.parse
-    storage?: Storage
-  },
-) => [T, (newState: T) => void]
+    serialize?: typeof JSON.stringify;
+    deserialize?: typeof JSON.parse;
+    storage?: Storage;
+  }
+) => [T, (newState: T) => void];
 
 /**
  * Storage wrapper around Reacts useState hook which persists any state in the
@@ -49,45 +49,45 @@ export const useStorage: UseStorage = (
   {
     serialize = JSON.stringify,
     deserialize = JSON.parse,
-    storage = localStorage, // you can also use sessionStorage
-  } = {},
+    storage = localStorage // you can also use sessionStorage
+  } = {}
 ) => {
   const [state, setState] = useState(() => {
     // make sure we're not running this on the server
     if (typeof window === 'undefined') {
-      return initialState
+      return initialState;
     }
 
     try {
-      const valueInStorage = storage.getItem(key)
+      const valueInStorage = storage.getItem(key);
 
       // if value was stored earlier, use that as initial state for useState
       if (valueInStorage) {
-        return deserialize(valueInStorage)
+        return deserialize(valueInStorage);
       }
 
       // nothing saved in storage yet, store initialState from options
-      storage.setItem(key, serialize(initialState))
+      storage.setItem(key, serialize(initialState));
     } catch (error) {
       // logs to the console, or use some error reporting tool here
-      console.error(error)
+      console.error(error);
     }
 
     // use initial state from options to initialize
-    return initialState
-  })
+    return initialState;
+  });
 
   // if component updates state, make sure we also try to store it
   // in our storage, and update the state after that
   const storeState = (newState: typeof initialState) => {
     try {
-      storage.setItem(key, serialize(newState))
+      storage.setItem(key, serialize(newState));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-    setState(newState)
-  }
+    setState(newState);
+  };
 
-  return [state, storeState]
-}
+  return [state, storeState];
+};
 ````

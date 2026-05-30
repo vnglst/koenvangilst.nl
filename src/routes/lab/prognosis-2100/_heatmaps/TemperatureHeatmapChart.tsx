@@ -1,40 +1,27 @@
-''
+'';
 
-import { dateFormatter, temperatureFormatter } from '#/lib/formatters'
+import { dateFormatter, temperatureFormatter } from '#/lib/formatters';
 
-import { Chart } from '../_charts/Chart'
-import { ChartSection } from '../_charts/ChartSection'
-import type { Data, HeatmapValue } from './WeatherHeatmap'
+import { Chart } from '../_charts/Chart';
+import { ChartSection } from '../_charts/ChartSection';
+import type { Data, HeatmapValue } from './WeatherHeatmap';
 
 type TemperatureHeatmapProps = {
-  data: Data
-}
+  data: Data;
+};
 
 export function TemperatureHeatmapClient({ data }: TemperatureHeatmapProps) {
-  const options = generateOptions(data)
+  const options = generateOptions(data);
 
   return (
     <ChartSection>
       <Chart options={options} className="aspect-[5/1] min-h-[300px]" />
     </ChartSection>
-  )
+  );
 }
 
 function generateOptions(heatmap: Data) {
-  const MONTHS = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
   return {
     grid: {
@@ -42,41 +29,41 @@ function generateOptions(heatmap: Data) {
       bottom: 25,
       left: 20,
       right: 20,
-      containLabel: true,
+      containLabel: true
     },
     toolbox: {
       feature: {
         saveAsImage: {
-          name: 'monthly-temperature-anomalies',
-        },
-      },
+          name: 'monthly-temperature-anomalies'
+        }
+      }
     },
     title: [
       {
         text: 'Monthly Temperature Anomalies De Bilt',
         subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(heatmap.timestamp)}`,
         subtextStyle: {
-          lineHeight: 18,
+          lineHeight: 18
         },
         top: 0,
-        left: 0,
-      },
+        left: 0
+      }
     ],
     xAxis: {
       type: 'category',
-      data: heatmap.years,
+      data: heatmap.years
     },
     yAxis: [
       {
         type: 'category',
         data: MONTHS,
-        position: 'left',
+        position: 'left'
       },
       {
         type: 'category',
         data: MONTHS,
-        position: 'right',
-      },
+        position: 'right'
+      }
     ],
     visualMap: {
       min: -5,
@@ -87,31 +74,31 @@ function generateOptions(heatmap: Data) {
       left: 'center',
       type: 'continuous',
       inRange: {
-        color: ['#2196f3', '#ffffff', '#ff9662'],
-      },
+        color: ['#2196f3', '#ffffff', '#ff9662']
+      }
     },
     tooltip: {
       trigger: 'item',
       formatter: function (params: { value: HeatmapValue }) {
-        const [year, month, value] = params.value
-        const monthStr = MONTHS[month]
-        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${temperatureFormatter(value)}</b>`
-      },
+        const [year, month, value] = params.value;
+        const monthStr = MONTHS[month];
+        return `${monthStr}. ${year}<br/>Anomaly <b style="padding-left: 15px">${temperatureFormatter(value)}</b>`;
+      }
     },
     series: [
       {
         type: 'heatmap',
         data: heatmap.temperature_heatmap,
         label: {
-          show: false,
+          show: false
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
-            shadowColor: 'rgba(0, 0, 0, 0.25)',
-          },
-        },
-      },
-    ],
-  }
+            shadowColor: 'rgba(0, 0, 0, 0.25)'
+          }
+        }
+      }
+    ]
+  };
 }

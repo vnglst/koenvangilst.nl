@@ -1,54 +1,42 @@
-import type { JSX } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { z } from 'zod'
+import type { JSX } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { z } from 'zod';
 
-import { fetcher } from '#/lib/fetcher'
+import { fetcher } from '#/lib/fetcher';
 
-import { RainClient } from './RainChart'
-import { SunshineClient } from './Sunshine'
-import { TemperatureClient } from './TemperatureChart'
+import { RainClient } from './RainChart';
+import { SunshineClient } from './Sunshine';
+import { TemperatureClient } from './TemperatureChart';
 
-const DATA_URL =
-  'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json'
+const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json';
 
 type AnomalyProps = {
-  type: 'sunshine' | 'rain' | 'temperature'
-  look: 'blog' | 'dashboard'
-}
+  type: 'sunshine' | 'rain' | 'temperature';
+  look: 'blog' | 'dashboard';
+};
 
 export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const { data, error } = useQuery({
     queryKey: [DATA_URL],
-    queryFn: () => fetcher(DATA_URL),
-  })
+    queryFn: () => fetcher(DATA_URL)
+  });
 
-  const classNameForBlog = 'my-4 aspect-[1/1]'
-  const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square'
-  const className = look === 'blog' ? classNameForBlog : classNameForDashboard
+  const classNameForBlog = 'my-4 aspect-[1/1]';
+  const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
+  const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 
-  if (error)
-    return (
-      <div className="text-sm text-red-500">Failed to load weather data</div>
-    )
-  if (!data)
-    return (
-      <div
-        className={`${className} animate-pulse bg-gray-100 dark:bg-gray-800`}
-      />
-    )
+  if (error) return <div className="text-sm text-red-500">Failed to load weather data</div>;
+  if (!data) return <div className={`${className} animate-pulse bg-gray-100 dark:bg-gray-800`} />;
 
-  const parsed = Data.safeParse(data)
-  if (!parsed.success) return null
+  const parsed = Data.safeParse(data);
+  if (!parsed.success) return null;
 
-  let Component: JSX.Element | null = null
-  if (type === 'sunshine')
-    Component = <SunshineClient data={parsed.data} className={className} />
-  else if (type === 'rain')
-    Component = <RainClient data={parsed.data} className={className} />
-  else
-    Component = <TemperatureClient data={parsed.data} className={className} />
+  let Component: JSX.Element | null = null;
+  if (type === 'sunshine') Component = <SunshineClient data={parsed.data} className={className} />;
+  else if (type === 'rain') Component = <RainClient data={parsed.data} className={className} />;
+  else Component = <TemperatureClient data={parsed.data} className={className} />;
 
-  return Component
+  return Component;
 }
 
 const Data = z.object({
@@ -69,7 +57,7 @@ const Data = z.object({
   last_temperature_anomaly: z.number(),
   last_temperature_trend: z.number(),
   years: z.array(z.string()),
-  forecast_years: z.array(z.string()),
-})
+  forecast_years: z.array(z.string())
+});
 
-export type Data = z.infer<typeof Data>
+export type Data = z.infer<typeof Data>;

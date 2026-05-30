@@ -21,75 +21,73 @@ Through my experiment, I aimed to explore whether the rise of LLMs serves to exa
 We'll begin with a straightforward task: instructing the computer to display "Hello, world!". For this, we're utilizing TypeScript. I asked ChatGPT how a junior developer would write this. The answer is short, simple and correct:
 
 ```ts
-console.log('Hello, world!')
+console.log('Hello, world!');
 ```
 
 Now, to add complexity, I took the following steps. First, I asked whether ChatGPT could refactor the code from a Senior Developer's perspective. This request yielded the subsequent code:
 
 ```ts
-;(() => {
-  const getMessage = (): string => 'Hello, world!'
-  console.log(getMessage())
-})()
+(() => {
+  const getMessage = (): string => 'Hello, world!';
+  console.log(getMessage());
+})();
 ```
 
 Next, I progressed through several iterations, incrementally elevating the developer's seniority level—from Staff Engineer to Principal Staff Engineer, and finally to Principal Staff Engineer at a large corporation. The final outcome was as follows:
 
 ```ts
 interface ILogger {
-  log: (message: string) => void
+  log: (message: string) => void;
 }
 
 class ConsoleLogger implements ILogger {
   public log(message: string): void {
-    console.log(message)
+    console.log(message);
   }
 }
 
 interface IApplication {
-  run(): void
+  run(): void;
 }
 
 class HelloApplication implements IApplication {
-  private logger: ILogger
-  private messageProvider: IMessageProvider
+  private logger: ILogger;
+  private messageProvider: IMessageProvider;
 
   constructor(logger: ILogger, messageProvider: IMessageProvider) {
-    this.logger = logger
-    this.messageProvider = messageProvider
+    this.logger = logger;
+    this.messageProvider = messageProvider;
   }
 
   public run(): void {
-    const message = this.messageProvider.getMessage()
-    this.logger.log(message)
+    const message = this.messageProvider.getMessage();
+    this.logger.log(message);
   }
 }
 
 interface IMessageProvider {
-  getMessage(): string
+  getMessage(): string;
 }
 
 class StaticMessageProvider implements IMessageProvider {
-  private message: string
+  private message: string;
 
   constructor(message: string) {
-    this.message = message
+    this.message = message;
   }
 
   public getMessage(): string {
-    return this.message
+    return this.message;
   }
 }
 
 // Dependency Injection Container or Framework Setup
-const logger: ILogger = new ConsoleLogger()
-const messageProvider: IMessageProvider = new StaticMessageProvider(
-  'Hello, world!',
-)
-const application: IApplication = new HelloApplication(logger, messageProvider)
+const logger: ILogger = new ConsoleLogger();
+const messageProvider: IMessageProvider = new StaticMessageProvider('Hello, world!');
+const application: IApplication = new HelloApplication(logger, messageProvider);
 
 // Application Entry Point
-application.run()
+application.run();
 ```
 
 This code is strikingly complex, yet not unrealistic to anyone who has worked within a large corporation.
@@ -101,12 +99,12 @@ By itself, this doesn't prove much about LLMs: It's a well-known trope that more
 Imagine the business now comes up with the following requirements. Our organisation closes on Friday at 6 o'clock PM and we want you to log an error message in red to the browser console saying "Sorry, we're closed" after that time. Let's see how our junior would do it:
 
 ```ts
-const currentHour = new Date().getHours()
+const currentHour = new Date().getHours();
 
 if (currentHour >= 18) {
-  console.error("Sorry, we're closed")
+  console.error("Sorry, we're closed");
 } else {
-  console.log('Hello, world!')
+  console.log('Hello, world!');
 }
 ```
 
@@ -114,67 +112,65 @@ Now, back to the more complex version created by our Principal Staff Engineer in
 
 ```ts
 interface ILogger {
-  log: (message: string, isError?: boolean) => void
+  log: (message: string, isError?: boolean) => void;
 }
 
 class ConsoleLogger implements ILogger {
   public log(message: string, isError: boolean = false): void {
     if (isError) {
-      console.error(message) // Use console.error for error messages
+      console.error(message); // Use console.error for error messages
     } else {
-      console.log(message)
+      console.log(message);
     }
   }
 }
 
 interface IApplication {
-  run(): void
+  run(): void;
 }
 
 class HelloApplication implements IApplication {
-  private logger: ILogger
-  private messageProvider: IMessageProvider
+  private logger: ILogger;
+  private messageProvider: IMessageProvider;
 
   constructor(logger: ILogger, messageProvider: IMessageProvider) {
-    this.logger = logger
-    this.messageProvider = messageProvider
+    this.logger = logger;
+    this.messageProvider = messageProvider;
   }
 
   public run(): void {
-    const { message, isError } = this.messageProvider.getMessage()
-    this.logger.log(message, isError)
+    const { message, isError } = this.messageProvider.getMessage();
+    this.logger.log(message, isError);
   }
 }
 
 interface IMessageProvider {
-  getMessage(): { message: string; isError: boolean }
+  getMessage(): { message: string; isError: boolean };
 }
 
 class StaticMessageProvider implements IMessageProvider {
-  private message: string
+  private message: string;
 
   constructor(message: string) {
-    this.message = message
+    this.message = message;
   }
 
   public getMessage(): { message: string; isError: boolean } {
-    const currentTime = new Date()
+    const currentTime = new Date();
     if (currentTime.getHours() >= 18) {
-      return { message: "Sorry, we're closed", isError: true }
+      return { message: "Sorry, we're closed", isError: true };
     }
-    return { message: this.message, isError: false }
+    return { message: this.message, isError: false };
   }
 }
 
 // Dependency Injection Container or Framework Setup
-const logger: ILogger = new ConsoleLogger()
-const messageProvider: IMessageProvider = new StaticMessageProvider(
-  'Hello, world!',
-)
-const application: IApplication = new HelloApplication(logger, messageProvider)
+const logger: ILogger = new ConsoleLogger();
+const messageProvider: IMessageProvider = new StaticMessageProvider('Hello, world!');
+const application: IApplication = new HelloApplication(logger, messageProvider);
 
 // Application Entry Point
-application.run()
+application.run();
 ```
 
 What a mess! This code is so convoluted that I want to stop reading after the first few lines. And I suppose that's not a bad initial reaction.
@@ -191,15 +187,15 @@ In the final exercise of this experiment, I challenged ChatGPT to step back, ass
 
 ```ts
 function displayMessage(): void {
-  const currentHour = new Date().getHours()
+  const currentHour = new Date().getHours();
   if (currentHour >= 18) {
-    console.error("Sorry, we're closed")
+    console.error("Sorry, we're closed");
   } else {
-    console.log('Hello, world!')
+    console.log('Hello, world!');
   }
 }
 
-displayMessage()
+displayMessage();
 ```
 
 ## Conclusions

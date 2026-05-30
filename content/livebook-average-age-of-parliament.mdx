@@ -52,12 +52,7 @@ In English the above query would read something like this:
 
 The results of the query look something like this in my case:
 
-<Image
-  alt={``}
-  src={`/static/screenshots/livebook-wiki-query.jpg`}
-  width={2268}
-  height={1714}
-/>
+<Image alt={``} src={`/static/screenshots/livebook-wiki-query.jpg`} width={2268} height={1714} />
 
 I saved the results of the query in a JSON file. This file is also stored in the [Github repo](https://github.com/vnglst/livebook-age-of-dutch-parliament) for this Livebook.
 
@@ -238,12 +233,7 @@ Vl.new(width: 800, height: 400, title: "Age of Dutch parliament", view: [fill: "
   |> Vl.encode_field(:y, "age", type: :quantitative)
 ```
 
-<Image
-  alt={``}
-  src={`/static/screenshots/livebook1.jpg`}
-  width={865}
-  height={476}
-/>
+<Image alt={``} src={`/static/screenshots/livebook1.jpg`} width={865} height={476} />
 
 As you can see, around 1950 the density of the circles increases. That makes sense, as around that time the number of members in parliament increased from 100 to 150.
 
@@ -262,12 +252,7 @@ Vl.new(
   |> Vl.encode_field(:y, "age", aggregate: :mean, scale: [domain: [0, 70]])
 ```
 
-<Image
-  alt={``}
-  src={`/static/screenshots/livebook2.jpg`}
-  width={865}
-  height={476}
-/>
+<Image alt={``} src={`/static/screenshots/livebook2.jpg`} width={865} height={476} />
 
 Looking at the plot it seems like the Dutch parliament is getting younger instead of older. Pfew, no gerontocracy in my country!
 
@@ -336,9 +321,4 @@ Vl.from_json("""
 |> Vl.data_from_values(ages)
 ```
 
-<Image
-  alt={``}
-  src={`/static/screenshots/livebook3.jpg`}
-  width={865}
-  height={476}
-/>
+<Image alt={``} src={`/static/screenshots/livebook3.jpg`} width={865} height={476} />

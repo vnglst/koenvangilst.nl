@@ -1,33 +1,33 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
 
-import { Heading } from '#/components/content/Heading'
-import { Container } from '#/components/layout/Container'
-import { BlogPostLink } from '#/components/ui/PostLink'
-import { TagLink } from '#/components/ui/Tag'
-import { getPosts } from '#/cms/mdx-parser'
-import { desluggify, sluggify } from '#/lib/sluggify'
+import { Heading } from '#/components/content/Heading';
+import { Container } from '#/components/layout/Container';
+import { BlogPostLink } from '#/components/ui/PostLink';
+import { TagLink } from '#/components/ui/Tag';
+import { getPosts } from '#/cms/mdx-parser';
+import { desluggify, sluggify } from '#/lib/sluggify';
 
 const getTagData = createServerFn({ method: 'GET' })
   .inputValidator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
-    const allPosts = await getPosts()
-    const posts = allPosts.filter((p) => p.tagsAsSlugs.includes(slug))
-    const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))]
+    const allPosts = await getPosts();
+    const posts = allPosts.filter((p) => p.tagsAsSlugs.includes(slug));
+    const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
 
     if (posts.length === 0) {
-      throw notFound()
+      throw notFound();
     }
 
-    return { posts, uniqueTags }
-  })
+    return { posts, uniqueTags };
+  });
 
 export const Route = createFileRoute('/tag/$slug')({
   loader: async ({ params }) => getTagData({ data: params.slug }),
   head: ({ params, loaderData }) => {
-    const tag = desluggify(params.slug)
-    const postCount = loaderData?.posts.length ?? 0
-    const ogImage = `https://koenvangilst.nl/og?title=${encodeURIComponent(`Posts about ${tag}`)}&description=${encodeURIComponent(`${postCount} post${postCount === 1 ? '' : 's'} about ${tag}`)}&type=tag`
+    const tag = desluggify(params.slug);
+    const postCount = loaderData?.posts.length ?? 0;
+    const ogImage = `https://koenvangilst.nl/og?title=${encodeURIComponent(`Posts about ${tag}`)}&description=${encodeURIComponent(`${postCount} post${postCount === 1 ? '' : 's'} about ${tag}`)}&type=tag`;
     return {
       meta: [
         { title: `Posts about ${tag} | Koen van Gilst` },
@@ -36,17 +36,17 @@ export const Route = createFileRoute('/tag/$slug')({
         { property: 'og:description', content: `All posts about ${tag}` },
         { property: 'og:image', content: ogImage },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: ogImage },
-      ],
-    }
+        { name: 'twitter:image', content: ogImage }
+      ]
+    };
   },
-  component: TagPage,
-})
+  component: TagPage
+});
 
 function TagPage() {
-  const { slug } = Route.useParams()
-  const { posts, uniqueTags } = Route.useLoaderData()
-  const tag = desluggify(slug)
+  const { slug } = Route.useParams();
+  const { posts, uniqueTags } = Route.useLoaderData();
+  const tag = desluggify(slug);
 
   return (
     <Container>
@@ -70,5 +70,5 @@ function TagPage() {
         </ul>
       </section>
     </Container>
-  )
+  );
 }

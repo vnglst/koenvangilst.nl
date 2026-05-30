@@ -1,10 +1,13 @@
-//  @ts-check
+// @ts-check
 
 /** @type {import('prettier').Config} */
 const config = {
-  semi: false,
+  plugins: ['prettier-plugin-tailwindcss'],
+  arrowParens: 'always',
   singleQuote: true,
-  trailingComma: 'all',
-}
+  tabWidth: 2,
+  trailingComma: 'none',
+  printWidth: 120
+};
 
-export default config
+export default config;
