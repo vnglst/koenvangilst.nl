@@ -1,30 +1,30 @@
-import type { PostType } from '#/cms/schema';
+import type { PostType } from '#/cms/schema'
 
-import { sluggify } from '#/lib/sluggify';
+import { sluggify } from '#/lib/sluggify'
 
-import { Container } from '../layout/Container';
-import { Link } from '../ui/Link';
-import { TagLink } from '../ui/Tag';
-import { ArticleMetadata } from './ArticleMetadata';
-import { Heading } from './Heading';
-import { MDXComponent } from './MDXComponent';
-import { Prose } from './Prose';
+import { Container } from '../layout/Container'
+import { Link } from '../ui/Link'
+import { TagLink } from '../ui/Tag'
+import { ArticleMetadata } from './ArticleMetadata'
+import { Heading } from './Heading'
+import { MDXComponent } from './MDXComponent'
+import { Prose } from './Prose'
 
 type Props = {
-  publishedAt: string;
-  title: string;
-  readingTime: PostType['readingTime'];
-  tags?: string[];
-  path: string;
+  publishedAt: string
+  title: string
+  readingTime: PostType['readingTime']
+  tags?: string[]
+  path: string
   image?: {
-    alt: string;
-    src: string;
-    width: number;
-    height: number;
-    showAsHeader?: boolean;
-  };
-  Component: React.ComponentType;
-};
+    alt: string
+    src: string
+    width: number
+    height: number
+    showAsHeader?: boolean
+  }
+  Component: React.ComponentType
+}
 
 export function MarkdownLayout({
   publishedAt,
@@ -33,14 +33,17 @@ export function MarkdownLayout({
   tags,
   path,
   image,
-  Component
+  Component,
 }: Props) {
   return (
     <Container>
       <article className="w-full max-w-[700px]">
         <header>
           <Heading level={1}>{title}</Heading>
-          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
+          <ArticleMetadata
+            publishedAt={publishedAt}
+            readingTimeText={readingTime.text}
+          />
           {tags && tags.length > 0 && (
             <ul className="my-4 flex w-full flex-wrap gap-2">
               {tags.map((tag: string) => (
@@ -71,10 +74,10 @@ export function MarkdownLayout({
         </footer>
       </article>
     </Container>
-  );
+  )
 }
 
 function getEditUrl(path: string) {
-  const slug = path.split('/').pop();
-  return `https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`;
+  const slug = path.split('/').pop()
+  return `https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`
 }

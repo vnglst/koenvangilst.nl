@@ -13,8 +13,8 @@ While on holiday I read `Programming TypeScript` by Boris Cherny. It's excellent
 ## Type literals
 
 ```ts
-let b = 5678; // type = number
-const c = 5678; // type = 5678
+let b = 5678 // type = number
+const c = 5678 // type = 5678
 ```
 
 ## Numeric separator
@@ -22,7 +22,7 @@ const c = 5678; // type = 5678
 For example:
 
 ```ts
-let oneMillion = 1_000_0000;
+let oneMillion = 1_000_0000
 ```
 
 ## Structurally typed
@@ -33,12 +33,12 @@ JavaScript (and TypeScript) are structurally typed. This means that it's not the
 
 ```ts
 let a: {
-  b: number;
-  c?: string; // optional property
-  [key: number]: boolean; // index signature
-};
+  b: number
+  c?: string // optional property
+  [key: number]: boolean // index signature
+}
 
-a = { b: 10, 1: true, 100: false }; // example
+a = { b: 10, 1: true, 100: false } // example
 ```
 
 ## Tuples
@@ -46,7 +46,7 @@ a = { b: 10, 1: true, 100: false }; // example
 Tuples are a subtype of an array. They've got a fixed length and each index has a known type. For example:
 
 ```ts
-let b: [string, string, number] = ['koen', 'van gilst', 1978];
+let b: [string, string, number] = ['koen', 'van gilst', 1978]
 ```
 
 Cherny advises using tuples often: they allow you to safely encode heterogeneous lists with fixed lengths.
@@ -54,7 +54,7 @@ Cherny advises using tuples often: they allow you to safely encode heterogeneous
 ## Immutable arrays
 
 ```ts
-let as: readonly number[] = [1, 2, 3];
+let as: readonly number[] = [1, 2, 3]
 ```
 
 This could be very useful in a React/Redux context: To avoid accidental mutations of the state object.
@@ -77,11 +77,11 @@ A parameter is the data needed by the function to run. An argument is the data y
 ## Typing functions
 
 ```ts
-type Log = (msg: string, userId?: string) => void;
+type Log = (msg: string, userId?: string) => void
 
 let log: Log = (msg, userId = 'Not signed in') => {
-  console.log(msg + userId);
-};
+  console.log(msg + userId)
+}
 ```
 
 _Contextual typing_ infers from the context that `msg` has to be a string.
@@ -92,21 +92,21 @@ Let's a function do two different things based on the call signature. For exampl
 
 ```ts
 type Reserve = {
-  (from: Date, to: Date, dest: string): Reservation;
-  (from: Date, dest: string): Reservation;
-};
+  (from: Date, to: Date, dest: string): Reservation
+  (from: Date, dest: string): Reservation
+}
 
 let reserve: Reserve = (
   from: Date,
   toOrDestination: Date | string,
-  destination?: string
+  destination?: string,
 ) => {
   if (toOrDestination instanceof Date && destination !== undefined) {
     // Book a one-way trip
   } else if (typeof toOrDestination === 'string') {
     // Book a round trip
   }
-};
+}
 ```
 
 ## Typing properties on functions
@@ -116,21 +116,21 @@ Consider the following code which assigns a property `wasCalled` to the function
 ```ts
 function warnUser(warning) {
   if (warnUser.wasCalled) {
-    return;
+    return
   }
-  warnUser.wasCalled = true;
-  alert(warning);
+  warnUser.wasCalled = true
+  alert(warning)
 }
-warnUser.wasCalled = false;
+warnUser.wasCalled = false
 ```
 
 This can be typed with TypeScript as follows:
 
 ```ts
 type WarnUser = {
-  (warning: string): void; // the function
-  wasCalled: boolean; // property
-};
+  (warning: string): void // the function
+  wasCalled: boolean // property
+}
 ```
 
 ## Generics
@@ -151,11 +151,11 @@ Here's another example from the book. This is the typing for the `map` function,
 
 ```ts
 function map<T, U>(array: T[], f: (item: T) => U): U[] {
-  let result = [];
+  let result = []
   for (let i = 0; i < array.length; i++) {
-    result[i] = f(array[i]);
+    result[i] = f(array[i])
   }
-  return result;
+  return result
 }
 ```
 
@@ -172,18 +172,25 @@ A style of programming where you sketch out type signatures first and fill in va
 Consider the following code:
 
 ```ts
-type Color = 'Black' | 'White';
-type File = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
-type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type Color = 'Black' | 'White'
+type File = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H'
+type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 class Position {
-  constructor(private file: File, private rank: Rank) {}
+  constructor(
+    private file: File,
+    private rank: Rank,
+  ) {}
 }
 
 class Piece {
-  protected position: Position;
-  constructor(private readonly color: Color, file: File, rank: Rank) {
-    this.position = new Position(file, rank);
+  protected position: Position
+  constructor(
+    private readonly color: Color,
+    file: File,
+    rank: Rank,
+  ) {
+    this.position = new Position(file, rank)
   }
 }
 ```
@@ -202,9 +209,9 @@ Using the `abstract` keyword in front of a class means that you can't instantiat
 abstract class Piece {
   // ...
   moveTo(position: Position) {
-    this.position = position;
+    this.position = position
   }
-  abstract canMoveTo(position: Position): boolean;
+  abstract canMoveTo(position: Position): boolean
 }
 ```
 
@@ -216,10 +223,10 @@ Like aliases interfaces let you define types of things. Interfaces don’t have 
 
 ```ts
 type Cake = {
-  calories: number;
-  sweet: boolean;
-  tasty: boolean;
-};
+  calories: number
+  sweet: boolean
+  tasty: boolean
+}
 ```
 
 ## Decorators
@@ -243,8 +250,8 @@ let APIPayload = serializable(
     getValue(): Payload {
       // ...
     }
-  }
-);
+  },
+)
 ```
 
 However, since decorators are still experimental in JavaScript (and also in TypeScript) (see: https://github.com/tc39/proposal-decorators) Cherny recommends sticking to ordinary functions until decorators become stable.
@@ -258,30 +265,30 @@ new RequestBuilder()
   .setURL('/users')
   .setMethod('get')
   .setData({ firstName: 'Anna' })
-  .send();
+  .send()
 ```
 
 Cherny shows how to build this in a type-safe way using TypeScript:
 
 ```ts
 class RequestBuilder {
-  private data: object | null = null;
-  private method: 'get' | 'post' | null = null;
-  private url: string | null = null;
+  private data: object | null = null
+  private method: 'get' | 'post' | null = null
+  private url: string | null = null
 
   setMethod(method: 'get' | 'post'): this {
-    this.method = method;
-    return this;
+    this.method = method
+    return this
   }
 
   setData(data: object): this {
-    this.data = data;
-    return this;
+    this.data = data
+    return this
   }
 
   setURL(url: string): this {
-    this.url = url;
-    return this;
+    this.url = url
+    return this
   }
 
   send() {

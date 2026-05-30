@@ -12,15 +12,15 @@ Until recently I've been an unequivocal fan of so-called barrel files. They work
 
 ```ts
 // src/components/index.js
-export * from './Foo';
-export * from './Bar';
-export * from './FooBar';
+export * from './Foo'
+export * from './Bar'
+export * from './FooBar'
 ```
 
 Which allows you to use components like this:
 
 ```ts
-import { Foo, Bar, FooBar } from 'src/components';
+import { Foo, Bar, FooBar } from 'src/components'
 ```
 
 Short and sweet! For this reason, I'm also a happy user of the VSCode plugin [Auto-barrel](https://marketplace.visualstudio.com/items?itemName=mikehanson.auto-barrel) which helps with creating/updating these barrel files.

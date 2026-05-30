@@ -1,32 +1,32 @@
-import { Icon } from '#/components/ui/Icon';
+import { Icon } from '#/components/ui/Icon'
 
 const footerLinks = [
   {
     href: 'https://bsky.app/profile/vnglst.bsky.social',
     label: 'bluesky',
-    icon: 'bluesky' as const
+    icon: 'bluesky' as const,
   },
   {
     href: 'https://hachyderm.io/@vnglst',
     label: 'mastodon',
-    icon: 'mastodon' as const
+    icon: 'mastodon' as const,
   },
   {
     href: 'https://github.com/vnglst',
     label: 'github',
-    icon: 'github' as const
+    icon: 'github' as const,
   },
   {
     href: 'https://www.linkedin.com/in/vangilst/',
     label: 'linkedin',
-    icon: 'linkedin' as const
-  }
-];
+    icon: 'linkedin' as const,
+  },
+]
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-  const commitHash = import.meta.env.VITE_COMMIT_HASH as string | undefined;
-  const appVersion = import.meta.env.VITE_APP_VERSION as string | undefined;
+  const currentYear = new Date().getFullYear()
+  const commitHash = import.meta.env.VITE_COMMIT_HASH as string | undefined
+  const appVersion = import.meta.env.VITE_APP_VERSION as string | undefined
 
   return (
     <footer className="my-16 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
@@ -59,5 +59,5 @@ export function Footer() {
         </a>
       </div>
     </footer>
-  );
+  )
 }

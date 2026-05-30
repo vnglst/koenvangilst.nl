@@ -126,24 +126,24 @@ As an escape hatch Phoenix offers so-called **client hooks** with the `phx-hook`
 ```js {5-15,19}
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
-  .getAttribute('content');
+  .getAttribute('content')
 
-let Hooks = {};
+let Hooks = {}
 
 Hooks.TrackClientCursor = {
   mounted() {
     document.addEventListener('mousemove', (e) => {
-      const x = (e.pageX / window.innerWidth) * 100; // in %
-      const y = (e.pageY / window.innerHeight) * 100; // in %
-      this.pushEvent('cursor-move', { x, y });
-    });
-  }
-};
+      const x = (e.pageX / window.innerWidth) * 100 // in %
+      const y = (e.pageY / window.innerHeight) * 100 // in %
+      this.pushEvent('cursor-move', { x, y })
+    })
+  },
+}
 
 let liveSocket = new LiveSocket('/live', Socket, {
   hooks: Hooks,
-  params: { _csrf_token: csrfToken }
-});
+  params: { _csrf_token: csrfToken },
+})
 ```
 
 To activate a hook in our LiveView template, we have to specify the hook name in the `phx-hook` binding. In our case, it doesn't matter to which element we bind it. Make sure to add an id to the element so that LiveView can identify it. We also need to handle the events coming from the client. In our LiveView file `cursors.ex` make the following changes:

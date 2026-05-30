@@ -1,11 +1,11 @@
 export function ArticleMetadata({
   publishedAt,
   readingTimeText,
-  children
+  children,
 }: {
-  publishedAt: string;
-  readingTimeText: string;
-  children?: React.ReactNode;
+  publishedAt: string
+  readingTimeText: string
+  children?: React.ReactNode
 }) {
   return (
     <div className="mt-2 flex w-full items-center justify-between text-sm text-gray-600 dark:text-gray-400">
@@ -13,7 +13,7 @@ export function ArticleMetadata({
         {new Date(publishedAt).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
         })}
       </p>
       <p className="flex items-center gap-2">
@@ -26,5 +26,5 @@ export function ArticleMetadata({
         )}
       </p>
     </div>
-  );
+  )
 }

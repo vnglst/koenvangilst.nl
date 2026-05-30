@@ -22,10 +22,16 @@ export function Co2Monitor() {
 
   return (
     <div className="not-prose w-full pt-4 pb-4">
-      <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">{timestamp}</pre>
+      <pre className="mb-6 w-full bg-transparent text-center text-gray-600 dark:text-gray-400">
+        {timestamp}
+      </pre>
       <div className="mb-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         <MetricCard header="CO2" metric={reading?.co2} unit="ppm" />
-        <MetricCard header="Temperature" metric={reading?.temperature} unit="°C" />
+        <MetricCard
+          header="Temperature"
+          metric={reading?.temperature}
+          unit="°C"
+        />
         <MetricCard header="Humidity" metric={reading?.humidity} unit="%" />
         <MetricCard header="Pressure" metric={reading?.pressure} unit="hPa" />
       </div>
@@ -34,9 +40,9 @@ export function Co2Monitor() {
 }
 
 type MetricCardProps = {
-  header: string;
-  metric?: number;
-  unit: string;
+  header: string
+  metric?: number
+  unit: string
 }
 
 function MetricCard({ header, metric, unit }: MetricCardProps) {

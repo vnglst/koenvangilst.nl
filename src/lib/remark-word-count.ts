@@ -1,5 +1,5 @@
-import type { Root } from 'mdast';
-import { visit } from 'unist-util-visit';
+import type { Root } from 'mdast'
+import { visit } from 'unist-util-visit'
 
 /**
  * Remark plugin that injects word count into the MDX frontmatter data.
@@ -8,16 +8,16 @@ import { visit } from 'unist-util-visit';
  */
 export function remarkWordCount() {
   return function (tree: Root) {
-    let wordCount = 0;
+    let wordCount = 0
 
     visit(tree, 'text', (node: { value: string }) => {
-      const words = node.value.trim().split(/\s+/).filter(Boolean);
-      wordCount += words.length;
-    });
+      const words = node.value.trim().split(/\s+/).filter(Boolean)
+      wordCount += words.length
+    })
 
     // Inject wordCount into the YAML frontmatter node so remark-mdx-frontmatter exports it
     visit(tree, 'yaml', (node: { value: string }) => {
-      node.value = node.value.trimEnd() + `\nwordCount: ${wordCount}`;
-    });
-  };
+      node.value = node.value.trimEnd() + `\nwordCount: ${wordCount}`
+    })
+  }
 }

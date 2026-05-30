@@ -67,7 +67,7 @@ We can get the vertical scrolling position with the following code:
 
 ```html
 <script>
-  let scrollY;
+  let scrollY
 </script>
 
 <svelte:window bind:scrollY />
@@ -77,7 +77,7 @@ Here we are binding the vertical scroll position of the window to a variable _sc
 
 ```html
 <script>
-  let scrollY;
+  let scrollY
 </script>
 
 <svelte:window bind:scrollY />
@@ -96,7 +96,7 @@ Notice how you can combine HTML, CSS and JavaScript within a Svelte component. A
 To verify if this works you might be tempted to add a _console.log_ just below the line `let scrollY;`. If you try that however you’ll see only one `0` being logged. The reason for this is that any code inside the `<script>` will run only once (when initializing the component). If you want to keep executing the _console.log_ as the scroll values update, make it reactive using the following notation:
 
 ```js
-$: console.log(scrollY);
+$: console.log(scrollY)
 ```
 
 This may look a bit funky (and it is! I’m not even sure if it’s still JavaScript) but you’ll get used to it.
@@ -107,9 +107,9 @@ Similarly, we can use bind on `<video>` to get the other values:
 
 ```html {3,4,11-18}
 <script>
-  let scrollY;
-  let time;
-  let duration;
+  let scrollY
+  let time
+  let duration
 </script>
 
 <svelte:window bind:scrollY />
@@ -142,9 +142,9 @@ Before we can continue we first have to make sure the video is always displayed 
 
 ```html {11,20, 23-39}
 <script>
-  let scrollY;
-  let time;
-  let duration;
+  let scrollY
+  let time
+  let duration
 </script>
 
 <svelte:window bind:scrollY />
@@ -191,15 +191,15 @@ Any changes in the scroll position should immediately be reflected in a change i
 
 ```html {2,5,7-11}
 <script>
-  let time = 0;
-  let duration;
+  let time = 0
+  let duration
 
-  let scrollY = 0;
+  let scrollY = 0
 
   $: {
     const totalScroll =
-      document.documentElement.scrollHeight - window.innerHeight;
-    time = duration * (scrollY / totalScroll);
+      document.documentElement.scrollHeight - window.innerHeight
+    time = duration * (scrollY / totalScroll)
   }
 </script>
 ```

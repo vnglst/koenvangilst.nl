@@ -7,21 +7,68 @@ export function RobotVsExoskeleton() {
         alignItems: 'center',
         justifyContent: 'center',
         gap: '2rem',
-        padding: '2rem 0'
+        padding: '2rem 0',
       }}
     >
       {/* AI Coworker */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-        <div style={{ height: 220, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-          <svg viewBox="0 0 400 500" width={160} height={200} className="robot-float">
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.75rem',
+        }}
+      >
+        <div
+          style={{
+            height: 220,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+          }}
+        >
+          <svg
+            viewBox="0 0 400 500"
+            width={160}
+            height={200}
+            className="robot-float"
+          >
             {/* Shadow */}
-            <ellipse cx={200} cy={475} rx={70} ry={6} fill="#1a1a1a" opacity={0.08} />
+            <ellipse
+              cx={200}
+              cy={475}
+              rx={70}
+              ry={6}
+              fill="#1a1a1a"
+              opacity={0.08}
+            />
 
             {/* Head */}
-            <rect x={145} y={40} width={110} height={80} rx={8} fill="#1a1a1a" />
+            <rect
+              x={145}
+              y={40}
+              width={110}
+              height={80}
+              rx={8}
+              fill="#1a1a1a"
+            />
             {/* Antenna */}
-            <line x1={200} y1={40} x2={200} y2={18} stroke="#1a1a1a" strokeWidth={3} />
-            <circle cx={200} cy={14} r={6} fill="#f5c4b5" stroke="#e8c8b8" strokeWidth={2} />
+            <line
+              x1={200}
+              y1={40}
+              x2={200}
+              y2={18}
+              stroke="#1a1a1a"
+              strokeWidth={3}
+            />
+            <circle
+              cx={200}
+              cy={14}
+              r={6}
+              fill="#f5c4b5"
+              stroke="#e8c8b8"
+              strokeWidth={2}
+            />
             {/* Eyes */}
             <circle cx={178} cy={75} r={12} fill="#f5c4b5" />
             <circle cx={178} cy={75} r={5} fill="#1a1a1a" />
@@ -29,19 +76,68 @@ export function RobotVsExoskeleton() {
             <circle cx={222} cy={75} r={5} fill="#1a1a1a" />
             {/* Mouth */}
             <rect x={175} y={98} width={50} height={6} rx={3} fill="#666666" />
-            <line x1={188} y1={98} x2={188} y2={104} stroke="#1a1a1a" strokeWidth={1} />
-            <line x1={200} y1={98} x2={200} y2={104} stroke="#1a1a1a" strokeWidth={1} />
-            <line x1={212} y1={98} x2={212} y2={104} stroke="#1a1a1a" strokeWidth={1} />
+            <line
+              x1={188}
+              y1={98}
+              x2={188}
+              y2={104}
+              stroke="#1a1a1a"
+              strokeWidth={1}
+            />
+            <line
+              x1={200}
+              y1={98}
+              x2={200}
+              y2={104}
+              stroke="#1a1a1a"
+              strokeWidth={1}
+            />
+            <line
+              x1={212}
+              y1={98}
+              x2={212}
+              y2={104}
+              stroke="#1a1a1a"
+              strokeWidth={1}
+            />
 
             {/* Neck */}
-            <rect x={188} y={120} width={24} height={18} rx={4} fill="#666666" />
+            <rect
+              x={188}
+              y={120}
+              width={24}
+              height={18}
+              rx={4}
+              fill="#666666"
+            />
 
             {/* Torso */}
-            <rect x={130} y={138} width={140} height={150} rx={8} fill="#1a1a1a" />
+            <rect
+              x={130}
+              y={138}
+              width={140}
+              height={150}
+              rx={8}
+              fill="#1a1a1a"
+            />
             {/* Chest panel */}
-            <rect x={150} y={158} width={100} height={80} rx={4} fill="#333333" />
+            <rect
+              x={150}
+              y={158}
+              width={100}
+              height={80}
+              rx={4}
+              fill="#333333"
+            />
             {/* Reactor */}
-            <circle cx={200} cy={198} r={22} fill="#333333" stroke="#666666" strokeWidth={2} />
+            <circle
+              cx={200}
+              cy={198}
+              r={22}
+              fill="#333333"
+              stroke="#666666"
+              strokeWidth={2}
+            />
             <circle cx={200} cy={198} r={14} fill="#f5c4b5" />
             <circle cx={200} cy={198} r={7} fill="#f5ccb5" />
             <circle cx={200} cy={198} r={3} fill="#1a1a1a" />
@@ -50,50 +146,164 @@ export function RobotVsExoskeleton() {
             <rect x={256} y={170} width={8} height={40} rx={2} fill="#666666" />
 
             {/* Left arm */}
-            <circle cx={118} cy={150} r={16} fill="#666666" stroke="#1a1a1a" strokeWidth={2} />
+            <circle
+              cx={118}
+              cy={150}
+              r={16}
+              fill="#666666"
+              stroke="#1a1a1a"
+              strokeWidth={2}
+            />
             <circle cx={118} cy={150} r={6} fill="#1a1a1a" />
-            <rect x={106} y={168} width={24} height={80} rx={10} fill="#666666" />
+            <rect
+              x={106}
+              y={168}
+              width={24}
+              height={80}
+              rx={10}
+              fill="#666666"
+            />
             <circle cx={118} cy={252} r={10} fill="#1a1a1a" />
             <circle cx={118} cy={252} r={4} fill="#666666" />
-            <rect x={108} y={264} width={20} height={70} rx={8} fill="#666666" />
-            <rect x={104} y={336} width={28} height={24} rx={6} fill="#1a1a1a" />
+            <rect
+              x={108}
+              y={264}
+              width={20}
+              height={70}
+              rx={8}
+              fill="#666666"
+            />
+            <rect
+              x={104}
+              y={336}
+              width={28}
+              height={24}
+              rx={6}
+              fill="#1a1a1a"
+            />
 
             {/* Right arm */}
-            <circle cx={282} cy={150} r={16} fill="#666666" stroke="#1a1a1a" strokeWidth={2} />
+            <circle
+              cx={282}
+              cy={150}
+              r={16}
+              fill="#666666"
+              stroke="#1a1a1a"
+              strokeWidth={2}
+            />
             <circle cx={282} cy={150} r={6} fill="#1a1a1a" />
-            <rect x={270} y={168} width={24} height={80} rx={10} fill="#666666" />
+            <rect
+              x={270}
+              y={168}
+              width={24}
+              height={80}
+              rx={10}
+              fill="#666666"
+            />
             <circle cx={282} cy={252} r={10} fill="#1a1a1a" />
             <circle cx={282} cy={252} r={4} fill="#666666" />
-            <rect x={272} y={264} width={20} height={70} rx={8} fill="#666666" />
-            <rect x={268} y={336} width={28} height={24} rx={6} fill="#1a1a1a" />
+            <rect
+              x={272}
+              y={264}
+              width={20}
+              height={70}
+              rx={8}
+              fill="#666666"
+            />
+            <rect
+              x={268}
+              y={336}
+              width={28}
+              height={24}
+              rx={6}
+              fill="#1a1a1a"
+            />
 
             {/* Left leg */}
             <circle cx={168} cy={294} r={12} fill="#1a1a1a" />
             <circle cx={168} cy={294} r={5} fill="#666666" />
-            <rect x={155} y={305} width={26} height={80} rx={10} fill="#666666" />
+            <rect
+              x={155}
+              y={305}
+              width={26}
+              height={80}
+              rx={10}
+              fill="#666666"
+            />
             <circle cx={168} cy={388} r={9} fill="#1a1a1a" />
             <circle cx={168} cy={388} r={4} fill="#666666" />
-            <rect x={157} y={398} width={22} height={60} rx={8} fill="#666666" />
-            <rect x={148} y={455} width={40} height={16} rx={4} fill="#1a1a1a" />
+            <rect
+              x={157}
+              y={398}
+              width={22}
+              height={60}
+              rx={8}
+              fill="#666666"
+            />
+            <rect
+              x={148}
+              y={455}
+              width={40}
+              height={16}
+              rx={4}
+              fill="#1a1a1a"
+            />
 
             {/* Right leg */}
             <circle cx={232} cy={294} r={12} fill="#1a1a1a" />
             <circle cx={232} cy={294} r={5} fill="#666666" />
-            <rect x={219} y={305} width={26} height={80} rx={10} fill="#666666" />
+            <rect
+              x={219}
+              y={305}
+              width={26}
+              height={80}
+              rx={10}
+              fill="#666666"
+            />
             <circle cx={232} cy={388} r={9} fill="#1a1a1a" />
             <circle cx={232} cy={388} r={4} fill="#666666" />
-            <rect x={221} y={398} width={22} height={60} rx={8} fill="#666666" />
-            <rect x={212} y={455} width={40} height={16} rx={4} fill="#1a1a1a" />
+            <rect
+              x={221}
+              y={398}
+              width={22}
+              height={60}
+              rx={8}
+              fill="#666666"
+            />
+            <rect
+              x={212}
+              y={455}
+              width={40}
+              height={16}
+              rx={4}
+              fill="#1a1a1a"
+            />
           </svg>
         </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, textAlign: 'center' }}>AI Coworker</h3>
+        <h3
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            margin: 0,
+            textAlign: 'center',
+          }}
+        >
+          AI Coworker
+        </h3>
       </div>
 
       {/* vs divider */}
       <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>vs</div>
 
       {/* Human + AI (Exoskeleton) */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.75rem',
+        }}
+      >
         <div
           style={{
             width: 180,
@@ -101,7 +311,7 @@ export function RobotVsExoskeleton() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            position: 'relative'
+            position: 'relative',
           }}
         >
           <div className="exo-glow" />
@@ -136,7 +346,14 @@ export function RobotVsExoskeleton() {
             </defs>
 
             {/* Ground shadow */}
-            <ellipse cx={400} cy={965} rx={200} ry={18} fill="#000" opacity={0.12} />
+            <ellipse
+              cx={400}
+              cy={965}
+              rx={200}
+              ry={18}
+              fill="#000"
+              opacity={0.12}
+            />
 
             {/* === EXOSKELETON (behind) === */}
             {/* Left exo leg */}
@@ -168,11 +385,45 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={325} cy={740} r={22} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={325} cy={740} r={12} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={325} cy={740} r={5} fill="#ffcc02" filter="url(#glow)" />
-            <circle cx={335} cy={575} r={16} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={335} cy={575} r={8} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
+            <circle
+              cx={325}
+              cy={740}
+              r={22}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={325}
+              cy={740}
+              r={12}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={325}
+              cy={740}
+              r={5}
+              fill="#ffcc02"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={335}
+              cy={575}
+              r={16}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={335}
+              cy={575}
+              r={8}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
             <line
               x1={325}
               y1={595}
@@ -228,7 +479,13 @@ export function RobotVsExoskeleton() {
               className="pulse"
               strokeLinecap="round"
             />
-            <circle cx={250} cy={910} r={5} fill="#ff9800" filter="url(#glow)" />
+            <circle
+              cx={250}
+              cy={910}
+              r={5}
+              fill="#ff9800"
+              filter="url(#glow)"
+            />
 
             {/* Right exo leg */}
             <path
@@ -259,11 +516,45 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={470} cy={740} r={22} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={470} cy={740} r={12} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={470} cy={740} r={5} fill="#ffcc02" filter="url(#glow)" />
-            <circle cx={465} cy={575} r={16} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={465} cy={575} r={8} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
+            <circle
+              cx={470}
+              cy={740}
+              r={22}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={470}
+              cy={740}
+              r={12}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={470}
+              cy={740}
+              r={5}
+              fill="#ffcc02"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={465}
+              cy={575}
+              r={16}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={465}
+              cy={575}
+              r={8}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
             <line
               x1={470}
               y1={595}
@@ -319,13 +610,55 @@ export function RobotVsExoskeleton() {
               className="pulse"
               strokeLinecap="round"
             />
-            <circle cx={555} cy={910} r={5} fill="#ff9800" filter="url(#glow)" />
+            <circle
+              cx={555}
+              cy={910}
+              r={5}
+              fill="#ff9800"
+              filter="url(#glow)"
+            />
 
             {/* Backpack / spine */}
-            <rect x={365} y={310} width={70} height={270} rx={12} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <rect x={378} y={325} width={44} height={6} rx={3} fill="#153550" stroke="#0a1f30" strokeWidth={1} />
-            <rect x={378} y={340} width={44} height={6} rx={3} fill="#153550" stroke="#0a1f30" strokeWidth={1} />
-            <rect x={378} y={355} width={44} height={6} rx={3} fill="#153550" stroke="#0a1f30" strokeWidth={1} />
+            <rect
+              x={365}
+              y={310}
+              width={70}
+              height={270}
+              rx={12}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <rect
+              x={378}
+              y={325}
+              width={44}
+              height={6}
+              rx={3}
+              fill="#153550"
+              stroke="#0a1f30"
+              strokeWidth={1}
+            />
+            <rect
+              x={378}
+              y={340}
+              width={44}
+              height={6}
+              rx={3}
+              fill="#153550"
+              stroke="#0a1f30"
+              strokeWidth={1}
+            />
+            <rect
+              x={378}
+              y={355}
+              width={44}
+              height={6}
+              rx={3}
+              fill="#153550"
+              stroke="#0a1f30"
+              strokeWidth={1}
+            />
             <line
               x1={400}
               y1={375}
@@ -336,10 +669,38 @@ export function RobotVsExoskeleton() {
               className="pulse-slow"
               strokeLinecap="round"
             />
-            <circle cx={400} cy={400} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={400} cy={450} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={400} cy={500} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={400} cy={550} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
+            <circle
+              cx={400}
+              cy={400}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={400}
+              cy={450}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={400}
+              cy={500}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={400}
+              cy={550}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
 
             {/* Exo arms */}
             <path
@@ -356,11 +717,45 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={268} cy={340} r={20} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={268} cy={340} r={10} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={268} cy={340} r={4} fill="#ffcc02" filter="url(#glow)" />
-            <circle cx={210} cy={482} r={16} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={210} cy={482} r={8} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
+            <circle
+              cx={268}
+              cy={340}
+              r={20}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={268}
+              cy={340}
+              r={10}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={268}
+              cy={340}
+              r={4}
+              fill="#ffcc02"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={210}
+              cy={482}
+              r={16}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={210}
+              cy={482}
+              r={8}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
             <line
               x1={258}
               y1={360}
@@ -388,7 +783,13 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={165} cy={650} r={6} fill="#ff9800" filter="url(#glow)" />
+            <circle
+              cx={165}
+              cy={650}
+              r={6}
+              fill="#ff9800"
+              filter="url(#glow)"
+            />
 
             <path
               d="M525,340 L560,420 L580,480 L600,480 L585,410 L555,330 Z"
@@ -404,11 +805,45 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={532} cy={340} r={20} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={532} cy={340} r={10} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
-            <circle cx={532} cy={340} r={4} fill="#ffcc02" filter="url(#glow)" />
-            <circle cx={590} cy={482} r={16} fill="#1e4a6e" stroke="#0f2b42" strokeWidth={3} />
-            <circle cx={590} cy={482} r={8} fill="#ff9800" stroke="#e65100" strokeWidth={2} />
+            <circle
+              cx={532}
+              cy={340}
+              r={20}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={532}
+              cy={340}
+              r={10}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
+            <circle
+              cx={532}
+              cy={340}
+              r={4}
+              fill="#ffcc02"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={590}
+              cy={482}
+              r={16}
+              fill="#1e4a6e"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
+            <circle
+              cx={590}
+              cy={482}
+              r={8}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+            />
             <line
               x1={542}
               y1={360}
@@ -436,11 +871,29 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <circle cx={635} cy={650} r={6} fill="#ff9800" filter="url(#glow)" />
+            <circle
+              cx={635}
+              cy={650}
+              r={6}
+              fill="#ff9800"
+              filter="url(#glow)"
+            />
 
             {/* Shoulder bars */}
-            <path d="M268,340 L365,325" fill="none" stroke="#1b3d5e" strokeWidth={12} strokeLinecap="round" />
-            <path d="M532,340 L435,325" fill="none" stroke="#1b3d5e" strokeWidth={12} strokeLinecap="round" />
+            <path
+              d="M268,340 L365,325"
+              fill="none"
+              stroke="#1b3d5e"
+              strokeWidth={12}
+              strokeLinecap="round"
+            />
+            <path
+              d="M532,340 L435,325"
+              fill="none"
+              stroke="#1b3d5e"
+              strokeWidth={12}
+              strokeLinecap="round"
+            />
 
             {/* Hip belt */}
             <path
@@ -500,9 +953,31 @@ export function RobotVsExoskeleton() {
               strokeWidth={3}
               strokeLinejoin="round"
             />
-            <path d="M370,320 L400,345 L430,320" fill="none" stroke="#3a6baa" strokeWidth={2.5} />
-            <rect x={420} y={400} width={30} height={25} rx={3} fill="none" stroke="#3a6baa" strokeWidth={2} />
-            <line x1={432} y1={395} x2={432} y2={410} stroke="#ff9800" strokeWidth={3} strokeLinecap="round" />
+            <path
+              d="M370,320 L400,345 L430,320"
+              fill="none"
+              stroke="#3a6baa"
+              strokeWidth={2.5}
+            />
+            <rect
+              x={420}
+              y={400}
+              width={30}
+              height={25}
+              rx={3}
+              fill="none"
+              stroke="#3a6baa"
+              strokeWidth={2}
+            />
+            <line
+              x1={432}
+              y1={395}
+              x2={432}
+              y2={410}
+              stroke="#ff9800"
+              strokeWidth={3}
+              strokeLinecap="round"
+            />
 
             {/* Arms */}
             <path
@@ -563,7 +1038,14 @@ export function RobotVsExoskeleton() {
             />
 
             {/* Chest reactor */}
-            <circle cx={400} cy={430} r={30} fill="#0d3347" stroke="#0f2b42" strokeWidth={3} />
+            <circle
+              cx={400}
+              cy={430}
+              r={30}
+              fill="#0d3347"
+              stroke="#0f2b42"
+              strokeWidth={3}
+            />
             <circle
               cx={400}
               cy={430}
@@ -583,26 +1065,95 @@ export function RobotVsExoskeleton() {
               opacity={0.7}
               className="pulse"
             />
-            <line x1={400} y1={405} x2={400} y2={398} stroke="#00e5ff" strokeWidth={2.5} strokeLinecap="round" />
-            <line x1={400} y1={455} x2={400} y2={462} stroke="#00e5ff" strokeWidth={2.5} strokeLinecap="round" />
-            <line x1={375} y1={430} x2={368} y2={430} stroke="#00e5ff" strokeWidth={2.5} strokeLinecap="round" />
-            <line x1={425} y1={430} x2={432} y2={430} stroke="#00e5ff" strokeWidth={2.5} strokeLinecap="round" />
+            <line
+              x1={400}
+              y1={405}
+              x2={400}
+              y2={398}
+              stroke="#00e5ff"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+            />
+            <line
+              x1={400}
+              y1={455}
+              x2={400}
+              y2={462}
+              stroke="#00e5ff"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+            />
+            <line
+              x1={375}
+              y1={430}
+              x2={368}
+              y2={430}
+              stroke="#00e5ff"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+            />
+            <line
+              x1={425}
+              y1={430}
+              x2={432}
+              y2={430}
+              stroke="#00e5ff"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+            />
 
             {/* Neck */}
-            <rect x={382} y={280} width={36} height={45} rx={10} fill="#d4a574" stroke="#b8886a" strokeWidth={2.5} />
+            <rect
+              x={382}
+              y={280}
+              width={36}
+              height={45}
+              rx={10}
+              fill="#d4a574"
+              stroke="#b8886a"
+              strokeWidth={2.5}
+            />
 
             {/* Head */}
-            <ellipse cx={400} cy={225} rx={58} ry={68} fill="#d4a574" stroke="#b8886a" strokeWidth={2.5} />
+            <ellipse
+              cx={400}
+              cy={225}
+              rx={58}
+              ry={68}
+              fill="#d4a574"
+              stroke="#b8886a"
+              strokeWidth={2.5}
+            />
             <path
               d="M342,215 C342,165 365,142 400,138 C435,142 458,165 458,215 L458,195 C458,155 440,130 400,125 C360,130 342,155 342,195 Z"
               fill="#4e342e"
               stroke="#3e2723"
               strokeWidth={2}
             />
-            <path d="M360,165 C370,150 390,142 400,140 C385,145 368,158 360,175 Z" fill="#6d4c41" opacity={0.6} />
+            <path
+              d="M360,165 C370,150 390,142 400,140 C385,145 368,158 360,175 Z"
+              fill="#6d4c41"
+              opacity={0.6}
+            />
             {/* Eyes */}
-            <ellipse cx={378} cy={225} rx={14} ry={16} fill="#fff" stroke="#263238" strokeWidth={2.5} />
-            <ellipse cx={422} cy={225} rx={14} ry={16} fill="#fff" stroke="#263238" strokeWidth={2.5} />
+            <ellipse
+              cx={378}
+              cy={225}
+              rx={14}
+              ry={16}
+              fill="#fff"
+              stroke="#263238"
+              strokeWidth={2.5}
+            />
+            <ellipse
+              cx={422}
+              cy={225}
+              rx={14}
+              ry={16}
+              fill="#fff"
+              stroke="#263238"
+              strokeWidth={2.5}
+            />
             <circle cx={381} cy={227} r={8} fill="#4a6fa5" />
             <circle cx={425} cy={227} r={8} fill="#4a6fa5" />
             <circle cx={383} cy={226} r={4} fill="#1a237e" />
@@ -610,8 +1161,20 @@ export function RobotVsExoskeleton() {
             <circle cx={386} cy={222} r={3} fill="#fff" />
             <circle cx={430} cy={222} r={3} fill="#fff" />
             {/* Eyebrows */}
-            <path d="M362,205 Q378,198 394,205" fill="none" stroke="#3e2723" strokeWidth={3.5} strokeLinecap="round" />
-            <path d="M406,205 Q422,198 438,205" fill="none" stroke="#3e2723" strokeWidth={3.5} strokeLinecap="round" />
+            <path
+              d="M362,205 Q378,198 394,205"
+              fill="none"
+              stroke="#3e2723"
+              strokeWidth={3.5}
+              strokeLinecap="round"
+            />
+            <path
+              d="M406,205 Q422,198 438,205"
+              fill="none"
+              stroke="#3e2723"
+              strokeWidth={3.5}
+              strokeLinecap="round"
+            />
             {/* Nose */}
             <path
               d="M400,238 L395,255 L405,255"
@@ -622,11 +1185,38 @@ export function RobotVsExoskeleton() {
               strokeLinejoin="round"
             />
             {/* Mouth */}
-            <path d="M382,268 Q400,282 418,268" fill="none" stroke="#6d4c41" strokeWidth={3} strokeLinecap="round" />
-            <path d="M385,270 Q400,278 415,270" fill="#fff" stroke="none" opacity={0.5} />
+            <path
+              d="M382,268 Q400,282 418,268"
+              fill="none"
+              stroke="#6d4c41"
+              strokeWidth={3}
+              strokeLinecap="round"
+            />
+            <path
+              d="M385,270 Q400,278 415,270"
+              fill="#fff"
+              stroke="none"
+              opacity={0.5}
+            />
             {/* Ears */}
-            <ellipse cx={342} cy={230} rx={8} ry={14} fill="#d4a574" stroke="#b8886a" strokeWidth={2} />
-            <ellipse cx={458} cy={230} rx={8} ry={14} fill="#d4a574" stroke="#b8886a" strokeWidth={2} />
+            <ellipse
+              cx={342}
+              cy={230}
+              rx={8}
+              ry={14}
+              fill="#d4a574"
+              stroke="#b8886a"
+              strokeWidth={2}
+            />
+            <ellipse
+              cx={458}
+              cy={230}
+              rx={8}
+              ry={14}
+              fill="#d4a574"
+              stroke="#b8886a"
+              strokeWidth={2}
+            />
 
             {/* Visor / HUD */}
             <path
@@ -690,19 +1280,90 @@ export function RobotVsExoskeleton() {
               opacity={0.6}
               className="pulse"
             />
-            <circle cx={335} cy={225} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} filter="url(#glow)" />
-            <circle cx={465} cy={225} r={6} fill="#ff9800" stroke="#e65100" strokeWidth={2} filter="url(#glow)" />
+            <circle
+              cx={335}
+              cy={225}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+              filter="url(#glow)"
+            />
+            <circle
+              cx={465}
+              cy={225}
+              r={6}
+              fill="#ff9800"
+              stroke="#e65100"
+              strokeWidth={2}
+              filter="url(#glow)"
+            />
 
             {/* Energy particles */}
-            <circle cx={250} cy={380} r={3} fill="#00e5ff" opacity={0.6} className="pulse" filter="url(#glow)" />
-            <circle cx={555} cy={330} r={2.5} fill="#00e5ff" opacity={0.5} className="pulse-slow" filter="url(#glow)" />
-            <circle cx={220} cy={550} r={2} fill="#00e5ff" opacity={0.4} className="pulse" />
-            <circle cx={580} cy={580} r={3} fill="#00e5ff" opacity={0.5} className="pulse-slow" filter="url(#glow)" />
-            <circle cx={280} cy={700} r={2.5} fill="#00e5ff" opacity={0.4} className="pulse" filter="url(#glow)" />
-            <circle cx={530} cy={720} r={2} fill="#00e5ff" opacity={0.35} className="pulse-slow" />
+            <circle
+              cx={250}
+              cy={380}
+              r={3}
+              fill="#00e5ff"
+              opacity={0.6}
+              className="pulse"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={555}
+              cy={330}
+              r={2.5}
+              fill="#00e5ff"
+              opacity={0.5}
+              className="pulse-slow"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={220}
+              cy={550}
+              r={2}
+              fill="#00e5ff"
+              opacity={0.4}
+              className="pulse"
+            />
+            <circle
+              cx={580}
+              cy={580}
+              r={3}
+              fill="#00e5ff"
+              opacity={0.5}
+              className="pulse-slow"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={280}
+              cy={700}
+              r={2.5}
+              fill="#00e5ff"
+              opacity={0.4}
+              className="pulse"
+              filter="url(#glow)"
+            />
+            <circle
+              cx={530}
+              cy={720}
+              r={2}
+              fill="#00e5ff"
+              opacity={0.35}
+              className="pulse-slow"
+            />
           </svg>
         </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, textAlign: 'center' }}>AI + Human</h3>
+        <h3
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            margin: 0,
+            textAlign: 'center',
+          }}
+        >
+          AI + Human
+        </h3>
       </div>
 
       <style>{`
@@ -755,5 +1416,5 @@ export function RobotVsExoskeleton() {
         }
       `}</style>
     </div>
-  );
+  )
 }

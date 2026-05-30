@@ -20,7 +20,8 @@ export const Route = createFileRoute('/lab/')({
       { title: 'Labs | Koen van Gilst' },
       {
         name: 'description',
-        content: "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects.",
+        content:
+          "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects.",
       },
     ],
   }),
@@ -35,8 +36,9 @@ function Labs() {
       <Heading level={1}>Articles &amp; Experiments</Heading>
       <Prose>
         <p>
-          Below, you'll find a collection of coding experiments, blog posts and side projects I've been thinkering with.
-          It's a mix of educational web apps, tutorials, data visualisations and creations just for fun.
+          Below, you'll find a collection of coding experiments, blog posts and
+          side projects I've been thinkering with. It's a mix of educational web
+          apps, tutorials, data visualisations and creations just for fun.
         </p>
       </Prose>
       <ProjectBrowser projects={posts} />

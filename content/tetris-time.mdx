@@ -27,7 +27,7 @@ I've learned to prototype and validate ideas outside of the coding environment f
   src="/static/screenshots/claude-excited.jpg"
   width={1898}
   height={1246}
-  label={'Here\'s Claude Opus 4.5 getting all excited about the idea'}
+  label={"Here's Claude Opus 4.5 getting all excited about the idea"}
 />
 
 ## Test Driven Still Works Best
@@ -50,23 +50,25 @@ I also include instructions for newer versions of libraries or frameworks that c
 
 Here's a short sample of what I included for Tetris Time:
 
->### TDD (Test-Driven Development)
+> ### TDD (Test-Driven Development)
 >
->Always write tests first:
->1. Write a failing test that describes the expected behavior
->2. Implement the minimal code to make the test pass
->3. Refactor while keeping tests green
+> Always write tests first:
 >
->### Running Tests
+> 1.  Write a failing test that describes the expected behavior
+> 2.  Implement the minimal code to make the test pass
+> 3.  Refactor while keeping tests green
 >
->npm test          # Run all tests (single run)
->npm run typecheck # TypeScript type checking
+> ### Running Tests
 >
->### Delivering Features
+> npm test # Run all tests (single run)
+> npm run typecheck # TypeScript type checking
 >
->Before completing any feature or bug fix, always run:
->1. `npm test` - All tests must pass
->2. `npm run typecheck` - No type errors allowed
+> ### Delivering Features
+>
+> Before completing any feature or bug fix, always run:
+>
+> 1.  `npm test` - All tests must pass
+> 2.  `npm run typecheck` - No type errors allowed
 
 ## Fresh Context for Each Feature
 
@@ -80,17 +82,18 @@ After a couple of features and some backtracking you might end up with dead code
 
 Something I've started doing in this project is keeping track of prompts in Git commit messages. I added this instruction to CLAUDE.md:
 
->### Committing Changes
+> ### Committing Changes
 >
->When the user asks to commit, provide a summary of what you've implemented and a list of ALL user prompts from the conversation as the commit message. Each prompt should be on its own line. Example:
+> When the user asks to commit, provide a summary of what you've implemented and a list of ALL user prompts from the conversation as the commit message. Each prompt should be on its own line. Example:
 >
->Implemented responsive design for Tetris Time clock display.
+> Implemented responsive design for Tetris Time clock display.
 >
->Prompts:
->- Can you make sure it also displays on mobile and other screen sizes.
->- It needs a little more margin on iPhone 12 Pro when in landscape mode.
+> Prompts:
 >
->Co-Authored-By: Claude Code \<noreply@anthropic.com\>
+> - Can you make sure it also displays on mobile and other screen sizes.
+> - It needs a little more margin on iPhone 12 Pro when in landscape mode.
+>
+> Co-Authored-By: Claude Code \<noreply@anthropic.com\>
 
 This creates a helpful log of how features evolved and makes it easier to understand how I'm prompting and guiding Claude.
 

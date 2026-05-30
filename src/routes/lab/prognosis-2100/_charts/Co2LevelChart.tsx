@@ -1,28 +1,28 @@
-'';
+''
 
-import { Chart } from './Chart';
-import { colors } from './themes/colors';
+import { Chart } from './Chart'
+import { colors } from './themes/colors'
 
-import { dateFormatter } from '#/lib/formatters';
+import { dateFormatter } from '#/lib/formatters'
 
-import { usePrognosisStore } from '../_store/prognosis';
-import type { DataType } from './Co2Level';
+import { usePrognosisStore } from '../_store/prognosis'
+import type { DataType } from './Co2Level'
 
 type SealevelProps = {
-  data: DataType;
-  className: string;
-};
+  data: DataType
+  className: string
+}
 
 export function Co2LevelClient({ data, className }: SealevelProps) {
-  const { showPrognosis } = usePrognosisStore();
-  const options = generateOptions(data, showPrognosis);
+  const { showPrognosis } = usePrognosisStore()
+  const options = generateOptions(data, showPrognosis)
 
   return (
     <Chart
       options={options}
       className={`w-full overflow-hidden border border-dashed border-gray-400 dark:border-none ${className}`}
     />
-  );
+  )
 }
 
 function generateOptions(data: DataType, showPrognosis: boolean) {
@@ -33,21 +33,21 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       markLine: {
         symbol: 'none',
         lineStyle: {
-          color: colors.red
+          color: colors.red,
         },
         data: [
           [
             {
               xAxis: '2023',
-              yAxis: data.last_co2_level
+              yAxis: data.last_co2_level,
             },
-            { xAxis: '2100', yAxis: data.worst_case }
-          ]
-        ]
+            { xAxis: '2100', yAxis: data.worst_case },
+          ],
+        ],
       },
       itemStyle: {
-        color: colors.red
-      }
+        color: colors.red,
+      },
     },
     {
       name: 'Best Case',
@@ -55,48 +55,48 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       markLine: {
         symbol: 'none',
         lineStyle: {
-          color: colors.limeGreen
+          color: colors.limeGreen,
         },
         data: [
           [
             {
               xAxis: '2023',
-              yAxis: data.last_co2_level
+              yAxis: data.last_co2_level,
             },
-            { xAxis: '2100', yAxis: data.best_case }
-          ]
-        ]
+            { xAxis: '2100', yAxis: data.best_case },
+          ],
+        ],
       },
       itemStyle: {
-        color: colors.limeGreen
-      }
-    }
-  ];
+        color: colors.limeGreen,
+      },
+    },
+  ]
 
   return {
     grid: {
       top: 120,
       bottom: 50,
       left: 15,
-      right: 15
+      right: 15,
     },
     title: {
       text: 'Global CO2 level',
       subtext: `In ppm measured at Mauna Loa.\nGlobal Monitoring Laboratory • www.koenvangilst.nl • ${dateFormatter(
-        data.timestamp
+        data.timestamp,
       )}`,
       subtextStyle: {
-        lineHeight: 18
+        lineHeight: 18,
       },
       top: 10,
-      left: 10
+      left: 10,
     },
     tooltip: {
       valueFormatter: (value: number) => `${value.toFixed(3)} m`,
       trigger: 'item',
       axisPointer: {
-        type: 'cross'
-      }
+        type: 'cross',
+      },
     },
     ...(showPrognosis
       ? {
@@ -107,24 +107,24 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
             selected: {
               'CO2 levels': true,
               'Worst Case': true,
-              'Best Case': true
-            }
-          }
+              'Best Case': true,
+            },
+          },
         }
       : {}),
     xAxis: {
       data: showPrognosis ? data.forecast_years : data.years,
       splitLine: {
-        show: false
-      }
+        show: false,
+      },
     },
     yAxis: {
       type: 'value',
       splitLine: {
-        show: false
+        show: false,
       },
       min: 0,
-      max: showPrognosis ? 1000 : 500
+      max: showPrognosis ? 1000 : 500,
     },
     series: [
       {
@@ -133,7 +133,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         smooth: true,
         data: data.co2_levels,
         emphasis: {
-          focus: 'series'
+          focus: 'series',
         },
         color: {
           type: 'linear',
@@ -144,13 +144,13 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
           colorStops: [
             {
               offset: 0,
-              color: '#2196f3'
+              color: '#2196f3',
             },
             {
               offset: 1,
-              color: '#cbf3ff'
-            }
-          ]
+              color: '#cbf3ff',
+            },
+          ],
         },
         areaStyle: {
           color: {
@@ -162,17 +162,17 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
             colorStops: [
               {
                 offset: 0,
-                color: '#19c9ff'
+                color: '#19c9ff',
               },
               {
                 offset: 1,
-                color: '#2196f3'
-              }
-            ]
-          }
-        }
+                color: '#2196f3',
+              },
+            ],
+          },
+        },
       },
-      ...(showPrognosis ? prognosisMarklines : [])
-    ]
-  };
+      ...(showPrognosis ? prognosisMarklines : []),
+    ],
+  }
 }

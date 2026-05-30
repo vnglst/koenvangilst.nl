@@ -17,17 +17,19 @@ import { remarkWordCount } from './src/lib/remark-word-count'
 
 const commitHash = (() => {
   // Prefer SOURCE_COMMIT injected by Docker/CI (git history not available in builder)
-  if (process.env.SOURCE_COMMIT) return process.env.SOURCE_COMMIT;
+  if (process.env.SOURCE_COMMIT) return process.env.SOURCE_COMMIT
   try {
-    return execSync('git rev-parse HEAD').toString().trim();
+    return execSync('git rev-parse HEAD').toString().trim()
   } catch {
-    return 'unknown';
+    return 'unknown'
   }
 })()
 
 const appVersion = (() => {
   try {
-    const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as { version?: string }
+    const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as {
+      version?: string
+    }
     return pkg.version ?? '0.0.0'
   } catch {
     return '0.0.0'

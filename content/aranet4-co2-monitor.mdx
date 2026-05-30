@@ -16,7 +16,7 @@ tags:
 
 import { Co2Monitor } from '#/routes/lab/co2/_components/Co2Monitor'
 
- Co<sub>2</sub> monitor and it's a delightful little gadget. It's small and simple and after inserting the 2 AA batteries I could immediately see the CO<sub>2</sub> levels on a clear little screen. I've [been told](https://twitter.com/PJUllrich/status/1737484637293711647) it's also one of the most accurate monitors on the market. Using an unofficial Python library and my Raspberry Pi I was also able to show the measurements on my website. You can [skip to the end](/blog/aranet4-co2-monitor#result) to see the result. Follow along if you're interested in doing something similar yourself.
+Co<sub>2</sub> monitor and it's a delightful little gadget. It's small and simple and after inserting the 2 AA batteries I could immediately see the CO<sub>2</sub> levels on a clear little screen. I've [been told](https://twitter.com/PJUllrich/status/1737484637293711647) it's also one of the most accurate monitors on the market. Using an unofficial Python library and my Raspberry Pi I was also able to show the measurements on my website. You can [skip to the end](/blog/aranet4-co2-monitor#result) to see the result. Follow along if you're interested in doing something similar yourself.
 
 ## Requirements
 
@@ -53,7 +53,6 @@ pip install aranet4 psycopg2
 ```
 
 Then I use the following Python script to store the latest measurement in a PostgreSQL database:
-
 
 ```python
 import configparser
@@ -158,7 +157,7 @@ As you can see I've also included a cleanup script that deletes any entries olde
 
 ## Result
 
-I'll leave out the front-end code in this tutorial as it is quite straightforward. For those interested in how it works it's a combination of a [React component](https://github.com/vnglst/koenvangilst.nl/blob/new-design-v7/app/lab/co2/(components)/Co2Monitor.tsx) and a Next.JS api route that calls the following [service](https://github.com/vnglst/koenvangilst.nl/blob/main/services/aranet.ts). 
+I'll leave out the front-end code in this tutorial as it is quite straightforward. For those interested in how it works it's a combination of a [React component](<https://github.com/vnglst/koenvangilst.nl/blob/new-design-v7/app/lab/co2/(components)/Co2Monitor.tsx>) and a Next.JS api route that calls the following [service](https://github.com/vnglst/koenvangilst.nl/blob/main/services/aranet.ts).
 
 Should the levels rise above the recommended threshold of 1000 ppm, don't hesitate to reach out to me on [Twitter](https://twitter.com/intent/tweet?text=@vnglst%20Open%20a%20window%20now!) or [Mastodon](https://elk.zone/hachyderm.io/@vnglst) to remind me to ventilate!
 

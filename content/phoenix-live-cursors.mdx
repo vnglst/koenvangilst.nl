@@ -124,7 +124,7 @@ For the front-end integration, you need to import the `user_socket.js` in your `
 ```js {3}
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
-import './user_socket.js';
+import './user_socket.js'
 
 // You can include dependencies in two ways.
 //
@@ -133,22 +133,22 @@ import './user_socket.js';
 To get a feeling for working with this channel (and sending updates to it) we'll start by tracking cursor movements server side. First, we need to start sending events from the client. In the file `assets/js/user_socket.js` add the following:
 
 ```js {1, 6-10}
-let channel = socket.channel('cursor:lobby', {});
+let channel = socket.channel('cursor:lobby', {})
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp);
+    console.log('Joined successfully', resp)
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth;
-      const y = e.pageY / window.innerHeight;
-      channel.push('move', { x, y });
-    });
+      const x = e.pageX / window.innerWidth
+      const y = e.pageY / window.innerHeight
+      channel.push('move', { x, y })
+    })
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp);
-  });
+    console.log('Unable to join', resp)
+  })
 
-export default socket;
+export default socket
 ```
 
 This listens for changes in the mouse cursor position and sends those as events to the Phoenix channel.
@@ -181,11 +181,11 @@ We'll add a template function to the file `user_socket.js`:
 
 ```js
 function cursorTemplate({ x, y, name }) {
-  const li = document.createElement('li');
+  const li = document.createElement('li')
   li.classList =
-    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300';
-  li.style.left = x + 'px';
-  li.style.top = y + 'px';
+    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300'
+  li.style.left = x + 'px'
+  li.style.top = y + 'px'
 
   li.innerHTML = `
     <svg
@@ -204,43 +204,43 @@ function cursorTemplate({ x, y, name }) {
         />
     </svg>
     <span class="mt-1 ml-4 px-1 text-sm text-pink-300" />
-  `;
+  `
 
-  li.lastChild.textContent = name;
+  li.lastChild.textContent = name
 
-  return li;
+  return li
 }
 ```
 
 And we listen for 'move' events on the channel:
 
 ```js {13-22}
-let channel = socket.channel('cursor:lobby', {});
+let channel = socket.channel('cursor:lobby', {})
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp);
+    console.log('Joined successfully', resp)
 
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth;
-      const y = e.pageY / window.innerHeight;
-      channel.push('move', { x, y });
-    });
+      const x = e.pageX / window.innerWidth
+      const y = e.pageY / window.innerHeight
+      channel.push('move', { x, y })
+    })
 
     channel.on('move', ({ x, y }) => {
-      const ul = document.createElement('ul');
+      const ul = document.createElement('ul')
       const cursorLi = cursorTemplate({
         x: x * window.innerWidth,
         y: y * window.innerHeight,
-        name: '???'
-      });
-      ul.appendChild(cursorLi);
-      document.getElementById('cursor-list').innerHTML = ul.innerHTML;
-    });
+        name: '???',
+      })
+      ul.appendChild(cursorLi)
+      document.getElementById('cursor-list').innerHTML = ul.innerHTML
+    })
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp);
-  });
+    console.log('Unable to join', resp)
+  })
 ```
 
 If you open up two browser tabs next to each other you can see the cursor moving around. However, the moment you
@@ -307,8 +307,8 @@ In `user_socket.js` we'll update the code that initializes the socket to use the
 
 ```js {2}
 let socket = new Socket('/socket', {
-  params: { token: sessionStorage.userToken }
-});
+  params: { token: sessionStorage.userToken },
+})
 ```
 
 When a user connects to the socket we can verify the authenticity by checking the token. Once
@@ -397,46 +397,46 @@ in `lib/phoenix_cursors/application.ex`:
 In `user_socket.js` we're going to replace the update logic for the cursors. Instead of rendering user cursors based on the `move` event, we're going to render a list of users that are currently online/present.
 
 ```js {1, 18, 24-40}
-import { Socket, Presence } from 'phoenix';
+import { Socket, Presence } from 'phoenix'
 
 let socket = new Socket('/socket', {
-  params: { token: sessionStorage.userToken }
-});
+  params: { token: sessionStorage.userToken },
+})
 
-socket.connect();
+socket.connect()
 
 channel
   .join()
   .receive('ok', (resp) => {
-    console.log('Joined successfully', resp);
+    console.log('Joined successfully', resp)
     document.addEventListener('mousemove', (e) => {
-      const x = e.pageX / window.innerWidth;
-      const y = e.pageY / window.innerHeight;
-      channel.push('move', { x, y });
-    });
+      const x = e.pageX / window.innerWidth
+      const y = e.pageY / window.innerHeight
+      channel.push('move', { x, y })
+    })
     // remove the code that updates cursor positions on the move event
   })
   .receive('error', (resp) => {
-    console.log('Unable to join', resp);
-  });
+    console.log('Unable to join', resp)
+  })
 
-const presence = new Presence(channel);
+const presence = new Presence(channel)
 
 presence.onSync(() => {
-  const ul = document.createElement('ul');
+  const ul = document.createElement('ul')
 
   presence.list((name, { metas: [firstDevice] }) => {
-    const { x, y } = firstDevice;
+    const { x, y } = firstDevice
     const cursorLi = cursorTemplate({
       name,
       x: x * window.innerWidth,
-      y: y * window.innerHeight
-    });
-    ul.appendChild(cursorLi);
-  });
+      y: y * window.innerHeight,
+    })
+    ul.appendChild(cursorLi)
+  })
 
-  document.getElementById('cursor-list').innerHTML = ul.innerHTML;
-});
+  document.getElementById('cursor-list').innerHTML = ul.innerHTML
+})
 ```
 
 After users join the channel we set up their presence in the channel. When a user sends a `move` event, we update the Presence state. Update `cursor_channel` to the following:
@@ -531,27 +531,27 @@ And in the front end we use this color for rendering the list of user cursors. I
 
 ```js {2, 3, 7}
 presence.list((name, { metas: [firstDevice] }) => {
-  const { x, y, color } = firstDevice;
+  const { x, y, color } = firstDevice
   const cursorLi = cursorTemplate({
     name,
     x: x * window.innerWidth,
     y: y * window.innerHeight,
-    color
-  });
-  ul.appendChild(cursorLi);
-});
+    color,
+  })
+  ul.appendChild(cursorLi)
+})
 ```
 
 Update the function `cursorTemplate` by using the supplied color instead of `pink-300`:
 
 ```js {1,4,7,25,28}
 function cursorTemplate({ x, y, name, color }) {
-  const li = document.createElement('li');
+  const li = document.createElement('li')
   li.classList =
-    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden';
-  li.style.left = x + 'px';
-  li.style.top = y + 'px';
-  li.style.color = color;
+    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden'
+  li.style.left = x + 'px'
+  li.style.top = y + 'px'
+  li.style.color = color
 
   li.innerHTML = `
     <svg
@@ -570,12 +570,12 @@ function cursorTemplate({ x, y, name, color }) {
         />
     </svg>
     <span class="mt-1 ml-4 px-1 text-sm text-white" />
-  `;
+  `
 
-  li.lastChild.style.backgroundColor = color;
-  li.lastChild.textContent = name;
+  li.lastChild.style.backgroundColor = color
+  li.lastChild.textContent = name
 
-  return li;
+  return li
 }
 ```
 

@@ -1,32 +1,35 @@
-import { useState } from 'react';
-import { Link, useRouterState } from '@tanstack/react-router';
+import { useState } from 'react'
+import { Link, useRouterState } from '@tanstack/react-router'
 
-import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
-import { cx } from '#/lib/clsx';
+import { ThemeToggleText } from '#/components/theme/ThemeToggleText'
+import { cx } from '#/lib/clsx'
 
 const navItems = [
   { href: '/', label: 'About' },
   { href: '/lab', label: 'Lab' },
-  { href: '/photography', label: 'Photography' }
-];
+  { href: '/photography', label: 'Photography' },
+]
 
 export function Header() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return pathname === '/';
+      return pathname === '/'
     }
-    return pathname.startsWith(href);
-  };
+    return pathname.startsWith(href)
+  }
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md md:hidden dark:border-gray-800 dark:bg-slate-950/80">
       <div className="mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo and Name */}
-          <Link to="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
+          <Link
+            to="/"
+            className="flex items-center gap-3 transition-opacity hover:opacity-80"
+          >
             <img
               alt="Koen van Gilst"
               height={36}
@@ -56,7 +59,11 @@ export function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                {mobileMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+                {mobileMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
           </div>
@@ -64,7 +71,10 @@ export function Header() {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <nav className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-800" aria-label="Mobile navigation">
+          <nav
+            className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-800"
+            aria-label="Mobile navigation"
+          >
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -75,10 +85,17 @@ export function Header() {
                   'flex items-center px-4 py-3 text-base font-medium transition-colors',
                   isActive(item.href)
                     ? 'text-primary dark:text-primary bg-gray-50 dark:bg-gray-900'
-                    : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-900'
+                    : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-900',
                 )}
               >
-                <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
+                <span
+                  className={cx(
+                    'mr-2 w-2',
+                    isActive(item.href)
+                      ? 'animate-blink text-primary'
+                      : 'invisible',
+                  )}
+                >
                   &gt;
                 </span>
                 {item.label}
@@ -88,5 +105,5 @@ export function Header() {
         )}
       </div>
     </header>
-  );
+  )
 }

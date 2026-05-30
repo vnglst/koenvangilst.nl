@@ -16,7 +16,9 @@ import { Link } from '#/components/ui/Link'
 
 // DevTools are only bundled in development — tree-shaken away in production
 const DevTools = import.meta.env.DEV
-  ? lazy(() => import('#/components/DevTools').then((m) => ({ default: m.DevTools })))
+  ? lazy(() =>
+      import('#/components/DevTools').then((m) => ({ default: m.DevTools })),
+    )
   : null
 
 interface MyRouterContext {
@@ -39,11 +41,41 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     links: [
       { rel: 'stylesheet', href: appCss },
       // Preload critical fonts to prevent FOUT (Flash of Unstyled Text)
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-400.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-500.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-600.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-700.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-400.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-500.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-600.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-700.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
       {
         rel: 'preconnect',
         href: 'https://plausible.koenvangilst.nl',
@@ -128,8 +160,9 @@ function NotFoundPage() {
       <Prose>
         <Heading level={2}>404 - Not found</Heading>
         <p>
-          It seems you've found something that used to exist, or you spelled something wrong. I'm
-          guessing you spelled something wrong. Can you double-check that URL?
+          It seems you've found something that used to exist, or you spelled
+          something wrong. I'm guessing you spelled something wrong. Can you
+          double-check that URL?
         </p>
         <Link href="/">Return Home</Link>
       </Prose>
@@ -152,4 +185,3 @@ function ErrorPage({ error }: { error: Error }) {
     </Container>
   )
 }
-

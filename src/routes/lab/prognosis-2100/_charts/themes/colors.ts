@@ -18,5 +18,5 @@ export const colors = {
   darkGoldenRod: '#c9ab00',
   limeGreen: '#7eb00a',
   darkSlateGray: '#6f5553',
-  deepPink: '#c14089'
-};
+  deepPink: '#c14089',
+}

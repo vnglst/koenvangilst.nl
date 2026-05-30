@@ -1,48 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import { Icon } from '#/components/ui/Icon';
+import { Icon } from '#/components/ui/Icon'
 
-import { Theme, useTheme } from './theme.store';
+import { Theme, useTheme } from './theme.store'
 
-const PREFERS_DARK = '(prefers-color-scheme: dark)';
+const PREFERS_DARK = '(prefers-color-scheme: dark)'
 
 export function ThemeToggleText() {
-  const theme = useTheme((state) => state.theme);
-  const setTheme = useTheme((state) => state.setTheme);
-  const [mounted, setMounted] = useState(false);
+  const theme = useTheme((state) => state.theme)
+  const setTheme = useTheme((state) => state.setTheme)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        document.documentElement.classList.add('dark');
-        setTheme(Theme.Dark);
+        document.documentElement.classList.add('dark')
+        setTheme(Theme.Dark)
       } else {
-        document.documentElement.classList.remove('dark');
-        setTheme(Theme.Light);
+        document.documentElement.classList.remove('dark')
+        setTheme(Theme.Light)
       }
-    };
+    }
 
-    window.matchMedia(PREFERS_DARK).addEventListener('change', handleThemeChange);
+    window
+      .matchMedia(PREFERS_DARK)
+      .addEventListener('change', handleThemeChange)
 
     return () => {
-      window.matchMedia(PREFERS_DARK).removeEventListener('change', handleThemeChange);
-    };
-  }, [setTheme]);
+      window
+        .matchMedia(PREFERS_DARK)
+        .removeEventListener('change', handleThemeChange)
+    }
+  }, [setTheme])
 
   function handleClick() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    const nextTheme = isDark ? Theme.Dark : Theme.Light;
-    setTheme(nextTheme);
-    window.localStorage.setItem('theme', nextTheme);
+    document.documentElement.classList.toggle('dark')
+    const isDark = document.documentElement.classList.contains('dark')
+    const nextTheme = isDark ? Theme.Dark : Theme.Light
+    setTheme(nextTheme)
+    window.localStorage.setItem('theme', nextTheme)
   }
 
   if (!mounted) {
-    return <div className="h-4 w-4" aria-hidden="true" />;
+    return <div className="h-4 w-4" aria-hidden="true" />
   }
 
   return (
@@ -53,5 +57,5 @@ export function ThemeToggleText() {
     >
       <Icon icon={theme === Theme.Dark ? 'moon' : 'sun'} className="h-4 w-4" />
     </button>
-  );
+  )
 }
