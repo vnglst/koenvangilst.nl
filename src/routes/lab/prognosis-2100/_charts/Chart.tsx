@@ -1,5 +1,3 @@
-'';
-
 import { memo, useEffect, useRef, useState } from 'react';
 import type * as echartsType from 'echarts/core';
 // Type imports don't increase bundle size
