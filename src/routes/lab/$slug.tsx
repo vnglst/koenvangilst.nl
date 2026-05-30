@@ -1,14 +1,14 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import { getPost, getMdxComponent } from '#/cms/mdx-parser'
-import { MarkdownLayout } from '#/components/content/MarkdownLayout'
-import { NotFoundPage } from '#/components/content/NotFoundPage'
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
+import { getPost, getMdxComponent } from '#/cms/mdx-parser';
+import { MarkdownLayout } from '#/components/content/MarkdownLayout';
+import { NotFoundPage } from '#/components/content/NotFoundPage';
 
 const getLabPost = createServerFn({ method: 'GET' })
   .inputValidator((data: { slug: string }) => data)
   .handler(async ({ data }) => {
-    const post = getPost(data.slug)
-    if (!post) throw notFound()
+    const post = getPost(data.slug);
+    if (!post) throw notFound();
     return {
       slug: post.slug,
       title: post.title,
@@ -18,16 +18,16 @@ const getLabPost = createServerFn({ method: 'GET' })
       tags: post.tags,
       tagsAsSlugs: post.tagsAsSlugs,
       image: post.image,
-      url: post.url,
-    }
-  })
+      url: post.url
+    };
+  });
 
 export const Route = createFileRoute('/lab/$slug')({
   loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
   head: ({ loaderData }) => {
     const ogImage = loaderData
       ? `https://koenvangilst.nl/og?title=${encodeURIComponent(loaderData.title)}&description=${encodeURIComponent(loaderData.summary)}&type=blog`
-      : undefined
+      : undefined;
     return {
       meta: [
         { title: `${loaderData?.title ?? ''} | Koen van Gilst` },
@@ -45,26 +45,24 @@ export const Route = createFileRoute('/lab/$slug')({
               { name: 'twitter:site', content: '@vnglst' },
               { name: 'twitter:title', content: loaderData!.title },
               { name: 'twitter:description', content: loaderData!.summary },
-              { name: 'twitter:image', content: ogImage },
+              { name: 'twitter:image', content: ogImage }
             ]
-          : []),
+          : [])
       ],
-      links: loaderData
-        ? [{ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` }]
-        : [],
-    }
+      links: loaderData ? [{ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` }] : []
+    };
   },
   notFoundComponent: () => <NotFoundPage />,
-  component: PostPage,
-})
+  component: PostPage
+});
 
 function PostPage() {
-  const postMeta = Route.useLoaderData()
-  const { slug } = Route.useParams()
+  const postMeta = Route.useLoaderData();
+  const { slug } = Route.useParams();
 
-  const Component = getMdxComponent(slug)
+  const Component = getMdxComponent(slug);
 
-  if (!Component) return <NotFoundPage />
+  if (!Component) return <NotFoundPage />;
 
   return (
     <MarkdownLayout
@@ -76,5 +74,5 @@ function PostPage() {
       image={postMeta.image}
       Component={Component}
     />
-  )
+  );
 }
