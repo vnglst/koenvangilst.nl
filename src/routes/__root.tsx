@@ -3,12 +3,13 @@ import { Suspense, lazy, useEffect } from 'react';
 
 import appCss from '../styles.css?url';
 
-import type { QueryClient } from '@tanstack/react-query';
-import { Tracking } from '#/components/Tracking';
-import { Container } from '#/components/layout/Container';
-import { Prose } from '#/components/content/Prose';
-import { Heading } from '#/components/content/Heading';
-import { Link } from '#/components/ui/Link';
+import type { QueryClient } from '@tanstack/react-query'
+import { Tracking } from '#/components/Tracking'
+import { Container } from '#/components/layout/Container'
+import { Prose } from '#/components/content/Prose'
+import { Heading } from '#/components/content/Heading'
+import { Link } from '#/components/ui/Link'
+import { NotFoundPage } from '#/components/content/NotFoundPage'
 
 // DevTools are only bundled in development — tree-shaken away in production
 const DevTools = import.meta.env.DEV
@@ -141,21 +142,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
-}
-
-function NotFoundPage() {
-  return (
-    <Container>
-      <Prose>
-        <Heading level={2}>404 - Not found</Heading>
-        <p>
-          It seems you've found something that used to exist, or you spelled something wrong. I'm guessing you spelled
-          something wrong. Can you double-check that URL?
-        </p>
-        <Link href="/">Return Home</Link>
-      </Prose>
-    </Container>
   );
 }
 

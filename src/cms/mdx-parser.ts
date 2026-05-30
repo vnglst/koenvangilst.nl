@@ -9,6 +9,12 @@ const modules = import.meta.glob<{
   frontmatter: Record<string, unknown>;
 }>('../../content/*.mdx', { eager: true });
 
+export function getMdxComponent(slug: string): React.ComponentType | undefined {
+  const key = `../../content/${slug}.mdx`;
+  const mod = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
+  return mod?.default;
+}
+
 export function getPosts() {
   return Object.entries(modules)
     .map(([filePath, mod]) => {
@@ -32,7 +38,6 @@ export function getPost(slug: string) {
     data.tagsAsSlugs = (data.tags as string[]).map(sluggify);
   }
 
-  // wordCount is injected by remarkWordCount at build time
   const wordCount = typeof data.wordCount === 'number' ? data.wordCount : 0;
   const minutes = Math.ceil(wordCount / 200);
   const readingTime = {
@@ -46,7 +51,6 @@ export function getPost(slug: string) {
 
   return {
     ...meta,
-    code: '',
     readingTime,
     Component: mod.default
   };
