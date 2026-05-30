@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import { getPost, mdxModules } from '#/cms/mdx-parser'
+import { getPost, getMdxComponent } from '#/cms/mdx-parser'
 import { MarkdownLayout } from '#/components/content/MarkdownLayout'
 import { NotFoundPage } from '#/components/content/NotFoundPage'
 
@@ -62,8 +62,7 @@ function PostPage() {
   const postMeta = Route.useLoaderData()
   const { slug } = Route.useParams()
 
-  const mod = (mdxModules as Record<string, { default: React.ComponentType } | undefined>)[`../../../content/${slug}.mdx`]
-  const Component = mod?.default
+  const Component = getMdxComponent(slug)
 
   if (!Component) return <NotFoundPage />
 

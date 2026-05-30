@@ -9,8 +9,11 @@ const modules = import.meta.glob<{
   frontmatter: Record<string, unknown>;
 }>('../../content/*.mdx', { eager: true });
 
-// Export the full module map so $slug.tsx can reuse it without re-globbing
-export const mdxModules = modules
+export function getMdxComponent(slug: string): React.ComponentType | undefined {
+  const key = `../../content/${slug}.mdx`;
+  const mod = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
+  return mod?.default;
+}
 
 export function getPosts() {
   return Object.entries(modules)
