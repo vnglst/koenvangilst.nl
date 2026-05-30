@@ -1,5 +1,5 @@
 {
-  "projectName": "my-tanstack-app",
+  "projectName": "koen-van-gilst-website",
   "mode": "file-router",
   "typescript": true,
   "packageManager": "npm",
@@ -12,9 +12,5 @@
   "routerOnly": false,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": [
-    "eslint",
-    "cloudflare",
-    "tanstack-query"
-  ]
+  "chosenAddOns": ["eslint", "cloudflare", "tanstack-query"]
 }
