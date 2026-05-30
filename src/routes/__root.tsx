@@ -132,7 +132,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             `
           }}
         />
-        {children}
+        <div className="flex min-h-screen flex-col">{children}</div>
         <Tracking />
         {DevTools && (
           <Suspense fallback={null}>
