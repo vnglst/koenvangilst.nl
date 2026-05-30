@@ -5,7 +5,8 @@ const config = {
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'none',
-  printWidth: 120
+  printWidth: 120,
+  semi: true
 };
 
 export default config;

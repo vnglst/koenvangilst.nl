@@ -10,7 +10,7 @@ import { dateFormatter } from '#/lib/formatters';
 const getRecentArticles = createServerFn({ method: 'GET' }).handler(() => {
   return getPosts()
     .filter((post) => post.tags.includes('article'))
-    .slice(0, 5);
+    .slice(0, 7);
 });
 
 export const Route = createFileRoute('/')({
