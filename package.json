@@ -75,7 +75,6 @@
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.3.0",
     "husky": "^9.1.7",
-    "jsdom": "^29.1.1",
     "knip": "^6.12.2",
     "lint-staged": "^17.0.4",
     "@types/mdast": "^4.0.4",

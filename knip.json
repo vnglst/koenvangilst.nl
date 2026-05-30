@@ -1,6 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
-  "entry": ["src/routes/**/*.{ts,tsx}", "src/server.ts"],
+  "entry": [
+    "src/routes/**/*.{ts,tsx}",
+    "src/server.ts",
+    "src/**/*.test.{ts,tsx}",
+    "e2e/**/*.spec.ts"
+  ],
   "ignore": ["scripts/**"],
   "ignoreDependencies": ["@types/mdx", "husky"],
   "ignoreBinaries": ["srvx"]
