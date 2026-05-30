@@ -27,13 +27,6 @@
   --font-family-nimbus: var(--font-nimbus), ui-sans-serif, system-ui, sans-serif;
 }
 
-dialog:modal {
-  max-width: 100vw;
-  max-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
 ::selection {
   background-color: var(--color-primary);
   color: #fefefe;

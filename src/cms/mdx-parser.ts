@@ -9,6 +9,9 @@ const modules = import.meta.glob<{
   frontmatter: Record<string, unknown>;
 }>('../../content/*.mdx', { eager: true });
 
+// Export the full module map so $slug.tsx can reuse it without re-globbing
+export const mdxModules = modules
+
 export function getPosts() {
   return Object.entries(modules)
     .map(([filePath, mod]) => {
@@ -32,7 +35,6 @@ export function getPost(slug: string) {
     data.tagsAsSlugs = (data.tags as string[]).map(sluggify);
   }
 
-  // wordCount is injected by remarkWordCount at build time
   const wordCount = typeof data.wordCount === 'number' ? data.wordCount : 0;
   const minutes = Math.ceil(wordCount / 200);
   const readingTime = {
@@ -46,7 +48,6 @@ export function getPost(slug: string) {
 
   return {
     ...meta,
-    code: '',
     readingTime,
     Component: mod.default
   };
