@@ -96,7 +96,11 @@ type Reserve = {
   (from: Date, dest: string): Reservation;
 };
 
-let reserve: Reserve = (from: Date, toOrDestination: Date | string, destination?: string) => {
+let reserve: Reserve = (
+  from: Date,
+  toOrDestination: Date | string,
+  destination?: string
+) => {
   if (toOrDestination instanceof Date && destination !== undefined) {
     // Book a one-way trip
   } else if (typeof toOrDestination === 'string') {
@@ -173,19 +177,12 @@ type File = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
 type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 class Position {
-  constructor(
-    private file: File,
-    private rank: Rank
-  ) {}
+  constructor(private file: File, private rank: Rank) {}
 }
 
 class Piece {
   protected position: Position;
-  constructor(
-    private readonly color: Color,
-    file: File,
-    rank: Rank
-  ) {
+  constructor(private readonly color: Color, file: File, rank: Rank) {
     this.position = new Position(file, rank);
   }
 }
@@ -257,7 +254,11 @@ However, since decorators are still experimental in JavaScript (and also in Type
 The builder pattern is a commonly used API style in JavaScript that looks like this:
 
 ```ts
-new RequestBuilder().setURL('/users').setMethod('get').setData({ firstName: 'Anna' }).send();
+new RequestBuilder()
+  .setURL('/users')
+  .setMethod('get')
+  .setData({ firstName: 'Anna' })
+  .send();
 ```
 
 Cherny shows how to build this in a type-safe way using TypeScript:

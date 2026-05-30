@@ -10,7 +10,16 @@ tags:
 
 In this tutorial, I’ll show you how Svelte’s bind command can be used to create a cool scroll video effect with very little code. The effect we’ll be creating plays a video when the user scrolls up or down. Below is a gif of [how this looks on the NYTimes website](https://www.nytimes.com/interactive/2019/10/30/world/middleeast/syria-turkey-maps.html)
 
-<video width="672" height="577" muted loop controls autoPlay playsInline fetchPriority="high">
+<video
+  width="672"
+  height="577"
+  muted
+  loop
+  controls
+  autoPlay
+  playsInline
+  fetchPriority="high"
+>
   <source src="https://i.imgur.com/s0GVWeR.mp4" type="video/mp4" />
 </video>
 
@@ -188,7 +197,8 @@ Any changes in the scroll position should immediately be reflected in a change i
   let scrollY = 0;
 
   $: {
-    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const totalScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
     time = duration * (scrollY / totalScroll);
   }
 </script>

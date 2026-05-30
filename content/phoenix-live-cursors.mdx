@@ -17,8 +17,9 @@ tags:
 ---
 
 <Disclaimer>
-  Don't forget to also read the [second part of this tutorial](/blog/phoenix-liveview-cursors), where I implement a
-  similar functionality using Phoenix LiveView!
+  Don't forget to also read the [second part of this
+  tutorial](/blog/phoenix-liveview-cursors), where I implement a similar
+  functionality using Phoenix LiveView!
 </Disclaimer>
 
 For the past few months, I've been learning about Phoenix and Elixir. Since I already spent most of my time staring at a computer screen for my day job, this means reading lots of books, listening to podcasts and watching conference talks. It's been very interesting so far, but I hadn't had a chance to get my hands dirty and write some actual Elixir code.
@@ -50,13 +51,15 @@ I'll be using Tailwind CSS for styling and you can quickly add that to the proje
 I've also added a nice background and some basic HTML. Replace the contents of the template `lib/phoenix_cursors_web/templates/page/index.html.heex` with the following:
 
 ```html
-<section class="flex h-screen w-screen flex-col items-center justify-center text-center">
+<section
+  class="flex flex-col w-screen h-screen justify-center items-center text-center"
+>
   <form
     id="msgform"
-    class="mx-auto flex w-xs space-x-3 rounded-xl bg-gradient-to-r from-pink-50 to-pink-100 p-8 drop-shadow-xl"
+    class="rounded-xl bg-gradient-to-r to-pink-100 from-pink-50 p-8 drop-shadow-xl flex w-xs mx-auto space-x-3"
   >
     <input
-      class="flex-1 appearance-none rounded-lg border border-transparent bg-white px-4 py-2 text-base text-gray-600 placeholder-gray-400 shadow-md focus:border-transparent focus:ring-2 focus:ring-pink-600 focus:outline-none"
+      class="flex-1 appearance-none border border-transparent py-2 px-4 bg-white text-gray-600 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent"
       maxlength="30"
       aria-label="Your message"
       type="text"
@@ -67,7 +70,7 @@ I've also added a nice background and some basic HTML. Replace the contents of t
     <input
       id="submit-msg"
       type="submit"
-      class="flex-shrink-0 rounded-lg bg-pink-600 px-4 py-2 text-base font-semibold text-white shadow-md hover:bg-pink-700 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200 focus:outline-none"
+      class="flex-shrink-0 bg-pink-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-pink-200"
       value="Change"
     />
   </form>
@@ -93,8 +96,8 @@ It should look like this:
 Now that we have a working Phoenix project with Tailwind CSS, let's start building the application.
 
 <Disclaimer>
-  Note: you can also follow along with this tutorial on GitHub. Visit the list of commits here:
-  https://github.com/vnglst/phoenix_cursors/commits/main
+  Note: you can also follow along with this tutorial on GitHub. Visit the list
+  of commits here: https://github.com/vnglst/phoenix_cursors/commits/main
 </Disclaimer>
 
 ## Tracking mouse movements
@@ -179,7 +182,8 @@ We'll add a template function to the file `user_socket.js`:
 ```js
 function cursorTemplate({ x, y, name }) {
   const li = document.createElement('li');
-  li.classList = 'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300';
+  li.classList =
+    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden text-pink-300';
   li.style.left = x + 'px';
   li.style.top = y + 'px';
 
@@ -543,7 +547,8 @@ Update the function `cursorTemplate` by using the supplied color instead of `pin
 ```js {1,4,7,25,28}
 function cursorTemplate({ x, y, name, color }) {
   const li = document.createElement('li');
-  li.classList = 'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden';
+  li.classList =
+    'flex flex-col absolute pointer-events-none whitespace-nowrap overflow-hidden';
   li.style.left = x + 'px';
   li.style.top = y + 'px';
   li.style.color = color;
@@ -597,8 +602,8 @@ In the [diff](https://github.com/vnglst/phoenix_cursors/commit/a0bd79fc40165ff35
 you'll find all the necessary code changes to get the chat functionality working.
 
 <Disclaimer>
-  Many thanks to [Dmitri Don](https://twitter.com/DmitriDon) for giving this tutorial a try and reporting any mistakes
-  and unclarities.
+  Many thanks to [Dmitri Don](https://twitter.com/DmitriDon) for giving this
+  tutorial a try and reporting any mistakes and unclarities.
 </Disclaimer>
 
 [^1]:

@@ -2,5 +2,6 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 
-# Prettier breaks MDX comment syntax in this file (escapes {* and */})
-content/trunkbased-development.mdx
+# Blog posts and custom components should not be formatted by Prettier
+# to preserve code block formatting and MDX comment syntax
+content/

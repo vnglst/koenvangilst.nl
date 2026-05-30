@@ -43,8 +43,10 @@ mix phx.new liveview_cursors --no-ecto
 ```
 
 <Disclaimer>
-  Note: you can also follow along [on Github](https://github.com/vnglst/phoenix_cursors/commits/main). I've created
-  waypoints after every step of the tutorial. Every waypoint is a commit on Github.
+  Note: you can also follow along [on
+  Github](https://github.com/vnglst/phoenix_cursors/commits/main). I've created
+  waypoints after every step of the tutorial. Every waypoint is a commit on
+  Github.
 </Disclaimer>
 
 We'll be using Tailwind CSS for styling and you can quickly add that to the project using the official installer. You can read about the steps to follow in [my earlier tutorial](/blog/adding-tailwind-to-phoenix). All the changes I made to get Tailwind to work are also in [this commit](https://github.com/vnglst/liveview_cursors/commit/a680d3f849de34710d902ae2777fd99b86c0f6dc).
@@ -122,7 +124,9 @@ The idea of LiveView is to do as much of the work on the server, but in some cas
 As an escape hatch Phoenix offers so-called **client hooks** with the `phx-hook` binding. These hooks are initialized on the client and allow us to write JavaScript to send events to the server. In our case, we'll use the hook to listen to `mousemove` events and send the changed coordinates to the server. In `assets/js/app.js` add the following code:
 
 ```js {5-15,19}
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute('content');
+let csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute('content');
 
 let Hooks = {};
 

@@ -17,7 +17,10 @@ environment variable.
 const pkg = require('./package.json');
 
 // starts a command line process to get the git hash
-const commitHash = require('child_process').execSync('git log --pretty=format:"%h" -n1').toString().trim();
+const commitHash = require('child_process')
+  .execSync('git log --pretty=format:"%h" -n1')
+  .toString()
+  .trim();
 
 module.exports = {
   // other configs
@@ -32,9 +35,12 @@ module.exports = {
 You can then use it in your code like this (example taken from this website):
 
 ```jsx
-<span className="my-4 text-right text-xs text-gray-500">
+<span className="text-gray-500 text-right text-xs my-4">
   v. {process.env.APP_VERSION} |{' '}
-  <a className="underline" href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH}`}>
+  <a
+    className="underline"
+    href={`https://github.com/vnglst/koenvangilst.nl/tree/${process.env.COMMIT_HASH}`}
+  >
     {process.env.COMMIT_HASH}
   </a>
 </span>

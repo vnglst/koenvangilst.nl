@@ -85,7 +85,11 @@ function TaskBoard() {
     <>
       <h1>Day off in Kyoto</h1>
       <AddTask onAddTask={handleAddTask} />
-      <TaskList tasks={tasks} onChangeTask={handleChangeTask} onDeleteTask={handleDeleteTask} />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
     </>
   );
 }
@@ -135,7 +139,11 @@ export default function TaskBoard() {
     <>
       <h1>Day off in Kyoto</h1>
       <AddTask onAddTask={handleAddTask} />
-      <TaskList tasks={tasks} onChangeTask={handleChangeTask} onDeleteTask={handleDeleteTask} />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
     </>
   );
 }

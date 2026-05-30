@@ -97,10 +97,10 @@ Developing new features on short-lived feature branches could work like this:
   alt="mermaid diagram of trunk-based development"
 />
 
-{/*
+{/* 
 Visit https://mermaid.live/ to update the diagram using the following code:
 gitGraph
-commit id: "feature 1"
+commit id: "feature 1" 
 commit id: "feature 2"
 branch feature/add-dashboard
 checkout feature/add-dashboard
@@ -123,6 +123,7 @@ commit id: "fix 3"
 
 */}
 
+
 ### Deploying a new release
 
 Ideally, the deployment process is fully automated in a CI/CD pipeline. It would then be a matter of automatically deploying the latest main to production regularly.
@@ -142,7 +143,7 @@ In a diagram this would look like:
   alt="mermaid diagram of trunk-based development"
 />
 
-{/*
+{/* 
 Visit https://mermaid.live/ to update the diagram using the following code:
 gitGraph
 checkout main
@@ -157,7 +158,7 @@ commit id: "fix 2"
 branch release/2023-02-09
 commit type:HIGHLIGHT id: "release v2" tag: "v2.0.0"
 checkout main
-commit id: "feature 4"
+commit id: "feature 4" 
 
 */}
 
