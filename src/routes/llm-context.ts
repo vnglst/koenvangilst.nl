@@ -72,7 +72,10 @@ async function handleRequest(request: Request) {
   } catch (error) {
     console.error('Error processing LLM report:', error);
     return new Response(
-      JSON.stringify({ success: false, message: 'An error occurred while processing your report.' }),
+      JSON.stringify({
+        success: false,
+        message: 'An error occurred while processing your report.'
+      }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

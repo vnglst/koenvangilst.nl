@@ -32,7 +32,10 @@ export const Route = createFileRoute('/og')({
 
           const fontData = loadFont();
           if (!fontData) {
-            return new Response(null, { status: 302, headers: { Location: '/banner.png' } });
+            return new Response(null, {
+              status: 302,
+              headers: { Location: '/banner.png' }
+            });
           }
 
           const svg = await satori(
@@ -50,13 +53,32 @@ export const Route = createFileRoute('/og')({
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div
-                  style={{ width: '8px', height: '40px', backgroundColor: '#199acc', borderRadius: '4px' }}
+                  style={{
+                    width: '8px',
+                    height: '40px',
+                    backgroundColor: '#199acc',
+                    borderRadius: '4px'
+                  }}
                 />
-                <span style={{ fontSize: 32, fontWeight: 600, color: '#199acc', letterSpacing: '-0.02em' }}>
+                <span
+                  style={{
+                    fontSize: 32,
+                    fontWeight: 600,
+                    color: '#199acc',
+                    letterSpacing: '-0.02em'
+                  }}
+                >
                   koenvangilst.nl
                 </span>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1000px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '24px',
+                  maxWidth: '1000px'
+                }}
+              >
                 <h1
                   style={{
                     fontSize: 72,
@@ -69,13 +91,26 @@ export const Route = createFileRoute('/og')({
                 >
                   {title}
                 </h1>
-                <p style={{ fontSize: 32, lineHeight: 1.4, color: '#666', margin: 0, fontWeight: 400 }}>
+                <p
+                  style={{
+                    fontSize: 32,
+                    lineHeight: 1.4,
+                    color: '#666',
+                    margin: 0,
+                    fontWeight: 400
+                  }}
+                >
                   {description}
                 </p>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span
-                  style={{ fontSize: 24, color: '#999', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                  style={{
+                    fontSize: 24,
+                    color: '#999',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em'
+                  }}
                 >
                   {type === 'tag' ? 'TAG' : 'BLOG POST'}
                 </span>
@@ -84,11 +119,20 @@ export const Route = createFileRoute('/og')({
             {
               width: 1200,
               height: 630,
-              fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
+              fonts: [
+                {
+                  name: 'IBM Plex Sans',
+                  data: fontData,
+                  weight: 700,
+                  style: 'normal'
+                }
+              ]
             }
           );
 
-          const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
+          const resvg = new Resvg(svg, {
+            fitTo: { mode: 'width', value: 1200 }
+          });
           const pngData = resvg.render().asPng();
 
           return new Response(Buffer.from(pngData), {
@@ -99,7 +143,10 @@ export const Route = createFileRoute('/og')({
           });
         } catch (e) {
           console.error('OG image generation failed:', e);
-          return new Response(null, { status: 302, headers: { Location: '/banner.png' } });
+          return new Response(null, {
+            status: 302,
+            headers: { Location: '/banner.png' }
+          });
         }
       }
     }

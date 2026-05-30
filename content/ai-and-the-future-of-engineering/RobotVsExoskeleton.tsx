@@ -11,8 +11,22 @@ export function RobotVsExoskeleton() {
       }}
     >
       {/* AI Coworker */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-        <div style={{ height: 220, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.75rem'
+        }}
+      >
+        <div
+          style={{
+            height: 220,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center'
+          }}
+        >
           <svg viewBox="0 0 400 500" width={160} height={200} className="robot-float">
             {/* Shadow */}
             <ellipse cx={200} cy={475} rx={70} ry={6} fill="#1a1a1a" opacity={0.08} />
@@ -86,14 +100,30 @@ export function RobotVsExoskeleton() {
             <rect x={212} y={455} width={40} height={16} rx={4} fill="#1a1a1a" />
           </svg>
         </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, textAlign: 'center' }}>AI Coworker</h3>
+        <h3
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            margin: 0,
+            textAlign: 'center'
+          }}
+        >
+          AI Coworker
+        </h3>
       </div>
 
       {/* vs divider */}
       <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>vs</div>
 
       {/* Human + AI (Exoskeleton) */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.75rem'
+        }}
+      >
         <div
           style={{
             width: 180,
@@ -702,7 +732,16 @@ export function RobotVsExoskeleton() {
             <circle cx={530} cy={720} r={2} fill="#00e5ff" opacity={0.35} className="pulse-slow" />
           </svg>
         </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, textAlign: 'center' }}>AI + Human</h3>
+        <h3
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            margin: 0,
+            textAlign: 'center'
+          }}
+        >
+          AI + Human
+        </h3>
       </div>
 
       <style>{`

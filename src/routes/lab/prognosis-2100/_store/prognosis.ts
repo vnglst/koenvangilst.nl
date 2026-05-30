@@ -7,5 +7,5 @@ type PrognosisStore = {
 
 export const usePrognosisStore = create<PrognosisStore>((set) => ({
   showPrognosis: false,
-  togglePrognosis: () => set((state) => ({ showPrognosis: !state.showPrognosis })),
+  togglePrognosis: () => set((state) => ({ showPrognosis: !state.showPrognosis }))
 }));

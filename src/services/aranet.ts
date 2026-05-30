@@ -5,4 +5,3 @@ export type Co2Reading = {
   humidity: number;
   pressure: number;
 };
-

@@ -36,8 +36,8 @@ export const Route = createFileRoute('/tag/$slug')({
         { property: 'og:description', content: `All posts about ${tag}` },
         { property: 'og:image', content: ogImage },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: ogImage },
-      ],
+        { name: 'twitter:image', content: ogImage }
+      ]
     };
   },
   component: TagPage

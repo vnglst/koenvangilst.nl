@@ -1,19 +1,22 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Heading } from '#/components/content/Heading'
-import { Prose } from '#/components/content/Prose'
-import { Container } from '#/components/layout/Container'
-import { Link } from '#/components/ui/Link'
-import { Co2Monitor } from './_components/Co2Monitor'
+import { createFileRoute } from '@tanstack/react-router';
+import { Heading } from '#/components/content/Heading';
+import { Prose } from '#/components/content/Prose';
+import { Container } from '#/components/layout/Container';
+import { Link } from '#/components/ui/Link';
+import { Co2Monitor } from './_components/Co2Monitor';
 
 export const Route = createFileRoute('/lab/co2/')({
   head: () => ({
     meta: [
       { title: 'Office CO2 readings | Koen van Gilst' },
-      { name: 'description', content: 'Readings of the CO2 sensor in my office.' },
-    ],
+      {
+        name: 'description',
+        content: 'Readings of the CO2 sensor in my office.'
+      }
+    ]
   }),
-  component: Co2Page,
-})
+  component: Co2Page
+});
 
 function Co2Page() {
   return (
@@ -33,5 +36,5 @@ function Co2Page() {
       </Prose>
       <Co2Monitor />
     </Container>
-  )
+  );
 }

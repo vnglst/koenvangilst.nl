@@ -85,10 +85,7 @@ async function generatePhotosData() {
       srcSetWebpParts.push(`/static/photography-optimized/${safeName}/original.webp ${metadata.width || 0}w`);
 
       // Tiny blur placeholder (10px wide, base64)
-      const blurBuffer = await sharp(filePath)
-        .resize(10, 10, { fit: 'inside' })
-        .jpeg({ quality: 70 })
-        .toBuffer();
+      const blurBuffer = await sharp(filePath).resize(10, 10, { fit: 'inside' }).jpeg({ quality: 70 }).toBuffer();
 
       console.log(`  ✓ ${file.filename}`);
       return {
@@ -103,14 +100,16 @@ async function generatePhotosData() {
         isVertical: aspectRatio < 1,
         createdAt,
         location,
-        blurDataURL: `data:image/jpeg;base64,${blurBuffer.toString('base64')}`,
+        blurDataURL: `data:image/jpeg;base64,${blurBuffer.toString('base64')}`
       };
     })
   );
 
   // Sort newest first (same as runtime lib)
   photos.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
-  photos.forEach((p, i) => { p.id = i; });
+  photos.forEach((p, i) => {
+    p.id = i;
+  });
 
   await fs.writeFile(OUTPUT_FILE, JSON.stringify(photos, null, 2));
   console.log(`✅ Photo metadata written to ${path.relative(process.cwd(), OUTPUT_FILE)}`);

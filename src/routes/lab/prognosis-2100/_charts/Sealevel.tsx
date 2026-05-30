@@ -8,10 +8,13 @@ import { SealevelClient } from './SealevelChart';
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/sealevels.json';
 
 export function Sealevel() {
-  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetcher(DATA_URL) });
+  const { data, error } = useQuery({
+    queryKey: [DATA_URL],
+    queryFn: () => fetcher(DATA_URL)
+  });
 
   if (error) return <div className="text-sm text-red-500">Failed to load sea level data</div>;
-  if (!data) return <div className="aspect-[3/5] animate-pulse bg-gray-100 dark:bg-gray-800 md:aspect-square" />;
+  if (!data) return <div className="aspect-[3/5] animate-pulse bg-gray-100 md:aspect-square dark:bg-gray-800" />;
 
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;

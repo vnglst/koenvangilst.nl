@@ -1,3 +1,7 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Blog posts and custom components should not be formatted by Prettier
+# to preserve code block formatting and MDX comment syntax
+content/

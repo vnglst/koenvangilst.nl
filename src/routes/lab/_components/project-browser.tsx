@@ -20,7 +20,7 @@ type ProjectBrowserProps = {
 const FEATURED_TAGS = [
   { label: 'articles', query: 'article' },
   { label: 'side projects', query: 'side-project' },
-  { label: 'snippets', query: 'snippet' },
+  { label: 'snippets', query: 'snippet' }
 ];
 
 export function ProjectBrowser({ projects }: ProjectBrowserProps) {
