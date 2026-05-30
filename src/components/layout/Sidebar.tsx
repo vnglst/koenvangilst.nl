@@ -1,23 +1,11 @@
-import { Link, useRouterState } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 
 import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
 import { cx } from '#/lib/clsx';
-
-const navItems = [
-  { href: '/', label: 'About' },
-  { href: '/lab', label: 'Lab' },
-  { href: '/photography', label: 'Photography' }
-];
+import { navItems, useIsActive } from '#/lib/navigation';
 
 export function Sidebar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
-    }
-    return pathname.startsWith(href);
-  };
+  const isActive = useIsActive();
 
   return (
     <aside className="hidden w-[200px] flex-shrink-0 md:block">

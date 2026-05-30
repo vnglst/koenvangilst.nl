@@ -1,25 +1,13 @@
 import { useState } from 'react';
-import { Link, useRouterState } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 
 import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
 import { cx } from '#/lib/clsx';
-
-const navItems = [
-  { href: '/', label: 'About' },
-  { href: '/lab', label: 'Lab' },
-  { href: '/photography', label: 'Photography' }
-];
+import { navItems, useIsActive } from '#/lib/navigation';
 
 export function Header() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isActive = useIsActive();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
-    }
-    return pathname.startsWith(href);
-  };
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md md:hidden dark:border-gray-800 dark:bg-slate-950/80">
