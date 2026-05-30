@@ -129,6 +129,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               if (preferredTheme === 'dark' || (!preferredTheme && systemDark)) {
                 document.documentElement.classList.add('dark');
               }
+              // After a redeploy, hashed asset filenames change. A browser serving
+              // stale cached HTML will request chunks that no longer exist (404).
+              // Vite fires 'vite:preloadError' in that case — reloading fetches
+              // fresh HTML with the correct asset references.
+              window.addEventListener('vite:preloadError', function() {
+                window.location.reload();
+              });
             `
           }}
         />
