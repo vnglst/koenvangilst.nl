@@ -3,13 +3,13 @@ import { Suspense, lazy, useEffect } from 'react';
 
 import appCss from '../styles.css?url';
 
-import type { QueryClient } from '@tanstack/react-query'
-import { Tracking } from '#/components/Tracking'
-import { Container } from '#/components/layout/Container'
-import { Prose } from '#/components/content/Prose'
-import { Heading } from '#/components/content/Heading'
-import { Link } from '#/components/ui/Link'
-import { NotFoundPage } from '#/components/content/NotFoundPage'
+import type { QueryClient } from '@tanstack/react-query';
+import { Tracking } from '#/components/Tracking';
+import { Container } from '#/components/layout/Container';
+import { Prose } from '#/components/content/Prose';
+import { Heading } from '#/components/content/Heading';
+import { Link } from '#/components/ui/Link';
+import { NotFoundPage } from '#/components/content/NotFoundPage';
 
 // DevTools are only bundled in development — tree-shaken away in production
 const DevTools = import.meta.env.DEV
