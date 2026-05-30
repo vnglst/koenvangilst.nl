@@ -16,7 +16,10 @@ type AnomalyProps = {
 };
 
 export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
-  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetcher(DATA_URL) });
+  const { data, error } = useQuery({
+    queryKey: [DATA_URL],
+    queryFn: () => fetcher(DATA_URL)
+  });
 
   const classNameForBlog = 'my-4 aspect-[1/1]';
   const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';

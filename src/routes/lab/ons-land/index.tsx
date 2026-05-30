@@ -1,23 +1,26 @@
-import { Suspense, lazy } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { ArticleMetadata } from '#/components/content/ArticleMetadata'
-import { Heading } from '#/components/content/Heading'
-import { Prose } from '#/components/content/Prose'
-import { Container } from '#/components/layout/Container'
-import { Link } from '#/components/ui/Link'
-import { Disclaimer } from '#/components/content/MDXComponent'
+import { Suspense, lazy } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { ArticleMetadata } from '#/components/content/ArticleMetadata';
+import { Heading } from '#/components/content/Heading';
+import { Prose } from '#/components/content/Prose';
+import { Container } from '#/components/layout/Container';
+import { Link } from '#/components/ui/Link';
+import { Disclaimer } from '#/components/content/MDXComponent';
 
-const LandUseChart = lazy(() => import('./_LandUseChart').then((mod) => ({ default: mod.LandUseChart })))
+const LandUseChart = lazy(() => import('./_LandUseChart').then((mod) => ({ default: mod.LandUseChart })));
 
 export const Route = createFileRoute('/lab/ons-land/')({
   head: () => ({
     meta: [
       { title: 'Ons Land | Koen van Gilst' },
-      { name: 'description', content: 'A data visualization project that shows the distribution land use in the Netherlands.' },
-    ],
+      {
+        name: 'description',
+        content: 'A data visualization project that shows the distribution land use in the Netherlands.'
+      }
+    ]
   }),
-  component: OnsLandPage,
-})
+  component: OnsLandPage
+});
 
 function OnsLandPage() {
   return (
@@ -61,5 +64,5 @@ function OnsLandPage() {
         </Disclaimer>
       </Prose>
     </Container>
-  )
+  );
 }

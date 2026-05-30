@@ -39,7 +39,14 @@ export function Comparison() {
             AI Coworker
           </div>
           {leftItems.map((item) => (
-            <div key={item} style={{ fontFamily: 'monospace', fontSize: '0.85rem', margin: '0.35rem 0' }}>
+            <div
+              key={item}
+              style={{
+                fontFamily: 'monospace',
+                fontSize: '0.85rem',
+                margin: '0.35rem 0'
+              }}
+            >
               {item}
             </div>
           ))}
@@ -57,7 +64,14 @@ export function Comparison() {
             AI + Human
           </div>
           {rightItems.map((item) => (
-            <div key={item} style={{ fontFamily: 'monospace', fontSize: '0.85rem', margin: '0.35rem 0' }}>
+            <div
+              key={item}
+              style={{
+                fontFamily: 'monospace',
+                fontSize: '0.85rem',
+                margin: '0.35rem 0'
+              }}
+            >
               {item}
             </div>
           ))}

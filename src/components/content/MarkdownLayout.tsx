@@ -26,15 +26,7 @@ type Props = {
   Component: React.ComponentType;
 };
 
-export function MarkdownLayout({
-  publishedAt,
-  title,
-  readingTime,
-  tags,
-  path,
-  image,
-  Component
-}: Props) {
+export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, image, Component }: Props) {
   return (
     <Container>
       <article className="w-full max-w-[700px]">

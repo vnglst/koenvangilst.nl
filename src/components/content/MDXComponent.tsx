@@ -45,7 +45,7 @@ const mdxComponents = {
   Image: RoundedImage, // next/image alias used in legacy MDX posts
   a: Link,
   Disclaimer,
-  Waypoint,
+  Waypoint
 };
 
 type MDXComponentProps = {

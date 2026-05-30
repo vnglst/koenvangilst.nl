@@ -25,8 +25,23 @@ function beanPath(bw: number, bh: number) {
 }
 
 type Tendril = { d: string; sw: number; delay: number };
-type Leaf = { cx: number; cy: number; rx: number; ry: number; rot: number; fill: string; delay: number };
-type Bean = { cx: number; cy: number; bw: number; bh: number; rot: number; delay: number };
+type Leaf = {
+  cx: number;
+  cy: number;
+  rx: number;
+  ry: number;
+  rot: number;
+  fill: string;
+  delay: number;
+};
+type Bean = {
+  cx: number;
+  cy: number;
+  bw: number;
+  bh: number;
+  rot: number;
+  delay: number;
+};
 type Vine = {
   stemD: string;
   stemDelay: number;
@@ -73,7 +88,15 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
   let endTime = offsetDelay + 3.5;
 
   const addLeaf = (cx: number, cy: number, rx: number, ry: number, rot: number, fill: string, d: number) => {
-    leaves.push({ cx: Math.round(cx), cy: Math.round(cy), rx, ry, rot, fill, delay: d });
+    leaves.push({
+      cx: Math.round(cx),
+      cy: Math.round(cy),
+      rx,
+      ry,
+      rot,
+      fill,
+      delay: d
+    });
     endTime = Math.max(endTime, d + 0.55);
   };
 
@@ -178,7 +201,14 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
 
       if (rng() < 0.28) {
         const bd = delay + r(0.7, 1.1);
-        beans.push({ cx: ex, cy: ey, bw: r(3, 5), bh: r(14, 24), rot: r(-180, 180), delay: bd });
+        beans.push({
+          cx: ex,
+          cy: ey,
+          bw: r(3, 5),
+          bh: r(14, 24),
+          rot: r(-180, 180),
+          delay: bd
+        });
         endTime = Math.max(endTime, bd + 0.65);
       }
     }
@@ -213,7 +243,14 @@ export function GrowingVines() {
   const vines = useMemo(buildAllVines, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', overflow: 'hidden' }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '16 / 9',
+        overflow: 'hidden'
+      }}
+    >
       <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style={{ width: '100%', height: '100%' }}>
         <defs>
           <radialGradient id="bn-main" cx="35%" cy="30%">
@@ -316,8 +353,22 @@ export function GrowingVines() {
         >
           Growing a better world
         </h2>
-        <p style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.25rem)', margin: '0 0 1.5rem 0' }}>together with AI</p>
-        <p style={{ fontSize: 'clamp(0.7rem, 1vw, 0.9rem)', color: '#666666', margin: 0, fontFamily: 'monospace' }}>
+        <p
+          style={{
+            fontSize: 'clamp(0.9rem, 1.5vw, 1.25rem)',
+            margin: '0 0 1.5rem 0'
+          }}
+        >
+          together with AI
+        </p>
+        <p
+          style={{
+            fontSize: 'clamp(0.7rem, 1vw, 0.9rem)',
+            color: '#666666',
+            margin: 0,
+            fontFamily: 'monospace'
+          }}
+        >
           Koen van Gilst &middot; Tech Lead Rabobank
         </p>
       </div>

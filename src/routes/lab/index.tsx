@@ -1,18 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import { getPosts } from '#/cms/mdx-parser'
-import { Container } from '#/components/layout/Container'
-import { Heading } from '#/components/content/Heading'
-import { Prose } from '#/components/content/Prose'
-import { ProjectBrowser } from './_components/project-browser'
+import { createFileRoute } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
+import { getPosts } from '#/cms/mdx-parser';
+import { Container } from '#/components/layout/Container';
+import { Heading } from '#/components/content/Heading';
+import { Prose } from '#/components/content/Prose';
+import { ProjectBrowser } from './_components/project-browser';
 
 const getLabPosts = createServerFn({ method: 'GET' }).handler(async () => {
-  return getPosts()
-})
+  return getPosts();
+});
 
 export const Route = createFileRoute('/lab/')({
   validateSearch: (search: Record<string, unknown>) => ({
-    q: typeof search.q === 'string' ? search.q : undefined,
+    q: typeof search.q === 'string' ? search.q : undefined
   }),
   loader: () => getLabPosts(),
   head: () => ({
@@ -20,15 +20,15 @@ export const Route = createFileRoute('/lab/')({
       { title: 'Labs | Koen van Gilst' },
       {
         name: 'description',
-        content: "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects.",
-      },
-    ],
+        content: "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects."
+      }
+    ]
   }),
-  component: Labs,
-})
+  component: Labs
+});
 
 function Labs() {
-  const posts = Route.useLoaderData()
+  const posts = Route.useLoaderData();
 
   return (
     <Container>
@@ -41,5 +41,5 @@ function Labs() {
       </Prose>
       <ProjectBrowser projects={posts} />
     </Container>
-  )
+  );
 }
