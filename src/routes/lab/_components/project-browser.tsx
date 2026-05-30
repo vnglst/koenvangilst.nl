@@ -39,8 +39,8 @@ export function ProjectBrowser({ projects }: ProjectBrowserProps) {
 function useFilteredProjects(projects: Project[], query: string): Project[] {
   if (!query) return projects;
 
-  const regex = new RegExp(query, 'i');
-  return projects.filter((project) => project.tags.some((tag) => regex.test(tag)));
+  const lowerQuery = query.toLowerCase();
+  return projects.filter((project) => project.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)));
 }
 
 type TagFilterProps = {

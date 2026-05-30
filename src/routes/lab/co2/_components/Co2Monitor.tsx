@@ -17,7 +17,7 @@ export function Co2Monitor() {
   });
 
   const timestamp = reading ? (
-    new Date(reading.timestamp * 1000).toLocaleTimeString('en-UK', {
+    new Date(reading.timestamp * 1000).toLocaleTimeString('en-GB', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
