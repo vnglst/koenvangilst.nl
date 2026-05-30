@@ -23,13 +23,7 @@ export const Route = createFileRoute('/lab/prognosis-2100/')({
 
 function PrognosisToggle() {
   const { showPrognosis, togglePrognosis } = usePrognosisStore();
-  return (
-    <Toggle
-      label="Show prognosis"
-      onChange={togglePrognosis}
-      checked={showPrognosis}
-    />
-  );
+  return <Toggle label="Show prognosis" onChange={togglePrognosis} checked={showPrognosis} />;
 }
 
 function Prognosis2100() {
@@ -54,8 +48,8 @@ function Prognosis2100() {
         <div className="prose dark:prose-invert my-auto p-2 md:py-6 md:pr-8">
           <p>
             The year 2100 seems far away but it is not unlikely that my children will still be alive then. What will the
-            Netherlands look like then? Will we have a warmer more subtropical climate? Will our dykes be high enough? And
-            will our economy be CO2 neutral?
+            Netherlands look like then? Will we have a warmer more subtropical climate? Will our dykes be high enough?
+            And will our economy be CO2 neutral?
           </p>
           <p>
             With this website, I want to answer these questions at a glance. So you can immediately see where we are now

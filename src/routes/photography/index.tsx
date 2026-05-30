@@ -19,7 +19,10 @@ export const Route = createFileRoute('/photography/')({
   head: () => ({
     meta: [
       { title: 'Photography | Koen van Gilst' },
-      { name: 'description', content: 'A collection of photographs by Koen van Gilst' }
+      {
+        name: 'description',
+        content: 'A collection of photographs by Koen van Gilst'
+      }
     ]
   }),
   component: Photography

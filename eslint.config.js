@@ -1,6 +1,6 @@
 //  @ts-check
 
-import { tanstackConfig } from '@tanstack/eslint-config'
+import { tanstackConfig } from '@tanstack/eslint-config';
 
 export default [
   ...tanstackConfig,
@@ -11,10 +11,10 @@ export default [
       'sort-imports': 'off',
       '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/require-await': 'off',
-      'pnpm/json-enforce-catalog': 'off',
-    },
+      'pnpm/json-enforce-catalog': 'off'
+    }
   },
   {
-    ignores: ['eslint.config.js', 'prettier.config.js', 'e2e/**'],
-  },
-]
+    ignores: ['eslint.config.js', 'prettier.config.js', 'e2e/**']
+  }
+];

@@ -1,26 +1,22 @@
-import {
-  HeadContent,
-  Scripts,
-  createRootRouteWithContext,
-} from '@tanstack/react-router'
-import { Suspense, lazy, useEffect } from 'react'
+import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
+import { Suspense, lazy, useEffect } from 'react';
 
-import appCss from '../styles.css?url'
+import appCss from '../styles.css?url';
 
-import type { QueryClient } from '@tanstack/react-query'
-import { Tracking } from '#/components/Tracking'
-import { Container } from '#/components/layout/Container'
-import { Prose } from '#/components/content/Prose'
-import { Heading } from '#/components/content/Heading'
-import { Link } from '#/components/ui/Link'
+import type { QueryClient } from '@tanstack/react-query';
+import { Tracking } from '#/components/Tracking';
+import { Container } from '#/components/layout/Container';
+import { Prose } from '#/components/content/Prose';
+import { Heading } from '#/components/content/Heading';
+import { Link } from '#/components/ui/Link';
 
 // DevTools are only bundled in development — tree-shaken away in production
 const DevTools = import.meta.env.DEV
   ? lazy(() => import('#/components/DevTools').then((m) => ({ default: m.DevTools })))
-  : null
+  : null;
 
 interface MyRouterContext {
-  queryClient: QueryClient
+  queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -33,59 +29,85 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         name: 'description',
         content:
-          'Innovative tech lead from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.',
-      },
+          'Innovative tech lead from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
+      }
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
       // Preload critical fonts to prevent FOUT (Flash of Unstyled Text)
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-400.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-500.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-600.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/ibm-plex-sans-700.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-      { rel: 'preload', href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-400.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-500.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-600.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/ibm-plex-sans-700.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous'
+      },
       {
         rel: 'preconnect',
         href: 'https://plausible.koenvangilst.nl',
-        crossOrigin: 'anonymous',
+        crossOrigin: 'anonymous'
       },
       { rel: 'me', href: 'https://hachyderm.io/@vnglst' },
       {
         rel: 'alternate',
         type: 'application/rss+xml',
-        href: '/feed.xml',
+        href: '/feed.xml'
       },
       {
         rel: 'icon',
         href: '/static/favicons/favicon-32x32.png',
-        sizes: '32x32',
+        sizes: '32x32'
       },
       {
         rel: 'icon',
         href: '/static/favicons/favicon-16x16.png',
-        sizes: '16x16',
+        sizes: '16x16'
       },
       { rel: 'shortcut icon', href: '/static/favicons/favicon.ico' },
       {
         rel: 'apple-touch-icon',
         href: '/static/favicons/apple-touch-icon.png',
-        sizes: '180x180',
+        sizes: '180x180'
       },
-      { rel: 'manifest', href: '/static/favicons/site.webmanifest' },
-    ],
+      { rel: 'manifest', href: '/static/favicons/site.webmanifest' }
+    ]
   }),
   notFoundComponent: NotFoundPage,
   errorComponent: ErrorPage,
-  shellComponent: RootDocument,
-})
+  shellComponent: RootDocument
+});
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="h-full min-w-[360px] font-sans"
-    >
+    <html lang="en" suppressHydrationWarning className="h-full min-w-[360px] font-sans">
       <head>
         <HeadContent />
       </head>
@@ -93,7 +115,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {/* Skip to main content for keyboard/screen reader users */}
         <a
           href="#content"
-          className="absolute left-2 top-2 z-[100] -translate-y-20 rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-900 dark:text-white"
+          className="focus:ring-primary absolute top-2 left-2 z-[100] -translate-y-20 rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 focus:translate-y-0 focus:ring-2 focus:outline-none dark:bg-slate-900 dark:text-white"
         >
           Skip to main content
         </a>
@@ -106,7 +128,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               if (preferredTheme === 'dark' || (!preferredTheme && systemDark)) {
                 document.documentElement.classList.add('dark');
               }
-            `,
+            `
           }}
         />
         {children}
@@ -119,7 +141,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
 
 function NotFoundPage() {
@@ -128,19 +150,19 @@ function NotFoundPage() {
       <Prose>
         <Heading level={2}>404 - Not found</Heading>
         <p>
-          It seems you've found something that used to exist, or you spelled something wrong. I'm
-          guessing you spelled something wrong. Can you double-check that URL?
+          It seems you've found something that used to exist, or you spelled something wrong. I'm guessing you spelled
+          something wrong. Can you double-check that URL?
         </p>
         <Link href="/">Return Home</Link>
       </Prose>
     </Container>
-  )
+  );
 }
 
 function ErrorPage({ error }: { error: Error }) {
   useEffect(() => {
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <Container>
@@ -150,6 +172,5 @@ function ErrorPage({ error }: { error: Error }) {
         <Link href="/">Return Home</Link>
       </Prose>
     </Container>
-  )
+  );
 }
-

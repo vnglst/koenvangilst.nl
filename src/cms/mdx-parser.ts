@@ -39,7 +39,7 @@ export function getPost(slug: string) {
     text: `${minutes} min read`,
     minutes,
     time: minutes * 60 * 1000,
-    words: wordCount,
+    words: wordCount
   };
 
   const meta = PostMeta.parse(data);
@@ -48,7 +48,6 @@ export function getPost(slug: string) {
     ...meta,
     code: '',
     readingTime,
-    Component: mod.default,
+    Component: mod.default
   };
 }
-

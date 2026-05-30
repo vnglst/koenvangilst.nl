@@ -55,14 +55,7 @@ const getSizeClasses = (size: ButtonSize) => {
 };
 
 export function Button(props: ButtonProps) {
-  const {
-    children,
-    className,
-    variant = 'primary',
-    size = 'md',
-    'aria-label': ariaLabel,
-    ...restProps
-  } = props;
+  const { children, className, variant = 'primary', size = 'md', 'aria-label': ariaLabel, ...restProps } = props;
 
   const baseClasses =
     'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all focus:outline-none no-underline';
