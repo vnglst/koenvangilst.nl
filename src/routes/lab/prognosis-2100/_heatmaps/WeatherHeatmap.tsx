@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { fetcher } from '#/lib/fetcher';
-
 import { RainHeatmapClient } from './RainHeatmapChart';
 import { SunshineHeatmapClient } from './SunshineHeatmapChart';
 import { TemperatureHeatmapClient } from './TemperatureHeatmapChart';
@@ -10,10 +8,7 @@ import { TemperatureHeatmapClient } from './TemperatureHeatmapChart';
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/monthly-weather-data.json';
 
 export function WeatherHeatmap({ type }: { type: 'rain' | 'sunshine' | 'temperature' }) {
-  const { data, error } = useQuery({
-    queryKey: [DATA_URL],
-    queryFn: () => fetcher(DATA_URL)
-  });
+  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load heatmap data</div>;
   if (!data) return <div className="aspect-[3/1] animate-pulse bg-gray-100 dark:bg-gray-800" />;

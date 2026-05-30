@@ -18,12 +18,11 @@ export const PostMeta = z
       })
       .optional(),
     tags: z.array(z.string()),
-    tagsAsSlugs: z.array(z.string())
+    tagsAsSlugs: z.array(z.string()).optional()
   })
   .strict();
 
 const Post = PostMeta.extend({
-  code: z.string(),
   readingTime: z.object({
     text: z.string(),
     minutes: z.number(),

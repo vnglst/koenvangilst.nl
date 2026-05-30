@@ -1,14 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetcher } from '#/lib/fetcher';
-import type { Co2Reading } from '#/services/aranet';
+import { useQuery } from '@tanstack/react-query'
+
+type Co2Reading = {
+  timestamp: number
+  co2: number
+  temperature: number
+  humidity: number
+  pressure: number
+}
 
 export function Co2Monitor() {
   const { data: reading } = useQuery<Co2Reading>({
     queryKey: ['/api/co2'],
-    queryFn: () => fetcher('/api/co2'),
+    queryFn: () => fetch('/api/co2').then((r) => r.json()),
     refetchInterval: 30_000,
     refetchOnWindowFocus: true
-  });
+  })
 
   const timestamp = reading ? (
     new Date(reading.timestamp * 1000).toLocaleTimeString('en-UK', {
@@ -18,7 +24,7 @@ export function Co2Monitor() {
     })
   ) : (
     <br />
-  );
+  )
 
   return (
     <div className="not-prose w-full pt-4 pb-4">
@@ -30,14 +36,14 @@ export function Co2Monitor() {
         <MetricCard header="Pressure" metric={reading?.pressure} unit="hPa" />
       </div>
     </div>
-  );
+  )
 }
 
 type MetricCardProps = {
-  header: string;
-  metric?: number;
-  unit: string;
-};
+  header: string
+  metric?: number
+  unit: string
+}
 
 function MetricCard({ header, metric, unit }: MetricCardProps) {
   return (
@@ -47,5 +53,5 @@ function MetricCard({ header, metric, unit }: MetricCardProps) {
         {metric ? metric.toLocaleString() + ' ' + unit : 'no data'}
       </p>
     </div>
-  );
+  )
 }

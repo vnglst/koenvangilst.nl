@@ -12,7 +12,7 @@ const getTagData = createServerFn({ method: 'GET' })
   .inputValidator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const allPosts = await getPosts();
-    const posts = allPosts.filter((p) => p.tagsAsSlugs.includes(slug));
+    const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(slug));
     const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
 
     if (posts.length === 0) {

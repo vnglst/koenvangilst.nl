@@ -1,17 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { fetcher } from '#/lib/fetcher';
-
 import { Co2LevelClient } from './Co2LevelChart';
 
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/co2_levels.json';
 
 export function Co2Level() {
-  const { data, error } = useQuery({
-    queryKey: [DATA_URL],
-    queryFn: () => fetcher(DATA_URL)
-  });
+  const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load CO2 data</div>;
   if (!data) return <div className="aspect-[3/5] animate-pulse bg-gray-100 md:aspect-square dark:bg-gray-800" />;
