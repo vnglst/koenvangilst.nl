@@ -109,13 +109,13 @@ const ChartComponent = ({ options, className }: ChartProps) => {
   }, [mode, options]);
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       {isLoading && (
-        <div className={`${className} flex items-center justify-center bg-gray-100 dark:bg-gray-800`}>
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
           <div className="text-gray-500 dark:text-gray-400">Loading chart...</div>
         </div>
       )}
-      <div ref={chartRef} className={className} style={{ opacity: isLoading ? 0 : 1 }} />
+      <div ref={chartRef} className="h-full w-full" style={{ opacity: isLoading ? 0 : 1 }} />
     </div>
   );
 };
