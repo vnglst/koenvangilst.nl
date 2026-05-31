@@ -55,7 +55,30 @@ export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, im
           )}
         </header>
         <Prose as="section">
-          <Suspense fallback={<div className="min-h-[24rem] min-w-[24rem]" />}>
+          <Suspense
+            fallback={
+              <div className="animate-pulsing-delayed w-full">
+                <div className="mb-4 space-y-3">
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+                </div>
+                <div className="space-y-3">
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+                </div>
+              </div>
+            }
+          >
             <MDXComponent Component={Component} />
           </Suspense>
         </Prose>

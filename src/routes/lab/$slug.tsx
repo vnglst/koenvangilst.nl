@@ -1,10 +1,8 @@
-import { Suspense } from 'react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
-import { Container } from '#/components/layout/Container';
 import { jsonLdArticle } from '#/lib/json-ld';
 
 const getLabPost = createServerFn({ method: 'GET' })
@@ -85,7 +83,7 @@ function PostPage() {
   const Component = getMdxComponent(slug);
 
   return (
-    <Suspense fallback={<MarkdownLayoutSkeleton />}>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -111,37 +109,6 @@ function PostPage() {
           Component={Component}
         />
       )}
-    </Suspense>
-  );
-}
-
-function MarkdownLayoutSkeleton() {
-  return (
-    <Container>
-      <div className="animate-pulsing-delayed mx-auto w-full min-w-[700px]">
-        <div className="w-[486px]">
-          <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-          <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
-          <div className="mb-4 space-y-3">
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
-          </div>
-          <div className="space-y-3">
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-            <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
-          </div>
-        </div>
-      </div>
-    </Container>
+    </>
   );
 }
