@@ -14,8 +14,7 @@ ARG SOURCE_COMMIT=unknown
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN --mount=type=cache,target=/app/node_modules/.cache \
-    SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
+RUN SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
 
 # ---- prod-deps stage: production-only deps (includes native addons) ----
 FROM node:24-alpine AS prod-deps

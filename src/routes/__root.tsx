@@ -134,6 +134,21 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             `
           }}
         />
+        {/* Auto-reload on dynamic import failures (e.g. stale chunk after redeploy) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              let _reloading = false;
+              window.addEventListener('error', function(e) {
+                if (_reloading) return;
+                if (e && e.message && /Failed to fetch dynamically imported module/i.test(e.message)) {
+                  _reloading = true;
+                  window.location.reload();
+                }
+              });
+            `
+          }}
+        />
         <div className="flex min-h-screen flex-col">{children}</div>
         <Tracking />
         {DevTools && (
