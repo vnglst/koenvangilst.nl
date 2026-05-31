@@ -5,6 +5,7 @@ import appCss from '../styles.css?url';
 
 import type { QueryClient } from '@tanstack/react-query';
 import { Tracking } from '#/components/Tracking';
+import { NavigationProgress } from '#/components/NavigationProgress';
 import { Container } from '#/components/layout/Container';
 import { Prose } from '#/components/content/Prose';
 import { Heading } from '#/components/content/Heading';
@@ -113,6 +114,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="bg-slate-50 text-gray-800 antialiased dark:bg-slate-950 dark:text-gray-100">
+        <NavigationProgress />
         {/* Skip to main content for keyboard/screen reader users */}
         <a
           href="#content"
