@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { getPosts } from '#/cms/mdx-parser';
+import { getPosts } from '#/cms/posts-server';
 import { getPhotos } from '#/lib/photos';
 import { RSS } from '#/lib/rss';
 
