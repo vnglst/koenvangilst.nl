@@ -14,11 +14,7 @@ export function ThemeToggleText() {
   }, []);
 
   function handleClick() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    const nextTheme = isDark ? Theme.Dark : Theme.Light;
-    setTheme(nextTheme);
-    window.localStorage.setItem('theme', nextTheme);
+    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
   }
 
   if (!mounted) {

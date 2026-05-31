@@ -1,7 +1,3 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { legacyRedirectRoute } from '#/lib/redirect';
 
-export const Route = createFileRoute('/clients/')({
-  beforeLoad: () => {
-    throw redirect({ to: '/lab', search: { q: undefined }, statusCode: 301 });
-  }
-});
+export const Route = legacyRedirectRoute('/clients/', '/lab');

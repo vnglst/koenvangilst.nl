@@ -12,8 +12,14 @@ export const Route = createFileRoute('/lab/co2/')({
       {
         name: 'description',
         content: 'Readings of the CO2 sensor in my office.'
-      }
-    ]
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://koenvangilst.nl/lab/co2' },
+      { property: 'og:title', content: 'Office CO2 readings | Koen van Gilst' },
+      { property: 'og:description', content: 'Live readings from the CO2 sensor in my office using an Aranet4 and Raspberry Pi.' },
+      { name: 'twitter:card', content: 'summary' }
+    ],
+    links: [{ rel: 'canonical', href: 'https://koenvangilst.nl/lab/co2' }]
   }),
   component: Co2Page
 });

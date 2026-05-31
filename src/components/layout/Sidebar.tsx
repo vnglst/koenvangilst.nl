@@ -18,6 +18,7 @@ export function Sidebar() {
               height={48}
               width={48}
               src="/avatar.jpg"
+              fetchPriority="high"
               className="rounded-full grayscale filter"
             />
           </Link>
@@ -31,6 +32,8 @@ export function Sidebar() {
                 <li key={item.href}>
                   <Link
                     to={item.href}
+                    search={{} as never}
+                    params={{} as never}
                     aria-current={isActive(item.href) ? 'page' : undefined}
                     className={cx(
                       'flex items-center py-1 pl-3 text-sm font-medium whitespace-nowrap transition-opacity',

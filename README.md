@@ -117,7 +117,7 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **RSS Feed**: Automatically generated from blog posts
 - **Sitemap**: Dynamic sitemap including all content
 - **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images
-- **Dark Mode**: System-preference aware theme switching
+- **Dark Mode**: Dark by default with user-preference override. Light mode is only shown when explicitly chosen via the theme toggle. System preference (`prefers-color-scheme`) is intentionally ignored in favor of a consistent dark-first experience.
 - **Reading Time**: Calculated for each blog post
 - **Tag System**: Categorized content with slug-based URLs
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
@@ -192,6 +192,10 @@ Use the Playwright suite as a required regression check when a change affects mu
 - No features beyond what was asked.
 - No abstractions for single-use code.
 - No "flexibility" that wasn't requested.
+
+### No Barrel/Index Files
+
+This project intentionally avoids barrel (index.ts) re-export files. All imports use direct deep paths like `#/components/ui/Button`. This maximizes tree-shaking and makes the import graph explicit. Barrel files can cause circular dependencies, slow down bundlers with re-export chains, and obscure the actual module source.
 
 ### Surgical Changes
 

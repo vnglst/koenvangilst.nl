@@ -2,6 +2,8 @@
 
 import { memo, useEffect, useRef, useState } from 'react';
 
+import type { ExtendedFeature, ExtendedFeatureCollection } from 'd3';
+
 const theme = {
   textLight: '#f4f4f4',
   textDark: '#0c3d0c',
@@ -112,8 +114,9 @@ const LandUseChartComponent = () => {
         .scale(9000)
         .translate([width / 2, height / 2]);
 
-      d3.json('/static/json/netherlands.json')
+      d3.json<ExtendedFeatureCollection>('/static/json/netherlands.json')
         .then((geoData) => {
+          if (!geoData || !geoData.features[0]) return;
           setIsLoading(false);
           const svg = d3.select(svgRef.current);
           const hexbin = d3Hexbin()
@@ -130,9 +133,12 @@ const LandUseChartComponent = () => {
             }
           }
 
-          const netherlandsFeature = (geoData as any).features[0];
-          const hexPoints = hexCenters.filter((center) =>
-            d3.geoContains(netherlandsFeature, (projection.invert as any)(center))
+          const netherlandsFeature: ExtendedFeature = geoData.features[0];
+          const hexPoints = hexCenters.filter(
+            (center) => {
+              const inverted = projection.invert?.(center as [number, number]);
+              return inverted ? d3.geoContains(netherlandsFeature, inverted) : false;
+            }
           ) as [number, number][];
           const hexData = hexbin(hexPoints);
           const totalHexagons = hexData.length;

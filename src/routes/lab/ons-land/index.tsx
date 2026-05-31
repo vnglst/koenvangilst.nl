@@ -16,8 +16,14 @@ export const Route = createFileRoute('/lab/ons-land/')({
       {
         name: 'description',
         content: 'A data visualization project that shows the distribution land use in the Netherlands.'
-      }
-    ]
+      },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:url', content: 'https://koenvangilst.nl/lab/ons-land' },
+      { property: 'og:title', content: 'Land Use in The Netherlands | Koen van Gilst' },
+      { property: 'og:description', content: 'Hexagon-based visualization showing land use distribution across the Netherlands.' },
+      { name: 'twitter:card', content: 'summary_large_image' }
+    ],
+    links: [{ rel: 'canonical', href: 'https://koenvangilst.nl/lab/ons-land' }]
   }),
   component: OnsLandPage
 });

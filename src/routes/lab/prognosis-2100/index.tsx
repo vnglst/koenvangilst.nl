@@ -15,8 +15,14 @@ export const Route = createFileRoute('/lab/prognosis-2100/')({
         name: 'description',
         content:
           "Prognosis 2100 is a dashboard that allows users to explore the effects of climate change on the world's population."
-      }
-    ]
+      },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:url', content: 'https://koenvangilst.nl/lab/prognosis-2100' },
+      { property: 'og:title', content: 'Prognosis 2100 | Koen van Gilst' },
+      { property: 'og:description', content: 'Explore the effects of climate change with interactive data visualizations.' },
+      { name: 'twitter:card', content: 'summary_large_image' }
+    ],
+    links: [{ rel: 'canonical', href: 'https://koenvangilst.nl/lab/prognosis-2100' }]
   }),
   component: Prognosis2100
 });

@@ -1,8 +1,5 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { legacySplatRedirect } from '#/lib/redirect';
 
-export const Route = createFileRoute('/projects/$')({
-  beforeLoad: ({ params }) => {
-    const splat = params['_splat'] ?? '';
-    throw redirect({ href: `/lab/${splat}`, statusCode: 301 });
-  }
-});
+export const Route = legacySplatRedirect('/projects/$', (splat) =>
+  ({ href: `/lab/${splat ?? ''}`, statusCode: 301 } as never)
+);

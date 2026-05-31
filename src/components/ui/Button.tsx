@@ -15,17 +15,11 @@ type BaseButtonProps = {
 
 type ButtonAsButton = BaseButtonProps & {
   as?: 'button';
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseButtonProps>;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseButtonProps | 'as'>;
 
 type ButtonAsLink = BaseButtonProps & {
   as: 'a';
-  href: string;
-  target?: string;
-  rel?: string;
-} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseButtonProps>;
+} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseButtonProps | 'as'>;
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
@@ -55,7 +49,7 @@ const getSizeClasses = (size: ButtonSize) => {
 };
 
 export function Button(props: ButtonProps) {
-  const { children, className, variant = 'primary', size = 'md', 'aria-label': ariaLabel, ...restProps } = props;
+  const { children, className, variant = 'primary', size = 'md', 'aria-label': ariaLabel } = props;
 
   const baseClasses =
     'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all focus:outline-none no-underline';
@@ -63,15 +57,34 @@ export function Button(props: ButtonProps) {
   const combinedClasses = cx(baseClasses, getVariantClasses(variant), getSizeClasses(size), className);
 
   if (props.as === 'a') {
-    const { href, target, rel, ...anchorProps } = restProps as ButtonAsLink;
+    const {
+      as: _as,
+      children: _ch,
+      className: _cl,
+      variant: _v,
+      size: _s,
+      'aria-label': _al,
+      ...anchorProps
+    } = props;
     return (
-      <a href={href} target={target} rel={rel} aria-label={ariaLabel} className={combinedClasses} {...anchorProps}>
+      <a aria-label={ariaLabel} className={combinedClasses} {...anchorProps}>
         {children}
       </a>
     );
   }
 
-  const { onClick, disabled = false, type = 'button', ...buttonProps } = restProps as ButtonAsButton;
+  const {
+    as: _as,
+    children: _ch,
+    className: _cl,
+    variant: _v,
+    size: _s,
+    'aria-label': _al,
+    onClick,
+    disabled = false,
+    type = 'button',
+    ...nativeButtonProps
+  } = props;
   return (
     <button
       type={type}
@@ -79,7 +92,7 @@ export function Button(props: ButtonProps) {
       disabled={disabled}
       aria-label={ariaLabel}
       className={cx(combinedClasses, disabled && 'cursor-not-allowed opacity-50')}
-      {...buttonProps}
+      {...nativeButtonProps}
     >
       {children}
     </button>
