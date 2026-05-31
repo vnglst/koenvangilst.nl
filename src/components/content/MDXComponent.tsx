@@ -6,16 +6,16 @@ import { cx } from '#/lib/clsx';
 import { Icon } from '#/components/ui/Icon';
 import { Link } from '#/components/ui/Link';
 
-function RoundedImage({ alt = '', label, ...props }: ComponentProps<'img'> & { label?: React.ReactNode }) {
+function RoundedImage({ alt = '', label, width, height, ...props }: ComponentProps<'img'> & { label?: React.ReactNode }) {
   const className = cx('mt-1 mb-0 inline-block rounded-lg');
 
   if (!label) {
-    return <img alt={alt} loading="lazy" {...props} className={className} />;
+    return <img alt={alt} loading="lazy" width={width} height={height} {...props} className={className} />;
   }
 
   return (
     <figure className="mt-1 mb-0 inline-block">
-      <img alt={alt} loading="lazy" {...props} className={className} />
+      <img alt={alt} loading="lazy" width={width} height={height} {...props} className={className} />
       <figcaption className="mt-1 text-center text-gray-600 dark:text-gray-400">{label}</figcaption>
     </figure>
   );

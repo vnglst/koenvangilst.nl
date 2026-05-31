@@ -31,7 +31,7 @@ const getTagClasses = (variant: TagVariant = 'default') => {
 
 export function TagLink({ children, href, className, variant = 'default' }: TagLinkProps) {
   return (
-    <RouterLink to={href} className={cx(getTagClasses(variant), className)}>
+    <RouterLink to={href} search={{} as never} params={{} as never} className={cx(getTagClasses(variant), className)}>
       {children}
     </RouterLink>
   );

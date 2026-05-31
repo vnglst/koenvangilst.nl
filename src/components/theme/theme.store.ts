@@ -10,6 +10,13 @@ type Store = {
   setTheme: (theme: Theme) => void;
 };
 
+function applyTheme(theme: Theme) {
+  if (typeof window === 'undefined') return;
+  const isDark = theme === Theme.Dark;
+  document.documentElement.classList.toggle('dark', isDark);
+  window.localStorage.setItem('theme', theme);
+}
+
 const getInitialTheme = (): Theme => {
   if (typeof window === 'undefined') return Theme.Light;
   const darkClass = document.documentElement.classList.contains('dark');
@@ -19,6 +26,7 @@ const getInitialTheme = (): Theme => {
 export const useTheme = create<Store>((set) => ({
   theme: getInitialTheme(),
   setTheme: (theme: Theme) => {
+    applyTheme(theme);
     set({ theme });
   }
 }));

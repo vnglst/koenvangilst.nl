@@ -6,6 +6,7 @@ import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
 import { Link } from '#/components/ui/Link';
 import { dateFormatter } from '#/lib/formatters';
+import { jsonLdPerson } from '#/lib/json-ld';
 
 const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
   const { getPosts } = await import('#/cms/posts-server');
@@ -13,6 +14,9 @@ const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => 
     .filter((post) => post.tags.includes('article'))
     .slice(0, 5);
 });
+
+const SITE_URL = 'https://koenvangilst.nl';
+const HOME_OG_IMAGE = `${SITE_URL}/og/home.png`;
 
 export const Route = createFileRoute('/')({
   loader: () => getRecentArticles(),
@@ -23,8 +27,26 @@ export const Route = createFileRoute('/')({
         name: 'description',
         content:
           'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming. I focus on AI, team building, and bridging business with technology to deliver real value.'
-      }
-    ]
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: SITE_URL },
+      { property: 'og:title', content: 'Koen van Gilst' },
+      {
+        property: 'og:description',
+        content:
+          'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+      },
+      { property: 'og:image', content: HOME_OG_IMAGE },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Koen van Gilst' },
+      {
+        name: 'twitter:description',
+        content:
+          'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+      },
+      { name: 'twitter:image', content: HOME_OG_IMAGE }
+    ],
+    links: [{ rel: 'canonical', href: SITE_URL }]
   }),
   component: Home
 });
@@ -34,6 +56,10 @@ function Home() {
 
   return (
     <Container>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson()) }}
+      />
       <Heading level={1}>Koen van Gilst</Heading>
       <Prose className="mb-4">
         <p>

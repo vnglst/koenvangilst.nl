@@ -17,13 +17,7 @@ export function ThemeToggleText() {
 
   useEffect(() => {
     const handleThemeChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-        setTheme(Theme.Dark);
-      } else {
-        document.documentElement.classList.remove('dark');
-        setTheme(Theme.Light);
-      }
+      setTheme(e.matches ? Theme.Dark : Theme.Light);
     };
 
     window.matchMedia(PREFERS_DARK).addEventListener('change', handleThemeChange);
@@ -34,11 +28,7 @@ export function ThemeToggleText() {
   }, [setTheme]);
 
   function handleClick() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    const nextTheme = isDark ? Theme.Dark : Theme.Light;
-    setTheme(nextTheme);
-    window.localStorage.setItem('theme', nextTheme);
+    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
   }
 
   if (!mounted) {

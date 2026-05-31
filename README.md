@@ -193,6 +193,10 @@ Use the Playwright suite as a required regression check when a change affects mu
 - No abstractions for single-use code.
 - No "flexibility" that wasn't requested.
 
+### No Barrel/Index Files
+
+This project intentionally avoids barrel (index.ts) re-export files. All imports use direct deep paths like `#/components/ui/Button`. This maximizes tree-shaking and makes the import graph explicit. Barrel files can cause circular dependencies, slow down bundlers with re-export chains, and obscure the actual module source.
+
 ### Surgical Changes
 
 - Touch only what you must. Don't "improve" adjacent code.
