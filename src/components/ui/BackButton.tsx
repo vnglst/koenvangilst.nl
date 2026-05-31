@@ -27,7 +27,7 @@ export function BackButton({
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      void navigate({ to: fallbackHref });
+      void navigate({ to: fallbackHref, search: {} as never, params: {} as never } as never);
     }
   };
 

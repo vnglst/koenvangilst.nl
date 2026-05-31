@@ -7,6 +7,7 @@ import { BlogPostLink } from '#/components/ui/PostLink';
 import { TagLink } from '#/components/ui/Tag';
 
 import { desluggify, sluggify } from '#/lib/sluggify';
+import { jsonLdBreadcrumb } from '#/lib/json-ld';
 
 const getTagData = createServerFn({ method: 'GET' })
   .inputValidator((slug: string) => slug)
@@ -35,9 +36,12 @@ export const Route = createFileRoute('/tag/$slug')({
         { property: 'og:title', content: `Posts about ${tag}` },
         { property: 'og:description', content: `All posts about ${tag}` },
         { property: 'og:image', content: ogImage },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: `https://koenvangilst.nl/tag/${params.slug}` },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:image', content: ogImage }
-      ]
+      ],
+      links: [{ rel: 'canonical', href: `https://koenvangilst.nl/tag/${params.slug}` }]
     };
   },
   component: TagPage
@@ -50,6 +54,18 @@ function TagPage() {
 
   return (
     <Container>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdBreadcrumb([
+              { name: 'Home', url: '/' },
+              { name: 'Lab', url: '/lab' },
+              { name: tag, url: `/tag/${slug}` }
+            ])
+          )
+        }}
+      />
       <Heading level={1}>Posts about {tag}</Heading>
       <section className="mb-4 flex w-full flex-col gap-6">
         <p className="mt-6 text-gray-600 dark:text-gray-400">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 
 import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
+import { Icon } from '#/components/ui/Icon';
 import { cx } from '#/lib/clsx';
 import { navItems, useIsActive } from '#/lib/navigation';
 
@@ -20,6 +21,7 @@ export function Header() {
               height={36}
               width={36}
               src="/avatar.jpg"
+              fetchPriority="high"
               className="rounded-full grayscale filter"
             />
           </Link>
@@ -35,17 +37,7 @@ export function Header() {
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
             >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {mobileMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-              </svg>
+              <Icon icon={mobileMenuOpen ? 'close' : 'menu'} className="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -57,6 +49,8 @@ export function Header() {
               <Link
                 key={item.href}
                 to={item.href}
+                search={{} as never}
+                params={{} as never}
                 onClick={() => setMobileMenuOpen(false)}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 className={cx(
@@ -66,6 +60,7 @@ export function Header() {
                     : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-900'
                 )}
               >
+              
                 <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
                   &gt;
                 </span>

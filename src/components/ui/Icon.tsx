@@ -18,7 +18,9 @@ type IconProps = {
     | 'mastodon'
     | 'github'
     | 'linkedin'
-    | 'terminal';
+    | 'terminal'
+    | 'menu'
+    | 'close';
   className?: string;
 };
 

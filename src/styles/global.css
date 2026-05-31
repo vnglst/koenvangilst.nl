@@ -27,6 +27,10 @@
   --font-family-nimbus: var(--font-nimbus), ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  color-scheme: light dark;
+}
+
 ::selection {
   background-color: var(--color-primary);
   color: #fefefe;
@@ -70,19 +74,7 @@ input[type='email'] {
   appearance: none;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
 
-.animate-blink {
-  animation: blink 1s step-end infinite;
-}
 
 /* Always show scrollbar to prevent layout shift */
 html {

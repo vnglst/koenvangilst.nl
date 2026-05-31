@@ -34,7 +34,7 @@ export function BlogPostLink({ title, summary, url, slug, publishedAt, showYear 
   }
 
   return (
-    <RouterLink to={href}>
+    <RouterLink to={href} search={{} as never} params={{} as never}>
       <article className="my-1 flex w-full flex-col items-baseline gap-2 p-1 md:flex-row">
         <div className={showYear ? 'text-primary mr-5 text-left' : 'mr-5 hidden md:invisible md:block'}>{year}</div>
         <div className="up-hover">
