@@ -1,6 +1,7 @@
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
+import { Suspense } from 'react';
 
 import { Container } from '../layout/Container';
 import { Link } from '../ui/Link';
@@ -54,7 +55,9 @@ export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, im
           )}
         </header>
         <Prose as="section">
-          <MDXComponent Component={Component} />
+          <Suspense fallback={<div className="min-h-[24rem] min-w-[24rem]" />}>
+            <MDXComponent Component={Component} />
+          </Suspense>
         </Prose>
         <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
           <Link href={getEditUrl(path)} className="font-normal">
