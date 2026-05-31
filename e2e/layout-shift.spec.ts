@@ -27,10 +27,7 @@ test.describe('layout shift on blog posts', () => {
     await page.waitForTimeout(500);
 
     const cls = await page.evaluate(() => {
-      return (window as any).__layoutShiftEntries.reduce(
-        (sum: number, entry: any) => sum + entry.value,
-        0
-      );
+      return (window as any).__layoutShiftEntries.reduce((sum: number, entry: any) => sum + entry.value, 0);
     });
 
     // CLS should be negligible; > 0.1 is considered poor.
@@ -56,7 +53,11 @@ test.describe('layout shift on blog posts', () => {
     // Track the sidebar bounding box over time.
     const sidebarMoves: { x: number; y: number; timestamp: number }[] = [];
     const interval = setInterval(async () => {
-      const box = await page.locator('aside').first().boundingBox().catch(() => null);
+      const box = await page
+        .locator('aside')
+        .first()
+        .boundingBox()
+        .catch(() => null);
       if (box) {
         sidebarMoves.push({ x: box.x, y: box.y, timestamp: Date.now() });
       }
