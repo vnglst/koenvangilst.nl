@@ -4,8 +4,6 @@ import { Icon } from '#/components/ui/Icon';
 
 import { Theme, useTheme } from './theme.store';
 
-const PREFERS_DARK = '(prefers-color-scheme: dark)';
-
 export function ThemeToggleText() {
   const theme = useTheme((state) => state.theme);
   const setTheme = useTheme((state) => state.setTheme);
@@ -14,18 +12,6 @@ export function ThemeToggleText() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const handleThemeChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? Theme.Dark : Theme.Light);
-    };
-
-    window.matchMedia(PREFERS_DARK).addEventListener('change', handleThemeChange);
-
-    return () => {
-      window.matchMedia(PREFERS_DARK).removeEventListener('change', handleThemeChange);
-    };
-  }, [setTheme]);
 
   function handleClick() {
     setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);

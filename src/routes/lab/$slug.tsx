@@ -39,14 +39,15 @@ export const Route = createFileRoute('/lab/$slug')({
   loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
   head: ({ loaderData }) => {
     const ogImage = loaderData ? `https://koenvangilst.nl/og/${loaderData.slug}.png` : undefined;
-    const links = loaderData
-      ? [{ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` }]
-      : [];
-    if (loaderData.prevSlug) {
-      links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/lab/${loaderData.prevSlug}` });
-    }
-    if (loaderData.nextSlug) {
-      links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/lab/${loaderData.nextSlug}` });
+    const links: { rel: string; href: string }[] = [];
+    if (loaderData) {
+      links.push({ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` });
+      if (loaderData.prevSlug) {
+        links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/lab/${loaderData.prevSlug}` });
+      }
+      if (loaderData.nextSlug) {
+        links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/lab/${loaderData.nextSlug}` });
+      }
     }
     return {
       meta: [
