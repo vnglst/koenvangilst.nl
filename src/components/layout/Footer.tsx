@@ -30,33 +30,33 @@ export function Footer() {
 
   return (
     <footer className="my-16 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
-      <div className="mb-2 flex items-center justify-between">
-        <div>© {currentYear} Koen van Gilst</div>
-        <div className="flex space-x-2">
-          {footerLinks.map(({ href, label, icon }) => (
-            <a
-              key={href}
-              className="text-sm text-gray-400 transition hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-300"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={href}
-            >
-              <span className="sr-only">{label}</span>
-              <Icon icon={icon} className="h-[18px] w-[18px]" />
-            </a>
-          ))}
-        </div>
+      <div className="mb-2 flex justify-end space-x-2">
+        {footerLinks.map(({ href, label, icon }) => (
+          <a
+            key={href}
+            className="text-sm text-gray-400 transition hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={href}
+          >
+            <span className="sr-only">{label}</span>
+            <Icon icon={icon} className="h-[18px] w-[18px]" />
+          </a>
+        ))}
       </div>
-      <div className="text-right text-xs text-gray-400 dark:text-gray-600">
-        v. {appVersion} |{' '}
-        <a
-          className="hover:underline"
-          href={`https://github.com/vnglst/koenvangilst.nl/tree/${commitHash}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {commitHash?.substring(0, 7) || 'no commit hash'}
-        </a>
+      <div className="flex items-center justify-between text-xs">
+        <div>© {currentYear} Koen van Gilst</div>
+        <div className="text-gray-400 dark:text-gray-600">
+          v. {appVersion} |{' '}
+          <a
+            className="hover:underline"
+            href={`https://github.com/vnglst/koenvangilst.nl/tree/${commitHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {commitHash?.substring(0, 7) || 'no commit hash'}
+          </a>
+        </div>
       </div>
     </footer>
   );
