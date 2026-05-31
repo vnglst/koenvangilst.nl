@@ -11,7 +11,7 @@ type Store = {
 };
 
 const getInitialTheme = (): Theme => {
-  if (typeof window === 'undefined') return Theme.Light;
+  if (typeof window === 'undefined') return Theme.Dark;
   const darkClass = document.documentElement.classList.contains('dark');
   return darkClass ? Theme.Dark : Theme.Light;
 };
