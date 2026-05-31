@@ -138,14 +138,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              let _reloading = false;
-              window.addEventListener('error', function(e) {
-                if (_reloading) return;
-                if (e && e.message && /Failed to fetch dynamically imported module/i.test(e.message)) {
-                  _reloading = true;
-                  window.location.reload();
+              (function() {
+                let _reloading = false;
+                function reloadIfChunkError(msg) {
+                  if (_reloading) return;
+                  if (msg && /Failed to fetch dynamically imported module/i.test(msg)) {
+                    _reloading = true;
+                    window.location.reload();
+                  }
                 }
-              });
+                window.addEventListener('error', (e) => reloadIfChunkError(e.message));
+                window.addEventListener('unhandledrejection', (e) => reloadIfChunkError(e.reason?.message));
+              })();
             `
           }}
         />
@@ -164,6 +168,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function ErrorPage({ error }: { error: Error }) {
   useEffect(() => {
+    // If a lazy route chunk is missing after a deploy, reload to fetch fresh assets
+    if (/Failed to fetch dynamically imported module/.test(error.message)) {
+      window.location.reload();
+      return;
+    }
     console.error(error);
   }, [error]);
 
