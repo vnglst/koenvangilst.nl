@@ -87,4 +87,42 @@ test.describe('layout shift on blog posts', () => {
     // A jump of more than 50 px is the bug we are guarding against.
     expect(xDelta).toBeLessThan(50);
   });
+
+  test('skeleton does not flash for fast loads', async ({ page }) => {
+    await page.goto('/lab');
+    await expect(page.getByRole('heading', { level: 1, name: /articles & experiments/i })).toBeVisible();
+
+    // Wait for hydration.
+    await page.waitForFunction(() => typeof (window as any).__TSR_ROUTER__ !== 'undefined');
+    await page.mouse.move(0, 0);
+
+    // Delay the MDX chunk for 2 s so it definitely outlasts the skeleton delay.
+    await page.route(/\.mdx\.js|chunk.*mdx|lazy.*mdx/i, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await route.continue();
+    });
+
+    await page
+      .locator('a[href="/lab/clean-code-is-a-phase"]')
+      .first()
+      .evaluate((el: HTMLAnchorElement) => el.click());
+
+    await expect(page).toHaveURL(/\/lab\/clean-code-is-a-phase$/, { timeout: 10_000 });
+
+    const skeletonLocator = page.locator('[class*="animate-pulse"]').first();
+
+    // After 500 ms the skeleton should still be hidden.
+    await page.waitForTimeout(500);
+    await expect(skeletonLocator).not.toBeVisible();
+
+    // After 1.2 s the skeleton should be visible because the chunk is still loading.
+    await page.waitForTimeout(800);
+    await expect(skeletonLocator).toBeVisible();
+
+    // Eventually the real content replaces it.
+    await expect(page.getByRole('heading', { level: 1, name: /clean code/i })).toBeVisible({
+      timeout: 10_000
+    });
+    await expect(skeletonLocator).not.toBeVisible();
+  });
 });

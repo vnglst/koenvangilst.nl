@@ -23,6 +23,10 @@
   animation: fadeIn 200ms ease-in-out;
 }
 
+.animate-delayed-skeleton {
+  animation: fadeIn 200ms ease-in-out 1s both;
+}
+
 .animate-blink {
   animation: blink 1s step-start 1s infinite;
 }

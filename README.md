@@ -222,21 +222,37 @@ Layout shifts degrade perceived performance and user experience. Always avoid th
 
 1. **Match the skeleton to the layout** - If the final page renders inside `<Container>`, the skeleton must also render inside `<Container>`.
 2. **Reserve space for async content** - If a component loads asynchronously inside a page, its placeholder should occupy the same dimensions so surrounding elements do not move.
-3. **Verify with the Layout Instability API** - The Playwright e2e suite guards against this. When adding a new route with async content, include a CLS test:
+3. **Delay skeletons by ~1 s** - Fast loads should never flash a skeleton. Use a small timer (e.g. `setTimeout(..., 1000)`) so the placeholder only appears when a load genuinely takes longer than one second. This prevents a jarring "flash of skeleton" for typical fast navigation.
+4. **Verify with the Layout Instability API** - The Playwright e2e suite guards against this. When adding a new route with async content, include a CLS test:
    ```bash
    npm run test:e2e  # e2e/layout-shift.spec.ts checks CLS < 0.1
    ```
-4. **Test client-side navigation** - Layout shifts often only appear during SPA navigation, not on direct page loads. Navigate from a stable page (e.g. `/lab`) to the new route and watch the sidebar.
+5. **Test client-side navigation** - Layout shifts often only appear during SPA navigation, not on direct page loads. Navigate from a stable page (e.g. `/lab`) to the new route and watch the sidebar.
 
 **What to watch for:**
 - Sidebars or fixed navigation that vanish and reappear in a different position.
 - Images without explicit `width` and `height` that push text down as they load.
 - Font swaps that reflow text when web fonts arrive.
 - Asynchronous charts or visualisations that expand from a zero-height placeholder.
+- Skeletons that appear for a split second on every fast navigation, creating a strobe-like effect.
 
-**Example of a correct skeleton:**
+**Example of a correct skeleton with delay:**
 ```tsx
 // lab/$slug.tsx - Skeleton wraps the same Container so the sidebar stays put.
+// It is delayed by 1 s to avoid flashing on fast loads.
+function DelayedSkeleton() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!show) return null;
+
+  return <MarkdownLayoutSkeleton />;
+}
+
 function MarkdownLayoutSkeleton() {
   return (
     <Container>

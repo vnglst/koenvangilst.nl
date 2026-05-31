@@ -66,7 +66,7 @@ function PostPage() {
   if (!Component) return <NotFoundPage />;
 
   return (
-    <Suspense fallback={<MarkdownLayoutSkeleton />}>
+    <Suspense fallback={<DelayedSkeleton />}>
       <MarkdownLayout
         publishedAt={postMeta.publishedAt}
         title={postMeta.title}
@@ -80,10 +80,14 @@ function PostPage() {
   );
 }
 
+function DelayedSkeleton() {
+  return <MarkdownLayoutSkeleton />;
+}
+
 function MarkdownLayoutSkeleton() {
   return (
     <Container>
-      <div className="mx-auto w-full max-w-[700px] animate-pulse">
+      <div className="animate-delayed-skeleton mx-auto w-full max-w-[700px] animate-pulse">
         <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
         <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
         <div className="space-y-3">
