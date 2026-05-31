@@ -206,6 +206,42 @@ Use the Playwright suite as a required regression check when a change affects mu
 - Transform tasks into verifiable goals.
 - Loop until verified.
 
+### Preventing Layout Shifts
+
+Layout shifts (CLS — Cumulative Layout Shift) create a jarring user experience where page elements visibly jump during loading. Always follow these rules:
+
+**1. Suspense fallbacks must preserve layout structure.**
+When a `<Suspense>` boundary wraps a component that includes layout chrome (sidebar, header, container divs), the fallback skeleton MUST include the same layout structure. Never let a loading fallback render centered full-width content if the final state includes a sidebar that shifts it to the side.
+
+```tsx
+// BAD — skeleton is centered, final layout has sidebar → layout shift
+<Suspense fallback={<div className="mx-auto max-w-prose">Loading...</div>}>
+  <PageLayout>  {/* includes <Sidebar /> + main content */}
+    <Content />
+  </PageLayout>
+</Suspense>
+
+// GOOD — skeleton preserves the same chrome
+<Suspense fallback={<PageLayout><div className="mx-auto max-w-prose animate-pulse">Loading...</div></PageLayout>}>
+  <PageLayout>
+    <Content />
+  </PageLayout>
+</Suspense>
+```
+
+**2. Reserve space for async content.**
+Give loading skeletons the same dimensions (width, height, margins) as the final content they replace. Use `min-h`, `min-w`, or explicit sizing to prevent the page from collapsing while content loads.
+
+**3. Always verify with throttled network.**
+Open DevTools → Network tab → set throttling to "Slow 3G", then hard-reload the page. Watch for any visible jumps in the sidebar, header, or content area. Fix every shift you see before considering the work done.
+
+**4. This project's anti-shift measures (do not remove):**
+- `html { overflow-y: scroll }` in `global.css` — forces a permanent scrollbar so pages never shift horizontally when content height changes
+- Inline theme script in `__root.tsx` — applies `dark` class before paint to prevent FOUC
+- Font preloads in `HeadContent` — prevents FOUT (Flash of Unstyled Text)
+
+
+
 ### Close the Feedback Loop First
 
 - Before solving, build a way to observe.
