@@ -163,14 +163,31 @@ function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startI
   );
 }
 
+function PhotoGallerySkeleton() {
+  return (
+    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className="aspect-square animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800"
+        />
+      ))}
+    </div>
+  );
+}
+
 export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const navigate = useNavigate();
   const search = useSearch({ from: '/photography/' });
   const photoParam = (search as Record<string, string | undefined>).photo;
   const selectedIndex = photoParam ? parseInt(photoParam, 10) : 0;
 
-  if (photoParam !== undefined) {
+  if (photoParam !== undefined && photos.length > 0) {
     return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
+  }
+
+  if (photos.length === 0) {
+    return <PhotoGallerySkeleton />;
   }
 
   return (
