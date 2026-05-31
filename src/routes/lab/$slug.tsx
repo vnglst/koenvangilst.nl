@@ -4,6 +4,7 @@ import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
+import { Container } from '#/components/layout/Container';
 
 const getLabPost = createServerFn({ method: 'GET' })
   .inputValidator((data: { slug: string }) => data)
@@ -81,14 +82,16 @@ function PostPage() {
 
 function MarkdownLayoutSkeleton() {
   return (
-    <div className="mx-auto w-full max-w-[700px] animate-pulse">
-      <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-      <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
-      <div className="space-y-3">
-        <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+    <Container>
+      <div className="mx-auto w-full max-w-[700px] animate-pulse">
+        <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
+        <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
+        <div className="space-y-3">
+          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+          <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }
