@@ -1,57 +1,14 @@
-import { PostMeta } from './schema';
-import { sluggify } from '#/lib/sluggify';
+import { lazy } from 'react';
 
-// Pre-compiled by @mdx-js/rollup at build time - NOT runtime FS access
-// Each MDX file exports: default (component), frontmatter (object)
-// The remarkWordCount plugin injects wordCount into frontmatter at build time
+// Lazy-loaded MDX components — each post is fetched as a separate chunk on demand.
+// This prevents all ~80 MDX modules from being eagerly bundled into the client JS.
 const modules = import.meta.glob<{
   default: React.ComponentType;
-  frontmatter: Record<string, unknown>;
-}>('../../content/*.mdx', { eager: true });
+}>('../../content/*.mdx');
 
 export function getMdxComponent(slug: string): React.ComponentType | undefined {
   const key = `../../content/${slug}.mdx`;
-  const mod = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
-  return mod?.default;
-}
-
-export function getPosts() {
-  return Object.entries(modules)
-    .map(([filePath, mod]) => {
-      const slug = filePath.replace('../../content/', '').replace('.mdx', '');
-      const data = { ...mod.frontmatter, slug } as Record<string, unknown>;
-      if (Array.isArray(data.tags)) {
-        data.tagsAsSlugs = (data.tags as string[]).map(sluggify);
-      }
-      return PostMeta.parse(data);
-    })
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-}
-
-export function getPost(slug: string) {
-  const key = `../../content/${slug}.mdx`;
-  const mod = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
-  if (!mod) return null;
-
-  const data = { ...mod.frontmatter, slug } as Record<string, unknown>;
-  if (Array.isArray(data.tags)) {
-    data.tagsAsSlugs = (data.tags as string[]).map(sluggify);
-  }
-
-  const wordCount = typeof data.wordCount === 'number' ? data.wordCount : 0;
-  const minutes = Math.ceil(wordCount / 200);
-  const readingTime = {
-    text: `${minutes} min read`,
-    minutes,
-    time: minutes * 60 * 1000,
-    words: wordCount
-  };
-
-  const meta = PostMeta.parse(data);
-
-  return {
-    ...meta,
-    readingTime,
-    Component: mod.default
-  };
+  const load = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
+  if (!load) return undefined;
+  return lazy(load);
 }

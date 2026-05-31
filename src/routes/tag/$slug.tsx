@@ -5,13 +5,14 @@ import { Heading } from '#/components/content/Heading';
 import { Container } from '#/components/layout/Container';
 import { BlogPostLink } from '#/components/ui/PostLink';
 import { TagLink } from '#/components/ui/Tag';
-import { getPosts } from '#/cms/mdx-parser';
+
 import { desluggify, sluggify } from '#/lib/sluggify';
 
 const getTagData = createServerFn({ method: 'GET' })
   .inputValidator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
-    const allPosts = await getPosts();
+    const { getPosts } = await import('#/cms/posts-server');
+    const allPosts = getPosts();
     const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(slug));
     const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
 
@@ -24,10 +25,9 @@ const getTagData = createServerFn({ method: 'GET' })
 
 export const Route = createFileRoute('/tag/$slug')({
   loader: async ({ params }) => getTagData({ data: params.slug }),
-  head: ({ params, loaderData }) => {
+  head: ({ params }) => {
     const tag = desluggify(params.slug);
-    const postCount = loaderData?.posts.length ?? 0;
-    const ogImage = `https://koenvangilst.nl/og?title=${encodeURIComponent(`Posts about ${tag}`)}&description=${encodeURIComponent(`${postCount} post${postCount === 1 ? '' : 's'} about ${tag}`)}&type=tag`;
+    const ogImage = `https://koenvangilst.nl/og/tag-${params.slug}.png`;
     return {
       meta: [
         { title: `Posts about ${tag} | Koen van Gilst` },

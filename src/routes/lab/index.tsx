@@ -1,12 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
-import { getPosts } from '#/cms/mdx-parser';
+
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
 import { ProjectBrowser } from './_components/project-browser';
 
 const getLabPosts = createServerFn({ method: 'GET' }).handler(async () => {
+  const { getPosts } = await import('#/cms/posts-server');
   return getPosts();
 });
 
