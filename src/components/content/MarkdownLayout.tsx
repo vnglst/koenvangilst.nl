@@ -1,6 +1,7 @@
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
+import { Suspense } from 'react';
 
 import { Container } from '../layout/Container';
 import { Link } from '../ui/Link';
@@ -54,7 +55,32 @@ export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, im
           )}
         </header>
         <Prose as="section">
-          <MDXComponent Component={Component} />
+          <Suspense
+            fallback={
+              <div className="animate-pulsing-delayed w-full">
+                <div className="mb-4 space-y-3">
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+                </div>
+                <div className="space-y-3">
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+                </div>
+              </div>
+            }
+          >
+            <MDXComponent Component={Component} />
+          </Suspense>
         </Prose>
         <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
           <Link href={getEditUrl(path)} className="font-normal">

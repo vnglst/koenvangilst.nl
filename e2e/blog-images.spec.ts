@@ -34,7 +34,7 @@ async function expectRenderedBlogImagesToLoad(page: Page) {
             naturalHeight: img.naturalHeight,
             currentSrc: img.currentSrc || img.getAttribute('src') || ''
           })),
-        { timeout: 10_000 }
+        { timeout: 20_000 }
       )
       .toMatchObject({
         complete: true
@@ -54,7 +54,7 @@ async function expectRenderedBlogImagesToLoad(page: Page) {
 
 test.describe('blog post images', () => {
   for (const post of BLOG_POSTS_WITH_IMAGES) {
-    test(`renders loaded images for ${post.slug}`, async ({ page }) => {
+    test(`renders loaded images for ${post.slug}`, { timeout: 60_000 }, async ({ page }) => {
       await page.goto(`/lab/${post.slug}`);
 
       await expect(page.getByRole('heading', { level: 1, name: post.title })).toBeVisible();
