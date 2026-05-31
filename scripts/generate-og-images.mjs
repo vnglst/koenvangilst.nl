@@ -30,7 +30,10 @@ function parseFrontmatter(filePath) {
 
     if (trimmed.startsWith('- ')) {
       if (currentKey) {
-        const val = trimmed.slice(2).trim().replace(/^['"]|['"]$/g, '');
+        const val = trimmed
+          .slice(2)
+          .trim()
+          .replace(/^['"]|['"]$/g, '');
         if (!result[currentKey]) result[currentKey] = [];
         result[currentKey].push(val);
       }
@@ -76,71 +79,59 @@ function createOgElement(title, description, type) {
       }
     },
     [
-      createElement(
-        'div',
-        { style: { display: 'flex', alignItems: 'center', gap: '12px' } },
-        [
-          createElement('div', {
-            style: { width: '8px', height: '40px', backgroundColor: '#199acc', borderRadius: '4px' }
-          }),
-          createElement(
-            'span',
-            { style: { fontSize: 32, fontWeight: 600, color: '#199acc', letterSpacing: '-0.02em' } },
-            'koenvangilst.nl'
-          )
-        ]
-      ),
-      createElement(
-        'div',
-        { style: { display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1000px' } },
-        [
-          createElement(
-            'h1',
-            {
-              style: {
-                fontSize: 72,
-                fontWeight: 700,
-                lineHeight: 1.1,
-                color: '#1a1a1a',
-                margin: 0,
-                letterSpacing: '-0.03em'
-              }
-            },
-            title
-          ),
-          createElement(
-            'p',
-            {
-              style: {
-                fontSize: 32,
-                lineHeight: 1.4,
-                color: '#666',
-                margin: 0,
-                fontWeight: 400
-              }
-            },
-            description
-          )
-        ]
-      ),
-      createElement(
-        'div',
-        { style: { display: 'flex', alignItems: 'center' } },
-        [
-          createElement(
-            'span',
-            {
-              style: {
-                fontSize: 24,
-                color: '#999',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em'
-              }
-            },
-            type === 'tag' ? 'TAG' : 'BLOG POST'
-          )
-        ]
-      )
+      createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '12px' } }, [
+        createElement('div', {
+          style: { width: '8px', height: '40px', backgroundColor: '#199acc', borderRadius: '4px' }
+        }),
+        createElement(
+          'span',
+          { style: { fontSize: 32, fontWeight: 600, color: '#199acc', letterSpacing: '-0.02em' } },
+          'koenvangilst.nl'
+        )
+      ]),
+      createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1000px' } }, [
+        createElement(
+          'h1',
+          {
+            style: {
+              fontSize: 72,
+              fontWeight: 700,
+              lineHeight: 1.1,
+              color: '#1a1a1a',
+              margin: 0,
+              letterSpacing: '-0.03em'
+            }
+          },
+          title
+        ),
+        createElement(
+          'p',
+          {
+            style: {
+              fontSize: 32,
+              lineHeight: 1.4,
+              color: '#666',
+              margin: 0,
+              fontWeight: 400
+            }
+          },
+          description
+        )
+      ]),
+      createElement('div', { style: { display: 'flex', alignItems: 'center' } }, [
+        createElement(
+          'span',
+          {
+            style: {
+              fontSize: 24,
+              color: '#999',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em'
+            }
+          },
+          type === 'tag' ? 'TAG' : 'BLOG POST'
+        )
+      ])
     ]
   );
 }
@@ -174,14 +165,11 @@ async function main() {
   }
 
   for (const post of posts) {
-    const svg = await satori(
-      createOgElement(post.title, post.summary, 'blog'),
-      {
-        width: 1200,
-        height: 630,
-        fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
-      }
-    );
+    const svg = await satori(createOgElement(post.title, post.summary, 'blog'), {
+      width: 1200,
+      height: 630,
+      fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
+    });
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
     fs.writeFileSync(path.join(outputDir, `${post.slug}.png`), Buffer.from(pngData));
@@ -193,14 +181,11 @@ async function main() {
     const title = `Posts about ${tag}`;
     const description = `${tagPosts.length} post${tagPosts.length === 1 ? '' : 's'} about ${tag}`;
 
-    const svg = await satori(
-      createOgElement(title, description, 'tag'),
-      {
-        width: 1200,
-        height: 630,
-        fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
-      }
-    );
+    const svg = await satori(createOgElement(title, description, 'tag'), {
+      width: 1200,
+      height: 630,
+      fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
+    });
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
     const tagSlug = sluggify(tag);
