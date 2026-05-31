@@ -39,7 +39,7 @@ function ExternalLinkContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Link({ href, children, className, ...props }: LinkProps) {
+export function Link({ href, children, className, target, rel, ...props }: LinkProps) {
   const isExternal = href && href.startsWith('http');
 
   const variantClasses =
@@ -51,8 +51,8 @@ export function Link({ href, children, className, ...props }: LinkProps) {
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={target ?? '_blank'}
+        rel={rel ?? 'noopener noreferrer'}
         className={cx(combinedClassName, 'break-words')}
         {...props}
       >
@@ -62,7 +62,7 @@ export function Link({ href, children, className, ...props }: LinkProps) {
   }
 
   return (
-    <RouterLink to={href} className={combinedClassName} {...(props as object)}>
+    <RouterLink to={href} search={{} as never} params={{} as never} className={combinedClassName}>
       {children}
     </RouterLink>
   );

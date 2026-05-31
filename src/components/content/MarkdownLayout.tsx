@@ -66,7 +66,9 @@ export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, im
   );
 }
 
+const GITHUB_REPO = 'https://github.com/vnglst/koenvangilst.nl';
+
 function getEditUrl(path: string) {
   const slug = path.split('/').pop();
-  return `https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`;
+  return `${GITHUB_REPO}/edit/main/content/${slug}.mdx`;
 }

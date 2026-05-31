@@ -22,8 +22,14 @@ export const Route = createFileRoute('/lab/')({
       {
         name: 'description',
         content: "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects."
-      }
-    ]
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://koenvangilst.nl/lab' },
+      { property: 'og:title', content: 'Labs | Koen van Gilst' },
+      { property: 'og:description', content: 'A collection of coding experiments, articles, and side projects.' },
+      { name: 'twitter:card', content: 'summary' }
+    ],
+    links: [{ rel: 'canonical', href: 'https://koenvangilst.nl/lab' }]
   }),
   component: Labs
 });
