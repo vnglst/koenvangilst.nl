@@ -66,7 +66,7 @@ function PostPage() {
   if (!Component) return <NotFoundPage />;
 
   return (
-    <Suspense fallback={<DelayedSkeleton />}>
+    <Suspense fallback={<MarkdownLayoutSkeleton />}>
       <MarkdownLayout
         publishedAt={postMeta.publishedAt}
         title={postMeta.title}
@@ -80,20 +80,31 @@ function PostPage() {
   );
 }
 
-function DelayedSkeleton() {
-  return <MarkdownLayoutSkeleton />;
-}
-
 function MarkdownLayoutSkeleton() {
   return (
     <Container>
-      <div className="animate-delayed-skeleton mx-auto w-full max-w-[700px] animate-pulse">
-        <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="space-y-3">
-          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-          <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+      <div className="animate-pulsing-delayed mx-auto w-full min-w-[700px]">
+        <div className="w-[486px]">
+          <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
+          <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
+          <div className="mb-4 space-y-3">
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+          </div>
+          <div className="space-y-3">
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
+            <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
+          </div>
         </div>
       </div>
     </Container>
