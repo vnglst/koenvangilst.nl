@@ -127,10 +127,7 @@ test.describe('layout shift on blog posts', () => {
 
     // No significant layout shift.
     const cls = await page.evaluate(() => {
-      return (window as any).__layoutShiftEntries.reduce(
-        (sum: number, entry: any) => sum + entry.value,
-        0
-      );
+      return (window as any).__layoutShiftEntries.reduce((sum: number, entry: any) => sum + entry.value, 0);
     });
     expect(cls).toBeLessThan(0.1);
   });
