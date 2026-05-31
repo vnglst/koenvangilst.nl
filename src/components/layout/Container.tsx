@@ -19,7 +19,7 @@ export function Container({ children, footer = true, wide = false }: PropsWithCh
       <Header />
 
       {/* Desktop layout with sidebar */}
-      <div className="mx-4 mt-20 flex max-w-4xl flex-1 flex-col md:mt-20 md:flex-row lg:mx-auto lg:mt-32 lg:px-6">
+      <div className="mx-4 mt-20 flex max-w-4xl flex-1 flex-col md:mt-20 md:flex-row lg:mx-auto lg:mt-32 lg:w-full lg:px-6">
         <Sidebar />
         <Main>
           <Suspense>

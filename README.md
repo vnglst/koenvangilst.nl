@@ -237,6 +237,7 @@ Layout shifts degrade perceived performance and user experience. Always avoid th
 5. **Test client-side navigation** - Layout shifts often only appear during SPA navigation, not on direct page loads. Navigate from a stable page (e.g. `/lab`) to the new route and watch the sidebar.
 
 **What to watch for:**
+
 - Sidebars or fixed navigation that vanish and reappear in a different position.
 - Images without explicit `width` and `height` that push text down as they load.
 - Font swaps that reflow text when web fonts arrive.
@@ -244,6 +245,7 @@ Layout shifts degrade perceived performance and user experience. Always avoid th
 - Skeletons that appear for a split second on every fast navigation, creating a strobe-like effect.
 
 **Example of a correct skeleton with delay:**
+
 ```tsx
 // lab/$slug.tsx - Skeleton wraps the same Container so the sidebar stays put.
 // It is delayed by 1 s to avoid flashing on fast loads.

@@ -47,10 +47,8 @@ test.describe('layout shift on blog posts', () => {
     // Move mouse away to prevent hover-based preloading.
     await page.mouse.move(0, 0);
 
-    // Intercept the MDX chunk requests to reliably delay them.
-    const mdxChunkRequests: string[] = [];
-    await page.route(/\.mdx\.js|chunk.*mdx|lazy.*mdx/i, async (route) => {
-      mdxChunkRequests.push(route.request().url());
+    // Intercept the MDX chunk for this post to reliably delay it.
+    await page.route(/clean-code-is-a-phase/, async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 500));
       await route.continue();
     });
@@ -97,7 +95,7 @@ test.describe('layout shift on blog posts', () => {
     await page.mouse.move(0, 0);
 
     // Delay the MDX chunk for 2 s so it definitely outlasts the skeleton delay.
-    await page.route(/\.mdx\.js|chunk.*mdx|lazy.*mdx/i, async (route) => {
+    await page.route(/clean-code-is-a-phase/, async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       await route.continue();
     });
@@ -109,7 +107,7 @@ test.describe('layout shift on blog posts', () => {
 
     await expect(page).toHaveURL(/\/lab\/clean-code-is-a-phase$/, { timeout: 10_000 });
 
-    const skeletonLocator = page.locator('[class*="animate-pulse"]').first();
+    const skeletonLocator = page.locator('[class*="animate-pulsing-delayed"]').first();
 
     // After 500 ms the skeleton should still be hidden.
     await page.waitForTimeout(500);
