@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
@@ -84,7 +83,7 @@ function PostPage() {
   const Component = getMdxComponent(slug);
 
   return (
-    <Suspense fallback={<MarkdownLayoutSkeleton />}>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -110,20 +109,6 @@ function PostPage() {
           Component={Component}
         />
       )}
-    </Suspense>
-  );
-}
-
-function MarkdownLayoutSkeleton() {
-  return (
-    <div className="mx-auto w-full max-w-[700px] animate-pulse">
-      <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-      <div className="mb-8 h-4 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
-      <div className="space-y-3">
-        <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
-      </div>
-    </div>
+    </>
   );
 }

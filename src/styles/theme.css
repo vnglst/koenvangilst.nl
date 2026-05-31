@@ -23,6 +23,24 @@
   animation: fadeIn 200ms ease-in-out;
 }
 
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animate pulsing, start after delay of 1s */
+.animate-pulsing-delayed {
+  opacity: 0;
+  animation: pulse 2s ease-in-out 1s infinite;
+}
+
 .animate-blink {
   animation: blink 1s step-start 1s infinite;
 }

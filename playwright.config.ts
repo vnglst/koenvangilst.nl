@@ -16,7 +16,8 @@ export default defineConfig({
   use: {
     baseURL,
     headless: true,
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    ignoreHTTPSErrors: useExternalBaseURL
   },
   webServer: useExternalBaseURL
     ? undefined
