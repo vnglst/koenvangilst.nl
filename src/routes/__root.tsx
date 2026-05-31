@@ -122,13 +122,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         >
           Skip to main content
         </a>
-        {/* Inline theme detection to prevent FOUC */}
+        {/* Inline theme detection to prevent FOUC — defaults to dark */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
               const preferredTheme = localStorage.getItem('theme');
-              if (preferredTheme === 'dark' || (!preferredTheme && systemDark)) {
+              if (preferredTheme !== 'light') {
                 document.documentElement.classList.add('dark');
               }
 
