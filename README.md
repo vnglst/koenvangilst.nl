@@ -170,8 +170,11 @@ If any of these fail, fix the issues before committing. This ensures code qualit
 **E2E for large changes**: When making a large refactor or other broad change — especially routing changes, content rendering changes, image handling changes, shared layout updates, or cross-cutting UI work — ALSO run:
 
 ```bash
-npm run test:e2e  # Playwright end-to-end coverage for main site flows
+npm run build && npm run start &  # Build first, then start the production server
+npm run test:e2e                  # Playwright end-to-end coverage for main site flows
 ```
+
+> **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start`), never against the dev server (`npm run dev`). The dev server behaves differently (no SSR optimizations, different code paths) and can produce false positives or false negatives.
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
 

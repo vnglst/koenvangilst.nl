@@ -16,27 +16,14 @@ import { Route as HealthRouteImport } from './routes/health'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SnippetsIndexRouteImport } from './routes/snippets/index'
-import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
-import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
-import { Route as LabsIndexRouteImport } from './routes/labs/index'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
-import { Route as ClientsIndexRouteImport } from './routes/clients/index'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as TagSlugRouteImport } from './routes/tag/$slug'
-import { Route as SnippetsSplatRouteImport } from './routes/snippets/$'
-import { Route as ProjectsSplatRouteImport } from './routes/projects/$'
-import { Route as PortfolioSplatRouteImport } from './routes/portfolio/$'
-import { Route as LabsSplatRouteImport } from './routes/labs/$'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
-import { Route as ClientsSplatRouteImport } from './routes/clients/$'
-import { Route as BlogSplatRouteImport } from './routes/blog/$'
 import { Route as LabPrognosis2100IndexRouteImport } from './routes/lab/prognosis-2100/index'
 import { Route as LabOnsLandIndexRouteImport } from './routes/lab/ons-land/index'
 import { Route as LabGenArtGalleryIndexRouteImport } from './routes/lab/gen-art-gallery/index'
 import { Route as LabCo2IndexRouteImport } from './routes/lab/co2/index'
-import { Route as PhotographyPhotoSplatRouteImport } from './routes/photography/photo/$'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -73,29 +60,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SnippetsIndexRoute = SnippetsIndexRouteImport.update({
-  id: '/snippets/',
-  path: '/snippets/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
-  id: '/portfolio/',
-  path: '/portfolio/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PhotographyIndexRoute = PhotographyIndexRouteImport.update({
   id: '/photography/',
   path: '/photography/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LabsIndexRoute = LabsIndexRouteImport.update({
-  id: '/labs/',
-  path: '/labs/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabIndexRoute = LabIndexRouteImport.update({
@@ -103,54 +70,14 @@ const LabIndexRoute = LabIndexRouteImport.update({
   path: '/lab/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ClientsIndexRoute = ClientsIndexRouteImport.update({
-  id: '/clients/',
-  path: '/clients/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/blog/',
-  path: '/blog/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TagSlugRoute = TagSlugRouteImport.update({
   id: '/tag/$slug',
   path: '/tag/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SnippetsSplatRoute = SnippetsSplatRouteImport.update({
-  id: '/snippets/$',
-  path: '/snippets/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsSplatRoute = ProjectsSplatRouteImport.update({
-  id: '/projects/$',
-  path: '/projects/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioSplatRoute = PortfolioSplatRouteImport.update({
-  id: '/portfolio/$',
-  path: '/portfolio/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LabsSplatRoute = LabsSplatRouteImport.update({
-  id: '/labs/$',
-  path: '/labs/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LabSlugRoute = LabSlugRouteImport.update({
   id: '/lab/$slug',
   path: '/lab/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClientsSplatRoute = ClientsSplatRouteImport.update({
-  id: '/clients/$',
-  path: '/clients/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogSplatRoute = BlogSplatRouteImport.update({
-  id: '/blog/$',
-  path: '/blog/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabPrognosis2100IndexRoute = LabPrognosis2100IndexRouteImport.update({
@@ -173,11 +100,6 @@ const LabCo2IndexRoute = LabCo2IndexRouteImport.update({
   path: '/lab/co2/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PhotographyPhotoSplatRoute = PhotographyPhotoSplatRouteImport.update({
-  id: '/photography/photo/$',
-  path: '/photography/photo/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -187,23 +109,10 @@ export interface FileRoutesByFullPath {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/blog/$': typeof BlogSplatRoute
-  '/clients/$': typeof ClientsSplatRoute
   '/lab/$slug': typeof LabSlugRoute
-  '/labs/$': typeof LabsSplatRoute
-  '/portfolio/$': typeof PortfolioSplatRoute
-  '/projects/$': typeof ProjectsSplatRoute
-  '/snippets/$': typeof SnippetsSplatRoute
   '/tag/$slug': typeof TagSlugRoute
-  '/blog/': typeof BlogIndexRoute
-  '/clients/': typeof ClientsIndexRoute
   '/lab/': typeof LabIndexRoute
-  '/labs/': typeof LabsIndexRoute
   '/photography/': typeof PhotographyIndexRoute
-  '/portfolio/': typeof PortfolioIndexRoute
-  '/projects/': typeof ProjectsIndexRoute
-  '/snippets/': typeof SnippetsIndexRoute
-  '/photography/photo/$': typeof PhotographyPhotoSplatRoute
   '/lab/co2/': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land/': typeof LabOnsLandIndexRoute
@@ -217,23 +126,10 @@ export interface FileRoutesByTo {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/blog/$': typeof BlogSplatRoute
-  '/clients/$': typeof ClientsSplatRoute
   '/lab/$slug': typeof LabSlugRoute
-  '/labs/$': typeof LabsSplatRoute
-  '/portfolio/$': typeof PortfolioSplatRoute
-  '/projects/$': typeof ProjectsSplatRoute
-  '/snippets/$': typeof SnippetsSplatRoute
   '/tag/$slug': typeof TagSlugRoute
-  '/blog': typeof BlogIndexRoute
-  '/clients': typeof ClientsIndexRoute
   '/lab': typeof LabIndexRoute
-  '/labs': typeof LabsIndexRoute
   '/photography': typeof PhotographyIndexRoute
-  '/portfolio': typeof PortfolioIndexRoute
-  '/projects': typeof ProjectsIndexRoute
-  '/snippets': typeof SnippetsIndexRoute
-  '/photography/photo/$': typeof PhotographyPhotoSplatRoute
   '/lab/co2': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land': typeof LabOnsLandIndexRoute
@@ -248,23 +144,10 @@ export interface FileRoutesById {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/blog/$': typeof BlogSplatRoute
-  '/clients/$': typeof ClientsSplatRoute
   '/lab/$slug': typeof LabSlugRoute
-  '/labs/$': typeof LabsSplatRoute
-  '/portfolio/$': typeof PortfolioSplatRoute
-  '/projects/$': typeof ProjectsSplatRoute
-  '/snippets/$': typeof SnippetsSplatRoute
   '/tag/$slug': typeof TagSlugRoute
-  '/blog/': typeof BlogIndexRoute
-  '/clients/': typeof ClientsIndexRoute
   '/lab/': typeof LabIndexRoute
-  '/labs/': typeof LabsIndexRoute
   '/photography/': typeof PhotographyIndexRoute
-  '/portfolio/': typeof PortfolioIndexRoute
-  '/projects/': typeof ProjectsIndexRoute
-  '/snippets/': typeof SnippetsIndexRoute
-  '/photography/photo/$': typeof PhotographyPhotoSplatRoute
   '/lab/co2/': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land/': typeof LabOnsLandIndexRoute
@@ -280,23 +163,10 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
-    | '/blog/$'
-    | '/clients/$'
     | '/lab/$slug'
-    | '/labs/$'
-    | '/portfolio/$'
-    | '/projects/$'
-    | '/snippets/$'
     | '/tag/$slug'
-    | '/blog/'
-    | '/clients/'
     | '/lab/'
-    | '/labs/'
     | '/photography/'
-    | '/portfolio/'
-    | '/projects/'
-    | '/snippets/'
-    | '/photography/photo/$'
     | '/lab/co2/'
     | '/lab/gen-art-gallery/'
     | '/lab/ons-land/'
@@ -310,23 +180,10 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
-    | '/blog/$'
-    | '/clients/$'
     | '/lab/$slug'
-    | '/labs/$'
-    | '/portfolio/$'
-    | '/projects/$'
-    | '/snippets/$'
     | '/tag/$slug'
-    | '/blog'
-    | '/clients'
     | '/lab'
-    | '/labs'
     | '/photography'
-    | '/portfolio'
-    | '/projects'
-    | '/snippets'
-    | '/photography/photo/$'
     | '/lab/co2'
     | '/lab/gen-art-gallery'
     | '/lab/ons-land'
@@ -340,23 +197,10 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
-    | '/blog/$'
-    | '/clients/$'
     | '/lab/$slug'
-    | '/labs/$'
-    | '/portfolio/$'
-    | '/projects/$'
-    | '/snippets/$'
     | '/tag/$slug'
-    | '/blog/'
-    | '/clients/'
     | '/lab/'
-    | '/labs/'
     | '/photography/'
-    | '/portfolio/'
-    | '/projects/'
-    | '/snippets/'
-    | '/photography/photo/$'
     | '/lab/co2/'
     | '/lab/gen-art-gallery/'
     | '/lab/ons-land/'
@@ -371,23 +215,10 @@ export interface RootRouteChildren {
   LlmContextRoute: typeof LlmContextRoute
   OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  BlogSplatRoute: typeof BlogSplatRoute
-  ClientsSplatRoute: typeof ClientsSplatRoute
   LabSlugRoute: typeof LabSlugRoute
-  LabsSplatRoute: typeof LabsSplatRoute
-  PortfolioSplatRoute: typeof PortfolioSplatRoute
-  ProjectsSplatRoute: typeof ProjectsSplatRoute
-  SnippetsSplatRoute: typeof SnippetsSplatRoute
   TagSlugRoute: typeof TagSlugRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-  ClientsIndexRoute: typeof ClientsIndexRoute
   LabIndexRoute: typeof LabIndexRoute
-  LabsIndexRoute: typeof LabsIndexRoute
   PhotographyIndexRoute: typeof PhotographyIndexRoute
-  PortfolioIndexRoute: typeof PortfolioIndexRoute
-  ProjectsIndexRoute: typeof ProjectsIndexRoute
-  SnippetsIndexRoute: typeof SnippetsIndexRoute
-  PhotographyPhotoSplatRoute: typeof PhotographyPhotoSplatRoute
   LabCo2IndexRoute: typeof LabCo2IndexRoute
   LabGenArtGalleryIndexRoute: typeof LabGenArtGalleryIndexRoute
   LabOnsLandIndexRoute: typeof LabOnsLandIndexRoute
@@ -445,39 +276,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/snippets/': {
-      id: '/snippets/'
-      path: '/snippets'
-      fullPath: '/snippets/'
-      preLoaderRoute: typeof SnippetsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects/': {
-      id: '/projects/'
-      path: '/projects'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof ProjectsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio/': {
-      id: '/portfolio/'
-      path: '/portfolio'
-      fullPath: '/portfolio/'
-      preLoaderRoute: typeof PortfolioIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/photography/': {
       id: '/photography/'
       path: '/photography'
       fullPath: '/photography/'
       preLoaderRoute: typeof PhotographyIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/labs/': {
-      id: '/labs/'
-      path: '/labs'
-      fullPath: '/labs/'
-      preLoaderRoute: typeof LabsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/': {
@@ -487,20 +290,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/clients/': {
-      id: '/clients/'
-      path: '/clients'
-      fullPath: '/clients/'
-      preLoaderRoute: typeof ClientsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tag/$slug': {
       id: '/tag/$slug'
       path: '/tag/$slug'
@@ -508,53 +297,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/snippets/$': {
-      id: '/snippets/$'
-      path: '/snippets/$'
-      fullPath: '/snippets/$'
-      preLoaderRoute: typeof SnippetsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects/$': {
-      id: '/projects/$'
-      path: '/projects/$'
-      fullPath: '/projects/$'
-      preLoaderRoute: typeof ProjectsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio/$': {
-      id: '/portfolio/$'
-      path: '/portfolio/$'
-      fullPath: '/portfolio/$'
-      preLoaderRoute: typeof PortfolioSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/labs/$': {
-      id: '/labs/$'
-      path: '/labs/$'
-      fullPath: '/labs/$'
-      preLoaderRoute: typeof LabsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lab/$slug': {
       id: '/lab/$slug'
       path: '/lab/$slug'
       fullPath: '/lab/$slug'
       preLoaderRoute: typeof LabSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clients/$': {
-      id: '/clients/$'
-      path: '/clients/$'
-      fullPath: '/clients/$'
-      preLoaderRoute: typeof ClientsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/$': {
-      id: '/blog/$'
-      path: '/blog/$'
-      fullPath: '/blog/$'
-      preLoaderRoute: typeof BlogSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/prognosis-2100/': {
@@ -585,13 +332,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabCo2IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/photography/photo/$': {
-      id: '/photography/photo/$'
-      path: '/photography/photo/$'
-      fullPath: '/photography/photo/$'
-      preLoaderRoute: typeof PhotographyPhotoSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -603,23 +343,10 @@ const rootRouteChildren: RootRouteChildren = {
   LlmContextRoute: LlmContextRoute,
   OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  BlogSplatRoute: BlogSplatRoute,
-  ClientsSplatRoute: ClientsSplatRoute,
   LabSlugRoute: LabSlugRoute,
-  LabsSplatRoute: LabsSplatRoute,
-  PortfolioSplatRoute: PortfolioSplatRoute,
-  ProjectsSplatRoute: ProjectsSplatRoute,
-  SnippetsSplatRoute: SnippetsSplatRoute,
   TagSlugRoute: TagSlugRoute,
-  BlogIndexRoute: BlogIndexRoute,
-  ClientsIndexRoute: ClientsIndexRoute,
   LabIndexRoute: LabIndexRoute,
-  LabsIndexRoute: LabsIndexRoute,
   PhotographyIndexRoute: PhotographyIndexRoute,
-  PortfolioIndexRoute: PortfolioIndexRoute,
-  ProjectsIndexRoute: ProjectsIndexRoute,
-  SnippetsIndexRoute: SnippetsIndexRoute,
-  PhotographyPhotoSplatRoute: PhotographyPhotoSplatRoute,
   LabCo2IndexRoute: LabCo2IndexRoute,
   LabGenArtGalleryIndexRoute: LabGenArtGalleryIndexRoute,
   LabOnsLandIndexRoute: LabOnsLandIndexRoute,
