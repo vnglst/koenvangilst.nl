@@ -1,11 +1,8 @@
-'';
-
-import { colors } from './themes/colors';
-
 import { dateFormatter } from '#/lib/formatters';
 
 import { usePrognosisStore } from '../_store/prognosis';
 import { Chart } from './Chart';
+import { createPrognosisMarklines } from './utils';
 import type { DataType } from './Sealevel';
 
 type SealevelProps = {
@@ -26,52 +23,11 @@ export function SealevelClient({ data, className }: SealevelProps) {
 }
 
 function generateOptions(data: DataType, showPrognosis: boolean) {
-  const prognosisMarklines = [
-    {
-      name: 'Worst Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.red
-        },
-        data: [
-          [
-            {
-              xAxis: '2023',
-              yAxis: data.last_sealevel
-            },
-            { xAxis: '2100', yAxis: data.worst_case }
-          ]
-        ]
-      },
-      itemStyle: {
-        color: colors.red
-      }
-    },
-    {
-      name: 'Best Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.limeGreen
-        },
-        data: [
-          [
-            {
-              xAxis: '2023',
-              yAxis: data.last_sealevel
-            },
-            { xAxis: '2100', yAxis: data.best_case }
-          ]
-        ]
-      },
-      lineStyle: {
-        color: colors.limeGreen
-      }
-    }
-  ];
+  const prognosisMarklines = createPrognosisMarklines({
+    lastValue: data.last_sealevel,
+    worstCase: data.worst_case,
+    bestCase: data.best_case
+  });
 
   return {
     grid: {

@@ -3,7 +3,7 @@ export const temperatureFormatter = (value?: number | null) => {
     return 'N/A';
   }
 
-  return `${value.toLocaleString('en-UK', {
+  return `${value.toLocaleString('en-GB', {
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
     signDisplay: 'always'
@@ -15,7 +15,7 @@ export const mmFormatter = (value?: number | null) => {
     return 'N/A';
   }
 
-  return `${value.toLocaleString('en-UK', {
+  return `${value.toLocaleString('en-GB', {
     maximumFractionDigits: 0,
     signDisplay: 'auto'
   })} mm`;
@@ -26,14 +26,14 @@ export const hoursFormatter = (value?: number | null) => {
     return 'N/A';
   }
 
-  return `${value.toLocaleString('en-UK', {
+  return `${value.toLocaleString('en-GB', {
     maximumFractionDigits: 0,
     signDisplay: 'always'
   })} hours`;
 };
 
 export const dateFormatter = (value: string) => {
-  return new Date(value).toLocaleDateString('en-UK', {
+  return new Date(value).toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric'

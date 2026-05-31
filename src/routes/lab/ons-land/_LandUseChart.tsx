@@ -135,12 +135,7 @@ const LandUseChartComponent = () => {
             d3.geoContains(netherlandsFeature, (projection.invert as any)(center))
           ) as [number, number][];
           const hexData = hexbin(hexPoints);
-
           const totalHexagons = hexData.length;
-
-          console.log('1 hexagon represents', (1 / totalHexagons) * 100, '% of the total area');
-          // Total hectares of the Netherlands: 41,543,000
-          console.log('Hectare per hexagon:', 41543000 / totalHexagons, 'hectares');
 
           const colorScale = d3
             .scaleOrdinal()
