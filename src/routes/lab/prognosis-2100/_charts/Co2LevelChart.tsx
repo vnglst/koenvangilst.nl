@@ -1,19 +1,17 @@
-'';
-
 import { Chart } from './Chart';
-import { colors } from './themes/colors';
+import { createPrognosisMarklines } from './utils';
 
 import { dateFormatter } from '#/lib/formatters';
 
 import { usePrognosisStore } from '../_store/prognosis';
 import type { DataType } from './Co2Level';
 
-type SealevelProps = {
+type Co2LevelProps = {
   data: DataType;
   className: string;
 };
 
-export function Co2LevelClient({ data, className }: SealevelProps) {
+export function Co2LevelClient({ data, className }: Co2LevelProps) {
   const { showPrognosis } = usePrognosisStore();
   const options = generateOptions(data, showPrognosis);
 
@@ -26,52 +24,11 @@ export function Co2LevelClient({ data, className }: SealevelProps) {
 }
 
 function generateOptions(data: DataType, showPrognosis: boolean) {
-  const prognosisMarklines = [
-    {
-      name: 'Worst Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.red
-        },
-        data: [
-          [
-            {
-              xAxis: '2023',
-              yAxis: data.last_co2_level
-            },
-            { xAxis: '2100', yAxis: data.worst_case }
-          ]
-        ]
-      },
-      itemStyle: {
-        color: colors.red
-      }
-    },
-    {
-      name: 'Best Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.limeGreen
-        },
-        data: [
-          [
-            {
-              xAxis: '2023',
-              yAxis: data.last_co2_level
-            },
-            { xAxis: '2100', yAxis: data.best_case }
-          ]
-        ]
-      },
-      itemStyle: {
-        color: colors.limeGreen
-      }
-    }
-  ];
+  const prognosisMarklines = createPrognosisMarklines({
+    lastValue: data.last_co2_level,
+    worstCase: data.worst_case,
+    bestCase: data.best_case
+  });
 
   return {
     grid: {
@@ -92,7 +49,7 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       left: 10
     },
     tooltip: {
-      valueFormatter: (value: number) => `${value.toFixed(3)} m`,
+      valueFormatter: (value: number) => `${value.toFixed(1)} ppm`,
       trigger: 'item',
       axisPointer: {
         type: 'cross'

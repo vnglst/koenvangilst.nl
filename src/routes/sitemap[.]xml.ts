@@ -9,8 +9,7 @@ export const Route = createFileRoute('/sitemap.xml')({
   server: {
     handlers: {
       GET: async () => {
-        const posts = await getPosts();
-        const photos = await getPhotos();
+        const [posts, photos] = await Promise.all([getPosts(), getPhotos()]);
 
         const pages = ['', 'lab', 'photography'];
 

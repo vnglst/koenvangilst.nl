@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import type { PropsWithChildren } from 'react';
+import { Suspense, type PropsWithChildren } from 'react';
 
 import { cx } from '#/lib/clsx';
 import { Footer } from './Footer';
