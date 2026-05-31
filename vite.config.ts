@@ -50,6 +50,22 @@ const config = defineConfig({
     external: ['sharp', '@resvg/resvg-js', 'exif-reader'],
     noExternal: []
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/'))
+            return 'react';
+          if (id.includes('node_modules/@tanstack/react-router'))
+            return 'tanstack-router';
+          if (id.includes('node_modules/@tanstack/react-start'))
+            return 'tanstack-start';
+          if (id.includes('node_modules/@tanstack/react-query'))
+            return 'tanstack-query';
+        }
+      }
+    }
+  },
   plugins: [
     devtools(),
     tailwindcss(),
