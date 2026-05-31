@@ -1,13 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
-import { getPosts } from '#/cms/mdx-parser';
+
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
 import { Link } from '#/components/ui/Link';
 import { dateFormatter } from '#/lib/formatters';
 
-const getRecentArticles = createServerFn({ method: 'GET' }).handler(() => {
+const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
+  const { getPosts } = await import('#/cms/posts-server');
   return getPosts()
     .filter((post) => post.tags.includes('article'))
     .slice(0, 5);

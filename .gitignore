@@ -18,5 +18,8 @@ public/static/photography-optimized/
 # Generated photo metadata (created at deploy time by scripts/generate-photos-data.mjs)
 public/static/photos-data.json
 
+# Generated OG images (created at build time by scripts/generate-og-images.mjs)
+public/og/
+
 # Playwright test artifacts
 test-results/
