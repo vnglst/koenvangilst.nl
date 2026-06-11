@@ -1,0 +1,28 @@
+---
+title: 'Notes from GOTO Copenhagen: Context Is King'
+publishedAt: '2025-10-02'
+summary: 'A few days at GOTO Copenhagen on AI agents, technical leadership and architecture decisions. Main take aways: not prompt magic, but context engineering, ownership and clear decision-making.'
+tags:
+  - ai
+  - article
+---
+
+I spent the last few days in Copenhagen at GOTO, and it was one of those conferences where multiple talks keep circling back to the same core idea from different angles: context matters more than hype.
+
+Rod Johnson put it most sharply in his talk on building reliable agents: **context engineering beats prompt engineering**. Instead of throwing natural language at a model and hoping for the best, use your actual domain models, structured inputs and smaller deterministic steps. His framing was practical and grounded in enterprise reality: business systems should become the agent's memory, and you need guardrails and testing like in any other serious software system.
+
+He also had a good line about failed AI initiatives: top-down mandates as "guidance from the golf course". Funny, but painfully recognizable.
+
+Henrik Kniberg came from the opposite direction and still landed on a similar conclusion. He showed agents as a middle layer between code and people: faster than humans, but not magical. The sweet spot is repetitive, time-consuming work where consistency matters, and where humans stay in the loop. His examples (like large-scale investment screening and scheduling workflows) were a good reminder that the best AI use cases are often not flashy, just useful.
+
+Outside the AI track, Pat Kua's Trident Model was a highlight for me. The distinction between Individual Contributor, Management and Technical Leadership sounds simple, but in practice many organisations blur those roles. His definition of technical leadership resonated with me: creating alignment, shaping technical direction, managing risk and growing the engineering capability of a team. Less about being the person with the final answer, more about helping the team make better decisions.
+
+Andrew Harmel-Law's talk on decentralised architecture decisions connected well with that. If we want autonomous teams, we also need architecture decision-making that doesn't bottleneck on a single architect. The mechanism is straightforward: empower more people to decide, support less experienced engineers, and write decisions down in lightweight ADRs with context and consulted stakeholders. Decentralisation without documentation is chaos; decentralisation with clear records is leverage.
+
+A few other sessions stayed with me too. Lu Wilson's "Beyond Chat" explored what AI might look like once we move beyond text prompts into visual canvases, and it was one of the most creative demos of the event. Jose Valim offered a critical lens on coding agents and MCP, especially around security and runtime feedback loops. Carly Richmond's search talk reinforced the same pattern again: strong retrieval and re-ranking pipelines are basically context engineering for search.
+
+My overall takeaway from GOTO is surprisingly non-mystical: getting value from AI is less about one giant model and more about solid engineering fundamentals. Clear domain boundaries. Structured interactions. Good tooling. Human collaboration.
+
+Also: Copenhagen was beautiful in the sun, and the hallway conversations were as valuable as the talks. I had great chats with engineers from IKEA and AXA, and those discussions made the conference ideas feel concrete in a way slides never can.
+
+With one more day still to go, this trip was already worth it.
