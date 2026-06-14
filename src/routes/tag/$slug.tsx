@@ -10,7 +10,7 @@ import { desluggify, sluggify } from '#/lib/sluggify';
 import { jsonLdBreadcrumb } from '#/lib/json-ld';
 
 const getTagData = createServerFn({ method: 'GET' })
-  .inputValidator((slug: string) => slug)
+  .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const { getPosts } = await import('#/cms/posts-server');
     const allPosts = getPosts();
