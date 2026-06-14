@@ -57,15 +57,7 @@ export function Button(props: ButtonProps) {
   const combinedClasses = cx(baseClasses, getVariantClasses(variant), getSizeClasses(size), className);
 
   if (props.as === 'a') {
-    const {
-      as: _as,
-      children: _ch,
-      className: _cl,
-      variant: _v,
-      size: _s,
-      'aria-label': _al,
-      ...anchorProps
-    } = props;
+    const { as: _as, children: _ch, className: _cl, variant: _v, size: _s, 'aria-label': _al, ...anchorProps } = props;
     return (
       <a aria-label={ariaLabel} className={combinedClasses} {...anchorProps}>
         {children}
