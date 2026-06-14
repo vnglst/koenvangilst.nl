@@ -33,16 +33,14 @@ export const Route = createFileRoute('/')({
       { property: 'og:title', content: 'Koen van Gilst' },
       {
         property: 'og:description',
-        content:
-          'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+        content: 'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
       },
       { property: 'og:image', content: HOME_OG_IMAGE },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Koen van Gilst' },
       {
         name: 'twitter:description',
-        content:
-          'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+        content: 'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
       },
       { name: 'twitter:image', content: HOME_OG_IMAGE }
     ],
@@ -56,10 +54,7 @@ function Home() {
 
   return (
     <Container>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson()) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson()) }} />
       <Heading level={1}>Koen van Gilst</Heading>
       <Prose className="mb-4">
         <p>

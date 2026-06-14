@@ -60,7 +60,6 @@ export function Header() {
                     : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-900'
                 )}
               >
-              
                 <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
                   &gt;
                 </span>

@@ -146,9 +146,10 @@ npm run type-check   # TypeScript check (no emit)
 npm run lint         # ESLint
 npm run format       # Prettier + ESLint auto-fix
 npm run check        # Check formatting with Prettier
-npm run test         # Vitest (single run)
-npm run test:e2e     # Playwright end-to-end tests
-npm run test:e2e:ui  # Playwright end-to-end tests with UI
+npm run test              # Vitest (single run)
+npm run test:e2e          # Playwright end-to-end tests
+npm run test:e2e:ui       # Playwright end-to-end tests with UI
+npm run test:e2e:docker   # Playwright e2e tests against a Docker/Nginx container
 npx vitest           # Vitest in watch mode
 npm run knip         # Detect unused dependencies/exports
 ```
@@ -174,7 +175,13 @@ npm run build && npm run start &  # Build first, then start the production serve
 npm run test:e2e                  # Playwright end-to-end coverage for main site flows
 ```
 
-> **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start`), never against the dev server (`npm run dev`). The dev server behaves differently (no SSR optimizations, different code paths) and can produce false positives or false negatives.
+For the most production-like validation (Nginx reverse proxy, legacy redirects, CSP headers, and static asset serving), run:
+
+```bash
+npm run test:e2e:docker           # Build image, run container, and run e2e suite
+```
+
+> **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server behaves differently (no SSR optimizations, different code paths) and can produce false positives or false negatives.
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
 

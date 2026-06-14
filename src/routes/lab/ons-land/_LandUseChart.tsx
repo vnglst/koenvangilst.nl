@@ -134,12 +134,10 @@ const LandUseChartComponent = () => {
           }
 
           const netherlandsFeature: ExtendedFeature = geoData.features[0];
-          const hexPoints = hexCenters.filter(
-            (center) => {
-              const inverted = projection.invert?.(center as [number, number]);
-              return inverted ? d3.geoContains(netherlandsFeature, inverted) : false;
-            }
-          ) as [number, number][];
+          const hexPoints = hexCenters.filter((center) => {
+            const inverted = projection.invert?.(center as [number, number]);
+            return inverted ? d3.geoContains(netherlandsFeature, inverted) : false;
+          }) as [number, number][];
           const hexData = hexbin(hexPoints);
           const totalHexagons = hexData.length;
 
