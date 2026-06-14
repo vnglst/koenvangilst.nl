@@ -6,7 +6,7 @@ import { NotFoundPage } from '#/components/content/NotFoundPage';
 import { jsonLdArticle } from '#/lib/json-ld';
 
 const getLabPost = createServerFn({ method: 'GET' })
-  .inputValidator((data: { slug: string }) => data)
+  .validator((data: { slug: string }) => data)
   .handler(async ({ data }) => {
     const { getPost, getPosts } = await import('#/cms/posts-server');
     const post = getPost(data.slug);
