@@ -3,8 +3,8 @@
 # Env vars are passed through from the container environment (set in Coolify).
 
 cd /app
-node sync.mjs >> /app/data/sync.log 2>&1
+node sync.mjs 
 
 if [ $? -ne 0 ]; then
-  echo "[$(date)] sync failed" >> /app/data/sync.log
+  echo "[$(date)] sync failed" 
 fi
