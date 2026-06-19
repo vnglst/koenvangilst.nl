@@ -123,7 +123,7 @@ node --env-file=.env.zipline sync.mjs
 Edit `crontab` and redeploy. The format is standard cron:
 
 ```
-*/5 * * * * /app/sync.sh    # every 5 minutes
+*/10 * * * * /app/sync.sh   # every 10 minutes
 0 * * * * /app/sync.sh      # every hour
 ```
 

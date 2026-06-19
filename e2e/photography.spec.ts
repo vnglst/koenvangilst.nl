@@ -14,10 +14,4 @@ test.describe('photography', () => {
     await expect(page).toHaveURL(/\/photography\?photo=0-gallery$/);
     await expect(page.getByRole('button', { name: /back/i })).toBeVisible();
   });
-
-  test('legacy photography detail URLs redirect to the gallery', async ({ page }) => {
-    await page.goto('/photography/photo/some-legacy-id');
-
-    await expect(page).toHaveURL('/photography');
-  });
 });

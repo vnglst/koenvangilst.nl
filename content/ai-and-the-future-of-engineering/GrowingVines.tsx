@@ -101,18 +101,18 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
   };
 
   for (let i = 1; i < wps.length - 1; i++) {
-    const { x: wx, y: wy } = wps[i];
+    const { x: vineX, y: vineY } = wps[i];
     delay += r(0.15, 0.28);
 
     for (const s of [1, -1]) {
       const big = rng() < 0.22;
       addLeaf(
-        wx + s * r(4, big ? 22 : 16),
-        wy + r(-10, 10),
+        vineX + s * r(4, big ? 22 : 16),
+        vineY + r(-10, 10),
         big ? r(24, 42) : r(8, 18),
         big ? r(11, 19) : r(4, 8),
         s * r(10, 42),
-        leafFillByY(wy),
+        leafFillByY(vineY),
         delay - 0.05
       );
     }
@@ -120,12 +120,12 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
       const big = rng() < 0.18;
       const s = rng() > 0.5 ? 1 : -1;
       addLeaf(
-        wx + s * r(2, 14),
-        wy + r(-18, 18),
+        vineX + s * r(2, 14),
+        vineY + r(-18, 18),
         big ? r(20, 38) : r(6, 14),
         big ? r(9, 17) : r(3, 6),
         s * r(20, 50),
-        leafFillByY(wy),
+        leafFillByY(vineY),
         delay + 0.1
       );
     }
@@ -133,11 +133,11 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
     if (rng() < 0.95) {
       const dir = firstDir * (i % 2 === 0 ? 1 : -1);
       const len = r(55, 135);
-      const ex = Math.round(wx + dir * len);
-      const ey = Math.round(wy + r(-28, 12));
-      const c1x = Math.round(wx + dir * len * 0.28 + r(-16, 16));
-      const c1y = Math.round(wy + r(-22, -4));
-      const c2x = Math.round(wx + dir * len * 0.68 + r(-10, 10));
+      const ex = Math.round(vineX + dir * len);
+      const ey = Math.round(vineY + r(-28, 12));
+      const c1x = Math.round(vineX + dir * len * 0.28 + r(-16, 16));
+      const c1y = Math.round(vineY + r(-22, -4));
+      const c2x = Math.round(vineX + dir * len * 0.68 + r(-10, 10));
       const c2y = Math.round(ey + r(-18, 5));
       const c = r(0.75, 1.5);
 
@@ -150,16 +150,16 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
         ` ${Math.round(ex - dir * c * 7)},${Math.round(ey + c * 9)}`;
 
       tendrils.push({
-        d: `M ${wx},${wy} C ${c1x},${c1y} ${c2x},${c2y} ${ex},${ey} ${curlD}`,
+        d: `M ${vineX},${vineY} C ${c1x},${c1y} ${c2x},${c2y} ${ex},${ey} ${curlD}`,
         sw: r(1.5, 2.7),
         delay
       });
       endTime = Math.max(endTime, delay + 0.9);
 
-      const midY1 = wy + (ey - wy) * 0.4;
-      const midY2 = wy + (ey - wy) * 0.75;
+      const midY1 = vineY + (ey - vineY) * 0.4;
+      const midY2 = vineY + (ey - vineY) * 0.75;
       addLeaf(
-        wx + dir * len * 0.4 + r(-8, 8),
+        vineX + dir * len * 0.4 + r(-8, 8),
         midY1 + r(-6, 6),
         r(7, 14),
         r(3, 6.5),
@@ -168,7 +168,7 @@ function buildVine(seed: number, x: number, topY: number, firstDir: number, offs
         delay + r(0.4, 0.7)
       );
       addLeaf(
-        wx + dir * len * 0.75 + r(-8, 8),
+        vineX + dir * len * 0.75 + r(-8, 8),
         midY2 + r(-6, 6),
         r(7, 14),
         r(3, 6.5),

@@ -180,12 +180,11 @@ async function uploadFile(buffer, filename, mimeType, folderId) {
   const contentType = res.headers.get('content-type') || '';
   if (contentType.includes('application/json')) {
     const data = await res.json();
-    const file = data.files?.[0];
-    if (!file) throw new Error('Upload response missing files array');
-    return file;
+    const url = typeof data === 'string' ? data : data.url || data.files?.[0]?.url;
+    if (!url) throw new Error('Upload response missing url');
+    return { id: null, name: filename, originalName: filename, type: mimeType, url };
   }
-  const text = await res.text();
-  const url = text.split(',')[0];
+  const url = await res.text();
   return { id: null, name: filename, type: mimeType, url };
 }
 
@@ -450,11 +449,6 @@ async function publishPhotosData(photos) {
   }
 
   const existingDataFile = Array.from(optimizedMapCache.values()).find((f) => f.originalName === 'photos-data.json');
-  if (existingDataFile?.id) {
-    await deleteFile(existingDataFile.id);
-    log('🗑️', `  Deleted old photos-data.json (${existingDataFile.id})`);
-  }
-
   const uploaded = await uploadFile(jsonBuffer, 'photos-data.json', 'application/json', OPTIMIZED_FOLDER_ID);
   log('⬆️', `  Uploaded photos-data.json -> ${uploaded.url}`);
 
@@ -467,6 +461,11 @@ async function publishPhotosData(photos) {
   } else {
     await createVanityUrl(VANITY, destination);
     log('🔗', `  Created vanity "${VANITY}" -> ${destination}`);
+  }
+
+  if (existingDataFile?.id) {
+    await deleteFile(existingDataFile.id);
+    log('🗑️', `  Deleted old photos-data.json (${existingDataFile.id})`);
   }
 
   log('🌐', `  Frontend can fetch: ${destination}`);
@@ -492,12 +491,18 @@ async function processBatch(items, fn, concurrency) {
   for (let i = 0; i < items.length; i += concurrency) {
     const batch = items.slice(i, i + concurrency);
     const batchResults = await Promise.allSettled(batch.map(fn));
+    const failures = [];
     for (const result of batchResults) {
       if (result.status === 'fulfilled' && result.value) {
         results.push(result.value);
       } else if (result.status === 'rejected') {
+        failures.push(result.reason);
         log('❌', `Error: ${result.reason.message}`);
       }
+    }
+
+    if (failures.length > 0) {
+      throw new Error(`Failed to process ${failures.length} photo(s)`);
     }
   }
   return results;
