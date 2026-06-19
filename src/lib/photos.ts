@@ -16,7 +16,7 @@ export type PhotoType = {
 const PHOTOS_DATA_URL = process.env.ZIPLINE_PHOTOS_DATA_URL || 'https://files.koenvangilst.nl/go/photos-data';
 const ZIPLINE_URL = 'https://files.koenvangilst.nl';
 
-const CACHE_TTL_MS = 10 * 60 * 1000;
+const CACHE_TTL_MS = 2 * 60 * 1000;
 
 let cachedPhotos: { data: PhotoType[]; fetchedAt: number } | null = null;
 
