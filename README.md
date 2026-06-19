@@ -116,7 +116,7 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **Server-Side Rendering**: Full SSR via TanStack Start for optimal performance
 - **RSS Feed**: Automatically generated from blog posts
 - **Sitemap**: Dynamic sitemap including all content
-- **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images
+- **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images, served directly from a self-hosted Zipline instance
 - **Dark Mode**: Dark by default with user-preference override. Light mode is only shown when explicitly chosen via the theme toggle. System preference (`prefers-color-scheme`) is intentionally ignored in favor of a consistent dark-first experience.
 - **Reading Time**: Calculated for each blog post
 - **Tag System**: Categorized content with slug-based URLs
@@ -138,7 +138,6 @@ Visit `http://localhost:3000` to see the site in development mode.
 
 ```bash
 npm run dev          # Start development server (port 3000)
-npm run predev       # Generate photo metadata before dev server starts
 npm run build        # Production build → dist/
 npm run start        # Run built server: srvx --entry dist/server/server.js
 npm run preview      # Preview production build locally
@@ -341,7 +340,6 @@ These are baked in at build time, not runtime env vars.
 - **Deployment platform**: Coolify v4 (self-hosted on separate Raspberry Pi 5)
 - **Build process**: Docker builds run on Hetzner server (expect ~4min builds with TanStack Start + Vite)
 - **Container runtime**: Docker Engine with BuildKit cache mounts for build optimization
-- **Persistent cache**: `/data/cache` volume mounted for optimized image cache
 
 ### Deployment Target
 
@@ -372,14 +370,14 @@ docker stop koenvangilst-test && docker rm koenvangilst-test
 The Docker image uses a multi-stage build (`Dockerfile`) with **Nginx as the reverse proxy** and **Node.js as the SSR backend**:
 
 - **Nginx** listens on `0.0.0.0:3000` (external) and handles:
-  - Static assets directly (client bundles, fonts, photography images) with long cache headers
+  - Static assets directly (client bundles, fonts, public files) with long cache headers
   - Health checks (`/health`) directly without hitting Node.js
   - Rate limiting on SSR endpoints (30 req/s per IP)
   - Security headers including Content-Security-Policy, HSTS, X-Frame-Options
   - Gzip compression
   - Proxying everything else to Node.js with streaming support
 - **Node.js SSR server** runs on `127.0.0.1:3001` (internal only) via `srvx --entry server/server.js`
-- `docker-entrypoint.sh` starts Node.js in the background, runs image generation scripts, then starts Nginx in the foreground
+- `docker-entrypoint.sh` starts Node.js in the background, then starts Nginx in the foreground
 
 Build output goes to `dist/`:
 
@@ -393,12 +391,7 @@ Inside the container, the `dist/` contents are copied to `/app/`, so paths becom
 
 ### Startup Scripts
 
-On container startup, `docker-entrypoint.sh` runs these in the background:
-
-- `scripts/generate-images.mjs` — generates responsive image sizes (JPEG + WebP) for the photography portfolio
-- `scripts/generate-photos-data.mjs` — generates photo metadata JSON (EXIF, dimensions) used by the photography gallery
-
-Both scripts are idempotent and skip existing files. The container healthcheck allows a 90s start period to account for first-run image generation.
+On container startup, `docker-entrypoint.sh` starts the Node.js SSR server and Nginx. No image generation happens at startup - photography assets are served directly from a self-hosted Zipline instance. See `zipline-sync/` for the separate service that processes photos and publishes the manifest.
 
 ### Testing Docker Builds Locally
 
@@ -420,16 +413,9 @@ docker logs koenvangilst-test
 curl http://localhost:3000/health
 # Should return: OK
 
-# Test post-deployment scripts
-docker exec koenvangilst-test node scripts/generate-images.mjs
-# Should generate optimized images or skip if they exist
-
-docker exec koenvangilst-test node scripts/generate-photos-data.mjs
-# Should generate photo metadata or skip if it exists
-
-# Test image serving
-curl -I http://localhost:3000/static/photography-optimized/Sweden-IMG_7734/original.webp
-# Should return HTTP/1.1 200 OK with Content-Type: image/webp
+# Test the public Zipline manifest used by the photography page
+curl -I https://files.koenvangilst.nl/go/photos-data
+# Should return HTTP/1.1 200 OK
 
 # Cleanup
 docker stop koenvangilst-test && docker rm koenvangilst-test
@@ -469,7 +455,6 @@ This project uses `knip` for detecting unused dependencies and exports. Run with
 
 Knip cannot follow Vite's `import.meta.glob`, MDX compilation, or Docker/deployment usage, so it may incorrectly report these as unused:
 
-- `scripts/generate-images.mjs` — used by Docker entrypoint at runtime
 - `@tanstack/router-plugin` — used in `vite.config.ts` as a Vite plugin
 - `@types/mdx` — provides TypeScript types for `.mdx` imports
 - `husky` — drives the `.husky/pre-commit` hook
@@ -513,19 +498,19 @@ When writing or editing blog posts and documentation:
 
 ## What Was Not Migrated 1:1
 
-| Feature                                   | Reason                                                                                                               | Status                                                                                       |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Next.js `localFont`                       | Not available outside Next.js                                                                                        | Replaced with CSS `@font-face` rules in `styles/fonts.css`                                   |
-| Next.js Image optimization                | `next/image` auto-resizes/optimizes; replaced with plain `<img>`                                                     | The legacy `scripts/generate-images.mjs` pre-generates responsive sizes at container startup |
-| Per-post `.components.js` dynamic imports | Legacy dynamically imports per-post component files at request time; Vite build-time MDX uses static imports instead | MDX files import their custom components directly with static `import`                       |
+| Feature                                   | Reason                                                                                                               | Status                                                                     |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Next.js `localFont`                       | Not available outside Next.js                                                                                        | Replaced with CSS `@font-face` rules in `styles/fonts.css`                 |
+| Next.js Image optimization                | `next/image` auto-resizes/optimizes; replaced with plain `<img>`                                                     | `zipline-sync/` pre-generates responsive variants and publishes a manifest |
+| Per-post `.components.js` dynamic imports | Legacy dynamically imports per-post component files at request time; Vite build-time MDX uses static imports instead | MDX files import their custom components directly with static `import`     |
 
 ## Completed TODOs
 
 All original TODOs have been resolved:
 
 - ✅ `/og` dynamic OG image generation with `satori` + `resvg-js` using IBM Plex Sans TTF (in `public/fonts/IBMPlexSans-Bold.ttf`)
-- ✅ Photography EXIF reading via `src/lib/photos.ts` using `sharp`+`exif-reader` with 1-hour in-process cache
-- ✅ `scripts/generate-images.mjs` copied and called from `docker-entrypoint.sh`
+- ✅ Photography EXIF reading moved to the separate `zipline-sync/` service with a 10-minute in-process manifest cache in the main app
+- ✅ Startup image generation removed from the main website container
 - ✅ Per-post MDX component imports (static `import` in each MDX file)
 - ✅ All routes tested with Playwright + curl (100% pass rate)
 - ✅ Legacy-source cleaned up

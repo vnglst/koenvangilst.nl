@@ -1,0 +1,16 @@
+{
+  "name": "zipline-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Polls Zipline for new photos, generates optimized variants, publishes photos-data.json",
+  "scripts": {
+    "sync": "node sync.mjs",
+    "sync:dry-run": "node sync.mjs --dry-run",
+    "sync:rebuild": "node sync.mjs --rebuild"
+  },
+  "dependencies": {
+    "exif-reader": "2.0.3",
+    "sharp": "0.35.1"
+  }
+}

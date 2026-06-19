@@ -12,14 +12,14 @@ dist-ssr
 __unconfig*
 todos.json
 
-# Generated images (created at deploy time by scripts/generate-images.mjs)
-public/static/photography-optimized/
-
-# Generated photo metadata (created at deploy time by scripts/generate-photos-data.mjs)
-public/static/photos-data.json
-
 # Generated OG images (created at build time by scripts/generate-og-images.mjs)
 public/og/
 
 # Playwright test artifacts
 test-results/
+
+# Zipline sync local env (token + folder IDs)
+.env.zipline
+zipline-sync/photos-data.json
+zipline-sync/node_modules
+zipline-sync/data/
