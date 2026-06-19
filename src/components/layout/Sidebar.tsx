@@ -11,15 +11,15 @@ export function Sidebar() {
     <aside className="hidden w-[200px] flex-shrink-0 md:block">
       <div className="sticky top-20">
         {/* Logo and Name */}
-        <div className="mb-8 pl-6">
-          <Link to="/" className="transition-opacity hover:opacity-80">
+        <div className="mb-8 pl-8">
+          <Link to="/">
             <img
               alt="Koen van Gilst"
               height={48}
               width={48}
               src="/avatar.jpg"
               fetchPriority="high"
-              className="rounded-full grayscale filter"
+              className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
             />
           </Link>
         </div>
