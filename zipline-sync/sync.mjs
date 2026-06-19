@@ -531,7 +531,7 @@ async function main() {
   const originals = await listFolderFiles(ORIGINALS_FOLDER_ID);
   const photoOriginals = originals.filter((f) => {
     const name = getOriginalFilename(f) || '';
-    return /\.(jpg|jpeg)$/i.test(name);
+    return /\.(jpg|jpeg|png)$/i.test(name);
   });
   log('📁', `Originals folder: ${photoOriginals.length} photos`);
 
