@@ -16,9 +16,10 @@ export type PhotoType = {
 const PHOTOS_DATA_URL = process.env.ZIPLINE_PHOTOS_DATA_URL || 'https://files.koenvangilst.nl/go/photos-data';
 const ZIPLINE_URL = 'https://files.koenvangilst.nl';
 
-const CACHE_TTL_MS = 2 * 60 * 1000;
+const CACHE_TTL_MS = 5 * 1000; // 5 seconds
 
 let cachedPhotos: { data: PhotoType[]; fetchedAt: number } | null = null;
+let inFlightFetch: Promise<PhotoType[]> | null = null;
 
 function absoluteZiplineUrl(url: string) {
   if (url.startsWith('/z/')) {
@@ -59,22 +60,29 @@ async function fetchPhotosData(): Promise<PhotoType[]> {
   return (await res.json()) as PhotoType[];
 }
 
-export async function getPhotos(): Promise<PhotoType[]> {
-  if (cachedPhotos && Date.now() - cachedPhotos.fetchedAt < CACHE_TTL_MS) {
-    return cachedPhotos.data;
-  }
-
+async function refreshPhotos(): Promise<PhotoType[]> {
   try {
     const photos = normalizePhotoUrls(await fetchPhotosData());
     cachedPhotos = { data: photos, fetchedAt: Date.now() };
     return photos;
   } catch (err) {
     console.warn('[photos] Failed to fetch photos-data from Zipline:', err);
-
-    if (cachedPhotos) {
-      return cachedPhotos.data;
-    }
-
-    return [];
+    return cachedPhotos ? cachedPhotos.data : [];
   }
+}
+
+export async function getPhotos(): Promise<PhotoType[]> {
+  const isStale = !cachedPhotos || Date.now() - cachedPhotos.fetchedAt >= CACHE_TTL_MS;
+
+  if (isStale && !inFlightFetch) {
+    inFlightFetch = refreshPhotos().finally(() => {
+      inFlightFetch = null;
+    });
+  }
+
+  if (cachedPhotos) {
+    return cachedPhotos.data;
+  }
+
+  return inFlightFetch as Promise<PhotoType[]>;
 }
