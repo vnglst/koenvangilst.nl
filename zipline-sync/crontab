@@ -3,4 +3,4 @@
 # Default: every 10 minutes
 # Override at runtime with CRON_SCHEDULE env var (not directly supported by crond,
 # so rebuild the crontab in entrypoint if you need a custom schedule).
-*/2 * * * * /app/sync.sh
+* * * * * /app/sync.sh
