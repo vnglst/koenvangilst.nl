@@ -15,14 +15,14 @@ export function Header() {
       <div className="mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo and Name */}
-          <Link to="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
+          <Link to="/" className="flex items-center gap-3">
             <img
               alt="Koen van Gilst"
               height={36}
               width={36}
               src="/avatar.jpg"
               fetchPriority="high"
-              className="rounded-full grayscale filter"
+              className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
             />
           </Link>
 
