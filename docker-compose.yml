@@ -5,13 +5,13 @@ services:
       args:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
     ports:
-      - '3000:3000'
+      - '3000:80'
     volumes:
       - photography-data:/data/photography:ro
     environment:
       PHOTOS_MANIFEST_PATH: /data/photography/photos-data.json
     healthcheck:
-      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://127.0.0.1:3000/health']
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://127.0.0.1/health']
       interval: 30s
       timeout: 5s
       start_period: 15s

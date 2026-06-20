@@ -366,7 +366,7 @@ Enable "Include Source Commit in Build" in Advanced settings to display commit h
 docker build --build-arg SOURCE_COMMIT=$(git rev-parse HEAD) -t koenvangilst .
 
 # Run locally to test
-docker run -d -p 3000:3000 --name koenvangilst-test koenvangilst
+docker run -d -p 3000:80 --name koenvangilst-test koenvangilst
 curl http://localhost:3000/health   # → OK
 
 # Cleanup
@@ -377,7 +377,7 @@ docker stop koenvangilst-test && docker rm koenvangilst-test
 
 The Docker image uses a multi-stage build (`Dockerfile`) with **Nginx as the reverse proxy** and **Node.js as the SSR backend**:
 
-- **Nginx** listens on `0.0.0.0:3000` (external) and handles:
+- **Nginx** listens on `0.0.0.0:80` inside the container and handles:
   - Static assets directly (client bundles, fonts, public files) with long cache headers
   - Health checks (`/health`) directly without hitting Node.js
   - Rate limiting on SSR endpoints (30 req/s per IP)
@@ -410,12 +410,12 @@ Before deploying to Coolify, test the Docker build locally:
 docker build --build-arg SOURCE_COMMIT=$(git rev-parse HEAD) -t koenvangilst-test .
 
 # Run the container
-docker run -d -p 3000:3000 --name koenvangilst-test koenvangilst-test
+docker run -d -p 3000:80 --name koenvangilst-test koenvangilst-test
 
 # Check logs
 docker logs koenvangilst-test
 # Should show: "Starting Node.js SSR server on 127.0.0.1:3001..."
-# Should show: "Starting Nginx on 0.0.0.0:3000..."
+# Should show: "Starting Nginx on 0.0.0.0:80..."
 
 # Test health check
 curl http://localhost:3000/health
