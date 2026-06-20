@@ -1,4 +1,4 @@
-export const OG_TEMPLATE_VERSION = 'v8-dark-avatar-gradient';
+export const OG_TEMPLATE_VERSION = 'v9-dark-avatar-gradient-fontfix';
 
 export const HOME_OG_TITLE = 'Koen van Gilst';
 export const HOME_OG_DESCRIPTION =

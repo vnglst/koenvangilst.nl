@@ -3,12 +3,15 @@ import path from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import { createHomeOgImage, createPostOgImage, createTagOgImage } from '../src/lib/og-image.mjs';
 
+const watchMode = process.argv.includes('--watch');
+const skipInitial = process.argv.includes('--skip-initial');
 const contentDir = path.join(process.cwd(), 'content');
 const outputDir = process.env.OG_OUTPUT_DIR || path.join(process.cwd(), 'public/og');
 const manifestPath = path.join(outputDir, '.manifest.json');
 const fontsDir = path.join(process.cwd(), 'public/fonts');
 const avatarPath = path.join(process.cwd(), 'public/avatar.jpg');
 const fontPath = path.join(fontsDir, 'IBMPlexSans-Bold.ttf');
+const watchFiles = [path.join(process.cwd(), 'src/lib/og-image.mjs'), avatarPath, fontPath];
 
 function toDataUrl(filePath, mime = 'image/jpeg') {
   return `data:${mime};base64,${fs.readFileSync(filePath).toString('base64')}`;
@@ -111,7 +114,7 @@ function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, weight) {
     .join('\n');
 }
 
-function createOgSvg(title, description, type, avatarDataUrl, fontDataUrl) {
+function createOgSvg(title, description, type, avatarDataUrl) {
   const badgeLabel = type === 'tag' ? 'Tag' : type === 'home' ? 'Home' : 'Blog post';
   const titleLines = wrapText(title, 22, 3);
   const descriptionLines = wrapText(description, 58, titleLines.length >= 3 ? 2 : 3);
@@ -121,20 +124,6 @@ function createOgSvg(title, description, type, avatarDataUrl, fontDataUrl) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <style>
-      @font-face {
-        font-family: 'IBM Plex Sans';
-        src: url('${fontDataUrl}') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-      }
-      @font-face {
-        font-family: 'IBM Plex Sans';
-        src: url('${fontDataUrl}') format('truetype');
-        font-weight: 700;
-        font-style: normal;
-      }
-    </style>
     <clipPath id="avatar-clip" clipPathUnits="userSpaceOnUse">
       <circle cx="44" cy="44" r="32" />
     </clipPath>
@@ -190,15 +179,31 @@ function writeFileAtomically(filePath, contents) {
   fs.renameSync(temporaryPath, filePath);
 }
 
-function renderOgImage(image, type, avatarDataUrl, fontDataUrl) {
+function renderOgImage(image, type, avatarDataUrl) {
   const outputPath = path.join(outputDir, image.filename);
-  const svg = createOgSvg(image.title, image.description, type, avatarDataUrl, fontDataUrl);
-  const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
+  const svg = createOgSvg(image.title, image.description, type, avatarDataUrl);
+  const resvg = new Resvg(svg, {
+    fitTo: { mode: 'width', value: 1200 },
+    font: {
+      defaultFontFamily: 'IBM Plex Sans',
+      fontFiles: [fontPath],
+      loadSystemFonts: false
+    }
+  });
   writeFileAtomically(outputPath, Buffer.from(resvg.render().asPng()));
   console.log(`Generated OG: ${image.url}`);
 }
 
 async function main() {
+  if (watchMode) {
+    await runWatchMode();
+    return;
+  }
+
+  await generateOgImages();
+}
+
+async function generateOgImages() {
   fs.mkdirSync(outputDir, { recursive: true });
   const previousManifest = readManifest();
   // Keep historical entries because their immutable URLs may still be in use.
@@ -220,8 +225,6 @@ async function main() {
     process.exit(1);
   }
 
-  const fontDataUrl = toDataUrl(fontPath, 'font/ttf');
-
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.mdx'));
   const posts = [];
   const allTags = new Set();
@@ -235,7 +238,7 @@ async function main() {
       fs.existsSync(path.join(outputDir, homeImage.filename))
     )
   ) {
-    renderOgImage(homeImage, 'home', avatarDataUrl, fontDataUrl);
+    renderOgImage(homeImage, 'home', avatarDataUrl);
   }
 
   for (const file of files) {
@@ -266,7 +269,7 @@ async function main() {
       continue;
     }
 
-    renderOgImage(image, 'blog', avatarDataUrl, fontDataUrl);
+    renderOgImage(image, 'blog', avatarDataUrl);
   }
 
   for (const tag of uniqueTags) {
@@ -279,10 +282,79 @@ async function main() {
       continue;
     }
 
-    renderOgImage(image, 'tag', avatarDataUrl, fontDataUrl);
+    renderOgImage(image, 'tag', avatarDataUrl);
   }
 
   writeManifest(nextManifest);
+}
+
+async function runWatchMode() {
+  if (!skipInitial) {
+    await generateOgImages();
+  }
+
+  console.log('Watching OG image inputs for changes...');
+
+  let running = false;
+  let rerunQueued = false;
+  let debounceTimer = null;
+  const watchers = [];
+
+  const scheduleRerun = () => {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      void rerun();
+    }, 150);
+  };
+
+  const rerun = async () => {
+    if (running) {
+      rerunQueued = true;
+      return;
+    }
+
+    running = true;
+    try {
+      await generateOgImages();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      running = false;
+      if (rerunQueued) {
+        rerunQueued = false;
+        await rerun();
+      }
+    }
+  };
+
+  watchers.push(
+    fs.watch(contentDir, { persistent: true }, (_eventType, filename) => {
+      if (!filename || filename.endsWith('.mdx')) {
+        scheduleRerun();
+      }
+    })
+  );
+
+  for (const filePath of watchFiles) {
+    fs.watchFile(filePath, { interval: 1000 }, scheduleRerun);
+  }
+
+  const shutdown = () => {
+    for (const watcher of watchers) {
+      watcher.close();
+    }
+
+    for (const filePath of watchFiles) {
+      fs.unwatchFile(filePath, scheduleRerun);
+    }
+
+    process.exit(0);
+  };
+
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
+
+  await new Promise(() => {});
 }
 
 main().catch((err) => {

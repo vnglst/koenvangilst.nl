@@ -148,12 +148,14 @@ npm install
 npm run dev
 ```
 
+This starts the app and the OG image generator together. The generator writes hashed PNGs into `public/og` and keeps watching `content/`, `src/lib/og-image.mjs`, the avatar, and the font so image URLs stay up to date without a second terminal.
+
 Visit `http://localhost:3000` to see the site in development mode.
 
 ## Development Scripts
 
 ```bash
-npm run dev          # Start development server (port 3000)
+npm run dev          # Start development server + OG image generator watcher (port 3000)
 npm run build        # Production build → dist/
 npm run start        # Run built server: srvx --entry dist/server/server.js
 npm run preview      # Preview production build locally
@@ -196,7 +198,7 @@ For the most production-like validation (Nginx reverse proxy, legacy redirects, 
 npm run test:e2e:docker           # Build image, run container, and run e2e suite
 ```
 
-> **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server behaves differently (no SSR optimizations, different code paths) and can produce false positives or false negatives.
+> **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server now also runs the local OG generator, but it still behaves differently from production for SSR and proxying and can produce false positives or false negatives.
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
 

@@ -5,9 +5,7 @@
   "type": "module",
   "description": "Polls Zipline for new photos, generates optimized variants, publishes photos-data.json",
   "scripts": {
-    "sync": "node sync.mjs",
-    "sync:dry-run": "node sync.mjs --dry-run",
-    "sync:rebuild": "node sync.mjs --rebuild"
+    "sync": "node sync.mjs"
   },
   "dependencies": {
     "exif-reader": "2.0.3",

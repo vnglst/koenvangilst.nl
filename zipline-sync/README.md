@@ -77,24 +77,11 @@ cd zipline-sync
 npm install
 ```
 
-### 3. Dry run (no uploads)
-
-```bash
-node --env-file=.env.zipline sync.mjs --dry-run
-```
-
-### 4. Full run
+### 3. Run the sync
 
 ```bash
 node --env-file=.env.zipline sync.mjs
 ```
-
-## CLI Flags
-
-| Flag        | Description                                             |
-| ----------- | ------------------------------------------------------- |
-| `--dry-run` | Show what would be processed without uploading anything |
-| `--rebuild` | Re-process ALL originals                                |
 
 ## Environment Variables
 
@@ -143,8 +130,6 @@ The originals folder is the source of truth. When an original photo is removed f
 - republishes the manifest so the website stops showing it
 
 Cleanup is conservative: the script only deletes filenames referenced by the removed manifest entry. It does not delete unrelated files from the output directory.
-
-Use `--dry-run` to preview cleanup without deleting files or publishing a new manifest.
 
 ## URL format
 

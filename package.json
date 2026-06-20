@@ -7,7 +7,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "node scripts/dev.mjs",
     "build": "vite build",
     "start": "srvx --entry dist/server/server.js",
     "preview": "vite preview",

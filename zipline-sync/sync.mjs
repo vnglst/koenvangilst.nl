@@ -19,10 +19,6 @@ import sharp from 'sharp';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const args = new Set(process.argv.slice(2));
-const DRY_RUN = args.has('--dry-run');
-const REBUILD = args.has('--rebuild');
-
 const ZIPLINE_URL = (process.env.ZIPLINE_URL || '').replace(/\/+$/, '');
 const ZIPLINE_TOKEN = process.env.ZIPLINE_TOKEN || '';
 const ORIGINALS_FOLDER_ID = process.env.ZIPLINE_ORIGINALS_FOLDER_ID || '';
@@ -135,11 +131,6 @@ async function writeVariant(filename, buffer) {
     return;
   } catch {}
 
-  if (DRY_RUN) {
-    log('[dry-run]', `would write ${filename} (${buffer.length} bytes)`);
-    return;
-  }
-
   await writeFileAtomic(filePath, buffer);
 }
 
@@ -163,11 +154,6 @@ async function cleanupRemovedPhoto(photo) {
   log('[cleanup]', `removing ${filenames.length} variant(s) for ${photo.filename}`);
 
   for (const filename of filenames) {
-    if (DRY_RUN) {
-      log('[dry-run]', `would delete ${filename}`);
-      continue;
-    }
-
     try {
       await fs.unlink(path.join(PHOTOS_OUTPUT_DIR, filename));
     } catch (err) {
@@ -312,11 +298,6 @@ async function processBatch(items, fn, concurrency) {
 }
 
 async function writePhotosData(photos) {
-  if (DRY_RUN) {
-    log('[dry-run]', 'skipping photos-data write');
-    return;
-  }
-
   await writeFileAtomic(PHOTOS_DATA_PATH, JSON.stringify(photos, null, 2));
   log('[write]', `manifest ${path.relative(process.cwd(), PHOTOS_DATA_PATH)}`);
 }
@@ -325,12 +306,9 @@ async function main() {
   validateConfig();
   await fs.mkdir(PHOTOS_OUTPUT_DIR, { recursive: true });
 
-  if (DRY_RUN) log('[mode]', 'dry run - no files will change');
-  if (REBUILD) log('[mode]', 'rebuild - re-processing all originals');
-
   log('[zipline]', ZIPLINE_URL);
 
-  const existingPhotos = REBUILD ? [] : await loadPhotosData();
+  const existingPhotos = await loadPhotosData();
   log('[manifest]', `${existingPhotos.length} existing photos`);
 
   const originals = await listFolderFiles(ORIGINALS_FOLDER_ID);
