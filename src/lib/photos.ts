@@ -56,6 +56,7 @@ async function fetchPhotosData(): Promise<PhotoType[]> {
       return JSON.parse(await readFile(PHOTOS_MANIFEST_PATH, 'utf8')) as PhotoType[];
     } catch (err) {
       console.warn('[photos] Failed to read local photos manifest:', err);
+      throw err;
     }
   }
 

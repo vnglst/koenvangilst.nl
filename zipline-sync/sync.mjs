@@ -321,8 +321,7 @@ async function main() {
   const currentOriginalFilenames = new Set(photoOriginals.map(getOriginalFilename));
   const removedPhotos = existingPhotos.filter((photo) => !currentOriginalFilenames.has(photo.filename));
   if (removedPhotos.length > 0) {
-    log('[cleanup]', `${removedPhotos.length} removed original photo(s)`);
-    await cleanupRemovedPhotos(removedPhotos);
+    log('[cleanup]', `${removedPhotos.length} removed original photo(s) pending successful sync`);
   }
 
   const existingByFilename = new Map(existingPhotos.map((photo) => [photo.filename, photo]));
@@ -335,13 +334,6 @@ async function main() {
 
   const processedEntries = await processBatch(originalsToProcess, processOriginal, CONCURRENCY);
   const processedByFilename = new Map(processedEntries.map((photo) => [photo.filename, photo]));
-
-  for (const processedPhoto of processedEntries) {
-    const previousPhoto = existingByFilename.get(processedPhoto.filename);
-    if (previousPhoto?.sourceHash && previousPhoto.sourceHash !== processedPhoto.sourceHash) {
-      await cleanupRemovedPhoto(previousPhoto);
-    }
-  }
 
   const photos = photoOriginals
     .map((original) => {
@@ -356,6 +348,15 @@ async function main() {
   });
 
   await writePhotosData(photos);
+
+  await cleanupRemovedPhotos(removedPhotos);
+  for (const processedPhoto of processedEntries) {
+    const previousPhoto = existingByFilename.get(processedPhoto.filename);
+    if (previousPhoto?.sourceHash && previousPhoto.sourceHash !== processedPhoto.sourceHash) {
+      await cleanupRemovedPhoto(previousPhoto);
+    }
+  }
+
   log('[complete]', `${photos.length} photos total (${processedEntries.length} processed)`);
 }
 

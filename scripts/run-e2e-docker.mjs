@@ -10,9 +10,8 @@
 import { execSync, spawn } from 'node:child_process';
 import { setTimeout } from 'node:timers/promises';
 
-const IMAGE_NAME = 'koenvangilst-e2e';
-const CONTAINER_NAME = 'koenvangilst-e2e';
-const PORT = '3000';
+const COMPOSE_PROJECT = 'koenvangilst-e2e';
+const PORT = '3210';
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 
 function run(command, options = {}) {
@@ -45,31 +44,40 @@ async function runTests() {
 }
 
 async function cleanup() {
-  console.log('> Cleaning up container and image...');
+  console.log('> Cleaning up Compose stack...');
   try {
-    execSync(`docker stop ${CONTAINER_NAME} > /dev/null 2>&1`);
-    execSync(`docker rm ${CONTAINER_NAME} > /dev/null 2>&1`);
-  } catch {
-    // ignore
-  }
-  try {
-    execSync(`docker rmi ${IMAGE_NAME} > /dev/null 2>&1`);
+    execSync(`docker compose -p ${COMPOSE_PROJECT} down --volumes --rmi local`, { stdio: 'ignore' });
   } catch {
     // ignore
   }
 }
 
+function verifyProductionEndpoints() {
+  run(`curl -sf ${BASE_URL}/og/fallback.png -o /dev/null`);
+  run(`curl -sfI ${BASE_URL}/ | grep -i 'content-security-policy:'`);
+  run(`curl -sfI ${BASE_URL}/fonts/ibm-plex-sans-400.woff2 | grep -i 'cache-control:.*immutable'`);
+}
+
 async function main() {
   const sourceCommit = execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
   const platform = process.env.E2E_DOCKER_PLATFORM ?? '';
-  const platformFlag = platform ? `--platform ${platform} ` : '';
 
   try {
-    run(`docker build ${platformFlag}--build-arg SOURCE_COMMIT=${sourceCommit} -t ${IMAGE_NAME} .`);
+    const environment = {
+      ...process.env,
+      SOURCE_COMMIT: sourceCommit,
+      WEBSITE_PORT: PORT,
+      PHOTOGRAPHY_DATA_SOURCE: './e2e/fixtures/photography',
+      ...(platform ? { DOCKER_DEFAULT_PLATFORM: platform } : {})
+    };
+    const composeOptions = { env: environment };
 
-    run(`docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${IMAGE_NAME}`);
+    run(`docker compose -p ${COMPOSE_PROJECT} build website og-generator`, composeOptions);
+    run(`docker compose -p ${COMPOSE_PROJECT} up -d website`, composeOptions);
 
     await waitForHealth();
+    run(`docker compose -p ${COMPOSE_PROJECT} up --no-deps og-generator`, composeOptions);
+    verifyProductionEndpoints();
 
     const exitCode = await runTests();
     await cleanup();

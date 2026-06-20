@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/dev.mjs",
+    "sync:photos": "node scripts/sync-photos.mjs",
     "build": "vite build",
     "start": "srvx --entry dist/server/server.js",
     "preview": "vite preview",
@@ -15,6 +16,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:docker": "node scripts/run-e2e-docker.mjs",
+    "test:photos:docker": "docker compose --env-file .env.zipline run --rm zipline-sync /app/sync.sh",
     "type-check": "tsc --noEmit",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",

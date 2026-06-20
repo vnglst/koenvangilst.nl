@@ -145,17 +145,27 @@ Architecture decision records live in [`docs/ADRs/`](docs/ADRs/).
 git clone https://github.com/vnglst/koenvangilst.nl.git
 cd koenvangilst.nl
 npm install
+npm install --prefix zipline-sync
 npm run dev
 ```
 
-This starts the app and the OG image generator together. The generator writes hashed PNGs into `public/og` and keeps watching `content/`, `src/lib/og-image.mjs`, the avatar, and the font so image URLs stay up to date without a second terminal.
+This starts the app, the OG image generator, and the local photography sync together. The OG generator writes hashed PNGs into `public/og` and watches its inputs. Photography sync uses the same `zipline-sync/sync.mjs` implementation as production, writes its manifest to `public/photos-data.json`, writes variants to `public/photos/`, and refreshes every ten minutes.
+
+To enable photography sync, create the ignored local credentials file and fill in its values:
+
+```bash
+cp .env.zipline.example .env.zipline
+```
+
+If credentials are absent, development still starts and reports that photography sync is disabled. Existing generated photography data is retained. A failed refresh also retains the last successfully published manifest and its assets. Run `npm run sync:photos` for an immediate one-shot refresh.
 
 Visit `http://localhost:3000` to see the site in development mode.
 
 ## Development Scripts
 
 ```bash
-npm run dev          # Start development server + OG image generator watcher (port 3000)
+npm run dev          # Start Vite, OG watcher, and periodic photo sync (port 3000)
+npm run sync:photos  # Refresh the local photography mirror once
 npm run build        # Production build → dist/
 npm run start        # Run built server: srvx --entry dist/server/server.js
 npm run preview      # Preview production build locally
@@ -167,9 +177,12 @@ npm run test              # Vitest (single run)
 npm run test:e2e          # Playwright end-to-end tests
 npm run test:e2e:ui       # Playwright end-to-end tests with UI
 npm run test:e2e:docker   # Playwright e2e tests against a Docker/Nginx container
+npm run test:photos:docker # Run production photo-sync container with local credentials
 npx vitest           # Vitest in watch mode
 npm run knip         # Detect unused dependencies/exports
 ```
+
+Vite uses polling on macOS to avoid exhausting the operating system's low default file-watcher limit. Linux and production builds retain native file watching.
 
 ## Validation & Pre-commit Checks
 
@@ -192,11 +205,13 @@ npm run build && npm run start &  # Build first, then start the production serve
 npm run test:e2e                  # Playwright end-to-end coverage for main site flows
 ```
 
-For the most production-like validation (Nginx reverse proxy, legacy redirects, CSP headers, and static asset serving), run:
+For the most production-like validation (the Compose website and OG worker, Nginx reverse proxy, legacy redirects, CSP headers, and static asset serving), run:
 
 ```bash
 npm run test:e2e:docker           # Build image, run container, and run e2e suite
 ```
+
+To smoke-test the production photography container against Zipline, run `npm run test:photos:docker`. Compose reads `.env.zipline`, writes to the photography volume, and exercises the same image, command, paths, and sync implementation used by Coolify.
 
 > **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server now also runs the local OG generator, but it still behaves differently from production for SSR and proxying and can produce false positives or false negatives.
 

@@ -5,9 +5,9 @@ services:
       args:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
     ports:
-      - '3000:80'
+      - '${WEBSITE_PORT:-3000}:80'
     volumes:
-      - photography-data:/data/photography:ro
+      - ${PHOTOGRAPHY_DATA_SOURCE:-photography-data}:/data/photography:ro
       - og-data:/data/og:ro
     environment:
       PHOTOS_MANIFEST_PATH: /data/photography/photos-data.json

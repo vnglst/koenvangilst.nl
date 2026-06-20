@@ -38,6 +38,9 @@ const appVersion = (() => {
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  server: {
+    watch: process.platform === 'darwin' ? { usePolling: true, interval: 250 } : undefined
+  },
   define: {
     'import.meta.env.VITE_COMMIT_HASH': JSON.stringify(commitHash),
     'import.meta.env.VITE_APP_VERSION': JSON.stringify(appVersion)

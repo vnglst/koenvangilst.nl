@@ -305,7 +305,17 @@ async function runWatchMode() {
   let running = false;
   let rerunQueued = false;
   let debounceTimer = null;
-  const watchers = [];
+
+  const readContentSnapshot = () => {
+    const snapshot = new Map();
+    for (const filename of fs.readdirSync(contentDir).filter((file) => file.endsWith('.mdx'))) {
+      const stats = fs.statSync(path.join(contentDir, filename));
+      snapshot.set(filename, `${stats.mtimeMs}:${stats.size}`);
+    }
+    return snapshot;
+  };
+
+  let contentSnapshot = readContentSnapshot();
 
   const scheduleRerun = () => {
     if (debounceTimer) clearTimeout(debounceTimer);
@@ -334,22 +344,21 @@ async function runWatchMode() {
     }
   };
 
-  watchers.push(
-    fs.watch(contentDir, { persistent: true }, (_eventType, filename) => {
-      if (!filename || filename.endsWith('.mdx')) {
-        scheduleRerun();
-      }
-    })
-  );
+  const contentPoller = setInterval(() => {
+    const nextSnapshot = readContentSnapshot();
+    const changed =
+      nextSnapshot.size !== contentSnapshot.size ||
+      [...nextSnapshot].some(([filename, signature]) => contentSnapshot.get(filename) !== signature);
+    contentSnapshot = nextSnapshot;
+    if (changed) scheduleRerun();
+  }, 1000);
 
   for (const filePath of watchFiles) {
     fs.watchFile(filePath, { interval: 1000 }, scheduleRerun);
   }
 
   const shutdown = () => {
-    for (const watcher of watchers) {
-      watcher.close();
-    }
+    clearInterval(contentPoller);
 
     for (const filePath of watchFiles) {
       fs.unwatchFile(filePath, scheduleRerun);

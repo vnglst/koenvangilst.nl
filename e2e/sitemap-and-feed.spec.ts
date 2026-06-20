@@ -92,7 +92,7 @@ test.describe('feed.xml', () => {
     expect(body).toContain('<title>Photo:');
     expect(body).toContain('<link>https://koenvangilst.nl/photography/');
     expect(body).toContain('<enclosure');
-    expect(body).toContain('url="https://files.koenvangilst.nl/u/');
+    expect(body).toContain('url="https://koenvangilst.nl/photos/');
   });
 
   test('sets cache-control header', async ({ request }) => {
