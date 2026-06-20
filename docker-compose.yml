@@ -4,8 +4,8 @@ services:
       context: .
       args:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
-    ports:
-      - '${WEBSITE_PORT:-3000}:80'
+    expose:
+      - '80'
     volumes:
       - ${PHOTOGRAPHY_DATA_SOURCE:-photography-data}:/data/photography:ro
       - og-data:/data/og:ro

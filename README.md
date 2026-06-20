@@ -398,6 +398,14 @@ curl http://localhost:3000/health   # → OK
 docker stop koenvangilst-test && docker rm koenvangilst-test
 ```
 
+The production Compose file exposes the website only on its internal Docker network, making
+Coolify's proxy the sole public entry point. For local Compose access on `127.0.0.1:3000`, include
+the local override:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.local.yml up website
+```
+
 ### Production Container Architecture
 
 The Docker image uses a multi-stage build (`Dockerfile`) with **Nginx as the reverse proxy** and **Node.js as the SSR backend**:

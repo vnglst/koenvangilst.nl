@@ -11,6 +11,7 @@ import { execSync, spawn } from 'node:child_process';
 import { setTimeout } from 'node:timers/promises';
 
 const COMPOSE_PROJECT = 'koenvangilst-e2e';
+const COMPOSE_FILES = '-f docker-compose.yml -f docker-compose.local.yml';
 const PORT = '3210';
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 
@@ -46,7 +47,9 @@ async function runTests() {
 async function cleanup() {
   console.log('> Cleaning up Compose stack...');
   try {
-    execSync(`docker compose -p ${COMPOSE_PROJECT} down --volumes --rmi local`, { stdio: 'ignore' });
+    execSync(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} down --volumes --rmi local`, {
+      stdio: 'ignore'
+    });
   } catch {
     // ignore
   }
@@ -72,11 +75,11 @@ async function main() {
     };
     const composeOptions = { env: environment };
 
-    run(`docker compose -p ${COMPOSE_PROJECT} build website og-generator`, composeOptions);
-    run(`docker compose -p ${COMPOSE_PROJECT} up -d website`, composeOptions);
+    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} build website og-generator`, composeOptions);
+    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} up -d website`, composeOptions);
 
     await waitForHealth();
-    run(`docker compose -p ${COMPOSE_PROJECT} up --no-deps og-generator`, composeOptions);
+    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} up --no-deps og-generator`, composeOptions);
     verifyProductionEndpoints();
 
     const exitCode = await runTests();

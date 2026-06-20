@@ -1,0 +1,4 @@
+services:
+  website:
+    ports:
+      - '127.0.0.1:${WEBSITE_PORT:-3000}:80'
