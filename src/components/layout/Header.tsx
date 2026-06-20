@@ -18,14 +18,16 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo and Name */}
           <Link to="/" className="flex items-center gap-3">
-            <img
-              alt="Koen van Gilst"
-              height={36}
-              width={36}
-              src={avatarUrl}
-              fetchPriority="high"
-              className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
-            />
+            <span className="profile-avatar-shell inline-block">
+              <img
+                alt="Koen van Gilst"
+                height={36}
+                width={36}
+                src={avatarUrl}
+                fetchPriority="high"
+                className="rounded-full grayscale-10 filter hover:grayscale-0"
+              />
+            </span>
           </Link>
 
           {/* Right side: Theme toggle and mobile menu */}

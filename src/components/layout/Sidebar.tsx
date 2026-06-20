@@ -15,14 +15,16 @@ export function Sidebar() {
         {/* Logo and Name */}
         <div className="mb-8 pl-8">
           <Link to="/">
-            <img
-              alt="Koen van Gilst"
-              height={48}
-              width={48}
-              src={avatarUrl}
-              fetchPriority="high"
-              className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
-            />
+            <span className="profile-avatar-shell inline-block">
+              <img
+                alt="Koen van Gilst"
+                height={48}
+                width={48}
+                src={avatarUrl}
+                fetchPriority="high"
+                className="rounded-full grayscale-10 filter hover:grayscale-0"
+              />
+            </span>
           </Link>
         </div>
 

@@ -68,6 +68,59 @@ h6 {
   transition: all 0.2s ease-in-out;
 }
 
+.profile-avatar-shell {
+  display: inline-block;
+}
+
+.profile-avatar-shell img {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.profile-avatar-shell:hover img {
+  animation: profile-wiggle 780ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-avatar-shell:hover img {
+    animation: none;
+  }
+}
+
+@keyframes profile-wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  12% {
+    transform: rotate(-4deg);
+  }
+
+  24% {
+    transform: rotate(5deg);
+  }
+
+  36% {
+    transform: rotate(-3deg);
+  }
+
+  52% {
+    transform: rotate(3deg);
+  }
+
+  68% {
+    transform: rotate(-2deg);
+  }
+
+  84% {
+    transform: rotate(1deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 /* Remove Safari input shadow on mobile */
 input[type='text'],
 input[type='email'] {
