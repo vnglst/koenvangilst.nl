@@ -193,7 +193,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
         <button
           key={photo.id}
           onClick={() => navigate({ to: '/photography', search: { photo: String(index) } })}
-          className="relative block aspect-square overflow-hidden rounded-lg"
+          className="group relative block aspect-square overflow-hidden rounded-lg"
           style={{
             backgroundImage: `url(${photo.blurDataURL})`,
             backgroundSize: 'cover'
@@ -212,7 +212,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               srcSet={photo.srcSet}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt={photo.alt}
-              className="h-full w-full object-cover transition-opacity hover:opacity-90"
+              className="h-full w-full transform-gpu object-cover transition-opacity transition-transform duration-300 ease-out group-hover:scale-115 group-hover:opacity-90"
               loading={index < 3 ? 'eager' : 'lazy'}
               fetchPriority={index < 3 ? 'high' : 'auto'}
             />
