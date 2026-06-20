@@ -154,7 +154,7 @@ function createOgSvg(title, description, type, avatarDataUrl) {
     <text x="75" y="12" text-anchor="middle" fill="#64b5f6" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="700" letter-spacing="0.15em" dominant-baseline="hanging">${badgeLabel.toUpperCase()}</text>
   </g>
   <g transform="translate(56 226)">
-    <text x="0" y="-46" fill="#2196f3" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="700" letter-spacing="0.18em" dominant-baseline="hanging">WRITING / SOFTWARE / SYSTEMS</text>
+    <text x="0" y="-46" fill="#2196f3" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="700" letter-spacing="0.18em" dominant-baseline="hanging">WRITING / CREATIVITY / SOFTWARE</text>
     ${renderTextBlock(titleLines, 0, 0, 78, 70, '#f8fafc', 700)}
     ${renderTextBlock(descriptionLines, 0, descriptionY - 226 + 26, 39, 28, '#cbd5e1', 400)}
   </g>
