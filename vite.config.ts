@@ -59,7 +59,7 @@ const config = defineConfig({
     }
   },
   plugins: [
-    devtools(),
+    ...(process.env.NODE_ENV !== 'production' ? [devtools()] : []),
     tailwindcss(),
     mdx({
       remarkPlugins: [remarkGfm, remarkFrontmatter, remarkWordCount, [remarkMdxFrontmatter, { name: 'frontmatter' }]],

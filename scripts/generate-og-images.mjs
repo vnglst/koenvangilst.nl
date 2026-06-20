@@ -6,6 +6,7 @@ import { Resvg } from '@resvg/resvg-js';
 
 const contentDir = path.join(process.cwd(), 'content');
 const outputDir = path.join(process.cwd(), 'public/og');
+const manifestPath = path.join(outputDir, '.manifest.json');
 
 function sluggify(str) {
   return str.trim().toLowerCase().split(' ').join('-');
@@ -136,11 +137,22 @@ function createOgElement(title, description, type) {
   );
 }
 
-async function main() {
-  if (fs.existsSync(outputDir)) {
-    fs.rmSync(outputDir, { recursive: true });
+function readManifest() {
+  try {
+    return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  } catch {
+    return {};
   }
+}
+
+function writeManifest(manifest) {
+  fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+}
+
+async function main() {
   fs.mkdirSync(outputDir, { recursive: true });
+  const previousManifest = readManifest();
+  const nextManifest = {};
 
   const fontPath = path.join(process.cwd(), 'public/fonts/IBMPlexSans-Bold.ttf');
   if (!fs.existsSync(fontPath)) {
@@ -164,7 +176,24 @@ async function main() {
     }
   }
 
+  const uniqueTags = [];
+  const seenTagSlugs = new Set();
+  for (const tag of allTags) {
+    const tagSlug = sluggify(tag);
+    if (seenTagSlugs.has(tagSlug)) continue;
+    seenTagSlugs.add(tagSlug);
+    uniqueTags.push(tag);
+  }
+
   for (const post of posts) {
+    const filename = `${post.slug}.png`;
+    const signature = `blog\n${post.slug}\n${post.title}\n${post.summary}`;
+    nextManifest[filename] = signature;
+
+    if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
+      continue;
+    }
+
     const svg = await satori(createOgElement(post.title, post.summary, 'blog'), {
       width: 1200,
       height: 630,
@@ -172,14 +201,22 @@ async function main() {
     });
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
-    fs.writeFileSync(path.join(outputDir, `${post.slug}.png`), Buffer.from(pngData));
-    console.log(`Generated OG: og/${post.slug}.png`);
+    fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));
+    console.log(`Generated OG: og/${filename}`);
   }
 
-  for (const tag of allTags) {
+  for (const tag of uniqueTags) {
     const tagPosts = posts.filter((p) => p.tags.includes(tag));
     const title = `Posts about ${tag}`;
     const description = `${tagPosts.length} post${tagPosts.length === 1 ? '' : 's'} about ${tag}`;
+    const tagSlug = sluggify(tag);
+    const filename = `tag-${tagSlug}.png`;
+    const signature = `tag\n${tagSlug}\n${title}\n${description}`;
+    nextManifest[filename] = signature;
+
+    if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
+      continue;
+    }
 
     const svg = await satori(createOgElement(title, description, 'tag'), {
       width: 1200,
@@ -188,10 +225,17 @@ async function main() {
     });
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
-    const tagSlug = sluggify(tag);
-    fs.writeFileSync(path.join(outputDir, `tag-${tagSlug}.png`), Buffer.from(pngData));
-    console.log(`Generated OG: og/tag-${tagSlug}.png`);
+    fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));
+    console.log(`Generated OG: og/${filename}`);
   }
+
+  for (const file of fs.readdirSync(outputDir)) {
+    if (!file.endsWith('.png')) continue;
+    if (nextManifest[file]) continue;
+    fs.rmSync(path.join(outputDir, file));
+  }
+
+  writeManifest(nextManifest);
 }
 
 main().catch((err) => {
