@@ -4,6 +4,8 @@ import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
 import { cx } from '#/lib/clsx';
 import { navItems, useIsActive } from '#/lib/navigation';
 
+import avatarUrl from '../../assets/avatar.jpg?url';
+
 export function Sidebar() {
   const isActive = useIsActive();
 
@@ -17,7 +19,7 @@ export function Sidebar() {
               alt="Koen van Gilst"
               height={48}
               width={48}
-              src="/avatar.jpg"
+              src={avatarUrl}
               fetchPriority="high"
               className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
             />

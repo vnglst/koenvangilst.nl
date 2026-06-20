@@ -6,6 +6,8 @@ import { Icon } from '#/components/ui/Icon';
 import { cx } from '#/lib/clsx';
 import { navItems, useIsActive } from '#/lib/navigation';
 
+import avatarUrl from '../../assets/avatar.jpg?url';
+
 export function Header() {
   const isActive = useIsActive();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,7 +22,7 @@ export function Header() {
               alt="Koen van Gilst"
               height={36}
               width={36}
-              src="/avatar.jpg"
+              src={avatarUrl}
               fetchPriority="high"
               className="rotate-3 rounded-full grayscale-10 filter transition hover:rotate-0 hover:grayscale-0"
             />

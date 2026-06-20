@@ -213,7 +213,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt={photo.alt}
               className="h-full w-full object-cover transition-opacity hover:opacity-90"
-              loading={index < 6 ? 'eager' : 'lazy'}
+              loading={index < 3 ? 'eager' : 'lazy'}
               fetchPriority={index < 3 ? 'high' : 'auto'}
             />
           </picture>
