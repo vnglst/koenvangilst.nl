@@ -31,7 +31,7 @@ export const Route = createFileRoute('/feed.xml')({
             url: `https://koenvangilst.nl/photography/${photo.id}`,
             description: `A photograph taken in ${photo.location ?? 'an unknown location'}`,
             date: photo.createdAt ?? new Date().toISOString(),
-            enclosure: { url: `https://koenvangilst.nl${photo.src}` }
+            enclosure: { url: photo.src }
           });
         });
 

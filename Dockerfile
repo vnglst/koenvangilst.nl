@@ -34,20 +34,18 @@ ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
-    apk add --no-cache su-exec nginx && \
+    apk add --no-cache ca-certificates su-exec nginx && \
     mkdir -p /run/nginx /var/cache/nginx
 
 # TanStack Start / Vinxi server output
 COPY --from=builder --chown=appuser:nodejs /app/dist ./
 
-# Public dir (source photos + runtime-generated photography-optimized volume mount point)
+# Public dir (icons, favicons, etc. - no photography originals, they live in Zipline)
 COPY --from=builder --chown=appuser:nodejs /app/public ./public
 
-# Production node_modules (sharp, exif-reader, satori, resvg-js native addons)
+# Production node_modules (satori, resvg-js native addons - no sharp/exif-reader, those
+# are now used only by the zipline-sync service)
 COPY --from=prod-deps --chown=appuser:nodejs /app/node_modules ./node_modules
-
-# Image generation scripts
-COPY --from=builder --chown=appuser:nodejs /app/scripts ./scripts
 
 # Nginx configuration (replaces default site)
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
@@ -60,8 +58,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 3000
 
 # Nginx answers /health directly — no Node.js round-trip
-# start-period=90s accounts for image generation time on first deploy
-HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/health || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

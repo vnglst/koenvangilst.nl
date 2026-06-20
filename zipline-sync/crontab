@@ -1,0 +1,6 @@
+# Zipline photo sync cron schedule
+# Format: minute hour day month day-of-week
+# Default: every 10 minutes
+# Override at runtime with CRON_SCHEDULE env var (not directly supported by crond,
+# so rebuild the crontab in entrypoint if you need a custom schedule).
+*/10 * * * * /app/sync.sh

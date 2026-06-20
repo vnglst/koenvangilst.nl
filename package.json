@@ -8,7 +8,6 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "predev": "node scripts/generate-photos-data.mjs",
     "build": "node scripts/generate-og-images.mjs && vite build",
     "start": "srvx --entry dist/server/server.js",
     "preview": "vite preview",
@@ -44,7 +43,6 @@
     "d3": "7.9.0",
     "d3-hexbin": "0.2.2",
     "echarts": "6.1.0",
-    "exif-reader": "2.0.3",
     "prettier-plugin-tailwindcss": "0.8.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
@@ -56,7 +54,6 @@
     "remark-gfm": "4.0.1",
     "remark-mdx-frontmatter": "5.2.0",
     "satori": "0.26.0",
-    "sharp": "0.35.1",
     "tailwindcss": "4.3.1",
     "zod": "4.4.3",
     "zustand": "5.0.14"

@@ -2,9 +2,7 @@
  * Build and run a production-like Docker container, then execute the Playwright
  * e2e suite against it.
  *
- * Mirrors the production deployment (Nginx reverse proxy + Node SSR). It mounts
- * public/static so filesystem-dependent photography tests can manipulate
- * photos-data.json on the host and have those changes reflected in the container.
+ * Mirrors the production deployment (Nginx reverse proxy + Node SSR).
  *
  * Tests run serially (workers=1) because the emulated/limited container can be
  * overwhelmed by Playwright's default parallel workers.
@@ -69,9 +67,7 @@ async function main() {
   try {
     run(`docker build ${platformFlag}--build-arg SOURCE_COMMIT=${sourceCommit} -t ${IMAGE_NAME} .`);
 
-    run(
-      `docker run -d -p ${PORT}:${PORT} -v "${process.cwd()}/public/static:/app/public/static" --name ${CONTAINER_NAME} ${IMAGE_NAME}`
-    );
+    run(`docker run -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${IMAGE_NAME}`);
 
     await waitForHealth();
 

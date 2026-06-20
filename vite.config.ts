@@ -42,12 +42,8 @@ const config = defineConfig({
     'import.meta.env.VITE_COMMIT_HASH': JSON.stringify(commitHash),
     'import.meta.env.VITE_APP_VERSION': JSON.stringify(appVersion)
   },
-  // Native addons cannot be bundled — exclude from both client and server builds
-  optimizeDeps: {
-    exclude: ['sharp', '@resvg/resvg-js', 'exif-reader']
-  },
   ssr: {
-    external: ['sharp', '@resvg/resvg-js', 'exif-reader'],
+    external: ['@resvg/resvg-js'],
     noExternal: []
   },
   build: {
