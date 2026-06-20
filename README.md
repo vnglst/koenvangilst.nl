@@ -123,6 +123,14 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
+### Photography Sync
+
+Photography delivery is handled by the separate `zipline-sync/` service. Original uploads live in Zipline's `photography-originals` folder, the sync job generates optimized JPEG/WebP variants plus a `photos-data.json` manifest in `photography-optimized`, and the website reads that manifest to render direct Zipline image URLs without doing image generation at startup. To set it up, run a Zipline instance, create the two folders, set the API token and folder IDs in `.env.zipline`, then run `zipline-sync` locally or as a Coolify service.
+
+## ADRs
+
+Architecture decision records live in [`docs/ADRs/`](docs/ADRs/).
+
 ## Running Locally
 
 ```bash
