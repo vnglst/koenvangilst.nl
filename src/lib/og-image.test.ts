@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { createHomeOgImage, createPostOgImage, createTagOgImage, hashOgSignature } from './og-image.mjs';
+import {
+  createFallbackOgImage,
+  createHomeOgImage,
+  createPostOgImage,
+  createTagOgImage,
+  hashOgSignature
+} from './og-image.mjs';
 
 describe('OG image addresses', () => {
   it('creates deterministic content-addressed post filenames', () => {
@@ -22,6 +28,12 @@ describe('OG image addresses', () => {
 
   it('creates a hashed home URL', () => {
     expect(createHomeOgImage().url).toMatch(/^\/og\/home-[a-f0-9]{12}\.png$/);
+  });
+
+  it('creates a stable fallback URL', () => {
+    expect(createFallbackOgImage()).toEqual(createFallbackOgImage());
+    expect(createFallbackOgImage().url).toBe('/og/fallback.png');
+    expect(createFallbackOgImage().filename).toBe('fallback.png');
   });
 
   it('hashes unicode text deterministically', () => {

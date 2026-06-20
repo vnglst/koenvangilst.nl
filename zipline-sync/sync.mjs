@@ -169,7 +169,7 @@ async function cleanupRemovedPhotos(removedPhotos) {
 }
 
 function shouldProcessOriginal(original, existingPhoto) {
-  if (REBUILD || !existingPhoto) return true;
+  if (!existingPhoto) return true;
   if (!existingPhoto.sourceHash) return true;
   if (existingPhoto.originalId && existingPhoto.originalId !== original.id) return true;
 

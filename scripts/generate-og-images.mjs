@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
-import { createHomeOgImage, createPostOgImage, createTagOgImage } from '../src/lib/og-image.mjs';
+import { createFallbackOgImage, createHomeOgImage, createPostOgImage, createTagOgImage } from '../src/lib/og-image.mjs';
 
 const watchMode = process.argv.includes('--watch');
 const skipInitial = process.argv.includes('--skip-initial');
@@ -115,7 +115,7 @@ function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, weight) {
 }
 
 function createOgSvg(title, description, type, avatarDataUrl) {
-  const badgeLabel = type === 'tag' ? 'Tag' : type === 'home' ? 'Home' : 'Blog post';
+  const badgeLabel = type === 'tag' ? 'Tag' : type === 'home' ? 'Home' : type === 'fallback' ? 'Website' : 'Blog post';
   const titleLines = wrapText(title, 22, 3);
   const descriptionLines = wrapText(description, 58, titleLines.length >= 3 ? 2 : 3);
   const titleHeight = titleLines.length * 78;
@@ -194,6 +194,11 @@ function renderOgImage(image, type, avatarDataUrl) {
   console.log(`Generated OG: ${image.url}`);
 }
 
+function renderFallbackOgImage(avatarDataUrl) {
+  const image = createFallbackOgImage();
+  renderOgImage(image, 'fallback', avatarDataUrl);
+}
+
 async function main() {
   if (watchMode) {
     await runWatchMode();
@@ -231,6 +236,8 @@ async function generateOgImages() {
 
   const homeImage = createHomeOgImage();
   nextManifest[homeImage.filename] = homeImage.signature;
+
+  renderFallbackOgImage(avatarDataUrl);
 
   if (
     !(

@@ -129,7 +129,7 @@ Photography delivery is handled by the `zipline-sync/` service in the same Docke
 
 ### Open Graph Image Generation
 
-Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns the avatar fallback with `Cache-Control: no-store` so crawlers can retry the same URL later.
+Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic OG fallback image with the site title and avatar, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
 
 The volume manifest and hashed PNG files persist across deployments. Existing files are deliberately retained because previously published OG URLs must remain valid. Prune the volume manually only when old URLs no longer need to work. In Coolify versions that include stopped one-shot services in application health evaluation, mark `og-generator` as excluded from health checks in the Coolify service settings.
 

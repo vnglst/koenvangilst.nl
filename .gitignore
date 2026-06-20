@@ -13,7 +13,8 @@ __unconfig*
 todos.json
 
 # Generated OG images (created locally or by the post-deployment worker)
-public/og/
+public/og/*
+!public/og/fallback.png
 
 # Playwright test artifacts
 test-results/

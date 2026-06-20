@@ -14,7 +14,8 @@ dist/
 coverage/
 playwright-report/
 test-results/
-public/og/
+public/og/*
+!public/og/fallback.png
 *.tsbuildinfo
 
 # Local environment files and logs

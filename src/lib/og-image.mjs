@@ -3,6 +3,8 @@ export const OG_TEMPLATE_VERSION = 'v9-dark-avatar-gradient-fontfix';
 export const HOME_OG_TITLE = 'Koen van Gilst';
 export const HOME_OG_DESCRIPTION =
   'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.';
+export const FALLBACK_OG_TITLE = HOME_OG_TITLE;
+export const FALLBACK_OG_DESCRIPTION = 'koenvangilst.nl';
 
 /**
  * FNV-1a provides a small, deterministic content fingerprint that works in
@@ -41,6 +43,16 @@ export function createHomeOgImage() {
     title: HOME_OG_TITLE,
     description: HOME_OG_DESCRIPTION
   });
+}
+
+export function createFallbackOgImage() {
+  return {
+    description: FALLBACK_OG_DESCRIPTION,
+    filename: 'fallback.png',
+    signature: `${OG_TEMPLATE_VERSION}\nfallback\n${FALLBACK_OG_TITLE}\n${FALLBACK_OG_DESCRIPTION}`,
+    title: FALLBACK_OG_TITLE,
+    url: '/og/fallback.png'
+  };
 }
 
 export function createPostOgImage({ slug, title, description }) {
