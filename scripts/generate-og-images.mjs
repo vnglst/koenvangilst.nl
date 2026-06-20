@@ -1,12 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { createElement } from 'react';
-import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
 const contentDir = path.join(process.cwd(), 'content');
 const outputDir = path.join(process.cwd(), 'public/og');
 const manifestPath = path.join(outputDir, '.manifest.json');
+const fontsDir = path.join(process.cwd(), 'public/fonts');
+const avatarPath = path.join(process.cwd(), 'public/avatar.jpg');
+const fontPath = path.join(fontsDir, 'IBMPlexSans-Bold.ttf');
+const ogVersion = 'v5-dark-minimal';
+
+function toDataUrl(filePath, mime = 'image/jpeg') {
+  return `data:${mime};base64,${fs.readFileSync(filePath).toString('base64')}`;
+}
 
 function sluggify(str) {
   return str.trim().toLowerCase().split(' ').join('-');
@@ -64,77 +70,92 @@ function parseFrontmatter(filePath) {
   return result;
 }
 
-function createOgElement(title, description, type) {
-  return createElement(
-    'div',
-    {
-      style: {
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
-        backgroundColor: '#fff',
-        padding: '80px'
+function escapeXml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function wrapText(text, maxChars, maxLines) {
+  const words = text.split(/\s+/);
+  const lines = [];
+  let line = '';
+
+  for (const word of words) {
+    const next = line ? `${line} ${word}` : word;
+    if (next.length > maxChars && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+
+  if (line) lines.push(line);
+  if (lines.length <= maxLines) return lines;
+
+  const trimmed = lines.slice(0, maxLines);
+  trimmed[maxLines - 1] = `${trimmed[maxLines - 1].replace(/\s+$/, '')}...`;
+  return trimmed;
+}
+
+function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, weight) {
+  return lines
+    .map(
+      (line, index) =>
+        `<text x="${x}" y="${startY + index * lineHeight}" fill="${fill}" font-family="IBM Plex Sans, sans-serif" font-size="${fontSize}" font-weight="${weight}" dominant-baseline="hanging">${escapeXml(line)}</text>`
+    )
+    .join('\n');
+}
+
+function createOgSvg(title, description, type, avatarDataUrl, fontDataUrl) {
+  const badgeLabel = type === 'tag' ? 'Tag' : type === 'home' ? 'Home' : 'Blog post';
+  const titleLines = wrapText(title, 24, 3);
+  const descriptionLines = wrapText(description, 54, 3);
+  const titleHeight = titleLines.length * 74;
+  const descriptionY = 230 + titleHeight;
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        src: url('${fontDataUrl}') format('truetype');
+        font-weight: 400;
+        font-style: normal;
       }
-    },
-    [
-      createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '12px' } }, [
-        createElement('div', {
-          style: { width: '8px', height: '40px', backgroundColor: '#199acc', borderRadius: '4px' }
-        }),
-        createElement(
-          'span',
-          { style: { fontSize: 32, fontWeight: 600, color: '#199acc', letterSpacing: '-0.02em' } },
-          'koenvangilst.nl'
-        )
-      ]),
-      createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1000px' } }, [
-        createElement(
-          'h1',
-          {
-            style: {
-              fontSize: 72,
-              fontWeight: 700,
-              lineHeight: 1.1,
-              color: '#1a1a1a',
-              margin: 0,
-              letterSpacing: '-0.03em'
-            }
-          },
-          title
-        ),
-        createElement(
-          'p',
-          {
-            style: {
-              fontSize: 32,
-              lineHeight: 1.4,
-              color: '#666',
-              margin: 0,
-              fontWeight: 400
-            }
-          },
-          description
-        )
-      ]),
-      createElement('div', { style: { display: 'flex', alignItems: 'center' } }, [
-        createElement(
-          'span',
-          {
-            style: {
-              fontSize: 24,
-              color: '#999',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em'
-            }
-          },
-          type === 'tag' ? 'TAG' : 'BLOG POST'
-        )
-      ])
-    ]
-  );
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        src: url('${fontDataUrl}') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+      }
+    </style>
+    <clipPath id="avatar-clip">
+      <circle cx="20" cy="20" r="20" />
+    </clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="#020617" />
+  <rect x="56" y="574" width="1088" height="3" rx="1.5" fill="#2196f3" />
+  <g transform="translate(56 56)">
+    <circle cx="20" cy="20" r="20" fill="none" stroke="#2196f3" stroke-width="2" />
+    <image href="${avatarDataUrl}" x="0" y="0" width="40" height="40" clip-path="url(#avatar-clip)" preserveAspectRatio="xMidYMid slice" />
+    <text x="56" y="0" fill="#f8fafc" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="700" letter-spacing="0.04em" dominant-baseline="hanging">koenvangilst.nl</text>
+    <text x="56" y="20" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="400" dominant-baseline="hanging">Tech Lead at Rabobank</text>
+    <g transform="translate(1000 0)">
+      <rect x="0" y="0" width="144" height="36" rx="18" fill="rgba(15, 23, 42, 0.85)" stroke="#334155" />
+      <text x="72" y="11" text-anchor="middle" fill="#2196f3" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="700" letter-spacing="0.14em" dominant-baseline="hanging">${badgeLabel.toUpperCase()}</text>
+    </g>
+  </g>
+  <g transform="translate(56 230)">
+    ${renderTextBlock(titleLines, 0, 0, 74, 68, '#f8fafc', 700)}
+    ${renderTextBlock(descriptionLines, 0, descriptionY - 230 + 28, 42, 30, '#cbd5e1', 400)}
+  </g>
+</svg>`;
 }
 
 function readManifest() {
@@ -154,16 +175,43 @@ async function main() {
   const previousManifest = readManifest();
   const nextManifest = {};
 
-  const fontPath = path.join(process.cwd(), 'public/fonts/IBMPlexSans-Bold.ttf');
-  if (!fs.existsSync(fontPath)) {
-    console.error('Font not found:', fontPath);
+  const requiredFonts = ['IBMPlexSans-Bold.ttf'];
+
+  for (const fontFile of requiredFonts) {
+    const fontPath = path.join(fontsDir, fontFile);
+    if (!fs.existsSync(fontPath)) {
+      console.error('Font not found:', fontPath);
+      process.exit(1);
+    }
+  }
+
+  const avatarDataUrl = fs.existsSync(avatarPath) ? toDataUrl(avatarPath) : null;
+  if (!avatarDataUrl) {
+    console.error('Avatar not found:', avatarPath);
     process.exit(1);
   }
-  const fontData = fs.readFileSync(fontPath);
+
+  const fontDataUrl = toDataUrl(fontPath, 'font/ttf');
 
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.mdx'));
   const posts = [];
   const allTags = new Set();
+
+  const homeTitle = 'Koen van Gilst';
+  const homeDescription =
+    'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.';
+
+  const homeFilename = 'home.png';
+  const homeSignature = `${ogVersion}\nhome\n${homeTitle}\n${homeDescription}`;
+  nextManifest[homeFilename] = homeSignature;
+
+  if (!(previousManifest[homeFilename] === homeSignature && fs.existsSync(path.join(outputDir, homeFilename)))) {
+    const svg = createOgSvg(homeTitle, homeDescription, 'home', avatarDataUrl, fontDataUrl);
+    const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
+    const pngData = resvg.render().asPng();
+    fs.writeFileSync(path.join(outputDir, homeFilename), Buffer.from(pngData));
+    console.log(`Generated OG: og/${homeFilename}`);
+  }
 
   for (const file of files) {
     const slug = file.replace('.mdx', '');
@@ -187,18 +235,14 @@ async function main() {
 
   for (const post of posts) {
     const filename = `${post.slug}.png`;
-    const signature = `blog\n${post.slug}\n${post.title}\n${post.summary}`;
+    const signature = `${ogVersion}\nblog\n${post.slug}\n${post.title}\n${post.summary}`;
     nextManifest[filename] = signature;
 
     if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
       continue;
     }
 
-    const svg = await satori(createOgElement(post.title, post.summary, 'blog'), {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
-    });
+    const svg = createOgSvg(post.title, post.summary, 'blog', avatarDataUrl, fontDataUrl);
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
     fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));
@@ -211,18 +255,14 @@ async function main() {
     const description = `${tagPosts.length} post${tagPosts.length === 1 ? '' : 's'} about ${tag}`;
     const tagSlug = sluggify(tag);
     const filename = `tag-${tagSlug}.png`;
-    const signature = `tag\n${tagSlug}\n${title}\n${description}`;
+    const signature = `${ogVersion}\ntag\n${tagSlug}\n${title}\n${description}`;
     nextManifest[filename] = signature;
 
     if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
       continue;
     }
 
-    const svg = await satori(createOgElement(title, description, 'tag'), {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'IBM Plex Sans', data: fontData, weight: 700, style: 'normal' }]
-    });
+    const svg = createOgSvg(title, description, 'tag', avatarDataUrl, fontDataUrl);
     const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
     const pngData = resvg.render().asPng();
     fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));

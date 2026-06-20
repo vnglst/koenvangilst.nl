@@ -8,7 +8,7 @@ export const Route = createFileRoute('/og')({
       GET: () => {
         return new Response(null, {
           status: 302,
-          headers: { Location: '/banner.png' }
+          headers: { Location: '/og/home.png' }
         });
       }
     }

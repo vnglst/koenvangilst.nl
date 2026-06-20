@@ -31,7 +31,7 @@ export function jsonLdPerson() {
     '@type': 'Person',
     name: 'Koen van Gilst',
     url: 'https://koenvangilst.nl',
-    jobTitle: 'Tech Lead',
+    jobTitle: 'Principal Engineer',
     worksFor: {
       '@type': 'Organization',
       name: 'Rabobank'
@@ -65,6 +65,6 @@ export function jsonLdWebsite() {
     name: 'Koen van Gilst',
     url: 'https://koenvangilst.nl',
     description:
-      'Innovative tech lead from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
+      'Innovative engineer from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
   };
 }

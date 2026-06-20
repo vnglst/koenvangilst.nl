@@ -28,11 +28,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'theme-color', content: '#f8fafc', media: '(prefers-color-scheme: light)' },
       { name: 'theme-color', content: '#020617', media: '(prefers-color-scheme: dark)' },
-      { title: 'Koen van Gilst - Tech Lead' },
+      { title: 'Koen van Gilst - Principal Engineer' },
       {
         name: 'description',
         content:
-          'Innovative tech lead from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
+          'Innovative engineer from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
       }
     ],
     links: [

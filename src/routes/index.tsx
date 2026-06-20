@@ -26,21 +26,21 @@ export const Route = createFileRoute('/')({
       {
         name: 'description',
         content:
-          'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming. I focus on AI, team building, and bridging business with technology to deliver real value.'
+          'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming. I focus on AI, team building, and bridging business with technology to deliver real value.'
       },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: SITE_URL },
       { property: 'og:title', content: 'Koen van Gilst' },
       {
         property: 'og:description',
-        content: 'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+        content: 'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.'
       },
       { property: 'og:image', content: HOME_OG_IMAGE },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Koen van Gilst' },
       {
         name: 'twitter:description',
-        content: 'Tech Lead at Rabobank with a background in philosophy and lifelong passion for programming.'
+        content: 'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.'
       },
       { name: 'twitter:image', content: HOME_OG_IMAGE }
     ],
