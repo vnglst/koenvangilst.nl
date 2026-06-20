@@ -6,7 +6,11 @@ RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci
+    npm ci --no-audit --no-fund
+
+# ---- prod-deps stage: prune dev-only packages from the cached install ----
+FROM deps AS prod-deps
+RUN npm prune --omit=dev --no-audit --no-fund
 
 # ---- builder stage: compile the app ----
 FROM node:24-alpine AS builder
@@ -15,14 +19,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
-
-# ---- prod-deps stage: production-only deps (includes native addons) ----
-FROM node:24-alpine AS prod-deps
-RUN apk add --no-cache libc6-compat python3 make g++
-WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
 
 # ---- OG generator: one-shot post-deployment worker ----
 FROM node:24-alpine AS og-generator
