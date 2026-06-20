@@ -55,10 +55,10 @@ RUN rm -f /etc/nginx/http.d/default.conf
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 3000
+EXPOSE 80
 
 # Nginx answers /health directly — no Node.js round-trip
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/health || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1/health || exit 1
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

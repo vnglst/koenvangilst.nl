@@ -8,5 +8,5 @@ echo "Starting Node.js SSR server on 127.0.0.1:3001..."
 su-exec appuser:nodejs env PORT=3001 HOSTNAME=127.0.0.1 node_modules/.bin/srvx --entry server/server.js &
 
 # Start Nginx in foreground as the main process (becomes effective PID 1)
-echo "Starting Nginx on 0.0.0.0:3000..."
+echo "Starting Nginx on 0.0.0.0:80..."
 exec nginx -g "daemon off;"
