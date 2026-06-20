@@ -11,6 +11,7 @@ import { Prose } from '#/components/content/Prose';
 import { Heading } from '#/components/content/Heading';
 import { Link } from '#/components/ui/Link';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
+import { createFallbackOgImage } from '#/lib/og-image.mjs';
 
 // DevTools are only bundled in development — tree-shaken away in production
 const DevTools = import.meta.env.DEV
@@ -20,6 +21,9 @@ const DevTools = import.meta.env.DEV
 interface MyRouterContext {
   queryClient: QueryClient;
 }
+
+const SITE_URL = 'https://koenvangilst.nl';
+const FALLBACK_OG_IMAGE = `${SITE_URL}${createFallbackOgImage().url}`;
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
@@ -33,7 +37,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         name: 'description',
         content:
           'Innovative engineer from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
-      }
+      },
+      { property: 'og:image', content: FALLBACK_OG_IMAGE },
+      { property: 'og:image:alt', content: 'Koen van Gilst' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:image', content: FALLBACK_OG_IMAGE }
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
