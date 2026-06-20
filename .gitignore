@@ -12,7 +12,7 @@ dist-ssr
 __unconfig*
 todos.json
 
-# Generated OG images (created at build time by scripts/generate-og-images.mjs)
+# Generated OG images (created locally or by the post-deployment worker)
 public/og/
 
 # Playwright test artifacts

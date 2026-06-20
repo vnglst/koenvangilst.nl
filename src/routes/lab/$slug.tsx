@@ -4,6 +4,7 @@ import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
 import { jsonLdArticle } from '#/lib/json-ld';
+import { createPostOgImage } from '#/lib/og-image.mjs';
 
 const getLabPost = createServerFn({ method: 'GET' })
   .validator((data: { slug: string }) => data)
@@ -37,7 +38,15 @@ const getLabPost = createServerFn({ method: 'GET' })
 export const Route = createFileRoute('/lab/$slug')({
   loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
   head: ({ loaderData }) => {
-    const ogImage = loaderData ? `https://koenvangilst.nl/og/${loaderData.slug}.png` : undefined;
+    const ogImage = loaderData
+      ? `https://koenvangilst.nl${
+          createPostOgImage({
+            slug: loaderData.slug,
+            title: loaderData.title,
+            description: loaderData.summary
+          }).url
+        }`
+      : undefined;
     const links: { rel: string; href: string }[] = [];
     if (loaderData) {
       links.push({ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` });

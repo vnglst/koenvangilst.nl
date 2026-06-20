@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
+import { createHomeOgImage, createPostOgImage, createTagOgImage } from '../src/lib/og-image.mjs';
 
 const contentDir = path.join(process.cwd(), 'content');
-const outputDir = path.join(process.cwd(), 'public/og');
+const outputDir = process.env.OG_OUTPUT_DIR || path.join(process.cwd(), 'public/og');
 const manifestPath = path.join(outputDir, '.manifest.json');
 const fontsDir = path.join(process.cwd(), 'public/fonts');
 const avatarPath = path.join(process.cwd(), 'public/avatar.jpg');
 const fontPath = path.join(fontsDir, 'IBMPlexSans-Bold.ttf');
-const ogVersion = 'v8-dark-avatar-gradient';
 
 function toDataUrl(filePath, mime = 'image/jpeg') {
   return `data:${mime};base64,${fs.readFileSync(filePath).toString('base64')}`;
@@ -181,13 +181,28 @@ function readManifest() {
 }
 
 function writeManifest(manifest) {
-  fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+  writeFileAtomically(manifestPath, Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`));
+}
+
+function writeFileAtomically(filePath, contents) {
+  const temporaryPath = `${filePath}.${process.pid}.tmp`;
+  fs.writeFileSync(temporaryPath, contents);
+  fs.renameSync(temporaryPath, filePath);
+}
+
+function renderOgImage(image, type, avatarDataUrl, fontDataUrl) {
+  const outputPath = path.join(outputDir, image.filename);
+  const svg = createOgSvg(image.title, image.description, type, avatarDataUrl, fontDataUrl);
+  const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
+  writeFileAtomically(outputPath, Buffer.from(resvg.render().asPng()));
+  console.log(`Generated OG: ${image.url}`);
 }
 
 async function main() {
   fs.mkdirSync(outputDir, { recursive: true });
   const previousManifest = readManifest();
-  const nextManifest = {};
+  // Keep historical entries because their immutable URLs may still be in use.
+  const nextManifest = { ...previousManifest };
 
   const requiredFonts = ['IBMPlexSans-Bold.ttf'];
 
@@ -211,20 +226,16 @@ async function main() {
   const posts = [];
   const allTags = new Set();
 
-  const homeTitle = 'Koen van Gilst';
-  const homeDescription =
-    'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.';
+  const homeImage = createHomeOgImage();
+  nextManifest[homeImage.filename] = homeImage.signature;
 
-  const homeFilename = 'home.png';
-  const homeSignature = `${ogVersion}\nhome\n${homeTitle}\n${homeDescription}`;
-  nextManifest[homeFilename] = homeSignature;
-
-  if (!(previousManifest[homeFilename] === homeSignature && fs.existsSync(path.join(outputDir, homeFilename)))) {
-    const svg = createOgSvg(homeTitle, homeDescription, 'home', avatarDataUrl, fontDataUrl);
-    const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
-    const pngData = resvg.render().asPng();
-    fs.writeFileSync(path.join(outputDir, homeFilename), Buffer.from(pngData));
-    console.log(`Generated OG: og/${homeFilename}`);
+  if (
+    !(
+      previousManifest[homeImage.filename] === homeImage.signature &&
+      fs.existsSync(path.join(outputDir, homeImage.filename))
+    )
+  ) {
+    renderOgImage(homeImage, 'home', avatarDataUrl, fontDataUrl);
   }
 
   for (const file of files) {
@@ -248,45 +259,27 @@ async function main() {
   }
 
   for (const post of posts) {
-    const filename = `${post.slug}.png`;
-    const signature = `${ogVersion}\nblog\n${post.slug}\n${post.title}\n${post.summary}`;
-    nextManifest[filename] = signature;
+    const image = createPostOgImage({ slug: post.slug, title: post.title, description: post.summary });
+    nextManifest[image.filename] = image.signature;
 
-    if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
+    if (previousManifest[image.filename] === image.signature && fs.existsSync(path.join(outputDir, image.filename))) {
       continue;
     }
 
-    const svg = createOgSvg(post.title, post.summary, 'blog', avatarDataUrl, fontDataUrl);
-    const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
-    const pngData = resvg.render().asPng();
-    fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));
-    console.log(`Generated OG: og/${filename}`);
+    renderOgImage(image, 'blog', avatarDataUrl, fontDataUrl);
   }
 
   for (const tag of uniqueTags) {
     const tagPosts = posts.filter((p) => p.tags.includes(tag));
-    const title = `Posts about ${tag}`;
-    const description = `${tagPosts.length} post${tagPosts.length === 1 ? '' : 's'} about ${tag}`;
     const tagSlug = sluggify(tag);
-    const filename = `tag-${tagSlug}.png`;
-    const signature = `${ogVersion}\ntag\n${tagSlug}\n${title}\n${description}`;
-    nextManifest[filename] = signature;
+    const image = createTagOgImage({ slug: tagSlug, tag, postCount: tagPosts.length });
+    nextManifest[image.filename] = image.signature;
 
-    if (previousManifest[filename] === signature && fs.existsSync(path.join(outputDir, filename))) {
+    if (previousManifest[image.filename] === image.signature && fs.existsSync(path.join(outputDir, image.filename))) {
       continue;
     }
 
-    const svg = createOgSvg(title, description, 'tag', avatarDataUrl, fontDataUrl);
-    const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } });
-    const pngData = resvg.render().asPng();
-    fs.writeFileSync(path.join(outputDir, filename), Buffer.from(pngData));
-    console.log(`Generated OG: og/${filename}`);
-  }
-
-  for (const file of fs.readdirSync(outputDir)) {
-    if (!file.endsWith('.png')) continue;
-    if (nextManifest[file]) continue;
-    fs.rmSync(path.join(outputDir, file));
+    renderOgImage(image, 'tag', avatarDataUrl, fontDataUrl);
   }
 
   writeManifest(nextManifest);

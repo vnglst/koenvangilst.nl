@@ -8,6 +8,7 @@ import { TagLink } from '#/components/ui/Tag';
 
 import { desluggify, sluggify } from '#/lib/sluggify';
 import { jsonLdBreadcrumb } from '#/lib/json-ld';
+import { createTagOgImage } from '#/lib/og-image.mjs';
 
 const getTagData = createServerFn({ method: 'GET' })
   .validator((slug: string) => slug)
@@ -16,25 +17,28 @@ const getTagData = createServerFn({ method: 'GET' })
     const allPosts = getPosts();
     const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(slug));
     const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
+    const tag = uniqueTags.find((candidate) => sluggify(candidate) === slug);
 
-    if (posts.length === 0) {
+    if (posts.length === 0 || !tag) {
       throw notFound();
     }
 
-    return { posts, uniqueTags };
+    return { posts, tag, uniqueTags };
   });
 
 export const Route = createFileRoute('/tag/$slug')({
   loader: async ({ params }) => getTagData({ data: params.slug }),
-  head: ({ params }) => {
-    const tag = desluggify(params.slug);
-    const ogImage = `https://koenvangilst.nl/og/tag-${params.slug}.png`;
+  head: ({ loaderData, params }) => {
+    const tag = loaderData?.tag ?? desluggify(params.slug);
+    const postCount = loaderData?.posts.length ?? 0;
+    const og = createTagOgImage({ slug: params.slug, tag, postCount });
+    const ogImage = `https://koenvangilst.nl${og.url}`;
     return {
       meta: [
         { title: `Posts about ${tag} | Koen van Gilst` },
         { name: 'description', content: `All posts about ${tag}` },
         { property: 'og:title', content: `Posts about ${tag}` },
-        { property: 'og:description', content: `All posts about ${tag}` },
+        { property: 'og:description', content: og.description },
         { property: 'og:image', content: ogImage },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: `https://koenvangilst.nl/tag/${params.slug}` },

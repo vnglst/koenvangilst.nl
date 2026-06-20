@@ -7,6 +7,7 @@ import { Prose } from '#/components/content/Prose';
 import { Link } from '#/components/ui/Link';
 import { dateFormatter } from '#/lib/formatters';
 import { jsonLdPerson } from '#/lib/json-ld';
+import { createHomeOgImage } from '#/lib/og-image.mjs';
 
 const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
   const { getPosts } = await import('#/cms/posts-server');
@@ -16,7 +17,7 @@ const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => 
 });
 
 const SITE_URL = 'https://koenvangilst.nl';
-const HOME_OG_IMAGE = `${SITE_URL}/og/home.png`;
+const HOME_OG_IMAGE = `${SITE_URL}${createHomeOgImage().url}`;
 
 export const Route = createFileRoute('/')({
   loader: () => getRecentArticles(),

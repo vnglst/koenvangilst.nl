@@ -1,14 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { createHomeOgImage } from '#/lib/og-image.mjs';
 
-// OG images are now pre-generated at build time (scripts/generate-og-images.mjs).
-// This route remains as a fallback for any legacy /og?... URLs.
+// Preserve legacy /og?... URLs while the generated images are served by Nginx.
 export const Route = createFileRoute('/og')({
   server: {
     handlers: {
       GET: () => {
         return new Response(null, {
           status: 302,
-          headers: { Location: '/og/home.png' }
+          headers: { Location: createHomeOgImage().url }
         });
       }
     }

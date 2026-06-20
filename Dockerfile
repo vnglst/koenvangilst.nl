@@ -24,6 +24,22 @@ COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
+# ---- OG generator: one-shot post-deployment worker ----
+FROM node:24-alpine AS og-generator
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV OG_OUTPUT_DIR=/data/og
+
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY scripts/generate-og-images.mjs ./scripts/generate-og-images.mjs
+COPY src/lib/og-image.mjs ./src/lib/og-image.mjs
+COPY content ./content
+COPY public/fonts/IBMPlexSans-Bold.ttf ./public/fonts/IBMPlexSans-Bold.ttf
+COPY public/avatar.jpg ./public/avatar.jpg
+
+CMD ["node", "scripts/generate-og-images.mjs"]
+
 # ---- runner stage: lean production image ----
 FROM node:24-alpine AS runner
 WORKDIR /app
@@ -43,9 +59,10 @@ COPY --from=builder --chown=appuser:nodejs /app/dist ./
 # Public dir (icons, favicons, etc. - no photography originals, they live in Zipline)
 COPY --from=builder --chown=appuser:nodejs /app/public ./public
 
-# Production node_modules (satori, resvg-js native addons - no sharp/exif-reader, those
-# are now used only by the zipline-sync service)
+# Production node_modules (no sharp/exif-reader; those are used only by zipline-sync)
 COPY --from=prod-deps --chown=appuser:nodejs /app/node_modules ./node_modules
+# The native renderer is needed only in the separate og-generator target.
+RUN rm -rf node_modules/@resvg
 
 # Nginx configuration (replaces default site)
 COPY nginx/nginx.conf /etc/nginx/nginx.conf

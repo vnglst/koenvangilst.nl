@@ -8,6 +8,7 @@ services:
       - '3000:80'
     volumes:
       - photography-data:/data/photography:ro
+      - og-data:/data/og:ro
     environment:
       PHOTOS_MANIFEST_PATH: /data/photography/photos-data.json
     healthcheck:
@@ -16,6 +17,17 @@ services:
       timeout: 5s
       start_period: 15s
       retries: 3
+
+  og-generator:
+    build:
+      context: .
+      target: og-generator
+    depends_on:
+      website:
+        condition: service_healthy
+    restart: 'no'
+    volumes:
+      - og-data:/data/og
 
   zipline-sync:
     build:
@@ -32,3 +44,4 @@ services:
 
 volumes:
   photography-data:
+  og-data:
