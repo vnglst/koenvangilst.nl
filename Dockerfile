@@ -1,44 +1,31 @@
 ARG SOURCE_COMMIT=unknown
 
-# ---- deps stage: install all dependencies with cache ----
-FROM node:24-alpine AS deps
-RUN apk add --no-cache libc6-compat python3 make g++
+# ---- shared Node.js base ----
+FROM node:24-alpine AS base
 WORKDIR /app
+
+# ---- deps stage: install all build dependencies with cache ----
+FROM base AS deps
+RUN apk add --no-cache libc6-compat python3 make g++
 COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-audit --no-fund
 
-# ---- prod-deps stage: prune dev-only packages from the cached install ----
-FROM deps AS prod-deps
-RUN npm prune --omit=dev --no-audit --no-fund
+# ---- prod-deps stage: install production dependencies directly ----
+# This can run in parallel with the full install and avoids an expensive npm prune.
+FROM base AS prod-deps
+COPY package.json package-lock.json* ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev --no-audit --no-fund
 
 # ---- builder stage: compile the app ----
-FROM node:24-alpine AS builder
+FROM deps AS builder
 ARG SOURCE_COMMIT=unknown
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN SOURCE_COMMIT=${SOURCE_COMMIT} npm run build
 
-# ---- OG generator: one-shot post-deployment worker ----
-FROM node:24-alpine AS og-generator
-WORKDIR /app
-
-ENV NODE_ENV=production
-ENV OG_OUTPUT_DIR=/data/og
-
-COPY --from=prod-deps /app/node_modules ./node_modules
-COPY scripts/generate-og-images.mjs ./scripts/generate-og-images.mjs
-COPY src/lib/og-image.mjs ./src/lib/og-image.mjs
-COPY content ./content
-COPY public/fonts/IBMPlexSans-Bold.ttf ./public/fonts/IBMPlexSans-Bold.ttf
-COPY public/avatar.jpg ./public/avatar.jpg
-
-CMD ["node", "scripts/generate-og-images.mjs"]
-
 # ---- runner stage: lean production image ----
-FROM node:24-alpine AS runner
-WORKDIR /app
+FROM base AS runner
 
 ENV NODE_ENV=production
 # Note: PORT and HOSTNAME for Node.js are set inline in docker-entrypoint.sh
@@ -49,16 +36,8 @@ RUN addgroup --system --gid 1001 nodejs && \
     apk add --no-cache ca-certificates su-exec nginx && \
     mkdir -p /run/nginx /var/cache/nginx
 
-# TanStack Start / Vinxi server output
-COPY --from=builder --chown=appuser:nodejs /app/dist ./
-
-# Public dir (icons, favicons, etc. - no photography originals, they live in Zipline)
-COPY --from=builder --chown=appuser:nodejs /app/public ./public
-
-# Production node_modules (no sharp/exif-reader; those are used only by zipline-sync)
+# Production node_modules
 COPY --from=prod-deps --chown=appuser:nodejs /app/node_modules ./node_modules
-# The native renderer is needed only in the separate og-generator target.
-RUN rm -rf node_modules/@resvg
 
 # Nginx configuration (replaces default site)
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
@@ -67,6 +46,13 @@ RUN rm -f /etc/nginx/http.d/default.conf
 # Entrypoint starts Node.js (background) then Nginx (foreground)
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Keep code-dependent layers last so normal deploys reuse the complete runtime base.
+# TanStack Start / Vinxi server output
+COPY --from=builder --chown=appuser:nodejs /app/dist ./
+
+# Public dir (icons, favicons, etc. - no photography originals, they live in Zipline)
+COPY --from=builder --chown=appuser:nodejs /app/public ./public
 
 EXPOSE 80
 

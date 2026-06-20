@@ -61,6 +61,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 │   └── [slug]/            # Per-post directories with custom React components
 ├── e2e/                   # Playwright end-to-end tests
 ├── nginx/                 # Nginx configuration for production
+├── og-generator/          # Isolated Docker build and dependencies for OG rendering
 ├── public/                # Static assets
 ├── scripts/               # Build and deployment scripts
 ├── Dockerfile             # Multi-stage Docker build

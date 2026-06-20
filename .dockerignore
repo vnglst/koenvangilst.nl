@@ -16,6 +16,8 @@ playwright-report/
 test-results/
 public/og/*
 !public/og/fallback.png
+public/photos/
+public/photos-data.json
 *.tsbuildinfo
 
 # Local environment files and logs

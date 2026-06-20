@@ -5,10 +5,11 @@ WORKDIR /app
 RUN apk add --no-cache ca-certificates
 
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev --no-audit --no-fund
 
-COPY sync.mjs sync.sh ./
-RUN chmod +x sync.sh
+COPY --chmod=755 sync.sh ./sync.sh
+COPY sync.mjs ./sync.mjs
 COPY crontab /etc/crontabs/root
 
 RUN mkdir -p /data/photography/files

@@ -21,7 +21,7 @@ services:
   og-generator:
     build:
       context: .
-      target: og-generator
+      dockerfile: og-generator/Dockerfile
     depends_on:
       website:
         condition: service_healthy
