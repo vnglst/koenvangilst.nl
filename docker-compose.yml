@@ -1,0 +1,28 @@
+services:
+  website:
+    build:
+      context: .
+      args:
+        SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
+    ports:
+      - '3000:3000'
+    volumes:
+      - photography-data:/data/photography:ro
+    environment:
+      PHOTOS_MANIFEST_PATH: /data/photography/photos-data.json
+
+  zipline-sync:
+    build:
+      context: ./zipline-sync
+    volumes:
+      - photography-data:/data/photography
+    environment:
+      ZIPLINE_URL: ${ZIPLINE_URL:-}
+      ZIPLINE_TOKEN: ${ZIPLINE_TOKEN:-}
+      ZIPLINE_ORIGINALS_FOLDER_ID: ${ZIPLINE_ORIGINALS_FOLDER_ID:-}
+      PHOTOS_DATA_PATH: /data/photography/photos-data.json
+      PHOTOS_OUTPUT_DIR: /data/photography/files
+      PHOTOS_PUBLIC_BASE_URL: /photos
+
+volumes:
+  photography-data:
