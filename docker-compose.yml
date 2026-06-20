@@ -4,6 +4,10 @@ services:
       context: .
       args:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
+    labels:
+      - 'caddy_0=https://koenvangilst.nl'
+      - 'caddy_0.handle_path=/*'
+      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 3000}}'
     expose:
       - '3000'
     volumes:
