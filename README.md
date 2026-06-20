@@ -516,7 +516,7 @@ When writing or editing blog posts and documentation:
 
 All original TODOs have been resolved:
 
-- ✅ `/og` dynamic OG image generation with `satori` + `resvg-js` using IBM Plex Sans TTF (in `public/fonts/IBMPlexSans-Bold.ttf`)
+- ✅ `/og` static OG image generation with SVG + `resvg-js` using IBM Plex Sans TTF (in `public/fonts/IBMPlexSans-Bold.ttf`)
 - ✅ Photography EXIF reading moved to the separate `zipline-sync/` service with a 10-minute in-process manifest cache in the main app
 - ✅ Startup image generation removed from the main website container
 - ✅ Per-post MDX component imports (static `import` in each MDX file)
