@@ -61,7 +61,7 @@ function Home() {
         <p>
           I'm a software engineer with a philosophy degree and a lifelong passion for creating software. I started
           programming at an early age using GW-Basic and Turbo Pascal, and even though I've had many more interests, my
-          fascination for making computers do "cool stuff" has never faded. After many years as a web developer, I'm now
+          fascination for making computers do "cool stuff" has never left me. After many years as a web developer, I'm now
           in a technical leadership role helping teams build AI solutions for Rabobank.
         </p>
       </Prose>
