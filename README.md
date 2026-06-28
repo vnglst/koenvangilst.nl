@@ -26,7 +26,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
-- **Server**: Node.js 24 (LTS) on Hetzner CX33 (x86_64) via Docker + Coolify
+- **Server**: Node.js 26 on Hetzner CX33 (x86_64) via Docker + Coolify
 - **Reverse Proxy**: Nginx (serves static assets, rate-limiting, security headers, health checks)
 
 ## Project Structure
@@ -220,6 +220,50 @@ Use the Playwright suite as a required regression check when a change affects mu
 
 **Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (ESLint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
+## Updating Dependencies
+
+The project pins exact versions and uses npm's `min-release-age` protection (currently 2 days). The latest published versions may be newer than that window, so installs may need a temporary override.
+
+1. **Root dependencies**: run the updater script.
+
+   ```bash
+   npm run update-deps
+   ```
+
+   If the install hangs or errors with `No matching version found for ... with a date before ...`, the chosen version is too fresh for `min-release-age`. Re-run the install with the override:
+
+   ```bash
+   npm install --no-audit --no-fund --min-release-age=0
+   ```
+
+2. **Sub-project dependencies**: `og-generator/` and `zipline-sync/` are not covered by the root updater. Check and update them manually:
+
+   ```bash
+   npm view <package> version
+   npm install --prefix zipline-sync --no-audit --no-fund --min-release-age=0
+   ```
+
+3. **Docker base images**: check whether a newer Node Alpine tag is available and update all Dockerfiles (`Dockerfile`, `og-generator/Dockerfile`, `zipline-sync/Dockerfile`) together with the Node version mentions in this README.
+
+4. **After upgrading**, run the standard validation suite:
+
+   ```bash
+   npm run type-check
+   npm run lint
+   npm run test
+   npm run build
+   npm run check
+   npm run knip
+   ```
+
+   `knip` may print new "Configuration hints" after a major/minor upgrade (e.g. suggesting entries to remove from `ignoreDependencies` or `ignoreBinaries`). Apply those hints to keep `knip.json` current.
+
+5. **Full regression**: dependency upgrades can change build output and runtime behavior. For the most production-like validation, run the Docker e2e suite before deploying:
+
+   ```bash
+   npm run test:e2e:docker
+   ```
+
 ## Coding Guidelines
 
 ### Think Before Coding
@@ -378,7 +422,7 @@ These are baked in at build time, not runtime env vars.
 ### Deployment Target
 
 - **Architecture**: linux/amd64 (Hetzner CX33 is x86_64, NOT ARM)
-- **Base images**: Use `node:24-alpine` for production builds
+- **Base images**: Use `node:26-alpine` for production builds
 - **Build optimization**: BuildKit cache mounts are configured for Vite build cache
 
 ### Coolify Configuration

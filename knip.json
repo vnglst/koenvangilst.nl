@@ -2,6 +2,6 @@
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "entry": ["src/routes/**/*.{ts,tsx}", "src/server.ts", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts"],
   "ignore": ["zipline-sync/**"],
-  "ignoreDependencies": ["@types/mdx", "husky", "react-dom"],
-  "ignoreBinaries": ["srvx", "lint-staged", "vite", "vitest", "playwright", "tsc", "eslint", "prettier", "knip"]
+  "ignoreDependencies": ["@types/mdx", "husky"],
+  "ignoreBinaries": ["srvx"]
 }

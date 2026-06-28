@@ -239,12 +239,10 @@ async function generateOgImages() {
 
   renderFallbackOgImage(avatarDataUrl);
 
-  if (
-    !(
-      previousManifest[homeImage.filename] === homeImage.signature &&
-      fs.existsSync(path.join(outputDir, homeImage.filename))
-    )
-  ) {
+  if (!(
+    previousManifest[homeImage.filename] === homeImage.signature &&
+    fs.existsSync(path.join(outputDir, homeImage.filename))
+  )) {
     renderOgImage(homeImage, 'home', avatarDataUrl);
   }
 

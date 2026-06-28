@@ -1,7 +1,7 @@
 ARG SOURCE_COMMIT=unknown
 
 # ---- shared Node.js base ----
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 WORKDIR /app
 
 # ---- deps stage: install all build dependencies with cache ----
