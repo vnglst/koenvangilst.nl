@@ -14,7 +14,6 @@ import { Route as OgRouteImport } from './routes/og'
 import { Route as LlmContextRouteImport } from './routes/llm-context'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
@@ -48,11 +47,6 @@ const HealthRoute = HealthRouteImport.update({
 const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
   id: '/feed.xml',
   path: '/feed.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -103,7 +97,6 @@ const LabCo2IndexRoute = LabCo2IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
@@ -120,7 +113,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
@@ -138,7 +130,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
@@ -157,7 +148,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
@@ -174,7 +164,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
@@ -191,7 +180,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
@@ -209,7 +197,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   HealthRoute: typeof HealthRoute
   LlmContextRoute: typeof LlmContextRoute
@@ -260,13 +247,6 @@ declare module '@tanstack/react-router' {
       path: '/feed.xml'
       fullPath: '/feed.xml'
       preLoaderRoute: typeof FeedDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -337,7 +317,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   FeedDotxmlRoute: FeedDotxmlRoute,
   HealthRoute: HealthRoute,
   LlmContextRoute: LlmContextRoute,

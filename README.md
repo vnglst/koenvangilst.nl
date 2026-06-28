@@ -36,7 +36,6 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 │   ├── routes/             # TanStack Router file-based routes
 │   │   ├── __root.tsx     # Root layout with fonts and metadata
 │   │   ├── index.tsx      # Homepage
-│   │   ├── about.tsx      # About page
 │   │   ├── lab/           # Blog posts and projects showcase
 │   │   ├── photography/   # Photography portfolio
 │   │   ├── feed[.]xml.ts  # RSS feed generation
@@ -371,13 +370,12 @@ function MarkdownLayoutSkeleton() {
 - `src/cms/mdx-parser.ts` — uses `import.meta.glob` to access compiled MDX modules
 - Each MDX file exports: `default` (React component) + `frontmatter` (object, via `remark-mdx-frontmatter`)
 - Schema validation via `src/cms/schema.ts` (Zod)
-- **Why build-time MDX**: The legacy `mdx-bundler` did runtime compilation via Node.js `esbuild`+`fs`. Build-time compilation is faster at request time and works with any deployment target.
+- **Why build-time MDX**: Vite compiles content before bundling, keeping request-time rendering fast and avoiding runtime file-system compilation.
 
 ### Routing (TanStack Router file-based)
 
 - `src/routes/__root.tsx` — root layout, meta tags, FOUC-prevention theme script, Plausible tracking
 - `src/routes/index.tsx` — home page
-- `src/routes/about.tsx` — about page
 - `src/routes/lab/index.tsx` — blog/lab listing with `q` search param (client-side filter)
 - `src/routes/lab/$slug.tsx` — individual MDX posts
 - `src/routes/lab/co2/` — live CO2 monitor dashboard (SWR polling)
@@ -581,39 +579,3 @@ When writing or editing blog posts and documentation:
 - **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
 - **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
 - **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌
-
-## What Was Not Migrated 1:1
-
-| Feature                                   | Reason                                                                                                               | Status                                                                                                        |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Next.js `localFont`                       | Not available outside Next.js                                                                                        | Replaced with CSS `@font-face` rules in `styles/fonts.css`                                                    |
-| Next.js Image optimization                | `next/image` auto-resizes/optimizes; replaced with plain `<img>`                                                     | `zipline-sync/` pre-generates responsive variants into the shared photo mirror and publishes a local manifest |
-| Per-post `.components.js` dynamic imports | Legacy dynamically imports per-post component files at request time; Vite build-time MDX uses static imports instead | MDX files import their custom components directly with static `import`                                        |
-
-## Completed TODOs
-
-All original TODOs have been resolved:
-
-- ✅ `/og` post-deployment OG image generation with SVG + `resvg-js`, content-addressed caching, and a persistent shared volume
-- ✅ Photography EXIF reading moved to the separate `zipline-sync/` service with a 10-minute in-process manifest cache in the main app
-- ✅ Startup image generation removed from the main website container
-- ✅ Per-post MDX component imports (static `import` in each MDX file)
-- ✅ All routes tested with Playwright + curl (100% pass rate)
-- ✅ Legacy-source cleaned up
-
-## Scaffolding
-
-```bash
-# TanStack CLI command used (from /Users/vnglst/Code):
-npx @tanstack/cli@latest create my-tanstack-app --agent --deployment cloudflare --add-ons tanstack-query
-# Framework: React, Toolchain: ESLint, No demo pages, No git init
-
-# TanStack Intent commands:
-npx @tanstack/intent@latest install   # created AGENTS.md, installed skill runner
-npx @tanstack/intent@latest list      # listed 31 skills across 9 packages
-npx @tanstack/intent@latest load @tanstack/react-start#lifecycle/migrate-from-nextjs
-npx @tanstack/intent@latest load @tanstack/start-client-core#start-core/deployment
-npx @tanstack/intent@latest load @tanstack/start-client-core#start-core/server-routes
-```
-
-> **Note on deployment target**: The CLI was invoked with `--deployment cloudflare` as specified, but the site is self-hosted on Node.js (Hetzner + Coolify). The `@cloudflare/vite-plugin` and `wrangler` were subsequently removed and replaced with the Node.js adapter (TanStack Start's default). The Cloudflare add-on's Query/ESLint integrations were kept.

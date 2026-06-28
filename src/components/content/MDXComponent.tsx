@@ -42,7 +42,7 @@ function Waypoint({ href }: { href: string }) {
 
 const mdxComponents = {
   img: RoundedImage,
-  Image: RoundedImage, // next/image alias used in legacy MDX posts
+  Image: RoundedImage, // MDX compatibility alias for posts that use an Image component
   a: Link,
   Disclaimer,
   Waypoint
