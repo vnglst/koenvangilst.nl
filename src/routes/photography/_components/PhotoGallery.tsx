@@ -31,6 +31,36 @@ function formatDate(dateString?: string) {
 }
 
 function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; isActive: boolean }) {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const captionFrameRef = useRef<number | null>(null);
+  const [isCaptionVisible, setCaptionVisible] = useState(false);
+
+  const revealCaption = useEffectEvent(() => {
+    if (captionFrameRef.current !== null) {
+      cancelAnimationFrame(captionFrameRef.current);
+    }
+
+    captionFrameRef.current = requestAnimationFrame(() => {
+      captionFrameRef.current = null;
+      setCaptionVisible(true);
+    });
+  });
+
+  useLayoutEffect(() => {
+    setCaptionVisible(false);
+
+    if (isActive && imageRef.current?.complete) {
+      revealCaption();
+    }
+
+    return () => {
+      if (captionFrameRef.current !== null) {
+        cancelAnimationFrame(captionFrameRef.current);
+        captionFrameRef.current = null;
+      }
+    };
+  }, [isActive]);
+
   return (
     <div
       id={`photo-${index}`}
@@ -44,6 +74,7 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
       <picture>
         {photo.srcSetWebp && <source type="image/webp" srcSet={photo.srcSetWebp} sizes="100vw" />}
         <img
+          ref={imageRef}
           src={photo.src}
           srcSet={photo.srcSet}
           sizes="100vw"
@@ -51,10 +82,15 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
           className="h-full w-full object-contain"
           loading={index < 2 ? 'eager' : 'lazy'}
           fetchPriority={index === 0 ? 'high' : 'auto'}
+          onLoad={() => {
+            if (isActive) revealCaption();
+          }}
         />
       </picture>
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pt-16 pb-12">
-        <div className="text-center">
+        <div
+          className={`text-center transition-opacity duration-300 ease-out ${isCaptionVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
           <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
           <time dateTime={photo.createdAt} className="mt-1 block text-xs font-light text-white/70">
             {formatDate(photo.createdAt)}

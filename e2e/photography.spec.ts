@@ -13,6 +13,8 @@ test.describe('photography', () => {
     const activePhoto = page.locator('.photo-view-transition-target');
     await expect(activePhoto.getByText('Paris, France', { exact: true })).toBeVisible();
     await expect(activePhoto.locator('time')).toHaveText(/^[A-Z][a-z]+ \d{1,2}, \d{4}$/);
+    await expect(activePhoto.locator('.text-center')).toHaveCSS('transition-property', 'opacity');
+    await expect(activePhoto.locator('.text-center')).toHaveCSS('opacity', '1');
   });
 
   test('photo deep links open the fullscreen viewer and update during navigation', async ({ page }) => {
