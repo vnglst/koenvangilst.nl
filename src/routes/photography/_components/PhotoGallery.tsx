@@ -1,10 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useEffectEvent, useLayoutEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { useNavigate } from '@tanstack/react-router';
 
 import type { PhotoType } from '#/lib/photos';
 
 type PhotoGalleryProps = {
   photos: PhotoType[];
+};
+
+type ViewTransitionAPI = {
+  startViewTransition?: (update: () => void) => { finished: Promise<void> };
+};
+
+type PhotoTransitionDirection = 'left' | 'right' | 'up' | 'down';
+
+const PHOTO_KEY_DIRECTIONS: Partial<Record<string, { delta: number; transition: PhotoTransitionDirection }>> = {
+  ArrowDown: { delta: 1, transition: 'down' },
+  ArrowUp: { delta: -1, transition: 'up' },
+  ArrowRight: { delta: 1, transition: 'right' },
+  ArrowLeft: { delta: -1, transition: 'left' }
 };
 
 function formatDate(dateString?: string) {
@@ -16,11 +30,11 @@ function formatDate(dateString?: string) {
   });
 }
 
-function Photo({ photo, index }: { photo: PhotoType; index: number }) {
+function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; isActive: boolean }) {
   return (
     <div
       id={`photo-${index}`}
-      className="relative h-screen w-full snap-start snap-always"
+      className={`relative h-screen w-full snap-start snap-always ${isActive ? 'photo-view-transition-target' : ''}`}
       style={{
         backgroundColor: '#020617',
         backgroundImage: `url(${photo.blurDataURL})`,
@@ -42,123 +56,107 @@ function Photo({ photo, index }: { photo: PhotoType; index: number }) {
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-8 pt-16 pb-12">
         <div className="text-center">
           <div className="text-base font-light tracking-wide text-white">{photo.location}</div>
-          <div className="mt-1 text-xs font-light text-white/70">{formatDate(photo.createdAt)}</div>
+          <time dateTime={photo.createdAt} className="mt-1 block text-xs font-light text-white/70">
+            {formatDate(photo.createdAt)}
+          </time>
         </div>
       </div>
     </div>
   );
 }
 
-function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
+export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
   const navigate = useNavigate();
-  const [slideOverlay, setSlideOverlay] = useState<{
-    photo: PhotoType;
-    direction: 'left' | 'right';
-  } | null>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const transitionIdRef = useRef(0);
+  const scrollIndicatorOffset = photos.length > 1 ? currentIndex * 100 : 0;
 
-  useEffect(() => {
-    const element = document.getElementById(`photo-${startIndex}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'instant' });
+  useLayoutEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.scrollTo({ top: currentIndex * scrollContainer.clientHeight, behavior: 'auto' });
     }
-  }, [startIndex]);
+  }, [currentIndex]);
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+  const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      navigate({ to: '/photography', search: {} });
+      return;
+    }
+
+    const direction = PHOTO_KEY_DIRECTIONS[event.key];
+
+    if (!direction) return;
+
+    event.preventDefault();
+    const nextIndex = currentIndex + direction.delta;
+
+    if (nextIndex < 0 || nextIndex >= photos.length) return;
+
+    const scrollToPhoto = (behavior: ScrollBehavior) => {
+      const scrollContainer = scrollContainerRef.current ?? document.querySelector<HTMLDivElement>('.snap-y');
+      if (scrollContainer) {
+        scrollContainer.scrollTo({ top: nextIndex * scrollContainer.clientHeight, behavior });
       }
     };
-  }, []);
+    const commitPhoto = () => {
+      flushSync(() => setCurrentIndex(nextIndex));
+      scrollToPhoto('auto');
+    };
+    const startViewTransition = (document as ViewTransitionAPI).startViewTransition;
 
-  useEffect(() => {
-    function getCurrentPhotoIndex() {
-      const scrollContainer = document.querySelector('.snap-y');
-      if (!scrollContainer) return 0;
-      const scrollTop = scrollContainer.scrollTop;
-      const photoHeight = window.innerHeight;
-      return Math.round(scrollTop / photoHeight);
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        navigate({ to: '/photography', search: {} });
-        return;
-      }
-
-      // Up/Down: keep existing smooth scroll behavior
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-        event.preventDefault();
-        const currentIndex = getCurrentPhotoIndex();
-        const isNext = event.key === 'ArrowDown';
-        const nextIndex = isNext ? currentIndex + 1 : currentIndex - 1;
-
-        if (nextIndex >= 0 && nextIndex < photos.length) {
-          const element = document.getElementById(`photo-${nextIndex}`);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+    if (!startViewTransition) {
+      commitPhoto();
+    } else {
+      const transitionId = ++transitionIdRef.current;
+      document.documentElement.dataset.photoTransition = direction.transition;
+      const viewTransition = startViewTransition.call(document, commitPhoto);
+      void viewTransition.finished
+        .catch(() => {})
+        .then(() => {
+          if (transitionIdRef.current === transitionId) {
+            delete document.documentElement.dataset.photoTransition;
           }
-        }
-        return;
-      }
-
-      // Left/Right: slide animation to prev/next photo
-      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-        event.preventDefault();
-
-        // Prevent overlapping transitions
-        if (slideOverlay) return;
-
-        const currentIndex = getCurrentPhotoIndex();
-        const isNext = event.key === 'ArrowRight';
-        const nextIndex = isNext ? currentIndex + 1 : currentIndex - 1;
-
-        if (nextIndex >= 0 && nextIndex < photos.length) {
-          const direction = isNext ? 'right' : 'left';
-          setSlideOverlay({
-            photo: photos[nextIndex],
-            direction
-          });
-
-          timeoutRef.current = setTimeout(() => {
-            setSlideOverlay(null);
-            const element = document.getElementById(`photo-${nextIndex}`);
-            if (element) {
-              element.scrollIntoView({ behavior: 'instant' });
-            }
-          }, 300);
-        }
-      }
+        });
     }
 
+    void navigate({
+      to: '/photography/$photo',
+      params: { photo: String(photos[nextIndex].id) },
+      resetScroll: false
+    });
+  });
+
+  useLayoutEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [navigate, photos, photos.length, slideOverlay]);
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-slate-950">
       <button
         onClick={() => navigate({ to: '/photography', search: {} })}
-        className="fixed top-4 left-4 z-50 rounded-full bg-black/50 px-4 py-2 text-sm text-white backdrop-blur-sm transition-opacity hover:opacity-60"
+        className="photo-back-button fixed top-4 left-4 z-50 rounded-full bg-black/50 px-4 py-2 text-sm text-white backdrop-blur-sm transition-opacity hover:opacity-60"
       >
         ← Back
       </button>
-      <div className="h-screen snap-y snap-mandatory overflow-y-scroll">
+      <div ref={scrollContainerRef} className="photo-scroll-container h-screen snap-y snap-mandatory overflow-y-scroll">
         {photos.map((photo, index) => (
-          <Photo key={photo.id} photo={photo} index={index} />
+          <Photo key={photo.id} photo={photo} index={index} isActive={index === currentIndex} />
         ))}
       </div>
-
-      {slideOverlay && (
+      <div
+        aria-hidden="true"
+        data-testid="photo-scroll-indicator"
+        className="photo-scroll-indicator pointer-events-none fixed top-0 right-1 z-[60] h-screen w-1 rounded-full bg-white/20"
+      >
         <div
-          className={`fixed inset-0 z-40 ${
-            slideOverlay.direction === 'right' ? 'animate-slide-in-right' : 'animate-slide-in-left'
-          }`}
-        >
-          <Photo photo={slideOverlay.photo} index={-1} />
-        </div>
-      )}
+          data-testid="photo-scroll-indicator-thumb"
+          className="h-full w-full rounded-full bg-[#0a84ff] transition-none"
+          style={{ height: `${100 / photos.length}%`, transform: `translateY(${scrollIndicatorOffset}%)` }}
+        />
+      </div>
     </div>
   );
 }
@@ -175,13 +173,6 @@ function PhotoGallerySkeleton() {
 
 export function PhotoGallery({ photos }: PhotoGalleryProps) {
   const navigate = useNavigate();
-  const search = useSearch({ from: '/photography/' });
-  const photoParam = (search as Record<string, string | undefined>).photo;
-  const selectedIndex = photoParam ? parseInt(photoParam, 10) : 0;
-
-  if (photoParam !== undefined && photos.length > 0) {
-    return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
-  }
 
   if (photos.length === 0) {
     return <PhotoGallerySkeleton />;
@@ -192,7 +183,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
       {photos.map((photo, index) => (
         <button
           key={photo.id}
-          onClick={() => navigate({ to: '/photography', search: { photo: String(index) } })}
+          onClick={() => navigate({ to: '/photography/$photo', params: { photo: String(photo.id) } })}
           className="group relative block aspect-square overflow-hidden rounded-lg"
           style={{
             backgroundImage: `url(${photo.blurDataURL})`,

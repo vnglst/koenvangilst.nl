@@ -45,30 +45,126 @@
   animation: blink 1s step-start 1s infinite;
 }
 
-@keyframes slideInFromRight {
+@keyframes photo-slide-in {
   from {
-    transform: translateX(100%);
+    transform: translate(var(--photo-transition-x), var(--photo-transition-y));
   }
   to {
-    transform: translateX(0);
+    transform: translate(0, 0);
   }
 }
 
-@keyframes slideInFromLeft {
+@keyframes photo-slide-out {
   from {
-    transform: translateX(-100%);
+    transform: translate(0, 0);
   }
   to {
-    transform: translateX(0);
+    transform: translate(var(--photo-transition-x), var(--photo-transition-y));
   }
 }
 
-.animate-slide-in-right {
-  animation: slideInFromRight 300ms ease-out forwards;
+.photo-view-transition-target {
+  view-transition-name: photography-photo;
 }
 
-.animate-slide-in-left {
-  animation: slideInFromLeft 300ms ease-out forwards;
+.photo-scroll-container {
+  scrollbar-width: none;
+}
+
+.photo-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.photo-scroll-indicator {
+  view-transition-name: photography-scroll-indicator;
+}
+
+.photo-back-button {
+  view-transition-name: photography-back-button;
+}
+
+html[data-photo-transition]::view-transition-old(root),
+html[data-photo-transition]::view-transition-new(root),
+html[data-photo-transition]::view-transition-group(root) {
+  animation: none;
+}
+
+html[data-photo-transition]::view-transition-group(photography-scroll-indicator),
+html[data-photo-transition]::view-transition-old(photography-scroll-indicator),
+html[data-photo-transition]::view-transition-new(photography-scroll-indicator),
+html[data-photo-transition]::view-transition-group(photography-back-button),
+html[data-photo-transition]::view-transition-old(photography-back-button),
+html[data-photo-transition]::view-transition-new(photography-back-button) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-photo-transition]::view-transition-group(photography-scroll-indicator) {
+  z-index: 1;
+}
+
+html[data-photo-transition]::view-transition-old(photography-scroll-indicator),
+html[data-photo-transition]::view-transition-old(photography-back-button) {
+  display: none;
+}
+
+html[data-photo-transition]::view-transition-group(photography-back-button) {
+  z-index: 2;
+}
+
+html[data-photo-transition]::view-transition-old(photography-photo),
+html[data-photo-transition]::view-transition-new(photography-photo) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  mix-blend-mode: normal;
+}
+
+html[data-photo-transition='right']::view-transition-old(photography-photo) {
+  --photo-transition-x: -100%;
+  --photo-transition-y: 0;
+  animation-name: photo-slide-out;
+}
+
+html[data-photo-transition='right']::view-transition-new(photography-photo) {
+  --photo-transition-x: 100%;
+  --photo-transition-y: 0;
+  animation-name: photo-slide-in;
+}
+
+html[data-photo-transition='left']::view-transition-old(photography-photo) {
+  --photo-transition-x: 100%;
+  --photo-transition-y: 0;
+  animation-name: photo-slide-out;
+}
+
+html[data-photo-transition='left']::view-transition-new(photography-photo) {
+  --photo-transition-x: -100%;
+  --photo-transition-y: 0;
+  animation-name: photo-slide-in;
+}
+
+html[data-photo-transition='down']::view-transition-old(photography-photo) {
+  --photo-transition-x: 0;
+  --photo-transition-y: -100%;
+  animation-name: photo-slide-out;
+}
+
+html[data-photo-transition='down']::view-transition-new(photography-photo) {
+  --photo-transition-x: 0;
+  --photo-transition-y: 100%;
+  animation-name: photo-slide-in;
+}
+
+html[data-photo-transition='up']::view-transition-old(photography-photo) {
+  --photo-transition-x: 0;
+  --photo-transition-y: 100%;
+  animation-name: photo-slide-out;
+}
+
+html[data-photo-transition='up']::view-transition-new(photography-photo) {
+  --photo-transition-x: 0;
+  --photo-transition-y: -100%;
+  animation-name: photo-slide-in;
 }
 
 /* Typography styles for light mode */

@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as TagSlugRouteImport } from './routes/tag/$slug'
+import { Route as PhotographyPhotoRouteImport } from './routes/photography/$photo'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
 import { Route as LabPrognosis2100IndexRouteImport } from './routes/lab/prognosis-2100/index'
 import { Route as LabOnsLandIndexRouteImport } from './routes/lab/ons-land/index'
@@ -69,6 +70,11 @@ const TagSlugRoute = TagSlugRouteImport.update({
   path: '/tag/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhotographyPhotoRoute = PhotographyPhotoRouteImport.update({
+  id: '/photography/$photo',
+  path: '/photography/$photo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabSlugRoute = LabSlugRouteImport.update({
   id: '/lab/$slug',
   path: '/lab/$slug',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
+  '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
+  '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab': typeof LabIndexRoute
   '/photography': typeof PhotographyIndexRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
+  '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
+    | '/photography/$photo'
     | '/tag/$slug'
     | '/lab/'
     | '/photography/'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
+    | '/photography/$photo'
     | '/tag/$slug'
     | '/lab'
     | '/photography'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
+    | '/photography/$photo'
     | '/tag/$slug'
     | '/lab/'
     | '/photography/'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LabSlugRoute: typeof LabSlugRoute
+  PhotographyPhotoRoute: typeof PhotographyPhotoRoute
   TagSlugRoute: typeof TagSlugRoute
   LabIndexRoute: typeof LabIndexRoute
   PhotographyIndexRoute: typeof PhotographyIndexRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/photography/$photo': {
+      id: '/photography/$photo'
+      path: '/photography/$photo'
+      fullPath: '/photography/$photo'
+      preLoaderRoute: typeof PhotographyPhotoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/$slug': {
       id: '/lab/$slug'
       path: '/lab/$slug'
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   LabSlugRoute: LabSlugRoute,
+  PhotographyPhotoRoute: PhotographyPhotoRoute,
   TagSlugRoute: TagSlugRoute,
   LabIndexRoute: LabIndexRoute,
   PhotographyIndexRoute: PhotographyIndexRoute,
