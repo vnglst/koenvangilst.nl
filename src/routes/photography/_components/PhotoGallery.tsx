@@ -104,6 +104,7 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
 export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[]; startIndex: number }) {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(startIndex);
+  const [isInitialPhotoPositioned, setInitialPhotoPositioned] = useState(startIndex === 0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const transitionIdRef = useRef(0);
   const scrollIndicatorOffset = photos.length > 1 ? currentIndex * 100 : 0;
@@ -113,6 +114,7 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
     if (scrollContainer) {
       scrollContainer.scrollTo({ top: currentIndex * scrollContainer.clientHeight, behavior: 'auto' });
     }
+    setInitialPhotoPositioned(true);
   }, [currentIndex]);
 
   const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
@@ -177,7 +179,12 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
       >
         ← Back
       </button>
-      <div ref={scrollContainerRef} className="photo-scroll-container h-screen snap-y snap-mandatory overflow-y-scroll">
+      <div
+        ref={scrollContainerRef}
+        className={`photo-scroll-container h-screen snap-y snap-mandatory overflow-y-scroll ${
+          isInitialPhotoPositioned ? 'visible' : 'invisible'
+        }`}
+      >
         {photos.map((photo, index) => (
           <Photo key={photo.id} photo={photo} index={index} isActive={index === currentIndex} />
         ))}

@@ -18,11 +18,15 @@ test.describe('photography', () => {
   });
 
   test('photo deep links open the fullscreen viewer and update during navigation', async ({ page }) => {
+    const response = await page.request.get('/photography/14');
+    expect(await response.text()).toMatch(/class="[^"]*photo-scroll-container[^"]*invisible[^"]*"/);
+
     await page.goto('/photography/14');
 
     await expect(page).toHaveTitle(/Photography/i);
     await expect(page).toHaveURL(/\/photography\/14$/);
     await expect(page.getByRole('button', { name: /back/i })).toBeVisible();
+    await expect(page.locator('.photo-scroll-container')).toHaveClass(/visible/);
     await expect.poll(() => page.locator('.snap-y').evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
     const initialScrollTop = await page.locator('.snap-y').evaluate((element) => element.scrollTop);
 
