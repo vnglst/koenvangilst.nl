@@ -107,7 +107,6 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
   const [isInitialPhotoPositioned, setInitialPhotoPositioned] = useState(startIndex === 0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const transitionIdRef = useRef(0);
-  const scrollIndicatorOffset = photos.length > 1 ? currentIndex * 100 : 0;
 
   useLayoutEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -188,17 +187,6 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
         {photos.map((photo, index) => (
           <Photo key={photo.id} photo={photo} index={index} isActive={index === currentIndex} />
         ))}
-      </div>
-      <div
-        aria-hidden="true"
-        data-testid="photo-scroll-indicator"
-        className="photo-scroll-indicator pointer-events-none fixed top-0 right-1 z-[60] h-screen w-1 rounded-full bg-white/20"
-      >
-        <div
-          data-testid="photo-scroll-indicator-thumb"
-          className="h-full w-full rounded-full bg-[#0a84ff] transition-none"
-          style={{ height: `${100 / photos.length}%`, transform: `translateY(${scrollIndicatorOffset}%)` }}
-        />
       </div>
     </div>
   );

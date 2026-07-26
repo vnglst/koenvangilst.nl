@@ -75,10 +75,6 @@
   display: none;
 }
 
-.photo-scroll-indicator {
-  view-transition-name: photography-scroll-indicator;
-}
-
 .photo-back-button {
   view-transition-name: photography-back-button;
 }
@@ -89,9 +85,6 @@ html[data-photo-transition]::view-transition-group(root) {
   animation: none;
 }
 
-html[data-photo-transition]::view-transition-group(photography-scroll-indicator),
-html[data-photo-transition]::view-transition-old(photography-scroll-indicator),
-html[data-photo-transition]::view-transition-new(photography-scroll-indicator),
 html[data-photo-transition]::view-transition-group(photography-back-button),
 html[data-photo-transition]::view-transition-old(photography-back-button),
 html[data-photo-transition]::view-transition-new(photography-back-button) {
@@ -99,11 +92,6 @@ html[data-photo-transition]::view-transition-new(photography-back-button) {
   mix-blend-mode: normal;
 }
 
-html[data-photo-transition]::view-transition-group(photography-scroll-indicator) {
-  z-index: 1;
-}
-
-html[data-photo-transition]::view-transition-old(photography-scroll-indicator),
 html[data-photo-transition]::view-transition-old(photography-back-button) {
   display: none;
 }

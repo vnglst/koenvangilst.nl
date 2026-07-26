@@ -33,9 +33,7 @@ test.describe('photography', () => {
     await page.locator('.snap-y').press('ArrowRight');
 
     await expect.poll(() => page.locator('html').getAttribute('data-photo-transition')).toBe('right');
-    await expect(page.getByTestId('photo-scroll-indicator')).toBeVisible();
-    await expect(page.getByTestId('photo-scroll-indicator-thumb')).toBeVisible();
-    await expect(page.getByTestId('photo-scroll-indicator-thumb')).toHaveCSS('background-color', 'rgb(10, 132, 255)');
+    await expect(page.getByTestId('photo-scroll-indicator')).toHaveCount(0);
     await expect(page.getByRole('button', { name: /back/i })).toBeVisible();
     await expect
       .poll(() =>
