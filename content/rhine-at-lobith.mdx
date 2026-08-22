@@ -1,0 +1,29 @@
+---
+title: The Rhine at Lobith, year by year
+publishedAt: '2026-08-22'
+summary: A century of daily discharge and water level measurements becomes a moving river landscape - revealing what stage alone can hide.
+tags:
+  - article
+  - data visualization
+  - water
+---
+
+import { RhineYearField } from './rhine-at-lobith/RhineYearField'
+
+Every line below is one year of the Rhine at Lobith, beginning in 1901 - the first year available for both records. The horizontal direction follows the calendar from January to December. Each year draws in full before the next one begins. Once the record is complete, the lines open into a field with time running from back to front.
+
+<RhineYearField />
+
+## Two views of the same river
+
+**Afvoer** is the amount of water passing Lobith each second. It makes the river's recurring winter peaks, summer lows, exceptional floods and drought years directly comparable across more than a century.
+
+**Waterstand** is the measured height relative to NAP. It responds to discharge, but also to the shape and level of the river bed. In the paired view, similar flow patterns can sit at different heights. That divergence is the point: a long-term change in water level is not automatically a long-term change in the amount of water.
+
+The line color compares every day with the historical average for that point in the year. Blue is below the seasonal average, grey is close to it and orange is above it. The final perspective is matched in both panels. Ridges that align belong to the same moments in the year and the same years in history; differences between the two fields expose how the relationship between flow and stage has changed.
+
+One difference is already striking. On days with an afvoer between 1,800 and 2,200 m³/s, the median waterstand is 1,110 cm NAP in 1901-1920 and 908 cm NAP in 2006-2025 - about two metres lower for a comparable flow. The visual fields make that divergence visible: the discharge landscape stays broadly in place while the corresponding water-level landscape shifts downward. The comparison describes the measurements; explaining the causes requires the river's changing bed and geometry as well as its flow.
+
+## Data
+
+The daily record runs from 1901 through 2025, followed by the partial 2026 line through the latest available observation. The source is [Rijkswaterstaat WaterWebservices](https://rijkswaterstaatdata.nl/waterdata/) at Lobith, Bovenrijn, Tolkamer. Afvoer uses Rijkswaterstaat's daily discharge values. Waterstand is averaged per calendar day from the corresponding measurements in centimetres relative to NAP. The early archive contains one observation per day; the later, more frequent measurements produce a true daily mean.
