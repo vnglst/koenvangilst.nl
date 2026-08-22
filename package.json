@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "sync:photos": "node scripts/sync-photos.mjs",
+    "fetch:lobith": "node scripts/fetch-lobith-data.mjs",
     "build": "vite build",
     "start": "srvx --entry dist/server/server.js",
     "preview": "vite preview",
