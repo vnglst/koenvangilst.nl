@@ -11,7 +11,7 @@ const observations = [
   {
     title: 'Sweet piece from our heart. Waffle makers.',
     location: 'Zell am See',
-    note: 'It looks delicious at first glance, but what is that strawberry doing, morphing into a blackberry? And what is with the honey-like texture of the syrup?',
+    note: 'It looks delicious at first glance, but what\'s that strawberry doing, morphing into a blackberry? And what is with the honey-like texture of the syrup?',
     image: '/static/images/ai-marketing-in-the-wild/02-waffle-makers.webp',
     alt: 'A Waffle Makers advertisement showing an AI-generated waffle and fruit',
     width: 1500,
@@ -20,7 +20,7 @@ const observations = [
   {
     title: 'Thai five',
     location: 'Zell am See',
-    note: 'It\'s the clone thing again. It appears they did try to fix this, though. Prompt: "Can you make the dude on the right look different?" "Certainly! I will add a beard. It is a completely unique human now!"',
+    note: 'It\'s the clone thing again. The AI did give the one on the right a beard.',
     image: '/static/images/ai-marketing-in-the-wild/03-thai-five.webp',
     alt: 'A Thai restaurant poster showing two nearly identical AI-generated diners',
     width: 1500,
@@ -65,7 +65,7 @@ const observations = [
   {
     title: 'Tribute to Vasco Rossi',
     location: 'Lake Garda',
-    note: 'Our band is real. Stay away from the skewer though. It is AI-generated. I wasn\'t sure about this poster to be honest, could be that parts of it were done by AI, but that it was composed using something like Photoshop.',
+    note: 'Our band is real. Stay away from the skewer though. It is AI-generated. I wasn\'t sure about this one. Parts may have been generated and then assembled in Photoshop.',
     image: '/static/images/ai-marketing-in-the-wild/08-vasco-rossi.webp',
     alt: 'A Vasco Rossi tribute band poster with an AI-generated food skewer',
     width: 1500,
@@ -92,7 +92,7 @@ const observations = [
   {
     title: 'Firefighter’s Ball, with fireworks!',
     location: 'Lake Geneva',
-    note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again. As a Dutch guy I would have prompted for a bit more foam on top the pitcher.',
+    note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again.',
     image: '/static/images/ai-marketing-in-the-wild/11-firefighters-ball.webp',
     alt: 'A firefighters ball poster combining fireworks, flames and AI-generated beer',
     width: 1500,
@@ -110,7 +110,7 @@ const observations = [
   {
     title: 'Corsier-Port Heritage Days 2026',
     location: 'Lake Geneva',
-    note: 'I had to ask AI what this one was about. My kids were sure it was AI-generated, but apparently it was made by an art collective called Plonk & Replonk-Bébert, who are well-known for their absurdist photomontages. So, probably not AI-generated?',
+    note: 'I had to ask AI what this one was about. My kids were sure it was AI-generated, but apparently it was made by an art collective called Plonk & Replonk-Bébert, who are well-known for their absurdist photomontages. Apparently AI is already changing how we look at human-made images too.',
     image: '/static/images/ai-marketing-in-the-wild/13-corsier-port-heritage.webp',
     alt: 'An absurdist Corsier-Port Heritage Days poster showing people and objects flying over a harbour',
     width: 1500,
