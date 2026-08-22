@@ -4,6 +4,10 @@
   border-top: 1px solid #30363d;
 }
 
+.footnotes li > p {
+  margin-block: 0.25rem;
+}
+
 /* Hide footnote back links completely */
 .footnotes a[data-footnote-backref],
 .footnotes a.data-footnote-backref {
