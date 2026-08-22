@@ -92,7 +92,7 @@ const observations = [
   {
     title: 'Firefighter’s Ball, with fireworks!',
     location: 'Lake Geneva',
-    note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again. As a Dutch goy I would have prompted for a bit more foam on top the pitcher.',
+    note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again. As a Dutch guy I would have prompted for a bit more foam on top the pitcher.',
     image: '/static/images/ai-marketing-in-the-wild/11-firefighters-ball.webp',
     alt: 'A firefighters ball poster combining fireworks, flames and AI-generated beer',
     width: 1500,
@@ -101,7 +101,7 @@ const observations = [
   {
     title: 'Rescue Festival',
     location: 'Lake Geneva',
-    note: 'The duck - or cormorant? - caught my attention, but the four human clones rowing the boat gave it away. Did the AI forget to put a beard or moustache on them to make them look like “unique” humans.',
+    note: 'The duck - or cormorant? - caught my attention, but the four human clones rowing the boat gave it away. Did the AI forget to put a beard or moustache on them to make them look like “unique” humans?',
     image: '/static/images/ai-marketing-in-the-wild/12-rescue-festival.webp',
     alt: 'A rescue festival poster with a cartoon bird and four nearly identical rowers',
     width: 1500,
