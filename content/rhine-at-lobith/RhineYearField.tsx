@@ -1,4 +1,9 @@
+import { Canvas, useThree } from '@react-three/fiber';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import * as THREE from 'three';
+import { Line2 } from 'three/addons/lines/Line2.js';
+import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
+import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 
 import lobithData from './lobith-daily.json';
 
@@ -7,11 +12,10 @@ type YearRecord = { year: number; values: (number | null)[] };
 
 const years = lobithData.years as YearRecord[];
 const firstYear = years[0]?.year ?? 1901;
-const monthTicks = [0, 90, 181, 273, 364];
-const monthLabels = ['Jan', 'Apr', 'Jul', 'Oct', 'Dec'];
+const monthLabels = ['Jan', 'Jul', 'Dec'];
 const numberFormat = new Intl.NumberFormat('nl-NL');
 const isNumber = (value: number | null): value is number => Number.isFinite(value);
-const getLineProminence = (age: number) => 0.07 + 0.45 * Math.exp(-age / 60);
+const getLineProminence = (age: number) => 0.12 + 0.44 * Math.exp(-age / 60);
 const drawDuration = 2_000;
 const handoffDuration = 400;
 const millisecondsPerYear = drawDuration + handoffDuration;
@@ -25,6 +29,7 @@ const automaticPerspective = automaticYRotationDegrees / maxYRotationDegrees;
 const fieldDuration = years.length * millisecondsPerYear;
 const chapterDuration = fieldDuration + perspectiveDuration;
 const totalDuration = chapterDuration;
+const playbackSpeeds = [0.25, 0.5, 1, 1.5, 2, 3, 4] as const;
 
 const measureConfig = [
   { title: 'Discharge', unit: 'm³/s', column: 0 as Measure },
@@ -58,34 +63,221 @@ function getSeasonalStats(measure: Measure) {
 
 const seasonalStats = [getSeasonalStats(0), getSeasonalStats(1)] as const;
 
-function hexToRgb(hex: string) {
-  const value = hex.replace('#', '');
-  return [0, 2, 4].map((offset) => Number.parseInt(value.slice(offset, offset + 2), 16));
-}
+const palettes = {
+  light: ['#007cc3', '#9ca3af', '#d24f2f'],
+  dark: ['#45c3ff', '#6b7280', '#ff7a4f']
+} as const;
 
-function mixColor(from: number[], to: number[], amount: number) {
-  const channels = from.map((channel, index) => Math.round(channel + (to[index] - channel) * amount));
-  return `rgb(${channels.join(' ')})`;
-}
-
-function getSignalColor(value: number, measure: Measure, normalizedDay: number, colors: number[][]) {
+function getSignalColor(
+  value: number,
+  measure: Measure,
+  normalizedDay: number,
+  colors: readonly [THREE.Color, THREE.Color, THREE.Color]
+) {
   const stats = seasonalStats[measure][normalizedDay];
   const score = (value - stats.mean) / stats.deviation;
   const signalStrength = Math.min(1, Math.max(0, (Math.abs(score) - 0.45) / 1.55));
-  if (signalStrength === 0) return mixColor(colors[1], colors[1], 0);
-  return score < 0
-    ? mixColor(colors[1], colors[0], signalStrength)
-    : mixColor(colors[1], colors[2], signalStrength);
+  return colors[1].clone().lerp(score < 0 ? colors[0] : colors[2], signalStrength);
 }
 
-function RiverCanvas({
+type SegmentData = {
+  positions: number[];
+  colors: number[];
+  distances: number[];
+  length: number;
+};
+
+function getYearGeometry(record: YearRecord, measure: Measure, palette: readonly string[]) {
+  const [minimum, maximum] = extents[measure];
+  const signalColors = palette.map((color) => new THREE.Color(color)) as [
+    THREE.Color,
+    THREE.Color,
+    THREE.Color
+  ];
+  const calendarDayCount = new Date(record.year, 1, 29).getDate() === 29 ? 366 : 365;
+  const dayCount = record.values.length / 2;
+  const segments: SegmentData[] = [];
+  let positions: number[] = [];
+  let colors: number[] = [];
+  let distances: number[] = [];
+  let segmentLength = 0;
+  let previousPoint: [number, number] | null = null;
+
+  const finishSegment = () => {
+    if (positions.length >= 6) segments.push({ positions, colors, distances, length: segmentLength });
+    positions = [];
+    colors = [];
+    distances = [];
+    segmentLength = 0;
+    previousPoint = null;
+  };
+
+  for (let dayIndex = 0; dayIndex < dayCount; dayIndex += 1) {
+    const value = record.values[dayIndex * 2 + measure];
+    if (!isNumber(value)) {
+      finishSegment();
+      continue;
+    }
+
+    const x = (dayIndex / (calendarDayCount - 1) - 0.5) * 7;
+    const y = ((value - minimum) / (maximum - minimum) - 0.5) * 4.4;
+    if (previousPoint) segmentLength += Math.hypot(x - previousPoint[0], y - previousPoint[1]);
+    distances.push(segmentLength);
+    positions.push(x, y, 0);
+    const normalizedDay = Math.round((dayIndex / (calendarDayCount - 1)) * 364);
+    const color = getSignalColor(value, measure, normalizedDay, signalColors);
+    colors.push(color.r, color.g, color.b);
+    previousPoint = [x, y];
+  }
+  finishSegment();
+
+  return { segments, totalLength: segments.reduce((total, segment) => total + segment.length, 0) };
+}
+
+function ThickLine({
+  data,
+  visibleLength,
+  opacity,
+  width,
+  renderOrder
+}: {
+  data: SegmentData;
+  visibleLength: number;
+  opacity: number;
+  width: number;
+  renderOrder: number;
+}) {
+  const invalidate = useThree((state) => state.invalidate);
+  const geometry = useMemo(() => {
+    const nextGeometry = new LineGeometry();
+    nextGeometry.setPositions(data.positions);
+    nextGeometry.setColors(data.colors);
+    return nextGeometry;
+  }, [data]);
+  const material = useMemo(() => {
+    const nextMaterial = new LineMaterial();
+    nextMaterial.vertexColors = true;
+    nextMaterial.transparent = true;
+    nextMaterial.depthWrite = false;
+    nextMaterial.toneMapped = false;
+    return nextMaterial;
+  }, []);
+  const line = useMemo(() => {
+    const nextLine = new Line2(geometry, material);
+    nextLine.frustumCulled = false;
+    return nextLine;
+  }, [geometry, material]);
+
+  useEffect(() => {
+    let visibleSegments = 0;
+    while (
+      visibleSegments < data.distances.length - 1 &&
+      data.distances[visibleSegments + 1] <= visibleLength
+    ) {
+      visibleSegments += 1;
+    }
+    geometry.instanceCount = visibleSegments;
+    line.visible = visibleSegments > 0;
+    material.opacity = opacity;
+    material.uniforms.linewidth.value = width;
+    line.renderOrder = renderOrder;
+    invalidate();
+  }, [data.distances, geometry, invalidate, line, material, opacity, renderOrder, visibleLength, width]);
+
+  useEffect(
+    () => () => {
+      geometry.dispose();
+      material.dispose();
+    },
+    [geometry, material]
+  );
+
+  return <primitive object={line} />;
+}
+
+function YearLine({
+  record,
+  measure,
+  palette,
+  age,
+  index,
+  visibleIndex,
+  drawProgress,
+  handoffProgress,
+  z
+}: {
+  record: YearRecord;
+  measure: Measure;
+  palette: readonly string[];
+  age: number;
+  index: number;
+  visibleIndex: number;
+  drawProgress: number;
+  handoffProgress: number;
+  z: number;
+}) {
+  const geometryData = useMemo(
+    () => getYearGeometry(record, measure, palette),
+    [measure, palette, record]
+  );
+  const prominence = getLineProminence(age);
+  const previousProminence = age === 1 ? handoffAlpha : getLineProminence(age - 1);
+  const isNewest = index === visibleIndex;
+  const isPrevious = index === visibleIndex - 1;
+  const opacity = isNewest
+    ? 1 + (handoffAlpha - 1) * handoffProgress
+    : previousProminence + (prominence - previousProminence) * drawProgress;
+  const width = isNewest
+    ? 2.1 + (handoffWidth - 2.1) * handoffProgress
+    : isPrevious
+      ? handoffWidth + (0.9 - handoffWidth) * drawProgress
+      : 1.05;
+  const targetLength = isNewest ? geometryData.totalLength * drawProgress : geometryData.totalLength;
+  let traversedLength = 0;
+
+  return (
+    <group position={[0, 0, z]}>
+      {geometryData.segments.map((segment, segmentIndex) => {
+        const visibleLength = Math.max(0, Math.min(segment.length, targetLength - traversedLength));
+        traversedLength += segment.length;
+        return (
+          <ThickLine
+            key={`${record.year}-${segmentIndex}`}
+            data={segment}
+            visibleLength={visibleLength}
+            opacity={opacity}
+            width={width}
+            renderOrder={index}
+          />
+        );
+      })}
+    </group>
+  );
+}
+
+function CameraRig() {
+  const camera = useThree((state) => state.camera) as THREE.OrthographicCamera;
+  const size = useThree((state) => state.size);
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    camera.zoom = Math.min(size.width / 8.6, size.height / 6.3);
+    camera.updateProjectionMatrix();
+    invalidate();
+  }, [camera, invalidate, size.height, size.width]);
+
+  return null;
+}
+
+function RiverField({
   measure,
   visibleIndex,
   perspective,
   xRotationDegrees,
   drawProgress,
   handoffProgress,
-  showGrid
+  showAxes,
+  dark
 }: {
   measure: Measure;
   visibleIndex: number;
@@ -93,267 +285,99 @@ function RiverCanvas({
   xRotationDegrees: number;
   drawProgress: number;
   handoffProgress: number;
-  showGrid: boolean;
+  showAxes: boolean;
+  dark: boolean;
 }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const drawRef = useRef<() => void>(() => undefined);
-
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const container = canvas.parentElement;
-    if (!container) return;
-
-    const cssWidth = container.clientWidth;
-    const cssHeight = Math.max(340, Math.min(480, cssWidth * 0.78));
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    const pixelWidth = Math.round(cssWidth * pixelRatio);
-    const pixelHeight = Math.round(cssHeight * pixelRatio);
-    if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
-      canvas.width = pixelWidth;
-      canvas.height = pixelHeight;
-    }
-    canvas.style.width = `${cssWidth}px`;
-    canvas.style.height = `${cssHeight}px`;
-
-    const context = canvas.getContext('2d');
-    if (!context) return;
-    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-
-    const styles = getComputedStyle(canvas);
-    const foreground = styles.getPropertyValue('--river-foreground').trim();
-    const grid = styles.getPropertyValue('--river-grid').trim();
-    const signalColors = ['--river-below', '--river-average', '--river-above'].map((property) =>
-      hexToRgb(styles.getPropertyValue(property).trim())
-    );
-    const [minimum, maximum] = extents[measure];
-    const left = showGrid ? (cssWidth < 360 ? 40 : 48) : 8;
-    const right = showGrid ? 14 : 8;
-    const top = showGrid ? 18 : 8;
-    const bottom = showGrid ? 34 : 8;
-    const plotWidth = cssWidth - left - right;
-    const plotHeight = cssHeight - top - bottom;
-    const rotationAngle = perspective * maxYRotationDegrees * (Math.PI / 180);
-    const rotationCosine = Math.max(0.001, Math.cos(rotationAngle));
-    const rotationSine = Math.sin(Math.abs(rotationAngle));
-    const depthRatio = 0.62;
-    const projectionWidth = rotationCosine + rotationSine * depthRatio;
-    const dayWidth = (plotWidth * rotationCosine) / projectionWidth;
-    const timeDepth =
-      Math.sign(rotationAngle) * ((plotWidth * rotationSine * depthRatio) / projectionWidth);
-    const timeOrigin = left + Math.max(0, -timeDepth);
-    const frontStart = timeOrigin + timeDepth;
-    const xRotationAngle = xRotationDegrees * (Math.PI / 180);
-    const xRotationCosine = Math.max(0.001, Math.cos(xRotationAngle));
-    const xRotationSine = Math.sin(Math.abs(xRotationAngle));
-    const verticalDepthRatio = 0.55;
-    const verticalProjection = xRotationCosine + xRotationSine * verticalDepthRatio;
-    const verticalSpace = plotHeight * 0.88;
-    const amplitude = (verticalSpace * xRotationCosine) / verticalProjection;
-    const verticalTimeDepth =
-      Math.sign(xRotationAngle) *
-      ((verticalSpace * xRotationSine * verticalDepthRatio) / verticalProjection);
-    const valueTop = top + Math.max(0, -verticalTimeDepth);
-    const backBaseline = valueTop + amplitude;
-    const frontBaseline = backBaseline + verticalTimeDepth;
-    const availableYears = years.slice(0, visibleIndex + 1);
-    const localDenominator = Math.max(availableYears.length - 1, 1);
-
-    context.clearRect(0, 0, cssWidth, cssHeight);
-    context.font = '11px "IBM Plex Sans", sans-serif';
-    context.textBaseline = 'middle';
-    context.fillStyle = foreground;
-
-    context.strokeStyle = grid;
-    context.lineWidth = 1;
-    for (let tickIndex = 0; tickIndex < monthTicks.length; tickIndex += 1) {
-      const tickPosition = monthTicks[tickIndex] / 364;
-      const x = frontStart + tickPosition * dayWidth;
-      if (showGrid) {
-        context.beginPath();
-        context.moveTo(x, frontBaseline - amplitude);
-        context.lineTo(x, frontBaseline);
-        context.stroke();
-      }
-      if (showGrid) {
-        context.textAlign =
-          tickIndex === 0 ? 'left' : tickIndex === monthTicks.length - 1 ? 'right' : 'center';
-        context.fillText(monthLabels[tickIndex], x, cssHeight - 13);
-      }
-    }
-
-    const axisValues = [maximum, Math.round((minimum + maximum) / 2), minimum];
-    axisValues.forEach((value, index) => {
-      const y = frontBaseline - amplitude + (index / 2) * amplitude;
-      if (showGrid) {
-        context.textAlign = 'right';
-        context.fillText(numberFormat.format(value), frontStart - 7, y);
-        context.strokeStyle = grid;
-        context.beginPath();
-        context.moveTo(frontStart, y);
-        context.lineTo(frontStart + dayWidth, y);
-        context.stroke();
-      }
-    });
-
-    availableYears.forEach((record, index) => {
-      const localDepth = index / localDenominator;
-      const age = availableYears.length - 1 - index;
-      const effectiveAge = age + handoffProgress;
-      const recedingDepth = 1 - Math.exp(-effectiveAge / 20);
-      const xRotationProgress = Math.abs(xRotationDegrees) / maxXRotationDegrees;
-      const yRotationProgress = Math.min(
-        1,
-        Math.abs((perspective * maxYRotationDegrees) / automaticYRotationDegrees)
-      );
-      const stackInfluence = 1 - Math.max(yRotationProgress, xRotationProgress);
-      const stackX = recedingDepth * 26 * stackInfluence;
-      const stackY = recedingDepth * plotHeight * 0.11 * stackInfluence;
-      const lineScale = 1 - recedingDepth * 0.09 * stackInfluence;
-      const baseline = backBaseline + verticalTimeDepth * localDepth - stackY;
-      const xOffset = timeOrigin - left + timeDepth * localDepth + stackX;
-      const projectedWidth = dayWidth * lineScale;
-      const prominence = getLineProminence(age);
-      const previousProminence = age === 1 ? handoffAlpha : getLineProminence(age - 1);
-      const isNewest = index === availableYears.length - 1;
-      const isPrevious = index === availableYears.length - 2;
-      const dayCount = record.values.length / 2;
-      const calendarDayCount = new Date(record.year, 1, 29).getDate() === 29 ? 366 : 365;
-      const lineStart = left + xOffset;
-      const lineEnd = lineStart + projectedWidth;
-      const signalGradient = context.createLinearGradient(lineStart, 0, lineEnd, 0);
-
-      for (let dayIndex = 0; dayIndex < dayCount; dayIndex += isNewest ? 1 : 3) {
-        const value = record.values[dayIndex * 2 + measure];
-        if (!isNumber(value)) continue;
-        const normalizedDay = Math.round((dayIndex / (calendarDayCount - 1)) * 364);
-        signalGradient.addColorStop(
-          dayIndex / (calendarDayCount - 1),
-          getSignalColor(value, measure, normalizedDay, signalColors)
-        );
-      }
-
-      const points = Array.from({ length: dayCount }, (_, dayIndex) => {
-        const value = record.values[dayIndex * 2 + measure];
-        if (!isNumber(value)) return null;
-        const x = lineStart + (dayIndex / (calendarDayCount - 1)) * projectedWidth;
-        const normalizedValue = (value - minimum) / (maximum - minimum);
-        return { x, y: baseline - normalizedValue * amplitude * lineScale };
-      });
-      let totalLength = 0;
-      for (let pointIndex = 1; pointIndex < points.length; pointIndex += 1) {
-        const previous = points[pointIndex - 1];
-        const point = points[pointIndex];
-        if (previous && point) totalLength += Math.hypot(point.x - previous.x, point.y - previous.y);
-      }
-      const targetLength = isNewest ? totalLength * drawProgress : totalLength;
-
-      context.beginPath();
-      context.strokeStyle = signalGradient;
-      context.globalAlpha = isNewest
-        ? 1 + (handoffAlpha - 1) * handoffProgress
-        : previousProminence + (prominence - previousProminence) * drawProgress;
-      context.lineWidth = isNewest
-        ? 2.1 + (handoffWidth - 2.1) * handoffProgress
-        : isPrevious
-          ? handoffWidth + (0.9 - handoffWidth) * drawProgress
-          : 0.9;
-      context.lineJoin = 'round';
-      context.lineCap = 'round';
-
-      let previousPoint: { x: number; y: number } | null = null;
-      let travelled = 0;
-      for (const point of points) {
-        if (!point) {
-          previousPoint = null;
-          continue;
-        }
-        if (!previousPoint) {
-          context.moveTo(point.x, point.y);
-          previousPoint = point;
-          continue;
-        }
-
-        const segmentLength = Math.hypot(point.x - previousPoint.x, point.y - previousPoint.y);
-        if (travelled + segmentLength > targetLength) {
-          const remaining = Math.max(0, targetLength - travelled);
-          const amount = segmentLength === 0 ? 0 : remaining / segmentLength;
-          context.lineTo(
-            previousPoint.x + (point.x - previousPoint.x) * amount,
-            previousPoint.y + (point.y - previousPoint.y) * amount
-          );
-          break;
-        }
-
-        context.lineTo(point.x, point.y);
-        travelled += segmentLength;
-        previousPoint = point;
-      }
-      context.stroke();
-    });
-
-    if (showGrid) {
-      context.globalAlpha = 1;
-      context.fillStyle = foreground;
-      if (Math.abs(timeDepth) >= 40) {
-        context.textAlign = 'left';
-        context.fillText(
-          String(availableYears[0]?.year ?? firstYear),
-          timeOrigin + 3,
-          backBaseline + 12
-        );
-        context.fillText(
-          String(availableYears.at(-1)?.year ?? firstYear),
-          frontStart + 3,
-          frontBaseline + 12
-        );
-      } else {
-        context.textAlign = 'right';
-        context.fillText(
-          String(availableYears.at(-1)?.year ?? firstYear),
-          left + plotWidth,
-          frontBaseline + 12
-        );
-      }
-    }
-  }, [drawProgress, handoffProgress, measure, perspective, showGrid, visibleIndex, xRotationDegrees]);
-
-  useEffect(() => {
-    draw();
-    drawRef.current = draw;
-  }, [draw]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const redraw = () => drawRef.current();
-    const resizeObserver = new ResizeObserver(redraw);
-    const themeObserver = new MutationObserver(redraw);
-    resizeObserver.observe(canvas.parentElement ?? canvas);
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => {
-      resizeObserver.disconnect();
-      themeObserver.disconnect();
-    };
-  }, []);
-
   const config = measureConfig[measure];
+  const [minimum, maximum] = extents[measure];
+  const palette = dark ? palettes.dark : palettes.light;
+  const yRotationDegrees = perspective * maxYRotationDegrees;
+  const depthSpan = ((visibleIndex + handoffProgress) / Math.max(years.length - 1, 1)) * 5.2;
+  const rotationStrength = Math.min(
+    1,
+    Math.max(Math.abs(xRotationDegrees) / 35, Math.abs(yRotationDegrees) / 35)
+  );
+  const availableYears = years.slice(0, visibleIndex + 1);
+
   return (
     <section className="min-w-0" aria-labelledby={`river-${measure}-title`}>
       <div className="mb-1 flex items-baseline justify-between gap-3">
-        <h3 id={`river-${measure}-title`} className="nimbus !m-0 !text-base tracking-wide uppercase">
+        <h3
+          id={`river-${measure}-title`}
+          className="nimbus flex items-baseline gap-2 !m-0 !text-base tracking-wide uppercase"
+        >
           {config.title}
+          {showAxes && (
+            <span className="font-sans text-[10px] font-normal tracking-normal text-gray-500/65 normal-case dark:text-gray-400/65">
+              at Lobith · {config.unit}
+            </span>
+          )}
         </h3>
-        {showGrid && <span className="text-xs text-gray-500 dark:text-gray-400">{config.unit}</span>}
       </div>
-      <div className="w-full">
-        <canvas
-          ref={canvasRef}
-          className="block aspect-[1.28] max-h-[480px] min-h-[340px] w-full [--river-above:#d24f2f] [--river-average:#9ca3af] [--river-below:#007cc3] [--river-foreground:#4b5563] [--river-grid:rgba(107,114,128,0.18)] dark:[--river-above:#ff7a4f] dark:[--river-average:#6b7280] dark:[--river-below:#45c3ff] dark:[--river-foreground:#d1d5db] dark:[--river-grid:rgba(156,163,175,0.16)]"
-          role="img"
-          aria-label={`${config.title} at Lobith, yearly daily lines from ${firstYear} through ${years[visibleIndex]?.year ?? firstYear}`}
-        />
+      <div
+        className="relative aspect-[1.28] max-h-[480px] min-h-[340px] w-full"
+        role="img"
+        aria-label={`${config.title} at Lobith, yearly daily lines from ${firstYear} through ${years[visibleIndex]?.year ?? firstYear}`}
+      >
+        <div className="absolute inset-2">
+          <Canvas
+            orthographic
+            frameloop="demand"
+            dpr={[1, 2]}
+            camera={{ position: [0, 0, 12], near: 0.1, far: 100 }}
+            gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+            fallback={<p className="text-xs text-gray-500">3D rendering is not available.</p>}
+          >
+            <CameraRig />
+            <group
+              rotation={[
+                THREE.MathUtils.degToRad(xRotationDegrees),
+                THREE.MathUtils.degToRad(yRotationDegrees),
+                0
+              ]}
+            >
+              {availableYears.map((record, index) => {
+                const age = visibleIndex - index;
+                const effectiveAge = age + handoffProgress;
+                const z = depthSpan / 2 - (effectiveAge / Math.max(years.length - 1, 1)) * 5.2;
+                const recedingDepth = 1 - Math.exp(-effectiveAge / 20);
+                const stackInfluence = 1 - rotationStrength;
+                return (
+                  <group
+                    key={record.year}
+                    position={[recedingDepth * 0.3 * stackInfluence, -recedingDepth * 0.14 * stackInfluence, 0]}
+                  >
+                    <YearLine
+                      record={record}
+                      measure={measure}
+                      palette={palette}
+                      age={age}
+                      index={index}
+                      visibleIndex={visibleIndex}
+                      drawProgress={drawProgress}
+                      handoffProgress={handoffProgress}
+                      z={z}
+                    />
+                  </group>
+                );
+              })}
+            </group>
+          </Canvas>
+        </div>
+
+        {showAxes && (
+          <>
+            <div className="pointer-events-none absolute top-4 bottom-7 left-3 flex flex-col justify-between text-[10px] text-gray-500/55 tabular-nums dark:text-gray-400/55">
+              <span>{numberFormat.format(maximum)}</span>
+              <span>{numberFormat.format(minimum)}</span>
+            </div>
+            <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex justify-between text-[10px] text-gray-500/55 dark:text-gray-400/55">
+              {monthLabels.map((label) => (
+                <span key={label}>{label}</span>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
@@ -426,12 +450,27 @@ function getTimelineStatus(time: number): TimelineStatus {
   return { visibleIndex: years.length - 1, turning: true, handingOff: false };
 }
 
+function useDarkTheme() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const update = () => setDark(document.documentElement.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  return dark;
+}
+
 export function RhineYearField() {
   const reducedMotion = useRef(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
   const timelineRef = useRef(0);
   const rotationOverrideRef = useRef<number | null>(null);
+  const speedRef = useRef(1);
   const [fieldStates, setFieldStates] = useState<[FieldState, FieldState]>([emptyField, emptyField]);
   const [status, setStatus] = useState<TimelineStatus | null>({
     visibleIndex: 0,
@@ -441,7 +480,10 @@ export function RhineYearField() {
   const [manualIndex, setManualIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showGuides, setShowGuides] = useState(false);
+  const [showWaterLevel, setShowWaterLevel] = useState(true);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [xRotationDegrees, setXRotationDegrees] = useState(0);
+  const dark = useDarkTheme();
   const displayIndex = status?.visibleIndex ?? manualIndex;
   const rotationDegrees = Math.round(fieldStates[0].perspective * maxYRotationDegrees);
   const summary = useMemo(() => getYearSummary(years[displayIndex]), [displayIndex]);
@@ -474,12 +516,15 @@ export function RhineYearField() {
         setXRotationDegrees(0);
         applyTimeline(0);
       }
-      const startTimeline = timelineRef.current;
-      const startTime = performance.now();
+      let previousTime = performance.now();
       setIsPlaying(true);
 
       const animate = (time: number) => {
-        const nextTimeline = reducedMotion.current ? totalDuration : startTimeline + time - startTime;
+        const elapsed = Math.max(0, time - previousTime);
+        previousTime = time;
+        const nextTimeline = reducedMotion.current
+          ? totalDuration
+          : timelineRef.current + elapsed * speedRef.current;
         applyTimeline(nextTimeline);
 
         if (nextTimeline < totalDuration) frameRef.current = requestAnimationFrame(animate);
@@ -531,20 +576,24 @@ export function RhineYearField() {
   };
 
   const onRotationChange = (degrees: number) => {
-    stopAnimation();
     const perspective = degrees / maxYRotationDegrees;
     rotationOverrideRef.current = perspective;
     setFieldStates(([discharge, waterLevel]) => [
       { ...discharge, perspective },
       { ...waterLevel, perspective }
     ]);
-    setStatus(null);
   };
 
   const onXRotationChange = (degrees: number) => {
-    stopAnimation();
     setXRotationDegrees(degrees);
-    setStatus(null);
+  };
+
+  const changeSpeed = (direction: -1 | 1) => {
+    const currentIndex = playbackSpeeds.indexOf(playbackSpeed as (typeof playbackSpeeds)[number]);
+    const nextIndex = Math.min(playbackSpeeds.length - 1, Math.max(0, currentIndex + direction));
+    const nextSpeed = playbackSpeeds[nextIndex];
+    speedRef.current = nextSpeed;
+    setPlaybackSpeed(nextSpeed);
   };
 
   return (
@@ -553,16 +602,37 @@ export function RhineYearField() {
       className="not-prose my-10 w-full"
       aria-label="The Rhine at Lobith through time"
     >
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
-        <div>
-          <p className="nimbus m-0 text-3xl leading-none tracking-tight tabular-nums">{years[displayIndex].year}</p>
-          <p className="mt-1 mb-0 text-xs text-gray-500 dark:text-gray-400">
-            {status
-              ? `${status.turning ? 'Rotating both views around the y-axis' : status.handingOff ? 'Receding both lines' : 'Drawing both lines'} · ${status.visibleIndex + 1} of ${years.length}`
-              : `Both views through ${years[manualIndex].year}`}
-          </p>
-        </div>
-        <div className="flex gap-2">
+      <div className="mb-5 border-b border-gray-200 pb-4 dark:border-gray-800">
+        <p className="nimbus m-0 text-3xl leading-none tracking-tight tabular-nums">{years[displayIndex].year}</p>
+      </div>
+
+      <div className="space-y-12">
+        <RiverField
+          measure={0}
+          visibleIndex={fieldStates[0].visibleIndex}
+          perspective={fieldStates[0].perspective}
+          xRotationDegrees={xRotationDegrees}
+          drawProgress={fieldStates[0].drawProgress}
+          handoffProgress={fieldStates[0].handoffProgress}
+          showAxes={showGuides}
+          dark={dark}
+        />
+        {showWaterLevel && (
+          <RiverField
+            measure={1}
+            visibleIndex={fieldStates[1].visibleIndex}
+            perspective={fieldStates[1].perspective}
+            xRotationDegrees={xRotationDegrees}
+            drawProgress={fieldStates[1].drawProgress}
+            handoffProgress={fieldStates[1].handoffProgress}
+            showAxes={showGuides}
+            dark={dark}
+          />
+        )}
+      </div>
+
+      <div className="mt-8 border-t border-gray-200 pt-5 dark:border-gray-800">
+        <div className="mb-6 flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={() => (isPlaying ? stopAnimation() : play())}
@@ -577,96 +647,102 @@ export function RhineYearField() {
           >
             Restart
           </button>
+          <div className="ml-auto flex items-center gap-2" aria-label="Playback speed">
+            <button
+              type="button"
+              onClick={() => changeSpeed(-1)}
+              disabled={playbackSpeed === playbackSpeeds[0]}
+              className="rounded border border-gray-300 px-2.5 py-1.5 text-sm disabled:opacity-35 dark:border-gray-700"
+              aria-label="Decrease playback speed"
+            >
+              −
+            </button>
+            <span className="min-w-12 text-center text-xs font-medium tabular-nums">{playbackSpeed}×</span>
+            <button
+              type="button"
+              onClick={() => changeSpeed(1)}
+              disabled={playbackSpeed === playbackSpeeds.at(-1)}
+              className="rounded border border-gray-300 px-2.5 py-1.5 text-sm disabled:opacity-35 dark:border-gray-700"
+              aria-label="Increase playback speed"
+            >
+              +
+            </button>
+          </div>
         </div>
-      </div>
 
-      <label className="mb-6 flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+        <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-600 dark:text-gray-300">
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showWaterLevel}
+              onChange={(event) => setShowWaterLevel(event.target.checked)}
+              className="accent-gray-900 dark:accent-gray-100"
+            />
+            Show water level
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showGuides}
+              onChange={(event) => setShowGuides(event.target.checked)}
+              className="accent-gray-900 dark:accent-gray-100"
+            />
+            Show axes and color key
+          </label>
+        </div>
+
+        {showGuides && (
+          <div className="mb-6 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+            <span>Below average</span>
+            <span className="h-1.5 min-w-24 flex-1 bg-gradient-to-r from-[#007cc3] via-[#9ca3af] to-[#d24f2f] dark:from-[#45c3ff] dark:via-[#6b7280] dark:to-[#ff7a4f]" />
+            <span>Above average</span>
+          </div>
+        )}
+
+        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-year">
+          Through {years[displayIndex].year}
+        </label>
         <input
-          type="checkbox"
-          checked={showGuides}
-          onChange={(event) => setShowGuides(event.target.checked)}
-          className="accent-gray-900 dark:accent-gray-100"
+          id="lobith-year"
+          className="mb-5 w-full accent-gray-900 dark:accent-gray-100"
+          type="range"
+          min={0}
+          max={years.length - 1}
+          value={displayIndex}
+          onChange={(event) => onYearChange(Number(event.target.value))}
         />
-        Show axes, grid and color key
-      </label>
 
-      {showGuides && (
-        <div className="mb-6 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-          <span>Below average</span>
-          <span className="h-1.5 min-w-24 flex-1 bg-gradient-to-r from-[#007cc3] via-[#9ca3af] to-[#d24f2f] dark:from-[#45c3ff] dark:via-[#6b7280] dark:to-[#ff7a4f]" />
-          <span>Above average</span>
-        </div>
-      )}
-
-      <label
-        className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300"
-        htmlFor="lobith-x-rotation"
-      >
-        X-axis rotation {xRotationDegrees}°
-      </label>
-      <input
-        id="lobith-x-rotation"
-        className="mb-5 w-full accent-gray-900 dark:accent-gray-100"
-        type="range"
-        min={-maxXRotationDegrees}
-        max={maxXRotationDegrees}
-        value={xRotationDegrees}
-        onChange={(event) => onXRotationChange(Number(event.target.value))}
-      />
-
-      <label
-        className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300"
-        htmlFor="lobith-rotation"
-      >
-        Y-axis rotation {rotationDegrees}°
-      </label>
-      <input
-        id="lobith-rotation"
-        className="mb-8 w-full accent-gray-900 dark:accent-gray-100"
-        type="range"
-        min={-maxYRotationDegrees}
-        max={maxYRotationDegrees}
-        value={rotationDegrees}
-        onChange={(event) => onRotationChange(Number(event.target.value))}
-      />
-
-      <div className="space-y-12">
-        <RiverCanvas
-          measure={0}
-          visibleIndex={fieldStates[0].visibleIndex}
-          perspective={fieldStates[0].perspective}
-          xRotationDegrees={xRotationDegrees}
-          drawProgress={fieldStates[0].drawProgress}
-          handoffProgress={fieldStates[0].handoffProgress}
-          showGrid={showGuides}
+        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-x-rotation">
+          X-axis rotation {xRotationDegrees}°
+        </label>
+        <input
+          id="lobith-x-rotation"
+          className="mb-5 w-full accent-gray-900 dark:accent-gray-100"
+          type="range"
+          min={-maxXRotationDegrees}
+          max={maxXRotationDegrees}
+          value={xRotationDegrees}
+          onChange={(event) => onXRotationChange(Number(event.target.value))}
         />
-        <RiverCanvas
-          measure={1}
-          visibleIndex={fieldStates[1].visibleIndex}
-          perspective={fieldStates[1].perspective}
-          xRotationDegrees={xRotationDegrees}
-          drawProgress={fieldStates[1].drawProgress}
-          handoffProgress={fieldStates[1].handoffProgress}
-          showGrid={showGuides}
+
+        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-rotation">
+          Y-axis rotation {rotationDegrees}°
+        </label>
+        <input
+          id="lobith-rotation"
+          className="w-full accent-gray-900 dark:accent-gray-100"
+          type="range"
+          min={-maxYRotationDegrees}
+          max={maxYRotationDegrees}
+          value={rotationDegrees}
+          onChange={(event) => onRotationChange(Number(event.target.value))}
         />
+
+        <p className="mt-4 mb-0 text-xs text-gray-500 tabular-nums dark:text-gray-400" aria-live="polite">
+          {years[displayIndex].year}: discharge {summary[0]} · water level {summary[1]}
+          {displayIndex === years.length - 1 ? ` · partial year through ${lobithData.updatedThrough}` : ''}
+        </p>
       </div>
-
-      <label className="mt-5 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-year">
-        Through {years[displayIndex].year}
-      </label>
-      <input
-        id="lobith-year"
-        className="mt-2 w-full accent-gray-900 dark:accent-gray-100"
-        type="range"
-        min={0}
-        max={years.length - 1}
-        value={displayIndex}
-        onChange={(event) => onYearChange(Number(event.target.value))}
-      />
-      <p className="mt-2 mb-0 text-xs text-gray-500 tabular-nums dark:text-gray-400" aria-live="polite">
-        {years[displayIndex].year}: discharge {summary[0]} · water level {summary[1]}
-        {displayIndex === years.length - 1 ? ` · partial year through ${lobithData.updatedThrough}` : ''}
-      </p>
     </div>
   );
 }
