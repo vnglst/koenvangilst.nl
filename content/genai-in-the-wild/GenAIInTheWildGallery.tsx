@@ -2,8 +2,8 @@ const observations = [
   {
     title: 'Fussball WM Public Viewing',
     location: 'Zell am See',
-    note: 'It is the clones of the same guy with glasses that give this one away. One clone is also watching his clones watch the game. Like Agent Smith in The Matrix Revolutions, but pretending to enjoy a game of football.',
-    image: '/static/images/ai-marketing-in-the-wild/01-football-public-viewing.webp',
+    note: 'It\'s the clones of the same guy with glasses that give this one away. One clone is also watching his clones watch the game. Like Agent Smith in The Matrix Revolutions, but pretending to enjoy a game of football.',
+    image: '/static/images/genai-in-the-wild/01-football-public-viewing.webp',
     alt: 'A football World Cup public viewing poster photographed in Zell am See',
     width: 1500,
     height: 2000
@@ -11,8 +11,8 @@ const observations = [
   {
     title: 'Sweet piece from our heart. Waffle makers.',
     location: 'Zell am See',
-    note: 'It looks delicious at first glance, but what\'s that strawberry doing, morphing into a blackberry? And what is with the honey-like texture of the syrup?',
-    image: '/static/images/ai-marketing-in-the-wild/02-waffle-makers.webp',
+    note: 'It looks delicious at first glance, but what\'s that strawberry doing? Is it morphing into a blackberry? And what is with the honey-like texture of the syrup?',
+    image: '/static/images/genai-in-the-wild/02-waffle-makers.webp',
     alt: 'A Waffle Makers advertisement showing an AI-generated waffle and fruit',
     width: 1500,
     height: 2000
@@ -21,7 +21,7 @@ const observations = [
     title: 'Thai five',
     location: 'Zell am See',
     note: 'It\'s the clone thing again. The AI did give the one on the right a beard.',
-    image: '/static/images/ai-marketing-in-the-wild/03-thai-five.webp',
+    image: '/static/images/genai-in-the-wild/03-thai-five.webp',
     alt: 'A Thai restaurant poster showing two nearly identical AI-generated diners',
     width: 1500,
     height: 1125
@@ -30,7 +30,7 @@ const observations = [
     title: 'Chicken Shawarma',
     location: 'Zell am See',
     note: 'Our shawarma is made by AI.',
-    image: '/static/images/ai-marketing-in-the-wild/04-chicken-shawarma.webp',
+    image: '/static/images/genai-in-the-wild/04-chicken-shawarma.webp',
     alt: 'A chicken shawarma restaurant sign with AI-generated food photography',
     width: 1500,
     height: 2000
@@ -39,7 +39,7 @@ const observations = [
     title: 'Wanted. Dog owners with money to spare.',
     location: 'Zell am See',
     note: 'This dog does not exist.',
-    image: '/static/images/ai-marketing-in-the-wild/05-wanted-dog-owner.webp',
+    image: '/static/images/genai-in-the-wild/05-wanted-dog-owner.webp',
     alt: 'A rack of wanted-style dog souvenir posters made with AI-generated portraits',
     width: 1500,
     height: 2000
@@ -47,9 +47,9 @@ const observations = [
   {
     title: 'CETO barbershop',
     location: 'Zell am See',
-    note: 'I wonder what they are using the scissor-comb for?',
-    image: '/static/images/ai-marketing-in-the-wild/06-ceto-barbershop.webp',
-    alt: 'A barbershop sign with an AI-generated barber holding an impossible scissor comb',
+    note: 'I wonder what they are using the scissor-comb hybrid for?',
+    image: '/static/images/genai-in-the-wild/06-ceto-barbershop.webp',
+    alt: 'A barbershop sign with an AI-generated barber holding an impossible scissor-comb hybrid',
     width: 1500,
     height: 2000
   },
@@ -57,7 +57,7 @@ const observations = [
     title: 'Summer Park Bier Fest',
     location: 'Desenzano',
     note: 'Three AI-generated beers for the price of one.',
-    image: '/static/images/ai-marketing-in-the-wild/07-summer-park-bierfest.webp',
+    image: '/static/images/genai-in-the-wild/07-summer-park-bierfest.webp',
     alt: 'A Summer Park Bier Fest poster featuring AI-generated glasses of beer',
     width: 1500,
     height: 2000
@@ -65,8 +65,8 @@ const observations = [
   {
     title: 'Tribute to Vasco Rossi',
     location: 'Lake Garda',
-    note: 'Our band is real. Stay away from the skewer though. It is AI-generated. I wasn\'t sure about this one. Parts may have been generated and then assembled in Photoshop.',
-    image: '/static/images/ai-marketing-in-the-wild/08-vasco-rossi.webp',
+    note: 'Our band is real. The skewer looks AI-generated, but in general I wasn\'t sure about this one. Parts may have been generated and then assembled in Photoshop.',
+    image: '/static/images/genai-in-the-wild/08-vasco-rossi.webp',
     alt: 'A Vasco Rossi tribute band poster with an AI-generated food skewer',
     width: 1500,
     height: 2000
@@ -75,7 +75,7 @@ const observations = [
     title: 'Le Family Bar',
     location: 'Chamonix, France',
     note: 'We serve Aperol Spritz, mojito and pints of Hainaksen!',
-    image: '/static/images/ai-marketing-in-the-wild/09-le-family-bar.webp',
+    image: '/static/images/genai-in-the-wild/09-le-family-bar.webp',
     alt: 'A summer happy hour sign with illustrated AI-generated drinks',
     width: 1500,
     height: 2000
@@ -84,7 +84,7 @@ const observations = [
     title: 'GalopPêche',
     location: 'Lake Geneva',
     note: 'Those fish look pretty scary. Did they eat his legs?',
-    image: '/static/images/ai-marketing-in-the-wild/10-galopeche.webp',
+    image: '/static/images/genai-in-the-wild/10-galopeche.webp',
     alt: 'A fishing advertisement showing an AI-generated angler standing among huge fish',
     width: 1500,
     height: 2000
@@ -93,8 +93,8 @@ const observations = [
     title: 'Firefighter’s Ball, with fireworks!',
     location: 'Lake Geneva',
     note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again.',
-    image: '/static/images/ai-marketing-in-the-wild/11-firefighters-ball.webp',
-    alt: 'A firefighters ball poster combining fireworks, flames and AI-generated beer',
+    image: '/static/images/genai-in-the-wild/11-firefighters-ball.webp',
+    alt: 'A firefighters\' ball poster combining fireworks, flames and AI-generated beer',
     width: 1500,
     height: 2000
   },
@@ -102,7 +102,7 @@ const observations = [
     title: 'Rescue Festival',
     location: 'Lake Geneva',
     note: 'The duck - or cormorant? - caught my attention, but the four human clones rowing the boat gave it away. Did the AI forget to put a beard or moustache on them to make them look like “unique” humans?',
-    image: '/static/images/ai-marketing-in-the-wild/12-rescue-festival.webp',
+    image: '/static/images/genai-in-the-wild/12-rescue-festival.webp',
     alt: 'A rescue festival poster with a cartoon bird and four nearly identical rowers',
     width: 1500,
     height: 2000
@@ -110,15 +110,15 @@ const observations = [
   {
     title: 'Corsier-Port Heritage Days 2026',
     location: 'Lake Geneva',
-    note: 'I had to ask AI what this one was about. My kids were sure it was AI-generated, but apparently it was made by an art collective called Plonk & Replonk-Bébert, who are well-known for their absurdist photomontages. Apparently AI is already changing how we look at human-made images too.',
-    image: '/static/images/ai-marketing-in-the-wild/13-corsier-port-heritage.webp',
+    note: 'I had to ask AI what this one was about. My kids were sure it was AI-generated, but apparently it was made by an art collective called Plonk & Replonk-Bébert, who are well known for their absurdist photomontages. AI is already changing how we look at human-made images too.',
+    image: '/static/images/genai-in-the-wild/13-corsier-port-heritage.webp',
     alt: 'An absurdist Corsier-Port Heritage Days poster showing people and objects flying over a harbour',
     width: 1500,
     height: 2000
   }
 ];
 
-export function AiMarketingGallery() {
+export function GenAIInTheWildGallery() {
   return (
     <div className="not-prose my-4 w-full">
       <div className="flex flex-col gap-6 md:gap-8">
