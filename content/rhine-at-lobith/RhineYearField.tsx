@@ -24,15 +24,18 @@ const handoffWidth = 1.15;
 const perspectiveDuration = 5_000;
 const maxYRotationDegrees = 90;
 const maxXRotationDegrees = 90;
+const defaultXRotationDegrees = 25;
+const defaultYRotationDegrees = 8;
 const automaticYRotationDegrees = -62;
+const defaultPerspective = defaultYRotationDegrees / maxYRotationDegrees;
 const automaticPerspective = automaticYRotationDegrees / maxYRotationDegrees;
 const fieldDuration = years.length * millisecondsPerYear;
 const chapterDuration = fieldDuration + perspectiveDuration;
 const totalDuration = chapterDuration;
-const playbackSpeeds = [0.25, 0.5, 1, 1.5, 2, 3, 4] as const;
+const playbackSpeeds = [0.25, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 10] as const;
 
 const measureConfig = [
-  { title: 'Discharge', unit: 'm³/s', column: 0 as Measure },
+  { title: 'River flow', unit: 'm³/s', column: 0 as Measure },
   { title: 'Water level', unit: 'cm NAP', column: 1 as Measure }
 ];
 
@@ -255,16 +258,54 @@ function YearLine({
   );
 }
 
-function CameraRig() {
+function CameraRig({
+  depthSpan,
+  xRotationDegrees,
+  yRotationDegrees
+}: {
+  depthSpan: number;
+  xRotationDegrees: number;
+  yRotationDegrees: number;
+}) {
   const camera = useThree((state) => state.camera) as THREE.OrthographicCamera;
   const size = useThree((state) => state.size);
   const invalidate = useThree((state) => state.invalidate);
+  const projectedSize = useMemo(() => {
+    const rotation = new THREE.Euler(
+      THREE.MathUtils.degToRad(xRotationDegrees),
+      THREE.MathUtils.degToRad(yRotationDegrees),
+      0
+    );
+    let minimumX = Infinity;
+    let maximumX = -Infinity;
+    let minimumY = Infinity;
+    let maximumY = -Infinity;
+
+    for (const x of [-3.5, 3.8]) {
+      for (const y of [-2.34, 2.2]) {
+        for (const z of [-depthSpan / 2, depthSpan / 2]) {
+          const corner = new THREE.Vector3(x, y, z).applyEuler(rotation);
+          minimumX = Math.min(minimumX, corner.x);
+          maximumX = Math.max(maximumX, corner.x);
+          minimumY = Math.min(minimumY, corner.y);
+          maximumY = Math.max(maximumY, corner.y);
+        }
+      }
+    }
+
+    return {
+      width: 2 * Math.max(Math.abs(minimumX), Math.abs(maximumX)),
+      height: 2 * Math.max(Math.abs(minimumY), Math.abs(maximumY))
+    };
+  }, [depthSpan, xRotationDegrees, yRotationDegrees]);
 
   useEffect(() => {
-    camera.zoom = Math.min(size.width / 8.6, size.height / 6.3);
+    const fittedWidth = Math.max(8.6, projectedSize.width + 0.8);
+    const fittedHeight = Math.max(6.3, projectedSize.height + 0.8);
+    camera.zoom = Math.min(size.width / fittedWidth, size.height / fittedHeight);
     camera.updateProjectionMatrix();
     invalidate();
-  }, [camera, invalidate, size.height, size.width]);
+  }, [camera, invalidate, projectedSize.height, projectedSize.width, size.height, size.width]);
 
   return null;
 }
@@ -328,7 +369,11 @@ function RiverField({
             gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
             fallback={<p className="text-xs text-gray-500">3D rendering is not available.</p>}
           >
-            <CameraRig />
+            <CameraRig
+              depthSpan={depthSpan}
+              xRotationDegrees={xRotationDegrees}
+              yRotationDegrees={yRotationDegrees}
+            />
             <group
               rotation={[
                 THREE.MathUtils.degToRad(xRotationDegrees),
@@ -403,7 +448,12 @@ type TimelineStatus = {
   handingOff: boolean;
 };
 
-const emptyField: FieldState = { visibleIndex: 0, perspective: 0, drawProgress: 0, handoffProgress: 0 };
+const emptyField: FieldState = {
+  visibleIndex: 0,
+  perspective: defaultPerspective,
+  drawProgress: 0,
+  handoffProgress: 0
+};
 const completeField: FieldState = {
   visibleIndex: years.length - 1,
   perspective: automaticPerspective,
@@ -420,7 +470,7 @@ function getFieldState(time: number): FieldState {
     const yearTime = localTime % millisecondsPerYear;
     return {
       visibleIndex: Math.min(years.length - 1, Math.floor(yearPosition)),
-      perspective: 0,
+      perspective: defaultPerspective,
       drawProgress: Math.min(1, yearTime / drawDuration),
       handoffProgress: Math.max(0, (yearTime - drawDuration) / handoffDuration)
     };
@@ -429,7 +479,9 @@ function getFieldState(time: number): FieldState {
   if (localTime < chapterDuration) {
     return {
       visibleIndex: years.length - 1,
-      perspective: automaticPerspective * ((localTime - fieldDuration) / perspectiveDuration),
+      perspective:
+        defaultPerspective +
+        (automaticPerspective - defaultPerspective) * ((localTime - fieldDuration) / perspectiveDuration),
       drawProgress: 1,
       handoffProgress: 1
     };
@@ -470,7 +522,7 @@ export function RhineYearField() {
   const frameRef = useRef<number | null>(null);
   const timelineRef = useRef(0);
   const rotationOverrideRef = useRef<number | null>(null);
-  const speedRef = useRef(1);
+  const speedRef = useRef(1.5);
   const [fieldStates, setFieldStates] = useState<[FieldState, FieldState]>([emptyField, emptyField]);
   const [status, setStatus] = useState<TimelineStatus | null>({
     visibleIndex: 0,
@@ -479,10 +531,10 @@ export function RhineYearField() {
   });
   const [manualIndex, setManualIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showGuides, setShowGuides] = useState(false);
-  const [showWaterLevel, setShowWaterLevel] = useState(true);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
-  const [xRotationDegrees, setXRotationDegrees] = useState(0);
+  const [showGuides, setShowGuides] = useState(true);
+  const [showWaterLevel, setShowWaterLevel] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1.5);
+  const [xRotationDegrees, setXRotationDegrees] = useState(defaultXRotationDegrees);
   const dark = useDarkTheme();
   const displayIndex = status?.visibleIndex ?? manualIndex;
   const rotationDegrees = Math.round(fieldStates[0].perspective * maxYRotationDegrees);
@@ -513,7 +565,7 @@ export function RhineYearField() {
       stopAnimation();
       if (restart || timelineRef.current >= totalDuration) {
         rotationOverrideRef.current = null;
-        setXRotationDegrees(0);
+        setXRotationDegrees(defaultXRotationDegrees);
         applyTimeline(0);
       }
       let previousTime = performance.now();
@@ -566,7 +618,8 @@ export function RhineYearField() {
     timelineRef.current = Math.min(fieldDuration, index * millisecondsPerYear + drawDuration);
     const fieldState = {
       visibleIndex: index,
-      perspective: rotationOverrideRef.current ?? (index === years.length - 1 ? automaticPerspective : 0),
+      perspective:
+        rotationOverrideRef.current ?? (index === years.length - 1 ? automaticPerspective : defaultPerspective),
       drawProgress: 1,
       handoffProgress: 0
     };
@@ -631,6 +684,14 @@ export function RhineYearField() {
         )}
       </div>
 
+      {showGuides && (
+        <div className="mt-3 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+          <span>Below average</span>
+          <span className="h-1.5 min-w-24 flex-1 bg-gradient-to-r from-[#007cc3] via-[#9ca3af] to-[#d24f2f] dark:from-[#45c3ff] dark:via-[#6b7280] dark:to-[#ff7a4f]" />
+          <span>Above average</span>
+        </div>
+      )}
+
       <div className="mt-8 border-t border-gray-200 pt-5 dark:border-gray-800">
         <div className="mb-6 flex flex-wrap items-center gap-2">
           <button
@@ -691,14 +752,6 @@ export function RhineYearField() {
           </label>
         </div>
 
-        {showGuides && (
-          <div className="mb-6 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-            <span>Below average</span>
-            <span className="h-1.5 min-w-24 flex-1 bg-gradient-to-r from-[#007cc3] via-[#9ca3af] to-[#d24f2f] dark:from-[#45c3ff] dark:via-[#6b7280] dark:to-[#ff7a4f]" />
-            <span>Above average</span>
-          </div>
-        )}
-
         <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-year">
           Through {years[displayIndex].year}
         </label>
@@ -739,7 +792,7 @@ export function RhineYearField() {
         />
 
         <p className="mt-4 mb-0 text-xs text-gray-500 tabular-nums dark:text-gray-400" aria-live="polite">
-          {years[displayIndex].year}: discharge {summary[0]} · water level {summary[1]}
+          {years[displayIndex].year}: river flow {summary[0]} · water level {summary[1]}
           {displayIndex === years.length - 1 ? ` · partial year through ${lobithData.updatedThrough}` : ''}
         </p>
       </div>
