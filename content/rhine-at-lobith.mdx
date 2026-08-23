@@ -1,7 +1,7 @@
 ---
 title: The Rhine at Lobith, year by year
 publishedAt: '2026-08-22'
-summary: A century of daily discharge and water level measurements becomes a moving river landscape - revealing what stage alone can hide.
+summary: A century of river flow and water level measurements becomes a moving landscape, revealing what water level alone can hide.
 tags:
   - article
   - data visualization
@@ -10,20 +10,30 @@ tags:
 
 import { RhineYearField } from './rhine-at-lobith/RhineYearField'
 
-Every line below is one year of the Rhine at Lobith, beginning in 1901 - the first year available for both records. The horizontal direction follows the calendar from January to December. Each year draws in full before the next one begins. Once the record is complete, the lines open into a field with time running from back to front.
+This summer, low water levels in the Netherlands' rivers have caused widespread concern and prompted much discussion. When I was young, however, high water seemed to be the greater threat.
+
+I vividly remember the flood of 1995, when around 250,000 people had to be evacuated. My school closed for two weeks, and when my room flooded, I had to move upstairs. Despite all that, it felt a little like an extra Christmas holiday.
+
+I wanted to know whether my memory matched the historical record. Has the Rhine shifted from frequent high water to lower levels? I downloaded the data to see what patterns might emerge.
+
+Each line below shows one year at Lobith, from January to December. The record begins in 1901. As new years appear, older ones recede. At the end, the field rotates to reveal the full landscape over time.
 
 <RhineYearField />
 
-## Two views of the same river
+## Flow and water level
 
-**Afvoer** is the amount of water passing Lobith each second. It makes the river's recurring winter peaks, summer lows, exceptional floods and drought years directly comparable across more than a century.
+**River flow**, technically called discharge, is the volume of water passing Lobith each second. It reveals recurring winter peaks, summer lows, floods and droughts.
 
-**Waterstand** is the measured height relative to NAP. It responds to discharge, but also to the shape and level of the river bed. In the paired view, similar flow patterns can sit at different heights. That divergence is the point: a long-term change in water level is not automatically a long-term change in the amount of water.
+**Water level** is the height of the water surface relative to a fixed reference point. It depends on flow, but also on the shape and depth of the channel.
 
-The line color compares every day with the historical average for that point in the year. Blue is below the seasonal average, grey is close to it and orange is above it. The final perspective is matched in both panels. Ridges that align belong to the same moments in the year and the same years in history; differences between the two fields expose how the relationship between flow and stage has changed.
+The river bed near Lobith has gradually eroded. River engineering made the channel narrower and fixed it in place, while less sediment arrives to replace what the current carries away. As the bed sinks, the water surface also sits lower, even when the same volume of water passes Lobith. [Research into the Dutch Rhine branches](https://research.tudelft.nl/files/84190833/YllaArbos_etal_2020_RiverFlow.pdf) documents this long-term change in bed level.
 
-One difference is already striking. On days with an afvoer between 1,800 and 2,200 m³/s, the median waterstand is 1,110 cm NAP in 1901-1920 and 908 cm NAP in 2006-2025 - about two metres lower for a comparable flow. The visual fields make that divergence visible: the discharge landscape stays broadly in place while the corresponding water-level landscape shifts downward. The comparison describes the measurements; explaining the causes requires the river's changing bed and geometry as well as its flow.
+Color compares each day with the historical average for that time of year. Blue is below average, grey is close to it and orange is above it. When both views are shown, matching ridges represent the same dates and years.
+
+One difference stands out. On days when flow was between 1,800 and 2,200 m³/s, the median water level fell from 1,110 cm NAP in 1901-1920 to 908 cm NAP in 2006-2025. That is about two metres lower for a comparable flow.
+
+This changes how the record should be read. Water level combines changes in flow with changes in the river itself, so a downward trend does not necessarily mean less water is passing Lobith. The relationship between water level and flow must therefore be recalibrated as the channel changes, as reflected in Rijkswaterstaat's periodically updated [water-level and flow relationships](https://open.rijkswaterstaat.nl/@261541/betrekkingslijnen-rijntakken-versie-2022/). For comparing water quantity over time, river flow is the more reliable signal.
 
 ## Data
 
-The daily record runs from 1901 through 2025, followed by the partial 2026 line through the latest available observation. The source is [Rijkswaterstaat WaterWebservices](https://rijkswaterstaatdata.nl/waterdata/) at Lobith, Bovenrijn, Tolkamer. Afvoer uses Rijkswaterstaat's daily discharge values. Waterstand is averaged per calendar day from the corresponding measurements in centimetres relative to NAP. The early archive contains one observation per day; the later, more frequent measurements produce a true daily mean.
+The daily record runs from 1901 through 2025, plus 2026 through the latest observation. The source is [Rijkswaterstaat WaterWebservices](https://rijkswaterstaatdata.nl/waterdata/) at Lobith. Flow uses daily discharge values. Water level is measured in centimetres relative to the national reference datum, NAP, and averaged by day when multiple observations are available.
