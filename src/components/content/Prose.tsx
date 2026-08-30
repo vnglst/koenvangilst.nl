@@ -1,9 +1,9 @@
-import type { JSX, PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { cx } from '#/lib/clsx';
 
 type ProseProps = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'article' | 'section';
   className?: string;
 };
 

@@ -1,5 +1,5 @@
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
-import { Suspense, lazy, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import appCss from '../styles.css?url';
 
@@ -12,11 +12,6 @@ import { Heading } from '#/components/content/Heading';
 import { Link } from '#/components/ui/Link';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
 import { createFallbackOgImage } from '#/lib/og-image.mjs';
-
-// DevTools are only bundled in development — tree-shaken away in production
-const DevTools = import.meta.env.DEV
-  ? lazy(() => import('#/components/DevTools').then((m) => ({ default: m.DevTools })))
-  : null;
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -164,11 +159,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         />
         <div className="flex min-h-screen flex-col">{children}</div>
         <Tracking />
-        {DevTools && (
-          <Suspense fallback={null}>
-            <DevTools />
-          </Suspense>
-        )}
         <Scripts />
       </body>
     </html>
