@@ -1,11 +1,14 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import * as THREE from 'three';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 
 import lobithData from './lobith-daily.json';
+import { rhinePalettes } from './rhine-palettes';
+import type { RhinePalette } from './rhine-palettes';
 
 type Measure = 0 | 1;
 type YearRecord = { year: number; values: (number | null)[] };
@@ -15,12 +18,12 @@ const firstYear = years[0]?.year ?? 1901;
 const monthLabels = ['Jan', 'Jul', 'Dec'];
 const numberFormat = new Intl.NumberFormat('nl-NL');
 const isNumber = (value: number | null): value is number => Number.isFinite(value);
-const getLineProminence = (age: number) => 0.12 + 0.44 * Math.exp(-age / 60);
+const getLineProminence = (age: number) => 0.22 + 0.43 * Math.exp(-age / 65);
 const drawDuration = 2_000;
 const handoffDuration = 400;
 const millisecondsPerYear = drawDuration + handoffDuration;
 const handoffAlpha = 0.52;
-const handoffWidth = 1.15;
+const handoffWidth = 2.25;
 const perspectiveDuration = 5_000;
 const maxYRotationDegrees = 90;
 const maxXRotationDegrees = 90;
@@ -29,6 +32,7 @@ const defaultYRotationDegrees = 8;
 const automaticYRotationDegrees = -62;
 const defaultPerspective = defaultYRotationDegrees / maxYRotationDegrees;
 const automaticPerspective = automaticYRotationDegrees / maxYRotationDegrees;
+const fieldDepth = 16;
 const fieldDuration = years.length * millisecondsPerYear;
 const chapterDuration = fieldDuration + perspectiveDuration;
 const totalDuration = chapterDuration;
@@ -66,21 +70,19 @@ function getSeasonalStats(measure: Measure) {
 
 const seasonalStats = [getSeasonalStats(0), getSeasonalStats(1)] as const;
 
-const palettes = {
-  light: ['#007cc3', '#9ca3af', '#d24f2f'],
-  dark: ['#45c3ff', '#6b7280', '#ff7a4f']
-} as const;
-
 function getSignalColor(
   value: number,
   measure: Measure,
   normalizedDay: number,
-  colors: readonly [THREE.Color, THREE.Color, THREE.Color]
+  colors: readonly [THREE.Color, THREE.Color, THREE.Color, THREE.Color, THREE.Color, THREE.Color]
 ) {
   const stats = seasonalStats[measure][normalizedDay];
   const score = (value - stats.mean) / stats.deviation;
-  const signalStrength = Math.min(1, Math.max(0, (Math.abs(score) - 0.45) / 1.55));
-  return colors[1].clone().lerp(score < 0 ? colors[0] : colors[2], signalStrength);
+  if (score <= -2) return colors[1].clone().lerp(colors[0], Math.min(1, (-score - 2) / 2));
+  if (score <= 0) return colors[1].clone().lerp(colors[2], (score + 2) / 2);
+  if (score <= 1.5) return colors[2].clone().lerp(colors[3], score / 1.5);
+  if (score <= 2.5) return colors[3].clone().lerp(colors[4], score - 1.5);
+  return colors[4].clone().lerp(colors[5], Math.min(1, (score - 2.5) / 1.5));
 }
 
 type SegmentData = {
@@ -90,9 +92,12 @@ type SegmentData = {
   length: number;
 };
 
-function getYearGeometry(record: YearRecord, measure: Measure, palette: readonly string[]) {
+function getYearGeometry(record: YearRecord, measure: Measure, palette: RhinePalette) {
   const [minimum, maximum] = extents[measure];
   const signalColors = palette.map((color) => new THREE.Color(color)) as [
+    THREE.Color,
+    THREE.Color,
+    THREE.Color,
     THREE.Color,
     THREE.Color,
     THREE.Color
@@ -211,7 +216,7 @@ function YearLine({
 }: {
   record: YearRecord;
   measure: Measure;
-  palette: readonly string[];
+  palette: RhinePalette;
   age: number;
   index: number;
   visibleIndex: number;
@@ -231,10 +236,10 @@ function YearLine({
     ? 1 + (handoffAlpha - 1) * handoffProgress
     : previousProminence + (prominence - previousProminence) * drawProgress;
   const width = isNewest
-    ? 2.1 + (handoffWidth - 2.1) * handoffProgress
+    ? 4.2 + (handoffWidth - 4.2) * handoffProgress
     : isPrevious
-      ? handoffWidth + (0.9 - handoffWidth) * drawProgress
-      : 1.05;
+      ? handoffWidth + (1.9 - handoffWidth) * drawProgress
+      : 1.9;
   const targetLength = isNewest ? geometryData.totalLength * drawProgress : geometryData.totalLength;
   let traversedLength = 0;
 
@@ -331,9 +336,9 @@ function RiverField({
 }) {
   const config = measureConfig[measure];
   const [minimum, maximum] = extents[measure];
-  const palette = dark ? palettes.dark : palettes.light;
+  const palette = dark ? rhinePalettes.dark : rhinePalettes.light;
   const yRotationDegrees = perspective * maxYRotationDegrees;
-  const depthSpan = ((visibleIndex + handoffProgress) / Math.max(years.length - 1, 1)) * 5.2;
+  const depthSpan = ((visibleIndex + handoffProgress) / Math.max(years.length - 1, 1)) * fieldDepth;
   const rotationStrength = Math.min(
     1,
     Math.max(Math.abs(xRotationDegrees) / 35, Math.abs(yRotationDegrees) / 35)
@@ -349,7 +354,7 @@ function RiverField({
         >
           {config.title}
           {showAxes && (
-            <span className="font-sans text-[10px] font-normal tracking-normal text-gray-500/65 normal-case dark:text-gray-400/65">
+            <span className="font-sans text-[11px] font-normal tracking-normal text-gray-500/80 normal-case dark:text-gray-400/80">
               at Lobith · {config.unit}
             </span>
           )}
@@ -384,7 +389,7 @@ function RiverField({
               {availableYears.map((record, index) => {
                 const age = visibleIndex - index;
                 const effectiveAge = age + handoffProgress;
-                const z = depthSpan / 2 - (effectiveAge / Math.max(years.length - 1, 1)) * 5.2;
+                const z = depthSpan / 2 - (effectiveAge / Math.max(years.length - 1, 1)) * fieldDepth;
                 const recedingDepth = 1 - Math.exp(-effectiveAge / 20);
                 const stackInfluence = 1 - rotationStrength;
                 return (
@@ -412,11 +417,11 @@ function RiverField({
 
         {showAxes && (
           <>
-            <div className="pointer-events-none absolute top-4 bottom-7 left-3 flex flex-col justify-between text-[10px] text-gray-500/55 tabular-nums dark:text-gray-400/55">
+            <div className="pointer-events-none absolute top-4 bottom-7 left-3 flex flex-col justify-between text-[11px] text-gray-500/75 tabular-nums dark:text-gray-400/75">
               <span>{numberFormat.format(maximum)}</span>
               <span>{numberFormat.format(minimum)}</span>
             </div>
-            <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex justify-between text-[10px] text-gray-500/55 dark:text-gray-400/55">
+            <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex justify-between text-[11px] text-gray-500/75 dark:text-gray-400/75">
               {monthLabels.map((label) => (
                 <span key={label}>{label}</span>
               ))}
@@ -522,6 +527,13 @@ export function RhineYearField() {
   const frameRef = useRef<number | null>(null);
   const timelineRef = useRef(0);
   const rotationOverrideRef = useRef<number | null>(null);
+  const rotationDragRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    xRotation: number;
+    yRotation: number;
+  } | null>(null);
   const speedRef = useRef(1.5);
   const [fieldStates, setFieldStates] = useState<[FieldState, FieldState]>([emptyField, emptyField]);
   const [status, setStatus] = useState<TimelineStatus | null>({
@@ -537,7 +549,6 @@ export function RhineYearField() {
   const [xRotationDegrees, setXRotationDegrees] = useState(defaultXRotationDegrees);
   const dark = useDarkTheme();
   const displayIndex = status?.visibleIndex ?? manualIndex;
-  const rotationDegrees = Math.round(fieldStates[0].perspective * maxYRotationDegrees);
   const summary = useMemo(() => getYearSummary(years[displayIndex]), [displayIndex]);
 
   const stopAnimation = useCallback(() => {
@@ -637,8 +648,41 @@ export function RhineYearField() {
     ]);
   };
 
-  const onXRotationChange = (degrees: number) => {
-    setXRotationDegrees(degrees);
+  const startRotationDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    rotationDragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      xRotation: xRotationDegrees,
+      yRotation: fieldStates[0].perspective * maxYRotationDegrees
+    };
+  };
+
+  const continueRotationDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = rotationDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    const nextXRotation = Math.max(
+      -maxXRotationDegrees,
+      Math.min(maxXRotationDegrees, drag.xRotation - (event.clientY - drag.startY) * 0.3)
+    );
+    const nextYRotation = Math.max(
+      -maxYRotationDegrees,
+      Math.min(maxYRotationDegrees, drag.yRotation + (event.clientX - drag.startX) * 0.3)
+    );
+    setXRotationDegrees(nextXRotation);
+    onRotationChange(nextYRotation);
+  };
+
+  const finishRotationDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (rotationDragRef.current?.pointerId !== event.pointerId) return;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    rotationDragRef.current = null;
   };
 
   const changeSpeed = (direction: -1 | 1) => {
@@ -655,11 +699,19 @@ export function RhineYearField() {
       className="not-prose my-10 w-full"
       aria-label="The Rhine at Lobith through time"
     >
-      <div className="mb-5 border-b border-gray-200 pb-4 dark:border-gray-800">
+      <div className="mb-5 flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
         <p className="nimbus m-0 text-3xl leading-none tracking-tight tabular-nums">{years[displayIndex].year}</p>
+        <span className="text-xs text-gray-500 dark:text-gray-400">Drag charts to rotate</span>
       </div>
 
-      <div className="space-y-12">
+      <div
+        className="touch-none cursor-grab space-y-12 active:cursor-grabbing"
+        aria-label="Drag the 3D charts left, right, up, or down to rotate them"
+        onPointerDown={startRotationDrag}
+        onPointerMove={continueRotationDrag}
+        onPointerUp={finishRotationDrag}
+        onPointerCancel={finishRotationDrag}
+      >
         <RiverField
           measure={0}
           visibleIndex={fieldStates[0].visibleIndex}
@@ -685,10 +737,19 @@ export function RhineYearField() {
       </div>
 
       {showGuides && (
-        <div className="mt-3 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-          <span>Below average</span>
-          <span className="h-1.5 min-w-24 flex-1 bg-gradient-to-r from-[#007cc3] via-[#9ca3af] to-[#d24f2f] dark:from-[#45c3ff] dark:via-[#6b7280] dark:to-[#ff7a4f]" />
-          <span>Above average</span>
+        <div className="mt-3 text-xs text-gray-600 dark:text-gray-300">
+          <span
+            className="block h-1.5 w-full"
+            style={{
+              background: `linear-gradient(to right, ${rhinePalettes[dark ? 'dark' : 'light'].join(', ')})`
+            }}
+            aria-hidden="true"
+          />
+          <div className="mt-1.5 grid grid-cols-3 gap-2">
+            <span>Below average</span>
+            <span className="text-center">Typical</span>
+            <span className="text-right">Above average</span>
+          </div>
         </div>
       )}
 
@@ -763,32 +824,6 @@ export function RhineYearField() {
           max={years.length - 1}
           value={displayIndex}
           onChange={(event) => onYearChange(Number(event.target.value))}
-        />
-
-        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-x-rotation">
-          X-axis rotation {xRotationDegrees}°
-        </label>
-        <input
-          id="lobith-x-rotation"
-          className="mb-5 w-full accent-gray-900 dark:accent-gray-100"
-          type="range"
-          min={-maxXRotationDegrees}
-          max={maxXRotationDegrees}
-          value={xRotationDegrees}
-          onChange={(event) => onXRotationChange(Number(event.target.value))}
-        />
-
-        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-rotation">
-          Y-axis rotation {rotationDegrees}°
-        </label>
-        <input
-          id="lobith-rotation"
-          className="w-full accent-gray-900 dark:accent-gray-100"
-          type="range"
-          min={-maxYRotationDegrees}
-          max={maxYRotationDegrees}
-          value={rotationDegrees}
-          onChange={(event) => onRotationChange(Number(event.target.value))}
         />
 
         <p className="mt-4 mb-0 text-xs text-gray-500 tabular-nums dark:text-gray-400" aria-live="polite">

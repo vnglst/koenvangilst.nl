@@ -6,7 +6,7 @@ const location = 'lobith.bovenrijn.tolkamer';
 const startYear = 1901;
 const now = new Date();
 const endYear = now.getFullYear();
-const outputPath = resolve('content/rhine-at-lobith/lobith-daily.json');
+const outputPath = resolve('content/rhine-highs-and-lows/lobith-daily.json');
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds));
 
