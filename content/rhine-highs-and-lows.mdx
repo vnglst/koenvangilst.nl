@@ -1,5 +1,5 @@
 ---
-title: The Rhine at Lobith, year by year
+title: The highs and lows of the Rhine
 publishedAt: '2026-08-22'
 summary: A century of river flow and water level measurements becomes a moving landscape, revealing what water level alone can hide.
 tags:
@@ -8,11 +8,30 @@ tags:
   - water
 ---
 
-import { RhineYearField } from './rhine-at-lobith/RhineYearField'
+import { RhineYearField } from './rhine-highs-and-lows/RhineYearField'
 
 This summer, low water levels in the Netherlands' rivers have caused widespread concern and prompted much discussion. When I was young, however, high water seemed to be the greater threat.
 
 I vividly remember the flood of 1995, when around 250,000 people had to be evacuated. My school closed for two weeks, and when my room flooded, I had to move upstairs. Despite all that, it felt a little like an extra Christmas holiday.
+
+<Image
+  src="/static/images/rhine-flood-everdingen-2007.jpg"
+  alt="High water on the Lek near Everdingen"
+  width={1920}
+  height={1080}
+  label={
+    <>
+      High water on the Lek near Lekdijk 40 in Everdingen, my home at the time of the 1995 flood.
+      <sup>
+        <a href="#user-content-fn-1" aria-label="See photo credit">
+          1
+        </a>
+      </sup>
+    </>
+  }
+/>
+
+<p className="sr-only">Photo credit[^1]</p>
 
 I wanted to know whether my memory matched the historical record. Has the Rhine shifted from frequent high water to lower levels? I downloaded the data to see what patterns might emerge.
 
@@ -28,7 +47,7 @@ Each line below shows one year at Lobith, from January to December. The record b
 
 The river bed near Lobith has gradually eroded. River engineering made the channel narrower and fixed it in place, while less sediment arrives to replace what the current carries away. As the bed sinks, the water surface also sits lower, even when the same volume of water passes Lobith. [Research into the Dutch Rhine branches](https://research.tudelft.nl/files/84190833/YllaArbos_etal_2020_RiverFlow.pdf) documents this long-term change in bed level.
 
-Color compares each day with the historical average for that time of year. Blue is below average, grey is close to it and orange is above it. When both views are shown, matching ridges represent the same dates and years.
+In both panels, color compares each day with the historical average for that time of year. Blue is below average, grey is close to it and orange is above it, with the outer shades reserved for the most extreme days. Matching ridges represent the same dates and years.
 
 One difference stands out. On days when flow was between 1,800 and 2,200 m³/s, the median water level fell from 1,110 cm NAP in 1901-1920 to 908 cm NAP in 2006-2025. That is about two metres lower for a comparable flow.
 
@@ -37,3 +56,5 @@ This changes how the record should be read. Water level combines changes in flow
 ## Data
 
 The daily record runs from 1901 through 2025, plus 2026 through the latest observation. The source is [Rijkswaterstaat WaterWebservices](https://rijkswaterstaatdata.nl/waterdata/) at Lobith. Flow uses daily discharge values. Water level is measured in centimetres relative to the national reference datum, NAP, and averaged by day when multiple observations are available.
+
+[^1]: Photo: © Fotografie George Burggraaff, 2007, as published by the [Culemborgse Courant](https://www.culemborgsecourant.nl/nieuws/nieuws/413452/deel-uw-persoonlijke-verhaal-over-hoge-water-en-evacuatie-199).
