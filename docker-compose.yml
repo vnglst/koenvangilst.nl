@@ -6,42 +6,9 @@ services:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
     expose:
       - '80'
-    volumes:
-      - ${PHOTOGRAPHY_DATA_SOURCE:-photography-data}:/data/photography:ro
-      - og-data:/data/og:ro
-    environment:
-      PHOTOS_MANIFEST_PATH: /data/photography/photos-data.json
     healthcheck:
       test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://127.0.0.1/health']
       interval: 30s
       timeout: 5s
       start_period: 15s
       retries: 3
-
-  og-generator:
-    build:
-      context: .
-      dockerfile: og-generator/Dockerfile
-    depends_on:
-      website:
-        condition: service_healthy
-    restart: 'no'
-    volumes:
-      - og-data:/data/og
-
-  zipline-sync:
-    build:
-      context: ./zipline-sync
-    volumes:
-      - photography-data:/data/photography
-    environment:
-      ZIPLINE_URL: ${ZIPLINE_URL:-}
-      ZIPLINE_TOKEN: ${ZIPLINE_TOKEN:-}
-      ZIPLINE_ORIGINALS_FOLDER_ID: ${ZIPLINE_ORIGINALS_FOLDER_ID:-}
-      PHOTOS_DATA_PATH: /data/photography/photos-data.json
-      PHOTOS_OUTPUT_DIR: /data/photography/files
-      PHOTOS_PUBLIC_BASE_URL: /photos
-
-volumes:
-  photography-data:
-  og-data:

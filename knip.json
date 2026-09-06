@@ -3,5 +3,5 @@
   "entry": ["src/routes/**/*.{ts,tsx}", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts"],
   "ignore": ["zipline-sync/**"],
   "ignoreDependencies": ["@types/mdx", "husky"],
-  "ignoreBinaries": ["srvx"]
+  "ignoreBinaries": []
 }

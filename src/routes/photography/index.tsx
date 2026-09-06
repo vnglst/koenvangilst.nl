@@ -1,15 +1,21 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 
 import { Container } from '#/components/layout/Container';
-import { getPhotos } from '#/lib/photos';
+import type { PhotoType } from '#/lib/photos';
 
 import { PhotoGallery } from './_components/PhotoGallery';
 
-const fetchPhotos = createServerFn({ method: 'GET' }).handler(() => getPhotos());
+async function getStaticPhotos(): Promise<PhotoType[]> {
+  if (typeof window !== 'undefined') {
+    const response = await fetch('/photos-data.json');
+    if (!response.ok) throw new Error('Unable to load photography data');
+    return response.json() as Promise<PhotoType[]>;
+  }
+  return (await import('#/lib/photos')).getPhotos();
+}
 
 export const Route = createFileRoute('/photography/')({
-  loader: () => fetchPhotos(),
+  loader: () => getStaticPhotos(),
   head: () => ({
     meta: [
       { title: 'Photography | Koen van Gilst' },

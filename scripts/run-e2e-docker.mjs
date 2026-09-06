@@ -2,7 +2,7 @@
  * Build and run a production-like Docker container, then execute the Playwright
  * e2e suite against it.
  *
- * Mirrors the production deployment (Nginx reverse proxy + Node SSR).
+ * Mirrors the production deployment (Nginx serving a static build).
  *
  * Tests run serially (workers=1) because the emulated/limited container can be
  * overwhelmed by Playwright's default parallel workers.
@@ -59,6 +59,14 @@ function verifyProductionEndpoints() {
   run(`curl -sf ${BASE_URL}/og/fallback.png -o /dev/null`);
   run(`curl -sfI ${BASE_URL}/ | grep -i 'content-security-policy:'`);
   run(`curl -sfI ${BASE_URL}/fonts/ibm-plex-sans-400.woff2 | grep -i 'cache-control:.*immutable'`);
+  try {
+    execSync(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} exec -T website node --version`, {
+      stdio: 'ignore'
+    });
+    throw new Error('The static website image unexpectedly contains a Node.js runtime');
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('unexpectedly')) throw error;
+  }
 }
 
 async function main() {
@@ -70,16 +78,14 @@ async function main() {
       ...process.env,
       SOURCE_COMMIT: sourceCommit,
       WEBSITE_PORT: PORT,
-      PHOTOGRAPHY_DATA_SOURCE: './e2e/fixtures/photography',
       ...(platform ? { DOCKER_DEFAULT_PLATFORM: platform } : {})
     };
     const composeOptions = { env: environment };
 
-    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} build website og-generator`, composeOptions);
+    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} build website`, composeOptions);
     run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} up -d website`, composeOptions);
 
     await waitForHealth();
-    run(`docker compose -p ${COMPOSE_PROJECT} ${COMPOSE_FILES} up --no-deps og-generator`, composeOptions);
     verifyProductionEndpoints();
 
     const exitCode = await runTests();

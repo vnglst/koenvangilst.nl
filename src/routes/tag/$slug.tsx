@@ -1,5 +1,4 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 
 import { Heading } from '#/components/content/Heading';
 import { Container } from '#/components/layout/Container';
@@ -9,25 +8,23 @@ import { TagLink } from '#/components/ui/Tag';
 import { desluggify, sluggify } from '#/lib/sluggify';
 import { jsonLdBreadcrumb } from '#/lib/json-ld';
 import { createTagOgImage } from '#/lib/og-image.mjs';
+import { getPosts } from '#/cms/posts-server';
 
-const getTagData = createServerFn({ method: 'GET' })
-  .validator((slug: string) => slug)
-  .handler(async ({ data: slug }) => {
-    const { getPosts } = await import('#/cms/posts-server');
-    const allPosts = getPosts();
-    const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(slug));
-    const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
-    const tag = uniqueTags.find((candidate) => sluggify(candidate) === slug);
+function getTagData(slug: string) {
+  const allPosts = getPosts();
+  const posts = allPosts.filter((p) => p.tagsAsSlugs?.includes(slug));
+  const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags))];
+  const tag = uniqueTags.find((candidate) => sluggify(candidate) === slug);
 
-    if (posts.length === 0 || !tag) {
-      throw notFound();
-    }
+  if (posts.length === 0 || !tag) {
+    throw notFound();
+  }
 
-    return { posts, tag, uniqueTags };
-  });
+  return { posts, tag, uniqueTags };
+}
 
 export const Route = createFileRoute('/tag/$slug')({
-  loader: async ({ params }) => getTagData({ data: params.slug }),
+  loader: ({ params }) => getTagData(params.slug),
   head: ({ loaderData, params }) => {
     const tag = loaderData?.tag ?? desluggify(params.slug);
     const postCount = loaderData?.posts.length ?? 0;

@@ -12,8 +12,32 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { execSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 import { remarkWordCount } from './src/lib/remark-word-count.ts';
+
+const contentDir = path.join(process.cwd(), 'content');
+const postSlugs = readdirSync(contentDir)
+  .filter((file) => file.endsWith('.mdx'))
+  .map((file) => file.slice(0, -'.mdx'.length));
+const tagSlugs = [
+  ...new Set(
+    postSlugs.flatMap((slug) => {
+      const source = readFileSync(path.join(contentDir, `${slug}.mdx`), 'utf8');
+      const tags = source.match(/^tags:\s*\n((?:\s*-.*\n?)+)/m)?.[1] ?? '';
+      return [...tags.matchAll(/^\s*-\s*['"]?(.+?)['"]?\s*$/gm)]
+        .map((match) => match[1].trim().toLowerCase().split(' ').join('-'))
+        .filter((tag) => tag !== '--');
+    })
+  )
+];
+const photoIds = (() => {
+  try {
+    return (JSON.parse(readFileSync('public/photos-data.json', 'utf8')) as Array<{ id: number }>).map(({ id }) => id);
+  } catch {
+    return [];
+  }
+})();
 
 const commitHash = (() => {
   // Prefer SOURCE_COMMIT injected by Docker/CI (git history not available in builder)
@@ -75,6 +99,19 @@ const config = defineConfig({
       providerImportSource: '@mdx-js/react'
     }),
     tanstackStart({
+      prerender: {
+        enabled: true,
+        autoStaticPathsDiscovery: true,
+        crawlLinks: false,
+        failOnError: true
+      },
+      pages: [
+        ...postSlugs.map((slug) => ({ path: `/lab/${slug}` })),
+        ...tagSlugs.map((slug) => ({ path: `/tag/${slug}` })),
+        ...photoIds.map((id) => ({ path: `/photography/${id}` })),
+        { path: '/feed.xml', prerender: { enabled: true, outputPath: '/feed.xml', autoSubfolderIndex: false } },
+        { path: '/sitemap.xml', prerender: { enabled: true, outputPath: '/sitemap.xml', autoSubfolderIndex: false } }
+      ],
       router: {
         // Exclude files/dirs with single _ prefix (components, etc.) but keep __root.tsx
         routeFileIgnorePattern: '^_(?!_)'

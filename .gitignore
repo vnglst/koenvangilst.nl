@@ -16,7 +16,6 @@ todos.json
 public/og/*
 !public/og/fallback.png
 public/photos/
-public/photos-data.json
 
 # Playwright test artifacts
 test-results/
