@@ -24,7 +24,7 @@ RUN mkdir -p /run/nginx /var/cache/nginx
 
 # Nginx configuration (replaces default site)
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-RUN rm -f /etc/nginx/http.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 
 # Keep code-dependent layers last so normal deploys reuse the complete runtime base.
 # Pre-rendered HTML, client bundles, photography snapshot, and generated OG images.
