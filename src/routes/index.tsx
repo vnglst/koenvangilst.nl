@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
@@ -8,13 +7,13 @@ import { Link } from '#/components/ui/Link';
 import { dateFormatter } from '#/lib/formatters';
 import { jsonLdPerson } from '#/lib/json-ld';
 import { createHomeOgImage } from '#/lib/og-image.mjs';
+import { getPosts } from '#/cms/posts-server';
 
-const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getPosts } = await import('#/cms/posts-server');
+function getRecentArticles() {
   return getPosts()
     .filter((post) => post.tags.includes('article'))
     .slice(0, 5);
-});
+}
 
 const SITE_URL = 'https://koenvangilst.nl';
 const HOME_OG_IMAGE = `${SITE_URL}${createHomeOgImage().url}`;

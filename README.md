@@ -16,7 +16,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 ## Tech Stack
 
 - **Framework**: [TanStack Start](https://tanstack.com/start) 1.x with [TanStack Router](https://tanstack.com/router) (file-based routing)
-- **Runtime**: [React 19](https://react.dev/) with server functions via Vite
+- **Runtime**: [React 19](https://react.dev/) in the browser; Nginx serves generated files
 - **Build**: Vite 8 + `@tanstack/react-start/plugin/vite` (Node.js adapter, default target)
 - **Content**: [MDX](https://github.com/mdx-js/mdx) compiled at build time via [@mdx-js/rollup](https://mdxjs.com/packages/rollup/) + `import.meta.glob`
 - **Data fetching**: TanStack Query (client) + `createServerFn` loaders
@@ -26,7 +26,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
-- **Server**: Node.js 26 on Hetzner CX33 (x86_64) via Docker + Coolify
+- **Server**: Nginx on Hetzner CX33 (x86_64) via Docker + Coolify
 - **Reverse Proxy**: Nginx (serves static assets, rate-limiting, security headers, health checks)
 
 ## Project Structure
@@ -113,7 +113,7 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 
 ## Features
 
-- **Server-Side Rendering**: Full SSR via TanStack Start for optimal performance
+- **Static generation**: HTML is generated at build time for every public route
 - **RSS Feed**: Automatically generated from blog posts
 - **Sitemap**: Dynamic sitemap including all content
 - **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images, generated from Zipline originals and served from the website's local photo mirror
@@ -121,15 +121,14 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **Reading Time**: Calculated for each blog post
 - **Tag System**: Categorized content with slug-based URLs
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
-- **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
 ### Photography Sync
 
-Photography delivery is handled by the `zipline-sync/` service in the same Docker Compose app as the website. Original uploads live in Zipline's `photography-originals` folder, the sync job downloads those originals, generates hashed JPEG/WebP variants plus a `photos-data.json` manifest into the shared `photography-data` volume, and Nginx serves the optimized files from `/photos/*` with immutable cache headers. The website reads the local manifest from `/data/photography/photos-data.json`, so the gallery keeps serving the last successful sync if Zipline is down.
+Photography is published as a snapshot. `public/photos-data.json` is versioned and provides the gallery, RSS feed, sitemap, and individual photo pages. During a build, `npm run prepare:photos` validates or downloads each referenced variant from the current site into the build artifact. To publish new uploads, run the existing local photo sync with credentials, review and commit the updated manifest, then deploy.
 
 ### Open Graph Image Generation
 
-Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic OG fallback image with the site title and avatar, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
+Open Graph images are generated during the build and served as content-addressed static files from `/og/*` with immutable cache headers.
 
 The volume manifest and hashed PNG files persist across deployments. Existing files are deliberately retained because previously published OG URLs must remain valid. Prune the volume manually only when old URLs no longer need to work. In Coolify versions that include stopped one-shot services in application health evaluation, mark `og-generator` as excluded from health checks in the Coolify service settings.
 

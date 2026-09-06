@@ -1,42 +1,39 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
 import { jsonLdArticle } from '#/lib/json-ld';
 import { createPostOgImage } from '#/lib/og-image.mjs';
+import { getPost, getPosts } from '#/cms/posts-server';
 
-const getLabPost = createServerFn({ method: 'GET' })
-  .validator((data: { slug: string }) => data)
-  .handler(async ({ data }) => {
-    const { getPost, getPosts } = await import('#/cms/posts-server');
-    const post = getPost(data.slug);
-    if (!post) throw notFound();
+function getLabPost(slug: string) {
+  const post = getPost(slug);
+  if (!post) throw notFound();
 
-    const allPosts = getPosts();
-    const currentIndex = allPosts.findIndex((p) => p.slug === data.slug);
-    const prevPost = allPosts[currentIndex + 1];
-    const nextPost = allPosts[currentIndex - 1];
+  const allPosts = getPosts();
+  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+  const prevPost = allPosts[currentIndex + 1];
+  const nextPost = allPosts[currentIndex - 1];
 
-    return {
-      slug: post.slug,
-      title: post.title,
-      summary: post.summary,
-      publishedAt: post.publishedAt,
-      readingTime: post.readingTime,
-      tags: post.tags,
-      tagsAsSlugs: post.tagsAsSlugs,
-      image: post.image,
-      url: post.url,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
-      prevSlug: prevPost?.slug ?? null,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
-      nextSlug: nextPost?.slug ?? null
-    };
-  });
+  return {
+    slug: post.slug,
+    title: post.title,
+    summary: post.summary,
+    publishedAt: post.publishedAt,
+    readingTime: post.readingTime,
+    tags: post.tags,
+    tagsAsSlugs: post.tagsAsSlugs,
+    image: post.image,
+    url: post.url,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
+    prevSlug: prevPost?.slug ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
+    nextSlug: nextPost?.slug ?? null
+  };
+}
 
 export const Route = createFileRoute('/lab/$slug')({
-  loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
+  loader: ({ params }) => getLabPost(params.slug),
   head: ({ loaderData }) => {
     const ogImage = loaderData
       ? `https://koenvangilst.nl${

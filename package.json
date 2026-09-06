@@ -9,8 +9,10 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "sync:photos": "node scripts/sync-photos.mjs",
-    "build": "vite build",
-    "start": "srvx --entry dist/server/server.js",
+    "prepare:photos": "node scripts/download-photo-assets.mjs",
+    "prepare:og": "node scripts/generate-og-images.mjs",
+    "build": "PHOTOS_MANIFEST_PATH=public/photos-data.json npm run prepare:photos && npm run prepare:og && PHOTOS_MANIFEST_PATH=public/photos-data.json vite build",
+    "start": "vite preview",
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "playwright test",

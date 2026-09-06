@@ -10,10 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as HealthRouteImport } from './routes/health'
-import { Route as LlmContextRouteImport } from './routes/llm-context'
-import { Route as OgRouteImport } from './routes/og'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
@@ -30,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
   id: '/feed.xml',
   path: '/feed.xml',
@@ -38,16 +42,6 @@ const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
 const HealthRoute = HealthRouteImport.update({
   id: '/health',
   path: '/health',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LlmContextRoute = LlmContextRouteImport.update({
-  id: '/llm-context',
-  path: '/llm-context',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OgRoute = OgRouteImport.update({
-  id: '/og',
-  path: '/og',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -103,10 +97,9 @@ const LabPrognosis2100IndexRoute = LabPrognosis2100IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
-  '/llm-context': typeof LlmContextRoute
-  '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
@@ -120,10 +113,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
-  '/llm-context': typeof LlmContextRoute
-  '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
@@ -138,10 +130,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
-  '/llm-context': typeof LlmContextRoute
-  '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
@@ -157,10 +148,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/404'
     | '/feed.xml'
     | '/health'
-    | '/llm-context'
-    | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
     | '/photography/$photo'
@@ -174,10 +164,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/404'
     | '/feed.xml'
     | '/health'
-    | '/llm-context'
-    | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
     | '/photography/$photo'
@@ -191,10 +180,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/404'
     | '/feed.xml'
     | '/health'
-    | '/llm-context'
-    | '/og'
     | '/sitemap.xml'
     | '/lab/$slug'
     | '/photography/$photo'
@@ -209,10 +197,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   HealthRoute: typeof HealthRoute
-  LlmContextRoute: typeof LlmContextRoute
-  OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LabSlugRoute: typeof LabSlugRoute
   PhotographyPhotoRoute: typeof PhotographyPhotoRoute
@@ -234,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/feed.xml': {
       id: '/feed.xml'
       path: '/feed.xml'
@@ -246,20 +240,6 @@ declare module '@tanstack/react-router' {
       path: '/health'
       fullPath: '/health'
       preLoaderRoute: typeof HealthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/llm-context': {
-      id: '/llm-context'
-      path: '/llm-context'
-      fullPath: '/llm-context'
-      preLoaderRoute: typeof LlmContextRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/og': {
-      id: '/og'
-      path: '/og'
-      fullPath: '/og'
-      preLoaderRoute: typeof OgRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -337,10 +317,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
   FeedDotxmlRoute: FeedDotxmlRoute,
   HealthRoute: HealthRoute,
-  LlmContextRoute: LlmContextRoute,
-  OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   LabSlugRoute: LabSlugRoute,
   PhotographyPhotoRoute: PhotographyPhotoRoute,

@@ -1,15 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
 import { ProjectBrowser } from './_components/project-browser';
+import { getPosts } from '#/cms/posts-server';
 
-const getLabPosts = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getPosts } = await import('#/cms/posts-server');
+function getLabPosts() {
   return getPosts();
-});
+}
 
 export const Route = createFileRoute('/lab/')({
   validateSearch: (search: Record<string, unknown>) => ({
