@@ -75,7 +75,7 @@ function Home() {
               key={article.slug}
               className="flex items-baseline gap-3 overflow-hidden text-base text-gray-900 dark:text-gray-100"
             >
-              <span className="w-24 shrink-0 text-gray-600 tabular-nums dark:text-gray-400">
+              <span className="w-28 shrink-0 text-gray-600 tabular-nums dark:text-gray-400">
                 {dateFormatter(article.publishedAt)}
               </span>
               <Link className="min-w-0 flex-1 truncate font-normal" href={article.url || `/lab/${article.slug}`}>

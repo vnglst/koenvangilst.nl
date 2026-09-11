@@ -29,6 +29,14 @@ export function Disclaimer({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function Bleed({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="my-5 md:relative md:left-1/2 md:w-[min(1200px,calc(100vw-2rem))] md:max-w-none md:-translate-x-1/2 [&>img]:w-full">
+      {children}
+    </div>
+  );
+}
+
 function Waypoint({ href }: { href: string }) {
   return (
     <div className="my-5 md:ml-[-27px]">
@@ -44,6 +52,7 @@ const mdxComponents = {
   img: RoundedImage,
   Image: RoundedImage, // MDX compatibility alias for posts that use an Image component
   a: Link,
+  Bleed,
   Disclaimer,
   Waypoint
 };
