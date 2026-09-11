@@ -165,10 +165,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ErrorPage({ error }: { error: Error }) {
+function ErrorPage({ error }: { error: unknown }) {
   useEffect(() => {
     // If a lazy route chunk is missing after a deploy, reload to fetch fresh assets
-    if (/Failed to fetch dynamically imported module/.test(error.message)) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    if (/Failed to fetch dynamically imported module/.test(errorMessage)) {
       window.location.reload();
       return;
     }
