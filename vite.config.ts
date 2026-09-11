@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import { devtools } from '@tanstack/devtools-vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import viteReact from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -62,7 +61,6 @@ const config = defineConfig({
     }
   },
   plugins: [
-    ...(process.env.NODE_ENV !== 'production' ? [devtools()] : []),
     tailwindcss(),
     mdx({
       remarkPlugins: [remarkGfm, remarkFrontmatter, remarkWordCount, [remarkMdxFrontmatter, { name: 'frontmatter' }]],
