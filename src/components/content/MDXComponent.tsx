@@ -30,7 +30,11 @@ export function Disclaimer({ children }: { children: React.ReactNode }) {
 }
 
 export function Bleed({ children }: { children: React.ReactNode }) {
-  return <div className="bleed my-5 lg:w-[min(900px,calc(50vw+8rem))] [&>img]:w-full">{children}</div>;
+  return (
+    <div className="bleed my-5 max-w-full overflow-hidden lg:w-[min(900px,calc(50vw+8rem))] [&>img]:h-auto [&>img]:max-w-full [&>img]:w-full">
+      {children}
+    </div>
+  );
 }
 
 function Waypoint({ href }: { href: string }) {
