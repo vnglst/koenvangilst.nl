@@ -32,6 +32,12 @@ services:
   zipline-sync:
     build:
       context: ./zipline-sync
+    healthcheck:
+      test: ['CMD-SHELL', 'pidof crond >/dev/null']
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3
     volumes:
       - photography-data:/data/photography
     environment:
