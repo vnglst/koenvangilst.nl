@@ -2,6 +2,11 @@
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "entry": ["src/routes/**/*.{ts,tsx}", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts"],
   "ignore": ["zipline-sync/**"],
+  "ignoreFiles": ["scripts/generate-og-images.mjs", "src/lib/og-image.d.mts"],
   "ignoreDependencies": ["@types/mdx", "husky"],
-  "ignoreBinaries": ["srvx"]
+  "ignoreBinaries": ["srvx"],
+  "ignoreIssues": {
+    "src/components/content/MDXComponent.tsx": ["exports"],
+    "src/lib/og-image.mjs": ["exports", "duplicates"]
+  }
 }
