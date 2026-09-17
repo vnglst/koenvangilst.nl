@@ -57,14 +57,3 @@ export function jsonLdBreadcrumb(items: BreadcrumbItem[]) {
     }))
   };
 }
-
-export function jsonLdWebsite() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Koen van Gilst',
-    url: 'https://koenvangilst.nl',
-    description:
-      'Innovative engineer from the Netherlands, specialising in AI, developer tooling, and building high-performing engineering teams.'
-  };
-}
