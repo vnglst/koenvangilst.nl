@@ -15,6 +15,7 @@ export function createLocalPhotoSyncEnvironment() {
   const environment = {
     ...process.env,
     PHOTOS_DATA_PATH: path.join(process.cwd(), 'public/photos-data.json'),
+    POSTS_DATA_PATH: path.join(process.cwd(), 'public/posts-data.json'),
     PHOTOS_OUTPUT_DIR: path.join(process.cwd(), 'public/photos'),
     PHOTOS_PUBLIC_BASE_URL: '/photos'
   };

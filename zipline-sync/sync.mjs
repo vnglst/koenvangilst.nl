@@ -25,6 +25,10 @@ const ORIGINALS_FOLDER_ID = process.env.ZIPLINE_ORIGINALS_FOLDER_ID || '';
 const PHOTOS_DATA_PATH = process.env.PHOTOS_DATA_PATH || path.join(__dirname, 'photos-data.json');
 const PHOTOS_OUTPUT_DIR = process.env.PHOTOS_OUTPUT_DIR || path.join(__dirname, 'data/files');
 const PHOTOS_PUBLIC_BASE_URL = (process.env.PHOTOS_PUBLIC_BASE_URL || '/photos').replace(/\/+$/, '');
+const WEBSITE_URL = (process.env.WEBSITE_URL || 'http://website').replace(/\/+$/, '');
+const POSTS_DATA_PATH = process.env.POSTS_DATA_PATH || '';
+const PHOTOGRAPHY_DIR = path.dirname(PHOTOS_DATA_PATH);
+const BASE_URL = 'https://koenvangilst.nl';
 
 const WIDTHS = [480, 768, 1080, 1440, 1920, 2560];
 const CONCURRENCY = 3;
@@ -302,6 +306,65 @@ async function writePhotosData(photos) {
   log('[write]', `manifest ${path.relative(process.cwd(), PHOTOS_DATA_PATH)}`);
 }
 
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+async function updateFeeds(photos) {
+  let posts;
+  if (POSTS_DATA_PATH) {
+    posts = JSON.parse(await fs.readFile(POSTS_DATA_PATH, 'utf8'));
+  } else {
+    const response = await fetch(`${WEBSITE_URL}/posts-data.json`);
+    if (!response.ok) throw new Error(`Unable to load built post metadata: ${response.status}`);
+    posts = await response.json();
+  }
+  if (!Array.isArray(posts)) throw new Error('Built post metadata is not an array');
+
+  const items = [
+    ...posts.map((post) => ({
+      title: post.title,
+      url: `${BASE_URL}/lab/${post.slug}`,
+      date: post.publishedAt,
+      description: post.summary
+    })),
+    ...photos.map((photo) => ({
+      title: `Photo: ${photo.location ?? 'Unknown'}`,
+      url: `${BASE_URL}/photography/${photo.id}`,
+      date: photo.createdAt ?? new Date().toISOString(),
+      description: `A photograph taken in ${photo.location ?? 'an unknown location'}`,
+      enclosure: new URL(photo.src, BASE_URL).toString()
+    }))
+  ];
+
+  const itemXml = items
+    .map(
+      (item) =>
+        `  <item>\n    <title>${escapeXml(item.title)}</title>\n    <link>${escapeXml(item.url)}</link>\n    <pubDate>${new Date(item.date).toUTCString()}</pubDate>${item.description ? `\n    <description>${escapeXml(item.description)}</description>` : ''}${item.enclosure ? `\n    <enclosure url="${escapeXml(item.enclosure)}" />` : ''}\n  </item>`
+    )
+    .join('\n');
+  const feed = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Koen van Gilst</title>\n    <link>${BASE_URL}</link>\n    <description>Koen van Gilst</description>\n    <language>en</language>\n${itemXml}\n  </channel>\n</rss>`;
+
+  const staticUrls = ['', 'lab', 'photography'].map((page) => `<url><loc>${BASE_URL}/${page}</loc></url>`);
+  const postUrls = posts.map((post) => {
+    const lastmod = new Date(post.publishedAt).toISOString();
+    return `<url><loc>${BASE_URL}/lab/${escapeXml(post.slug)}</loc><lastmod>${lastmod}</lastmod></url>`;
+  });
+  const photoUrls = photos.map((photo) => {
+    const lastmod = photo.createdAt ? new Date(photo.createdAt).toISOString() : new Date().toISOString();
+    return `<url><loc>${BASE_URL}/photography/${photo.id}</loc><lastmod>${lastmod}</lastmod></url>`;
+  });
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  ${[...staticUrls, ...postUrls, ...photoUrls].join('\n  ')}\n</urlset>`;
+
+  await writeFileAtomic(path.join(PHOTOGRAPHY_DIR, 'feed.xml'), feed);
+  await writeFileAtomic(path.join(PHOTOGRAPHY_DIR, 'sitemap.xml'), sitemap);
+}
+
 async function main() {
   validateConfig();
   await fs.mkdir(PHOTOS_OUTPUT_DIR, { recursive: true });
@@ -347,6 +410,7 @@ async function main() {
     photo.id = index;
   });
 
+  await updateFeeds(photos);
   await writePhotosData(photos);
 
   await cleanupRemovedPhotos(removedPhotos);

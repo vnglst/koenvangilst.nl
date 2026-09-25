@@ -116,7 +116,7 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **Static generation**: HTML is generated at build time for every public route
 - **RSS Feed**: Automatically generated from blog posts
 - **Sitemap**: Dynamic sitemap including all content
-- **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images, generated from Zipline originals and served from the website's local photo mirror
+- **Photography Portfolio**: Image gallery with EXIF data and optimized responsive images, generated from Zipline originals and served from a shared photo volume
 - **Dark Mode**: Dark by default with user-preference override. Light mode is only shown when explicitly chosen via the theme toggle. System preference (`prefers-color-scheme`) is intentionally ignored in favor of a consistent dark-first experience.
 - **Reading Time**: Calculated for each blog post
 - **Tag System**: Categorized content with slug-based URLs
@@ -124,7 +124,7 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 
 ### Photography Sync
 
-Photography is published as a snapshot. `public/photos-data.json` is versioned and provides the gallery, RSS feed, sitemap, and individual photo pages. During a build, `npm run prepare:photos` validates or downloads each referenced variant from the current site into the build artifact. To publish new uploads, run the existing local photo sync with credentials, review and commit the updated manifest, then deploy.
+Photography data is published independently from website deployments. The `zipline-sync` service polls Zipline every ten minutes, writes optimized image variants and an atomic `photos-data.json` manifest to the shared `photography-data` volume, and refreshes the RSS feed and sitemap from the built post metadata. Nginx serves those files and images directly. The browser loads the live manifest on photography pages, so new uploads do not require a website rebuild.
 
 ### Open Graph Image Generation
 

@@ -1,21 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Container } from '#/components/layout/Container';
-import type { PhotoType } from '#/lib/photos';
-
 import { PhotoGallery } from './_components/PhotoGallery';
-
-async function getStaticPhotos(): Promise<PhotoType[]> {
-  if (typeof window !== 'undefined') {
-    const response = await fetch('/photos-data.json');
-    if (!response.ok) throw new Error('Unable to load photography data');
-    return response.json() as Promise<PhotoType[]>;
-  }
-  return (await import('#/lib/photos')).getPhotos();
-}
+import { usePhotos } from './_components/usePhotos';
 
 export const Route = createFileRoute('/photography/')({
-  loader: () => getStaticPhotos(),
   head: () => ({
     meta: [
       { title: 'Photography | Koen van Gilst' },
@@ -35,11 +24,11 @@ export const Route = createFileRoute('/photography/')({
 });
 
 function Photography() {
-  const photos = Route.useLoaderData();
+  const { photos } = usePhotos();
 
   return (
     <Container footer wide>
-      <PhotoGallery photos={photos} />
+      <PhotoGallery photos={photos ?? []} />
     </Container>
   );
 }

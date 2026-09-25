@@ -7,11 +7,11 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "node scripts/dev.mjs",
-    "sync:photos": "node scripts/sync-photos.mjs",
-    "prepare:photos": "node scripts/download-photo-assets.mjs",
+    "dev": "npm run prepare:posts && node scripts/dev.mjs",
+    "sync:photos": "npm run prepare:posts && node scripts/sync-photos.mjs",
+    "prepare:posts": "node scripts/prepare-posts-data.mjs",
     "prepare:og": "node scripts/generate-og-images.mjs",
-    "build": "PHOTOS_MANIFEST_PATH=public/photos-data.json npm run prepare:photos && npm run prepare:og && PHOTOS_MANIFEST_PATH=public/photos-data.json vite build",
+    "build": "npm run prepare:posts && npm run prepare:og && vite build",
     "start": "vite preview",
     "preview": "vite preview",
     "test": "vitest run",
@@ -49,6 +49,7 @@
     "echarts": "6.1.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "yaml": "2.9.0",
     "zod": "4.4.3",
     "zustand": "5.0.15"
   },

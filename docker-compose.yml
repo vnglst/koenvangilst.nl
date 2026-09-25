@@ -6,9 +6,40 @@ services:
         SOURCE_COMMIT: ${SOURCE_COMMIT:-unknown}
     expose:
       - '80'
+    volumes:
+      - photography-source:/data/photography:ro
     healthcheck:
       test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://127.0.0.1/health']
       interval: 30s
       timeout: 5s
       start_period: 15s
       retries: 3
+
+  zipline-sync:
+    build:
+      context: ./zipline-sync
+    depends_on:
+      website:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'pidof crond >/dev/null']
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3
+    volumes:
+      - photography-data:/data/photography
+    environment:
+      ZIPLINE_URL: ${ZIPLINE_URL:-}
+      ZIPLINE_TOKEN: ${ZIPLINE_TOKEN:-}
+      ZIPLINE_ORIGINALS_FOLDER_ID: ${ZIPLINE_ORIGINALS_FOLDER_ID:-}
+      PHOTOS_DATA_PATH: /data/photography/photos-data.json
+      PHOTOS_OUTPUT_DIR: /data/photography/files
+      PHOTOS_PUBLIC_BASE_URL: /photos
+      WEBSITE_URL: http://website
+
+volumes:
+  photography-data:
+    name: ${COMPOSE_PROJECT_NAME:-koenvangilstnl}_photography-data
+  photography-source:
+    name: ${PHOTOGRAPHY_DATA_SOURCE:-${COMPOSE_PROJECT_NAME:-koenvangilstnl}_photography-data}

@@ -16,6 +16,10 @@ todos.json
 public/og/*
 !public/og/fallback.png
 public/photos/
+public/photos-data.json
+public/posts-data.json
+public/feed-fallback.xml
+public/sitemap-fallback.xml
 
 # Playwright test artifacts
 test-results/

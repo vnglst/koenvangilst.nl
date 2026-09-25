@@ -31,14 +31,6 @@ const tagSlugs = [
     })
   )
 ];
-const photoIds = (() => {
-  try {
-    return (JSON.parse(readFileSync('public/photos-data.json', 'utf8')) as Array<{ id: number }>).map(({ id }) => id);
-  } catch {
-    return [];
-  }
-})();
-
 const commitHash = (() => {
   // Prefer SOURCE_COMMIT injected by Docker/CI (git history not available in builder)
   if (process.env.SOURCE_COMMIT) return process.env.SOURCE_COMMIT;
@@ -105,12 +97,14 @@ const config = defineConfig({
         crawlLinks: false,
         failOnError: true
       },
+      spa: {
+        enabled: true,
+        maskPath: '/photography',
+        prerender: { outputPath: '/photography-shell' }
+      },
       pages: [
         ...postSlugs.map((slug) => ({ path: `/lab/${slug}` })),
-        ...tagSlugs.map((slug) => ({ path: `/tag/${slug}` })),
-        ...photoIds.map((id) => ({ path: `/photography/${id}` })),
-        { path: '/feed.xml', prerender: { enabled: true, outputPath: '/feed.xml', autoSubfolderIndex: false } },
-        { path: '/sitemap.xml', prerender: { enabled: true, outputPath: '/sitemap.xml', autoSubfolderIndex: false } }
+        ...tagSlugs.map((slug) => ({ path: `/tag/${slug}` }))
       ],
       router: {
         // Exclude files/dirs with single _ prefix (components, etc.) but keep __root.tsx

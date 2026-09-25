@@ -1,20 +1,12 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
 
-import type { PhotoType } from '#/lib/photos';
+import { Container } from '#/components/layout/Container';
 
-import { FullScreenGallery } from './_components/PhotoGallery';
-
-async function getStaticPhotos(): Promise<PhotoType[]> {
-  if (typeof window !== 'undefined') {
-    const response = await fetch('/photos-data.json');
-    if (!response.ok) throw new Error('Unable to load photography data');
-    return response.json() as Promise<PhotoType[]>;
-  }
-  return (await import('#/lib/photos')).getPhotos();
-}
+import { FullScreenGallery, PhotoGallery } from './_components/PhotoGallery';
+import { usePhotos } from './_components/usePhotos';
 
 export const Route = createFileRoute('/photography/$photo')({
-  loader: () => getStaticPhotos(),
   head: ({ params }) => ({
     meta: [
       { title: 'Photography | Koen van Gilst' },
@@ -34,13 +26,28 @@ export const Route = createFileRoute('/photography/$photo')({
 });
 
 function PhotographyPhoto() {
-  const photos = Route.useLoaderData();
+  const { photos, failed } = usePhotos();
+  const navigate = useNavigate();
   const { photo: photoId } = Route.useParams();
-  const selectedIndex = photos.findIndex((photo) => photo.id === Number(photoId));
+  const selectedPhotoId = Number(photoId);
 
-  if (selectedIndex === -1) {
-    throw notFound();
+  useEffect(() => {
+    if (photos && !photos.some((photo) => photo.id === selectedPhotoId)) {
+      void navigate({ to: '/404', replace: true });
+    }
+  }, [navigate, photos, selectedPhotoId]);
+
+  if (!photos || failed) {
+    return (
+      <Container footer wide>
+        <PhotoGallery photos={[]} />
+      </Container>
+    );
   }
+
+  const selectedIndex = photos.findIndex((photo) => photo.id === selectedPhotoId);
+
+  if (selectedIndex === -1) return null;
 
   return <FullScreenGallery photos={photos} startIndex={selectedIndex} />;
 }
