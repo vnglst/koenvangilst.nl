@@ -34,7 +34,8 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
     apk add --no-cache ca-certificates su-exec nginx && \
-    mkdir -p /run/nginx /var/cache/nginx
+    mkdir -p /run/nginx /var/cache/nginx/ssr && \
+    chown -R nginx:nginx /var/cache/nginx
 
 # Production node_modules
 COPY --from=prod-deps --chown=appuser:nodejs /app/node_modules ./node_modules
