@@ -455,7 +455,7 @@ The Docker image uses a multi-stage build (`Dockerfile`) with **Nginx as the rev
 
 - **Nginx** listens on `0.0.0.0:80` inside the container and handles:
   - Static assets directly (client bundles, fonts, public files) with long cache headers
-  - Public SSR HTML cached on the first request for up to one hour; photography pages and XML feeds/sitemaps bypass this cache to keep live data fresh
+  - Public SSR HTML cached on the first request and retained across the container lifetime (up to the 256 MB cache limit); photography pages and XML feeds/sitemaps bypass this cache to keep live data fresh
   - Health checks (`/health`) directly without hitting Node.js
   - Rate limiting on SSR endpoints (30 req/s per IP)
   - Security headers including Content-Security-Policy, HSTS, X-Frame-Options
