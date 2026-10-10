@@ -68,7 +68,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 ├── vite.config.ts         # Vite build configuration
 ├── vitest.config.ts       # Vitest test configuration
 ├── knip.json              # Knip dependency analysis config
-├── eslint.config.js       # ESLint configuration
+├── .oxlintrc.json         # Oxlint configuration
 ├── prettier.config.js     # Prettier configuration
 └── tsconfig.json          # TypeScript configuration
 ```
@@ -170,8 +170,8 @@ npm run build        # Production build → dist/
 npm run start        # Run built server: srvx --entry dist/server/server.js
 npm run preview      # Preview production build locally
 npm run type-check   # TypeScript check (no emit)
-npm run lint         # ESLint
-npm run format       # Prettier + ESLint auto-fix
+npm run lint         # Oxlint + TypeScript 7 type-aware rules
+npm run format       # Prettier + Oxlint auto-fix
 npm run check        # Check formatting with Prettier
 npm run test              # Vitest (single run)
 npm run test:e2e          # Playwright end-to-end tests
@@ -190,7 +190,7 @@ Vite uses polling on macOS to avoid exhausting the operating system's low defaul
 
 ```bash
 npm run type-check  # TypeScript type checking
-npm run lint        # ESLint
+npm run lint        # Oxlint + TypeScript 7 type-aware rules
 npm run test        # Vitest unit tests
 ```
 
@@ -217,7 +217,7 @@ To smoke-test the production photography container against Zipline, run `npm run
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
 
-**Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (ESLint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
+**Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (Oxlint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
 ## Updating Dependencies
 

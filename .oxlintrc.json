@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "node", "typescript"],
+  "ignorePatterns": ["e2e/**", "src/routeTree.gen.ts"],
+  "options": {
+    "typeAware": true
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "import/no-cycle": "off",
+    "typescript/array-type": "off",
+    "typescript/await-thenable": "off",
+    "typescript/no-floating-promises": "off",
+    "typescript/no-unnecessary-condition": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-useless-default-assignment": "off",
+    "typescript/require-await": "off"
+  }
+}

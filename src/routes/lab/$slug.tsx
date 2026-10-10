@@ -28,9 +28,9 @@ const getLabPost = createServerFn({ method: 'GET' })
       tagsAsSlugs: post.tagsAsSlugs,
       image: post.image,
       url: post.url,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
+      // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
       prevSlug: prevPost?.slug ?? null,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- array index may be out of bounds at runtime
+      // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
       nextSlug: nextPost?.slug ?? null
     };
   });
