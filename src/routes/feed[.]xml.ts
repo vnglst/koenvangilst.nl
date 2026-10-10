@@ -8,7 +8,9 @@ export const Route = createFileRoute('/feed.xml')({
   server: {
     handlers: {
       GET: async () => {
-        const [posts, photos] = await Promise.all([getPosts(), getPhotos()]);
+        const photosPromise = getPhotos();
+        const posts = getPosts();
+        const photos = await photosPromise;
 
         const feed = new RSS({
           title: 'Koen van Gilst',

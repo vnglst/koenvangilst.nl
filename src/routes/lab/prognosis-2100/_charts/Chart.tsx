@@ -36,6 +36,8 @@ const ChartComponent = ({ options, className }: ChartProps) => {
     if (!chartRef.current) return;
 
     let chart: ReturnType<typeof echartsType.init> | null = null;
+    let cleanupChart: (() => void) | undefined;
+    let cancelled = false;
 
     const loadChart = async () => {
       // Dynamic imports - echarts will only be loaded when this component renders
@@ -60,6 +62,8 @@ const ChartComponent = ({ options, className }: ChartProps) => {
         import('echarts/components'),
         import('echarts/renderers')
       ]);
+
+      if (cancelled) return;
 
       // Register required components
       echarts.use([
@@ -92,16 +96,17 @@ const ChartComponent = ({ options, className }: ChartProps) => {
       const mediaQuery = window.matchMedia('(max-width: 768px)');
       mediaQuery.addEventListener('change', handleResize);
 
-      return () => {
+      cleanupChart = () => {
         window.removeEventListener('resize', handleResize);
         mediaQuery.removeEventListener('change', handleResize);
       };
     };
 
-    const cleanup = loadChart();
+    void loadChart().catch((error) => console.error('Failed to initialize chart:', error));
 
     return () => {
-      cleanup.then((cleanupFn) => cleanupFn?.());
+      cancelled = true;
+      cleanupChart?.();
       chart?.dispose();
     };
   }, [mode, options]);

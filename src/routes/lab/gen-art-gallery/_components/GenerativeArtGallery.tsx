@@ -66,6 +66,9 @@ function LazyIframe({ url, title, index }: LazyIframeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -77,14 +80,10 @@ function LazyIframe({ url, title, index }: LazyIframeProps) {
       { rootMargin: '100px', threshold: 0.01 }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    observer.observe(container);
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
+      observer.unobserve(container);
     };
   }, []);
 

@@ -369,7 +369,7 @@ const LandUseChartComponent = () => {
         .catch((error) => console.error('Error loading or processing data:', error));
     };
 
-    loadVisualization();
+    void loadVisualization();
   }, []);
 
   return (

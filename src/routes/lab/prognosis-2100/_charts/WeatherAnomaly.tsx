@@ -10,7 +10,7 @@ const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/ma
 
 type AnomalyProps = {
   type: 'sunshine' | 'rain' | 'temperature';
-  look: 'blog' | 'dashboard';
+  look?: 'blog' | 'dashboard';
 };
 
 export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {

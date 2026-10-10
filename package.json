@@ -17,7 +17,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:docker": "node scripts/run-e2e-docker.mjs",
     "test:photos:docker": "docker compose --env-file .env.zipline run --rm zipline-sync /app/sync.sh",
-    "type-check": "tsc --noEmit",
+    "type-check": "oxlint --type-aware --type-check",
     "lint": "oxlint",
     "format": "prettier --write . && oxlint --fix",
     "check": "prettier --check .",

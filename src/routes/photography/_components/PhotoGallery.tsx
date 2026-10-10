@@ -1,4 +1,4 @@
-import { useEffectEvent, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffectEvent, useLayoutEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useNavigate } from '@tanstack/react-router';
 
@@ -35,7 +35,7 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
   const captionFrameRef = useRef<number | null>(null);
   const [isCaptionVisible, setCaptionVisible] = useState(false);
 
-  const revealCaption = useEffectEvent(() => {
+  const revealCaption = useCallback(() => {
     if (captionFrameRef.current !== null) {
       cancelAnimationFrame(captionFrameRef.current);
     }
@@ -44,7 +44,7 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
       captionFrameRef.current = null;
       setCaptionVisible(true);
     });
-  });
+  }, []);
 
   useLayoutEffect(() => {
     setCaptionVisible(false);
@@ -59,7 +59,7 @@ function Photo({ photo, index, isActive }: { photo: PhotoType; index: number; is
         captionFrameRef.current = null;
       }
     };
-  }, [isActive]);
+  }, [isActive, revealCaption]);
 
   return (
     <div
@@ -118,7 +118,7 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
 
   const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      navigate({ to: '/photography', search: {} });
+      void navigate({ to: '/photography', search: {} });
       return;
     }
 

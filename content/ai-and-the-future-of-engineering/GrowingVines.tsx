@@ -240,7 +240,7 @@ function buildAllVines() {
 }
 
 export function GrowingVines() {
-  const vines = useMemo(buildAllVines, []);
+  const vines = useMemo(() => buildAllVines(), []);
 
   return (
     <div

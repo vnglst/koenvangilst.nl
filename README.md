@@ -169,7 +169,7 @@ npm run sync:photos  # Refresh the local photography mirror once
 npm run build        # Production build → dist/
 npm run start        # Run built server: srvx --entry dist/server/server.js
 npm run preview      # Preview production build locally
-npm run type-check   # TypeScript check (no emit)
+npm run type-check   # Oxlint TypeScript 7 type-check
 npm run lint         # Oxlint + TypeScript 7 type-aware rules
 npm run format       # Prettier + Oxlint auto-fix
 npm run check        # Check formatting with Prettier
@@ -189,7 +189,7 @@ Vite uses polling on macOS to avoid exhausting the operating system's low defaul
 **IMPORTANT**: Before committing code changes, ALWAYS run:
 
 ```bash
-npm run type-check  # TypeScript type checking
+npm run type-check  # Oxlint TypeScript 7 type-check
 npm run lint        # Oxlint + TypeScript 7 type-aware rules
 npm run test        # Vitest unit tests
 ```
