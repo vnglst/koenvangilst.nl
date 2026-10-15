@@ -339,6 +339,9 @@ h6 {
   line-height: 1.4;
   font-weight: 400;
 }
+.post-link.plain-link:hover {
+  text-decoration: none;
+}
 .post-link:hover .post-title {
   text-decoration: underline;
   text-underline-offset: 5px;
@@ -576,7 +579,7 @@ h6 {
 .art-toolbar {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   margin-bottom: 20px;
   color: var(--muted);
 }
@@ -976,4 +979,59 @@ html:has(.photo-viewer) {
 
 .content-image.home-portrait {
   height: 40px;
+}
+
+.page-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: -12px 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.page-back-link.plain-link:hover {
+  text-decoration: none;
+}
+.page-back-link:hover .page-back-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.talk-list {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 48px;
+}
+.talk-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.talk-context time {
+  margin-left: auto;
+}
+.talk-entry .editorial-heading {
+  max-width: 28ch;
+  margin-bottom: 12px;
+}
+.talk-entry p {
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+@media (max-width: 767px) {
+  .talk-context {
+    flex-direction: column;
+  }
+  .talk-context time {
+    margin-left: 0;
+  }
 }

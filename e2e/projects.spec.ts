@@ -6,12 +6,14 @@ test.describe('flagship lab projects', () => {
 
     await expect(page).toHaveTitle(/Prognosis 2100/i);
     await expect(page.getByRole('heading', { level: 1, name: /prognosis 2100/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /go back/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /back to lab/i })).toBeVisible();
 
     const toggle = page.getByRole('checkbox', { name: /show prognosis/i });
     await expect(toggle).not.toBeChecked();
     await toggle.setChecked(true, { force: true });
     await expect(toggle).toBeChecked();
+    await page.getByRole('link', { name: /back to lab/i }).click();
+    await expect(page).toHaveURL(/\/lab$/);
   });
 
   test('Ons Land renders its explainer content', async ({ page }) => {

@@ -1,6 +1,5 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Button } from '#/components/ui/Button';
-import { Icon } from '#/components/ui/Icon';
+import { BackToLab } from '#/components/layout/BackToLab';
+import { createFileRoute } from '@tanstack/react-router';
 import { Container } from '#/components/layout/Container';
 import { Toolbar } from '#/components/layout/Toolbar';
 import { Prose } from '#/components/content/Prose';
@@ -40,18 +39,10 @@ function PrognosisToggle() {
 }
 
 function Prognosis2100() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    if (window.history.length > 1) window.history.back();
-    else void navigate({ to: '/lab', search: { q: undefined } });
-  };
   return (
     <Container wide>
+      <BackToLab />
       <Toolbar className="mb-8">
-        <Button variant="ghost" className="text-sm" aria-label="Go back" onClick={goBack}>
-          <Icon icon="arrow-left" className="h-4 w-4" />
-          Back
-        </Button>
         <Heading level={1} className="mb-0!">
           Prognosis 2100
         </Heading>

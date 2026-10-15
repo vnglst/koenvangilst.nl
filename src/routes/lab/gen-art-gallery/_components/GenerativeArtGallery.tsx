@@ -1,3 +1,4 @@
+import { BackToLab } from '#/components/layout/BackToLab';
 import { useRef, useState } from 'react';
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
@@ -60,9 +61,9 @@ export function GenerativeArtGallery() {
   const project = GENERATIVE_ART_PROJECTS[currentIndex];
   return (
     <Container wide footer={false} layout="art">
+      <BackToLab />
       <Heading>Generative Art Gallery</Heading>
       <div className="art-toolbar">
-        <Link href="/lab">← Back to Lab</Link>
         <details className="art-index" ref={projectIndex}>
           <summary>All {GENERATIVE_ART_PROJECTS.length} projects</summary>
           <nav aria-label="Choose an art project">

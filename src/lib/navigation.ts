@@ -3,6 +3,7 @@ import { useRouterState } from '@tanstack/react-router';
 export const navItems = [
   { href: '/', label: 'About' },
   { href: '/lab', label: 'Lab' },
+  { href: '/talks', label: 'Talks' },
   { href: '/photography', label: 'Photography' }
 ];
 

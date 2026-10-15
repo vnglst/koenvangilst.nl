@@ -13,7 +13,7 @@ export const Route = createFileRoute('/sitemap.xml')({
         const posts = getPosts();
         const photos = await photosPromise;
 
-        const pages = ['', 'lab', 'photography'];
+        const pages = ['', 'lab', 'talks', 'photography'];
 
         const staticUrls = pages.map((page) => `<url><loc>${BASE_URL}/${page}</loc></url>`).join('\n  ');
 

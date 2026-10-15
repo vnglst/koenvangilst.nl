@@ -1,3 +1,4 @@
+import { BackToLab } from '#/components/layout/BackToLab';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 
@@ -72,6 +73,7 @@ function TagPage() {
           )
         }}
       />
+      <BackToLab />
       <PageHeader title={`Posts about ${tag}`} />
       <section className="mb-4 flex w-full flex-col gap-6">
         <Text tone="muted" className="mt-6">

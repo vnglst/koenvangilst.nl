@@ -1,3 +1,4 @@
+import { BackToLab } from '#/components/layout/BackToLab';
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
@@ -33,6 +34,7 @@ export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, im
   return (
     <Container layout="reading">
       <article className="reading-column">
+        <BackToLab />
         <PageHeader title={title}>
           <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.minutes > 0 ? readingTime.text : ''} />
           {tags && tags.length > 0 && (

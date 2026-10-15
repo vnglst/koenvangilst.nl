@@ -16,6 +16,7 @@ import { Route as HealthRouteImport } from './routes/health'
 import { Route as LlmContextRouteImport } from './routes/llm-context'
 import { Route as OgRouteImport } from './routes/og'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TalksRouteImport } from './routes/talks'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
@@ -58,6 +59,11 @@ const OgRoute = OgRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalksRoute = TalksRouteImport.update({
+  id: '/talks',
+  path: '/talks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabIndexRoute = LabIndexRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   LlmContextRoute: typeof LlmContextRoute
   OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TalksRoute: typeof TalksRoute
   LabSlugRoute: typeof LabSlugRoute
   PhotographyPhotoRoute: typeof PhotographyPhotoRoute
   TagSlugRoute: typeof TagSlugRoute
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talks': {
+      id: '/talks'
+      path: '/talks'
+      fullPath: '/talks'
+      preLoaderRoute: typeof TalksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/': {
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmContextRoute: LlmContextRoute,
   OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TalksRoute: TalksRoute,
   LabSlugRoute: LabSlugRoute,
   PhotographyPhotoRoute: PhotographyPhotoRoute,
   TagSlugRoute: TagSlugRoute,
