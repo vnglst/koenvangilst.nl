@@ -97,11 +97,6 @@ h6 {
 .site-shell-home .site-main {
   max-width: var(--intro-width);
 }
-@media (min-width: 1100px) {
-  .site-shell-reading {
-    padding-left: 45vw;
-  }
-}
 .site-colophon {
   position: fixed;
   bottom: 54px;
@@ -140,6 +135,29 @@ h6 {
   top: 24px;
   right: 4vw;
   z-index: 40;
+}
+/* One bounded desktop frame keeps the signature and content related on wide monitors. */
+@media (min-width: 1100px) {
+  .site-shell {
+    --frame-gutter: max(64px, calc((100vw - 1600px) / 2 + 64px));
+    padding: 120px var(--frame-gutter) 64px calc(var(--frame-gutter) + clamp(280px, 26vw, 416px));
+  }
+  .site-shell-home {
+    padding-top: clamp(160px, 22svh, 240px);
+  }
+  .site-colophon {
+    left: max(64px, calc((100vw - 1600px) / 2 + 64px));
+    width: clamp(220px, 20vw, 320px);
+  }
+  .site-theme {
+    top: 24px;
+    right: max(64px, calc((100vw - 1600px) / 2 + 64px));
+  }
+  .site-shell-art .editorial-heading-1,
+  .site-shell-photography .editorial-heading-1 {
+    font-size: clamp(30px, 3vw, 42px);
+    margin-bottom: 24px;
+  }
 }
 .theme-toggle {
   display: grid;
@@ -400,11 +418,6 @@ h6 {
   font-size: 13px;
   color: var(--muted);
   padding-top: 12px;
-}
-@media (min-width: 1600px) {
-  .site-shell:not(.site-shell-home):not(.site-shell-wide):not(.site-shell-reading) {
-    padding-left: max(37vw, calc((100vw - 720px) / 2));
-  }
 }
 @media (max-width: 900px) and (min-width: 768px) {
   .site-shell {

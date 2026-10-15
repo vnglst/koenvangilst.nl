@@ -254,8 +254,8 @@ function DesignSystem() {
                 <Link href="/">Introduction</Link>
               </dt>
               <dd>
-                A small 40px portrait above the biography. On desktop the narrow column starts at 54vw; the signature
-                anchors the lower left. No terminal symbol.
+                A small 40px portrait above the biography. On desktop the narrow column shares the inner pages’ left
+                edge; the signature anchors the lower left. No terminal symbol.
               </dd>
             </div>
             <div>
@@ -272,7 +272,8 @@ function DesignSystem() {
                 <Link href="/lab/code-doesnt-speak-for-itself">Reading</Link>
               </dt>
               <dd>
-                A single column, quiet metadata, and generous leading. At 1100px and above the article begins at 45vw.
+                A single column, quiet metadata, and generous leading. At 1100px and above the article aligns to the
+                shared desktop frame.
               </dd>
             </div>
             <div>

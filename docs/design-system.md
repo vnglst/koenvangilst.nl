@@ -70,21 +70,25 @@ Use a four-pixel rhythm for new spacing: 8, 12, 16, 20, 24, 28, 32, 40, 48, and 
 
 ## Layout recipes
 
-| Screen           | Desktop                                                                                   | Below 768px                                 |
-| ---------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------- |
-| Shared shell     | Top 120px, left 37vw, right 6vw; content max 720px                                        | Padding 100px 24px 110px                    |
-| Homepage         | Left 54vw, top `max(160px, 32svh)`; max 520px                                             | Top `max(112px, 17svh)`; visible page title |
-| Reading          | Left 45vw from 1100px upward                                                              | One readable column; 32px title             |
-| Wide content     | Left 31vw, right 5vw; max 1100px                                                          | Same 24px gutters                           |
-| Photo collection | Top 72px; columns 1.4:1; gap 64px vertically, 40px horizontally; even items stagger 120px | One column, 48px gaps, no stagger           |
-| Art gallery      | Left 40vw, right 8vw; 23px title; canvas `min(60svh, 700px)`                              | 24px gutters; canvas 48svh                  |
-| Land use         | Left 40vw, top 72px; square black chart with reserved dimensions                          | 24px gutters; square chart                  |
+| Screen           | Desktop                                                                                    | Below 768px                                 |
+| ---------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| Shared shell     | Shared frame, top 120px; content max 720px                                                 | Padding 100px 24px 110px                    |
+| Homepage         | Shared left edge, top 160–240px; max 520px                                                 | Top `max(112px, 17svh)`; visible page title |
+| Reading          | Shared left edge; max 720px                                                                | One readable column; 32px title             |
+| Wide content     | Shared frame; max 1100px                                                                   | Same 24px gutters                           |
+| Photo collection | Top 120px; columns 1.4:1; gap 64px vertically, 40px horizontally; even items stagger 120px | One column, 48px gaps, no stagger           |
+| Art gallery      | Shared frame and page-title scale; canvas `min(60svh, 700px)`                              | 24px gutters; canvas 48svh                  |
+| Land use         | Shared frame, top 120px; square black chart with reserved dimensions                       | 24px gutters; square chart                  |
 
-At 768–900px, the shared shell moves to 34vw/4vw and navigation gaps tighten to 16px. From 1600px, ordinary non-wide, non-home, non-reading content uses `max(37vw, calc((100vw - 720px) / 2))` for its left edge. Retain these existing exceptions rather than introducing a universal centered container.
+At 768–900px, the shared shell moves to 34vw/4vw and navigation gaps tighten to 16px.
+
+From 1100px, all editorial screens share a desktop frame capped at 1600px. Its outer gutter is `max(64px, calc((100vw - 1600px) / 2 + 64px))`. Navigation anchors to that gutter, with a 220–320px rail. Every content column begins at the gutter plus `clamp(280px, 26vw, 416px)`. Reading and archive columns stay at 720px maximum; the homepage stays at 520px; wide visual work uses the remaining frame width, up to 1100px. These measures preserve readable content while keeping the composition together on large monitors.
+
+The desktop frame applies from 1100px. Between 901px and 1099px, compact desktop retains its proportional offsets (37vw standard, 31vw wide, 40vw art/map, 54vw home). All inner pages begin 120px from the top and use the same page-title scale. The homepage retains a quieter vertical entrance, capped at 240px (`clamp(160px, 22svh, 240px)`). Photo detail remains full viewport.
 
 ### Signature and navigation
 
-Desktop colophon: fixed 5vw from the left and 54px from the bottom; width 27vw. Navigation sits 16px below the signature, with 44px-high links. The theme control stays in the upper right.
+Desktop colophon: fixed 54px from the bottom. From 1100px it aligns to the shared frame gutter and uses a 220–320px rail; compact desktop retains the existing 5vw/27vw proportions. Navigation sits 16px below the signature, with 44px-high links. The theme control stays in the upper right.
 
 Mobile: hide the signature on every main screen. The fixed bottom bar uses the page background, 24px side gutters, and a 28px gap between left-aligned links. Include bottom safe-area padding. Reserve 110px below content so final rows remain reachable. The homepage still has a proper visible title.
 
