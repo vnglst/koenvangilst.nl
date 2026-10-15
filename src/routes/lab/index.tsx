@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 
 import { Container } from '#/components/layout/Container';
-import { Heading } from '#/components/content/Heading';
+import { PageHeader } from '#/components/layout/PageHeader';
 import { Prose } from '#/components/content/Prose';
 import { ProjectBrowser } from './_components/project-browser';
 
@@ -39,8 +39,8 @@ function Labs() {
 
   return (
     <Container>
-      <Heading level={1}>Articles &amp; Experiments</Heading>
-      <Prose>
+      <PageHeader title="Articles & Experiments" />
+      <Prose className="lab-introduction">
         <p>
           Below, you'll find a collection of coding experiments, blog posts and side projects I've been thinkering with.
           It's a mix of educational web apps, tutorials, data visualisations and creations just for fun.

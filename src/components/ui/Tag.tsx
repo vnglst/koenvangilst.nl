@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from '@tanstack/react-router';
 
+import { Button } from './Button';
 import { cx } from '#/lib/clsx';
 
 type TagVariant = 'default' | 'active';
@@ -20,13 +21,7 @@ type TagButtonProps = {
 };
 
 const getTagClasses = (variant: TagVariant = 'default') => {
-  const baseClasses = 'rounded-lg px-3 py-1 text-sm font-semibold no-underline transition-all';
-
-  if (variant === 'active') {
-    return `${baseClasses} bg-blue-400 text-white hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600`;
-  }
-
-  return `${baseClasses} bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200`;
+  return variant === 'active' ? 'text-tag text-tag-active' : 'text-tag';
 };
 
 export function TagLink({ children, href, className, variant = 'default' }: TagLinkProps) {
@@ -39,8 +34,13 @@ export function TagLink({ children, href, className, variant = 'default' }: TagL
 
 export function TagButton({ children, onClick, className, variant = 'default' }: TagButtonProps) {
   return (
-    <button onClick={onClick} className={cx(getTagClasses(variant), className)}>
+    <Button
+      variant="bare"
+      aria-pressed={variant === 'active'}
+      onClick={onClick}
+      className={cx(getTagClasses(variant), className)}
+    >
       {children}
-    </button>
+    </Button>
   );
 }

@@ -1,5 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { BackButton } from '#/components/ui/BackButton';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { Button } from '#/components/ui/Button';
+import { Icon } from '#/components/ui/Icon';
+import { Container } from '#/components/layout/Container';
+import { Toolbar } from '#/components/layout/Toolbar';
+import { Prose } from '#/components/content/Prose';
 import { Heading } from '#/components/content/Heading';
 import { Toggle } from '#/components/forms/Toggle';
 import { usePrognosisStore } from './_store/prognosis';
@@ -36,25 +40,25 @@ function PrognosisToggle() {
 }
 
 function Prognosis2100() {
+  const navigate = useNavigate();
+  const goBack = () => {
+    if (window.history.length > 1) window.history.back();
+    else void navigate({ to: '/lab', search: { q: undefined } });
+  };
   return (
-    <div className="relative min-h-screen">
-      <div className="sticky top-0 z-40 flex items-center justify-between bg-slate-50 p-4 shadow-sm md:px-8 dark:bg-slate-950">
-        <BackButton
-          fallbackHref="/lab"
-          className="flex items-center gap-2 text-sm font-medium text-gray-700 transition-opacity hover:opacity-60 dark:text-gray-300"
-        >
+    <Container wide>
+      <Toolbar className="mb-8">
+        <Button variant="ghost" className="text-sm" aria-label="Go back" onClick={goBack}>
+          <Icon icon="arrow-left" className="h-4 w-4" />
           Back
-        </BackButton>
-        <Heading
-          level={1}
-          className="nimbus absolute left-1/2 -translate-x-1/2 text-lg tracking-wide text-gray-900 uppercase md:text-2xl dark:text-gray-100"
-        >
+        </Button>
+        <Heading level={1} className="mb-0!">
           Prognosis 2100
         </Heading>
         <PrognosisToggle />
-      </div>
-      <div className="mb-10 grid min-h-screen w-full grid-cols-1 gap-4 p-4 md:px-8 lg:grid-cols-2 2xl:grid-cols-3">
-        <div className="prose dark:prose-invert my-auto p-2 md:py-6 md:pr-8">
+      </Toolbar>
+      <div className="mb-10 grid w-full grid-cols-1 gap-8 xl:grid-cols-2">
+        <Prose as="div" className="my-auto p-2 md:py-6 md:pr-8">
           <p>
             The year 2100 seems far away but it is not unlikely that my children will still be alive then. What will the
             Netherlands look like then? Will we have a warmer more subtropical climate? Will our dykes be high enough?
@@ -70,11 +74,11 @@ function Prognosis2100() {
             I hope that, as octogenarians, my children will be able to look back on our period as the tipping point when
             we started to tackle climate change seriously.
           </p>
-        </div>
+        </Prose>
         <WeatherAnomaly type="temperature" look="dashboard" />
         <Sealevel />
         <Co2Level />
       </div>
-    </div>
+    </Container>
   );
 }

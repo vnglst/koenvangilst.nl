@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-
-import { BackButton } from '#/components/ui/BackButton';
+import { useRef, useState } from 'react';
+import { Container } from '#/components/layout/Container';
+import { Heading } from '#/components/content/Heading';
 import { Button } from '#/components/ui/Button';
-import { Icon } from '#/components/ui/Icon';
+import { GalleryNavigation } from '#/components/ui/GalleryNavigation';
+import { Link } from '#/components/ui/Link';
 
 const GENERATIVE_ART_PROJECTS = [
   {
@@ -53,163 +54,55 @@ const GENERATIVE_ART_PROJECTS = [
   }
 ];
 
-type LazyIframeProps = {
-  url: string;
-  title: string;
-  index: number;
-};
-
-function LazyIframe({ url, title, index }: LazyIframeProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const [isInteracting, setIsInteracting] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          setIsInteracting(false);
-        }
-      },
-      { rootMargin: '100px', threshold: 0.01 }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      observer.unobserve(container);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative h-screen w-full snap-start snap-always bg-slate-900"
-      id={`project-${index}`}
-    >
-      {isVisible && (
-        <>
-          {!hasLoaded && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-900">
-              <div className="text-center text-white">
-                <Icon icon="spinner" className="mx-auto mb-4 h-8 w-8 animate-spin" />
-                <p className="text-sm">Loading {title}...</p>
-              </div>
-            </div>
-          )}
-          <iframe
-            src={url}
-            title={title}
-            className={`h-full w-full border-0 ${isInteracting ? '' : 'pointer-events-none'}`}
-            loading="lazy"
-            onLoad={() => setHasLoaded(true)}
-          />
-          {!isInteracting && hasLoaded && (
-            <button
-              className="absolute inset-0 z-10 cursor-pointer"
-              onClick={() => setIsInteracting(true)}
-              aria-label={`Click to interact with ${title}`}
-            />
-          )}
-        </>
-      )}
-      {!isVisible && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900 text-white">
-          <p className="text-sm">{title}</p>
-        </div>
-      )}
-      <div className="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-        <div className="pointer-events-auto flex justify-center">
-          <Button
-            as="a"
-            href={url}
-            target="_blank"
-            rel="noreferrer noopener"
-            variant="outline"
-            size="sm"
-            className="group rounded-full border-white/20 bg-white/10 text-white shadow-lg shadow-black/20 backdrop-blur hover:border-white/40 hover:bg-white/20 focus:ring-white/50"
-          >
-            <span>Open in new tab</span>
-            <Icon icon="external-link" className="h-4 w-4 text-white transition group-hover:translate-x-0.5" />
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function GenerativeArtGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const scrollToProject = (index: number) => {
-    const element = document.getElementById(`project-${index}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            const index = parseInt(id.split('-')[1]);
-            setCurrentIndex(index);
-          }
-        });
-      },
-      { root: containerRef.current, threshold: 0.5 }
-    );
-
-    const projects = document.querySelectorAll('[id^="project-"]');
-    projects.forEach((project) => observer.observe(project));
-
-    return () => {
-      projects.forEach((project) => observer.unobserve(project));
-    };
-  }, []);
-
+  const projectIndex = useRef<HTMLDetailsElement>(null);
+  const project = GENERATIVE_ART_PROJECTS[currentIndex];
   return (
-    <div className="relative">
-      <nav className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/50 px-3 py-2 backdrop-blur-sm sm:gap-2 sm:px-4">
-        <BackButton
-          fallbackHref="/lab"
-          className="flex items-center gap-2 text-sm text-white transition-opacity hover:bg-transparent hover:opacity-60 focus:ring-white/50 dark:hover:bg-transparent"
-        >
-          <span className="hidden sm:inline">Back to Lab</span>
-        </BackButton>
-        <span className="hidden text-white sm:inline">|</span>
-        <span className="text-xs text-white sm:text-sm">
+    <Container wide footer={false} layout="art">
+      <Heading>Generative Art Gallery</Heading>
+      <div className="art-toolbar">
+        <Link href="/lab">← Back to Lab</Link>
+        <details className="art-index" ref={projectIndex}>
+          <summary>All {GENERATIVE_ART_PROJECTS.length} projects</summary>
+          <nav aria-label="Choose an art project">
+            {GENERATIVE_ART_PROJECTS.map((item, index) => (
+              <Button
+                variant="bare"
+                key={item.slug}
+                aria-current={currentIndex === index ? 'true' : undefined}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  if (projectIndex.current) projectIndex.current.open = false;
+                }}
+              >
+                {item.title}
+              </Button>
+            ))}
+          </nav>
+        </details>
+        <span>
           {currentIndex + 1} / {GENERATIVE_ART_PROJECTS.length}
         </span>
-      </nav>
-
-      <div className="fixed top-1/2 right-4 z-50 flex -translate-y-1/2 flex-col gap-2">
-        {GENERATIVE_ART_PROJECTS.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToProject(index)}
-            className={`h-2 w-2 rounded-full transition-all ${
-              currentIndex === index ? 'scale-125 bg-white' : 'bg-white/50 hover:bg-white/75'
-            }`}
-            aria-label={`Go to project ${index + 1}`}
-          />
-        ))}
       </div>
-
-      <div ref={containerRef} className="h-screen snap-y snap-mandatory overflow-y-scroll">
-        {GENERATIVE_ART_PROJECTS.map((project, index) => (
-          <LazyIframe key={project.slug} url={project.url} title={project.title} index={index} />
-        ))}
+      <iframe key={project.slug} src={project.url} title={project.title} className="art-viewport" />
+      <div className="art-caption">
+        <Heading level={2} size={3}>
+          {project.title}
+        </Heading>
+        <Link href={project.url} variant="plain" externalIndicator={false}>
+          Open in new tab ↗
+        </Link>
       </div>
-    </div>
+      <GalleryNavigation
+        label="Art projects"
+        previousLabel="Previous art project"
+        nextLabel="Next art project"
+        previousDisabled={currentIndex === 0}
+        nextDisabled={currentIndex === GENERATIVE_ART_PROJECTS.length - 1}
+        onPrevious={() => setCurrentIndex(currentIndex - 1)}
+        onNext={() => setCurrentIndex(currentIndex + 1)}
+      />
+    </Container>
   );
 }

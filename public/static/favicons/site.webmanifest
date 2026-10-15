@@ -1,7 +1,7 @@
 {
   "name": "Koen van Gilst",
   "short_name": "koenvangilst.nl",
-  "description": "JavaScript developerw who likes to push the web beyond it's limits.",
+  "description": "Software engineer with a philosophy degree and a lifelong passion for creating software.",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
@@ -14,11 +14,11 @@
       "type": "image/png"
     }
   ],
-  "background_color": "#199acc",
-  "theme_color": "#199acc",
+  "background_color": "#111110",
+  "theme_color": "#111110",
   "display": "standalone",
   "dir": "ltr",
   "lang": "en-US",
   "orientation": "portrait-primary",
-  "start_url": "../../index.html"
+  "start_url": "/"
 }

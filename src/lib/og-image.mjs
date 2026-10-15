@@ -1,4 +1,4 @@
-export const OG_TEMPLATE_VERSION = 'v10-content-fix';
+export const OG_TEMPLATE_VERSION = 'v11-colophon';
 
 export const HOME_OG_TITLE = 'Koen van Gilst';
 export const HOME_OG_DESCRIPTION =

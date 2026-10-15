@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createFileRoute, notFound, redirect } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
@@ -12,6 +12,9 @@ const getLabPost = createServerFn({ method: 'GET' })
     const { getPost, getPosts } = await import('#/cms/posts-server');
     const post = getPost(data.slug);
     if (!post) throw notFound();
+    if (post.url?.startsWith('/') && post.url !== `/lab/${post.slug}`) {
+      throw redirect({ href: post.url, statusCode: 301 });
+    }
 
     const allPosts = getPosts();
     const currentIndex = allPosts.findIndex((p) => p.slug === data.slug);
@@ -115,7 +118,20 @@ function PostPage() {
           tags={postMeta.tags}
           path={`/lab/${postMeta.slug}`}
           image={postMeta.image}
-          Component={Component}
+          Component={
+            postMeta.readingTime.words === 0
+              ? () => (
+                  <>
+                    <p>{postMeta.summary}</p>
+                    {postMeta.url && (
+                      <p>
+                        <a href={postMeta.url}>Visit project ↗</a>
+                      </p>
+                    )}
+                  </>
+                )
+              : Component
+          }
         />
       )}
     </>

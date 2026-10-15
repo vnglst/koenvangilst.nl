@@ -373,10 +373,10 @@ const LandUseChartComponent = () => {
   }, []);
 
   return (
-    <div className="mt-5 flex flex-col items-center justify-center rounded-md bg-gradient-to-b from-black to-[#02071d] p-5 text-gray-200">
+    <div className="land-use-chart">
       {isLoading && (
-        <div className="flex h-[800px] w-full items-center justify-center">
-          <div className="text-gray-400">Loading visualization...</div>
+        <div className="land-use-loading" role="status">
+          Loading visualization...
         </div>
       )}
       <svg

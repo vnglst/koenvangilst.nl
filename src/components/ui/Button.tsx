@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cx } from '#/lib/clsx';
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'bare';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 type BaseButtonProps = {
@@ -25,14 +25,11 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const getVariantClasses = (variant: ButtonVariant) => {
   const variants = {
-    primary:
-      'bg-blue-400 text-white hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700',
-    secondary:
-      'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-700',
-    ghost:
-      'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700',
-    outline:
-      'border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700'
+    primary: 'editorial-button-primary',
+    secondary: 'editorial-button-secondary',
+    ghost: 'editorial-button-ghost',
+    outline: 'editorial-button-outline',
+    bare: ''
   };
 
   return variants[variant];
@@ -52,9 +49,16 @@ export function Button(props: ButtonProps) {
   const { children, className, variant = 'primary', size = 'md', 'aria-label': ariaLabel } = props;
 
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all focus:outline-none no-underline';
+    variant === 'bare'
+      ? 'action-button'
+      : 'action-button editorial-button inline-flex items-center justify-center gap-2 no-underline';
 
-  const combinedClasses = cx(baseClasses, getVariantClasses(variant), getSizeClasses(size), className);
+  const combinedClasses = cx(
+    baseClasses,
+    getVariantClasses(variant),
+    variant !== 'bare' && getSizeClasses(size),
+    className
+  );
 
   if (props.as === 'a') {
     const { as: _as, children: _ch, className: _cl, variant: _v, size: _s, 'aria-label': _al, ...anchorProps } = props;

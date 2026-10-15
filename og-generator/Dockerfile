@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY scripts/generate-og-images.mjs ./scripts/generate-og-images.mjs
 COPY src/lib/og-image.mjs ./src/lib/og-image.mjs
 COPY content ./content
-COPY public/fonts/IBMPlexSans-Bold.ttf ./public/fonts/IBMPlexSans-Bold.ttf
-COPY public/avatar.jpg ./public/avatar.jpg
+COPY public/fonts/IBMPlexSans-Regular.ttf ./public/fonts/IBMPlexSans-Regular.ttf
+COPY public/fonts/LibreCaslonText.ttf ./public/fonts/LibreCaslonText.ttf
 
 CMD ["node", "scripts/generate-og-images.mjs"]

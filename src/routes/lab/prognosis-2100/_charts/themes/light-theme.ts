@@ -3,9 +3,10 @@ import { colors } from './colors';
 export const lightTheme = {
   darkMode: false,
   color: Object.values(colors),
-  backgroundColor: 'white',
+  backgroundColor: '#f5f3ed',
   textStyle: {
-    fontSize: 12
+    fontSize: 12,
+    color: '#242420'
     // Setting fontFamily doesn't work for Canvas renderer.
     // fontFamily: 'var(--font-sans), sans-serif',
   },
@@ -13,7 +14,7 @@ export const lightTheme = {
     padding: 20,
     left: 'left',
     textStyle: {
-      color: '#000',
+      color: '#242420',
       fontSize: 16,
       fontWeight: 'normal'
       // Setting fontFamily doesn't work for Canvas renderer.
@@ -26,7 +27,7 @@ export const lightTheme = {
   },
   bar: {
     itemStyle: {
-      borderRadius: [15, 15, 0, 0]
+      borderRadius: 0
     }
   },
   grid: {
@@ -38,12 +39,12 @@ export const lightTheme = {
   },
   toolbox: {
     iconStyle: {
-      borderColor: '#000'
+      borderColor: '#242420'
     }
   },
   legend: {
     textStyle: {
-      color: '#000'
+      color: '#242420'
     }
   }
 };

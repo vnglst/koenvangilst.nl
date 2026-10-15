@@ -1,13 +1,27 @@
-/* Syntax highlighting styles for Prism.js */
-
+/* Prism colors share the Colophon surfaces, with readable contrast in both themes. */
+:root {
+  --syntax-green: #42634e;
+  --syntax-purple: #745084;
+  --syntax-gold: #82601e;
+  --syntax-blue: #4b627c;
+  --syntax-pink: #965462;
+}
+:root.dark {
+  --syntax-green: #b5c9b8;
+  --syntax-purple: #c8afd5;
+  --syntax-gold: #d6c48b;
+  --syntax-blue: #b3c4d6;
+  --syntax-pink: #d3b0b9;
+}
 .token.comment,
 .token.prolog,
 .token.doctype,
-.token.cdata,
-.token.punctuation {
-  @apply text-gray-700 dark:text-gray-300;
+.token.cdata {
+  color: var(--muted);
 }
-
+.token.punctuation {
+  color: var(--ink);
+}
 .token.property,
 .token.tag,
 .token.boolean,
@@ -15,19 +29,16 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-  @apply text-green-500;
+  color: var(--syntax-green);
 }
-
 .token.selector,
 .token.attr-name,
 .token.string,
 .token.char,
 .token.builtin,
 .token.inserted {
-  @apply text-purple-500;
+  color: var(--syntax-purple);
 }
-
-/* Yellow-highlighted syntactic elements */
 .token.operator,
 .token.entity,
 .token.url,
@@ -36,89 +47,63 @@
 .token.regex,
 .token.important,
 .token.variable {
-  @apply text-yellow-500;
+  color: var(--syntax-gold);
 }
-
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  @apply text-blue-500;
+  color: var(--syntax-blue);
 }
-
 .token.function,
 .token.class-name {
-  @apply text-pink-500;
+  color: var(--syntax-pink);
 }
-
-/* (regex, important, variable merged into yellow group above) */
-
 code[class*='language-'],
 pre[class*='language-'] {
-  @apply bg-gray-50 text-gray-800 dark:text-gray-50;
+  background: var(--surface);
+  color: var(--ink);
 }
-
 code[class*='language-'] {
-  @apply border-none p-0;
+  border: none;
+  padding: 0;
 }
-
 pre[class*='language-'] {
   max-width: 100%;
   overflow-x: auto;
   box-sizing: border-box;
 }
-
-@media (min-width: 768px) {
-  pre[class*='language-'] {
-    max-width: 100%;
-  }
+pre {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--surface);
 }
-
-/* Subtle scrollbar styling */
 pre::-webkit-scrollbar {
   height: 8px;
 }
-
 pre::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background: var(--surface);
 }
-
 pre::-webkit-scrollbar-thumb {
-  @apply rounded bg-gray-300 dark:bg-gray-600;
+  background: var(--muted);
 }
-
-pre::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
-}
-
-pre {
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgb(209 213 219) rgb(243 244 246); /* gray-300 on gray-100 */
-}
-
-.dark pre {
-  scrollbar-color: rgb(75 85 99) rgb(31 41 55); /* gray-600 on gray-800 */
-}
-
 .rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 12px 20px;
+  font-family: monospace;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line);
 }
-
-.rehype-code-title + pre {
-  @apply mt-0 rounded-t-none;
+.rehype-code-title + .code-block pre {
+  margin-top: 0;
 }
-
 .code-highlight {
-  @apply block w-full;
+  display: block;
+  width: 100%;
 }
-
 .highlight-line {
-  @apply -mx-4 block border-l-4 border-blue-500 bg-gray-100 px-3 dark:bg-gray-800;
-}
-
-.prose pre:has(.code-highlight) {
-  @apply border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
-}
-
-.prose code.code-highlight {
-  @apply rounded-lg border border-gray-100 bg-gray-50 px-0 py-0.5 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
+  display: block;
+  margin: 0 -20px;
+  padding: 0 18px;
+  border-left: 2px solid var(--muted);
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
 }

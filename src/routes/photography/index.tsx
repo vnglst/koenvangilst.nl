@@ -32,7 +32,7 @@ function Photography() {
   const photos = Route.useLoaderData();
 
   return (
-    <Container footer wide>
+    <Container footer wide layout="photography">
       <PhotoGallery photos={photos} />
     </Container>
   );

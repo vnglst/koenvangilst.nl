@@ -1,8 +1,12 @@
+import { ContentImage } from '#/components/content/ContentImage';
+import { Heading } from '#/components/content/Heading';
+import { Text } from '#/components/ui/Text';
+
 const observations = [
   {
     title: 'Fussball WM Public Viewing',
     location: 'Zell am See',
-    note: 'It\'s the clones of the same guy with glasses that give this one away. One clone is also watching his clones watch the game. Like Agent Smith in The Matrix Revolutions, but pretending to enjoy a game of football.',
+    note: "It's the clones of the same guy with glasses that give this one away. One clone is also watching his clones watch the game. Like Agent Smith in The Matrix Revolutions, but pretending to enjoy a game of football.",
     image: '/static/images/genai-in-the-wild/01-football-public-viewing.webp',
     alt: 'A football World Cup public viewing poster photographed in Zell am See',
     width: 1500,
@@ -11,7 +15,7 @@ const observations = [
   {
     title: 'Sweet piece from our heart. Waffle makers.',
     location: 'Zell am See',
-    note: 'It looks delicious at first glance, but what\'s that strawberry doing? Is it morphing into a blackberry? And what is with the honey-like texture of the syrup?',
+    note: "It looks delicious at first glance, but what's that strawberry doing? Is it morphing into a blackberry? And what is with the honey-like texture of the syrup?",
     image: '/static/images/genai-in-the-wild/02-waffle-makers.webp',
     alt: 'A Waffle Makers advertisement showing an AI-generated waffle and fruit',
     width: 1500,
@@ -20,7 +24,7 @@ const observations = [
   {
     title: 'Thai five',
     location: 'Zell am See',
-    note: 'It\'s the clone thing again. The AI did give the one on the right a beard.',
+    note: "It's the clone thing again. The AI did give the one on the right a beard.",
     image: '/static/images/genai-in-the-wild/03-thai-five.webp',
     alt: 'A Thai restaurant poster showing two nearly identical AI-generated diners',
     width: 1500,
@@ -65,7 +69,7 @@ const observations = [
   {
     title: 'Tribute to Vasco Rossi',
     location: 'Lake Garda',
-    note: 'Our band is real. The skewer looks AI-generated, but in general I wasn\'t sure about this one. Parts may have been generated and then assembled in Photoshop.',
+    note: "Our band is real. The skewer looks AI-generated, but in general I wasn't sure about this one. Parts may have been generated and then assembled in Photoshop.",
     image: '/static/images/genai-in-the-wild/08-vasco-rossi.webp',
     alt: 'A Vasco Rossi tribute band poster with an AI-generated food skewer',
     width: 1500,
@@ -94,7 +98,7 @@ const observations = [
     location: 'Lake Geneva',
     note: 'With all the fires across Europe this summer, this seems like an unlikely event. The only thing that is clearly AI-generated here is the beer. Again.',
     image: '/static/images/genai-in-the-wild/11-firefighters-ball.webp',
-    alt: 'A firefighters\' ball poster combining fireworks, flames and AI-generated beer',
+    alt: "A firefighters' ball poster combining fireworks, flames and AI-generated beer",
     width: 1500,
     height: 2000
   },
@@ -124,7 +128,7 @@ export function GenAIInTheWildGallery() {
       <div className="flex flex-col gap-6 md:gap-8">
         {observations.map((observation, index) => (
           <figure key={observation.title} className="m-0">
-            <img
+            <ContentImage
               src={observation.image}
               alt={observation.alt}
               width={observation.width}
@@ -132,15 +136,13 @@ export function GenAIInTheWildGallery() {
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchPriority={index === 0 ? 'high' : 'auto'}
               decoding="async"
-              sizes="(min-width: 1024px) 486px, (min-width: 768px) calc((100vw - 232px) * 0.75), calc(100vw - 2rem)"
-              className="m-0 block h-auto w-full rounded-sm bg-slate-200 dark:bg-slate-800"
+              sizes="(min-width: 1280px) 720px, (min-width: 768px) 57vw, calc(100vw - 48px)"
+              className="m-0 block h-auto w-full bg-[var(--surface)]"
             />
             <figcaption className="mt-4">
-              <h2 className="nimbus m-0 text-xl leading-tight text-slate-900 dark:text-slate-100">
-                {observation.title}
-              </h2>
-              <p className="mt-1 mb-0 text-sm text-slate-500 dark:text-slate-400">{observation.location}</p>
-              <p className="mt-3 mb-0 leading-relaxed text-slate-700 dark:text-slate-300">{observation.note}</p>
+              <Heading level={2} size={3} className="m-0!">{observation.title}</Heading>
+              <Text size="small" tone="muted" className="mt-1 mb-0">{observation.location}</Text>
+              <Text className="mt-3 mb-0">{observation.note}</Text>
             </figcaption>
           </figure>
         ))}

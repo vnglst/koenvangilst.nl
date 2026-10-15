@@ -1,3 +1,4 @@
+import { Text } from '#/components/ui/Text';
 import { Fragment } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
@@ -63,7 +64,7 @@ function TagFilter({ currentQuery, tags }: TagFilterProps) {
   };
 
   return (
-    <section className="my-6 mb-12 flex flex-wrap justify-start gap-2">
+    <section className="lab-filters">
       {tags.map((tag) => {
         const isActive = currentQuery === tag.query;
 
@@ -84,14 +85,16 @@ type ProjectsDisplayProps = {
 function ProjectsDisplay({ projects }: ProjectsDisplayProps) {
   if (projects.length === 0) {
     return (
-      <div className="mt-4 flex flex-col gap-6">
-        <p className="mb-4 text-gray-600 dark:text-gray-400">Nothing found.</p>
+      <div className="project-list">
+        <Text tone="muted" className="mb-4">
+          Nothing found.
+        </Text>
       </div>
     );
   }
 
   return (
-    <div className="mt-4 flex flex-col gap-6">
+    <div className="project-list">
       <ProjectList projects={projects} />
     </div>
   );
@@ -112,7 +115,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
 
         return (
           <Fragment key={project.slug}>
-            <BlogPostLink showYear={showYear} {...project} />
+            {showYear && <h2 className="archive-year">{year}</h2>}
+            <BlogPostLink compact {...project} />
           </Fragment>
         );
       })}

@@ -1,55 +1,34 @@
-import type { ComponentProps } from 'react';
 import { MDXProvider } from '@mdx-js/react';
+import { CodeBlock } from './CodeBlock';
 
-import { cx } from '#/lib/clsx';
+import { ContentImage } from './ContentImage';
+import { Note } from './Note';
 
 import { Icon } from '#/components/ui/Icon';
 import { Link } from '#/components/ui/Link';
 
-function RoundedImage({ alt = '', label, width, height, ...props }: ComponentProps<'img'> & { label?: React.ReactNode }) {
-  const className = cx('mt-1 mb-0 inline-block rounded-lg');
-
-  if (!label) {
-    return <img alt={alt} loading="lazy" width={width} height={height} {...props} className={className} />;
-  }
-
-  return (
-    <figure className="mt-1 mb-0 inline-block">
-      <img alt={alt} loading="lazy" width={width} height={height} {...props} className={className} />
-      <figcaption className="mt-1 text-center text-gray-600 dark:text-gray-400">{label}</figcaption>
-    </figure>
-  );
-}
-
-export function Disclaimer({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="overflow-x-auto rounded-md border-l-8 border-gray-400 bg-gray-200 p-2 px-8 dark:border-gray-500 dark:bg-gray-800">
-      <div className="min-w-0">{children}</div>
-    </div>
-  );
-}
-
-export function Bleed({ children }: { children: React.ReactNode }) {
-  return <div className="bleed my-5 lg:w-[min(900px,calc(50vw+8rem))] [&>img]:w-full">{children}</div>;
+function Bleed({ children }: { children: React.ReactNode }) {
+  return <div className="bleed my-5 [&>img]:w-full">{children}</div>;
 }
 
 function Waypoint({ href }: { href: string }) {
   return (
     <div className="my-5 md:ml-[-27px]">
       <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}
-      <a href={href} className="ml-2" target="_blank" rel="noopener noreferrer">
+      <Link href={href} className="ml-2" externalIndicator={false}>
         Commit on Github
-      </a>
+      </Link>
     </div>
   );
 }
 
 const mdxComponents = {
-  img: RoundedImage,
-  Image: RoundedImage, // MDX compatibility alias for posts that use an Image component
+  pre: CodeBlock,
+  img: ContentImage,
+  Image: ContentImage, // MDX compatibility alias for posts that use an Image component
   a: Link,
   Bleed,
-  Disclaimer,
+  Disclaimer: Note,
   Waypoint
 };
 

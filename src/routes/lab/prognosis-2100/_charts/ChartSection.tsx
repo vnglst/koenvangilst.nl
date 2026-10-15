@@ -15,12 +15,7 @@ type ChartSectionProps = {
  */
 export function ChartSection({ children, className }: PropsWithChildren<ChartSectionProps>) {
   return (
-    <div
-      className={cx(
-        'my-4 w-[600px] max-w-full overflow-x-auto overflow-y-hidden border border-dashed border-gray-400 md:min-h-0 dark:border-none',
-        className
-      )}
-    >
+    <div className={cx('my-4 w-[600px] max-w-full overflow-x-auto overflow-y-hidden md:min-h-0', className)}>
       {children}
     </div>
   );

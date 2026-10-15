@@ -9,7 +9,7 @@ export function Sealevel() {
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load sea level data</div>;
-  if (!data) return <div className="aspect-[3/5] animate-pulse bg-gray-100 md:aspect-square dark:bg-gray-800" />;
+  if (!data) return <div className="aspect-[3/5] animate-pulse bg-[var(--surface)] md:aspect-square" />;
 
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;

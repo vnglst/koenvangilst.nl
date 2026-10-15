@@ -1,5 +1,6 @@
-import { Link as RouterLink } from '@tanstack/react-router';
-
+import { Link } from './Link';
+import { Heading } from '#/components/content/Heading';
+import { dateFormatter } from '#/lib/formatters';
 import { Icon } from './Icon';
 
 type BlogPostLinkProps = {
@@ -7,41 +8,26 @@ type BlogPostLinkProps = {
   summary: string;
   slug: string;
   publishedAt: string;
-  showYear?: boolean;
   url?: string;
+  compact?: boolean;
 };
-
-export function BlogPostLink({ title, summary, url, slug, publishedAt, showYear }: BlogPostLinkProps) {
+export function BlogPostLink({ title, summary, url, slug, publishedAt, compact = false }: BlogPostLinkProps) {
   const href = url || `/lab/${slug}`;
-  const isExternal = href.startsWith('http');
-  const year = new Date(publishedAt).getFullYear();
-
-  if (isExternal) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        <article className="my-1 flex w-full flex-col items-baseline gap-2 p-1 md:flex-row">
-          <div className={showYear ? 'text-primary mr-5 text-left' : 'mr-5 hidden md:invisible md:block'}>{year}</div>
-          <div className="up-hover">
-            <h4 className="mb-2 w-full text-lg font-normal text-gray-900 md:text-xl dark:text-gray-100">
-              {title}
-              <Icon icon="external-link" className="ml-2 inline h-4 w-4" />
-            </h4>
-            <p className="text-gray-600 dark:text-gray-400">{summary}</p>
-          </div>
-        </article>
-      </a>
-    );
-  }
-
+  const content = (
+    <article className={compact ? 'post-entry post-entry-compact' : 'post-entry'}>
+      <time dateTime={publishedAt}>{dateFormatter(publishedAt)}</time>
+      <div>
+        <Heading level={3} size={3} className="post-title">
+          {title}
+          {url?.startsWith('http') && <Icon icon="external-link" className="ml-2 inline h-3 w-3" />}
+        </Heading>
+        {!compact && <p>{summary}</p>}
+      </div>
+    </article>
+  );
   return (
-    <RouterLink to={href} search={{} as never} params={{} as never}>
-      <article className="my-1 flex w-full flex-col items-baseline gap-2 p-1 md:flex-row">
-        <div className={showYear ? 'text-primary mr-5 text-left' : 'mr-5 hidden md:invisible md:block'}>{year}</div>
-        <div className="up-hover">
-          <h4 className="mb-2 w-full text-lg font-normal text-gray-900 md:text-xl dark:text-gray-100">{title}</h4>
-          <p className="text-gray-600 dark:text-gray-400">{summary}</p>
-        </div>
-      </article>
-    </RouterLink>
+    <Link href={href} variant="plain" externalIndicator={false} className="post-link">
+      {content}
+    </Link>
   );
 }

@@ -9,13 +9,9 @@ const contentDir = path.join(process.cwd(), 'content');
 const outputDir = process.env.OG_OUTPUT_DIR || path.join(process.cwd(), 'public/og');
 const manifestPath = path.join(outputDir, '.manifest.json');
 const fontsDir = path.join(process.cwd(), 'public/fonts');
-const avatarPath = path.join(process.cwd(), 'public/avatar.jpg');
-const fontPath = path.join(fontsDir, 'IBMPlexSans-Bold.ttf');
-const watchFiles = [path.join(process.cwd(), 'src/lib/og-image.mjs'), avatarPath, fontPath];
-
-function toDataUrl(filePath, mime = 'image/jpeg') {
-  return `data:${mime};base64,${fs.readFileSync(filePath).toString('base64')}`;
-}
+const fontPath = path.join(fontsDir, 'IBMPlexSans-Regular.ttf');
+const serifFontPath = path.join(fontsDir, 'LibreCaslonText.ttf');
+const watchFiles = [path.join(process.cwd(), 'src/lib/og-image.mjs'), fontPath, serifFontPath];
 
 function sluggify(str) {
   return str.trim().toLowerCase().split(' ').join('-');
@@ -105,59 +101,28 @@ function wrapText(text, maxChars, maxLines) {
   return trimmed;
 }
 
-function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, weight) {
+function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, family = 'IBM Plex Sans') {
   return lines
     .map(
       (line, index) =>
-        `<text x="${x}" y="${startY + index * lineHeight}" fill="${fill}" font-family="IBM Plex Sans, sans-serif" font-size="${fontSize}" font-weight="${weight}" dominant-baseline="hanging">${escapeXml(line)}</text>`
+        `<text x="${x}" y="${startY + index * lineHeight}" fill="${fill}" font-family="${family}" font-size="${fontSize}" font-weight="400" dominant-baseline="hanging">${escapeXml(line)}</text>`
     )
     .join('\n');
 }
 
-function createOgSvg(title, description, type, avatarDataUrl) {
-  const badgeLabel = type === 'tag' ? 'Tag' : type === 'home' ? 'Home' : type === 'fallback' ? 'Website' : 'Blog post';
-  const titleLines = wrapText(title, 22, 3);
-  const descriptionLines = wrapText(description, 58, titleLines.length >= 3 ? 2 : 3);
-  const titleHeight = titleLines.length * 78;
-  const descriptionY = 226 + titleHeight;
-
+function createOgSvg(title, description, type) {
+  const isHome = type === 'home' || type === 'fallback';
+  const titleLines = isHome ? [] : wrapText(title, 25, 5);
+  const descriptionLines = wrapText(description, 48, isHome ? 6 : 3);
+  const titleY = titleLines.length > 3 ? 100 : 155;
+  const descriptionY = isHome ? 260 : titleY + titleLines.length * 58 + 28;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="avatar-clip" clipPathUnits="userSpaceOnUse">
-      <circle cx="44" cy="44" r="32" />
-    </clipPath>
-    <linearGradient id="canvas" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#020617" />
-      <stop offset="0.58" stop-color="#0f172a" />
-      <stop offset="1" stop-color="#020617" />
-    </linearGradient>
-    <radialGradient id="blue-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(973 123) rotate(139) scale(520 360)">
-      <stop stop-color="#2196f3" stop-opacity="0.42" />
-      <stop offset="0.45" stop-color="#2196f3" stop-opacity="0.11" />
-      <stop offset="1" stop-color="#2196f3" stop-opacity="0" />
-    </radialGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#canvas)" />
-  <rect width="1200" height="630" fill="url(#blue-glow)" />
-  <rect x="56" y="560" width="1088" height="2" rx="1" fill="#1e293b" />
-  <rect x="56" y="560" width="184" height="2" rx="1" fill="#2196f3" />
-  <g transform="translate(56 54)">
-    <rect x="0" y="0" width="342" height="88" rx="44" fill="#0f172a" fill-opacity="0.78" stroke="#334155" />
-    <circle cx="44" cy="44" r="34" fill="#020617" stroke="#2196f3" stroke-width="2" />
-    <image href="${avatarDataUrl}" x="12" y="12" width="64" height="64" clip-path="url(#avatar-clip)" preserveAspectRatio="xMidYMid slice" />
-    <text x="96" y="22" fill="#f8fafc" font-family="IBM Plex Sans, sans-serif" font-size="18" font-weight="700" letter-spacing="0.035em" dominant-baseline="hanging">Koen van Gilst</text>
-    <text x="96" y="49" fill="#94a3b8" font-family="IBM Plex Sans, sans-serif" font-size="14" font-weight="400" dominant-baseline="hanging">koenvangilst.nl</text>
-  </g>
-  <g transform="translate(970 64)">
-    <rect x="0" y="0" width="150" height="38" rx="19" fill="#020617" fill-opacity="0.68" stroke="#334155" />
-    <text x="75" y="12" text-anchor="middle" fill="#64b5f6" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="700" letter-spacing="0.15em" dominant-baseline="hanging">${badgeLabel.toUpperCase()}</text>
-  </g>
-  <g transform="translate(56 226)">
-    <text x="0" y="-46" fill="#2196f3" font-family="IBM Plex Sans, sans-serif" font-size="16" font-weight="700" letter-spacing="0.18em" dominant-baseline="hanging">WRITING / CREATIVITY / SOFTWARE</text>
-    ${renderTextBlock(titleLines, 0, 0, 78, 70, '#f8fafc', 700)}
-    ${renderTextBlock(descriptionLines, 0, descriptionY - 226 + 26, 39, 28, '#cbd5e1', 400)}
-  </g>
+  <rect width="1200" height="630" fill="#111110" />
+  ${renderTextBlock(titleLines, 450, titleY, 58, 46, '#e9e7e0', 'Libre Caslon Text')}
+  ${renderTextBlock(descriptionLines, 450, descriptionY, 32, 22, '#a5a59b')}
+  <text x="64" y="510" fill="#e9e7e0" font-family="Libre Caslon Text" font-size="29" dominant-baseline="hanging">Koen van Gilst</text>
+  <text x="64" y="558" fill="#a5a59b" font-family="IBM Plex Sans" font-size="16" dominant-baseline="hanging">koenvangilst.nl</text>
 </svg>`;
 }
 
@@ -179,14 +144,14 @@ function writeFileAtomically(filePath, contents) {
   fs.renameSync(temporaryPath, filePath);
 }
 
-function renderOgImage(image, type, avatarDataUrl) {
+function renderOgImage(image, type) {
   const outputPath = path.join(outputDir, image.filename);
-  const svg = createOgSvg(image.title, image.description, type, avatarDataUrl);
+  const svg = createOgSvg(image.title, image.description, type);
   const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: 1200 },
     font: {
       defaultFontFamily: 'IBM Plex Sans',
-      fontFiles: [fontPath],
+      fontFiles: [fontPath, serifFontPath],
       loadSystemFonts: false
     }
   });
@@ -194,9 +159,9 @@ function renderOgImage(image, type, avatarDataUrl) {
   console.log(`Generated OG: ${image.url}`);
 }
 
-function renderFallbackOgImage(avatarDataUrl) {
+function renderFallbackOgImage() {
   const image = createFallbackOgImage();
-  renderOgImage(image, 'fallback', avatarDataUrl);
+  renderOgImage(image, 'fallback');
 }
 
 async function main() {
@@ -214,7 +179,7 @@ async function generateOgImages() {
   // Keep historical entries because their immutable URLs may still be in use.
   const nextManifest = { ...previousManifest };
 
-  const requiredFonts = ['IBMPlexSans-Bold.ttf'];
+  const requiredFonts = ['IBMPlexSans-Regular.ttf', 'LibreCaslonText.ttf'];
 
   for (const fontFile of requiredFonts) {
     const fontPath = path.join(fontsDir, fontFile);
@@ -224,12 +189,6 @@ async function generateOgImages() {
     }
   }
 
-  const avatarDataUrl = fs.existsSync(avatarPath) ? toDataUrl(avatarPath) : null;
-  if (!avatarDataUrl) {
-    console.error('Avatar not found:', avatarPath);
-    process.exit(1);
-  }
-
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.mdx'));
   const posts = [];
   const allTags = new Set();
@@ -237,13 +196,13 @@ async function generateOgImages() {
   const homeImage = createHomeOgImage();
   nextManifest[homeImage.filename] = homeImage.signature;
 
-  renderFallbackOgImage(avatarDataUrl);
+  renderFallbackOgImage();
 
   if (!(
     previousManifest[homeImage.filename] === homeImage.signature &&
     fs.existsSync(path.join(outputDir, homeImage.filename))
   )) {
-    renderOgImage(homeImage, 'home', avatarDataUrl);
+    renderOgImage(homeImage, 'home');
   }
 
   for (const file of files) {
@@ -274,7 +233,7 @@ async function generateOgImages() {
       continue;
     }
 
-    renderOgImage(image, 'blog', avatarDataUrl);
+    renderOgImage(image, 'blog');
   }
 
   for (const tag of uniqueTags) {
@@ -287,7 +246,7 @@ async function generateOgImages() {
       continue;
     }
 
-    renderOgImage(image, 'tag', avatarDataUrl);
+    renderOgImage(image, 'tag');
   }
 
   writeManifest(nextManifest);

@@ -1,0 +1,140 @@
+/* Specimen layout only. Shared design decisions remain in colophon.css. */
+.design-system {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.design-system p {
+  margin-bottom: 20px;
+}
+.design-system .ds-lead {
+  font-size: 19px;
+  line-height: 1.65;
+  max-width: 48ch;
+}
+.ds-caption {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.ds-index,
+.ds-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+.ds-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+}
+.ds-section {
+  margin-top: 80px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 60px;
+}
+.ds-palette {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+  margin: 32px 0;
+}
+.ds-color {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.ds-swatch {
+  display: block;
+  flex: 0 0 48px;
+  height: 64px;
+  border: 1px solid var(--line);
+}
+.ds-color strong,
+.ds-color code,
+.ds-color span:not(.ds-swatch) {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+}
+.ds-color code {
+  color: var(--muted);
+}
+.design-system .ds-color .ds-dark-value,
+.dark .design-system .ds-color .ds-light-value {
+  display: none;
+}
+.dark .design-system .ds-color .ds-dark-value {
+  display: block;
+}
+.ds-specimen,
+.ds-example {
+  margin-top: 32px;
+}
+.ds-spacing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin: 32px 0;
+}
+.ds-spacing > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.ds-spacing span {
+  width: 40px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ds-spacing i {
+  display: block;
+  height: 8px;
+  background: var(--ink);
+}
+.ds-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.ds-facts dd {
+  text-align: right;
+  color: var(--muted);
+}
+.ds-patterns > div {
+  margin-top: 28px;
+}
+.ds-patterns dt {
+  margin-bottom: 8px;
+  font-family: var(--editorial-serif);
+  font-size: 23px;
+}
+.ds-patterns dd {
+  color: var(--muted);
+}
+.ds-patterns + p {
+  margin-top: 32px;
+}
+.ds-rules {
+  list-style: disc;
+  padding-left: 20px;
+}
+.ds-rules li {
+  padding-left: 4px;
+  margin-bottom: 16px;
+}
+@media (max-width: 767px) {
+  .ds-section {
+    margin-top: 56px;
+  }
+  .ds-palette {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}

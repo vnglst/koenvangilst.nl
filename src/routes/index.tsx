@@ -4,8 +4,8 @@ import { createServerFn } from '@tanstack/react-start';
 import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
-import { Link } from '#/components/ui/Link';
-import { dateFormatter } from '#/lib/formatters';
+import { RecentArticles } from '#/components/content/RecentArticles';
+import { ContentImage } from '#/components/content/ContentImage';
 import { jsonLdPerson } from '#/lib/json-ld';
 import { createHomeOgImage } from '#/lib/og-image.mjs';
 
@@ -54,9 +54,20 @@ function Home() {
   const recentArticles = Route.useLoaderData();
 
   return (
-    <Container>
+    <Container home>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson()) }} />
-      <Heading level={1}>Koen van Gilst</Heading>
+      <ContentImage
+        className="home-portrait"
+        loading="eager"
+        src="/avatar.jpg"
+        alt="Koen van Gilst"
+        width={40}
+        height={40}
+        fetchPriority="high"
+      />
+      <Heading level={1} className="home-title">
+        Koen van Gilst
+      </Heading>
       <Prose className="mb-4">
         <p>
           I'm a software engineer with a philosophy degree and a lifelong passion for creating software. I started
@@ -66,25 +77,7 @@ function Home() {
         </p>
       </Prose>
 
-      <p className="mt-8 mb-4 text-base font-bold text-gray-900 dark:text-gray-100">Recent articles</p>
-
-      <section>
-        <ul className="space-y-2">
-          {recentArticles.map((article) => (
-            <li
-              key={article.slug}
-              className="flex items-baseline gap-3 overflow-hidden text-base text-gray-900 dark:text-gray-100"
-            >
-              <span className="w-28 shrink-0 text-gray-600 tabular-nums dark:text-gray-400">
-                {dateFormatter(article.publishedAt)}
-              </span>
-              <Link className="min-w-0 flex-1 truncate font-normal" href={article.url || `/lab/${article.slug}`}>
-                {article.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <RecentArticles articles={recentArticles} />
     </Container>
   );
 }

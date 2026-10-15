@@ -12,12 +12,7 @@ type RainProps = {
 export function RainClient({ data, className }: RainProps) {
   const options = generateOptions(data);
 
-  return (
-    <Chart
-      options={options}
-      className={`w-full overflow-hidden border border-dashed border-gray-400 dark:border-none ${className}`}
-    />
-  );
+  return <Chart options={options} className={`w-full overflow-hidden ${className}`} />;
 }
 
 function generateOptions(data: Data) {

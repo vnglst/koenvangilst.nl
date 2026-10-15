@@ -123,13 +123,23 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
+### Colophon design
+
+The shared layout uses a charcoal/ivory palette, self-hosted Libre Caslon Text headings, and IBM Plex Sans body text. Desktop navigation is anchored in the lower-left corner; below 768px it becomes a consistent navigation-only bottom bar with reserved content space. The signature is desktop-only. Theme foundations live in `src/styles/tokens.css`; shared component styles and responsive layout rules live in `src/styles/colophon.css`. The selected Quiet introduction direction places a small original portrait above the homepage biography, keeps inner-page signatures purely typographic, and uses blue for active navigation and an underline for active text filters. The homepage uses the complete biography and recent articles; Lab filters, tags, and MDX content retain their existing routes.
+
+Photography uses natural image proportions and a full-viewport detail viewer with compact overlay controls, keyboard and swipe navigation. Photo detail hides the editorial shell and fits the entire image without cropping on a neutral black canvas in either theme. The viewer renders the selected photograph directly from its URL, with swipe navigation on mobile. The art gallery exposes all ten projects in an expandable index. Generative art retains its original embeds inside the shared layout.
+
+The design system is documented in [docs/design-system.md](docs/design-system.md), with a live component and token reference at `/design-system`. Use these when extending the design. The reference supports both themes and mobile layouts, and is excluded from search indexing and the main navigation.
+
 ### Photography Sync
+
+Local previews read `public/photos-data.json` by default, using the same photo mirror as development. `PHOTOS_MANIFEST_PATH` overrides this in production or tests. A remote manifest is used only when `ZIPLINE_PHOTOS_DATA_URL` is explicitly configured.
 
 Photography delivery is handled by the `zipline-sync/` service in the same Docker Compose app as the website. Original uploads live in Zipline's `photography-originals` folder, the sync job downloads those originals, generates hashed JPEG/WebP variants plus a `photos-data.json` manifest into the shared `photography-data` volume, and Nginx serves the optimized files from `/photos/*` with immutable cache headers. The website reads the local manifest from `/data/photography/photos-data.json`, so the gallery keeps serving the last successful sync if Zipline is down.
 
 ### Open Graph Image Generation
 
-Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic OG fallback image with the site title and avatar, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
+Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic Colophon OG fallback image with the site title, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
 
 The volume manifest and hashed PNG files persist across deployments. Existing files are deliberately retained because previously published OG URLs must remain valid. Prune the volume manually only when old URLs no longer need to work. In Coolify versions that include stopped one-shot services in application health evaluation, mark `og-generator` as excluded from health checks in the Coolify service settings.
 
@@ -167,8 +177,8 @@ Visit `http://localhost:3000` to see the site in development mode.
 npm run dev          # Start Vite, OG watcher, and periodic photo sync (port 3000)
 npm run sync:photos  # Refresh the local photography mirror once
 npm run build        # Production build → dist/
-npm run start        # Run built server: srvx --entry dist/server/server.js
-npm run preview      # Preview production build locally
+npm run start        # Serve the production build and static assets (port 3000)
+npm run preview      # Serve the production build on localhost (port 3000)
 npm run type-check   # Oxlint TypeScript 7 type-check
 npm run lint         # Oxlint + TypeScript 7 type-aware rules
 npm run format       # Prettier + Oxlint auto-fix
@@ -216,6 +226,8 @@ To smoke-test the production photography container against Zipline, run `npm run
 > **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server now also runs the local OG generator, but it still behaves differently from production for SSR and proxying and can produce false positives or false negatives.
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
+
+After website changes, leave a local development environment or production preview running and provide direct links to the pages changed and checked, so the result is easy to verify.
 
 **Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (Oxlint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
@@ -378,7 +390,6 @@ function MarkdownLayoutSkeleton() {
 - `src/routes/index.tsx` — home page
 - `src/routes/lab/index.tsx` — blog/lab listing with `q` search param (client-side filter)
 - `src/routes/lab/$slug.tsx` — individual MDX posts
-- `src/routes/lab/co2/` — live CO2 monitor dashboard (SWR polling)
 - `src/routes/lab/gen-art-gallery/` — generative art iframe gallery
 - `src/routes/lab/ons-land/` — D3 land-use hexbin chart
 - `src/routes/lab/prognosis-2100/` — ECharts climate dashboard

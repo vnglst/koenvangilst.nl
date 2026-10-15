@@ -1,3 +1,4 @@
+import { LoadingState } from '#/components/content/LoadingState';
 import { memo, useEffect, useRef, useState } from 'react';
 import type * as echartsType from 'echarts/core';
 // Type imports don't increase bundle size
@@ -114,9 +115,7 @@ const ChartComponent = ({ options, className }: ChartProps) => {
   return (
     <div className={`relative ${className}`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-          <div className="text-gray-500 dark:text-gray-400">Loading chart...</div>
-        </div>
+        <LoadingState className="chart-loading absolute inset-0 bg-[var(--surface)]">Loading chart...</LoadingState>
       )}
       <div ref={chartRef} className="h-full w-full" style={{ opacity: isLoading ? 0 : 1 }} />
     </div>
