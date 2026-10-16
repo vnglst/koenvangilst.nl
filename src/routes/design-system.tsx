@@ -305,8 +305,9 @@ function DesignSystem() {
                 <Link href="/photography">Photography</Link>
               </dt>
               <dd>
-                Natural photo proportions in two unequal, staggered columns with quiet captions. One column on mobile.
-                Open a photo for a full-viewport image, fitted without cropping, on black in both themes.
+                Natural photo proportions in two unequal, staggered columns, using the full available width beside the
+                sidebar. One column on mobile. Open a photo for a full-viewport image, fitted without cropping, on black
+                in both themes.
               </dd>
             </div>
             <div>

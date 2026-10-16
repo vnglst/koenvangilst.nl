@@ -165,13 +165,13 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
                   <source
                     type="image/webp"
                     srcSet={photo.srcSetWebp}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes={index % 2 === 0 ? '(max-width: 767px) 100vw, 58vw' : '(max-width: 767px) 100vw, 42vw'}
                   />
                 )}
                 <img
                   src={photo.src}
                   srcSet={photo.srcSet}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes={index % 2 === 0 ? '(max-width: 767px) 100vw, 58vw' : '(max-width: 767px) 100vw, 42vw'}
                   alt={photo.alt}
                   className="transition-opacity group-hover:opacity-90"
                   width={photo.width}

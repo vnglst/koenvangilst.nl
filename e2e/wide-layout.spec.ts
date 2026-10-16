@@ -34,6 +34,13 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
           overflow: document.documentElement.scrollWidth > innerWidth
         };
       });
+      if (path === '/photography') {
+        expect(geometry.width).toBeGreaterThan(width - 400);
+        expect(geometry.gap).toBe(64);
+        expect(geometry.overflow).toBe(false);
+        expect(geometry.heading).toBe(32);
+        continue;
+      }
       contentLeft ??= geometry.left;
       headingSize ??= geometry.heading;
       expect(Math.abs(geometry.left - contentLeft), path).toBeLessThan(1);

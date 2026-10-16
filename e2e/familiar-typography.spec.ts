@@ -22,7 +22,8 @@ for (const width of [320, 768, 1440, 1920]) {
         const dark = (await page.locator('html').getAttribute('class'))?.includes('dark');
         if (dark !== (theme === 'dark')) await page.getByRole('button', { name: /switch to .* mode/i }).click();
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
-        expect((await page.locator('.site-main').boundingBox())!.width).toBeLessThanOrEqual(640);
+        if (path !== '/photography')
+          expect((await page.locator('.site-main').boundingBox())!.width).toBeLessThanOrEqual(640);
       }
     }
     await page.goto('/lab/code-doesnt-speak-for-itself');
@@ -52,6 +53,11 @@ test('photography preserves natural proportions and staggered columns with align
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/photography');
     const grid = page.locator('.photo-grid');
+    if (width >= 1440) {
+      const bounds = await grid.boundingBox();
+      expect(bounds!.width).toBeGreaterThan(width - 400);
+      expect(width - bounds!.x - bounds!.width).toBeCloseTo(width * 0.03, 0);
+    }
     await expect(grid).toBeVisible();
     const boxes = await grid.locator('button').evaluateAll((elements) =>
       elements.map((el) => {
