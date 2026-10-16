@@ -37,17 +37,13 @@ for (const width of [390, 1440]) {
       .getByRole('link', { name: 'Behavior' })
       .click();
     await page.locator('.ds-rules li').last().scrollIntoViewIfNeeded();
-    if (width < 768) {
-      const lastRule = await page.locator('.ds-rules li').last().boundingBox();
-      const navigation = await page.locator('.site-colophon').boundingBox();
-      expect(lastRule!.y + lastRule!.height).toBeLessThanOrEqual(navigation!.y);
-    }
+    if (width < 768) await page.getByRole('button', { name: 'Open navigation' }).click();
     // Route-specific specimen styles must not change the existing homepage.
     await page
       .getByRole('navigation', { name: 'Main navigation' })
       .getByRole('link', { name: 'About', exact: true })
       .click();
     await expect(page.getByText('Recent articles')).toBeVisible();
-    await expect(page.locator('.home-portrait')).toHaveCSS('width', '40px');
+    await expect(page.locator('.signature-portrait')).toHaveCSS('width', width < 768 ? '36px' : '48px');
   });
 }

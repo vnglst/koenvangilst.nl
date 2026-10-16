@@ -27,8 +27,8 @@ const getLabPost = createServerFn({ method: 'GET' })
       summary: post.summary,
       publishedAt: post.publishedAt,
       readingTime: post.readingTime,
+      hasContent: post.hasContent,
       tags: post.tags,
-      tagsAsSlugs: post.tagsAsSlugs,
       image: post.image,
       url: post.url,
       // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
@@ -112,14 +112,9 @@ function PostPage() {
       />
       {Component && (
         <MarkdownLayout
-          publishedAt={postMeta.publishedAt}
-          title={postMeta.title}
-          readingTime={postMeta.readingTime}
-          tags={postMeta.tags}
-          path={`/lab/${postMeta.slug}`}
-          image={postMeta.image}
+          post={postMeta}
           Component={
-            postMeta.readingTime.words === 0
+            !postMeta.hasContent
               ? () => (
                   <>
                     <p>{postMeta.summary}</p>

@@ -25,8 +25,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#f5f3ed', media: '(prefers-color-scheme: light)' },
-      { name: 'theme-color', content: '#111110', media: '(prefers-color-scheme: dark)' },
+      { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
+      { name: 'theme-color', content: '#020617', media: '(prefers-color-scheme: dark)' },
       { title: 'Koen van Gilst - Principal Engineer' },
       {
         name: 'description',
@@ -71,9 +71,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
       {
         rel: 'preload',
-        href: '/fonts/LibreCaslonText.ttf',
+        href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
         as: 'font',
-        type: 'font/ttf',
+        type: 'font/woff2',
         crossOrigin: 'anonymous'
       },
       {

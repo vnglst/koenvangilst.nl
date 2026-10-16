@@ -2,6 +2,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { GenerativeArtGallery } from './_components/GenerativeArtGallery';
 
 export const Route = createFileRoute('/lab/gen-art-gallery/')({
+  validateSearch: (search: Record<string, unknown>) => ({
+    project: typeof search.project === 'string' ? search.project : undefined
+  }),
   head: () => ({
     meta: [
       { title: 'Generative Art Gallery | Koen van Gilst' },

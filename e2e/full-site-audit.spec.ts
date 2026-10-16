@@ -23,7 +23,7 @@ test.describe('complete local content audit', () => {
       const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
       expect(response?.status(), path).toBe(200);
       await expect(page.locator('main h1'), path).toHaveCount(1);
-      await expect(page.getByRole('navigation', { name: 'Main navigation' }), path).toBeVisible();
+      await expect(page.getByRole('navigation', { name: 'Main navigation', includeHidden: true }), path).toHaveCount(1);
       // Wait for lazy MDX and its CSS before measuring the actual content.
       if (
         path.startsWith('/lab/') &&

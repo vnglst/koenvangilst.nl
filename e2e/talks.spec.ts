@@ -4,6 +4,7 @@ for (const width of [320, 1440]) {
   test(`talks are readable and reachable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/lab');
+    if (width < 768) await page.getByRole('button', { name: 'Open navigation' }).click();
     await page
       .getByRole('navigation', { name: 'Main navigation' })
       .getByRole('link', { name: 'Talks', exact: true })

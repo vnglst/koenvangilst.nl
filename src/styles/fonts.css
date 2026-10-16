@@ -35,11 +35,11 @@
   --font-sans: 'IBM Plex Sans';
 }
 
-/* Libre Caslon Text, SIL Open Font License (see the adjacent license file). */
+/* Original display face, retained for the site's recognizable headings. */
 @font-face {
-  font-family: 'Libre Caslon Text';
+  font-family: 'Nimbus Sans Extended';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 700;
   font-display: swap;
-  src: url('/fonts/LibreCaslonText.ttf') format('truetype');
+  src: url('/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2') format('woff2');
 }

@@ -46,22 +46,23 @@ test.describe('real local preview integrations', () => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/lab/gen-art-gallery');
-    await page.getByText('All 10 projects', { exact: true }).click();
-    const choices = page.getByRole('navigation', { name: 'Choose an art project' }).getByRole('button');
-    await expect(choices).toHaveCount(10);
-    const titles = await choices.allTextContents();
-    for (const title of titles) {
-      if (!(await choices.first().isVisible())) await page.getByText('All 10 projects', { exact: true }).click();
-      await choices.filter({ hasText: title }).click();
-      await expect(page.getByRole('heading', { level: 2, name: title, exact: true })).toBeVisible();
-      await expect(choices.first()).not.toBeVisible();
+    const picker = page.getByRole('combobox', { name: 'Choose an art project' });
+    await expect(picker.locator('option')).toHaveCount(10);
+    const projects = await picker.locator('option').evaluateAll((options) =>
+      options.map((option) => ({
+        slug: (option as HTMLOptionElement).value,
+        title: option.textContent!.replace(/^\d+\. /, '')
+      }))
+    );
+    for (const { slug, title } of projects) {
+      await picker.selectOption(slug);
       const embed = page.locator('iframe');
       await expect(embed).toHaveAttribute('title', title);
       await expect(page.frameLocator('iframe').locator('body')).toBeVisible({ timeout: 20_000 });
       expect(await page.frameLocator('iframe').locator('body').innerHTML(), title).not.toBe('');
       await expect(page.getByRole('link', { name: /open in new tab/i })).toHaveAttribute(
         'href',
-        (await embed.getAttribute('src'))!
+        slug === 'time-flies' ? 'https://time-flies.koenvangilst.nl' : (await embed.getAttribute('src'))!
       );
     }
     expect(errors).toEqual([]);
@@ -86,7 +87,7 @@ test.describe('real local preview integrations', () => {
       '/lab/aranet4-co2-monitor'
     ]) {
       await page.goto(route);
-      await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Open navigation' })).toBeVisible();
       await expect(page.locator('main')).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), route).toBe(true);
     }

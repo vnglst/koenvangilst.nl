@@ -17,18 +17,21 @@ import '#/styles/design-system.css';
 
 export const Route = createFileRoute('/design-system')({
   head: () => ({
-    meta: [{ title: 'Colophon design system | Koen van Gilst' }, { name: 'robots', content: 'noindex, follow' }]
+    meta: [
+      { title: 'Familiar, refined design system | Koen van Gilst' },
+      { name: 'robots', content: 'noindex, follow' }
+    ]
   }),
   component: DesignSystem
 });
 
 const palette = [
-  ['page', 'Canvas', '#111110', '#f5f3ed'],
-  ['ink', 'Text & headings', '#e9e7e0', '#242420'],
-  ['muted', 'Secondary text', '#a5a59b', '#686860'],
-  ['line', 'Hairline dividers', '#363632', '#d8d6cf'],
-  ['surface', 'Code & controls', '#20201d', '#eae8e1'],
-  ['accent', 'Selected navigation', '#6ca8d6', '#256c9f']
+  ['page', 'Canvas', '#020617', '#ffffff'],
+  ['ink', 'Text & headings', '#e5e7eb', '#1f2937'],
+  ['muted', 'Secondary text', '#9ca3af', '#6b7280'],
+  ['line', 'Hairline dividers', '#1e293b', '#e5e7eb'],
+  ['surface', 'Code & controls', '#111827', '#f3f4f6'],
+  ['accent', 'Selected navigation', '#42a5f5', '#1976d2']
 ];
 
 function DesignSystem() {
@@ -40,7 +43,7 @@ function DesignSystem() {
     <Container footer={false}>
       <div className="design-system">
         <header>
-          <p className="ds-caption">Koen van Gilst / Colophon</p>
+          <p className="ds-caption">Koen van Gilst / Familiar, refined</p>
           <Heading>Quiet by design.</Heading>
           <p className="ds-lead">
             A personal space for writing, photography, and experiments. The content carries the personality. The
@@ -58,8 +61,7 @@ function DesignSystem() {
         <section id="foundations" className="ds-section">
           <Heading level={2}>Foundations</Heading>
           <p>
-            Charcoal, ivory, and a trace of blue. Use the theme control above to see every specimen in dark or light
-            mode.
+            Navy, white, and the original blue. Use the theme control above to see every specimen in dark or light mode.
           </p>
           <div className="ds-palette">
             {palette.map(([token, role, dark, light]) => (
@@ -75,31 +77,52 @@ function DesignSystem() {
             ))}
           </div>
           <p className="ds-caption">
-            Blue identifies where you are. Inline links stay the text color and use an underline. Photography and
-            artwork keep their own colors.
+            Blue identifies the author and where you are. Inline links stay the text color and use an underline.
+            Photography and artwork keep their own colors.
           </p>
         </section>
 
         <section id="typography" className="ds-section">
           <Heading level={2}>Typography</Heading>
           <p>
-            Libre Caslon Text gives titles and the signature their voice. IBM Plex Sans keeps reading and navigation
+            Nimbus Sans Extended gives page titles their original character. IBM Plex Sans keeps reading and navigation
             clear. Both are self-hosted.
           </p>
           <div className="ds-specimen">
-            <p className="ds-caption">Page title / Libre Caslon Text / 30–42px desktop, 29px mobile</p>
+            <p className="ds-caption">Page title / Nimbus Sans Extended bold / 32px desktop, 28px mobile</p>
             <p className="editorial-heading editorial-heading-1">Code Doesn’t Speak for Itself</p>
-            <p className="ds-caption">Section title / 27px</p>
+            <p className="ds-caption">Section title / IBM Plex Sans semibold / 22px</p>
             <p className="editorial-heading editorial-heading-2">Articles &amp; Experiments</p>
-            <p className="ds-caption">Body / IBM Plex Sans / 17px, 1.75 leading; 1.65 on mobile</p>
+            <p className="ds-caption">Body / IBM Plex Sans / 17px, 28px leading</p>
             <Prose as="div">
               <p>I'm a software engineer with a philosophy degree and a lifelong passion for creating software.</p>
             </Prose>
             <p className="ds-caption">Navigation / 14px · Dates & captions / 13px</p>
           </div>
+          <div className="blog-article ds-specimen">
+            <Prose as="div" className="article-body">
+              <h2>Writing with room for images</h2>
+              <p>
+                A readable text column gives the story a steady rhythm. Photographs and diagrams can use the full width
+                when they need more space.
+              </p>
+              <ContentImage
+                src="/static/images/frontmania-2026-tetris.jpg"
+                alt="Koen speaking at Frontmania with Tetris projected behind him"
+                width={2048}
+                height={1413}
+                label="Frontmania, October 2026. Images retain their natural proportions."
+              />
+              <h3>Back to the story</h3>
+              <p>Headings, captions, and paragraphs share one rhythm, with more space around a change of subject.</p>
+              <blockquote>
+                <p>Let the content carry the personality.</p>
+              </blockquote>
+            </Prose>
+          </div>
           <p>
-            Regular weight, left alignment, and a readable measure. Article titles use 32px on mobile; compact archive
-            titles switch to 17px sans serif.
+            Regular body text, semibold supporting headings, left alignment, and a consistent reading measure. Archive
+            titles use 20px on desktop and 19px on mobile; summaries use 16px.
           </p>
         </section>
 
@@ -132,11 +155,11 @@ function DesignSystem() {
             </div>
             <div>
               <dt>Reading column</dt>
-              <dd>720px maximum</dd>
+              <dd>640px maximum</dd>
             </div>
             <div>
               <dt>Home biography</dt>
-              <dd>520px maximum</dd>
+              <dd>640px maximum</dd>
             </div>
           </dl>
         </section>
@@ -144,8 +167,8 @@ function DesignSystem() {
         <section id="components" className="ds-section">
           <Heading level={2}>Components</Heading>
           <p>
-            Use text first. Add a surface or border when a control needs more emphasis. Corners stay square, apart from
-            the portrait and switches.
+            Use text first. Add a surface or border when a control needs more emphasis. Controls and code panels use a
+            small radius; portraits remain circular.
           </p>
           <div className="ds-example">
             <p className="ds-caption">Links</p>
@@ -254,8 +277,8 @@ function DesignSystem() {
                 <Link href="/">Introduction</Link>
               </dt>
               <dd>
-                A small 40px portrait above the biography. On desktop the narrow column shares the inner pages’ left
-                edge; the signature anchors the lower left. No terminal symbol.
+                A 48px portrait above vertical navigation on desktop. The biography and visible name align with the same
+                reading column as the inner pages.
               </dd>
             </div>
             <div>
@@ -263,8 +286,8 @@ function DesignSystem() {
                 <Link href="/lab">Archive</Link>
               </dt>
               <dd>
-                Text filters and a dated list. Desktop pairs dates with serif titles. Mobile uses year groups, sans
-                serif titles, and fine dividers.
+                Text filters and year groups. Desktop pairs dates with semibold titles and summaries. Mobile stacks each
+                entry into a single readable column.
               </dd>
             </div>
             <div>
@@ -272,8 +295,8 @@ function DesignSystem() {
                 <Link href="/lab/code-doesnt-speak-for-itself">Reading</Link>
               </dt>
               <dd>
-                A single column, quiet metadata, and generous leading. At 1100px and above the article aligns to the
-                shared desktop frame.
+                A single 640px column, quiet metadata, and 17px text with 28px leading. Titles, body, and images share
+                one left edge.
               </dd>
             </div>
             <div>
@@ -281,8 +304,8 @@ function DesignSystem() {
                 <Link href="/photography">Photography</Link>
               </dt>
               <dd>
-                Natural proportions in two unequal columns, staggered by 120px. One column on mobile. Open a photo for a
-                full-viewport image, fitted without cropping, on black in both themes.
+                A regular square grid with three columns on desktop, two on tablet, and one on phones. Open a photo for
+                a full-viewport image, fitted without cropping, on black in both themes.
               </dd>
             </div>
             <div>
@@ -290,14 +313,14 @@ function DesignSystem() {
                 <Link href="/lab/gen-art-gallery">Experiments</Link>
               </dt>
               <dd>
-                The work is the main event. Small titles, compact controls, an expandable project index, and space for
+                The work is the main event. Consistent titles, compact controls, a native project picker, and space for
                 the original interactive canvas.
               </dd>
             </div>
           </dl>
           <Note>
-            Below 768px: 24px gutters, a fixed left-aligned navigation bar, and 110px of bottom content padding. Hide
-            the repeated signature. Photo detail uses its own immersive layout.
+            Below 768px: 24px gutters and a portrait header with theme and menu controls. Navigation expands below the
+            header. Footer content stays left aligned. Photo detail uses its own immersive layout.
           </Note>
         </section>
 
@@ -306,7 +329,7 @@ function DesignSystem() {
           <ul className="ds-rules">
             <li>Dark is the default. Light is an explicit choice that persists between visits.</li>
             <li>
-              Keyboard focus uses a visible 2px outline, offset by 5px. Selected states also use semantic attributes.
+              Keyboard focus uses a visible 2px outline, offset by 4px. Selected states also use semantic attributes.
             </li>
             <li>Use motion to answer an action. Honor reduced-motion preferences.</li>
             <li>

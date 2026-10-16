@@ -33,7 +33,7 @@ export function Footer() {
           </Link>
         ))}
       </div>
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
         <div>© {currentYear} Koen van Gilst</div>
         <div className="">
           v. {appVersion} |{' '}

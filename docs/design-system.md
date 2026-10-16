@@ -1,183 +1,79 @@
-# Colophon design system
+# Familiar, refined design system
 
-The Quiet introduction B direction for koenvangilst.nl. A small personal signature beside writing, photography, and experiments. Minimalism is the governing constraint: use composition, typography, and space to establish hierarchy.
-
-The live reference is at `/design-system`. It uses the same theme, components, fonts, and CSS as the website. Toggle the theme to inspect dark and light specimens. This reference is deliberately absent from the main navigation and search-engine indexing.
+The approved direction evolves the original koenvangilst.nl identity: a portrait sidebar, navy and white canvases, wide bold page titles, readable sans serif text, and restrained blue accents. The interactive reference lives at `/design-system`, outside primary navigation and search indexing. The earlier exploration remains in `output/familiar-refined/`.
 
 ## Sources of truth
 
-- `src/styles/tokens.css`: semantic color, spacing, measure, target-size, and photo-viewer tokens.
-- `src/styles/colophon.css`: component styles, editorial layout, responsive rules, interaction states, and photography viewer.
-- `src/styles/fonts.css`: self-hosted font declarations and `--font-sans`.
-- `src/styles/design-system.css`: layout for the reference page only.
-- `src/components/`: reusable implementations. Import components directly, without barrel files.
-- `output/colophon/personal/selected-b/`: approved generated screen references, including the immersive photo viewer. Treat generated images as composition guidance; real content and working behavior take precedence.
-
-When changing a design decision, update the shared CSS, this guide, and the visual reference together. Do not create a second set of theme values for individual pages.
+- `src/styles/tokens.css`: semantic colors, spacing, reading width, type roles, and viewer colors.
+- `src/styles/fonts.css`: self-hosted Nimbus Sans Extended and IBM Plex Sans.
+- `src/styles/colophon.css`: shared layout, components, responsive rules, and interaction states. The existing filename remains to avoid unnecessary import churn.
+- `src/styles/prose.css`: article typography and mixed-media rhythm.
+- `src/styles/design-system.css`: reference-page layout only.
+- `src/components/`: reusable components, imported directly without barrel files.
 
 ## Principles
 
-1. Content carries the personality. Use actual writing, photographs, and original projects.
-2. Keep a quiet signature. The portrait belongs above the homepage biography; the desktop signature is typographic. There is no terminal symbol.
-3. Leave space. A narrow column against a generous empty field is intentional. Do not fill that field with cards or decoration.
-4. Give blue a purpose. It marks active primary navigation. Text filters currently use ink and an underline; preserve that distinction.
-5. Adapt the composition. Mobile has its own reading rhythm and a consistent left-aligned bottom navigation.
-6. Let images occupy space. Preserve natural proportions in the collection and maximize the selected photograph in its viewer.
+1. Keep the original character: the real portrait, Nimbus page titles, and blue active marker.
+2. Use one consistent reading column for the homepage, Lab, talks, articles, photography, and art. Allow content to determine the page height.
+3. Keep controls quiet, with explicit hover, keyboard focus, selected, and disabled states.
+4. Use square crops in the photo overview; maximize the selected photograph without cropping.
+5. Use actual writing, talks, photographs, and projects. Do not replace content with decorative labels.
 
-## Color tokens
+## Theme
 
-| CSS token   | Dark      | Light     | Purpose                                    |
-| ----------- | --------- | --------- | ------------------------------------------ |
-| `--page`    | `#111110` | `#f5f3ed` | Page canvas                                |
-| `--ink`     | `#e9e7e0` | `#242420` | Headings, body, links, primary actions     |
-| `--muted`   | `#a5a59b` | `#686860` | Secondary copy, dates, inactive navigation |
-| `--line`    | `#363632` | `#d8d6cf` | Fine structural dividers                   |
-| `--surface` | `#20201d` | `#eae8e1` | Code and secondary controls                |
-| `--accent`  | `#6ca8d6` | `#256c9f` | Active primary navigation                  |
+| Token       | Dark      | White     |
+| ----------- | --------- | --------- |
+| `--page`    | `#020617` | `#ffffff` |
+| `--ink`     | `#e5e7eb` | `#1f2937` |
+| `--muted`   | `#9ca3af` | `#6b7280` |
+| `--line`    | `#1e293b` | `#e5e7eb` |
+| `--surface` | `#111827` | `#f3f4f6` |
+| `--accent`  | `#42a5f5` | `#1976d2` |
 
-Dark is the default, regardless of the operating system preference. An explicit theme choice is stored in local storage and applied before hydration. Components inherit semantic tokens rather than branching on the theme.
+Dark is the default. The explicit choice persists in local storage and applies before hydration. Consume semantic tokens rather than adding theme branches to components. Blue identifies active navigation, selected filters, hover, and keyboard focus. Primary buttons use `#1976d2` with white text in both themes.
 
-Text and muted text against the page exceed WCAG AA normal-text contrast in both themes. Divider colors are structural only; they are not suitable as text or as the sole identifier of an interactive element. Underline body links and expose selected states with `aria-current` or `aria-pressed`.
-
-Photo detail is intentionally theme-independent: canvas `#090909`, foreground `#f4f4f1`, secondary text `#c5c5be`, and control backgrounds `rgb(9 9 9 / 78%)`. Original artwork and data visualization colors need not be desaturated into the interface palette.
+Photo detail keeps its neutral black canvas in both themes. Artwork and chart colors retain their own meaning.
 
 ## Typography
 
-| Role                              | Typeface                   | Size / leading                   |
-| --------------------------------- | -------------------------- | -------------------------------- |
-| Page title                        | Libre Caslon Text, regular | `clamp(30px, 3vw, 42px)` / 1.18  |
-| Section title                     | Libre Caslon Text, regular | 27px / 1.18                      |
-| Subheading, desktop archive title | Libre Caslon Text, regular | 23px; archive leading 1.4        |
-| Desktop signature                 | Libre Caslon Text, regular | 29px / 1.25; 25px at 768–900px   |
-| Prose                             | IBM Plex Sans              | 17px / 1.75 desktop; 1.65 mobile |
-| Navigation, filters, metadata     | IBM Plex Sans              | 14px; date/caption 13px          |
-| Code                              | Existing monospace stack   | 14px / 1.7                       |
+| Role                       | Typeface / weight          | Size / leading                                   |
+| -------------------------- | -------------------------- | ------------------------------------------------ |
+| Page title                 | Nimbus Sans Extended / 700 | 32px / 1.2; mobile 28px / 1.22; below 360px 25px |
+| Section heading            | IBM Plex Sans / 600        | 22px / 1.4                                       |
+| Archive or talk title      | IBM Plex Sans / 600        | 20px / 1.4; archive mobile 19px                  |
+| Article and biography      | IBM Plex Sans / 400        | 17px / 28px                                      |
+| Summary and description    | IBM Plex Sans / 400        | 16px / 24px                                      |
+| Navigation and filters     | IBM Plex Sans / 400        | 14px; mobile navigation 15px                     |
+| Metadata, captions, footer | IBM Plex Sans / 400        | 13–14px / 20–22px                                |
+| Search and select          | IBM Plex Sans / 400        | 16px / 24px                                      |
+| Code                       | System monospace           | 14px / 1.7                                       |
 
-Headings use slight negative tracking (`-0.025em`) and balanced wrapping. Body text is left aligned. Use regular weight as the baseline; bold only when the content needs emphasis. Both typefaces are locally served under open font licenses.
+Page titles use balanced wrapping and slight negative tracking (`-0.01em`). Other headings use normal tracking. Text stays left aligned. Use regular weight for reading and semibold for structure; rich-text emphasis can use the locally served bold weight. Avoid shrinking captions below 13px.
 
-Below 768px: page titles are 29px, article titles 32px, archive page titles 25–29px. Compact archive rows switch to 17px IBM Plex Sans with 1.6 leading; other post titles remain 20px serif. Photo captions become 18px serif in the collection, while viewer captions remain 16px sans serif.
+The shared column has a 640px maximum. Article titles, metadata, body, and media use this same width. Article topics sit below the body in the article footer, using muted 13px links that wrap naturally. Lab listings omit entry counts. Body paragraphs have 24px after them; topic changes have 48px above and 16px below their headings. Media generally has 32px vertical spacing.
 
-## Spacing and shape
+## Layout
 
-Use a four-pixel rhythm for new spacing: 8, 12, 16, 20, 24, 28, 32, 40, 48, and 64px. This is guidance, not a mandate to replace existing optical adjustments.
+Desktop uses a centered frame capped at 1000px, 40px side gutters, a 160px portrait rail, and a 64px gap. Content starts 112px from the top, increasing to 128px above 1700px. Between 768px and 1000px, use 32px gutters, a 132px rail, a 32px gap, and an 80px top margin.
 
-- 8–12px: tightly related metadata and controls.
-- 16–24px: internal groups, prose support, title separation.
-- 28px: main navigation gap; 24px for archive filters.
-- 40–64px: larger content breaks and photography spacing.
-- 1px rules provide structure. Avoid decorative outlines, shadows, gradients, and rounded cards.
-- Rectangular controls and code panels. Circular 40px portrait and rounded switches are explicit exceptions.
+Below 768px, the portrait, theme control, and menu form one header in document flow. The menu expands into two columns below them. Navigation closes after following a link. Use 24px page gutters, reduced to 20px below 360px. Footer content stays left aligned. There is no fixed bottom navigation.
 
-## Layout recipes
+All main screens share their content start and heading scale. The photo gallery uses square thumbnails with a 16px gap: three columns above 1024px, two from 640px, and one below 640px. The fullscreen viewer hides the shell, contains the entire image, and overlays compact controls inside the viewport safe areas.
 
-| Screen           | Desktop                                                                                    | Below 768px                                 |
-| ---------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| Shared shell     | Shared frame, top 120px; content max 720px                                                 | Padding 100px 24px 110px                    |
-| Homepage         | Shared left edge, top 160–240px; max 520px                                                 | Top `max(112px, 17svh)`; visible page title |
-| Reading          | Shared left edge; max 720px                                                                | One readable column; 32px title             |
-| Wide content     | Shared frame; max 1100px                                                                   | Same 24px gutters                           |
-| Photo collection | Top 120px; columns 1.4:1; gap 64px vertically, 40px horizontally; even items stagger 120px | One column, 48px gaps, no stagger           |
-| Art gallery      | Shared frame and page-title scale; canvas `min(60svh, 700px)`                              | 24px gutters; canvas 48svh                  |
-| Land use         | Shared frame, top 120px; square black chart with reserved dimensions                       | 24px gutters; square chart                  |
+The art gallery places its native ten-project picker and Previous/Next controls above a 4:3 artwork frame; mobile uses a square frame. Project selection stays in the URL and supports reload/history. Gallery arrow keys do not intercept the embedded artwork's own controls. Time Flies uses the local fitted embed with its MIT license preserved.
 
-At 768–900px, the shared shell moves to 34vw/4vw and navigation gaps tighten to 16px.
+## Components and behavior
 
-From 1100px, all editorial screens share a desktop frame capped at 1600px. Its outer gutter is `max(64px, calc((100vw - 1600px) / 2 + 64px))`. Navigation anchors to that gutter, with a 220–320px rail. Every content column begins at the gutter plus `clamp(280px, 26vw, 416px)`. Reading and archive columns stay at 720px maximum; the homepage stays at 520px; wide visual work uses the remaining frame width, up to 1100px. These measures preserve readable content while keeping the composition together on large monitors.
+Reuse `Container`, `Heading`, `Text`, `Prose`, `PageHeader`, `BackToLab`, `ArticleMetadata`, `ContentImage`, `CodeBlock`, `Button`, `TagLink`, `TagButton`, `GalleryNavigation`, and `Toolbar`. Extend existing primitives rather than creating parallel libraries.
 
-The desktop frame applies from 1100px. Between 901px and 1099px, compact desktop retains its proportional offsets (37vw standard, 31vw wide, 40vw art/map, 54vw home). All inner pages begin 120px from the top and use the same page-title scale. The homepage retains a quieter vertical entrance, capped at 240px (`clamp(160px, 22svh, 240px)`). Photo detail remains full viewport.
+- Main navigation: `aria-current`, blue text, and a desktop `>` marker. The marker is navigation feedback, not an extra logo.
+- Filters: `aria-pressed`, blue text, and an underline. Lab category selection persists in URL parameter `q`; there is no search field.
+- Archive links: underline only the title on hover. Dates and summaries remain unadorned.
+- Back links: underline only the label; leave the arrow clear.
+- Inline links: persistently underlined, blue on hover.
+- Keyboard focus: a 2px blue outline, offset 4px. Navigation/control targets are at least 44px.
+- Photo viewer: keyboard arrows, Escape, swipe, and disabled boundary controls.
+- Code: scroll within its block and copy the complete command with announced feedback.
+- Loading: keep the shell, reserve media dimensions, and delay skeletons roughly one second. Honor reduced motion.
 
-### Signature and navigation
-
-Desktop colophon: fixed 54px from the bottom. From 1100px it aligns to the shared frame gutter and uses a 220–320px rail; compact desktop retains the existing 5vw/27vw proportions. Navigation sits 16px below the signature, with 44px-high links. The theme control stays in the upper right.
-
-Mobile: hide the signature on every main screen. The fixed bottom bar uses the page background, 24px side gutters, and a 28px gap between left-aligned links. Include bottom safe-area padding. Reserve 110px below content so final rows remain reachable. The homepage still has a proper visible title.
-
-### Immersive photography
-
-Use the standalone `FullScreenGallery`, not the editorial Container. Fill `100dvh`, hide page scrolling, and use `object-fit: contain` without cropping or a constrained content column. Keep the black canvas in both themes. Back and the counter overlay the top; caption and previous/next controls overlay the bottom with safe-area offsets and legible translucent backgrounds. Support arrow keys, Escape, swipe, browser history, and direct URLs. Every control remains available in portrait and landscape orientations.
-
-## Components and states
-
-| Need               | Existing implementation         | Rule                                                                                           |
-| ------------------ | ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Standard page      | `layout/Container`, `Sidebar`   | Use `home` or `wide` only for the relevant recipe                                              |
-| Titles             | `content/Heading`               | Preserve heading hierarchy; class controls visual role                                         |
-| Rich content       | `content/Prose`, `MDXComponent` | Text links underlined; code scrolls within its block                                           |
-| Article metadata   | `content/ArticleMetadata`       | Muted date and reading time, quiet hierarchy                                                   |
-| Archive entry      | `ui/PostLink`                   | Text-first layout; underline title on hover                                                    |
-| Actions            | `ui/Button`                     | Primary ink fill; secondary surface fill; outline or ghost for quieter actions; sm/md/lg sizes |
-| Topics and filters | `ui/Tag`                        | Plain text; active filter ink + underline and `aria-pressed`; no pill background               |
-| Boolean control    | `forms/Toggle`                  | Native labeled checkbox; visible keyboard focus                                                |
-| Theme              | `theme/ThemeToggleText`         | Clear accessible action label; persistent choice                                               |
-| Code               | `content/CodeBlock`             | Copy button with Copied / Copy failed feedback; preserve plain text                            |
-| Supporting note    | `.editorial-note`               | Muted text with a fine left rule                                                               |
-
-Hover adds an underline or increases text contrast. Disabled buttons use reduced opacity and native `disabled`; do not rely on color alone. Keyboard focus uses a 2px muted outline offset 5px (blue in the photo viewer); switches have their own ink outline. Keep navigation and primary control targets at least 44px. The existing compact code-copy control is 40px high and at least 44px wide.
-
-Do not invent a toast, modal, alert color, or new component family until an actual feature requires it. For unavailable content, say what is unavailable and offer a useful next action.
-
-## Motion, loading, and accessibility
-
-- Motion responds to user actions. Photo navigation is a 300ms directional transition when supported; switches use 120ms. Avoid decorative entrance sequences.
-- Respect `prefers-reduced-motion`; the shared stylesheet reduces animations and transitions and removes smooth scrolling.
-- Reserve image width/height and chart aspect ratios. Loading placeholders use the same shell and dimensions as final content. Delay indicators by about one second to avoid flashes on fast loads.
-- Keep semantic landmarks, heading order, text alternatives, accessible control names, and the skip link.
-- Check keyboard operation, 320px and 390px mobile widths, desktop, mobile landscape, both themes, long titles, and final-content visibility above the bottom bar.
-- Run browser regression checks against a production build, per README. Leave a local preview running with links to changed screens.
-
-## Extending the system
-
-Start with an existing screen recipe and component. Use semantic tokens for interface colors. Put shared decisions in `colophon.css`, and keep feature-specific styling local. Add a specimen here when a reusable pattern is introduced. Verify the actual page with real content before treating a new pattern as part of the system.
-
-## Component library API
-
-The library lives in the existing `src/components` folders. It has no third-party UI runtime and no barrel exports. The live `/design-system` page renders these exact components.
-
-| Import under `#/components/`            | API and usage                                                                                                                     | Applied in                                                            |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `layout/Container`                      | `layout="default\|reading\|photography\|art\|map"`; `home`, `wide`, `footer` control the established composition                  | Every editorial page; photo detail uses its dedicated viewport        |
-| `layout/PageHeader`                     | `title`, optional children and className                                                                                          | Articles, Lab, topic archives                                         |
-| `layout/Toolbar`                        | Native div props and children; wrapping, aligned controls                                                                         | Prognosis, library specimens                                          |
-| `ui/Button`                             | Native button props; primary/secondary/outline/ghost; `variant="bare"` for composed controls; `as="a"` for action links; sm/md/lg | Every React button, including theme, code copy, filters and galleries |
-| `ui/Link`                               | `href`, native anchor props; `variant="content\|plain"`; `externalIndicator` defaults true                                        | Prose, archive rows, homepage, footer, art links, reference           |
-| `ui/Text`                               | `as` defaults p; `size="body\|small\|caption"`; `tone="ink\|muted"`; native props                                                 | Metadata, captions, empty states and gallery copy                     |
-| `ui/Tag`                                | TagLink for topics; TagButton with default/active state                                                                           | Article topics, Lab filters, topic archives                           |
-| `ui/GalleryNavigation`                  | Labels, previous/next callbacks and disabled states; `immersive` for photo controls                                               | Art gallery, fullscreen photo viewer, live specimen                   |
-| `content/Heading`                       | Semantic `level` independent from optional visual `size` (1–6)                                                                    | Page headings, post entries, galleries and content                    |
-| `content/Prose`                         | `as` and className; inherited editorial typesetting                                                                               | Articles, homepage biography, chart introduction                      |
-| `content/ContentImage`                  | Native img props; optional `label` creates figure/caption; lazy by default                                                        | MDX images, homepage portrait, observed-AI gallery                    |
-| `content/Note`                          | Native div props; fine rule and supporting text                                                                                   | MDX Disclaimer compatibility alias and reference                      |
-| `content/LoadingState`                  | Native div props; role=status and delayed appearance                                                                              | Charts                                                                |
-| `content/LoadingState` → `TextSkeleton` | Reserved article placeholder; no immediate flash                                                                                  | Suspended MDX content                                                 |
-| `content/RecentArticles`                | Array of title/slug/publishedAt/url                                                                                               | Homepage                                                              |
-| `content/CodeBlock`                     | Native pre props, children; copy with feedback                                                                                    | All MDX code and reference                                            |
-
-`bare` buttons provide native semantics, a default type of button, disabled behavior, and shared focus styling. Their parent composition supplies dimensions and visual treatment. Do not use bare controls without a visible label or accessible name. Use `Button` variants for ordinary standalone actions.
-
-`Link` forwards native attributes to internal and external links. External content links open in a new tab with an indicator by default; quiet footer and gallery links opt out of the indicator explicitly. Layout-specific presentation belongs to the composing component, not a new link implementation.
-
-Article post titles use h3 below the archive year headings and retain their established visual size. Heading `size` allows this semantic order without tying appearance to the heading level. Original SVG illustrations, canvas artwork, D3 and ECharts rendering remain content, and use their own data-driven colors.
-
-### Example
-
-```tsx
-import { Container } from '#/components/layout/Container';
-import { PageHeader } from '#/components/layout/PageHeader';
-import { Prose } from '#/components/content/Prose';
-import { Note } from '#/components/content/Note';
-import { Link } from '#/components/ui/Link';
-
-<Container layout="reading">
-  <PageHeader title="A real article title" />
-  <Prose>
-    <p>
-      Write the content here, with a <Link href="/lab">link to the Lab</Link>.
-    </p>
-  </Prose>
-  <Note>Supporting context belongs close to the content.</Note>
-</Container>;
-```
-
-CSS tokens include `--space-2` through `--space-16` for the documented rhythm, `--mobile-gutter`, `--navigation-gap`, `--control-target`, `--reading-width`, and `--intro-width`. Immersive media uses `--viewer-page`, `--viewer-ink`, `--viewer-muted`, and `--viewer-overlay`. Reuse these names when composing new components.
-
-Legacy cleanup: Container owns its main landmark and theme-control header directly. The single-use BackButton was replaced with the library Button on Prognosis; its browser-history fallback is preserved. MDX names such as Disclaimer and Image remain registered for published articles, without unused named exports.
+Validate broad shared-layout changes against a production build with the Playwright regression suite, including narrow screens, both themes, client navigation, and layout shifts. Leave a running local preview with direct page links.

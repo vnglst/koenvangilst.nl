@@ -39,6 +39,6 @@ test.describe('project browser search', () => {
   test('handles special regex characters without crashing', async ({ page }) => {
     await page.goto('/lab?q=[test');
 
-    await expect(page.getByText('Nothing found.')).toBeVisible();
+    await expect(page.getByText('No matching entries')).toBeVisible();
   });
 });

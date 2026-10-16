@@ -123,11 +123,11 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
-### Colophon design
+### Familiar, refined design
 
-The shared layout uses a charcoal/ivory palette, self-hosted Libre Caslon Text headings, and IBM Plex Sans body text. Large desktop screens use a shared frame capped at 1600px, with aligned content starts and navigation on the frame’s lower-left edge; below 768px it becomes a consistent navigation-only bottom bar with reserved content space. The signature is desktop-only. Theme foundations live in `src/styles/tokens.css`; shared component styles and responsive layout rules live in `src/styles/colophon.css`. The selected Quiet introduction direction places a small original portrait above the homepage biography, keeps inner-page signatures purely typographic, and uses blue for active navigation and an underline for active text filters. The homepage uses the complete biography and recent articles; Lab filters, tags, and MDX content retain their existing routes.
+The shared layout evolves the original website with navy/white themes, self-hosted Nimbus Sans Extended page titles, IBM Plex Sans body text, and the original portrait. Desktop uses a centered frame with a portrait sidebar and vertical navigation. Below 768px, a portrait header contains the theme toggle and an expandable menu. All main screens share a 640px reading column, consistent title sizes, 17px/28px prose, 16px summaries, and 13px minimum captions. The footer stays left aligned on mobile.
 
-Photography uses natural image proportions and a full-viewport detail viewer with compact overlay controls, keyboard and swipe navigation. Photo detail hides the editorial shell and fits the entire image without cropping on a neutral black canvas in either theme. The viewer renders the selected photograph directly from its URL, with swipe navigation on mobile. The art gallery exposes all ten projects in an expandable index. Generative art retains its original embeds inside the shared layout.
+Theme and typography foundations live in `src/styles/tokens.css`; shared layout and component styles remain in `src/styles/colophon.css`. Article typography and mixed-media spacing live in `src/styles/prose.css`. Lab category filters use URL parameter `q`. Photography uses a neat square thumbnail grid and a full-viewport viewer with keyboard and swipe navigation. The art gallery exposes all ten projects through a native picker and Previous/Next controls, preserving selection in the URL. Time Flies uses its local fitted embed.
 
 The design system is documented in [docs/design-system.md](docs/design-system.md), with a live component and token reference at `/design-system`. Use these when extending the design. The reference supports both themes and mobile layouts, and is excluded from search indexing and the main navigation.
 
@@ -591,3 +591,7 @@ When writing or editing blog posts and documentation:
 - **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
 - **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
 - **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌
+
+### Local Time Flies embed
+
+The gallery serves a copy of the MIT-licensed `vnglst/time-flies` artwork from `public/static/art/time-flies/index.html`, with its license alongside it. This version changes the viewport layout to fit the frame and omits standalone analytics; the animation and credit links are preserved. Update this copy deliberately when the original changes. The gallery’s external link still opens the original website.

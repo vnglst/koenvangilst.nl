@@ -112,7 +112,7 @@
 }
 .ds-patterns dt {
   margin-bottom: 8px;
-  font-family: var(--editorial-serif);
+  font-family: var(--font-sans), sans-serif;
   font-size: 23px;
 }
 .ds-patterns dd {

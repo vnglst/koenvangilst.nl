@@ -1,4 +1,4 @@
-/* Colophon foundations. Components consume semantic names, never theme branches. */
+/* Familiar, refined: shared theme, type and spacing foundations. */
 :root {
   --space-2: 8px;
   --space-3: 12px;
@@ -13,27 +13,31 @@
   --mobile-gutter: var(--space-6);
   --navigation-gap: var(--space-7);
   --control-target: 44px;
-  --reading-width: 720px;
-  --intro-width: 520px;
+  --reading-width: 640px;
+  --intro-width: 640px;
   --viewer-page: #090909;
   --viewer-ink: #f4f4f1;
   --viewer-muted: #c5c5be;
   --viewer-overlay: rgb(9 9 9 / 78%);
-  --page: #f5f3ed;
-  --ink: #242420;
-  --muted: #686860;
-  --line: #d8d6cf;
-  --surface: #eae8e1;
-  --accent: #256c9f;
-  --editorial-serif: 'Libre Caslon Text', 'Iowan Old Style', Palatino, serif;
+  --page: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --surface: #f3f4f6;
+  --accent: #1976d2;
+  --font-display: 'Nimbus Sans Extended', var(--font-sans), sans-serif;
+  --type-body: 17px;
+  --leading-body: 28px;
+  --type-summary: 16px;
+  --type-caption: 13px;
   color-scheme: light;
 }
 :root.dark {
-  --page: #111110;
-  --ink: #e9e7e0;
-  --muted: #a5a59b;
-  --line: #363632;
-  --surface: #20201d;
-  --accent: #6ca8d6;
+  --page: #020617;
+  --ink: #e5e7eb;
+  --muted: #9ca3af;
+  --line: #1e293b;
+  --surface: #111827;
+  --accent: #42a5f5;
   color-scheme: dark;
 }

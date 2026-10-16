@@ -109,7 +109,7 @@ test.describe('layout shift on blog posts', () => {
     // Verify the skeleton CSS is configured correctly: opacity starts at 0
     // (hidden) and only animates into view after a 1-second delay.
     const skeletonStyle = await page.evaluate(() => {
-      const el = document.querySelector('.animate-pulsing-delayed');
+      const el = document.querySelector('.text-skeleton');
       if (!el) return null;
       const style = getComputedStyle(el);
       return {

@@ -5,7 +5,6 @@ import { Container } from '#/components/layout/Container';
 import { Heading } from '#/components/content/Heading';
 import { Prose } from '#/components/content/Prose';
 import { RecentArticles } from '#/components/content/RecentArticles';
-import { ContentImage } from '#/components/content/ContentImage';
 import { jsonLdPerson } from '#/lib/json-ld';
 import { createHomeOgImage } from '#/lib/og-image.mjs';
 
@@ -56,15 +55,6 @@ function Home() {
   return (
     <Container home>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson()) }} />
-      <ContentImage
-        className="home-portrait"
-        loading="eager"
-        src="/avatar.jpg"
-        alt="Koen van Gilst"
-        width={40}
-        height={40}
-        fetchPriority="high"
-      />
       <Heading level={1} className="home-title">
         Koen van Gilst
       </Heading>

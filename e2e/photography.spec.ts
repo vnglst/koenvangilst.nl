@@ -24,8 +24,11 @@ test.describe('photography', () => {
   });
 
   test('horizontal keys update the photo URL, caption, and boundary controls', async ({ page }) => {
-    await page.goto('/photography/14');
-    await expect(page.getByRole('button', { name: 'Next photograph' })).toBeVisible();
+    // Establish client navigation before sending window keys: SSR controls can
+    // appear before hydration, and window key events cannot be replayed.
+    await page.goto('/photography/15');
+    await page.getByRole('button', { name: 'Previous photograph' }).click();
+    await expect(page).toHaveURL(/\/photography\/14$/);
     await page.keyboard.press('ArrowRight');
     await expect(page).toHaveURL(/\/photography\/15$/);
     await expect(page.locator('.photo-caption time')).toHaveText('January 2, 2026');
@@ -36,8 +39,11 @@ test.describe('photography', () => {
   });
 
   test('vertical keys and Escape retain their navigation behavior', async ({ page }) => {
-    await page.goto('/photography/14');
-    await expect(page.getByRole('button', { name: 'Next photograph' })).toBeVisible();
+    // Establish client navigation before sending window keys: SSR controls can
+    // appear before hydration, and window key events cannot be replayed.
+    await page.goto('/photography/15');
+    await page.getByRole('button', { name: 'Previous photograph' }).click();
+    await expect(page).toHaveURL(/\/photography\/14$/);
     await page.keyboard.press('ArrowDown');
     await expect(page).toHaveURL(/\/photography\/15$/);
     await page.keyboard.press('ArrowUp');

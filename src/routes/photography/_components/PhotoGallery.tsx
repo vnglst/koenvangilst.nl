@@ -180,7 +180,6 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
                   fetchPriority={index < 3 ? 'high' : 'auto'}
                 />
               </picture>
-              <figcaption>{photo.location || photo.alt}</figcaption>
             </figure>
           </Button>
         ))}

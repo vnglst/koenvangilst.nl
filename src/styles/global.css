@@ -10,7 +10,7 @@
 @import './theme.css';
 
 @theme {
-  --color-primary: #858579;
+  --color-primary: #1976d2;
 
   /* Retained semantic chart and content colors. */
   --color-blue-300: #64b5f6;
@@ -51,7 +51,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--editorial-serif);
+  font-family: var(--font-display);
 }
 
 /* Remove Safari input shadow on mobile */

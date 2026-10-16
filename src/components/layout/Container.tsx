@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import type { PropsWithChildren } from 'react';
 import { cx } from '#/lib/clsx';
 import { Footer } from './Footer';
-import { ThemeToggleText } from '../theme/ThemeToggleText';
 import { Sidebar } from './Sidebar';
 
 type ContainerProps = {
@@ -28,9 +27,6 @@ export function Container({
         layout !== 'default' && `site-shell-${layout}`
       )}
     >
-      <header className="site-theme">
-        <ThemeToggleText />
-      </header>
       <Sidebar />
       <main id="content" className="site-main">
         <Suspense>

@@ -1,13 +1,74 @@
+.site-shell .prose {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: var(--leading-body);
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-links: var(--ink);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--line);
+}
+.site-shell .prose :is(h1, h2, h3, h4) {
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+.site-shell .prose p {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+.site-shell .prose a {
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+.site-shell .prose blockquote {
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  font-weight: 400;
+}
+.site-shell .prose :is(strong, code) {
+  color: var(--ink);
+}
+.site-shell .prose :not(pre) > code {
+  font-size: 0.88em;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+.site-shell .prose :not(pre) > code::before,
+.site-shell .prose :not(pre) > code::after {
+  content: none;
+}
+.site-shell .prose pre {
+  background: var(--surface);
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+.site-shell .prose pre code {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+.site-shell .prose .code-highlight {
+  min-width: max-content;
+}
+.site-shell .prose hr {
+  border-color: var(--line);
+}
+
 /* Prose component and typography overrides */
 
 .prose {
   @apply min-w-0;
-}
-
-.prose img,
-.prose figure {
-  margin-top: 0.25rem;
-  margin-bottom: 0;
 }
 
 .prose svg {
@@ -24,8 +85,7 @@
   @apply invisible absolute;
   margin-left: -1em;
   padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
+  width: auto;
   cursor: pointer;
 }
 
@@ -34,6 +94,7 @@
   content: '#';
 }
 
+.prose .anchor:focus-visible,
 .prose .anchor:hover,
 .prose *:hover > .anchor {
   @apply visible no-underline;
@@ -41,4 +102,128 @@
 
 .prose a {
   @apply transition-all;
+}
+
+/* Article text has a comfortable measure; media keeps the full reading column. */
+.blog-article > .page-header {
+  margin-bottom: 32px;
+}
+.site-shell-reading .site-main {
+  max-width: 40rem;
+}
+.article-cover {
+  width: 100%;
+  margin: 0 0 40px;
+}
+.site-shell .article-body > p {
+  margin-block: 0 24px;
+}
+.site-shell .article-body :is(h2, h3, h4, h5, h6) {
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: balance;
+  margin-block: 48px 16px;
+}
+.site-shell .article-body h2 {
+  font-size: 22px;
+}
+.site-shell .article-body h3 {
+  font-size: 20px;
+}
+.site-shell .article-body :is(h4, h5, h6) {
+  font-size: 19px;
+}
+.site-shell .article-body :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
+  margin-top: 24px;
+}
+.site-shell .article-body > :first-child {
+  margin-top: 0;
+}
+.site-shell .article-body > :last-child {
+  margin-bottom: 0;
+}
+.article-body > :is(img, figure, video, iframe, .article-media, .code-block, .editorial-note, table),
+.article-body > p:has(> img:only-child) {
+  margin-block: 32px;
+}
+.article-body :is(img, video, iframe) {
+  max-width: 100%;
+}
+.article-body video {
+  height: auto;
+}
+.article-body .article-media > img {
+  width: 100%;
+}
+.article-body figcaption {
+  max-width: 40rem;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.site-shell .article-body blockquote {
+  padding-left: 24px;
+  font-style: normal;
+}
+.site-shell .article-body blockquote p::before,
+.site-shell .article-body blockquote p::after {
+  content: none;
+}
+.site-shell .article-body .footnotes p {
+  margin-block: 8px;
+}
+.article-body .footnotes {
+  margin-top: 48px;
+  padding-top: 16px;
+}
+.article-waypoint {
+  margin-block: 32px;
+  font-size: 14px;
+}
+.article-footer {
+  display: grid;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+@media (max-width: 767px) {
+  .site-shell .prose {
+    line-height: var(--leading-body);
+  }
+  .article-cover {
+    margin-bottom: 32px;
+  }
+  .site-shell .article-body h2 {
+    font-size: 22px;
+  }
+  .site-shell .article-body h3 {
+    font-size: 20px;
+  }
+}
+
+.article-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article-tags .text-tag {
+  font-size: 13px;
+  line-height: 20px;
 }

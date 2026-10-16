@@ -1,27 +1,29 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Colophon mobile layout', () => {
+test.describe('Familiar mobile layout', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test('navigation remains available and does not cover the final content', async ({ page }) => {
+  test('navigation expands above content and closes after following a link', async ({ page }) => {
     await page.goto('/lab?q=snippet');
     const navigation = page.getByRole('navigation', { name: 'Main navigation' });
+    await expect(navigation).toBeHidden();
+    await page.getByRole('button', { name: 'Open navigation' }).click();
     await expect(navigation).toBeVisible();
     await expect(navigation.getByRole('link', { name: 'Lab', exact: true })).toHaveAttribute('aria-current', 'page');
     await expect(page.getByRole('button', { name: 'snippets', exact: true })).toHaveAttribute('aria-pressed', 'true');
-    const lastPost = page.locator('.post-link').last();
-    await lastPost.scrollIntoViewIfNeeded();
-    const postBox = await lastPost.boundingBox();
-    const footerBox = await page.locator('.site-colophon').boundingBox();
-    expect(postBox!.y + postBox!.height).toBeLessThanOrEqual(footerBox!.y);
+    const menu = await navigation.boundingBox();
+    const content = await page.locator('main').boundingBox();
+    expect(menu!.y + menu!.height).toBeLessThan(content!.y);
     await navigation.getByRole('link', { name: 'About', exact: true }).click();
     await expect(page.getByText('Recent articles')).toBeVisible();
+    await expect(navigation).toBeHidden();
     for (const path of ['/', '/lab', '/lab/code-doesnt-speak-for-itself', '/photography', '/lab/gen-art-gallery']) {
       await page.goto(path);
-      await expect(page.locator('.site-signature')).not.toBeVisible();
-      await expect(navigation).toBeVisible();
-      const mobileFooter = await page.locator('.site-colophon').boundingBox();
-      expect(mobileFooter!.height, path).toBe(footerBox!.height);
+      await expect(page.locator('.signature-portrait')).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Open navigation' })).toBeVisible();
+      await expect(navigation).toBeHidden();
+      if (await page.locator('.site-footer').count()) await page.locator('.site-footer').scrollIntoViewIfNeeded();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
   });
 
@@ -30,6 +32,7 @@ test.describe('Colophon mobile layout', () => {
     await expect(page.locator('html')).toHaveClass(/dark/);
     await page.getByRole('button', { name: 'Switch to light mode' }).click();
     await expect(page.locator('html')).not.toHaveClass(/dark/);
+    await page.getByRole('button', { name: 'Open navigation' }).click();
     await page.getByRole('navigation').getByRole('link', { name: 'Lab', exact: true }).click();
     await page.reload();
     await expect(page.getByRole('button', { name: 'Switch to dark mode' })).toBeVisible();
@@ -107,18 +110,18 @@ test('retired CO2 demo leads to the article without sensor polling', async ({ pa
   expect(sensorRequests).toEqual([]);
 });
 
-test('Quiet introduction keeps the portrait on About and blue on active navigation', async ({ page }) => {
+test('Personal signature retains the portrait and blue active navigation', async ({ page }) => {
   await page.goto('/');
-  const portrait = page.locator('.home-portrait');
+  const portrait = page.locator('.signature-portrait');
   await expect(portrait).toBeVisible();
   await expect(portrait).toHaveAttribute('src', '/avatar.jpg');
   for (const path of ['/lab', '/lab/code-doesnt-speak-for-itself', '/photography', '/lab/gen-art-gallery']) {
     await page.goto(path);
-    await expect(page.locator('img[src="/avatar.jpg"]')).toHaveCount(0);
+    await expect(page.locator('.signature-portrait')).toBeVisible();
     await expect(page.locator('.site-biography')).toHaveCount(0);
     const active = page.locator('nav[aria-label="Main navigation"] a[aria-current="page"]');
     await expect(active).toHaveCount(1);
-    expect(await active.evaluate((element) => getComputedStyle(element).color)).toBe('rgb(108, 168, 214)');
+    expect(await active.evaluate((element) => getComputedStyle(element).color)).toBe('rgb(66, 165, 245)');
   }
 });
 
@@ -162,7 +165,7 @@ test('photo detail uses the whole viewport in both themes and every orientation'
       await expect(page).toHaveURL(/\/photography\/15$/);
       await page.keyboard.press('Escape');
       await expect(page).toHaveURL(/\/photography$/);
-      await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
+      await expect(page.locator('.signature-portrait')).toBeVisible();
     }
   }
 });

@@ -21,7 +21,7 @@ export function BlogPostLink({ title, summary, url, slug, publishedAt, compact =
           {title}
           {url?.startsWith('http') && <Icon icon="external-link" className="ml-2 inline h-3 w-3" />}
         </Heading>
-        {!compact && <p>{summary}</p>}
+        <p>{summary}</p>
       </div>
     </article>
   );
