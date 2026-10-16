@@ -59,22 +59,22 @@ h6 {
 .site-shell:is(.site-shell-reading, .site-shell-photography, .site-shell-art) .site-main {
   max-width: var(--reading-width);
 }
-/* Photography uses the viewport; writing keeps its reading measure. */
-.site-shell.site-shell-photography {
-  max-width: none;
-  padding-inline: clamp(32px, 3vw, 64px);
-}
-.site-shell.site-shell-photography .site-main {
-  max-width: none;
-}
-@media (max-width: 767px) {
+/* Keep the shared rail anchored; only the gallery extends toward the right edge. */
+@media (min-width: 768px) {
   .site-shell.site-shell-photography {
-    padding-inline: 24px;
+    width: auto;
+    max-width: none;
+    margin-left: max(0px, calc((100% - 1000px) / 2));
+    margin-right: 0;
+    padding-inline: 40px clamp(32px, 3vw, 64px);
+  }
+  .site-shell.site-shell-photography .site-main {
+    max-width: none;
   }
 }
-@media (max-width: 359px) {
+@media (min-width: 768px) and (max-width: 1000px) {
   .site-shell.site-shell-photography {
-    padding-inline: 20px;
+    padding-left: 32px;
   }
 }
 .site-colophon {

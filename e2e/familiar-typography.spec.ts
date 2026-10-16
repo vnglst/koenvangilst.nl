@@ -55,7 +55,7 @@ test('photography preserves natural proportions and staggered columns with align
     const grid = page.locator('.photo-grid');
     if (width >= 1440) {
       const bounds = await grid.boundingBox();
-      expect(bounds!.width).toBeGreaterThan(width - 400);
+      expect(bounds!.width).toBeGreaterThan(640);
       expect(width - bounds!.x - bounds!.width).toBeCloseTo(width * 0.03, 0);
     }
     await expect(grid).toBeVisible();

@@ -6,6 +6,8 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
     await page.setViewportSize({ width, height: 1440 });
     let contentLeft: number | undefined;
     let headingSize: number | undefined;
+    let railLeft: number | undefined;
+    let railTop: number | undefined;
     for (const path of [
       '/lab',
       '/lab/code-doesnt-speak-for-itself',
@@ -29,13 +31,21 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
           width: main.width,
           gap: main.left - signature.right,
           gutter: signature.left,
+          railTop: signature.top,
+          right: main.right,
+          clientWidth: document.documentElement.clientWidth,
           rightGutter: innerWidth - frame.right + 40,
           heading: parseFloat(getComputedStyle(document.querySelector('main h1')!).fontSize),
           overflow: document.documentElement.scrollWidth > innerWidth
         };
       });
+      railLeft ??= geometry.gutter;
+      railTop ??= geometry.railTop;
+      expect(Math.abs(geometry.gutter - railLeft), `${path}: sidebar left`).toBeLessThan(1);
+      expect(Math.abs(geometry.railTop - railTop), `${path}: sidebar top`).toBeLessThan(1);
       if (path === '/photography') {
-        expect(geometry.width).toBeGreaterThan(width - 400);
+        expect(Math.abs(geometry.left - contentLeft!)).toBeLessThan(1);
+        expect(geometry.clientWidth - geometry.right).toBeCloseTo(Math.min(64, Math.max(32, width * 0.03)), 0);
         expect(geometry.gap).toBe(64);
         expect(geometry.overflow).toBe(false);
         expect(geometry.heading).toBe(32);
