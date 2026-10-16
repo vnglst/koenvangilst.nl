@@ -181,3 +181,7 @@ import { Link } from '#/components/ui/Link';
 CSS tokens include `--space-2` through `--space-16` for the documented rhythm, `--mobile-gutter`, `--navigation-gap`, `--control-target`, `--reading-width`, and `--intro-width`. Immersive media uses `--viewer-page`, `--viewer-ink`, `--viewer-muted`, and `--viewer-overlay`. Reuse these names when composing new components.
 
 Legacy cleanup: Container owns its main landmark and theme-control header directly. The single-use BackButton was replaced with the library Button on Prognosis; its browser-history fallback is preserved. MDX names such as Disclaimer and Image remain registered for published articles, without unused named exports.
+
+## Comparing design alternatives
+
+This branch retains Colophon: Caslon headings, charcoal/ivory themes, the existing signature composition, and bottom navigation on mobile. `codex/familiar-refined` is the alternative based on the original website. Shared content fixes, code-only article rendering, article/media consistency, gallery selection/history, and the local Time Flies fit apply to both. Do not copy the refined palette, fonts, square thumbnail layout, or mobile header into this branch during functional back-ports.

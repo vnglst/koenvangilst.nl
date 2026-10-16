@@ -591,3 +591,7 @@ When writing or editing blog posts and documentation:
 - **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
 - **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
 - **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌
+
+### Shared fixes across design alternatives
+
+PR #240 retains the Colophon visual direction. The Familiar, refined alternative is maintained on `codex/familiar-refined`. Both include body-presence detection for code-only MDX posts, the supplied Frontmania photo, corrected article covers, consistent article/media rendering, and URL-backed browsing of all ten artworks. Time Flies uses the fitted local MIT-licensed embed from `public/static/art/time-flies/`.

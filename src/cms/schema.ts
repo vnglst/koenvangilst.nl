@@ -8,6 +8,7 @@ export const PostMeta = z
     summary: z.string(),
     publishedAt: z.string(),
     wordCount: z.number().optional(),
+    hasContent: z.boolean().default(true),
     image: z
       .object({
         src: z.string(),

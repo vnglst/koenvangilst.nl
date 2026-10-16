@@ -15,66 +15,49 @@ import { TextSkeleton } from './LoadingState';
 import { ContentImage } from './ContentImage';
 
 type Props = {
-  publishedAt: string;
-  title: string;
-  readingTime: PostType['readingTime'];
-  tags?: string[];
-  path: string;
-  image?: {
-    alt: string;
-    src: string;
-    width: number;
-    height: number;
-    showAsHeader?: boolean;
-  };
+  post: Pick<PostType, 'slug' | 'title' | 'publishedAt' | 'readingTime' | 'tags' | 'image'>;
   Component: React.ComponentType;
 };
 
-export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, image, Component }: Props) {
+export function MarkdownLayout({ post, Component }: Props) {
+  const { slug, title, publishedAt, readingTime, tags, image } = post;
   return (
     <Container layout="reading">
-      <article className="reading-column">
+      <article className="reading-column blog-article">
         <BackToLab />
         <PageHeader title={title}>
           <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.minutes > 0 ? readingTime.text : ''} />
-          {tags && tags.length > 0 && (
-            <ul className="article-tags">
-              {tags.map((tag: string) => (
+
+          {tags.length > 0 && (
+            <ul className="article-tags" aria-label="Article topics">
+              {tags.map((tag) => (
                 <li key={tag}>
                   <TagLink href={`/tag/${sluggify(tag)}`}>{tag}</TagLink>
                 </li>
               ))}
             </ul>
           )}
-          {image && image.showAsHeader && (
-            <ContentImage
-              alt={image.alt}
-              src={image.src}
-              width={image.width}
-              height={image.height}
-              fetchPriority="high"
-              className="my-5 inline-block"
-            />
-          )}
         </PageHeader>
-        <Prose as="section">
+        {image?.showAsHeader && (
+          <ContentImage
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading="eager"
+            fetchPriority="high"
+            className="article-cover"
+          />
+        )}
+        <Prose as="div" className="article-body">
           <Suspense fallback={<TextSkeleton />}>
             <MDXComponent Component={Component} />
           </Suspense>
         </Prose>
-        <footer className="mt-8 text-sm text-[var(--muted)]">
-          <Link href={getEditUrl(path)} className="font-normal">
-            Edit on GitHub
-          </Link>
+        <footer className="article-footer">
+          <Link href={`https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`}>Edit on GitHub</Link>
         </footer>
       </article>
     </Container>
   );
-}
-
-const GITHUB_REPO = 'https://github.com/vnglst/koenvangilst.nl';
-
-function getEditUrl(path: string) {
-  const slug = path.split('/').pop();
-  return `${GITHUB_REPO}/edit/main/content/${slug}.mdx`;
 }

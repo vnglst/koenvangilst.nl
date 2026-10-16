@@ -8,12 +8,12 @@ import { Icon } from '#/components/ui/Icon';
 import { Link } from '#/components/ui/Link';
 
 function Bleed({ children }: { children: React.ReactNode }) {
-  return <div className="bleed my-5 [&>img]:w-full">{children}</div>;
+  return <div className="article-media">{children}</div>;
 }
 
 function Waypoint({ href }: { href: string }) {
   return (
-    <div className="my-5 md:ml-[-27px]">
+    <div className="article-waypoint">
       <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}
       <Link href={href} className="ml-2" externalIndicator={false}>
         Commit on Github

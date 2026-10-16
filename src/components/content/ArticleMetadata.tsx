@@ -1,4 +1,4 @@
-import { Text } from '#/components/ui/Text';
+import type { ReactNode } from 'react';
 
 export function ArticleMetadata({
   publishedAt,
@@ -7,26 +7,24 @@ export function ArticleMetadata({
 }: {
   publishedAt: string;
   readingTimeText: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   return (
-    <div className="mt-2 flex w-full items-center justify-between text-sm text-[var(--muted)]">
-      <Text size="small" tone="muted">
+    <div className="article-metadata">
+      <time dateTime={publishedAt}>
         {new Date(publishedAt).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         })}
-      </Text>
-      <Text size="small" tone="muted" className="flex items-center gap-2">
-        {readingTimeText}
-        {children && (
-          <>
-            <span>·</span>
-            {children}
-          </>
-        )}
-      </Text>
+      </time>
+      {(readingTimeText || children) && (
+        <span>
+          {readingTimeText}
+          {readingTimeText && children && <span aria-hidden="true"> · </span>}
+          {children}
+        </span>
+      )}
     </div>
   );
 }

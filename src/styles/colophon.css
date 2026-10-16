@@ -1035,3 +1035,78 @@ html:has(.photo-viewer) {
     margin-left: 0;
   }
 }
+
+/* Functional gallery controls use the existing Colophon palette and fonts. */
+.art-project-picker {
+  min-width: 0;
+}
+.art-project-picker select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--page);
+  color: var(--ink);
+  font:
+    16px/24px var(--font-sans),
+    sans-serif;
+  cursor: pointer;
+}
+.art-project-picker select:hover {
+  border-color: var(--muted);
+}
+.art-stage {
+  position: relative;
+  background: #090909;
+}
+.art-viewport {
+  display: block;
+  width: 100%;
+  height: min(60svh, 700px);
+  border: 0;
+}
+.art-loading {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 12px;
+  padding: 8px 12px;
+  color: #e5e7eb;
+  background: rgb(9 9 9 / 80%);
+  pointer-events: none;
+  font-size: 13px;
+}
+.art-caption {
+  flex-wrap: wrap;
+  margin-top: 16px;
+  color: var(--muted);
+}
+.art-caption .editorial-heading {
+  font-size: 20px;
+  margin: 0;
+}
+.art-controls button {
+  min-height: 44px;
+  cursor: pointer;
+}
+.art-controls button:hover:not(:disabled) {
+  color: var(--accent);
+}
+.art-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+@media (max-width: 767px) {
+  .art-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .art-viewport {
+    height: 48svh;
+  }
+}
+.art-toolbar .art-controls {
+  margin: 0;
+}
