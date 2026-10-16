@@ -368,7 +368,7 @@ h6 {
   width: 100%;
   min-height: 44px;
   padding: 10px 12px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-line);
   border-radius: 4px;
   background: var(--page);
   color: var(--ink);
@@ -446,20 +446,20 @@ h6 {
   color: var(--ink);
 }
 .editorial-button-primary {
-  background: #1976d2;
+  background: var(--action);
   color: #fff;
 }
 .editorial-button-secondary {
   background: var(--surface);
 }
 .editorial-button-outline {
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-line);
 }
 .editorial-button:hover:not(:disabled) {
   background: var(--surface);
 }
 .editorial-button-primary:hover:not(:disabled) {
-  background: #1565c0;
+  background: var(--action-hover);
 }
 .page-back-link {
   display: inline-flex;

@@ -24,13 +24,13 @@ The approved direction evolves the original koenvangilst.nl identity: a portrait
 | Token       | Dark      | White     |
 | ----------- | --------- | --------- |
 | `--page`    | `#020617` | `#ffffff` |
-| `--ink`     | `#e5e7eb` | `#1f2937` |
-| `--muted`   | `#9ca3af` | `#6b7280` |
-| `--line`    | `#1e293b` | `#e5e7eb` |
-| `--surface` | `#111827` | `#f3f4f6` |
-| `--accent`  | `#42a5f5` | `#1976d2` |
+| `--ink`     | `#e5e7eb` | `#111827` |
+| `--muted`   | `#9ca3af` | `#4b5563` |
+| `--line`    | `#1e293b` | `#d1d5db` |
+| `--surface` | `#111827` | `#eef2f6` |
+| `--accent`  | `#42a5f5` | `#1565c0` |
 
-Dark is the default. The explicit choice persists in local storage and applies before hydration. Consume semantic tokens rather than adding theme branches to components. Blue identifies active navigation, selected filters, hover, and keyboard focus. Primary buttons use `#1976d2` with white text in both themes.
+Dark is the default. The explicit choice persists in local storage and applies before hydration. Consume semantic tokens rather than adding theme branches to components. Blue identifies active navigation, selected filters, hover, and keyboard focus. Light mode uses darker slate secondary text and deeper blue accents. Interactive outlines use `--control-line` (`#7c8898` in light mode), separately from decorative dividers. Primary buttons use `--action` with white text: `#1565c0` in light mode and `#1976d2` in dark mode. Dark-mode colors are unchanged.
 
 Photo detail keeps its neutral black canvas in both themes. Artwork and chart colors retain their own meaning.
 

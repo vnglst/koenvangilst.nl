@@ -27,11 +27,12 @@ export const Route = createFileRoute('/design-system')({
 
 const palette = [
   ['page', 'Canvas', '#020617', '#ffffff'],
-  ['ink', 'Text & headings', '#e5e7eb', '#1f2937'],
-  ['muted', 'Secondary text', '#9ca3af', '#6b7280'],
-  ['line', 'Hairline dividers', '#1e293b', '#e5e7eb'],
-  ['surface', 'Code & controls', '#111827', '#f3f4f6'],
-  ['accent', 'Selected navigation', '#42a5f5', '#1976d2']
+  ['ink', 'Text & headings', '#e5e7eb', '#111827'],
+  ['muted', 'Secondary text', '#9ca3af', '#4b5563'],
+  ['line', 'Hairline dividers', '#1e293b', '#d1d5db'],
+  ['surface', 'Code & controls', '#111827', '#eef2f6'],
+  ['accent', 'Selected navigation', '#42a5f5', '#1565c0'],
+  ['control-line', 'Interactive borders', '#1e293b', '#7c8898']
 ];
 
 function DesignSystem() {

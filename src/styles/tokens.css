@@ -20,11 +20,14 @@
   --viewer-muted: #c5c5be;
   --viewer-overlay: rgb(9 9 9 / 78%);
   --page: #ffffff;
-  --ink: #1f2937;
-  --muted: #6b7280;
-  --line: #e5e7eb;
-  --surface: #f3f4f6;
-  --accent: #1976d2;
+  --ink: #111827;
+  --muted: #4b5563;
+  --line: #d1d5db;
+  --surface: #eef2f6;
+  --accent: #1565c0;
+  --control-line: #7c8898;
+  --action: #1565c0;
+  --action-hover: #0d47a1;
   --font-display: 'Nimbus Sans Extended', var(--font-sans), sans-serif;
   --type-body: 17px;
   --leading-body: 28px;
@@ -39,5 +42,8 @@
   --line: #1e293b;
   --surface: #111827;
   --accent: #42a5f5;
+  --control-line: var(--line);
+  --action: #1976d2;
+  --action-hover: #1565c0;
   color-scheme: dark;
 }
