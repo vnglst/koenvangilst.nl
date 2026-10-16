@@ -288,37 +288,35 @@ h6 {
 }
 .photo-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 64px 40px;
+  align-items: start;
   margin-top: 32px;
 }
 .photo-grid button {
-  display: block;
-  position: relative;
   min-width: 0;
-  width: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 8px;
+  text-align: left;
   cursor: pointer;
 }
-.photo-grid figure,
-.photo-grid picture {
-  display: block;
-  width: 100%;
-  height: 100%;
+.photo-grid button:nth-child(even) {
+  margin-top: 120px;
 }
 .photo-grid img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   transition: opacity 120ms ease;
 }
-@media (min-width: 640px) and (max-width: 1023px) {
-  .photo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.photo-grid figcaption {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 20px;
+  padding-top: 12px;
+}
+.photo-grid button:hover figcaption {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .land-use-chart {
   position: relative;
@@ -925,8 +923,12 @@ html:has(.photo-viewer) {
   }
 }
 
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .photo-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+  .photo-grid button:nth-child(even) {
+    margin-top: 0;
   }
 }

@@ -305,8 +305,8 @@ function DesignSystem() {
                 <Link href="/photography">Photography</Link>
               </dt>
               <dd>
-                A regular square grid with three columns on desktop, two on tablet, and one on phones. Open a photo for
-                a full-viewport image, fitted without cropping, on black in both themes.
+                Natural photo proportions in two unequal, staggered columns with quiet captions. One column on mobile.
+                Open a photo for a full-viewport image, fitted without cropping, on black in both themes.
               </dd>
             </div>
             <div>

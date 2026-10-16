@@ -45,7 +45,9 @@ test('Lab has category filters without a search field', async ({ page }) => {
   await expect(page.locator('.post-link').first()).toBeVisible();
 });
 
-test('photography uses a regular square grid and the desktop theme icon aligns with navigation', async ({ page }) => {
+test('photography preserves natural proportions and staggered columns with aligned theme controls', async ({
+  page
+}) => {
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/photography');
@@ -57,10 +59,23 @@ test('photography uses a regular square grid and the desktop theme icon aligns w
         return { x: r.x, y: r.y, width: r.width, height: r.height };
       })
     );
-    const columns = width < 640 ? 1 : width < 1024 ? 2 : 3;
-    expect(boxes.slice(0, columns).every((box) => box.y === boxes[0].y)).toBe(true);
-    expect(Math.abs(boxes[0].width - boxes[0].height)).toBeLessThan(1);
-    await expect(grid.locator('img').first()).toHaveCSS('object-fit', 'cover');
+    if (width < 768) {
+      expect(boxes[1].x).toBe(boxes[0].x);
+      expect(boxes[1].y).toBeGreaterThan(boxes[0].y + boxes[0].height);
+    } else {
+      expect(boxes[0].width / boxes[1].width).toBeCloseTo(1.4, 1);
+      expect(boxes[1].y - boxes[0].y).toBeCloseTo(120, 0);
+    }
+    const image = grid.locator('img').first();
+    const dimensions = await image.evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        rendered: r.width / r.height,
+        original: Number(el.getAttribute('width')) / Number(el.getAttribute('height'))
+      };
+    });
+    expect(dimensions.rendered).toBeCloseTo(dimensions.original, 2);
+    await expect(grid.locator('figcaption').first()).not.toBeEmpty();
     if (width >= 768) {
       const icon = page.locator('.theme-toggle svg');
       await expect(icon).toBeVisible();

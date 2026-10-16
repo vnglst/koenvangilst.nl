@@ -16,7 +16,7 @@ The approved direction evolves the original koenvangilst.nl identity: a portrait
 1. Keep the original character: the real portrait, Nimbus page titles, and blue active marker.
 2. Use one consistent reading column for the homepage, Lab, talks, articles, photography, and art. Allow content to determine the page height.
 3. Keep controls quiet, with explicit hover, keyboard focus, selected, and disabled states.
-4. Use square crops in the photo overview; maximize the selected photograph without cropping.
+4. Preserve natural photo proportions in the overview and maximize the selected photograph without cropping.
 5. Use actual writing, talks, photographs, and projects. Do not replace content with decorative labels.
 
 ## Theme
@@ -58,7 +58,7 @@ Desktop uses a centered frame capped at 1000px, 40px side gutters, a 160px portr
 
 Below 768px, the portrait, theme control, and menu form one header in document flow. The menu expands into two columns below them. Navigation closes after following a link. Use 24px page gutters, reduced to 20px below 360px. Footer content stays left aligned. There is no fixed bottom navigation.
 
-All main screens share their content start and heading scale. The photo gallery uses square thumbnails with a 16px gap: three columns above 1024px, two from 640px, and one below 640px. The fullscreen viewer hides the shell, contains the entire image, and overlays compact controls inside the viewport safe areas.
+All main screens share their content start and heading scale. The photo gallery uses the Colophon composition: two columns in a 1.4:1 ratio, 64px vertical and 40px horizontal gaps, and a 120px stagger on even items. Photos retain natural proportions with quiet captions. Below 768px, use one column with 48px gaps and no stagger. The fullscreen viewer hides the shell, contains the entire image, and overlays compact controls inside the viewport safe areas.
 
 The art gallery places its native ten-project picker and Previous/Next controls above a 4:3 artwork frame; mobile uses a square frame. Project selection stays in the URL and supports reload/history. Gallery arrow keys do not intercept the embedded artwork's own controls. Time Flies uses the local fitted embed with its MIT license preserved.
 
