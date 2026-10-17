@@ -10,17 +10,9 @@ export function merge<T extends Record<string, unknown>, TSource extends Record<
 ): T & TSource {
   const output = { ...target } as Record<string, unknown>;
 
-  for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      const sourceValue = source[key];
-      const targetValue = output[key];
-
-      if (isObject(sourceValue) && isObject(targetValue)) {
-        output[key] = merge(targetValue, sourceValue);
-      } else {
-        output[key] = sourceValue;
-      }
-    }
+  for (const [key, sourceValue] of Object.entries(source)) {
+    const targetValue = output[key];
+    output[key] = isObject(sourceValue) && isObject(targetValue) ? merge(targetValue, sourceValue) : sourceValue;
   }
 
   return output as T & TSource;

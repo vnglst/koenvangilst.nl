@@ -45,49 +45,21 @@ export function createPrognosisMarklines(config: PrognosisMarklineConfig) {
   const { lastValue, worstCase, bestCase, startYear = '2023', endYear = '2100' } = config;
 
   return [
-    {
-      name: 'Worst Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.red
-        },
-        data: [
-          [
-            {
-              xAxis: startYear,
-              yAxis: lastValue
-            },
-            { xAxis: endYear, yAxis: worstCase }
-          ]
+    { name: 'Worst Case', value: worstCase, color: colors.red },
+    { name: 'Best Case', value: bestCase, color: colors.limeGreen }
+  ].map(({ name, value, color }) => ({
+    name,
+    type: 'line',
+    markLine: {
+      symbol: 'none',
+      lineStyle: { color },
+      data: [
+        [
+          { xAxis: startYear, yAxis: lastValue },
+          { xAxis: endYear, yAxis: value }
         ]
-      },
-      itemStyle: {
-        color: colors.red
-      }
+      ]
     },
-    {
-      name: 'Best Case',
-      type: 'line',
-      markLine: {
-        symbol: 'none',
-        lineStyle: {
-          color: colors.limeGreen
-        },
-        data: [
-          [
-            {
-              xAxis: startYear,
-              yAxis: lastValue
-            },
-            { xAxis: endYear, yAxis: bestCase }
-          ]
-        ]
-      },
-      itemStyle: {
-        color: colors.limeGreen
-      }
-    }
-  ];
+    itemStyle: { color }
+  }));
 }
