@@ -27,12 +27,13 @@ test.describe('flagship lab projects', () => {
       })
     ).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /technology/i })).toBeVisible();
-    const chart = page.locator('.land-use-chart');
+    const chart = page.locator('.land-use-chart:has(svg)');
     await expect(chart).toBeVisible();
-    const before = await chart.boundingBox();
+    const before = await chart.evaluate((element) => element.getBoundingClientRect().height);
     await expect(chart.locator('.hexagon').first()).toBeVisible({ timeout: 20_000 });
-    const after = await chart.boundingBox();
-    expect(Math.abs(after!.height - before!.height)).toBeLessThan(1);
+    const after = await chart.evaluate((element) => element.getBoundingClientRect().height);
+    expect(before).toBeGreaterThan(0);
+    expect(Math.abs(after - before)).toBeLessThan(1);
     await chart.locator('.hexagon').first().click();
     const dimmedCategories = chart.locator('.legend-item[opacity="0.4"]');
     await expect.poll(() => dimmedCategories.count()).toBeGreaterThan(0);
