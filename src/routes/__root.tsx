@@ -39,41 +39,19 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     links: [
       { rel: 'stylesheet', href: appCss },
       // Preload critical fonts to prevent FOUT (Flash of Unstyled Text)
-      {
+      ...[
+        'ibm-plex-sans-400.woff2',
+        'ibm-plex-sans-500.woff2',
+        'ibm-plex-sans-600.woff2',
+        'ibm-plex-sans-700.woff2',
+        'Nimbus-Sans-D-OT-Bold-Extended_32745.woff2'
+      ].map((filename) => ({
         rel: 'preload',
-        href: '/fonts/ibm-plex-sans-400.woff2',
+        href: `/fonts/${filename}`,
         as: 'font',
         type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/ibm-plex-sans-500.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/ibm-plex-sans-600.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/ibm-plex-sans-700.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
+        crossOrigin: 'anonymous' as const
+      })),
       {
         rel: 'preconnect',
         href: 'https://plausible.koenvangilst.nl',

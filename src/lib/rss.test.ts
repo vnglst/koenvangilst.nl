@@ -6,8 +6,7 @@ describe('RSS', () => {
   it('should create a basic RSS feed', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     const xml = feed.xml();
@@ -22,8 +21,7 @@ describe('RSS', () => {
   it('should add items to the feed', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     feed.item({
@@ -45,8 +43,7 @@ describe('RSS', () => {
   it('should handle multiple items', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     feed.item({
@@ -71,8 +68,7 @@ describe('RSS', () => {
   it('should escape XML special characters', () => {
     const feed = new RSS({
       title: 'Test & Feed <with> "special" characters',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     const xml = feed.xml();
@@ -84,8 +80,7 @@ describe('RSS', () => {
   it('should handle items with enclosures', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     feed.item({
@@ -103,8 +98,7 @@ describe('RSS', () => {
   it('should format with indentation when requested', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     feed.item({
@@ -124,7 +118,6 @@ describe('RSS', () => {
     const feed = new RSS({
       title: 'Test Feed',
       site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml',
       description: 'Custom description'
     });
 
@@ -136,8 +129,7 @@ describe('RSS', () => {
   it('should use title as description fallback', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     const xml = feed.xml();
@@ -148,8 +140,7 @@ describe('RSS', () => {
   it('should handle items without description', () => {
     const feed = new RSS({
       title: 'Test Feed',
-      site_url: 'https://example.com',
-      feed_url: 'https://example.com/feed.xml'
+      site_url: 'https://example.com'
     });
 
     feed.item({

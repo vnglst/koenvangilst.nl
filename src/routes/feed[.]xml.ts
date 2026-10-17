@@ -14,8 +14,7 @@ export const Route = createFileRoute('/feed.xml')({
 
         const feed = new RSS({
           title: 'Koen van Gilst',
-          site_url: 'https://koenvangilst.nl',
-          feed_url: 'https://koenvangilst.nl/feed.xml'
+          site_url: 'https://koenvangilst.nl'
         });
 
         posts.forEach((post) => {

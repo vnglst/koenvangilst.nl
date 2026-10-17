@@ -60,28 +60,24 @@ const labels = [
   {
     label: 'Inland Water',
     perc: 10,
-    displayLabel: true,
     labelTarget: { x: 660, y: 100 },
     labelPosition: { x: 680, y: 50 }
   },
   {
     label: 'Nature',
     perc: 14,
-    displayLabel: true,
     labelTarget: { x: 700, y: 200 },
     labelPosition: { x: 730, y: 200 }
   },
   {
     label: 'Urban Area',
     perc: 17,
-    displayLabel: true,
     labelTarget: { x: 650, y: 320 },
     labelPosition: { x: 680, y: 320 }
   },
   {
     label: 'Agriculture',
     perc: 54,
-    displayLabel: true,
     labelTarget: { x: 535, y: 540 },
     labelPosition: { x: 600, y: 540 }
   }
@@ -156,14 +152,7 @@ const LandUseChartComponent = () => {
               .filter((_, i) => hexColors[i] === category)
               .attr('stroke-width', 1)
               .attr('stroke', theme.bgLight);
-            svg
-              .selectAll('.legend-item')
-              .filter((_, i) => categories[i].name !== category)
-              .attr('opacity', 0.4);
-            svg
-              .selectAll('.legend-item')
-              .filter((_, i) => categories[i].name === category)
-              .attr('opacity', 1);
+            svg.selectAll('.legend-item').attr('opacity', (_, i) => (categories[i].name === category ? 1 : 0.4));
           }
 
           function deselectHexagons() {
@@ -252,58 +241,57 @@ const LandUseChartComponent = () => {
               .attr('opacity', 1);
           });
 
-          labels
-            .filter((c) => c.displayLabel)
-            .forEach((category, i) => {
-              const labelGroup = svg;
+          labels.forEach((category, i) => {
+            const labelGroup = svg;
 
-              labelGroup
-                .append('text')
-                .attr('x', category.labelPosition.x)
-                .attr('y', category.labelPosition.y)
-                .text(category.label)
-                .attr('font-size', '18px')
-                .attr('font-weight', 'bold')
-                .attr('fill', 'currentColor')
-                .attr('opacity', 0)
-                .transition()
-                .delay(totalHexagons * 0.7 + 750 + i * 300)
-                .duration(500)
-                .attr('opacity', 1);
+            labelGroup
+              .append('text')
+              .attr('x', category.labelPosition.x)
+              .attr('y', category.labelPosition.y)
+              .text(category.label)
+              .attr('font-size', '18px')
+              .attr('font-weight', 'bold')
+              .attr('fill', 'currentColor')
+              .attr('opacity', 0)
+              .transition()
+              .delay(totalHexagons * 0.7 + 750 + i * 300)
+              .duration(500)
+              .attr('opacity', 1);
 
-              // Percentage of labelled area
-              labelGroup
-                .append('text')
-                .attr('x', category.labelPosition.x + 10)
-                .attr('y', category.labelPosition.y + 20)
-                .text(`${category.perc}%`)
-                .attr('font-size', '14px')
-                .attr('fill', 'currentColor')
-                .attr('opacity', 0)
-                .transition()
-                .delay(totalHexagons * 0.7 + 750 + i * 300)
-                .duration(500)
-                .attr('opacity', 1);
+            // Percentage of labelled area
+            labelGroup
+              .append('text')
+              .attr('x', category.labelPosition.x + 10)
+              .attr('y', category.labelPosition.y + 20)
+              .text(`${category.perc}%`)
+              .attr('font-size', '14px')
+              .attr('fill', 'currentColor')
+              .attr('opacity', 0)
+              .transition()
+              .delay(totalHexagons * 0.7 + 750 + i * 300)
+              .duration(500)
+              .attr('opacity', 1);
 
-              labelGroup
-                .append('line')
-                .attr('x1', category.labelPosition.x - 10)
-                .attr('y1', category.labelPosition.y - 5)
-                .attr('x2', category.labelTarget.x - 10)
-                .attr('y2', category.labelTarget.y - 5)
-                .attr('stroke', 'currentColor')
-                .attr('stroke-width', 2)
-                .attr('stroke-dasharray', '2,2')
-                .attr('opacity', 0)
-                .transition()
-                .delay(totalHexagons * 0.7 + 750 + i * 300)
-                .duration(500)
-                .attr('opacity', 1);
+            labelGroup
+              .append('line')
+              .attr('x1', category.labelPosition.x - 10)
+              .attr('y1', category.labelPosition.y - 5)
+              .attr('x2', category.labelTarget.x - 10)
+              .attr('y2', category.labelTarget.y - 5)
+              .attr('stroke', 'currentColor')
+              .attr('stroke-width', 2)
+              .attr('stroke-dasharray', '2,2')
+              .attr('opacity', 0)
+              .transition()
+              .delay(totalHexagons * 0.7 + 750 + i * 300)
+              .duration(500)
+              .attr('opacity', 1);
 
+            for (const point of [category.labelPosition, category.labelTarget]) {
               labelGroup
                 .append('circle')
-                .attr('cx', category.labelPosition.x - 10)
-                .attr('cy', category.labelPosition.y - 5)
+                .attr('cx', point.x - 10)
+                .attr('cy', point.y - 5)
                 .attr('r', 3)
                 .attr('fill', 'currentColor')
                 .attr('opacity', 0)
@@ -311,19 +299,8 @@ const LandUseChartComponent = () => {
                 .delay(totalHexagons * 0.7 + 750 + i * 300)
                 .duration(500)
                 .attr('opacity', 1);
-
-              labelGroup
-                .append('circle')
-                .attr('cx', category.labelTarget.x - 10)
-                .attr('cy', category.labelTarget.y - 5)
-                .attr('r', 3)
-                .attr('fill', 'currentColor')
-                .attr('opacity', 0)
-                .transition()
-                .delay(totalHexagons * 0.7 + 750 + i * 300)
-                .duration(500)
-                .attr('opacity', 1);
-            });
+            }
+          });
 
           svg
             .append('foreignObject')

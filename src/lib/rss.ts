@@ -6,7 +6,6 @@
 type RSSOptions = {
   title: string;
   site_url: string;
-  feed_url: string;
   description?: string;
   language?: string;
 };

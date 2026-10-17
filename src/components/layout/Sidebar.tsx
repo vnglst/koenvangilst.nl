@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { Link, useRouterState } from '@tanstack/react-router';
-import { navItems, useIsActive } from '#/lib/navigation';
 import { ThemeToggleText } from '../theme/ThemeToggleText';
 
+const navItems = [
+  { href: '/', label: 'About' },
+  { href: '/lab', label: 'Lab' },
+  { href: '/talks', label: 'Talks' },
+  { href: '/photography', label: 'Photography' }
+];
+
 export function Sidebar() {
-  const isActive = useIsActive();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
   const [openPath, setOpenPath] = useState<string>();
   const expanded = openPath === pathname;
 

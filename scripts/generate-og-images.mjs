@@ -162,11 +162,6 @@ function renderOgImage(image, type) {
   console.log(`Generated OG: ${image.url}`);
 }
 
-function renderFallbackOgImage() {
-  const image = createFallbackOgImage();
-  renderOgImage(image, 'fallback');
-}
-
 async function main() {
   if (watchMode) {
     await runWatchMode();
@@ -196,17 +191,15 @@ async function generateOgImages() {
   const posts = [];
   const allTags = new Set();
 
-  const homeImage = createHomeOgImage();
-  nextManifest[homeImage.filename] = homeImage.signature;
+  const renderIfNeeded = (image, type) => {
+    nextManifest[image.filename] = image.signature;
+    if (previousManifest[image.filename] !== image.signature || !fs.existsSync(path.join(outputDir, image.filename))) {
+      renderOgImage(image, type);
+    }
+  };
 
-  renderFallbackOgImage();
-
-  if (!(
-    previousManifest[homeImage.filename] === homeImage.signature &&
-    fs.existsSync(path.join(outputDir, homeImage.filename))
-  )) {
-    renderOgImage(homeImage, 'home');
-  }
+  renderOgImage(createFallbackOgImage(), 'fallback');
+  renderIfNeeded(createHomeOgImage(), 'home');
 
   for (const file of files) {
     const slug = file.replace('.mdx', '');
@@ -230,26 +223,14 @@ async function generateOgImages() {
 
   for (const post of posts) {
     const image = createPostOgImage({ slug: post.slug, title: post.title, description: post.summary });
-    nextManifest[image.filename] = image.signature;
-
-    if (previousManifest[image.filename] === image.signature && fs.existsSync(path.join(outputDir, image.filename))) {
-      continue;
-    }
-
-    renderOgImage(image, 'blog');
+    renderIfNeeded(image, 'blog');
   }
 
   for (const tag of uniqueTags) {
     const tagPosts = posts.filter((p) => p.tags.includes(tag));
     const tagSlug = sluggify(tag);
     const image = createTagOgImage({ slug: tagSlug, tag, postCount: tagPosts.length });
-    nextManifest[image.filename] = image.signature;
-
-    if (previousManifest[image.filename] === image.signature && fs.existsSync(path.join(outputDir, image.filename))) {
-      continue;
-    }
-
-    renderOgImage(image, 'tag');
+    renderIfNeeded(image, 'tag');
   }
 
   writeManifest(nextManifest);
