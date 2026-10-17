@@ -7,8 +7,6 @@ import type { ECBasicOption } from 'echarts/types/dist/shared';
 import { useTheme } from '#/components/theme/theme.store';
 import { merge } from '#/lib/merge';
 
-import { getChartTheme } from './themes/site-theme';
-
 type ChartProps = {
   options: ECBasicOption;
   className: string;
@@ -40,53 +38,14 @@ const ChartComponent = ({ options, className }: ChartProps) => {
     let cancelled = false;
 
     const loadChart = async () => {
-      // Dynamic imports - echarts will only be loaded when this component renders
-      const [
-        echarts,
-        { BarChart, HeatmapChart, LineChart },
-        {
-          DataZoomComponent,
-          GraphicComponent,
-          GridComponent,
-          LegendComponent,
-          MarkLineComponent,
-          TitleComponent,
-          ToolboxComponent,
-          TooltipComponent,
-          VisualMapComponent
-        },
-        { CanvasRenderer }
-      ] = await Promise.all([
-        import('echarts/core'),
-        import('echarts/charts'),
-        import('echarts/components'),
-        import('echarts/renderers')
-      ]);
-
+      const { createChart } = await import('./themes/site-theme');
       if (!chartRef.current) return;
       const fontFamily = getComputedStyle(chartRef.current).fontFamily;
       await Promise.all([document.fonts.load(`600 16px ${fontFamily}`), document.fonts.load(`400 12px ${fontFamily}`)]);
       await document.fonts.ready;
       if (cancelled) return;
 
-      // Register required components
-      echarts.use([
-        BarChart,
-        LineChart,
-        LegendComponent,
-        DataZoomComponent,
-        GraphicComponent,
-        GridComponent,
-        HeatmapChart,
-        MarkLineComponent,
-        CanvasRenderer,
-        TitleComponent,
-        ToolboxComponent,
-        TooltipComponent,
-        VisualMapComponent
-      ]);
-
-      chart = echarts.init(chartRef.current, getChartTheme(chartRef.current), { renderer: 'canvas' });
+      chart = createChart(chartRef.current);
       chart.setOption(merge(options, DEFAULT_OPTIONS));
       setIsLoading(false);
 
