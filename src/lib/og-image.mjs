@@ -1,10 +1,10 @@
-export const OG_TEMPLATE_VERSION = 'v11-colophon';
+export const OG_TEMPLATE_VERSION = 'v12-refined';
 
 export const HOME_OG_TITLE = 'Koen van Gilst';
 export const HOME_OG_DESCRIPTION =
   'Principal Engineer at Rabobank with a background in philosophy and lifelong passion for programming.';
 export const FALLBACK_OG_TITLE = HOME_OG_TITLE;
-export const FALLBACK_OG_DESCRIPTION = 'koenvangilst.nl';
+export const FALLBACK_OG_DESCRIPTION = HOME_OG_DESCRIPTION;
 
 /**
  * FNV-1a provides a small, deterministic content fingerprint that works in

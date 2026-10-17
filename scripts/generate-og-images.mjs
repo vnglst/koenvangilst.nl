@@ -10,8 +10,9 @@ const outputDir = process.env.OG_OUTPUT_DIR || path.join(process.cwd(), 'public/
 const manifestPath = path.join(outputDir, '.manifest.json');
 const fontsDir = path.join(process.cwd(), 'public/fonts');
 const fontPath = path.join(fontsDir, 'IBMPlexSans-Regular.ttf');
-const serifFontPath = path.join(fontsDir, 'LibreCaslonText.ttf');
-const watchFiles = [path.join(process.cwd(), 'src/lib/og-image.mjs'), fontPath, serifFontPath];
+const displayFontPath = path.join(fontsDir, 'NimbusSansExtended-Bold.otf');
+const portraitPath = path.join(process.cwd(), 'public/avatar.jpg');
+const watchFiles = [path.join(process.cwd(), 'src/lib/og-image.mjs'), fontPath, displayFontPath, portraitPath];
 
 function sluggify(str) {
   return str.trim().toLowerCase().split(' ').join('-');
@@ -101,28 +102,30 @@ function wrapText(text, maxChars, maxLines) {
   return trimmed;
 }
 
-function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, family = 'IBM Plex Sans') {
+function renderTextBlock(lines, x, startY, lineHeight, fontSize, fill, family = 'IBM Plex Sans', weight = 400) {
   return lines
     .map(
       (line, index) =>
-        `<text x="${x}" y="${startY + index * lineHeight}" fill="${fill}" font-family="${family}" font-size="${fontSize}" font-weight="400" dominant-baseline="hanging">${escapeXml(line)}</text>`
+        `<text x="${x}" y="${startY + index * lineHeight}" fill="${fill}" font-family="${family}" font-size="${fontSize}" font-weight="${weight}">${escapeXml(line)}</text>`
     )
     .join('\n');
 }
 
 function createOgSvg(title, description, type) {
   const isHome = type === 'home' || type === 'fallback';
-  const titleLines = isHome ? [] : wrapText(title, 25, 5);
-  const descriptionLines = wrapText(description, 48, isHome ? 6 : 3);
-  const titleY = titleLines.length > 3 ? 100 : 155;
-  const descriptionY = isHome ? 260 : titleY + titleLines.length * 58 + 28;
+  const titleLines = isHome ? [title] : wrapText(title, 26, 5);
+  const titleY = isHome ? 170 : 100;
+  const descriptionY = isHome ? 270 : titleY + titleLines.length * 58 + 28;
+  const descriptionLines = wrapText(description, 58, isHome ? 4 : 3);
+  const portrait = fs.readFileSync(portraitPath).toString('base64');
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#111110" />
-  ${renderTextBlock(titleLines, 450, titleY, 58, 46, '#e9e7e0', 'Libre Caslon Text')}
-  ${renderTextBlock(descriptionLines, 450, descriptionY, 32, 22, '#a5a59b')}
-  <text x="64" y="510" fill="#e9e7e0" font-family="Libre Caslon Text" font-size="29" dominant-baseline="hanging">Koen van Gilst</text>
-  <text x="64" y="558" fill="#a5a59b" font-family="IBM Plex Sans" font-size="16" dominant-baseline="hanging">koenvangilst.nl</text>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs><clipPath id="portrait"><circle cx="120" cy="130" r="40" /></clipPath></defs>
+  <rect width="1200" height="630" fill="#020617" />
+  <image x="80" y="90" width="80" height="80" clip-path="url(#portrait)" href="data:image/jpeg;base64,${portrait}" />
+  ${renderTextBlock(titleLines, 280, titleY, 58, isHome ? 54 : 46, '#e5e7eb', 'Nimbus Sans D OT', 700)}
+  ${renderTextBlock(descriptionLines, 280, descriptionY, 34, 24, '#9ca3af')}
+  <text x="280" y="560" fill="#42a5f5" font-family="IBM Plex Sans" font-size="22">koenvangilst.nl</text>
 </svg>`;
 }
 
@@ -148,14 +151,14 @@ function renderOgImage(image, type) {
   const outputPath = path.join(outputDir, image.filename);
   const svg = createOgSvg(image.title, image.description, type);
   const resvg = new Resvg(svg, {
-    fitTo: { mode: 'width', value: 1200 },
     font: {
       defaultFontFamily: 'IBM Plex Sans',
-      fontFiles: [fontPath, serifFontPath],
+      fontFiles: [fontPath, displayFontPath],
       loadSystemFonts: false
     }
   });
-  writeFileAtomically(outputPath, Buffer.from(resvg.render().asPng()));
+  const rendered = resvg.render();
+  writeFileAtomically(outputPath, rendered.asPng());
   console.log(`Generated OG: ${image.url}`);
 }
 
@@ -179,7 +182,7 @@ async function generateOgImages() {
   // Keep historical entries because their immutable URLs may still be in use.
   const nextManifest = { ...previousManifest };
 
-  const requiredFonts = ['IBMPlexSans-Regular.ttf', 'LibreCaslonText.ttf'];
+  const requiredFonts = ['IBMPlexSans-Regular.ttf', 'NimbusSansExtended-Bold.otf'];
 
   for (const fontFile of requiredFonts) {
     const fontPath = path.join(fontsDir, fontFile);

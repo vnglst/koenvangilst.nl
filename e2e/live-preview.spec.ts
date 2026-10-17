@@ -62,7 +62,7 @@ test.describe('real local preview integrations', () => {
       expect(await page.frameLocator('iframe').locator('body').innerHTML(), title).not.toBe('');
       await expect(page.getByRole('link', { name: /open in new tab/i })).toHaveAttribute(
         'href',
-        slug === 'time-flies' ? 'https://time-flies.koenvangilst.nl' : (await embed.getAttribute('src'))!
+        (await embed.getAttribute('src'))!
       );
     }
     expect(errors).toEqual([]);

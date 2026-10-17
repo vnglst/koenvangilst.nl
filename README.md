@@ -123,13 +123,9 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
-### Familiar, refined design
+### Design reference
 
-The shared layout evolves the original website with navy/white themes, self-hosted Nimbus Sans Extended page titles, IBM Plex Sans body text, and the original portrait. Desktop uses a centered frame with a portrait sidebar and vertical navigation. Below 768px, a portrait header contains the theme toggle and an expandable menu. Writing screens share a 640px reading column, consistent title sizes, 17px/28px prose, 16px summaries, and 13px minimum captions. The footer stays left aligned on mobile.
-
-Theme and typography foundations live in `src/styles/tokens.css`; shared layout and component styles remain in `src/styles/colophon.css`. Article typography and mixed-media spacing live in `src/styles/prose.css`. Lab category filters use URL parameter `q`. Photography fills the available viewport beside the sidebar, using natural proportions in two unequal, staggered columns with captions (one column on mobile) and a full-viewport viewer with keyboard and swipe navigation. The art gallery exposes all ten projects through a native picker and Previous/Next controls, preserving selection in the URL. Time Flies uses its local fitted embed.
-
-The design system is documented in [docs/design-system.md](docs/design-system.md), with a live component and token reference at `/design-system`. Use these when extending the design. The reference supports both themes and mobile layouts, and is excluded from search indexing and the main navigation.
+Use `/design-system` for the live component reference and [docs/design-system.md](docs/design-system.md) for the few implementation decisions that are not apparent from the components and styles.
 
 ### Photography Sync
 
@@ -139,7 +135,7 @@ Photography delivery is handled by the `zipline-sync/` service in the same Docke
 
 ### Open Graph Image Generation
 
-Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic Colophon OG fallback image with the site title, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
+Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic refined OG fallback image with the site title, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
 
 The volume manifest and hashed PNG files persist across deployments. Existing files are deliberately retained because previously published OG URLs must remain valid. Prune the volume manually only when old URLs no longer need to work. In Coolify versions that include stopped one-shot services in application health evaluation, mark `og-generator` as excluded from health checks in the Coolify service settings.
 
@@ -591,7 +587,3 @@ When writing or editing blog posts and documentation:
 - **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
 - **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
 - **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌
-
-### Local Time Flies embed
-
-The gallery serves a copy of the MIT-licensed `vnglst/time-flies` artwork from `public/static/art/time-flies/index.html`, with its license alongside it. This version changes the viewport layout to fit the frame and omits standalone analytics; the animation and credit links are preserved. Update this copy deliberately when the original changes. The gallery’s external link still opens the original website.

@@ -128,7 +128,7 @@ export function GenerativeArtGallery() {
         )}
         <iframe
           key={project.slug}
-          src={project.slug === 'time-flies' ? '/static/art/time-flies/index.html' : project.url}
+          src={project.url}
           title={project.title}
           className="art-viewport"
           onLoad={() => setLoadedSlug(project.slug)}

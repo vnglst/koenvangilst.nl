@@ -31,19 +31,15 @@ for (const width of [390, 1440]) {
     }
   });
 
-  test(`Time Flies fits its frame with no inner scroll at ${width}px`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 844 });
+  test(`Time Flies stays an external embed at ${width}px`, async ({ page }) => {
+    await page.route('https://time-flies.koenvangilst.nl/**', (route) =>
+      route.fulfill({ contentType: 'text/html', body: '<html><body>Time Flies</body></html>' })
+    );
     await page.goto('/lab/gen-art-gallery?project=time-flies');
-    const artwork = page.frameLocator('iframe');
-    await expect(artwork.locator('canvas')).toBeVisible();
-    expect(
-      await artwork.locator('html').evaluate((el) => ({
-        vertical: el.scrollHeight > el.clientHeight,
-        horizontal: el.scrollWidth > el.clientWidth
-      }))
-    ).toEqual({ vertical: false, horizontal: false });
-    const credits = await artwork.locator('#made').boundingBox();
-    const frame = await page.locator('iframe').boundingBox();
-    expect(credits!.y + credits!.height).toBeLessThanOrEqual(frame!.y + frame!.height);
+    await expect(page.locator('iframe')).toHaveAttribute('src', 'https://time-flies.koenvangilst.nl');
+    await expect(page.getByRole('link', { name: /open in new tab/i })).toHaveAttribute(
+      'href',
+      'https://time-flies.koenvangilst.nl'
+    );
   });
 }
