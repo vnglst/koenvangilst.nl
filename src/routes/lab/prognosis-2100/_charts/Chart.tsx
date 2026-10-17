@@ -40,28 +40,8 @@ const ChartComponent = ({ options, className }: ChartProps) => {
     let cancelled = false;
 
     const loadChart = async () => {
-      // Dynamic imports - echarts will only be loaded when this component renders
-      const [
-        echarts,
-        { BarChart, HeatmapChart, LineChart },
-        {
-          DataZoomComponent,
-          GraphicComponent,
-          GridComponent,
-          LegendComponent,
-          MarkLineComponent,
-          TitleComponent,
-          ToolboxComponent,
-          TooltipComponent,
-          VisualMapComponent
-        },
-        { CanvasRenderer }
-      ] = await Promise.all([
-        import('echarts/core'),
-        import('echarts/charts'),
-        import('echarts/components'),
-        import('echarts/renderers')
-      ]);
+      // Keep the async boundary while allowing unused ECharts features to be removed.
+      const { createChart } = await import('./create-chart');
 
       if (!chartRef.current) return;
       const fontFamily = getComputedStyle(chartRef.current).fontFamily;
@@ -69,24 +49,7 @@ const ChartComponent = ({ options, className }: ChartProps) => {
       await document.fonts.ready;
       if (cancelled) return;
 
-      // Register required components
-      echarts.use([
-        BarChart,
-        LineChart,
-        LegendComponent,
-        DataZoomComponent,
-        GraphicComponent,
-        GridComponent,
-        HeatmapChart,
-        MarkLineComponent,
-        CanvasRenderer,
-        TitleComponent,
-        ToolboxComponent,
-        TooltipComponent,
-        VisualMapComponent
-      ]);
-
-      chart = echarts.init(chartRef.current, getChartTheme(chartRef.current), { renderer: 'canvas' });
+      chart = createChart(chartRef.current, getChartTheme(chartRef.current));
       chart.setOption(merge(options, DEFAULT_OPTIONS));
       setIsLoading(false);
 

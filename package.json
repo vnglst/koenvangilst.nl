@@ -10,6 +10,7 @@
     "dev": "node scripts/dev.mjs",
     "sync:photos": "node scripts/sync-photos.mjs",
     "build": "vite build",
+    "benchmark:build": "node scripts/benchmark-build.mjs",
     "start": "srvx --prod --entry dist/server/server.js --static ../client",
     "preview": "npm run start -- --host 127.0.0.1",
     "test": "vitest run",

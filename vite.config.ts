@@ -12,6 +12,7 @@ import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { cacheMdx } from './scripts/lib/cache-mdx.ts';
 import { remarkWordCount } from './src/lib/remark-word-count.ts';
 
 const commitHash = (() => {
@@ -62,16 +63,18 @@ const config = defineConfig({
   },
   plugins: [
     tailwindcss(),
-    mdx({
-      remarkPlugins: [remarkGfm, remarkFrontmatter, remarkWordCount, [remarkMdxFrontmatter, { name: 'frontmatter' }]],
-      rehypePlugins: [
-        rehypeSlug,
-        rehypeCodeTitles,
-        rehypePrismPlus,
-        [rehypeAutolinkHeadings, { properties: { className: ['anchor'] } }]
-      ],
-      providerImportSource: '@mdx-js/react'
-    }),
+    cacheMdx(
+      mdx({
+        remarkPlugins: [remarkGfm, remarkFrontmatter, remarkWordCount, [remarkMdxFrontmatter, { name: 'frontmatter' }]],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypeCodeTitles,
+          rehypePrismPlus,
+          [rehypeAutolinkHeadings, { properties: { className: ['anchor'] } }]
+        ],
+        providerImportSource: '@mdx-js/react'
+      })
+    ),
     tanstackStart({
       router: {
         // Exclude files/dirs with single _ prefix (components, etc.) but keep __root.tsx
