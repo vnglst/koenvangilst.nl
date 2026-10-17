@@ -28,6 +28,7 @@ test.describe('flagship lab projects', () => {
     ).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: /technology/i })).toBeVisible();
     const chart = page.locator('.land-use-chart');
+    await expect(chart).toBeVisible();
     const before = await chart.boundingBox();
     await expect(chart.locator('.hexagon').first()).toBeVisible({ timeout: 20_000 });
     const after = await chart.boundingBox();
