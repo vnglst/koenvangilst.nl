@@ -40,27 +40,15 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       { rel: 'stylesheet', href: appCss },
       // Preload the body, heading and display faces used above the fold.
       // Other weights remain available through CSS and load only when used.
-      {
-        rel: 'preload',
-        href: '/fonts/ibm-plex-sans-400.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/ibm-plex-sans-600.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2',
-        as: 'font',
-        type: 'font/woff2',
-        crossOrigin: 'anonymous'
-      },
+      ...['ibm-plex-sans-400.woff2', 'ibm-plex-sans-600.woff2', 'Nimbus-Sans-D-OT-Bold-Extended_32745.woff2'].map(
+        (filename) => ({
+          rel: 'preload',
+          href: `/fonts/${filename}`,
+          as: 'font',
+          type: 'font/woff2',
+          crossOrigin: 'anonymous' as const
+        })
+      ),
       {
         rel: 'preconnect',
         href: 'https://plausible.koenvangilst.nl',

@@ -1,20 +1,7 @@
 /* Familiar, refined: shared theme, type and spacing foundations. */
 :root {
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-7: 28px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --mobile-gutter: var(--space-6);
-  --navigation-gap: var(--space-7);
   --control-target: 44px;
   --reading-width: 640px;
-  --intro-width: 640px;
   --viewer-page: #090909;
   --viewer-ink: #f4f4f1;
   --viewer-muted: #c5c5be;
@@ -32,7 +19,6 @@
   --type-body: 17px;
   --leading-body: 28px;
   --type-summary: 16px;
-  --type-caption: 13px;
   color-scheme: light;
 }
 :root.dark {

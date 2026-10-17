@@ -90,9 +90,7 @@ async function main() {
   process.once('SIGINT', cleanup);
   process.once('SIGTERM', cleanup);
 
-  const firstExit = await Promise.race(
-    children.map((child) => waitForExit(child).then((result) => ({ child, ...result })))
-  );
+  const firstExit = await Promise.race(children.map(waitForExit));
   cleanup();
 
   if (firstExit.signal) {

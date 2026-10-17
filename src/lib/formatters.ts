@@ -1,36 +1,25 @@
-export const temperatureFormatter = (value?: number | null) => {
-  if (value === undefined || value === null) {
-    return 'N/A';
-  }
+function unitFormatter(unit: string, options: Intl.NumberFormatOptions) {
+  return (value?: number | null) => {
+    if (value === undefined || value === null) return 'N/A';
+    return `${value.toLocaleString('en-GB', options)} ${unit}`;
+  };
+}
 
-  return `${value.toLocaleString('en-GB', {
-    maximumFractionDigits: 2,
-    minimumFractionDigits: 2,
-    signDisplay: 'always'
-  })} °C`;
-};
+export const temperatureFormatter = unitFormatter('°C', {
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 2,
+  signDisplay: 'always'
+});
 
-export const mmFormatter = (value?: number | null) => {
-  if (value === undefined || value === null) {
-    return 'N/A';
-  }
+export const mmFormatter = unitFormatter('mm', {
+  maximumFractionDigits: 0,
+  signDisplay: 'auto'
+});
 
-  return `${value.toLocaleString('en-GB', {
-    maximumFractionDigits: 0,
-    signDisplay: 'auto'
-  })} mm`;
-};
-
-export const hoursFormatter = (value?: number | null) => {
-  if (value === undefined || value === null) {
-    return 'N/A';
-  }
-
-  return `${value.toLocaleString('en-GB', {
-    maximumFractionDigits: 0,
-    signDisplay: 'always'
-  })} hours`;
-};
+export const hoursFormatter = unitFormatter('hours', {
+  maximumFractionDigits: 0,
+  signDisplay: 'always'
+});
 
 export const dateFormatter = (value: string) => {
   return new Date(value).toLocaleDateString('en-GB', {
