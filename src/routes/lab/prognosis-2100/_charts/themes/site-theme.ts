@@ -1,4 +1,35 @@
-export function getChartTheme(element: HTMLElement) {
+import { init, use as registerChartFeatures } from 'echarts/core';
+import { BarChart, HeatmapChart, LineChart } from 'echarts/charts';
+import {
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  LegendComponent,
+  MarkLineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent
+} from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+
+registerChartFeatures([
+  BarChart,
+  HeatmapChart,
+  LineChart,
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  LegendComponent,
+  MarkLineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent,
+  CanvasRenderer
+]);
+
+function getChartTheme(element: HTMLElement) {
   const style = getComputedStyle(element);
   const token = (name: string) => style.getPropertyValue(`--${name}`).trim();
   const ink = token('ink');
@@ -41,4 +72,8 @@ export function getChartTheme(element: HTMLElement) {
       label: { backgroundColor: token('surface'), color: ink, borderColor: line, borderWidth: 1, fontFamily }
     }
   };
+}
+
+export function createChart(element: HTMLDivElement) {
+  return init(element, getChartTheme(element), { renderer: 'canvas' });
 }

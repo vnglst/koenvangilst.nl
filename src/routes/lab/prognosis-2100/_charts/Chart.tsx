@@ -7,8 +7,6 @@ import type { ECBasicOption } from 'echarts/types/dist/shared';
 import { useTheme } from '#/components/theme/theme.store';
 import { merge } from '#/lib/merge';
 
-import { getChartTheme } from './themes/site-theme';
-
 type ChartProps = {
   options: ECBasicOption;
   className: string;
@@ -40,16 +38,14 @@ const ChartComponent = ({ options, className }: ChartProps) => {
     let cancelled = false;
 
     const loadChart = async () => {
-      // Keep the async boundary while allowing unused ECharts features to be removed.
-      const { createChart } = await import('./create-chart');
-
+      const { createChart } = await import('./themes/site-theme');
       if (!chartRef.current) return;
       const fontFamily = getComputedStyle(chartRef.current).fontFamily;
       await Promise.all([document.fonts.load(`600 16px ${fontFamily}`), document.fonts.load(`400 12px ${fontFamily}`)]);
       await document.fonts.ready;
       if (cancelled) return;
 
-      chart = createChart(chartRef.current, getChartTheme(chartRef.current));
+      chart = createChart(chartRef.current);
       chart.setOption(merge(options, DEFAULT_OPTIONS));
       setIsLoading(false);
 

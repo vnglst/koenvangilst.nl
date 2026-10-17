@@ -77,7 +77,7 @@ Contributor setup, architecture, validation, and deployment are documented below
 1. **Content Discovery**: MDX files are read from the `/content` directory
 2. **Frontmatter Parsing**: `remark-frontmatter` and `remark-mdx-frontmatter` extract metadata at build time
 3. **Schema Validation**: Zod ensures content structure integrity with type safety
-4. **MDX Compilation**: [@mdx-js/rollup](https://mdxjs.com/packages/rollup/) processes MDX with custom components; an invocation-local cache reuses identical compilation output across client and SSR builds
+4. **MDX Compilation**: [@mdx-js/rollup](https://mdxjs.com/packages/rollup/) processes MDX with custom components
 5. **Enhancement**: Rehype plugins add code highlighting, auto-linking headings, and more
 
 ### Content Schema
@@ -222,10 +222,6 @@ To smoke-test the production photography container against Zipline, run `npm run
 > **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server now also runs the local OG generator, but it still behaves differently from production for SSR and proxying and can produce false positives or false negatives.
 
 Without `BASE_URL`, `playwright.config.ts` starts `npm run dev` or reuses a server on port 3000. Set `BASE_URL` explicitly for production validation and wait for the preview to be ready. To run a focused spec, use `BASE_URL=http://127.0.0.1:3000 npm run test:e2e -- e2e/layout-shift.spec.ts`.
-
-Performance regression checks live in `e2e/performance.spec.ts`. They cap decoded JavaScript bytes and request counts on the homepage, Lab, an article, and the climate dashboard, and attach loading measurements to the Playwright results. Climate data is fixture-backed. Timing is diagnostic because local load times vary by machine. See [the performance benchmark](docs/performance.md) for before/after measurements and reproduction commands.
-
-Run `npm run benchmark:build` for three production builds and their median wall time. Set `BUILD_BENCHMARK_RUNS` to change the sample count. Dependencies must already be installed; run benchmarks without competing builds or test suites.
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows. A Node preview does not include Nginx; use the Docker suite for proxy, CSP, redirects, and cache behavior.
 
