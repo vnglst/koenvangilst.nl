@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-17",
+  "baselineCommit": "c4459a64a100ff40ce66c028f733b490080a2573",
+  "environment": {
+    "browser": "Playwright Chromium",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "samplesPerPage": 3,
+    "cache": "fresh browser context for every sample",
+    "server": "local production Node preview, no Nginx compression",
+    "responseBudgetBytesPerSecond": 200000,
+    "requestLatencyMs": 100,
+    "externalRequests": "blocked",
+    "sizes": "decoded local resource bytes, excluding HTML"
+  },
+  "samples": {
+    "before": [
+      {
+        "path": "/",
+        "run": 0,
+        "ttfbMs": 270.7,
+        "fcpMs": 2316,
+        "lcpMs": 2316,
+        "resourceBytes": 786972,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/",
+        "run": 1,
+        "ttfbMs": 185.5,
+        "fcpMs": 752,
+        "lcpMs": 752,
+        "resourceBytes": 786972,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/",
+        "run": 2,
+        "ttfbMs": 180.4,
+        "fcpMs": 2124,
+        "lcpMs": 2124,
+        "resourceBytes": 786972,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab",
+        "run": 0,
+        "ttfbMs": 642.6,
+        "fcpMs": 2820,
+        "lcpMs": 2820,
+        "resourceBytes": 789177,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab",
+        "run": 1,
+        "ttfbMs": 549.4,
+        "fcpMs": 2624,
+        "lcpMs": 2624,
+        "resourceBytes": 789177,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab",
+        "run": 2,
+        "ttfbMs": 532.2,
+        "fcpMs": 2712,
+        "lcpMs": 2712,
+        "resourceBytes": 789177,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 0,
+        "ttfbMs": 1403,
+        "fcpMs": 3728,
+        "lcpMs": 3728,
+        "resourceBytes": 845119,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 1,
+        "ttfbMs": 1392.8,
+        "fcpMs": 3460,
+        "lcpMs": 3460,
+        "resourceBytes": 845119,
+        "fontBytes": 311408
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 2,
+        "ttfbMs": 1390.4,
+        "fcpMs": 3580,
+        "lcpMs": 3580,
+        "resourceBytes": 845119,
+        "fontBytes": 311408
+      }
+    ],
+    "after": [
+      {
+        "path": "/",
+        "run": 0,
+        "ttfbMs": 189.7,
+        "fcpMs": 1616,
+        "lcpMs": 1616,
+        "resourceBytes": 640936,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/",
+        "run": 1,
+        "ttfbMs": 179.8,
+        "fcpMs": 1488,
+        "lcpMs": 1488,
+        "resourceBytes": 640936,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/",
+        "run": 2,
+        "ttfbMs": 183.9,
+        "fcpMs": 1492,
+        "lcpMs": 1492,
+        "resourceBytes": 640936,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/lab",
+        "run": 0,
+        "ttfbMs": 535.2,
+        "fcpMs": 1844,
+        "lcpMs": 1844,
+        "resourceBytes": 643141,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/lab",
+        "run": 1,
+        "ttfbMs": 526,
+        "fcpMs": 1764,
+        "lcpMs": 1764,
+        "resourceBytes": 643141,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/lab",
+        "run": 2,
+        "ttfbMs": 523.1,
+        "fcpMs": 1740,
+        "lcpMs": 1740,
+        "resourceBytes": 643141,
+        "fontBytes": 165584
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 0,
+        "ttfbMs": 1391.9,
+        "fcpMs": 2744,
+        "lcpMs": 2744,
+        "resourceBytes": 768503,
+        "fontBytes": 235004
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 1,
+        "ttfbMs": 1392.8,
+        "fcpMs": 2728,
+        "lcpMs": 2728,
+        "resourceBytes": 768503,
+        "fontBytes": 235004
+      },
+      {
+        "path": "/lab/ai-and-the-future-of-engineering",
+        "run": 2,
+        "ttfbMs": 1394,
+        "fcpMs": 2660,
+        "lcpMs": 2660,
+        "resourceBytes": 768503,
+        "fontBytes": 235004
+      }
+    ]
+  }
+}
