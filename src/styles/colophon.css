@@ -572,11 +572,6 @@ h6 {
   padding-top: 48px;
 }
 
-.chart-loading {
-  opacity: 0;
-  animation: fadeIn 200ms 1s forwards;
-}
-
 /* Photo detail is an immersive viewport, independent of the editorial shell. */
 html:has(.photo-viewer) {
   overflow: hidden;
@@ -686,18 +681,6 @@ html:has(.photo-viewer) {
   font-family: var(--font-sans), sans-serif;
   font-weight: 400;
 }
-.editorial-text-body {
-  font-size: 17px;
-  line-height: 1.75;
-}
-.editorial-text-small {
-  font-size: 14px;
-  line-height: 1.6;
-}
-.editorial-text-caption {
-  font-size: 13px;
-  line-height: 1.6;
-}
 .editorial-text-ink {
   color: var(--ink);
 }
@@ -775,15 +758,6 @@ html:has(.photo-viewer) {
   margin: 0;
   letter-spacing: normal;
   text-wrap: initial;
-}
-@media (max-width: 767px) {
-  .editorial-text-body {
-    line-height: 1.65;
-  }
-}
-
-.art-caption .editorial-heading {
-  margin: 0;
 }
 
 /* Shared type roles remain identical across routes and themes. */
