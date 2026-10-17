@@ -29,7 +29,7 @@ const FEATURED_TAGS = [
 export function ProjectBrowser({ projects }: ProjectBrowserProps) {
   const search = useSearch({ from: '/lab/' });
   const urlQuery = search.q ?? '';
-  const filteredProjects = useFilteredProjects(projects, urlQuery);
+  const filteredProjects = filterProjects(projects, urlQuery);
 
   return (
     <section>
@@ -39,7 +39,7 @@ export function ProjectBrowser({ projects }: ProjectBrowserProps) {
   );
 }
 
-function useFilteredProjects(projects: Project[], query: string): Project[] {
+function filterProjects(projects: Project[], query: string): Project[] {
   if (!query) return projects;
   const lowerQuery = query.toLowerCase();
   return projects.filter((project) => project.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)));
@@ -97,18 +97,10 @@ function ProjectsDisplay({ projects }: ProjectsDisplayProps) {
     );
   }
 
-  return (
-    <div className="project-list">
-      <ProjectList projects={projects} />
-    </div>
-  );
-}
-
-function ProjectList({ projects }: { projects: Project[] }) {
   const displayedYears = new Set<string>();
 
   return (
-    <>
+    <div className="project-list">
       {projects.map((project) => {
         const year = new Date(project.publishedAt).getFullYear().toString();
         const showYear = !displayedYears.has(year);
@@ -124,6 +116,6 @@ function ProjectList({ projects }: { projects: Project[] }) {
           </Fragment>
         );
       })}
-    </>
+    </div>
   );
 }
