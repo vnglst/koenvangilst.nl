@@ -26,7 +26,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
-- **Server**: Node.js 26 on Hetzner CX33 (x86_64) via Docker + Coolify
+- **Server**: Node.js 26.12 on Hetzner CX33 (x86_64) via Docker + Coolify
 - **Reverse Proxy**: Nginx (serves static assets, rate-limiting, security headers, health checks)
 
 ## Project Structure
@@ -231,6 +231,8 @@ After website changes, leave a local development environment or production previ
 
 The project pins exact versions and uses npm's `min-release-age` protection (currently 2 days). The latest published versions may be newer than that window, so installs may need a temporary override.
 
+The scoped `postcss-selector-parser` override patches Tailwind Typography's build-time dependency until its upstream pin is updated.
+
 1. **Root dependencies**: run the updater script.
 
    ```bash
@@ -427,7 +429,7 @@ These are baked in at build time, not runtime env vars.
 ### Deployment Target
 
 - **Architecture**: linux/amd64 (Hetzner CX33 is x86_64, NOT ARM)
-- **Base images**: Use `node:26-alpine` for production builds
+- **Base images**: Use `node:26.12.0-alpine` for production builds
 - **Build optimization**: BuildKit cache mounts are configured for Vite build cache
 
 ### Coolify Configuration
