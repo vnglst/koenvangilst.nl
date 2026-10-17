@@ -2,7 +2,7 @@
 
 The source code of my personal website and blog. Built with TanStack Start + Vite, self-hosted on Hetzner. Contains blog posts, data visualizations, and a generative art gallery. Follows a strict self-hosting and open-source philosophy.
 
-> **For coding agents**: Before making any changes, read this README in full. All project conventions, validation requirements, and architectural decisions are documented here.
+Contributor setup, architecture, validation, and deployment are documented below. AI coding instructions live in [AGENTS.md](AGENTS.md).
 
 ## Philosophy
 
@@ -10,8 +10,6 @@ The source code of my personal website and blog. Built with TanStack Start + Vit
 - **No Vercel, no GitHub Actions builds** — Docker container deployed via Coolify on Hetzner
 - **FOSS only** — all software components must be free and open source
 - **Full control** — preference for solutions that can be fully controlled and maintained without relying on third-party services
-
-When suggesting solutions or improvements, prioritize self-hosted, open-source alternatives over managed services (e.g., no Vercel, no proprietary CDNs).
 
 ## Tech Stack
 
@@ -53,7 +51,6 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 │   ├── lib/               # Utility functions
 │   ├── router.tsx          # Router configuration
 │   ├── server.ts           # Server entry configuration
-│   ├── services/          # External service integrations
 │   └── styles/            # Global CSS styles
 ├── content/               # MDX blog posts and articles
 │   ├── *.mdx             # Individual blog posts with frontmatter
@@ -192,7 +189,7 @@ Vite uses polling on macOS to avoid exhausting the operating system's low defaul
 
 ## Validation & Pre-commit Checks
 
-**IMPORTANT**: Before committing code changes, ALWAYS run:
+Before committing code changes, run:
 
 ```bash
 npm run type-check  # Oxlint TypeScript 7 type-check
@@ -200,15 +197,18 @@ npm run lint        # Oxlint + TypeScript 7 type-aware rules
 npm run test        # Vitest unit tests
 ```
 
-If any of these fail, fix the issues before committing. This ensures code quality and prevents broken builds from being deployed.
+Resolve failures before committing to prevent broken builds from being deployed.
 
 **Exception**: When dependencies are not installed (e.g., in CI or lightweight environments), these checks may be skipped, but should be run in local development before pushing.
 
 **E2E for large changes**: When making a large refactor or other broad change — especially routing changes, content rendering changes, image handling changes, shared layout updates, or cross-cutting UI work — ALSO run:
 
 ```bash
-npm run build && npm run start &  # Build first, then start the production server
-npm run test:e2e                  # Playwright end-to-end coverage for main site flows
+# Terminal 1: build and start the production preview
+npm run build && npm run preview
+
+# Terminal 2: bypass Playwright's automatic dev server
+BASE_URL=http://127.0.0.1:3000 npm run test:e2e
 ```
 
 For the most production-like validation (the Compose website and OG worker, Nginx reverse proxy, legacy redirects, CSP headers, and static asset serving), run:
@@ -221,9 +221,9 @@ To smoke-test the production photography container against Zipline, run `npm run
 
 > **Important**: Always run e2e tests against a production **build** (`npm run build && npm run start` or `npm run test:e2e:docker`), never against the dev server (`npm run dev`). The dev server now also runs the local OG generator, but it still behaves differently from production for SSR and proxying and can produce false positives or false negatives.
 
-Use the Playwright suite as a required regression check when a change affects multiple user flows.
+Without `BASE_URL`, `playwright.config.ts` starts `npm run dev` or reuses a server on port 3000. Set `BASE_URL` explicitly for production validation and wait for the preview to be ready. To run a focused spec, use `BASE_URL=http://127.0.0.1:3000 npm run test:e2e -- e2e/layout-shift.spec.ts`.
 
-After website changes, leave a local development environment or production preview running and provide direct links to the pages changed and checked, so the result is easy to verify.
+Use the Playwright suite as a required regression check when a change affects multiple user flows. A Node preview does not include Nginx; use the Docker suite for proxy, CSP, redirects, and cache behavior.
 
 **Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (Oxlint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
@@ -273,111 +273,15 @@ The scoped `postcss-selector-parser` override patches Tailwind Typography's buil
    npm run test:e2e:docker
    ```
 
-## Coding Guidelines
-
-### Think Before Coding
-
-- State assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so.
-- If something is unclear, stop and ask.
-
-### Simplicity First
-
-- Minimum code that solves the problem. Nothing speculative.
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" that wasn't requested.
-
-### No Barrel/Index Files
-
-This project intentionally avoids barrel (index.ts) re-export files. All imports use direct deep paths like `#/components/ui/Button`. This maximizes tree-shaking and makes the import graph explicit. Barrel files can cause circular dependencies, slow down bundlers with re-export chains, and obscure the actual module source.
-
-### Surgical Changes
-
-- Touch only what you must. Don't "improve" adjacent code.
-- Match existing style, even if you'd do it differently.
-- Remove imports/variables/functions that YOUR changes made unused.
-- Every changed line should trace directly to the request.
-
-### Goal-Driven Execution
-
-- Define success criteria before starting.
-- Transform tasks into verifiable goals.
-- Loop until verified.
-
-### Close the Feedback Loop First
-
-- Before solving, build a way to observe.
-- A tight feedback loop is the foundation of execution.
-- Prefer building a reproduction script before the real implementation.
-
-### Prevent Layout Shifts (CLS)
-
-Layout shifts degrade perceived performance and user experience. Always avoid them.
-
-**Loading states must preserve the shell layout.** When a route uses `Suspense` or a loading skeleton, the fallback must include the same outer layout (sidebar, header, footer) as the final content. If the skeleton omits the sidebar, the sidebar will disappear and reappear during navigation, causing a visible jump.
-
-**Checklist for every new or changed route:**
-
-1. **Match the skeleton to the layout** - If the final page renders inside `<Container>`, the skeleton must also render inside `<Container>`.
-2. **Reserve space for async content** - If a component loads asynchronously inside a page, its placeholder should occupy the same dimensions so surrounding elements do not move.
-3. **Delay skeletons by ~1 s** - Fast loads should never flash a skeleton. Use a small timer (e.g. `setTimeout(..., 1000)`) so the placeholder only appears when a load genuinely takes longer than one second. This prevents a jarring "flash of skeleton" for typical fast navigation.
-4. **Verify with the Layout Instability API** - The Playwright e2e suite guards against this. When adding a new route with async content, include a CLS test:
-   ```bash
-   npm run test:e2e  # e2e/layout-shift.spec.ts checks CLS < 0.1
-   ```
-5. **Test client-side navigation** - Layout shifts often only appear during SPA navigation, not on direct page loads. Navigate from a stable page (e.g. `/lab`) to the new route and watch the sidebar.
-
-**What to watch for:**
-
-- Sidebars or fixed navigation that vanish and reappear in a different position.
-- Images without explicit `width` and `height` that push text down as they load.
-- Font swaps that reflow text when web fonts arrive.
-- Asynchronous charts or visualisations that expand from a zero-height placeholder.
-- Skeletons that appear for a split second on every fast navigation, creating a strobe-like effect.
-
-**Example of a correct skeleton with delay:**
-
-```tsx
-// lab/$slug.tsx - Skeleton wraps the same Container so the sidebar stays put.
-// It is delayed by 1 s to avoid flashing on fast loads.
-function DelayedSkeleton() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!show) return null;
-
-  return <MarkdownLayoutSkeleton />;
-}
-
-function MarkdownLayoutSkeleton() {
-  return (
-    <Container>
-      <div className="mx-auto w-full max-w-[700px] animate-pulse">
-        <div className="mb-4 h-8 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="space-y-3">
-          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-          <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-        </div>
-      </div>
-    </Container>
-  );
-}
-```
-
 ## Architecture
 
 ### Content / CMS
 
-- Blog posts live in `content/*.mdx` (and optionally in `content/[slug]/index.mdx`) with YAML frontmatter
+- Blog posts live in `content/*.mdx` with YAML frontmatter; the current content globs do not discover nested `index.mdx` files
 - Per-post custom React components live in `content/[slug]/` directories and are imported directly in the MDX file with static `import`
 - `@mdx-js/rollup` compiles MDX at build time (Vite processes all content files before bundling)
-- `src/cms/mdx-parser.ts` — uses `import.meta.glob` to access compiled MDX modules
+- `src/cms/posts-server.ts` - eagerly loads compiled MDX modules and validates post metadata on the server
+- `src/cms/mdx-parser.ts` - lazily loads compiled MDX components and caches their React component identities
 - Each MDX file exports: `default` (React component) + `frontmatter` (object, via `remark-mdx-frontmatter`)
 - Schema validation via `src/cms/schema.ts` (Zod)
 - **Why build-time MDX**: Vite compiles content before bundling, keeping request-time rendering fast and avoiding runtime file-system compilation.
@@ -394,17 +298,17 @@ function MarkdownLayoutSkeleton() {
 - `src/routes/photography/` — photo gallery
 - `src/routes/tag/$slug.tsx` — posts filtered by tag
 - **Server routes** (API): `feed.xml.ts`, `health.ts`, `llm-context.ts`, `og.tsx`, `sitemap[.]xml.ts`
-- **Legacy redirects**: `blog/`, `blog/$`, `labs/`, `projects/`, `clients/`, `portfolio/`, `snippets/`, `photography/photo/$`
+- **Legacy redirects**: handled by `src/lib/legacy-redirect.ts` through `src/server.ts`, with production redirects also in `nginx/nginx.conf`
 
 TanStack Router generates `src/routeTree.gen.ts` automatically — never edit this file manually. Files/dirs prefixed with a single `_` are treated as non-route components (e.g. `_components/`, `_charts/`).
 
 ### Key Patterns
 
-**`createServerFn`**: All server-side data fetching goes through `createServerFn({ method: 'GET' }).handler(...)`. Route `loader:` calls the server fn. Component reads data with `Route.useLoaderData()`.
+**`createServerFn`**: Route loaders that need server-only data use `createServerFn({ method: 'GET' }).handler(...)`. Route `loader:` calls the server fn. Component reads data with `Route.useLoaderData()`.
 
 **`_components/` convention**: Files/folders prefixed with `_` (single) are excluded from route generation by `routeFileIgnorePattern: '^_(?!_)'` in vite.config.ts.
 
-**`#/*` and `@/*` path aliases**: Cross-module imports use `#/components/...`, `#/lib/...`, etc. Both `#/*` and `@/*` are configured in `tsconfig.json` (paths) and `package.json` (imports field). The codebase primarily uses `#/*`.
+**`#/*` path alias**: Cross-module imports use `#/components/...`, `#/lib/...`, etc. The alias is configured in `tsconfig.json` (paths) and `package.json` (imports field). Relative imports are also used; `@/*` is not configured.
 
 **MDX in `lab/$slug`**: The route loader returns serializable metadata. The component uses `import.meta.glob` to re-import the MDX React component by slug client-side (avoids serialising React components over the wire).
 
@@ -515,6 +419,23 @@ curl -I http://localhost:3000/photos/example.webp
 docker stop koenvangilst-test && docker rm koenvangilst-test
 ```
 
+### Deploying and Verifying Production
+
+1. Run `npm run test`, `npm run type-check`, `npm run lint`, and `npm run knip`. Resolve failures before continuing.
+2. Run `npm run build` to verify the production build. Run the Docker e2e suite before deploying broad changes or dependency upgrades, as described above.
+3. Commit the intended changes and push the deployment branch to origin. Coolify builds and deploys the website on Hetzner; deployment typically takes about five minutes.
+4. Verify these production endpoints after deployment:
+
+   | Endpoint                                                     | Expected result                                        |
+   | ------------------------------------------------------------ | ------------------------------------------------------ |
+   | https://koenvangilst.nl                                      | 200 OK; footer commit hash matches the deployed commit |
+   | https://koenvangilst.nl/lab                                  | 200 OK; listing renders                                |
+   | https://koenvangilst.nl/lab/ai-and-the-future-of-engineering | 200 OK; article renders                                |
+   | https://koenvangilst.nl/feed.xml                             | 200 OK; valid RSS XML                                  |
+   | https://koenvangilst.nl/health                               | 200 OK; health check passes                            |
+
+If verification fails, inspect the deployment and application logs, fix the issue locally, repeat validation, and redeploy.
+
 ### Development Environment
 
 - **Local Docker**: Use only free and open source tooling (avoid proprietary services like Docker Desktop; prefer Colima)
@@ -549,7 +470,6 @@ This project uses `knip` for detecting unused dependencies and exports. Run with
 
 Knip cannot follow Vite's `import.meta.glob`, MDX compilation, or Docker/deployment usage, so it may incorrectly report these as unused:
 
-- `@tanstack/router-plugin` — used in `vite.config.ts` as a Vite plugin
 - `@types/mdx` — provides TypeScript types for `.mdx` imports
 - `husky` — drives the `.husky/pre-commit` hook
 
@@ -581,11 +501,3 @@ Reports can be viewed in the Plausible Analytics dashboard:
 
 - `/public/llms.txt` - Contains honeypot instruction
 - `/src/routes/llm-context.ts` - Context resource that sends events to Plausible
-
-## Writing Style
-
-When writing or editing blog posts and documentation:
-
-- **Punctuation**: Use regular hyphens (-) instead of em-dashes (—) for readability and simplicity
-- **Example**: "No log parsing, no database queries - just a clean dashboard" ✅
-- **Avoid**: "No log parsing, no database queries—just a clean dashboard" ❌

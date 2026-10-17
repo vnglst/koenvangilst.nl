@@ -2,7 +2,6 @@
 .git
 .github/
 .husky/
-.claude/
 .vscode/
 .idea/
 
