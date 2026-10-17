@@ -64,3 +64,21 @@ test.describe('photography', () => {
     await expect(page.locator('.photo-caption')).toContainText('Paris, France');
   });
 });
+
+test.describe('dates across time zones', () => {
+  test.use({ timezoneId: 'America/Los_Angeles' });
+
+  test('photo and article dates agree with server-rendered dates after hydration', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto('/photography/14');
+    await page.getByRole('button', { name: 'Next photograph' }).click();
+    await expect(page.locator('.photo-caption time')).toHaveText('January 2, 2026');
+    await page.getByRole('button', { name: 'Previous photograph' }).click();
+    await expect(page.locator('.photo-caption time')).toHaveText('January 1, 2026');
+    await page.goto('/lab/two-uncomfortably-exciting-conference-talks');
+    await page.getByRole('button', { name: 'Switch to light mode' }).click();
+    await expect(page.locator('.article-metadata time')).toHaveText('October 10, 2026');
+    expect(errors).toEqual([]);
+  });
+});

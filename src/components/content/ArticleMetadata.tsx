@@ -13,6 +13,7 @@ export function ArticleMetadata({
     <div className="article-metadata">
       <time dateTime={publishedAt}>
         {new Date(publishedAt).toLocaleDateString('en-US', {
+                timeZone: 'UTC',
           year: 'numeric',
           month: 'long',
           day: 'numeric'

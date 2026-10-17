@@ -14,7 +14,12 @@ function applyTheme(theme: Theme) {
   if (typeof window === 'undefined') return;
   const isDark = theme === Theme.Dark;
   document.documentElement.classList.toggle('dark', isDark);
-  window.localStorage.setItem('theme', theme);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#020617' : '#ffffff');
+  try {
+    window.localStorage.setItem('theme', theme);
+  } catch {
+    // Theme switching still works when the browser blocks storage.
+  }
 }
 
 const getInitialTheme = (): Theme => {

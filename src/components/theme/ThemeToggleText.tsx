@@ -10,7 +10,10 @@ export function ThemeToggleText() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', theme === Theme.Dark ? '#020617' : '#ffffff');
+  }, [theme]);
 
   function handleClick() {
     setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);

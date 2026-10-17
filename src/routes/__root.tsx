@@ -25,8 +25,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
-      { name: 'theme-color', content: '#020617', media: '(prefers-color-scheme: dark)' },
       { title: 'Koen van Gilst - Principal Engineer' },
       {
         name: 'description',
@@ -115,6 +113,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full min-w-[320px] font-sans">
       <head>
+        <meta name="theme-color" content="#020617" suppressHydrationWarning />
         <HeadContent />
       </head>
       <body className="antialiased">
@@ -127,10 +126,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              const preferredTheme = localStorage.getItem('theme');
-              if (preferredTheme !== 'light') {
-                document.documentElement.classList.add('dark');
-              }
+              let preferredTheme = 'dark';
+              try { preferredTheme = localStorage.getItem('theme') || 'dark'; } catch {}
+              document.documentElement.classList.toggle('dark', preferredTheme !== 'light');
 
             `
           }}

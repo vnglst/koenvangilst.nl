@@ -112,6 +112,7 @@ export function FullScreenGallery({ photos, startIndex }: { photos: PhotoType[];
           {photo.createdAt && (
             <time dateTime={photo.createdAt} className="mt-1 block">
               {new Date(photo.createdAt).toLocaleDateString('en-US', {
+                timeZone: 'UTC',
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'

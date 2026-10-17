@@ -26,3 +26,6 @@ test-results/
 zipline-sync/photos-data.json
 zipline-sync/node_modules
 zipline-sync/data/
+
+# Local design explorations and screenshots
+output/

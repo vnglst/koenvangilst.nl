@@ -34,6 +34,7 @@ export const hoursFormatter = (value?: number | null) => {
 
 export const dateFormatter = (value: string) => {
   return new Date(value).toLocaleDateString('en-GB', {
+    timeZone: 'UTC',
     day: 'numeric',
     month: 'short',
     year: 'numeric'
