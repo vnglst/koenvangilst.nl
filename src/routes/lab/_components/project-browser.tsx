@@ -112,7 +112,7 @@ function ProjectsDisplay({ projects }: ProjectsDisplayProps) {
         return (
           <Fragment key={project.slug}>
             {showYear && <h2 className="archive-year">{year}</h2>}
-            <BlogPostLink compact {...project} />
+            <BlogPostLink {...project} />
           </Fragment>
         );
       })}

@@ -19,10 +19,6 @@
   --color-blue-600: #1e88e5;
   --color-blue-700: #1976d2;
   --color-blue-800: #1565c0;
-
-  --font-family-sans:
-    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
 }
 
 :root {

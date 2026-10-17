@@ -9,12 +9,11 @@ type BlogPostLinkProps = {
   slug: string;
   publishedAt: string;
   url?: string;
-  compact?: boolean;
 };
-export function BlogPostLink({ title, summary, url, slug, publishedAt, compact = false }: BlogPostLinkProps) {
+export function BlogPostLink({ title, summary, url, slug, publishedAt }: BlogPostLinkProps) {
   const href = url || `/lab/${slug}`;
   const content = (
-    <article className={compact ? 'post-entry post-entry-compact' : 'post-entry'}>
+    <article className="post-entry">
       <time dateTime={publishedAt}>{dateFormatter(publishedAt)}</time>
       <div>
         <Heading level={3} size={3} className="post-title">

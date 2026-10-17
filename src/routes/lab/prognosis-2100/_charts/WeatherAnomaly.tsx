@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { RainClient } from './RainChart';
-import { SunshineClient } from './Sunshine';
+import { WeatherBarChart } from './WeatherBarChart';
 import { TemperatureClient } from './TemperatureChart';
 
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json';
@@ -23,8 +22,9 @@ export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;
 
-  if (type === 'sunshine') return <SunshineClient data={parsed.data} className={className} />;
-  if (type === 'rain') return <RainClient data={parsed.data} className={className} />;
+  if (type === 'rain' || type === 'sunshine') {
+    return <WeatherBarChart data={parsed.data} type={type} className={className} />;
+  }
   return <TemperatureClient data={parsed.data} className={className} />;
 }
 
