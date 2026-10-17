@@ -1,27 +1,13 @@
-/* Prism colors share the Colophon surfaces, with readable contrast in both themes. */
-:root {
-  --syntax-green: #42634e;
-  --syntax-purple: #745084;
-  --syntax-gold: #82601e;
-  --syntax-blue: #4b627c;
-  --syntax-pink: #965462;
-}
-:root.dark {
-  --syntax-green: #b5c9b8;
-  --syntax-purple: #c8afd5;
-  --syntax-gold: #d6c48b;
-  --syntax-blue: #b3c4d6;
-  --syntax-pink: #d3b0b9;
-}
+/* Syntax highlighting styles for Prism.js */
+
 .token.comment,
 .token.prolog,
 .token.doctype,
-.token.cdata {
-  color: var(--muted);
-}
+.token.cdata,
 .token.punctuation {
-  color: var(--ink);
+  @apply text-gray-700 dark:text-gray-300;
 }
+
 .token.property,
 .token.tag,
 .token.boolean,
@@ -29,16 +15,19 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: var(--syntax-green);
+  @apply text-green-500;
 }
+
 .token.selector,
 .token.attr-name,
 .token.string,
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: var(--syntax-purple);
+  @apply text-purple-500;
 }
+
+/* Yellow-highlighted syntactic elements */
 .token.operator,
 .token.entity,
 .token.url,
@@ -47,17 +36,22 @@
 .token.regex,
 .token.important,
 .token.variable {
-  color: var(--syntax-gold);
+  @apply text-yellow-500;
 }
+
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: var(--syntax-blue);
+  @apply text-blue-500;
 }
+
 .token.function,
 .token.class-name {
-  color: var(--syntax-pink);
+  @apply text-pink-500;
 }
+
+/* (regex, important, variable merged into yellow group above) */
+
 code[class*='language-'],
 pre[class*='language-'] {
   background: var(--surface);

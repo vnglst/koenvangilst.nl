@@ -4,11 +4,10 @@ import type * as echartsType from 'echarts/core';
 // Type imports don't increase bundle size
 import type { ECBasicOption } from 'echarts/types/dist/shared';
 
-import { Theme, useTheme } from '#/components/theme/theme.store';
+import { useTheme } from '#/components/theme/theme.store';
 import { merge } from '#/lib/merge';
 
-import { darkTheme } from './themes/dark-theme';
-import { lightTheme } from './themes/light-theme';
+import { getChartTheme } from './themes/site-theme';
 
 type ChartProps = {
   options: ECBasicOption;
@@ -23,8 +22,8 @@ const DEFAULT_OPTIONS: ECBasicOption = {
         show: true
       }
     },
-    right: 15,
-    top: 15
+    right: 0,
+    top: 0
   }
 };
 
@@ -64,6 +63,10 @@ const ChartComponent = ({ options, className }: ChartProps) => {
         import('echarts/renderers')
       ]);
 
+      if (!chartRef.current) return;
+      const fontFamily = getComputedStyle(chartRef.current).fontFamily;
+      await Promise.all([document.fonts.load(`600 16px ${fontFamily}`), document.fonts.load(`400 12px ${fontFamily}`)]);
+      await document.fonts.ready;
       if (cancelled) return;
 
       // Register required components
@@ -83,24 +86,18 @@ const ChartComponent = ({ options, className }: ChartProps) => {
         VisualMapComponent
       ]);
 
-      echarts.registerTheme(Theme.Light, lightTheme);
-      echarts.registerTheme(Theme.Dark, darkTheme);
-
-      if (!chartRef.current) return;
-
-      chart = echarts.init(chartRef.current, mode, { renderer: 'canvas' });
+      chart = echarts.init(chartRef.current, getChartTheme(chartRef.current), { renderer: 'canvas' });
       chart.setOption(merge(options, DEFAULT_OPTIONS));
       setIsLoading(false);
 
-      const handleResize = () => chart?.resize();
-      window.addEventListener('resize', handleResize);
-      const mediaQuery = window.matchMedia('(max-width: 768px)');
-      mediaQuery.addEventListener('change', handleResize);
-
-      cleanupChart = () => {
-        window.removeEventListener('resize', handleResize);
-        mediaQuery.removeEventListener('change', handleResize);
-      };
+      const observer = new ResizeObserver(() => {
+        if (!chart || !chartRef.current) return;
+        chart.resize();
+        const width = Math.max(180, chartRef.current.clientWidth - 44);
+        chart.setOption({ title: { textStyle: { width }, subtextStyle: { width } } });
+      });
+      observer.observe(chartRef.current);
+      cleanupChart = () => observer.disconnect();
     };
 
     void loadChart().catch((error) => console.error('Failed to initialize chart:', error));
@@ -113,7 +110,7 @@ const ChartComponent = ({ options, className }: ChartProps) => {
   }, [mode, options]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`data-chart relative ${className}`}>
       {isLoading && (
         <LoadingState className="chart-loading absolute inset-0 bg-[var(--surface)]">Loading chart...</LoadingState>
       )}

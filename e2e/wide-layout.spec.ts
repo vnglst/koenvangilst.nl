@@ -43,7 +43,7 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
       railTop ??= geometry.railTop;
       expect(Math.abs(geometry.gutter - railLeft), `${path}: sidebar left`).toBeLessThan(1);
       expect(Math.abs(geometry.railTop - railTop), `${path}: sidebar top`).toBeLessThan(1);
-      if (path === '/photography') {
+      if (path === '/photography' || path === '/lab/prognosis-2100') {
         expect(Math.abs(geometry.left - contentLeft!)).toBeLessThan(1);
         expect(geometry.clientWidth - geometry.right).toBeCloseTo(Math.min(64, Math.max(32, width * 0.03)), 0);
         expect(geometry.gap).toBe(64);

@@ -38,6 +38,7 @@ async function expectDrawnCharts(charts: Locator, count: number) {
 }
 
 async function stableChartImage(chart: Locator) {
+  await chart.page().mouse.move(0, 0);
   let previous: string[] = [];
   let current: string[] = [];
   await expect
@@ -65,18 +66,20 @@ for (const width of [390, 1440]) {
     await expect(page.getByRole('checkbox', { name: 'Show prognosis' })).toBeChecked();
     await expectDrawnCharts(charts, 3);
     for (let i = 0; i < 3; i++)
-      expect(
-        JSON.stringify(await stableChartImage(charts.nth(i))) !== JSON.stringify(originals[i]),
-        `Chart ${i + 1} shows a forecast`
-      ).toBe(true);
+      await expect
+        .poll(async () => JSON.stringify(await stableChartImage(charts.nth(i))) !== JSON.stringify(originals[i]), {
+          message: `Chart ${i + 1} shows a forecast`
+        })
+        .toBe(true);
     await toggle.click();
     await expect(page.getByRole('checkbox', { name: 'Show prognosis' })).not.toBeChecked();
     await expectDrawnCharts(charts, 3);
     for (let i = 0; i < 3; i++)
-      expect(
-        JSON.stringify(await stableChartImage(charts.nth(i))) === JSON.stringify(originals[i]),
-        `Chart ${i + 1} restores historical data`
-      ).toBe(true);
+      await expect
+        .poll(async () => JSON.stringify(await stableChartImage(charts.nth(i))) === JSON.stringify(originals[i]), {
+          message: `Chart ${i + 1} restores historical data`
+        })
+        .toBe(true);
     await page.getByRole('button', { name: 'Switch to light mode' }).click();
     await expectDrawnCharts(charts, 3);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -115,5 +118,65 @@ for (const width of [390, 1440]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await expect(page.getByRole('heading', { name: 'Sources and methodology' })).toBeVisible();
     expect(errors).toEqual([]);
+  });
+}
+
+for (const width of [390, 1440]) {
+  test(`all climate charts use the refined palette and canvas typography at ${width}px`, async ({ page }) => {
+    test.setTimeout(90_000);
+    await page.setViewportSize({ width, height: 1000 });
+    await page.addInitScript(() => {
+      const labels: Array<{ text: string; font: string; color: string }> = [];
+      (window as any).__chartLabels = labels;
+      const original = CanvasRenderingContext2D.prototype.fillText;
+      CanvasRenderingContext2D.prototype.fillText = function (text: string, x: number, y: number, maxWidth?: number) {
+        if (/Temperature|Rainfall|Sunshine|Sea Level|Global CO2/.test(text)) {
+          labels.push({ text, font: this.font, color: String(this.fillStyle) });
+        }
+        if (maxWidth === undefined) original.call(this, text, x, y);
+        else original.call(this, text, x, y, maxWidth);
+      };
+    });
+    for (const [route, count] of [
+      ['/lab/prognosis-2100', 3],
+      ['/lab/rising-temperatures', 6]
+    ] as const) {
+      await page.goto(route);
+      const charts = page.locator('[_echarts_instance_]');
+      for (const theme of ['dark', 'light']) {
+        if ((await page.locator('html').getAttribute('class'))?.includes('dark') !== (theme === 'dark')) {
+          await page.getByRole('button', { name: /switch to .* mode/i }).click();
+        }
+        await expectDrawnCharts(charts, count);
+        const ink = theme === 'dark' ? '#e5e7eb' : '#111827';
+        for (const chart of await charts.all()) {
+          await expect
+            .poll(() =>
+              chart
+                .locator('canvas')
+                .first()
+                .evaluate((canvas) => Array.from(canvas.getContext('2d')!.getImageData(0, 0, 1, 1).data))
+            )
+            .toEqual(theme === 'dark' ? [2, 6, 23, 255] : [255, 255, 255, 255]);
+        }
+        await expect
+          .poll(() =>
+            page.evaluate(
+              (ink) => (window as any).__chartLabels.filter((label: { color: string }) => label.color === ink).length,
+              ink
+            )
+          )
+          .toBeGreaterThan(0);
+        const fonts = await page.evaluate(
+          (ink) =>
+            (window as any).__chartLabels
+              .filter((label: { color: string }) => label.color === ink)
+              .map((label: { font: string }) => label.font),
+          ink
+        );
+        expect(fonts.every((font: string) => font.includes('IBM Plex Sans'))).toBe(true);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      }
+    }
   });
 }

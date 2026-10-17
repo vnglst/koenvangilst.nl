@@ -96,26 +96,7 @@ function generateOptions(data: Data) {
 
           return {
             value,
-            itemStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color
-                  },
-                  {
-                    offset: 1,
-                    color
-                  }
-                ]
-              },
-              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
-            }
+            itemStyle: { color }
           };
         }),
         emphasis: {
@@ -128,7 +109,7 @@ function generateOptions(data: Data) {
         data: data.sunshine_trend,
         smooth: true,
         lineStyle: {
-          color: '#ff0000'
+          color: '#c05050'
         },
         emphasis: {
           focus: 'series'

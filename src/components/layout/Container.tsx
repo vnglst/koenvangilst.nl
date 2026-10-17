@@ -8,7 +8,7 @@ type ContainerProps = {
   footer?: boolean;
   wide?: boolean;
   home?: boolean;
-  layout?: 'default' | 'reading' | 'photography' | 'art' | 'map';
+  layout?: 'default' | 'reading' | 'photography' | 'art' | 'map' | 'dashboard';
 };
 
 export function Container({

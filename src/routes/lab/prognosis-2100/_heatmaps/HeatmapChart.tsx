@@ -28,7 +28,7 @@ export function HeatmapChart({
 
   return (
     <ChartSection>
-      <Chart options={options} className="aspect-[5/1] min-h-[300px]" />
+      <Chart options={options} className="heatmap-chart" />
     </ChartSection>
   );
 }
@@ -44,7 +44,7 @@ function generateOptions(
 ) {
   return {
     grid: {
-      top: 90,
+      top: 130,
       bottom: 25,
       left: 20,
       right: 20,
@@ -89,7 +89,7 @@ function generateOptions(
       max: visualMapRange.max,
       calculable: true,
       orient: 'horizontal',
-      top: 10,
+      top: 80,
       left: 'center',
       type: 'continuous',
       inRange: {
@@ -114,8 +114,7 @@ function generateOptions(
         },
         emphasis: {
           itemStyle: {
-            shadowBlur: 10,
-            shadowColor: 'rgba(0, 0, 0, 0.25)'
+            borderWidth: 1
           }
         }
       }

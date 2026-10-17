@@ -9,12 +9,12 @@ export function Sealevel() {
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load sea level data</div>;
-  if (!data) return <div className="aspect-[3/5] animate-pulse bg-[var(--surface)] md:aspect-square" />;
+  if (!data) return <div className="dashboard-chart animate-pulse bg-[var(--surface)]" />;
 
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;
 
-  return <SealevelClient data={parsed.data} className="aspect-[3/5] min-h-0 w-full md:aspect-square" />;
+  return <SealevelClient data={parsed.data} className="dashboard-chart" />;
 }
 
 const Data = z.object({

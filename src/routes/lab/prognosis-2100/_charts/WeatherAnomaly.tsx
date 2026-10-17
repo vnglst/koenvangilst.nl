@@ -17,7 +17,7 @@ export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   const classNameForBlog = 'my-4 aspect-[1/1]';
-  const classNameForDashboard = 'aspect-[3/5] min-h-0 w-full md:aspect-square';
+  const classNameForDashboard = 'dashboard-chart';
   const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
 
   if (error) return <div className="text-sm text-red-500">Failed to load weather data</div>;

@@ -30,7 +30,8 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       top: 120,
       bottom: 50,
       left: 15,
-      right: 15
+      right: 15,
+      containLabel: true
     },
     title: {
       text: 'Global CO2 level',
@@ -40,8 +41,8 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
       subtextStyle: {
         lineHeight: 18
       },
-      top: 10,
-      left: 10
+      top: 0,
+      left: 0
     },
     tooltip: {
       valueFormatter: (value: number) => `${value.toFixed(1)} ppm`,
@@ -87,42 +88,8 @@ function generateOptions(data: DataType, showPrognosis: boolean) {
         emphasis: {
           focus: 'series'
         },
-        color: {
-          type: 'linear',
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: '#2196f3'
-            },
-            {
-              offset: 1,
-              color: '#cbf3ff'
-            }
-          ]
-        },
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: '#19c9ff'
-              },
-              {
-                offset: 1,
-                color: '#2196f3'
-              }
-            ]
-          }
-        }
+        lineStyle: { width: 2 },
+        areaStyle: { opacity: 0.12 }
       },
       ...(showPrognosis ? prognosisMarklines : [])
     ]

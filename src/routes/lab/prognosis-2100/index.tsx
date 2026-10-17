@@ -40,7 +40,7 @@ function PrognosisToggle() {
 
 function Prognosis2100() {
   return (
-    <Container wide>
+    <Container layout="dashboard">
       <BackToLab />
       <Toolbar className="mb-8">
         <Heading level={1} className="mb-0!">
@@ -48,8 +48,8 @@ function Prognosis2100() {
         </Heading>
         <PrognosisToggle />
       </Toolbar>
-      <div className="mb-10 grid w-full grid-cols-1 gap-8 xl:grid-cols-2">
-        <Prose as="div" className="my-auto p-2 md:py-6 md:pr-8">
+      <div className="prognosis-grid">
+        <Prose as="div" className="dashboard-introduction">
           <p>
             The year 2100 seems far away but it is not unlikely that my children will still be alive then. What will the
             Netherlands look like then? Will we have a warmer more subtropical climate? Will our dykes be high enough?

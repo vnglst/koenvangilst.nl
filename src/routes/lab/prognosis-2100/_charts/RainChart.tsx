@@ -88,30 +88,11 @@ function generateOptions(data: Data) {
         type: 'bar',
         data: data.rainfall_anomalies.map((value) => {
           const factor = (value - min) / (max - min);
-          const color = lerpColor(factor, ['#cbf3ff', '#44d6ff', '#0022ff']);
+          const color = lerpColor(factor, ['#90caf9', '#42a5f5', '#1565c0']);
 
           return {
             value,
-            itemStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color
-                  },
-                  {
-                    offset: 1,
-                    color
-                  }
-                ]
-              },
-              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
-            }
+            itemStyle: { color }
           };
         }),
         emphasis: {
@@ -124,7 +105,7 @@ function generateOptions(data: Data) {
         data: data.rainfall_trend,
         smooth: true,
         lineStyle: {
-          color: '#ff0000'
+          color: '#c05050'
         },
         emphasis: {
           focus: 'series'

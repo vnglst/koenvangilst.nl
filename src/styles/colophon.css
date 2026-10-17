@@ -59,21 +59,21 @@ h6 {
 .site-shell:is(.site-shell-reading, .site-shell-photography, .site-shell-art) .site-main {
   max-width: var(--reading-width);
 }
-/* Keep the shared rail anchored; only the gallery extends toward the right edge. */
+/* Keep the shared rail anchored; galleries and dashboards extend toward the right edge. */
 @media (min-width: 768px) {
-  .site-shell.site-shell-photography {
+  .site-shell:is(.site-shell-photography, .site-shell-dashboard) {
     width: auto;
     max-width: none;
     margin-left: max(0px, calc((100% - 1000px) / 2));
     margin-right: 0;
     padding-inline: 40px clamp(32px, 3vw, 64px);
   }
-  .site-shell.site-shell-photography .site-main {
+  .site-shell:is(.site-shell-photography, .site-shell-dashboard) .site-main {
     max-width: none;
   }
 }
 @media (min-width: 768px) and (max-width: 1000px) {
-  .site-shell.site-shell-photography {
+  .site-shell:is(.site-shell-photography, .site-shell-dashboard) {
     padding-left: 32px;
   }
 }
@@ -341,8 +341,8 @@ h6 {
   aspect-ratio: 1;
   margin-top: 20px;
   padding: 16px;
-  background: #000;
-  color: #f4f4f4;
+  background: var(--page);
+  color: var(--ink);
 }
 .land-use-chart svg {
   display: block;
@@ -948,4 +948,43 @@ html:has(.photo-viewer) {
   .photo-grid button:nth-child(even) {
     margin-top: 0;
   }
+}
+
+.site-shell-dashboard .site-main {
+  container-type: inline-size;
+}
+.prognosis-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px 32px;
+  margin-bottom: 40px;
+}
+.dashboard-introduction {
+  max-width: var(--reading-width);
+  align-self: center;
+}
+.dashboard-chart {
+  width: 100%;
+  height: clamp(360px, 32vw, 560px);
+}
+@container (min-width: 850px) {
+  .prognosis-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.data-chart {
+  background: var(--page);
+  color: var(--ink);
+}
+.chart-scroller {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-block: 32px;
+}
+.heatmap-chart {
+  min-width: 640px;
+  width: 100%;
+  height: 320px;
 }

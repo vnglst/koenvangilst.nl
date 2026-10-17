@@ -105,26 +105,7 @@ function generateOptions(data: Data, showPrognosis: boolean) {
 
           return {
             value,
-            itemStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color
-                  },
-                  {
-                    offset: 1,
-                    color
-                  }
-                ]
-              },
-              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
-            }
+            itemStyle: { color }
           };
         }),
         emphasis: {
