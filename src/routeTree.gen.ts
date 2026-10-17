@@ -10,17 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as LlmContextRouteImport } from './routes/llm-context'
 import { Route as OgRouteImport } from './routes/og'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TalksRouteImport } from './routes/talks'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
 import { Route as PhotographyPhotoRouteImport } from './routes/photography/$photo'
 import { Route as TagSlugRouteImport } from './routes/tag/$slug'
-import { Route as LabCo2IndexRouteImport } from './routes/lab/co2/index'
 import { Route as LabGenArtGalleryIndexRouteImport } from './routes/lab/gen-art-gallery/index'
 import { Route as LabOnsLandIndexRouteImport } from './routes/lab/ons-land/index'
 import { Route as LabPrognosis2100IndexRouteImport } from './routes/lab/prognosis-2100/index'
@@ -28,6 +29,11 @@ import { Route as LabPrognosis2100IndexRouteImport } from './routes/lab/prognosi
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
@@ -55,6 +61,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TalksRoute = TalksRouteImport.update({
+  id: '/talks',
+  path: '/talks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabIndexRoute = LabIndexRouteImport.update({
   id: '/lab/',
   path: '/lab/',
@@ -80,11 +91,6 @@ const TagSlugRoute = TagSlugRouteImport.update({
   path: '/tag/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LabCo2IndexRoute = LabCo2IndexRouteImport.update({
-  id: '/lab/co2/',
-  path: '/lab/co2/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LabGenArtGalleryIndexRoute = LabGenArtGalleryIndexRouteImport.update({
   id: '/lab/gen-art-gallery/',
   path: '/lab/gen-art-gallery/',
@@ -103,34 +109,36 @@ const LabPrognosis2100IndexRoute = LabPrognosis2100IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/design-system': typeof DesignSystemRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
-  '/lab/co2/': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land/': typeof LabOnsLandIndexRoute
   '/lab/prognosis-2100/': typeof LabPrognosis2100IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/design-system': typeof DesignSystemRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab': typeof LabIndexRoute
   '/photography': typeof PhotographyIndexRoute
-  '/lab/co2': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land': typeof LabOnsLandIndexRoute
   '/lab/prognosis-2100': typeof LabPrognosis2100IndexRoute
@@ -138,17 +146,18 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/design-system': typeof DesignSystemRoute
   '/feed.xml': typeof FeedDotxmlRoute
   '/health': typeof HealthRoute
   '/llm-context': typeof LlmContextRoute
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/talks': typeof TalksRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
-  '/lab/co2/': typeof LabCo2IndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
   '/lab/ons-land/': typeof LabOnsLandIndexRoute
   '/lab/prognosis-2100/': typeof LabPrognosis2100IndexRoute
@@ -157,51 +166,54 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/design-system'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
     | '/lab/'
     | '/photography/'
-    | '/lab/co2/'
     | '/lab/gen-art-gallery/'
     | '/lab/ons-land/'
     | '/lab/prognosis-2100/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/design-system'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
     | '/lab'
     | '/photography'
-    | '/lab/co2'
     | '/lab/gen-art-gallery'
     | '/lab/ons-land'
     | '/lab/prognosis-2100'
   id:
     | '__root__'
     | '/'
+    | '/design-system'
     | '/feed.xml'
     | '/health'
     | '/llm-context'
     | '/og'
     | '/sitemap.xml'
+    | '/talks'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
     | '/lab/'
     | '/photography/'
-    | '/lab/co2/'
     | '/lab/gen-art-gallery/'
     | '/lab/ons-land/'
     | '/lab/prognosis-2100/'
@@ -209,17 +221,18 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesignSystemRoute: typeof DesignSystemRoute
   FeedDotxmlRoute: typeof FeedDotxmlRoute
   HealthRoute: typeof HealthRoute
   LlmContextRoute: typeof LlmContextRoute
   OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TalksRoute: typeof TalksRoute
   LabSlugRoute: typeof LabSlugRoute
   PhotographyPhotoRoute: typeof PhotographyPhotoRoute
   TagSlugRoute: typeof TagSlugRoute
   LabIndexRoute: typeof LabIndexRoute
   PhotographyIndexRoute: typeof PhotographyIndexRoute
-  LabCo2IndexRoute: typeof LabCo2IndexRoute
   LabGenArtGalleryIndexRoute: typeof LabGenArtGalleryIndexRoute
   LabOnsLandIndexRoute: typeof LabOnsLandIndexRoute
   LabPrognosis2100IndexRoute: typeof LabPrognosis2100IndexRoute
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/feed.xml': {
@@ -269,6 +289,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/talks': {
+      id: '/talks'
+      path: '/talks'
+      fullPath: '/talks'
+      preLoaderRoute: typeof TalksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/': {
       id: '/lab/'
       path: '/lab'
@@ -304,13 +331,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lab/co2/': {
-      id: '/lab/co2/'
-      path: '/lab/co2'
-      fullPath: '/lab/co2/'
-      preLoaderRoute: typeof LabCo2IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lab/gen-art-gallery/': {
       id: '/lab/gen-art-gallery/'
       path: '/lab/gen-art-gallery'
@@ -337,17 +357,18 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesignSystemRoute: DesignSystemRoute,
   FeedDotxmlRoute: FeedDotxmlRoute,
   HealthRoute: HealthRoute,
   LlmContextRoute: LlmContextRoute,
   OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TalksRoute: TalksRoute,
   LabSlugRoute: LabSlugRoute,
   PhotographyPhotoRoute: PhotographyPhotoRoute,
   TagSlugRoute: TagSlugRoute,
   LabIndexRoute: LabIndexRoute,
   PhotographyIndexRoute: PhotographyIndexRoute,
-  LabCo2IndexRoute: LabCo2IndexRoute,
   LabGenArtGalleryIndexRoute: LabGenArtGalleryIndexRoute,
   LabOnsLandIndexRoute: LabOnsLandIndexRoute,
   LabPrognosis2100IndexRoute: LabPrognosis2100IndexRoute,

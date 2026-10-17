@@ -13,14 +13,15 @@ export const Route = createFileRoute('/sitemap.xml')({
         const posts = getPosts();
         const photos = await photosPromise;
 
-        const pages = ['', 'lab', 'photography'];
+        const pages = ['', 'lab', 'talks', 'photography'];
 
         const staticUrls = pages.map((page) => `<url><loc>${BASE_URL}/${page}</loc></url>`).join('\n  ');
 
         const postUrls = posts
           .map((post) => {
             const lastmod = new Date(post.publishedAt).toISOString();
-            return `<url><loc>${BASE_URL}/lab/${post.slug}</loc><lastmod>${lastmod}</lastmod></url>`;
+            const path = post.url?.startsWith('/') ? post.url : `/lab/${post.slug}`;
+            return `<url><loc>${BASE_URL}${path}</loc><lastmod>${lastmod}</lastmod></url>`;
           })
           .join('\n  ');
 

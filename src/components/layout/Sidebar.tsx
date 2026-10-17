@@ -1,65 +1,61 @@
-import { Link } from '@tanstack/react-router';
-
-import { ThemeToggleText } from '#/components/theme/ThemeToggleText';
-import { cx } from '#/lib/clsx';
+import { useState } from 'react';
+import { Link, useRouterState } from '@tanstack/react-router';
 import { navItems, useIsActive } from '#/lib/navigation';
-
-import avatarUrl from '../../assets/avatar.jpg?url';
+import { ThemeToggleText } from '../theme/ThemeToggleText';
 
 export function Sidebar() {
   const isActive = useIsActive();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const [openPath, setOpenPath] = useState<string>();
+  const expanded = openPath === pathname;
 
   return (
-    <aside className="hidden w-[200px] flex-shrink-0 md:block">
-      <div className="sticky top-20">
-        {/* Logo and Name */}
-        <div className="mb-8 pl-8">
-          <Link to="/">
-            <span className="profile-avatar-shell inline-block">
-              <img
-                alt="Koen van Gilst"
-                height={48}
-                width={48}
-                src={avatarUrl}
-                fetchPriority="high"
-                className="rounded-full grayscale-10 filter hover:grayscale-0"
-              />
-            </span>
-          </Link>
-        </div>
-
-        {/* Navigation */}
-        <div className="flex flex-col items-start">
-          <nav aria-label="Main navigation">
-            <ul className="flex flex-col items-start">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    to={item.href}
-                    search={{} as never}
-                    params={{} as never}
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={cx(
-                      'flex items-center py-1 pl-3 text-sm font-medium whitespace-nowrap transition-opacity',
-                      isActive(item.href)
-                        ? 'text-primary dark:text-primary'
-                        : 'text-gray-800 hover:opacity-70 dark:text-gray-300'
-                    )}
-                  >
-                    <span className={cx('mr-2 w-2', isActive(item.href) ? 'animate-blink text-primary' : 'invisible')}>
-                      &gt;
-                    </span>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className="mt-6 pl-6">
-            <ThemeToggleText />
-          </div>
-        </div>
+    <aside className="site-colophon">
+      <Link to="/" className="site-signature" aria-label="Koen van Gilst" onClick={() => setOpenPath(undefined)}>
+        <img src="/avatar.jpg" alt="" width={48} height={48} className="signature-portrait" />
+      </Link>
+      <div className="site-theme">
+        <ThemeToggleText />
       </div>
+      <button
+        type="button"
+        className="site-menu"
+        aria-label={expanded ? 'Close navigation' : 'Open navigation'}
+        aria-expanded={expanded}
+        aria-controls="main-navigation"
+        onClick={() => setOpenPath(expanded ? undefined : pathname)}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+        >
+          {expanded ? <path d="m6 6 12 12M6 18 18 6" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+        </svg>
+      </button>
+      <nav id="main-navigation" aria-label="Main navigation" className={expanded ? 'is-expanded' : undefined}>
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            to={item.href}
+            search={{} as never}
+            params={{} as never}
+            onClick={() => setOpenPath(undefined)}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {isActive(item.href) && (
+              <span className="nav-active-marker" aria-hidden="true">
+                &gt;
+              </span>
+            )}
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </aside>
   );
 }

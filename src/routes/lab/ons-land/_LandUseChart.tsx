@@ -4,12 +4,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 
 import type { ExtendedFeature, ExtendedFeatureCollection } from 'd3';
 
-const theme = {
-  textLight: '#f4f4f4',
-  textDark: '#0c3d0c',
-  bgLight: '#0c0c00',
-  bgDark: '#000000'
-};
+const theme = { bgLight: 'var(--page)' };
 
 const categories = [
   {
@@ -339,7 +334,7 @@ const LandUseChartComponent = () => {
             .attr('font-size', '12px')
             .append('xhtml:div')
             .html(
-              `Data: <a target="_blank" href="https://research.wur.nl/en/publications/landelijk-grondgebruiksbestand-nederland-2021-lgn2021-achtergrond" class="text-gray-300 underline underline-offset-2">WUR</a>`
+              `Data: <a target="_blank" href="https://research.wur.nl/en/publications/landelijk-grondgebruiksbestand-nederland-2021-lgn2021-achtergrond" class="content-link">WUR</a>`
             );
 
           svg
@@ -351,7 +346,7 @@ const LandUseChartComponent = () => {
             .attr('font-size', '12px')
             .append('xhtml:div')
             .html(
-              `| Code: <a target="_blank" href="https://github.com/vnglst/onsland" class="text-gray-300 underline underline-offset-2">Github</a>`
+              `| Code: <a target="_blank" href="https://github.com/vnglst/onsland" class="content-link">Github</a>`
             );
 
           svg
@@ -363,7 +358,7 @@ const LandUseChartComponent = () => {
             .attr('font-size', '12px')
             .append('xhtml:div')
             .html(
-              `Visualisation by <a target="_blank" href="https://koenvangilst.nl" class="text-gray-300 underline underline-offset-2">Koen van Gilst</a>`
+              `Visualisation by <a target="_blank" href="https://koenvangilst.nl" class="content-link">Koen van Gilst</a>`
             );
         })
         .catch((error) => console.error('Error loading or processing data:', error));
@@ -373,10 +368,10 @@ const LandUseChartComponent = () => {
   }, []);
 
   return (
-    <div className="mt-5 flex flex-col items-center justify-center rounded-md bg-gradient-to-b from-black to-[#02071d] p-5 text-gray-200">
+    <div className="land-use-chart">
       {isLoading && (
-        <div className="flex h-[800px] w-full items-center justify-center">
-          <div className="text-gray-400">Loading visualization...</div>
+        <div className="land-use-loading" role="status">
+          Loading visualization...
         </div>
       )}
       <svg

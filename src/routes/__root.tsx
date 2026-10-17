@@ -25,8 +25,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#f8fafc', media: '(prefers-color-scheme: light)' },
-      { name: 'theme-color', content: '#020617', media: '(prefers-color-scheme: dark)' },
       { title: 'Koen van Gilst - Principal Engineer' },
       {
         name: 'description',
@@ -113,27 +111,24 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full min-w-[360px] font-sans">
+    <html lang="en" suppressHydrationWarning className="h-full min-w-[320px] font-sans">
       <head>
+        <meta name="theme-color" content="#020617" suppressHydrationWarning />
         <HeadContent />
       </head>
-      <body className="bg-slate-50 text-gray-800 antialiased dark:bg-slate-950 dark:text-gray-100">
+      <body className="antialiased">
         <NavigationProgress />
         {/* Skip to main content for keyboard/screen reader users */}
-        <a
-          href="#content"
-          className="focus-visible:ring-primary absolute top-2 left-2 z-[100] -translate-y-20 rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 opacity-0 focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none dark:bg-slate-900 dark:text-white"
-        >
+        <a href="#content" className="skip-link">
           Skip to main content
         </a>
         {/* Inline theme detection to prevent FOUC — defaults to dark */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              const preferredTheme = localStorage.getItem('theme');
-              if (preferredTheme !== 'light') {
-                document.documentElement.classList.add('dark');
-              }
+              let preferredTheme = 'dark';
+              try { preferredTheme = localStorage.getItem('theme') || 'dark'; } catch {}
+              document.documentElement.classList.toggle('dark', preferredTheme !== 'light');
 
             `
           }}

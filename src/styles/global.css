@@ -10,9 +10,9 @@
 @import './theme.css';
 
 @theme {
-  --color-primary: #2196f3;
+  --color-primary: #1976d2;
 
-  /* Light blue palette - consistent with primary color */
+  /* Retained semantic chart and content colors. */
   --color-blue-300: #64b5f6;
   --color-blue-400: #42a5f5;
   --color-blue-500: #2196f3;
@@ -23,7 +23,6 @@
   --font-family-sans:
     var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
-  --font-family-nimbus: var(--font-nimbus), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -52,72 +51,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-nimbus), sans-serif;
-}
-
-.nimbus {
-  font-family: var(--font-nimbus), sans-serif;
-}
-
-.up-hover:hover {
-  transform: scale(1.02);
-}
-
-.up-hover {
-  transition: all 0.2s ease-in-out;
-}
-
-.profile-avatar-shell {
-  display: inline-block;
-}
-
-.profile-avatar-shell img {
-  transform-origin: center;
-  will-change: transform;
-}
-
-.profile-avatar-shell:hover img {
-  animation: profile-wiggle 780ms cubic-bezier(0.34, 1.56, 0.64, 1) 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .profile-avatar-shell:hover img {
-    animation: none;
-  }
-}
-
-@keyframes profile-wiggle {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  12% {
-    transform: rotate(-4deg);
-  }
-
-  24% {
-    transform: rotate(5deg);
-  }
-
-  36% {
-    transform: rotate(-3deg);
-  }
-
-  52% {
-    transform: rotate(3deg);
-  }
-
-  68% {
-    transform: rotate(-2deg);
-  }
-
-  84% {
-    transform: rotate(1deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
+  font-family: var(--font-display);
 }
 
 /* Remove Safari input shadow on mobile */
@@ -150,5 +84,7 @@ table {
 }
 
 ::-webkit-scrollbar-thumb:is(.dark *) {
-  background: linear-gradient(to bottom, var(--color-primary), black);
+  background: var(--color-primary);
 }
+
+@import './colophon.css';

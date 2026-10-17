@@ -11,7 +11,7 @@ export function WeatherHeatmap({ type }: { type: 'rain' | 'sunshine' | 'temperat
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
   if (error) return <div className="text-sm text-red-500">Failed to load heatmap data</div>;
-  if (!data) return <div className="aspect-[3/1] animate-pulse bg-gray-100 dark:bg-gray-800" />;
+  if (!data) return <div className="aspect-[3/1] animate-pulse bg-[var(--surface)]" />;
 
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;

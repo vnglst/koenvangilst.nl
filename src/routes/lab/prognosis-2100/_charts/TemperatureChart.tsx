@@ -14,12 +14,7 @@ export function TemperatureClient({ data, className }: TemperatureProps) {
   const { showPrognosis } = usePrognosisStore();
   const options = generateOptions(data, showPrognosis);
 
-  return (
-    <Chart
-      options={options}
-      className={`w-full overflow-hidden border border-dashed border-gray-400 dark:border-none ${className}`}
-    />
-  );
+  return <Chart options={options} className={`w-full overflow-hidden ${className}`} />;
 }
 
 function generateOptions(data: Data, showPrognosis: boolean) {
@@ -110,26 +105,7 @@ function generateOptions(data: Data, showPrognosis: boolean) {
 
           return {
             value,
-            itemStyle: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color
-                  },
-                  {
-                    offset: 1,
-                    color
-                  }
-                ]
-              },
-              borderRadius: value > 0 ? [15, 15, 0, 0] : [0, 0, 15, 15]
-            }
+            itemStyle: { color }
           };
         }),
         emphasis: {

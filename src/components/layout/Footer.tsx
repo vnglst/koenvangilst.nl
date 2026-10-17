@@ -1,25 +1,21 @@
-import { Icon } from '#/components/ui/Icon';
+import { Link } from '#/components/ui/Link';
 
 const footerLinks = [
   {
     href: 'https://bsky.app/profile/vnglst.bsky.social',
-    label: 'bluesky',
-    icon: 'bluesky' as const
+    label: 'bluesky'
   },
   {
     href: 'https://hachyderm.io/@vnglst',
-    label: 'mastodon',
-    icon: 'mastodon' as const
+    label: 'mastodon'
   },
   {
     href: 'https://github.com/vnglst',
-    label: 'github',
-    icon: 'github' as const
+    label: 'github'
   },
   {
     href: 'https://www.linkedin.com/in/vangilst/',
-    label: 'linkedin',
-    icon: 'linkedin' as const
+    label: 'linkedin'
   }
 ];
 
@@ -29,33 +25,28 @@ export function Footer() {
   const appVersion = import.meta.env.VITE_APP_VERSION as string | undefined;
 
   return (
-    <footer className="my-16 text-sm text-gray-400 md:w-9/12 dark:text-gray-500">
-      <div className="mb-2 flex justify-end space-x-2">
-        {footerLinks.map(({ href, label, icon }) => (
-          <a
-            key={href}
-            className="text-sm text-gray-400 transition hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-300"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={href}
-          >
-            <span className="sr-only">{label}</span>
-            <Icon icon={icon} className="h-[18px] w-[18px]" />
-          </a>
+    <footer className="site-footer">
+      <div className="site-footer-links">
+        {footerLinks.map(({ href, label }) => (
+          <Link key={href} href={href} variant="plain" externalIndicator={false}>
+            {label}
+          </Link>
         ))}
       </div>
-      <div className="flex items-center justify-between text-xs">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
         <div>© {currentYear} Koen van Gilst</div>
-        <div className="text-gray-400 dark:text-gray-600">
+        <div className="">
           v. {appVersion} |{' '}
-          <a
+          <Link
+            variant="plain"
+            externalIndicator={false}
             className="hover:underline"
             href={`https://github.com/vnglst/koenvangilst.nl/tree/${commitHash}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             {commitHash?.substring(0, 7) || 'no commit hash'}
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

@@ -1,17 +1,11 @@
 .footnotes {
   font-size: smaller;
-  color: #8b949e;
-  border-top: 1px solid #30363d;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
 }
 
 .footnotes li > p {
   margin-block: 0.25rem;
-}
-
-/* Hide footnote back links completely */
-.footnotes a[data-footnote-backref],
-.footnotes a.data-footnote-backref {
-  display: none;
 }
 
 /* Place `[` and `]` around footnote references. */

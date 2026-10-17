@@ -6,7 +6,6 @@
   "ignoreDependencies": ["@types/mdx", "husky"],
   "ignoreBinaries": ["srvx"],
   "ignoreIssues": {
-    "src/components/content/MDXComponent.tsx": ["exports"],
     "src/lib/og-image.mjs": ["exports", "duplicates"]
   }
 }

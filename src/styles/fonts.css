@@ -31,16 +31,15 @@
   src: url('/fonts/ibm-plex-sans-700.woff2') format('woff2');
 }
 
-/* Nimbus Sans */
+:root {
+  --font-sans: 'IBM Plex Sans';
+}
+
+/* Original display face, retained for the site's recognizable headings. */
 @font-face {
-  font-family: 'Nimbus Sans';
+  font-family: 'Nimbus Sans Extended';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url('/fonts/Nimbus-Sans-D-OT-Bold-Extended_32745.woff2') format('woff2');
-}
-
-:root {
-  --font-sans: 'IBM Plex Sans';
-  --font-nimbus: 'Nimbus Sans';
 }

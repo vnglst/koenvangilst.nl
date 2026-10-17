@@ -13,8 +13,8 @@ export type PhotoType = {
   blurDataURL: string;
 };
 
-const PHOTOS_DATA_URL = process.env.ZIPLINE_PHOTOS_DATA_URL || 'https://files.koenvangilst.nl/go/photos-data';
-const PHOTOS_MANIFEST_PATH = process.env.PHOTOS_MANIFEST_PATH;
+const PHOTOS_DATA_URL = process.env.ZIPLINE_PHOTOS_DATA_URL;
+const PHOTOS_MANIFEST_PATH = process.env.PHOTOS_MANIFEST_PATH || 'public/photos-data.json';
 const ZIPLINE_URL = 'https://files.koenvangilst.nl';
 
 const CACHE_TTL_MS = 5 * 1000; // 5 seconds
@@ -50,7 +50,7 @@ function normalizePhotoUrls(photos: PhotoType[]) {
 }
 
 async function fetchPhotosData(): Promise<PhotoType[]> {
-  if (PHOTOS_MANIFEST_PATH) {
+  if (!PHOTOS_DATA_URL || process.env.PHOTOS_MANIFEST_PATH) {
     try {
       const { readFile } = await import('node:fs/promises');
       return JSON.parse(await readFile(PHOTOS_MANIFEST_PATH, 'utf8')) as PhotoType[];
@@ -77,7 +77,7 @@ async function refreshPhotos(): Promise<PhotoType[]> {
     cachedPhotos = { data: photos, fetchedAt: Date.now() };
     return photos;
   } catch (err) {
-    console.warn('[photos] Failed to fetch photos-data from Zipline:', err);
+    console.warn('[photos] Failed to load photography manifest:', err);
     return cachedPhotos ? cachedPhotos.data : [];
   }
 }

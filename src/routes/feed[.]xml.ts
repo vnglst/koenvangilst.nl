@@ -21,7 +21,7 @@ export const Route = createFileRoute('/feed.xml')({
         posts.forEach((post) => {
           feed.item({
             title: post.title,
-            url: `https://koenvangilst.nl/lab/${post.slug}`,
+            url: `https://koenvangilst.nl${post.url?.startsWith('/') ? post.url : `/lab/${post.slug}`}`,
             date: post.publishedAt,
             description: post.summary
           });

@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createFileRoute, notFound, redirect } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { getMdxComponent } from '#/cms/mdx-parser';
 import { MarkdownLayout } from '#/components/content/MarkdownLayout';
@@ -12,6 +12,9 @@ const getLabPost = createServerFn({ method: 'GET' })
     const { getPost, getPosts } = await import('#/cms/posts-server');
     const post = getPost(data.slug);
     if (!post) throw notFound();
+    if (post.url?.startsWith('/') && post.url !== `/lab/${post.slug}`) {
+      throw redirect({ href: post.url, statusCode: 301 });
+    }
 
     const allPosts = getPosts();
     const currentIndex = allPosts.findIndex((p) => p.slug === data.slug);
@@ -24,8 +27,8 @@ const getLabPost = createServerFn({ method: 'GET' })
       summary: post.summary,
       publishedAt: post.publishedAt,
       readingTime: post.readingTime,
+      hasContent: post.hasContent,
       tags: post.tags,
-      tagsAsSlugs: post.tagsAsSlugs,
       image: post.image,
       url: post.url,
       // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
@@ -109,13 +112,21 @@ function PostPage() {
       />
       {Component && (
         <MarkdownLayout
-          publishedAt={postMeta.publishedAt}
-          title={postMeta.title}
-          readingTime={postMeta.readingTime}
-          tags={postMeta.tags}
-          path={`/lab/${postMeta.slug}`}
-          image={postMeta.image}
-          Component={Component}
+          post={postMeta}
+          Component={
+            !postMeta.hasContent
+              ? () => (
+                  <>
+                    <p>{postMeta.summary}</p>
+                    {postMeta.url && (
+                      <p>
+                        <a href={postMeta.url}>Visit project ↗</a>
+                      </p>
+                    )}
+                  </>
+                )
+              : Component
+          }
         />
       )}
     </>

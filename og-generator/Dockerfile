@@ -1,4 +1,4 @@
-FROM node:26-alpine
+FROM node:26.12.0-alpine
 
 WORKDIR /app
 
@@ -12,7 +12,8 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY scripts/generate-og-images.mjs ./scripts/generate-og-images.mjs
 COPY src/lib/og-image.mjs ./src/lib/og-image.mjs
 COPY content ./content
-COPY public/fonts/IBMPlexSans-Bold.ttf ./public/fonts/IBMPlexSans-Bold.ttf
+COPY public/fonts/IBMPlexSans-Regular.ttf ./public/fonts/IBMPlexSans-Regular.ttf
+COPY public/fonts/NimbusSansExtended-Bold.otf ./public/fonts/NimbusSansExtended-Bold.otf
 COPY public/avatar.jpg ./public/avatar.jpg
 
 CMD ["node", "scripts/generate-og-images.mjs"]

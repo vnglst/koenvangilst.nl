@@ -1,0 +1,49 @@
+/* Familiar, refined: shared theme, type and spacing foundations. */
+:root {
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --mobile-gutter: var(--space-6);
+  --navigation-gap: var(--space-7);
+  --control-target: 44px;
+  --reading-width: 640px;
+  --intro-width: 640px;
+  --viewer-page: #090909;
+  --viewer-ink: #f4f4f1;
+  --viewer-muted: #c5c5be;
+  --viewer-overlay: rgb(9 9 9 / 78%);
+  --page: #ffffff;
+  --ink: #111827;
+  --muted: #4b5563;
+  --line: #d1d5db;
+  --surface: #eef2f6;
+  --accent: #1565c0;
+  --control-line: #7c8898;
+  --action: #1565c0;
+  --action-hover: #0d47a1;
+  --font-display: 'Nimbus Sans Extended', var(--font-sans), sans-serif;
+  --type-body: 17px;
+  --leading-body: 28px;
+  --type-summary: 16px;
+  --type-caption: 13px;
+  color-scheme: light;
+}
+:root.dark {
+  --page: #020617;
+  --ink: #e5e7eb;
+  --muted: #9ca3af;
+  --line: #1e293b;
+  --surface: #111827;
+  --accent: #42a5f5;
+  --control-line: var(--line);
+  --action: #1976d2;
+  --action-hover: #1565c0;
+  color-scheme: dark;
+}

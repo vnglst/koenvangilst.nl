@@ -26,7 +26,7 @@ When suggesting solutions or improvements, prioritize self-hosted, open-source a
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
-- **Server**: Node.js 26 on Hetzner CX33 (x86_64) via Docker + Coolify
+- **Server**: Node.js 26.12 on Hetzner CX33 (x86_64) via Docker + Coolify
 - **Reverse Proxy**: Nginx (serves static assets, rate-limiting, security headers, health checks)
 
 ## Project Structure
@@ -123,13 +123,19 @@ Per-post custom React components live in `content/[slug]/` (e.g. `GrowingVines.t
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **LLM Honeypot**: Tracks when AI models access site content via `/llm-context`
 
+### Design reference
+
+Use `/design-system` for the live component reference and [docs/design-system.md](docs/design-system.md) for the few implementation decisions that are not apparent from the components and styles.
+
 ### Photography Sync
+
+Local previews read `public/photos-data.json` by default, using the same photo mirror as development. `PHOTOS_MANIFEST_PATH` overrides this in production or tests. A remote manifest is used only when `ZIPLINE_PHOTOS_DATA_URL` is explicitly configured.
 
 Photography delivery is handled by the `zipline-sync/` service in the same Docker Compose app as the website. Original uploads live in Zipline's `photography-originals` folder, the sync job downloads those originals, generates hashed JPEG/WebP variants plus a `photos-data.json` manifest into the shared `photography-data` volume, and Nginx serves the optimized files from `/photos/*` with immutable cache headers. The website reads the local manifest from `/data/photography/photos-data.json`, so the gallery keeps serving the last successful sync if Zipline is down.
 
 ### Open Graph Image Generation
 
-Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic OG fallback image with the site title and avatar, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
+Open Graph images are generated after deployment by the one-shot `og-generator` service. It starts after the website health check succeeds, renders only missing content-addressed images, writes them to the persistent `og-data` volume, and exits. Nginx serves completed images from `/og/*` with immutable cache headers. While a new image is still being generated, Nginx returns a generic refined OG fallback image with the site title, served with `Cache-Control: no-store` so crawlers can retry the same URL later.
 
 The volume manifest and hashed PNG files persist across deployments. Existing files are deliberately retained because previously published OG URLs must remain valid. Prune the volume manually only when old URLs no longer need to work. In Coolify versions that include stopped one-shot services in application health evaluation, mark `og-generator` as excluded from health checks in the Coolify service settings.
 
@@ -167,8 +173,8 @@ Visit `http://localhost:3000` to see the site in development mode.
 npm run dev          # Start Vite, OG watcher, and periodic photo sync (port 3000)
 npm run sync:photos  # Refresh the local photography mirror once
 npm run build        # Production build → dist/
-npm run start        # Run built server: srvx --entry dist/server/server.js
-npm run preview      # Preview production build locally
+npm run start        # Serve the production build and static assets (port 3000)
+npm run preview      # Serve the production build on localhost (port 3000)
 npm run type-check   # Oxlint TypeScript 7 type-check
 npm run lint         # Oxlint + TypeScript 7 type-aware rules
 npm run format       # Prettier + Oxlint auto-fix
@@ -217,11 +223,15 @@ To smoke-test the production photography container against Zipline, run `npm run
 
 Use the Playwright suite as a required regression check when a change affects multiple user flows.
 
+After website changes, leave a local development environment or production preview running and provide direct links to the pages changed and checked, so the result is easy to verify.
+
 **Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (Oxlint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
 ## Updating Dependencies
 
 The project pins exact versions and uses npm's `min-release-age` protection (currently 2 days). The latest published versions may be newer than that window, so installs may need a temporary override.
+
+The scoped `postcss-selector-parser` override patches Tailwind Typography's build-time dependency until its upstream pin is updated.
 
 1. **Root dependencies**: run the updater script.
 
@@ -378,7 +388,6 @@ function MarkdownLayoutSkeleton() {
 - `src/routes/index.tsx` — home page
 - `src/routes/lab/index.tsx` — blog/lab listing with `q` search param (client-side filter)
 - `src/routes/lab/$slug.tsx` — individual MDX posts
-- `src/routes/lab/co2/` — live CO2 monitor dashboard (SWR polling)
 - `src/routes/lab/gen-art-gallery/` — generative art iframe gallery
 - `src/routes/lab/ons-land/` — D3 land-use hexbin chart
 - `src/routes/lab/prognosis-2100/` — ECharts climate dashboard
@@ -420,7 +429,7 @@ These are baked in at build time, not runtime env vars.
 ### Deployment Target
 
 - **Architecture**: linux/amd64 (Hetzner CX33 is x86_64, NOT ARM)
-- **Base images**: Use `node:26-alpine` for production builds
+- **Base images**: Use `node:26.12.0-alpine` for production builds
 - **Build optimization**: BuildKit cache mounts are configured for Vite build cache
 
 ### Coolify Configuration

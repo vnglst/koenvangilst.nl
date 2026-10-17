@@ -1,3 +1,4 @@
+import { BackToLab } from '#/components/layout/BackToLab';
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
@@ -7,94 +8,56 @@ import { Container } from '../layout/Container';
 import { Link } from '../ui/Link';
 import { TagLink } from '../ui/Tag';
 import { ArticleMetadata } from './ArticleMetadata';
-import { Heading } from './Heading';
 import { MDXComponent } from './MDXComponent';
 import { Prose } from './Prose';
+import { PageHeader } from '../layout/PageHeader';
+import { TextSkeleton } from './LoadingState';
+import { ContentImage } from './ContentImage';
 
 type Props = {
-  publishedAt: string;
-  title: string;
-  readingTime: PostType['readingTime'];
-  tags?: string[];
-  path: string;
-  image?: {
-    alt: string;
-    src: string;
-    width: number;
-    height: number;
-    showAsHeader?: boolean;
-  };
+  post: Pick<PostType, 'slug' | 'title' | 'publishedAt' | 'readingTime' | 'tags' | 'image'>;
   Component: React.ComponentType;
 };
 
-export function MarkdownLayout({ publishedAt, title, readingTime, tags, path, image, Component }: Props) {
+export function MarkdownLayout({ post, Component }: Props) {
+  const { slug, title, publishedAt, readingTime, tags, image } = post;
   return (
-    <Container>
-      <article className="w-full max-w-[700px]">
-        <header>
-          <Heading level={1}>{title}</Heading>
-          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.text} />
-          {tags && tags.length > 0 && (
-            <ul className="my-4 flex w-full flex-wrap gap-2">
-              {tags.map((tag: string) => (
+    <Container layout="reading">
+      <article className="reading-column blog-article">
+        <BackToLab />
+        <PageHeader title={title}>
+          <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.minutes > 0 ? readingTime.text : ''} />
+
+        </PageHeader>
+        {image?.showAsHeader && (
+          <ContentImage
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading="eager"
+            fetchPriority="high"
+            className="article-cover"
+          />
+        )}
+        <Prose as="div" className="article-body">
+          <Suspense fallback={<TextSkeleton />}>
+            <MDXComponent Component={Component} />
+          </Suspense>
+        </Prose>
+        <footer className="article-footer">
+          {tags.length > 0 && (
+            <ul className="article-tags" aria-label="Article topics">
+              {tags.map((tag) => (
                 <li key={tag}>
                   <TagLink href={`/tag/${sluggify(tag)}`}>{tag}</TagLink>
                 </li>
               ))}
             </ul>
           )}
-          {image && image.showAsHeader && (
-            <img
-              alt={image.alt}
-              src={image.src}
-              width={image.width}
-              height={image.height}
-              fetchPriority="high"
-              className="my-5 inline-block rounded-lg"
-            />
-          )}
-        </header>
-        <Prose as="section">
-          <Suspense
-            fallback={
-              <div className="animate-pulsing-delayed w-full">
-                <div className="mb-4 space-y-3">
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
-                </div>
-                <div className="space-y-3">
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 rounded bg-gray-200 dark:bg-gray-800" />
-                  <div className="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800" />
-                </div>
-              </div>
-            }
-          >
-            <MDXComponent Component={Component} />
-          </Suspense>
-        </Prose>
-        <footer className="mt-8 text-sm text-gray-700 dark:text-gray-300">
-          <Link href={getEditUrl(path)} className="font-normal">
-            Edit on GitHub
-          </Link>
+          <Link href={`https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`}>Edit on GitHub</Link>
         </footer>
       </article>
     </Container>
   );
-}
-
-const GITHUB_REPO = 'https://github.com/vnglst/koenvangilst.nl';
-
-function getEditUrl(path: string) {
-  const slug = path.split('/').pop();
-  return `${GITHUB_REPO}/edit/main/content/${slug}.mdx`;
 }

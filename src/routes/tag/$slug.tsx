@@ -1,6 +1,9 @@
+import { BackToLab } from '#/components/layout/BackToLab';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 
+import { PageHeader } from '#/components/layout/PageHeader';
+import { Text } from '#/components/ui/Text';
 import { Heading } from '#/components/content/Heading';
 import { Container } from '#/components/layout/Container';
 import { BlogPostLink } from '#/components/ui/PostLink';
@@ -70,16 +73,17 @@ function TagPage() {
           )
         }}
       />
-      <Heading level={1}>Posts about {tag}</Heading>
+      <BackToLab />
+      <PageHeader title={`Posts about ${tag}`} />
       <section className="mb-4 flex w-full flex-col gap-6">
-        <p className="mt-6 text-gray-600 dark:text-gray-400">
+        <Text tone="muted" className="mt-6">
           There are <b>{posts.length} post(s)</b> about the topic {tag}.
-        </p>
+        </Text>
         {posts.map((post) => (
           <BlogPostLink key={post.title} {...post} />
         ))}
       </section>
-      <section className="mt-8 text-sm text-gray-700 dark:text-gray-300">
+      <section className="mt-8 text-sm text-[var(--muted)]">
         <Heading level={2}>Other tags</Heading>
         <ul className="flex w-full flex-wrap gap-3">
           {uniqueTags.map((t) => (

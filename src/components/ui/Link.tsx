@@ -9,6 +9,8 @@ type BaseProps = {
   href: string;
   children: React.ReactNode;
   className?: string;
+  variant?: 'content' | 'plain';
+  externalIndicator?: boolean;
 };
 
 type LinkProps = BaseProps & Omit<ComponentProps<'a'>, keyof BaseProps>;
@@ -39,11 +41,19 @@ function ExternalLinkContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Link({ href, children, className, target, rel, ...props }: LinkProps) {
+export function Link({
+  href,
+  children,
+  className,
+  target,
+  rel,
+  variant = 'content',
+  externalIndicator = true,
+  ...props
+}: LinkProps) {
   const isExternal = href && href.startsWith('http');
 
-  const variantClasses =
-    'underline font-bold text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400';
+  const variantClasses = variant === 'content' ? 'content-link' : 'plain-link';
 
   const combinedClassName = cx(variantClasses, className);
 
@@ -56,13 +66,29 @@ export function Link({ href, children, className, target, rel, ...props }: LinkP
         className={cx(combinedClassName, 'break-words')}
         {...props}
       >
-        <ExternalLinkContent>{children}</ExternalLinkContent>
+        {externalIndicator ? <ExternalLinkContent>{children}</ExternalLinkContent> : children}
+      </a>
+    );
+  }
+
+  if (href.startsWith('#') || /^(mailto:|tel:)/.test(href)) {
+    return (
+      <a href={href} className={combinedClassName} target={target} rel={rel} {...props}>
+        {children}
       </a>
     );
   }
 
   return (
-    <RouterLink to={href} search={{} as never} params={{} as never} className={combinedClassName}>
+    <RouterLink
+      to={href}
+      search={{} as never}
+      params={{} as never}
+      className={combinedClassName}
+      target={target}
+      rel={rel}
+      {...props}
+    >
       {children}
     </RouterLink>
   );
