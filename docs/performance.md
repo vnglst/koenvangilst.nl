@@ -44,5 +44,5 @@ The performance spec attaches JSON measurements for each route. It limits the da
 
 - Type checking, lint, all 46 unit tests, Knip, changed-file formatting and whitespace checks pass.
 - All four performance budgets and all three layout-shift checks pass against the production preview. Climate article heatmaps and chart typography checks pass at phone and desktop widths.
-- Full Docker/Nginx suite: 91 passed, 5 skipped, 1 failed. The failing test is `Prognosis updates all three charts and restores them at 390px`, which compares restored canvas pixels. The same restoration assertion fails on unchanged source; both widths failed in the isolated Node baseline run. No assertion was weakened to hide it.
+- Full Docker/Nginx suite: 91 passed, 5 skipped, 1 failed. The failing test is `Prognosis updates all three charts and restores them at 390px`, which compares restored canvas pixels. The same restoration assertion fails on unchanged source; a fresh unchanged Node preview reproduced the 390px failure while the 1440px case passed. No assertion was weakened to hide it.
 - A full Node-preview suite was stopped after missing local photography data caused unrelated failures. The Docker run supplies photography fixtures and passes those flows, including keyboard navigation, deep links and swipe navigation.
