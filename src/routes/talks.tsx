@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Container } from '#/components/layout/Container';
 import { PageHeader } from '#/components/layout/PageHeader';
 import { Heading } from '#/components/content/Heading';
+import { ContentImage } from '#/components/content/ContentImage';
 
 const talks = [
   {
@@ -50,6 +51,16 @@ function Talks() {
   return (
     <Container>
       <PageHeader title="Talks" />
+      <ContentImage
+        src="/static/images/frontmania-2026-tetris.jpg"
+        alt="Speaking at Frontmania with a colourful Tetris game projected behind me"
+        width={2048}
+        height={1413}
+        loading="eager"
+        fetchPriority="high"
+        className="w-full"
+        label="Frontmania, October 2026."
+      />
       <ol className="talk-list">
         {talks.map((talk) => (
           <li key={talk.date}>
