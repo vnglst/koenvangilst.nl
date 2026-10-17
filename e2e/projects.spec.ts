@@ -16,7 +16,7 @@ test.describe('flagship lab projects', () => {
     await expect(page).toHaveURL(/\/lab$/);
   });
 
-  test('Ons Land renders its explainer content', async ({ page }) => {
+  test('Ons Land renders its map and supports category selection and clearing', async ({ page }) => {
     await page.goto('/lab/ons-land');
 
     await expect(page).toHaveTitle(/Ons Land/i);
@@ -32,6 +32,14 @@ test.describe('flagship lab projects', () => {
     await expect(chart.locator('.hexagon').first()).toBeVisible({ timeout: 20_000 });
     const after = await chart.boundingBox();
     expect(Math.abs(after!.height - before!.height)).toBeLessThan(1);
+    await chart.locator('.hexagon').first().click();
+    const dimmedCategories = chart.locator('.legend-item[opacity="0.4"]');
+    await expect.poll(() => dimmedCategories.count()).toBeGreaterThan(0);
+    await page.mouse.move(0, 0);
+    await expect.poll(() => dimmedCategories.count()).toBeGreaterThan(0);
+    await page.getByRole('heading', { level: 1 }).click();
+    await expect(dimmedCategories).toHaveCount(0);
+    await expect(chart.locator('.hexagon[stroke-width="1"]')).toHaveCount(0);
   });
 
   test('generative art gallery exposes project navigation', async ({ page }) => {

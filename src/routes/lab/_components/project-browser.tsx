@@ -56,13 +56,10 @@ function TagFilter({ currentQuery, tags }: TagFilterProps) {
 
   const handleTagClick = (tag: { label: string; query: string }) => (e: React.MouseEvent) => {
     e.preventDefault();
-    const isActive = currentQuery === tag.query;
-
-    if (isActive) {
-      void navigate({ to: '/lab', search: { ...search, q: undefined } });
-    } else {
-      void navigate({ to: '/lab', search: { ...search, q: tag.query } });
-    }
+    void navigate({
+      to: '/lab',
+      search: { ...search, q: currentQuery === tag.query || !tag.query ? undefined : tag.query }
+    });
   };
 
   return (

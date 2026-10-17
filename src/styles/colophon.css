@@ -119,8 +119,7 @@ h6 {
 .site-colophon nav a:hover {
   color: var(--accent);
 }
-.site-colophon nav a[aria-current='page']::before {
-  content: '>';
+.site-colophon .nav-active-marker {
   position: absolute;
   left: -18px;
 }
@@ -866,8 +865,8 @@ html:has(.photo-viewer) {
   .site-colophon nav.is-expanded {
     display: grid;
   }
-  .site-colophon nav a[aria-current='page']::before {
-    content: none;
+  .site-colophon .nav-active-marker {
+    display: none;
   }
   .editorial-heading-1 {
     font-size: 28px;

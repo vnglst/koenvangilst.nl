@@ -82,3 +82,29 @@ test.describe('dates across time zones', () => {
     expect(errors).toEqual([]);
   });
 });
+
+test('mobile thumbnails open the viewer and swipe navigation returns to the collection', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/photography');
+  await page.locator('.photo-grid button').first().click();
+  await expect(page).toHaveURL(/\/photography\/13$/);
+  await expect(page.getByRole('button', { name: 'Previous photograph' })).toBeDisabled();
+  for (const [fromX, toX, id] of [
+    [300, 100, 14],
+    [100, 300, 13]
+  ]) {
+    await page.locator('.photo-slide').evaluate(
+      (element, { fromX, toX }) => {
+        const start = new Touch({ identifier: 1, target: element, clientX: fromX, clientY: 400 });
+        const end = new Touch({ identifier: 1, target: element, clientX: toX, clientY: 400 });
+        element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [start] }));
+        element.dispatchEvent(new TouchEvent('touchend', { bubbles: true, changedTouches: [end] }));
+      },
+      { fromX, toX }
+    );
+    await expect(page).toHaveURL(new RegExp(`/photography/${id}$`));
+  }
+  await page.getByRole('button', { name: /Back/ }).click();
+  await expect(page).toHaveURL(/\/photography$/);
+  await expect(page.locator('.photo-grid button')).toHaveCount(3);
+});

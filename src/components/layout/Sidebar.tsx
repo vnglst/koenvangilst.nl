@@ -47,6 +47,11 @@ export function Sidebar() {
             onClick={() => setOpenPath(undefined)}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
+            {isActive(item.href) && (
+              <span className="nav-active-marker" aria-hidden="true">
+                &gt;
+              </span>
+            )}
             {item.label}
           </Link>
         ))}

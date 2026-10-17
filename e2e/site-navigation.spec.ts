@@ -21,3 +21,27 @@ test.describe('site shell', () => {
     await expect(page.getByRole('link', { name: /return home/i })).toBeVisible();
   });
 });
+
+for (const width of [390, 1440]) {
+  test(`main navigation connects About, Lab, Photography and Talks at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await expect(page.locator('main')).toContainText("I'm a software engineer with a philosophy degree");
+    await page.locator('.recent-entry a').first().click();
+    await expect(page.locator('.article-body')).not.toBeEmpty();
+    for (const [label, destination, heading] of [
+      ['Lab', '/lab', 'Articles & Experiments'],
+      ['Photography', '/photography', 'Photography'],
+      ['Talks', '/talks', 'Talks'],
+      ['About', '/', 'Koen van Gilst']
+    ]) {
+      if (width < 768) await page.getByRole('button', { name: 'Open navigation' }).click();
+      const navigation = page.getByRole('navigation', { name: 'Main navigation', includeHidden: true });
+      await navigation.getByRole('link', { name: label, exact: true }).click();
+      await expect(page).toHaveURL(new URL(destination, page.url()).href);
+      await expect(page.getByRole('heading', { level: 1, name: heading, exact: true })).toBeVisible();
+      await expect(navigation.locator(`a[href="${destination}"]`)).toHaveAttribute('aria-current', 'page');
+      if (width < 768) await expect(navigation).toBeHidden();
+    }
+  });
+}
