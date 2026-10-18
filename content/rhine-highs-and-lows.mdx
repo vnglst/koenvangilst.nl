@@ -23,7 +23,8 @@ I vividly remember the flood of 1995, when around 250,000 people had to be evacu
     <>
       High water on the Lek near Lekdijk 40 in Everdingen, my home at the time of the 1995 flood.
       <sup>
-        <a href="#user-content-fn-1" aria-label="See photo credit">
+        <a href="https://www.culemborgsecourant.nl/nieuws/nieuws/413452/deel-uw-persoonlijke-verhaal-over-hoge-water-en-evacuatie-199"
+          aria-label="Photo: © Fotografie George Burggraaff, 2007, published by the Culemborgse Courant">
           1
         </a>
       </sup>
@@ -31,30 +32,8 @@ I vividly remember the flood of 1995, when around 250,000 people had to be evacu
   }
 />
 
-<p className="sr-only">Photo credit[^1]</p>
+I wanted to know whether my memory corresponded with the historical records. Is high water in the Rhine now less frequent and are lower water levels occurring more often? I downloaded and visualised the data to see if those patterns are really emerging.
 
-I wanted to know whether my memory matched the historical record. Has the Rhine shifted from frequent high water to lower levels? I downloaded the data to see what patterns might emerge.
-
-Each line below shows one year at Lobith, from January to December. The record begins in 1901. As new years appear, older ones recede. At the end, the field rotates to reveal the full landscape over time.
+Each line below shows one year at Lobith, from January to December. The record begins in 1901. As new years appear, older ones go to the background. At the end, the field rotates to reveal the full landscape over time.
 
 <RhineYearField />
-
-## Flow and water level
-
-**River flow**, technically called discharge, is the volume of water passing Lobith each second. It reveals recurring winter peaks, summer lows, floods and droughts.
-
-**Water level** is the height of the water surface relative to a fixed reference point. It depends on flow, but also on the shape and depth of the channel.
-
-The river bed near Lobith has gradually eroded. River engineering made the channel narrower and fixed it in place, while less sediment arrives to replace what the current carries away. As the bed sinks, the water surface also sits lower, even when the same volume of water passes Lobith. [Research into the Dutch Rhine branches](https://research.tudelft.nl/files/84190833/YllaArbos_etal_2020_RiverFlow.pdf) documents this long-term change in bed level.
-
-In both panels, color compares each day with the historical average for that time of year. Blue is below average, grey is close to it and orange is above it, with the outer shades reserved for the most extreme days. Matching ridges represent the same dates and years.
-
-One difference stands out. On days when flow was between 1,800 and 2,200 m³/s, the median water level fell from 1,110 cm NAP in 1901-1920 to 908 cm NAP in 2006-2025. That is about two metres lower for a comparable flow.
-
-This changes how the record should be read. Water level combines changes in flow with changes in the river itself, so a downward trend does not necessarily mean less water is passing Lobith. The relationship between water level and flow must therefore be recalibrated as the channel changes, as reflected in Rijkswaterstaat's periodically updated [water-level and flow relationships](https://open.rijkswaterstaat.nl/@261541/betrekkingslijnen-rijntakken-versie-2022/). For comparing water quantity over time, river flow is the more reliable signal.
-
-## Data
-
-The daily record runs from 1901 through 2025, plus 2026 through the latest observation. The source is [Rijkswaterstaat WaterWebservices](https://rijkswaterstaatdata.nl/waterdata/) at Lobith. Flow uses daily discharge values. Water level is measured in centimetres relative to the national reference datum, NAP, and averaged by day when multiple observations are available.
-
-[^1]: Photo: © Fotografie George Burggraaff, 2007, as published by the [Culemborgse Courant](https://www.culemborgsecourant.nl/nieuws/nieuws/413452/deel-uw-persoonlijke-verhaal-over-hoge-water-en-evacuatie-199).
