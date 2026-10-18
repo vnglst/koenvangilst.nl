@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import { cx } from '#/lib/clsx';
 
 type ProseProps = {
-  as?: 'article' | 'section';
+  as?: 'article' | 'section' | 'div';
   className?: string;
 };
 

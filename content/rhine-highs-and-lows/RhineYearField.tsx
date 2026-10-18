@@ -142,6 +142,20 @@ function getYearGeometry(record: YearRecord, measure: Measure, palette: RhinePal
   return { segments, totalLength: segments.reduce((total, segment) => total + segment.length, 0) };
 }
 
+// Three.js objects are mutable scene resources, updated after React renders.
+function updateLineAppearance(line: Line2, visibleSegments: number, opacity: number, width: number, renderOrder: number) {
+  line.geometry.instanceCount = visibleSegments;
+  line.visible = line.geometry.instanceCount > 0;
+  line.material.opacity = opacity;
+  line.material.uniforms.linewidth.value = width;
+  line.renderOrder = renderOrder;
+}
+
+function updateCameraZoom(camera: THREE.OrthographicCamera, zoom: number) {
+  camera.zoom = zoom;
+  camera.updateProjectionMatrix();
+}
+
 function ThickLine({
   data,
   visibleLength,
@@ -184,11 +198,7 @@ function ThickLine({
     ) {
       visibleSegments += 1;
     }
-    geometry.instanceCount = visibleSegments;
-    line.visible = visibleSegments > 0;
-    material.opacity = opacity;
-    material.uniforms.linewidth.value = width;
-    line.renderOrder = renderOrder;
+    updateLineAppearance(line, visibleSegments, opacity, width, renderOrder);
     invalidate();
   }, [data.distances, geometry, invalidate, line, material, opacity, renderOrder, visibleLength, width]);
 
@@ -241,13 +251,14 @@ function YearLine({
       ? handoffWidth + (1.9 - handoffWidth) * drawProgress
       : 1.9;
   const targetLength = isNewest ? geometryData.totalLength * drawProgress : geometryData.totalLength;
-  let traversedLength = 0;
 
   return (
     <group position={[0, 0, z]}>
       {geometryData.segments.map((segment, segmentIndex) => {
+        const traversedLength = geometryData.segments
+          .slice(0, segmentIndex)
+          .reduce((total, previous) => total + previous.length, 0);
         const visibleLength = Math.max(0, Math.min(segment.length, targetLength - traversedLength));
-        traversedLength += segment.length;
         return (
           <ThickLine
             key={`${record.year}-${segmentIndex}`}
@@ -307,8 +318,7 @@ function CameraRig({
   useEffect(() => {
     const fittedWidth = Math.max(8.6, projectedSize.width + 0.8);
     const fittedHeight = Math.max(6.3, projectedSize.height + 0.8);
-    camera.zoom = Math.min(size.width / fittedWidth, size.height / fittedHeight);
-    camera.updateProjectionMatrix();
+    updateCameraZoom(camera, Math.min(size.width / fittedWidth, size.height / fittedHeight));
     invalidate();
   }, [camera, invalidate, projectedSize.height, projectedSize.width, size.height, size.width]);
 
