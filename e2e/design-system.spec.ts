@@ -23,6 +23,17 @@ for (const width of [390, 1440]) {
     await expect(page.getByRole('checkbox', { name: 'Show implementation notes' })).toBeChecked();
     await expect(page.getByText('Reuse the existing Toggle component.')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Unavailable', exact: true })).toBeDisabled();
+    const exampleYear = page.getByRole('slider', { name: 'Example year:' });
+    await exampleYear.press('Home');
+    await exampleYear.press('ArrowRight');
+    await expect(exampleYear).toHaveValue('1902');
+    await expect(page.getByText('Example year: 1902', { exact: true })).toBeVisible();
+    await page.getByRole('combobox', { name: 'Example playback speed' }).selectOption('4');
+    await expect(page.getByRole('combobox', { name: 'Example playback speed' })).toHaveValue('4');
+    const view = page.getByRole('group', { name: 'Example chart view' });
+    await view.getByRole('button', { name: 'Landscape' }).click();
+    await expect(view.getByRole('button', { name: 'Landscape' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(view.getByRole('button', { name: 'Front view' })).toHaveAttribute('aria-pressed', 'false');
     const exampleNavigation = page.getByRole('navigation', { name: 'Library gallery example' });
     await expect(exampleNavigation.getByRole('button', { name: 'Previous example' })).toBeDisabled();
     await exampleNavigation.getByRole('button', { name: 'Next example' }).click();
@@ -45,5 +56,25 @@ for (const width of [390, 1440]) {
       .click();
     await expect(page.getByText('Recent articles')).toBeVisible();
     await expect(page.locator('.signature-portrait')).toHaveCSS('width', width < 768 ? '36px' : '48px');
+  });
+}
+
+for (const theme of ['dark', 'light']) {
+  test(`select picker supports keyboard selection in ${theme} mode`, async ({ page }) => {
+    await page.setViewportSize({ width: 700, height: 800 });
+    await page.goto('/design-system');
+    if (theme === 'light') await page.getByRole('button', { name: 'Switch to light mode' }).click();
+    const select = page.getByRole('combobox', { name: 'Example playback speed' });
+    await select.scrollIntoViewIfNeeded();
+    await select.press('Space');
+    const option = page.getByRole('option', { name: '4×', exact: true });
+    await expect(option).toBeVisible();
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await expect(select).toHaveValue('4');
+    await select.press('Space');
+    await page.screenshot({ path: `output/select-refined-${theme}.png` });
+    await page.keyboard.press('Escape');
+    await expect(select).toBeFocused();
   });
 }

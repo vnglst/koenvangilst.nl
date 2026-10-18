@@ -1,0 +1,39 @@
+---
+title: The highs and lows of the Rhine
+publishedAt: '2026-08-22'
+summary: A century of river flow and water level measurements becomes a moving landscape, revealing what water level alone can hide.
+tags:
+  - article
+  - data visualization
+  - water
+---
+
+import { RhineYearField } from './rhine-highs-and-lows/RhineYearField'
+
+This summer, low water levels in the Netherlands' rivers have caused widespread concern and prompted much discussion. When I was young, however, high water seemed to be the greater threat.
+
+I vividly remember the flood of 1995, when around 250,000 people had to be evacuated. My school closed for two weeks, and when my room flooded, I had to move upstairs. Despite all that, it felt a little like an extra Christmas holiday.
+
+<Image
+  src="/static/images/rhine-flood-everdingen-2007.jpg"
+  alt="High water on the Lek near Everdingen"
+  width={1920}
+  height={1080}
+  label={
+    <>
+      High water on the Lek near Lekdijk 40 in Everdingen, my home at the time of the 1995 flood.
+      <sup>
+        <a href="https://www.culemborgsecourant.nl/nieuws/nieuws/413452/deel-uw-persoonlijke-verhaal-over-hoge-water-en-evacuatie-199"
+          aria-label="Photo: © Fotografie George Burggraaff, 2007, published by the Culemborgse Courant">
+          1
+        </a>
+      </sup>
+    </>
+  }
+/>
+
+I wanted to know whether my memory corresponded with the historical records. Is high water in the Rhine now less frequent and are lower water levels occurring more often? I downloaded and visualised the data to see if those patterns are really emerging.
+
+Each line below shows one year at Lobith, from January to December. The record begins in 1901. As new years appear, older ones go to the background. At the end, the field rotates to reveal the full landscape over time.
+
+<RhineYearField />

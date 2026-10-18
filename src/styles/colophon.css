@@ -476,6 +476,110 @@ h6 {
 .editorial-button-primary:hover:not(:disabled) {
   background: var(--action-hover);
 }
+.editorial-button-outline[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+.editorial-form-label {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.editorial-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.editorial-select select {
+  min-width: 88px;
+  min-height: var(--control-target);
+  margin: 0;
+  border: 1px solid var(--control-line);
+  border-radius: 4px;
+  background: var(--page);
+  color: var(--ink);
+  padding: 10px 12px;
+  font:
+    400 14px / 20px var(--font-sans),
+    sans-serif;
+  cursor: pointer;
+}
+.editorial-select select:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+/* Keep native keyboard and mobile behavior, with a themed picker where supported. */
+@supports (appearance: base-select) {
+  .editorial-select select,
+  .editorial-select select::picker(select) {
+    appearance: base-select;
+  }
+  .editorial-select select {
+    gap: 12px;
+  }
+  .editorial-select select::picker-icon {
+    color: var(--muted);
+    margin-inline-start: auto;
+  }
+  .editorial-select select::picker(select) {
+    margin-block: 4px;
+    padding: 4px;
+    border: 1px solid var(--control-line);
+    border-radius: 4px;
+    background: var(--page);
+    color: var(--ink);
+    font:
+      400 14px / 20px var(--font-sans),
+      sans-serif;
+    max-height: min(320px, 60dvh);
+    overflow-y: auto;
+  }
+  .editorial-select option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .editorial-select option:checked {
+    background: var(--surface);
+  }
+  .editorial-select option:hover,
+  .editorial-select option:focus-visible {
+    background: var(--surface);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .editorial-select option::checkmark {
+    order: 1;
+    margin-inline-start: auto;
+    color: var(--accent);
+  }
+  .editorial-select option:disabled {
+    color: var(--muted);
+    cursor: not-allowed;
+  }
+}
+.editorial-range {
+  width: 100%;
+}
+.editorial-range .editorial-form-label {
+  display: block;
+}
+.editorial-range input {
+  display: block;
+  width: 100%;
+  min-height: var(--control-target);
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.editorial-select select:disabled,
+.editorial-range input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 .page-back-link {
   display: inline-flex;
   align-items: center;

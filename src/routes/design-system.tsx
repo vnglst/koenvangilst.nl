@@ -12,6 +12,8 @@ import { Text } from '#/components/ui/Text';
 import { GalleryNavigation } from '#/components/ui/GalleryNavigation';
 import { Toolbar } from '#/components/layout/Toolbar';
 import { Link } from '#/components/ui/Link';
+import { Range } from '#/components/forms/Range';
+import { Select } from '#/components/forms/Select';
 import { Toggle } from '#/components/forms/Toggle';
 import '#/styles/design-system.css';
 
@@ -38,6 +40,9 @@ const palette = [
 function DesignSystem() {
   const [filter, setFilter] = useState('articles');
   const [checked, setChecked] = useState(false);
+  const [year, setYear] = useState(1995);
+  const [speed, setSpeed] = useState('1.5');
+  const [landscape, setLandscape] = useState(false);
   const [specimenIndex, setSpecimenIndex] = useState(0);
 
   return (
@@ -220,6 +225,36 @@ function DesignSystem() {
                 label.
               </Note>
             )}
+          </div>
+          <div className="ds-example">
+            <p className="ds-caption">Chart controls / native range and select, pressed buttons</p>
+            <Range
+              label={`Example year: ${year}`}
+              min={1901}
+              max={2026}
+              value={year}
+              onChange={(event) => setYear(Number(event.target.value))}
+            />
+            <div className="ds-controls">
+              <Select label="Example playback speed" value={speed} onChange={(event) => setSpeed(event.target.value)}>
+                <option value="1">1×</option>
+                <option value="1.5">1.5×</option>
+                <option value="4">4×</option>
+              </Select>
+              <div role="group" aria-label="Example chart view" className="ds-controls">
+                <Button variant="outline" size="sm" aria-pressed={!landscape} onClick={() => setLandscape(false)}>
+                  Front view
+                </Button>
+                <Button variant="outline" size="sm" aria-pressed={landscape} onClick={() => setLandscape(true)}>
+                  Landscape
+                </Button>
+              </div>
+            </div>
+            <Text size="caption" tone="muted" className="mt-4">
+              Import Range and Select from components/forms, Button from components/ui, and Toggle from
+              components/forms. Native controls retain their keyboard behavior. Outline buttons use aria-pressed for
+              selected views.
+            </Text>
           </div>
           <div className="ds-example">
             <p className="ds-caption">Code / scroll within the block, copy as plain text</p>
