@@ -1,9 +1,7 @@
-import type { JSX } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { RainClient } from './RainChart';
-import { SunshineClient } from './Sunshine';
+import { WeatherBarChart } from './WeatherBarChart';
 import { TemperatureClient } from './TemperatureChart';
 
 const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/main/data/yearly-weather-data.json';
@@ -16,9 +14,7 @@ type AnomalyProps = {
 export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
-  const classNameForBlog = 'my-4 aspect-[1/1]';
-  const classNameForDashboard = 'dashboard-chart';
-  const className = look === 'blog' ? classNameForBlog : classNameForDashboard;
+  const className = look === 'blog' ? 'my-4 aspect-[1/1]' : 'dashboard-chart';
 
   if (error) return <div className="text-sm text-red-500">Failed to load weather data</div>;
   if (!data) return <div className={`${className} animate-pulse bg-[var(--surface)]`} />;
@@ -26,12 +22,10 @@ export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
   const parsed = Data.safeParse(data);
   if (!parsed.success) return null;
 
-  let Component: JSX.Element | null = null;
-  if (type === 'sunshine') Component = <SunshineClient data={parsed.data} className={className} />;
-  else if (type === 'rain') Component = <RainClient data={parsed.data} className={className} />;
-  else Component = <TemperatureClient data={parsed.data} className={className} />;
-
-  return Component;
+  if (type === 'rain' || type === 'sunshine') {
+    return <WeatherBarChart data={parsed.data} type={type} className={className} />;
+  }
+  return <TemperatureClient data={parsed.data} className={className} />;
 }
 
 const Data = z.object({

@@ -6,18 +6,7 @@ type Argument = string | number | boolean | null | undefined;
  * @returns The joined classNames
  */
 function cx(...args: Argument[]): string {
-  let str = '';
-
-  for (const arg of args) {
-    if (arg && typeof arg === 'string') {
-      if (str) {
-        str += ' ';
-      }
-      str += arg;
-    }
-  }
-
-  return str;
+  return args.filter((arg) => typeof arg === 'string' && arg).join(' ');
 }
 
 export { cx };

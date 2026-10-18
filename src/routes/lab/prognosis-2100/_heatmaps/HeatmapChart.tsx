@@ -5,7 +5,7 @@ import { ChartSection } from '../_charts/ChartSection';
 import { MONTHS } from '../_charts/utils';
 import type { Data, HeatmapValue } from './WeatherHeatmap';
 
-type HeatmapChartProps = {
+export type HeatmapChartProps = {
   data: Data;
   dataKey: 'temperature_heatmap' | 'rainfall_heatmap' | 'sunshine_heatmap';
   title: string;
@@ -24,25 +24,7 @@ export function HeatmapChart({
   colors,
   tooltipFormatter
 }: HeatmapChartProps) {
-  const options = generateOptions(data, dataKey, title, saveAsImageName, visualMapRange, colors, tooltipFormatter);
-
-  return (
-    <ChartSection>
-      <Chart options={options} className="heatmap-chart" />
-    </ChartSection>
-  );
-}
-
-function generateOptions(
-  heatmap: Data,
-  dataKey: string,
-  title: string,
-  saveAsImageName: string,
-  visualMapRange: { min: number; max: number },
-  colors: string[],
-  tooltipFormatter: (value: number) => string
-) {
-  return {
+  const options = {
     grid: {
       top: 130,
       bottom: 25,
@@ -60,7 +42,7 @@ function generateOptions(
     title: [
       {
         text: title,
-        subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(heatmap.timestamp)}`,
+        subtext: `KNMI • www.koenvangilst.nl • ${dateFormatter(data.timestamp)}`,
         subtextStyle: {
           lineHeight: 18
         },
@@ -70,7 +52,7 @@ function generateOptions(
     ],
     xAxis: {
       type: 'category',
-      data: heatmap.years
+      data: data.years
     },
     yAxis: [
       {
@@ -108,7 +90,7 @@ function generateOptions(
     series: [
       {
         type: 'heatmap',
-        data: (heatmap as Record<string, unknown>)[dataKey],
+        data: data[dataKey],
         label: {
           show: false
         },
@@ -120,4 +102,10 @@ function generateOptions(
       }
     ]
   };
+
+  return (
+    <ChartSection>
+      <Chart options={options} className="heatmap-chart" />
+    </ChartSection>
+  );
 }
