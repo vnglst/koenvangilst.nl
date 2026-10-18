@@ -6,6 +6,11 @@ import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 
+import { Button } from '#/components/ui/Button';
+import { Toggle } from '#/components/forms/Toggle';
+import { Range } from '#/components/forms/Range';
+import { Select } from '#/components/forms/Select';
+
 import lobithData from './lobith-daily.json';
 import { rhinePalettes } from './rhine-palettes';
 import type { RhinePalette } from './rhine-palettes';
@@ -16,7 +21,7 @@ type YearRecord = { year: number; values: (number | null)[] };
 const years = lobithData.years as YearRecord[];
 const firstYear = years[0]?.year ?? 1901;
 const monthLabels = ['Jan', 'Jul', 'Dec'];
-const numberFormat = new Intl.NumberFormat('nl-NL');
+const numberFormat = new Intl.NumberFormat('en-GB');
 const isNumber = (value: number | null): value is number => Number.isFinite(value);
 const getLineProminence = (age: number) => 0.22 + 0.43 * Math.exp(-age / 65);
 const drawDuration = 2_000;
@@ -360,18 +365,18 @@ function RiverField({
       <div className="mb-1 flex items-baseline justify-between gap-3">
         <h3
           id={`river-${measure}-title`}
-          className="nimbus flex items-baseline gap-2 !m-0 !text-base tracking-wide uppercase"
+          className="flex flex-wrap items-baseline gap-x-2 !m-0 !text-base"
         >
           {config.title}
           {showAxes && (
-            <span className="font-sans text-[11px] font-normal tracking-normal text-gray-500/80 normal-case dark:text-gray-400/80">
+            <span className="font-sans text-[11px] font-normal tracking-normal text-gray-600 normal-case dark:text-gray-400">
               at Lobith · {config.unit}
             </span>
           )}
         </h3>
       </div>
       <div
-        className="relative aspect-[1.28] max-h-[480px] min-h-[340px] w-full"
+        className="relative aspect-[1.28] max-h-[480px] min-h-[260px] w-full"
         role="img"
         aria-label={`${config.title} at Lobith, yearly daily lines from ${firstYear} through ${years[visibleIndex]?.year ?? firstYear}`}
       >
@@ -427,11 +432,11 @@ function RiverField({
 
         {showAxes && (
           <>
-            <div className="pointer-events-none absolute top-4 bottom-7 left-3 flex flex-col justify-between text-[11px] text-gray-500/75 tabular-nums dark:text-gray-400/75">
+            <div className="pointer-events-none absolute top-4 bottom-7 left-3 flex flex-col justify-between text-[11px] text-gray-600 tabular-nums dark:text-gray-400">
               <span>{numberFormat.format(maximum)}</span>
               <span>{numberFormat.format(minimum)}</span>
             </div>
-            <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex justify-between text-[11px] text-gray-500/75 dark:text-gray-400/75">
+            <div className="pointer-events-none absolute right-3 bottom-3 left-3 flex justify-between text-[11px] text-gray-600 dark:text-gray-400">
               {monthLabels.map((label) => (
                 <span key={label}>{label}</span>
               ))}
@@ -545,7 +550,7 @@ export function RhineYearField() {
     yRotation: number;
   } | null>(null);
   const speedRef = useRef(1.5);
-  const [fieldStates, setFieldStates] = useState<[FieldState, FieldState]>([emptyField, emptyField]);
+  const [fieldState, setFieldState] = useState<FieldState>(emptyField);
   const [status, setStatus] = useState<TimelineStatus | null>({
     visibleIndex: 0,
     turning: false,
@@ -576,7 +581,7 @@ export function RhineYearField() {
       ...automaticFieldState,
       perspective: rotationOverrideRef.current ?? automaticFieldState.perspective
     };
-    setFieldStates([fieldState, fieldState]);
+    setFieldState(fieldState);
     setStatus(timelineStatus);
     setManualIndex(timelineStatus?.visibleIndex ?? years.length - 1);
   }, []);
@@ -644,7 +649,7 @@ export function RhineYearField() {
       drawProgress: 1,
       handoffProgress: 0
     };
-    setFieldStates([fieldState, fieldState]);
+    setFieldState(fieldState);
     setManualIndex(index);
     setStatus(null);
   };
@@ -652,29 +657,26 @@ export function RhineYearField() {
   const onRotationChange = (degrees: number) => {
     const perspective = degrees / maxYRotationDegrees;
     rotationOverrideRef.current = perspective;
-    setFieldStates(([discharge, waterLevel]) => [
-      { ...discharge, perspective },
-      { ...waterLevel, perspective }
-    ]);
+    setFieldState((current) => ({ ...current, perspective }));
   };
 
   const startRotationDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.button !== 0) return;
-    event.preventDefault();
+    if (event.pointerType === 'mouse') event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
     rotationDragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
       startY: event.clientY,
       xRotation: xRotationDegrees,
-      yRotation: fieldStates[0].perspective * maxYRotationDegrees
+      yRotation: fieldState.perspective * maxYRotationDegrees
     };
   };
 
   const continueRotationDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     const drag = rotationDragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
-    event.preventDefault();
+    if (event.pointerType === 'mouse') event.preventDefault();
     const nextXRotation = Math.max(
       -maxXRotationDegrees,
       Math.min(maxXRotationDegrees, drag.xRotation - (event.clientY - drag.startY) * 0.3)
@@ -683,7 +685,7 @@ export function RhineYearField() {
       -maxYRotationDegrees,
       Math.min(maxYRotationDegrees, drag.yRotation + (event.clientX - drag.startX) * 0.3)
     );
-    setXRotationDegrees(nextXRotation);
+    if (event.pointerType !== 'touch') setXRotationDegrees(nextXRotation);
     onRotationChange(nextYRotation);
   };
 
@@ -695,28 +697,73 @@ export function RhineYearField() {
     rotationDragRef.current = null;
   };
 
-  const changeSpeed = (direction: -1 | 1) => {
-    const currentIndex = playbackSpeeds.indexOf(playbackSpeed as (typeof playbackSpeeds)[number]);
-    const nextIndex = Math.min(playbackSpeeds.length - 1, Math.max(0, currentIndex + direction));
-    const nextSpeed = playbackSpeeds[nextIndex];
-    speedRef.current = nextSpeed;
-    setPlaybackSpeed(nextSpeed);
+  const setView = (landscape: boolean) => {
+    stopAnimation();
+    setXRotationDegrees(landscape ? defaultXRotationDegrees : 0);
+    onRotationChange(landscape ? automaticYRotationDegrees : 0);
   };
 
   return (
     <div
       ref={rootRef}
       className="not-prose my-10 w-full"
+      role="region"
       aria-label="The Rhine at Lobith through time"
     >
-      <div className="mb-5 flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
-        <p className="nimbus m-0 text-3xl leading-none tracking-tight tabular-nums">{years[displayIndex].year}</p>
-        <span className="text-xs text-gray-500 dark:text-gray-400">Drag charts to rotate</span>
+      <div className="mb-6 border-y border-gray-200 py-4 dark:border-gray-800">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-baseline gap-3">
+            <span className="text-3xl leading-none tracking-tight tabular-nums">{years[displayIndex].year}</span>
+            <span className="text-xs text-gray-600 dark:text-gray-400">at Lobith</span>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              onClick={() => (isPlaying ? stopAnimation() : play())}
+              size="sm"
+              className="min-w-20"
+            >
+              {isPlaying ? 'Pause' : 'Play'}
+            </Button>
+            <Button type="button" onClick={() => play(true)} variant="outline" size="sm">
+              Restart
+            </Button>
+          </div>
+        </div>
+        <Range
+          id="lobith-year"
+          label="Year"
+          hideLabel
+          aria-valuetext={String(years[displayIndex].year)}
+          className="mt-2"
+          min={0}
+          max={years.length - 1}
+          value={displayIndex}
+          onChange={(event) => onYearChange(Number(event.target.value))}
+        />
+        <div className="flex justify-between text-xs text-gray-600 tabular-nums dark:text-gray-400" aria-hidden="true">
+          <span>{firstYear}</span>
+          <span>{years.at(-1)?.year}</span>
+        </div>
+      </div>
+
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex gap-2" role="group" aria-label="Chart view">
+          <Button type="button" onClick={() => setView(false)} variant="outline" size="sm"
+            aria-pressed={xRotationDegrees === 0 && fieldState.perspective === 0}>
+            Front view
+          </Button>
+          <Button type="button" onClick={() => setView(true)} variant="outline" size="sm"
+            aria-pressed={xRotationDegrees === defaultXRotationDegrees && fieldState.perspective === automaticPerspective}>
+            Landscape
+          </Button>
+        </div>
+        <span className="text-xs text-gray-600 dark:text-gray-400">Drag to rotate</span>
       </div>
 
       <div
-        className="touch-none cursor-grab space-y-12 active:cursor-grabbing"
-        aria-label="Drag the 3D charts left, right, up, or down to rotate them"
+        className="touch-pan-y cursor-grab space-y-8 active:cursor-grabbing"
+        aria-label="Drag the charts to rotate, or use the chart view buttons"
         onPointerDown={startRotationDrag}
         onPointerMove={continueRotationDrag}
         onPointerUp={finishRotationDrag}
@@ -724,22 +771,22 @@ export function RhineYearField() {
       >
         <RiverField
           measure={0}
-          visibleIndex={fieldStates[0].visibleIndex}
-          perspective={fieldStates[0].perspective}
+          visibleIndex={fieldState.visibleIndex}
+          perspective={fieldState.perspective}
           xRotationDegrees={xRotationDegrees}
-          drawProgress={fieldStates[0].drawProgress}
-          handoffProgress={fieldStates[0].handoffProgress}
+          drawProgress={fieldState.drawProgress}
+          handoffProgress={fieldState.handoffProgress}
           showAxes={showGuides}
           dark={dark}
         />
         {showWaterLevel && (
           <RiverField
             measure={1}
-            visibleIndex={fieldStates[1].visibleIndex}
-            perspective={fieldStates[1].perspective}
+            visibleIndex={fieldState.visibleIndex}
+            perspective={fieldState.perspective}
             xRotationDegrees={xRotationDegrees}
-            drawProgress={fieldStates[1].drawProgress}
-            handoffProgress={fieldStates[1].handoffProgress}
+            drawProgress={fieldState.drawProgress}
+            handoffProgress={fieldState.handoffProgress}
             showAxes={showGuides}
             dark={dark}
           />
@@ -747,99 +794,54 @@ export function RhineYearField() {
       </div>
 
       {showGuides && (
-        <div className="mt-3 text-xs text-gray-600 dark:text-gray-300">
+        <div className="mt-3 text-xs text-gray-600 dark:text-gray-400">
           <span
-            className="block h-1.5 w-full"
+            className="block h-1 w-full"
             style={{
               background: `linear-gradient(to right, ${rhinePalettes[dark ? 'dark' : 'light'].join(', ')})`
             }}
             aria-hidden="true"
           />
-          <div className="mt-1.5 grid grid-cols-3 gap-2">
+          <div className="mt-2 flex justify-between gap-2">
             <span>Below average</span>
-            <span className="text-center">Typical</span>
-            <span className="text-right">Above average</span>
+            <span>Above average</span>
           </div>
+          <div className="mt-1 text-center">Compared with the same time of year</div>
         </div>
       )}
 
-      <div className="mt-8 border-t border-gray-200 pt-5 dark:border-gray-800">
-        <div className="mb-6 flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => (isPlaying ? stopAnimation() : play())}
-            className="rounded border border-gray-300 px-3 py-1.5 text-sm font-medium hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-900"
+      <div className="mt-6 border-t border-gray-200 pt-4 dark:border-gray-800">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+          <Toggle
+            label="Compare water level"
+            checked={showWaterLevel}
+            onChange={(event) => setShowWaterLevel(event.target.checked)}
+            className="min-h-11"
+          />
+          <Toggle
+            label="Axes and color key"
+            checked={showGuides}
+            onChange={(event) => setShowGuides(event.target.checked)}
+            className="min-h-11"
+          />
+          <Select
+            label="Speed"
+            aria-label="Playback speed"
+            value={playbackSpeed}
+            onChange={(event) => {
+              const speed = Number(event.target.value);
+              speedRef.current = speed;
+              setPlaybackSpeed(speed);
+            }}
           >
-            {isPlaying ? 'Pause' : 'Play'}
-          </button>
-          <button
-            type="button"
-            onClick={() => play(true)}
-            className="rounded border border-gray-300 px-3 py-1.5 text-sm font-medium hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-900"
-          >
-            Restart
-          </button>
-          <div className="ml-auto flex items-center gap-2" aria-label="Playback speed">
-            <button
-              type="button"
-              onClick={() => changeSpeed(-1)}
-              disabled={playbackSpeed === playbackSpeeds[0]}
-              className="rounded border border-gray-300 px-2.5 py-1.5 text-sm disabled:opacity-35 dark:border-gray-700"
-              aria-label="Decrease playback speed"
-            >
-              −
-            </button>
-            <span className="min-w-12 text-center text-xs font-medium tabular-nums">{playbackSpeed}×</span>
-            <button
-              type="button"
-              onClick={() => changeSpeed(1)}
-              disabled={playbackSpeed === playbackSpeeds.at(-1)}
-              className="rounded border border-gray-300 px-2.5 py-1.5 text-sm disabled:opacity-35 dark:border-gray-700"
-              aria-label="Increase playback speed"
-            >
-              +
-            </button>
-          </div>
+            {playbackSpeeds.map((speed) => <option key={speed} value={speed}>{speed}×</option>)}
+          </Select>
         </div>
-
-        <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-600 dark:text-gray-300">
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={showWaterLevel}
-              onChange={(event) => setShowWaterLevel(event.target.checked)}
-              className="accent-gray-900 dark:accent-gray-100"
-            />
-            Show water level
-          </label>
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={showGuides}
-              onChange={(event) => setShowGuides(event.target.checked)}
-              className="accent-gray-900 dark:accent-gray-100"
-            />
-            Show axes and color key
-          </label>
+        <div className="mt-3 space-y-1 text-xs text-gray-600 tabular-nums dark:text-gray-400">
+          <div>{years[displayIndex].year} river flow: {summary[0]}</div>
+          {showWaterLevel && <div>Water level: {summary[1]}</div>}
+          {displayIndex === years.length - 1 && <div>Partial year through {lobithData.updatedThrough}</div>}
         </div>
-
-        <label className="mb-2 block text-xs font-medium text-gray-600 dark:text-gray-300" htmlFor="lobith-year">
-          Through {years[displayIndex].year}
-        </label>
-        <input
-          id="lobith-year"
-          className="mb-5 w-full accent-gray-900 dark:accent-gray-100"
-          type="range"
-          min={0}
-          max={years.length - 1}
-          value={displayIndex}
-          onChange={(event) => onYearChange(Number(event.target.value))}
-        />
-
-        <p className="mt-4 mb-0 text-xs text-gray-500 tabular-nums dark:text-gray-400" aria-live="polite">
-          {years[displayIndex].year}: river flow {summary[0]} · water level {summary[1]}
-          {displayIndex === years.length - 1 ? ` · partial year through ${lobithData.updatedThrough}` : ''}
-        </p>
       </div>
     </div>
   );
