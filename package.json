@@ -43,7 +43,7 @@
   "dependencies": {
     "@mdx-js/react": "3.1.1",
     "@react-three/fiber": "9.8.2",
-    "@tanstack/react-query": "5.104.3",
+    "@tanstack/react-query": "5.104.5",
     "@tanstack/react-router": "1.170.45",
     "@tanstack/react-router-ssr-query": "1.167.3",
     "@tanstack/react-start": "1.169.3",
