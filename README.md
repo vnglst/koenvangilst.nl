@@ -24,7 +24,7 @@ Contributor setup, architecture, validation, and deployment are documented below
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
-- **Server**: Node.js 26.12 on Hetzner CX33 (x86_64) via Docker + Coolify
+- **Server**: Node.js 26.12.1 on Hetzner CX33 (x86_64) via Docker + Coolify
 - **Reverse Proxy**: Nginx (serves static assets, rate-limiting, security headers, health checks)
 
 ## Project Structure
@@ -333,7 +333,7 @@ These are baked in at build time, not runtime env vars.
 ### Deployment Target
 
 - **Architecture**: linux/amd64 (Hetzner CX33 is x86_64, NOT ARM)
-- **Base images**: Use `node:26.12.0-alpine` for production builds
+- **Base images**: Use `node:26.12.1-alpine` for production builds
 - **Build optimization**: BuildKit cache mounts are configured for Vite build cache
 
 ### Coolify Configuration
