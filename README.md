@@ -229,7 +229,9 @@ Use the Playwright suite as a required regression check when a change affects mu
 
 ## Updating Dependencies
 
-The project pins exact versions and uses npm's `min-release-age` protection (currently 2 days). The latest published versions may be newer than that window, so installs may need a temporary override.
+Renovate is configured to update npm dependencies in the root project and subprojects, plus Node.js base images in Dockerfiles. Its two-day minimum release age matches npm's `min-release-age` protection. Install the Renovate GitHub App for this repository to enable automated update pull requests.
+
+The project pins exact versions. The latest published versions may be newer than the two-day window, so installs may need a temporary override.
 
 The scoped `postcss-selector-parser` override patches Tailwind Typography's build-time dependency until its upstream pin is updated.
 
