@@ -72,7 +72,7 @@
     "@types/three": "0.182.0",
     "@vitejs/plugin-react": "6.1.2",
     "husky": "9.1.7",
-    "knip": "6.41.0",
+    "knip": "6.42.1",
     "lint-staged": "17.6.0",
     "oxlint": "1.88.0",
     "oxlint-tsgolint": "7.0.2004",
