@@ -5,7 +5,9 @@
   "minimumReleaseAge": "2 days",
   "packageRules": [
     {
-      "matchJsonata": "isVulnerabilityAlert and ($not($exists(vulnerabilitySeverity)) or vulnerabilitySeverity != 'CRITICAL')",
+      "matchJsonata": [
+        "isVulnerabilityAlert and ($not($exists(vulnerabilitySeverity)) or vulnerabilitySeverity != 'CRITICAL')"
+      ],
       "enabled": false
     }
   ]
