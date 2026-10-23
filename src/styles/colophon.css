@@ -2,10 +2,16 @@
 @import './tokens.css';
 body {
   background: var(--page);
+  background-image: url('/static/images/page-grain.svg');
   color: var(--ink);
   font:
     var(--type-body)/var(--leading-body) var(--font-sans),
     sans-serif;
+}
+@media print, (forced-colors: active) {
+  body {
+    background-image: none;
+  }
 }
 ::selection {
   background: var(--accent);
