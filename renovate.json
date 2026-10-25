@@ -9,16 +9,25 @@
   },
   "packageRules": [
     {
-      "description": "Disable every regular dependency update; security updates are severity-filtered below",
+      "description": "Disable regular npm updates; npm security fixes are severity-filtered below",
       "matchJsonata": ["$exists(updateType) and ($not($exists(isVulnerabilityAlert)) or isVulnerabilityAlert = false)"],
-      "enabled": false
+      "enabled": false,
+      "matchManagers": ["npm"]
     },
     {
-      "description": "Allow vulnerability fixes only when GitHub reports HIGH or CRITICAL severity",
+      "description": "Allow npm vulnerability fixes only when GitHub reports HIGH or CRITICAL severity",
       "matchJsonata": [
         "isVulnerabilityAlert and ($not($exists(vulnerabilitySeverity)) or (vulnerabilitySeverity != 'HIGH' and vulnerabilitySeverity != 'CRITICAL'))"
       ],
-      "enabled": false
+      "enabled": false,
+      "matchManagers": ["npm"]
+    },
+    {
+      "description": "Offer every supported Dockerfile version and image digest update as a manually merged PR",
+      "matchManagers": ["dockerfile"],
+      "enabled": true,
+      "pinDigests": true,
+      "automerge": false
     }
   ]
 }
