@@ -229,7 +229,12 @@ Use the Playwright suite as a required regression check when a change affects mu
 
 ## Updating Dependencies
 
-The self-hosted Renovate runner is configured for this repository. It creates pull requests only for GitHub vulnerability alerts rated HIGH or CRITICAL; routine version updates and alerts with missing, LOW, or MODERATE severity are disabled. Auto-merge is disabled. The runner checks npm dependencies in the root project and subprojects for vulnerable versions reported by GitHub. Ordinary Dockerfile updates are also disabled; this policy does not scan Docker images or Alpine packages installed by `apk`. Security fixes bypass the normal two-day release-age delay. GitHub Dependency graph and Dependabot alerts must be enabled for vulnerability PRs.
+The self-hosted Renovate runner uses two policies, both with auto-merge disabled:
+
+- **npm**: only GitHub vulnerability alerts rated HIGH or CRITICAL produce update PRs. Routine npm updates and lower or unknown severity alerts are disabled. This covers the root project and subprojects. Security fixes bypass the normal two-day release-age delay; Dependency graph and Dependabot alerts must be enabled.
+- **Dockerfiles**: all supported version updates and base-image digest updates produce PRs for manual review and merge, including updates without a reported CVE. Digests let Renovate detect rebuilt images under the same tag. The normal two-day release-age setting remains in place. This follows declared dependencies and does not scan built images or classify Docker CVEs.
+
+Unversioned `apk add` packages, including the website's Nginx package, cannot receive individual version-update PRs. They are resolved during a build. A separate Nginx update PR requires an explicit version constraint and Renovate registry settings matching the base image's Alpine repositories; base-image updates alone do not guarantee that the running Nginx has every available fix.
 
 The project pins exact versions. The latest published versions may be newer than the two-day window, so installs may need a temporary override.
 
