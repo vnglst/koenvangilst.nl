@@ -3,10 +3,20 @@
   "extends": ["config:recommended"],
   "enabledManagers": ["npm", "dockerfile"],
   "minimumReleaseAge": "2 days",
+  "automerge": false,
+  "vulnerabilityAlerts": {
+    "automerge": false
+  },
   "packageRules": [
     {
+      "description": "Disable every regular dependency update; security updates are severity-filtered below",
+      "matchJsonata": ["$exists(updateType) and ($not($exists(isVulnerabilityAlert)) or isVulnerabilityAlert = false)"],
+      "enabled": false
+    },
+    {
+      "description": "Allow vulnerability fixes only when GitHub reports HIGH or CRITICAL severity",
       "matchJsonata": [
-        "isVulnerabilityAlert and ($not($exists(vulnerabilitySeverity)) or vulnerabilitySeverity != 'CRITICAL')"
+        "isVulnerabilityAlert and ($not($exists(vulnerabilitySeverity)) or (vulnerabilitySeverity != 'HIGH' and vulnerabilitySeverity != 'CRITICAL'))"
       ],
       "enabled": false
     }

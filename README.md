@@ -229,7 +229,7 @@ Use the Playwright suite as a required regression check when a change affects mu
 
 ## Updating Dependencies
 
-Renovate is configured to update npm dependencies in the root project and subprojects, plus Node.js base images in Dockerfiles. Its two-day minimum release age matches npm's `min-release-age` protection. Install the Renovate GitHub App for this repository to enable automated update pull requests.
+The self-hosted Renovate runner is configured for this repository. It creates pull requests only for GitHub vulnerability alerts rated HIGH or CRITICAL; routine version updates and alerts with missing, LOW, or MODERATE severity are disabled. Auto-merge is disabled. The runner checks npm dependencies in the root project and subprojects for vulnerable versions reported by GitHub. Ordinary Dockerfile updates are also disabled; this policy does not scan Docker images or Alpine packages installed by `apk`. Security fixes bypass the normal two-day release-age delay. GitHub Dependency graph and Dependabot alerts must be enabled for vulnerability PRs.
 
 The project pins exact versions. The latest published versions may be newer than the two-day window, so installs may need a temporary override.
 
