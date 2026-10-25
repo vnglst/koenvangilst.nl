@@ -234,7 +234,7 @@ The self-hosted Renovate runner uses two policies, both with auto-merge disabled
 - **npm**: only GitHub vulnerability alerts rated HIGH or CRITICAL produce update PRs. Routine npm updates and lower or unknown severity alerts are disabled. This covers the root project and subprojects. Security fixes bypass the normal two-day release-age delay; Dependency graph and Dependabot alerts must be enabled.
 - **Dockerfiles**: all supported version updates and base-image digest updates produce PRs for manual review and merge, including updates without a reported CVE. Digests let Renovate detect rebuilt images under the same tag. The normal two-day release-age setting remains in place. This follows declared dependencies and does not scan built images or classify Docker CVEs.
 
-Unversioned `apk add` packages, including the website's Nginx package, cannot receive individual version-update PRs. They are resolved during a build. A separate Nginx update PR requires an explicit version constraint and Renovate registry settings matching the base image's Alpine repositories; base-image updates alone do not guarantee that the running Nginx has every available fix.
+All direct `apk add` dependencies, including Nginx, are explicitly versioned so Renovate can propose individual package updates, including Alpine package revisions. The Node image uses an explicit Alpine 3.24 tag and immutable digest; APK lookup URLs in `renovate.json` point to that same branch. `gcompat` is the actual Alpine package that previously satisfied the `libc6-compat` alias. When upgrading the Alpine branch, update all three Dockerfiles and the APK lookup URL together. Exact package pins can make a fresh build fail after Alpine removes an older package version; merge the corresponding package update PR and rebuild. Tracking updates does not certify that a release fixes a particular CVE.
 
 The project pins exact versions. The latest published versions may be newer than the two-day window, so installs may need a temporary override.
 
@@ -340,7 +340,7 @@ These are baked in at build time, not runtime env vars.
 ### Deployment Target
 
 - **Architecture**: linux/amd64 (Hetzner CX33 is x86_64, NOT ARM)
-- **Base images**: Use `node:26.12.1-alpine` for production builds
+- **Base images**: Use the digest-pinned `node:26.12.1-alpine3.24` reference in all Dockerfiles for production builds
 - **Build optimization**: BuildKit cache mounts are configured for Vite build cache
 
 ### Coolify Configuration

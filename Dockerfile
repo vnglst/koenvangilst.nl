@@ -1,12 +1,12 @@
 ARG SOURCE_COMMIT=unknown
 
 # ---- shared Node.js base ----
-FROM node:26.12.1-alpine AS base
+FROM node:26.12.1-alpine3.24@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797 AS base
 WORKDIR /app
 
 # ---- deps stage: install all build dependencies with cache ----
 FROM base AS deps
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN apk add --no-cache gcompat=1.1.0-r4 python3=3.14.8-r0 make=4.4.1-r4 g++=15.2.0-r5
 COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-audit --no-fund
@@ -33,7 +33,7 @@ ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
-    apk add --no-cache ca-certificates su-exec nginx && \
+    apk add --no-cache ca-certificates=20261020-r0 su-exec=0.3-r0 nginx=1.30.6-r0 && \
     mkdir -p /run/nginx /var/cache/nginx/ssr && \
     chown -R nginx:nginx /var/cache/nginx
 
