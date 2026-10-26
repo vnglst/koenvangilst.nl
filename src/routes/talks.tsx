@@ -3,6 +3,7 @@ import { Container } from '#/components/layout/Container';
 import { PageHeader } from '#/components/layout/PageHeader';
 import { Heading } from '#/components/content/Heading';
 import { ContentImage } from '#/components/content/ContentImage';
+import { Link } from '#/components/ui/Link';
 
 const talks = [
   {
@@ -10,6 +11,7 @@ const talks = [
     event: 'Frontmania',
     date: '2026-10-07',
     displayDate: '7 October 2026',
+    recap: '/lab/two-uncomfortably-exciting-conference-talks',
     description:
       'On building creative things with code, what AI means for our skills and creativity, and a future where engineers are enhanced by AI.'
   },
@@ -73,6 +75,11 @@ function Talks() {
                 {talk.title}
               </Heading>
               <p>{talk.description}</p>
+              {talk.recap && (
+                <p>
+                  <Link href={talk.recap}>Read the conference recap</Link>
+                </p>
+              )}
             </article>
           </li>
         ))}
