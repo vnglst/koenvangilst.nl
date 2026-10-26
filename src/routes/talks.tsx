@@ -34,6 +34,7 @@ const talks = [
     event: 'AI Circle',
     date: '2026-03-30',
     displayDate: '30 March 2026',
+    recap: '/lab/ai-and-the-future-of-engineering',
     description: 'Vibe coding, AI-assisted development, and how the role of the software engineer is changing.'
   }
 ];
@@ -77,7 +78,7 @@ function Talks() {
               <p>{talk.description}</p>
               {talk.recap && (
                 <p>
-                  <Link href={talk.recap}>Read the conference recap</Link>
+                  <Link href={talk.recap}>Read the recap</Link>
                 </p>
               )}
             </article>
