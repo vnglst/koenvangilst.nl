@@ -6,7 +6,7 @@ WORKDIR /app
 
 # ---- deps stage: install all build dependencies with cache ----
 FROM base AS deps
-RUN apk add --no-cache gcompat=1.1.0-r4 python3=3.14.8-r0 make=4.4.1-r4 g++=15.2.0-r5
+RUN apk add --no-cache gcompat=1.1.0-r4 python3=3.14.10-r1 make=4.4.1-r4 g++=15.2.0-r5
 COPY package.json package-lock.json* ./
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-audit --no-fund
