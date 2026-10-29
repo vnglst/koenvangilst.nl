@@ -7,6 +7,7 @@ Contributor setup, architecture, validation, and deployment are documented below
 ## Philosophy
 
 - **Self-hosted, open source, minimal external dependencies**
+- Prefer platform APIs and existing project code over adding packages. Keep a dependency when it provides substantial functionality that would be costly or risky to maintain locally. Import only the modules a feature needs, remove unused dependencies, and assess the full installed dependency tree rather than just the number of direct declarations. Validate removals with a production build and the relevant tests.
 - **No Vercel, no GitHub Actions builds** — Docker container deployed via Coolify on Hetzner
 - **FOSS only** — all software components must be free and open source
 - **Full control** — preference for solutions that can be fully controlled and maintained without relying on third-party services
@@ -20,7 +21,7 @@ Contributor setup, architecture, validation, and deployment are documented below
 - **Data fetching**: TanStack Query (client) + `createServerFn` loaders
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with custom design system + `@tailwindcss/vite`
 - **State**: Zustand (theme toggle)
-- **Charts**: ECharts + D3
+- **Charts**: ECharts + focused D3 modules for geography, selections, transitions, and easing
 - **Analytics**: [Plausible](https://plausible.io/) (self-hosted) for privacy-friendly analytics
 - **Code Highlighting**: [Rehype Prism Plus](https://github.com/timlrx/rehype-prism-plus)
 - **Testing**: [Vitest](https://vitest.dev/) + Playwright end-to-end tests
@@ -317,7 +318,7 @@ TanStack Router generates `src/routeTree.gen.ts` automatically — never edit th
 
 **`#/*` path alias**: Cross-module imports use `#/components/...`, `#/lib/...`, etc. The alias is configured in `tsconfig.json` (paths) and `package.json` (imports field). Relative imports are also used; `@/*` is not configured.
 
-**MDX in `lab/$slug`**: The route loader returns serializable metadata. The component uses `import.meta.glob` to re-import the MDX React component by slug client-side (avoids serialising React components over the wire).
+**MDX in `lab/$slug`**: The route loader returns serializable metadata. The component uses `import.meta.glob` to re-import the MDX React component by slug client-side (avoids serialising React components over the wire). Custom components are passed through the compiled MDX component's `components` prop.
 
 ### Environment Variables
 
@@ -477,7 +478,6 @@ This project uses `knip` for detecting unused dependencies and exports. Run with
 
 Knip cannot follow Vite's `import.meta.glob`, MDX compilation, or Docker/deployment usage, so it may incorrectly report these as unused:
 
-- `@types/mdx` — provides TypeScript types for `.mdx` imports
 - `husky` — drives the `.husky/pre-commit` hook
 
 ### Before Deleting "Unused" Files

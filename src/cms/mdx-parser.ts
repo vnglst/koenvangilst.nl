@@ -1,16 +1,17 @@
+import type { MDXProps } from 'mdx/types';
 import { lazy } from 'react';
 
 // Lazy-loaded MDX components — each post is fetched as a separate chunk on demand.
 // This prevents all ~80 MDX modules from being eagerly bundled into the client JS.
 const modules = import.meta.glob<{
-  default: React.ComponentType;
+  default: React.ComponentType<MDXProps>;
 }>('../../content/*.mdx');
 
 // Cache lazy components by key — creating a new lazy() on every render causes
 // React to see a new component type each render, triggering an infinite loop.
-const cache = new Map<string, React.ComponentType>();
+const cache = new Map<string, React.ComponentType<MDXProps>>();
 
-export function getMdxComponent(slug: string): React.ComponentType | undefined {
+export function getMdxComponent(slug: string): React.ComponentType<MDXProps> | undefined {
   const key = `../../content/${slug}.mdx`;
   const load = (modules as Record<string, (typeof modules)[string] | undefined>)[key];
   if (!load) return undefined;

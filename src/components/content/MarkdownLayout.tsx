@@ -1,3 +1,4 @@
+import type { MDXProps } from 'mdx/types';
 import { BackToLab } from '#/components/layout/BackToLab';
 import type { PostType } from '#/cms/schema';
 
@@ -16,7 +17,7 @@ import { ContentImage } from './ContentImage';
 
 type Props = {
   post: Pick<PostType, 'slug' | 'title' | 'publishedAt' | 'readingTime' | 'tags' | 'image'>;
-  Component: React.ComponentType;
+  Component: React.ComponentType<MDXProps>;
 };
 
 export function MarkdownLayout({ post, Component }: Props) {
