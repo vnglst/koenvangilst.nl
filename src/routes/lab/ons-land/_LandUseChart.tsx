@@ -2,7 +2,7 @@
 
 import { memo, useEffect, useRef, useState } from 'react';
 
-import type { ExtendedFeature, ExtendedFeatureCollection } from 'd3';
+import type { ExtendedFeature, ExtendedFeatureCollection } from 'd3-geo';
 
 const theme = { bgLight: 'var(--page)' };
 
@@ -93,23 +93,29 @@ const LandUseChartComponent = () => {
 
   useEffect(() => {
     const loadVisualization = async () => {
-      // Dynamic imports - d3 libraries only loaded when this component renders
-      const [d3Module, d3HexbinModule] = await Promise.all([import('d3'), import('d3-hexbin')]);
+      // Load only the D3 modules this visualization needs.
+      const [{ geoMercator, geoContains }, { select }, { easeCubicOut }, { hexbin: d3Hexbin }] = await Promise.all([
+        import('d3-geo'),
+        import('d3-selection'),
+        import('d3-ease'),
+        import('d3-hexbin'),
+        import('d3-transition')
+      ]);
 
-      const d3 = d3Module;
-      const d3Hexbin = d3HexbinModule.hexbin;
-
-      const projection = d3
-        .geoMercator()
+      const projection = geoMercator()
         .center([5.5, 52.2])
         .scale(9000)
         .translate([width / 2, height / 2]);
 
-      d3.json<ExtendedFeatureCollection>('/static/json/netherlands.json')
+      fetch('/static/json/netherlands.json')
+        .then((response) => {
+          if (!response.ok) throw new Error(`Unable to load Netherlands map: ${response.status}`);
+          return response.json() as Promise<ExtendedFeatureCollection>;
+        })
         .then((geoData) => {
-          if (!geoData || !geoData.features[0]) return;
+          if (!geoData.features[0]) return;
           setIsLoading(false);
-          const svg = d3.select(svgRef.current);
+          const svg = select(svgRef.current);
           const hexbin = d3Hexbin()
             .radius(hexRadius)
             .extent([
@@ -127,15 +133,12 @@ const LandUseChartComponent = () => {
           const netherlandsFeature: ExtendedFeature = geoData.features[0];
           const hexPoints = hexCenters.filter((center) => {
             const inverted = projection.invert?.(center as [number, number]);
-            return inverted ? d3.geoContains(netherlandsFeature, inverted) : false;
+            return inverted ? geoContains(netherlandsFeature, inverted) : false;
           }) as [number, number][];
           const hexData = hexbin(hexPoints);
           const totalHexagons = hexData.length;
 
-          const colorScale = d3
-            .scaleOrdinal()
-            .domain(categories.map((c) => c.name))
-            .range(categories.map((c) => c.color));
+          const categoryColors = new Map(categories.map((category) => [category.name, category.color]));
 
           const hexColors: string[] = [];
 
@@ -197,12 +200,12 @@ const LandUseChartComponent = () => {
             .transition()
             .delay((_, i) => i * 0.7)
             .duration(750)
-            .ease(d3.easeCubicOut)
-            .attr('fill', (_, i) => colorScale(hexColors[i]) as string)
+            .ease(easeCubicOut)
+            .attr('fill', (_, i) => categoryColors.get(hexColors[i]) ?? theme.bgLight)
             .attr('transform', (d) => `translate(${d.x},${d.y})`)
             .attr('d', () => hexbin.hexagon(hexRadius));
 
-          d3.select('body').on('click', function () {
+          select('body').on('click', function () {
             if (selectedCategory !== null) {
               deselectHexagons();
             }

@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/react';
+import type { MDXProps } from 'mdx/types';
 import { CodeBlock } from './CodeBlock';
 
 import { ContentImage } from './ContentImage';
@@ -33,13 +33,9 @@ const mdxComponents = {
 };
 
 type MDXComponentProps = {
-  Component: React.ComponentType;
+  Component: React.ComponentType<MDXProps>;
 };
 
 export function MDXComponent({ Component }: MDXComponentProps) {
-  return (
-    <MDXProvider components={mdxComponents}>
-      <Component />
-    </MDXProvider>
-  );
+  return <Component components={mdxComponents} />;
 }

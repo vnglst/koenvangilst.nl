@@ -90,8 +90,7 @@ const config = defineConfig({
           rehypeCodeTitles,
           rehypePrismPlus,
           [rehypeAutolinkHeadings, { properties: { className: ['anchor'] } }]
-        ],
-        providerImportSource: '@mdx-js/react'
+        ]
       })
     ),
     tanstackStart({

@@ -3,7 +3,7 @@
   "entry": ["src/routes/**/*.{ts,tsx}", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts"],
   "ignore": ["zipline-sync/**"],
   "ignoreFiles": ["scripts/generate-og-images.mjs", "src/lib/og-image.d.mts"],
-  "ignoreDependencies": ["@types/mdx", "husky"],
+  "ignoreDependencies": ["husky"],
   "ignoreBinaries": ["srvx"],
   "ignoreIssues": {
     "src/lib/og-image.mjs": ["exports", "duplicates"]
