@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+});
+
 for (const width of [390, 1440]) {
   test(`design system is usable in both themes at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });

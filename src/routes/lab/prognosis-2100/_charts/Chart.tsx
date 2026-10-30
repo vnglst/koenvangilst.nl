@@ -26,7 +26,7 @@ const DEFAULT_OPTIONS: ECBasicOption = {
 };
 
 const ChartComponent = ({ options, className }: ChartProps) => {
-  const mode = useTheme((state) => state.theme);
+  const mode = useTheme((state) => state.resolvedTheme);
   const chartRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
 

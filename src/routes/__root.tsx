@@ -97,13 +97,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <a href="#content" className="skip-link">
           Skip to main content
         </a>
-        {/* Inline theme detection to prevent FOUC — defaults to dark */}
+        {/* Inline theme detection to prevent FOUC - defaults to the system preference */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              let preferredTheme = 'dark';
-              try { preferredTheme = localStorage.getItem('theme') || 'dark'; } catch {}
-              document.documentElement.classList.toggle('dark', preferredTheme !== 'light');
+              let preferredTheme = 'system';
+              try { preferredTheme = localStorage.getItem('theme') || 'system'; } catch {}
+              const isDark = preferredTheme === 'dark' || (preferredTheme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+              document.documentElement.classList.toggle('dark', isDark);
 
             `
           }}

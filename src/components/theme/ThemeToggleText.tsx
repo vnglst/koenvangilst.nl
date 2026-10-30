@@ -5,18 +5,22 @@ import { Theme, useTheme } from './theme.store';
 
 export function ThemeToggleText() {
   const theme = useTheme((state) => state.theme);
+  const resolvedTheme = useTheme((state) => state.resolvedTheme);
   const setTheme = useTheme((state) => state.setTheme);
+  const syncTheme = useTheme((state) => state.syncTheme);
+  const nextTheme = resolvedTheme === Theme.Light ? Theme.Dark : Theme.Light;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === Theme.Dark ? '#020617' : '#ffffff');
-  }, [theme]);
+    syncTheme();
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    media.addEventListener('change', syncTheme);
+    return () => media.removeEventListener('change', syncTheme);
+  }, [syncTheme]);
 
   function handleClick() {
-    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
+    setTheme(nextTheme);
   }
 
   if (!mounted) {
@@ -28,10 +32,11 @@ export function ThemeToggleText() {
       variant="bare"
       onClick={handleClick}
       className="theme-toggle"
-      aria-label={`Switch to ${theme === Theme.Dark ? 'light' : 'dark'} mode`}
+      aria-label={`Switch to ${nextTheme} mode`}
+      title={`Theme: ${theme}. Switch to ${nextTheme} mode`}
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
-        {theme === Theme.Dark ? (
+        {nextTheme === Theme.Dark ? (
           <path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5 8.7 8.7 0 1 0 20.5 14.3Z" />
         ) : (
           <>

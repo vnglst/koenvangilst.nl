@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+});
+
 test.describe('Familiar mobile layout', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
