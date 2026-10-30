@@ -1,0 +1,34 @@
+---
+title: The future of work is waiting for a support agent
+publishedAt: '2026-10-30'
+summary: After my API key was compromised, getting help from Anthropic made me wonder how far AI companies have implemented the future they are selling.
+tags:
+  - ai
+  - article
+---
+
+On a Saturday morning, I received three emails in quick succession: half my Claude API credits were gone, then all of them, and finally my API access had been blocked. Someone was using my API key and had spent the remaining balance within minutes. It was only about seven euros, but the thought that somebody might have access to my computer or home network was scary enough that I spent the morning investigating, with some help from Codex. We couldn't find anything that explained what had happened.
+
+![API usage on October 17 showing a spike of 1,670,579 input tokens across Opus 5 and Fable 5.1, with 22,981 output tokens.](/static/images/the-future-of-work/api-usage.jpg)
+
+Then an email from OpenCode arrived, warning that their systems had been compromised and somebody might have accessed my API key. A follow-up confirmed that my key was affected.[^opencode-incident] That explained the spending, but I also wanted to report the unauthorized use to Anthropic, partly to make sure they knew that whatever had happened with that key wasn't me. Finding a way to do that turned out to be an interesting experience.
+
+I was actually quite curious to see how this would work. Anthropic is telling everybody that AI is going to change how we do our jobs, and customer support has always been one of the obvious examples. So I was expecting an AI company to have figured out how to offer a good support experience using AI. In the console, I found a help button that opened a chat with the Fin AI agent, now owned by Salesforce,[^fin-ownership] accompanied by a warning that they were experiencing a high volume of inquiries. Apparently, scaling support was still a challenge.
+
+The chatbot first asked me to accept the terms of use. Then it offered a menu: technical issues, usage limits, subscriptions, billing, or feature requests. There was no option for a compromised API key, so I picked a category and eventually got to explain what had happened. The agent said it would pass my conversation to a human. That was October 17, and it took until October 21 to receive a reply acknowledging my report. When I later asked about a refund, I was back to waiting.
+
+In the meantime, I had also emailed Anthropic's security address. The automated reply explained where I should send my message depending on whether it concerned a vulnerability, fraud, model safety, or another support issue. I had already written an email explaining the problem, but apparently I also needed to figure out which department should handle it. You have some of the smartest language models in the world, and this is still something you ask your customer to do?
+
+![Anthropic's automated security email directing customers to different channels for vulnerabilities, fraud, model safety, compliance, and other support requests.](/static/images/the-future-of-work/security-triage.jpg)
+
+When I followed up with OpenCode, its co-founder Dax responded quickly and offered to refund the amount. I appreciated that and said we could wait for Anthropic to get back to me. Of course, having a founder personally answer support emails isn't going to scale, but I would have expected an AI company to be further along in figuring out how to offer that kind of help to all its customers.
+
+Anthropic has outsourced its AI support agent to Salesforce and reports that it resolves about half of incoming questions.[^anthropic-support] What I'd like to understand is what happens to the questions that still need a human. Somebody needs to take responsibility for resolving them and keep the customer informed. That's the part of this experience that left me wondering how far we are with the future of work.
+
+In the end, it looks like I got my credits back, and my account works again. Nobody told me, but maybe that notification is still waiting for a human in the loop to review and approve it.
+
+[^opencode-incident]: See the Hacker News discussions of [OpenCode’s breach announcement](https://news.ycombinator.com/item?id=50133401) and the [subsequent OpenCode and OpenAI refund update](https://news.ycombinator.com/item?id=50148946).
+
+[^anthropic-support]: See the interview [Why Anthropic chose Fin to transform their customer support](https://www.intercom.com/blog/podcasts/why-anthropic-chose-fin-to-transform-their-customer-support) and Fin’s case study [Build vs buy: Why Anthropic chose Fin](https://fin.ai/customers/anthropic).
+
+[^fin-ownership]: Salesforce [completed its acquisition of Fin, formerly Intercom, on September 10, 2026](https://www.salesforce.com/news/press-releases/2026/09/10/salesforce-completes-acquisition-of-fin/).
