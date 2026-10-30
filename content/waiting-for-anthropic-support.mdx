@@ -1,0 +1,30 @@
+---
+title: Waiting for Anthropic Support
+publishedAt: '2026-10-30'
+summary: After my API key was compromised, getting help from Anthropic showed me how hard it is to automate customer support well.
+tags:
+  - ai
+  - article
+---
+
+On Saturday, October 17, I got a scary message. Half of my Claude API credits were gone. A second email said all of them were gone. A third said my API access had been blocked because I had used up my credits. When I looked at the console, I saw that someone had been using one of my API keys.
+
+![API usage on October 17 showing a spike of 1,670,579 input tokens across Opus 5 and Fable 5.1, with 22,981 output tokens.](/static/images/the-future-of-work/api-usage.jpg)
+
+My first thought was that I had been hacked. I spent the whole morning checking my computer and home network, but I could find nothing. No suspicious logs, and the key itself didn't even show up where I expected it. It was only about seven euros, but I was still a bit panicky. Then OpenCode emailed me: their systems had been compromised and my API key might have been exposed. Half an hour later a second email confirmed that my Anthropic key was affected.[^opencode-incident] So I wasn't hacked, but I did want to report it to Anthropic.
+
+Anthropic talks a lot about AI taking over work like customer support, so I was curious what that looks like in practice. The console has a help button that opens an AI chatbot. First I had to accept the conditions of use, and then I got a menu: technical issues, usage limits, subscription, billing, feature requests. A compromised API key wasn't on the list, so I picked one at random and was finally allowed to type. The bot said it would hand me over to a human. That was October 17. I heard back on October 21, and I'm still waiting for an answer about my refund.
+
+Meanwhile I found a security email address and wrote a short message about the compromise. The reply was automated and sorted requests by type: vulnerability? Use this link. Fraud? Email this address. Model safety? Email that one. I understand why they do it, but it did mean I had to work out which category my problem belonged in. I'd have expected an AI model to do that part.
+
+![Anthropic's automated security email directing customers to different channels for vulnerabilities, fraud, model safety, compliance, and other support requests.](/static/images/the-future-of-work/security-triage.jpg)
+
+OpenCode handled it really well. Their co-founder Dax answered quickly, said others had already been refunded, and offered to refund me too. I said I'd wait for Anthropic first. That felt personal and helpful, and I appreciated it. I guess that works because OpenCode is relatively small and that kind of attention is hard to scale, which is exactly what AI should help with.
+
+Anthropic outsources its AI customer support to Fin (by Salesforce) and said it resolved about half of incoming questions.[^anthropic-support] I'm curious what happens to the other half. Someone has to own those cases and keep the customer informed. Companies that have scaled support with humans for decades know how difficult that is, and AI is supposed to radically change this. Anthropic is in the best position to show how to make this work and I'm surprised they've not jumped on the most obvious opportunity to prove that you can use AI to run and scale a business.
+
+In the end, I got my 7 dollars back. Nobody from customer support told me. Maybe that notification is still waiting for a human in the loop to review and approve it.
+
+[^opencode-incident]: See the Hacker News discussions of [OpenCode’s breach announcement](https://news.ycombinator.com/item?id=50133401) and the [subsequent OpenCode and OpenAI refund update](https://news.ycombinator.com/item?id=50148946).
+
+[^anthropic-support]: See the interview [Why Anthropic chose Fin to transform their customer support](https://www.intercom.com/blog/podcasts/why-anthropic-chose-fin-to-transform-their-customer-support) and Fin’s case study [Build vs buy: Why Anthropic chose Fin](https://fin.ai/customers/anthropic).
