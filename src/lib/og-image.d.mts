@@ -19,7 +19,6 @@ export function createOgImage(input: {
   title: string;
   description: string;
   imageDigest?: string;
-  titleInImage?: boolean;
 }): OgImage;
 export function createHomeOgImage(): OgImage;
 export function createFallbackOgImage(): OgImage;
@@ -28,6 +27,5 @@ export function createPostOgImage(input: {
   title: string;
   description: string;
   imageDigest?: string;
-  titleInImage?: boolean;
 }): OgImage;
 export function createTagOgImage(input: { slug: string; tag: string; postCount: number }): OgImage;

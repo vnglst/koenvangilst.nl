@@ -22,13 +22,10 @@ export function hashOgSignature(value) {
   return hash.toString(16).padStart(16, '0').slice(0, 12);
 }
 
-export function createOgImage({ type, slug, title, description, imageDigest, titleInImage }) {
+export function createOgImage({ type, slug, title, description, imageDigest }) {
   const prefix = type === 'home' ? 'home' : type === 'tag' ? `tag-${slug}` : slug;
   const fields = [OG_TEMPLATE_VERSION, type, slug, title, description];
-  if (imageDigest) {
-    fields.push(imageDigest);
-    if (titleInImage) fields.push('title-in-image');
-  }
+  if (imageDigest) fields.push(imageDigest);
   const signature = fields.join('\n');
   const filename = `${prefix}-${hashOgSignature(signature)}.png`;
 
@@ -60,8 +57,8 @@ export function createFallbackOgImage() {
   };
 }
 
-export function createPostOgImage({ slug, title, description, imageDigest, titleInImage }) {
-  return createOgImage({ type: 'blog', slug, title, description, imageDigest, titleInImage });
+export function createPostOgImage({ slug, title, description, imageDigest }) {
+  return createOgImage({ type: 'blog', slug, title, description, imageDigest });
 }
 
 export function createTagOgImage({ slug, tag, postCount }) {

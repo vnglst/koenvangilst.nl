@@ -15,7 +15,6 @@ export const PostMeta = z
         alt: z.string(),
         width: z.number(),
         height: z.number(),
-        titleInImage: z.boolean().optional(),
         showAsHeader: z.boolean().optional()
       })
       .optional(),

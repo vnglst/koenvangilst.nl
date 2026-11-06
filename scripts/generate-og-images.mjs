@@ -147,36 +147,24 @@ function writeFileAtomically(filePath, contents) {
   fs.renameSync(temporaryPath, filePath);
 }
 
-async function renderOgImage(image, type, bytes, titleInImage) {
+async function renderOgImage(image, type, bytes) {
   const outputPath = path.join(outputDir, image.filename);
-  let png;
   let svg;
   if (bytes) {
     try {
-      if (titleInImage) {
-        png = await sharp(bytes)
-          .autoOrient()
-          .resize(1200, 630, { fit: 'contain', background: '#020617' })
-          .png()
-          .toBuffer();
-      } else {
-        svg = await createFeaturedOgSvg(image.title, bytes);
-      }
+      svg = await createFeaturedOgSvg(image.title, bytes);
     } catch (error) {
       console.warn(`Could not render featured image for ${image.filename}: ${error.message}`);
     }
   }
-  if (!png) {
-    const resvg = new Resvg(svg ?? createOgSvg(image.title, image.description, type), {
-      font: {
-        defaultFontFamily: 'IBM Plex Sans',
-        fontFiles: [fontPath, displayFontPath],
-        loadSystemFonts: false
-      }
-    });
-    png = resvg.render().asPng();
-  }
-  writeFileAtomically(outputPath, png);
+  const resvg = new Resvg(svg ?? createOgSvg(image.title, image.description, type), {
+    font: {
+      defaultFontFamily: 'IBM Plex Sans',
+      fontFiles: [fontPath, displayFontPath],
+      loadSystemFonts: false
+    }
+  });
+  writeFileAtomically(outputPath, resvg.render().asPng());
   console.log(`Generated OG: ${image.url}`);
 }
 
@@ -208,10 +196,10 @@ async function generateOgImages() {
   const posts = readPosts();
   const allTags = new Set(posts.flatMap((post) => post.tags));
 
-  const renderIfNeeded = async (image, type, bytes, titleInImage) => {
+  const renderIfNeeded = async (image, type, bytes) => {
     nextManifest[image.filename] = image.signature;
     if (previousManifest[image.filename] !== image.signature || !fs.existsSync(path.join(outputDir, image.filename))) {
-      await renderOgImage(image, type, bytes, titleInImage);
+      await renderOgImage(image, type, bytes);
     }
   };
 
@@ -233,10 +221,9 @@ async function generateOgImages() {
       slug: post.slug,
       title: post.title,
       description: post.summary,
-      imageDigest: source?.digest,
-      titleInImage: post.image?.titleInImage
+      imageDigest: source?.digest
     });
-    await renderIfNeeded(image, 'blog', source?.bytes, post.image?.titleInImage);
+    await renderIfNeeded(image, 'blog', source?.bytes);
   }
 
   for (const tag of uniqueTags) {

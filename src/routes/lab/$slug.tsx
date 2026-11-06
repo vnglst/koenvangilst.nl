@@ -25,8 +25,7 @@ const getLabPost = createServerFn({ method: 'GET' })
       slug: post.slug,
       title: post.title,
       description: post.summary,
-      imageDigest: readOgSource(post.image?.src)?.digest,
-      titleInImage: post.image?.titleInImage
+      imageDigest: readOgSource(post.image?.src)?.digest
     });
 
     return {

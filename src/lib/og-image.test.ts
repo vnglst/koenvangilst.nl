@@ -25,7 +25,6 @@ describe('OG image addresses', () => {
 
     expect(featured.url).not.toBe(fallback.url);
     expect(replacement.url).not.toBe(featured.url);
-    expect(createPostOgImage({ ...input, imageDigest: 'original', titleInImage: true }).url).not.toBe(featured.url);
   });
 
   it('includes tag post counts in the address', () => {
