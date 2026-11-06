@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
+import { parse } from 'yaml';
 import { createFallbackOgImage, createHomeOgImage, createPostOgImage, createTagOgImage } from '../src/lib/og-image.mjs';
+import { getOgSourcePath, readOgSource } from '../src/lib/og-source.ts';
 
 const watchMode = process.argv.includes('--watch');
 const skipInitial = process.argv.includes('--skip-initial');
@@ -20,54 +23,18 @@ function sluggify(str) {
 
 function parseFrontmatter(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return {};
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/);
+  return match ? (parse(match[1]) ?? {}) : {};
+}
 
-  const lines = match[1].split(/\r?\n/);
-  const result = {};
-  let currentKey = null;
-
-  for (const rawLine of lines) {
-    const line = rawLine.trimEnd();
-    const trimmed = line.trim();
-    if (!trimmed) {
-      currentKey = null;
-      continue;
-    }
-
-    if (trimmed.startsWith('- ')) {
-      if (currentKey) {
-        const val = trimmed
-          .slice(2)
-          .trim()
-          .replace(/^['"]|['"]$/g, '');
-        if (!result[currentKey]) result[currentKey] = [];
-        result[currentKey].push(val);
-      }
-    } else {
-      const colonIdx = trimmed.indexOf(':');
-      if (colonIdx !== -1) {
-        const key = trimmed.slice(0, colonIdx).trim();
-        let value = trimmed.slice(colonIdx + 1).trim();
-
-        if (value === '') {
-          currentKey = key;
-          result[key] = [];
-        } else if (value.startsWith('[') && value.endsWith(']')) {
-          result[key] = value
-            .slice(1, -1)
-            .split(',')
-            .map((s) => s.trim().replace(/^['"]|['"]$/g, ''));
-          currentKey = null;
-        } else {
-          value = value.replace(/^['"]|['"]$/g, '');
-          result[key] = value;
-          currentKey = null;
-        }
-      }
-    }
+function readPosts() {
+  const posts = [];
+  for (const file of fs.readdirSync(contentDir).filter((filename) => filename.endsWith('.mdx'))) {
+    const { title, summary, tags, image } = parseFrontmatter(path.join(contentDir, file));
+    if (!title || !summary) continue;
+    posts.push({ slug: file.slice(0, -4), title, summary, tags: tags ?? [], image });
   }
-  return result;
+  return posts;
 }
 
 function escapeXml(str) {
@@ -129,6 +96,39 @@ function createOgSvg(title, description, type) {
 </svg>`;
 }
 
+async function createFeaturedOgSvg(title, bytes) {
+  const source = sharp(bytes).autoOrient();
+  const {
+    autoOrient: { width, height }
+  } = await source.metadata();
+  // Keep the edges of wide comparisons and screenshots visible.
+  const panoramic = width / height > 2.4;
+  const background = await source
+    .clone()
+    .resize(1200, 630, { fit: panoramic ? 'inside' : 'cover' })
+    .png()
+    .toBuffer();
+  const backdrop = panoramic ? await source.resize(120, 63).blur(4).jpeg().toBuffer() : undefined;
+  const titleLines = wrapText(title, 30, 5);
+  const shadeEnd = Math.min(630, 180 + titleLines.length * 62);
+
+  return `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="${shadeEnd}">
+      <stop offset="0" stop-color="#020617" stop-opacity=".94" />
+      <stop offset=".55" stop-color="#020617" stop-opacity=".79" />
+      <stop offset="1" stop-color="#020617" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#020617" />
+  ${backdrop ? `<image width="1200" height="630" opacity=".35" href="data:image/jpeg;base64,${backdrop.toString('base64')}" />` : ''}
+  <image width="1200" height="630" preserveAspectRatio="xMidYMax meet" href="data:image/png;base64,${background.toString('base64')}" />
+  <rect width="1200" height="630" fill="url(#shade)" />
+  <text x="72" y="70" fill="#e5e7eb" font-family="IBM Plex Sans" font-size="24">koenvangilst.nl</text>
+  ${renderTextBlock(titleLines, 72, 138, 62, 56, '#ffffff', 'Nimbus Sans D OT', 700)}
+</svg>`;
+}
+
 function readManifest() {
   try {
     return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
@@ -147,18 +147,36 @@ function writeFileAtomically(filePath, contents) {
   fs.renameSync(temporaryPath, filePath);
 }
 
-function renderOgImage(image, type) {
+async function renderOgImage(image, type, bytes, titleInImage) {
   const outputPath = path.join(outputDir, image.filename);
-  const svg = createOgSvg(image.title, image.description, type);
-  const resvg = new Resvg(svg, {
-    font: {
-      defaultFontFamily: 'IBM Plex Sans',
-      fontFiles: [fontPath, displayFontPath],
-      loadSystemFonts: false
+  let png;
+  let svg;
+  if (bytes) {
+    try {
+      if (titleInImage) {
+        png = await sharp(bytes)
+          .autoOrient()
+          .resize(1200, 630, { fit: 'contain', background: '#020617' })
+          .png()
+          .toBuffer();
+      } else {
+        svg = await createFeaturedOgSvg(image.title, bytes);
+      }
+    } catch (error) {
+      console.warn(`Could not render featured image for ${image.filename}: ${error.message}`);
     }
-  });
-  const rendered = resvg.render();
-  writeFileAtomically(outputPath, rendered.asPng());
+  }
+  if (!png) {
+    const resvg = new Resvg(svg ?? createOgSvg(image.title, image.description, type), {
+      font: {
+        defaultFontFamily: 'IBM Plex Sans',
+        fontFiles: [fontPath, displayFontPath],
+        loadSystemFonts: false
+      }
+    });
+    png = resvg.render().asPng();
+  }
+  writeFileAtomically(outputPath, png);
   console.log(`Generated OG: ${image.url}`);
 }
 
@@ -187,30 +205,18 @@ async function generateOgImages() {
     }
   }
 
-  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.mdx'));
-  const posts = [];
-  const allTags = new Set();
+  const posts = readPosts();
+  const allTags = new Set(posts.flatMap((post) => post.tags));
 
-  const renderIfNeeded = (image, type) => {
+  const renderIfNeeded = async (image, type, bytes, titleInImage) => {
     nextManifest[image.filename] = image.signature;
     if (previousManifest[image.filename] !== image.signature || !fs.existsSync(path.join(outputDir, image.filename))) {
-      renderOgImage(image, type);
+      await renderOgImage(image, type, bytes, titleInImage);
     }
   };
 
-  renderOgImage(createFallbackOgImage(), 'fallback');
-  renderIfNeeded(createHomeOgImage(), 'home');
-
-  for (const file of files) {
-    const slug = file.replace('.mdx', '');
-    const fm = parseFrontmatter(path.join(contentDir, file));
-    if (!fm.title || !fm.summary) continue;
-
-    posts.push({ slug, title: fm.title, summary: fm.summary, tags: fm.tags || [] });
-    if (Array.isArray(fm.tags)) {
-      fm.tags.forEach((t) => allTags.add(t));
-    }
-  }
+  await renderOgImage(createFallbackOgImage(), 'fallback');
+  await renderIfNeeded(createHomeOgImage(), 'home');
 
   const uniqueTags = [];
   const seenTagSlugs = new Set();
@@ -222,15 +228,22 @@ async function generateOgImages() {
   }
 
   for (const post of posts) {
-    const image = createPostOgImage({ slug: post.slug, title: post.title, description: post.summary });
-    renderIfNeeded(image, 'blog');
+    const source = readOgSource(post.image?.src);
+    const image = createPostOgImage({
+      slug: post.slug,
+      title: post.title,
+      description: post.summary,
+      imageDigest: source?.digest,
+      titleInImage: post.image?.titleInImage
+    });
+    await renderIfNeeded(image, 'blog', source?.bytes, post.image?.titleInImage);
   }
 
   for (const tag of uniqueTags) {
     const tagPosts = posts.filter((p) => p.tags.includes(tag));
     const tagSlug = sluggify(tag);
     const image = createTagOgImage({ slug: tagSlug, tag, postCount: tagPosts.length });
-    renderIfNeeded(image, 'tag');
+    await renderIfNeeded(image, 'tag');
   }
 
   writeManifest(nextManifest);
@@ -247,16 +260,31 @@ async function runWatchMode() {
   let rerunQueued = false;
   let debounceTimer = null;
 
-  const readContentSnapshot = () => {
+  const readSnapshot = (files) => {
     const snapshot = new Map();
-    for (const filename of fs.readdirSync(contentDir).filter((file) => file.endsWith('.mdx'))) {
-      const stats = fs.statSync(path.join(contentDir, filename));
-      snapshot.set(filename, `${stats.mtimeMs}:${stats.size}`);
+    for (const file of files) {
+      const stats = fs.statSync(file, { throwIfNoEntry: false });
+      if (stats) snapshot.set(file, `${stats.mtimeMs}:${stats.size}`);
     }
     return snapshot;
   };
+  const readContentSnapshot = () =>
+    readSnapshot(
+      fs
+        .readdirSync(contentDir)
+        .filter((file) => file.endsWith('.mdx'))
+        .map((file) => path.join(contentDir, file))
+    );
+  const readSourcePaths = () =>
+    readPosts()
+      .map((post) => getOgSourcePath(post.image?.src))
+      .filter(Boolean);
+  const hasChanged = (previous, next) =>
+    next.size !== previous.size || [...next].some(([file, signature]) => previous.get(file) !== signature);
 
   let contentSnapshot = readContentSnapshot();
+  let sourcePaths = readSourcePaths();
+  let sourceSnapshot = readSnapshot(sourcePaths);
 
   const scheduleRerun = () => {
     if (debounceTimer) clearTimeout(debounceTimer);
@@ -286,12 +314,17 @@ async function runWatchMode() {
   };
 
   const contentPoller = setInterval(() => {
-    const nextSnapshot = readContentSnapshot();
-    const changed =
-      nextSnapshot.size !== contentSnapshot.size ||
-      [...nextSnapshot].some(([filename, signature]) => contentSnapshot.get(filename) !== signature);
-    contentSnapshot = nextSnapshot;
-    if (changed) scheduleRerun();
+    try {
+      const nextContent = readContentSnapshot();
+      const contentChanged = hasChanged(contentSnapshot, nextContent);
+      if (contentChanged) sourcePaths = readSourcePaths();
+      const nextSources = readSnapshot(sourcePaths);
+      if (contentChanged || hasChanged(sourceSnapshot, nextSources)) scheduleRerun();
+      contentSnapshot = nextContent;
+      sourceSnapshot = nextSources;
+    } catch (error) {
+      console.error(error);
+    }
   }, 1000);
 
   for (const filePath of watchFiles) {

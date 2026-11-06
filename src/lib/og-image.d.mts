@@ -18,8 +18,16 @@ export function createOgImage(input: {
   slug: string;
   title: string;
   description: string;
+  imageDigest?: string;
+  titleInImage?: boolean;
 }): OgImage;
 export function createHomeOgImage(): OgImage;
 export function createFallbackOgImage(): OgImage;
-export function createPostOgImage(input: { slug: string; title: string; description: string }): OgImage;
+export function createPostOgImage(input: {
+  slug: string;
+  title: string;
+  description: string;
+  imageDigest?: string;
+  titleInImage?: boolean;
+}): OgImage;
 export function createTagOgImage(input: { slug: string; tag: string; postCount: number }): OgImage;

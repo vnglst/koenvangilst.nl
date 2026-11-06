@@ -1,8 +1,8 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
-  "entry": ["src/routes/**/*.{ts,tsx}", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts"],
+  "entry": ["src/routes/**/*.{ts,tsx}", "src/**/*.test.{ts,tsx}", "e2e/**/*.spec.ts", "scripts/generate-og-images.mjs"],
   "ignore": ["zipline-sync/**"],
-  "ignoreFiles": ["scripts/generate-og-images.mjs", "src/lib/og-image.d.mts"],
+  "ignoreFiles": ["src/lib/og-image.d.mts"],
   "ignoreDependencies": ["husky"],
   "ignoreBinaries": ["srvx"],
   "ignoreIssues": {

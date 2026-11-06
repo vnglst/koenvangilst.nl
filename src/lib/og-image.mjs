@@ -1,4 +1,4 @@
-export const OG_TEMPLATE_VERSION = 'v12-refined';
+export const OG_TEMPLATE_VERSION = 'v13-featured';
 
 export const HOME_OG_TITLE = 'Koen van Gilst';
 export const HOME_OG_DESCRIPTION =
@@ -22,9 +22,14 @@ export function hashOgSignature(value) {
   return hash.toString(16).padStart(16, '0').slice(0, 12);
 }
 
-export function createOgImage({ type, slug, title, description }) {
+export function createOgImage({ type, slug, title, description, imageDigest, titleInImage }) {
   const prefix = type === 'home' ? 'home' : type === 'tag' ? `tag-${slug}` : slug;
-  const signature = [OG_TEMPLATE_VERSION, type, slug, title, description].join('\n');
+  const fields = [OG_TEMPLATE_VERSION, type, slug, title, description];
+  if (imageDigest) {
+    fields.push(imageDigest);
+    if (titleInImage) fields.push('title-in-image');
+  }
+  const signature = fields.join('\n');
   const filename = `${prefix}-${hashOgSignature(signature)}.png`;
 
   return {
@@ -55,8 +60,8 @@ export function createFallbackOgImage() {
   };
 }
 
-export function createPostOgImage({ slug, title, description }) {
-  return createOgImage({ type: 'blog', slug, title, description });
+export function createPostOgImage({ slug, title, description, imageDigest, titleInImage }) {
+  return createOgImage({ type: 'blog', slug, title, description, imageDigest, titleInImage });
 }
 
 export function createTagOgImage({ slug, tag, postCount }) {

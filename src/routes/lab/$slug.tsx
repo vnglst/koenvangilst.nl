@@ -5,6 +5,7 @@ import { MarkdownLayout } from '#/components/content/MarkdownLayout';
 import { NotFoundPage } from '#/components/content/NotFoundPage';
 import { jsonLdArticle } from '#/lib/json-ld';
 import { createPostOgImage } from '#/lib/og-image.mjs';
+import { readOgSource } from '#/lib/og-source';
 
 const getLabPost = createServerFn({ method: 'GET' })
   .validator((data: { slug: string }) => data)
@@ -20,6 +21,13 @@ const getLabPost = createServerFn({ method: 'GET' })
     const currentIndex = allPosts.findIndex((p) => p.slug === data.slug);
     const prevPost = allPosts[currentIndex + 1];
     const nextPost = allPosts[currentIndex - 1];
+    const ogImage = createPostOgImage({
+      slug: post.slug,
+      title: post.title,
+      description: post.summary,
+      imageDigest: readOgSource(post.image?.src)?.digest,
+      titleInImage: post.image?.titleInImage
+    });
 
     return {
       slug: post.slug,
@@ -30,6 +38,7 @@ const getLabPost = createServerFn({ method: 'GET' })
       hasContent: post.hasContent,
       tags: post.tags,
       image: post.image,
+      ogImageUrl: ogImage.url,
       url: post.url,
       // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
       prevSlug: prevPost?.slug ?? null,
@@ -41,15 +50,7 @@ const getLabPost = createServerFn({ method: 'GET' })
 export const Route = createFileRoute('/lab/$slug')({
   loader: ({ params }) => getLabPost({ data: { slug: params.slug } }),
   head: ({ loaderData }) => {
-    const ogImage = loaderData
-      ? `https://koenvangilst.nl${
-          createPostOgImage({
-            slug: loaderData.slug,
-            title: loaderData.title,
-            description: loaderData.summary
-          }).url
-        }`
-      : undefined;
+    const ogImage = loaderData ? `https://koenvangilst.nl${loaderData.ogImageUrl}` : undefined;
     const links: { rel: string; href: string }[] = [];
     if (loaderData) {
       links.push({ rel: 'canonical', href: `https://koenvangilst.nl/lab/${loaderData.slug}` });

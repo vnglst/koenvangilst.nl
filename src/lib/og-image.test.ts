@@ -17,6 +17,17 @@ describe('OG image addresses', () => {
     expect(createPostOgImage({ ...input, title: 'Changed' }).filename).not.toBe(createPostOgImage(input).filename);
   });
 
+  it('gives new featured image contents a new URL', () => {
+    const input = { slug: 'example', title: 'An example', description: 'A summary' };
+    const fallback = createPostOgImage(input);
+    const featured = createPostOgImage({ ...input, imageDigest: 'original' });
+    const replacement = createPostOgImage({ ...input, imageDigest: 'replacement' });
+
+    expect(featured.url).not.toBe(fallback.url);
+    expect(replacement.url).not.toBe(featured.url);
+    expect(createPostOgImage({ ...input, imageDigest: 'original', titleInImage: true }).url).not.toBe(featured.url);
+  });
+
   it('includes tag post counts in the address', () => {
     const onePost = createTagOgImage({ slug: 'typescript', tag: 'typescript', postCount: 1 });
     const twoPosts = createTagOgImage({ slug: 'typescript', tag: 'typescript', postCount: 2 });
