@@ -1,0 +1,37 @@
+---
+title: Captain’s Log - a Mac app for thinking out loud
+publishedAt: '2026-11-10'
+summary: A free, open-source Mac app for thinking out loud. Captain’s Log records, transcribes, and organizes your thoughts, with everything running locally on your Mac.
+tags:
+  - side-project
+  - ai
+  - article
+---
+
+I’ve always found that thinking out loud helps me better understand things. Whether it’s something that happened at work, an idea I’m trying to articulate, or just thoughts I want to remember. The problem is that most of those thoughts disappear as soon as I’ve had them.
+
+A little over a year ago, I decided to build a Mac app to do something about that. I called it [Captain’s Log](https://captainslog.koenvangilst.nl/), after Star Trek. I’ve always liked the scenes where my childhood hero, Jean-Luc Picard starts with “Captain’s Log, Stardate 41153.7” and then simply tells the computer what’s been happening. I wanted something like that for myself.
+
+I originally started building it as a kind of second brain, but soon discovered that just being able to talk to my computer and keeping a written record was useful enough. I now use it several times a week, for different things:
+
+- Looking back on my workweek and figuring out where my time went.
+- Recording thoughts about my family, friends, and everyday life.
+- Articulating new ideas by talking about them.
+- Practicing presentations or talks.
+
+The app records your voice, transcribes it with Whisper, and uses a local language model (Qwen) to clean up the text. It fixes transcription mistakes, adds paragraphs, corrects names based on a personal list, and sorts your notes into categories.
+
+**Everything happens on your Mac.** No accounts, no cloud services, and none of your recordings or notes leave your computer.
+
+It’s a fairly simple app, but I’ve come to rely on it. And although I originally built it just for myself, I’ve decided to make it open source and free for anyone to use or build upon. You can install it with Homebrew:
+
+```bash
+brew install --cask vnglst/tap/captainslog
+```
+
+Or point your favorite AI coding agent at the [GitHub repository](https://github.com/vnglst/CaptainsLog) and have it build the app from source. I haven’t paid the Apple developer fee yet, so the Homebrew version isn’t notarized. Here’s a short video showing how it works.
+
+<video controls playsInline preload="metadata" aria-label="Captain’s Log demo" style={{ borderRadius: '6px' }}>
+  <source src="https://files.koenvangilst.nl/u/GjP2Vu.mp4" type="video/mp4" />
+  [Watch the Captain’s Log demo](https://files.koenvangilst.nl/u/GjP2Vu.mp4)
+</video>
