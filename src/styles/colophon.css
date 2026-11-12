@@ -1089,6 +1089,10 @@ html:has(.photo-viewer) {
 .side-project-list > li > a {
   font-weight: 600;
 }
+.side-project-list > li > a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .side-project-list p {
   margin-top: 6px;
 }

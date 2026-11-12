@@ -58,7 +58,9 @@ export function ProjectBrowser({ projects }: ProjectBrowserProps) {
           <ul className="side-project-list">
             {getSideProjects(projects).map((project) => (
               <li key={project.url}>
-                <Link href={project.url}>{project.title}</Link>
+                <Link href={project.url} variant="plain">
+                  {project.title}
+                </Link>
                 <Text tone="muted">{project.summary}</Text>
               </li>
             ))}
