@@ -8,17 +8,6 @@ tags:
   - side-project
 ---
 
-## Update - November 12, 2026
-
-Almost a year later, a test confirmed that reporting still works. Most reports reuse placeholders or example URLs, so I can't tell whether they came from AI assistants, crawlers, or people. I've updated `llms.txt`, clarified the reporting instructions, and restored its sitemap entry. The original implementation below is kept for context.
-
-<Image
-  src="/static/images/llms-txt-findings-2026-11-12.jpg"
-  alt="Plausible findings showing mostly placeholders and copied examples, alongside an audit test and an unsolicited message."
-  width={2254}
-  height={866}
-/>
-
 I recently discovered [llms.txt](https://llmstxt.org/), a proposed standard for making websites more accessible to Large Language Models. The idea is simple: provide a markdown file at `/llms.txt` that helps LLMs understand your site's structure and content when they're browsing on behalf of users.
 
 Think of it as a `robots.txt` for the AI era, but instead of telling crawlers what _not_ to index, you're helping AI assistants find what they're _looking for_.
@@ -219,3 +208,14 @@ The complete implementation is in my [GitHub repository](https://github.com/vngl
 Whether you're curious about making your site more AI-friendly or want to track LLM visitors, this might be a fun experiment for your own website.
 
 And who knows? Maybe in a few weeks I'll write a follow-up post analyzing what the Plausible dashboard reveals about how LLMs actually browse the web.
+
+## Update - November 12, 2026
+
+Almost a year later, a test confirmed that reporting still works. Most reports reuse placeholders or example URLs, so I can't tell whether they came from AI assistants, crawlers, or people. I've updated `llms.txt`, clarified the reporting instructions, and restored its sitemap entry.
+
+<Image
+  src="/static/images/llms-txt-findings-2026-11-12.jpg"
+  alt="Plausible findings showing mostly placeholders and copied examples, alongside an audit test and an unsolicited message."
+  width={2254}
+  height={866}
+/>

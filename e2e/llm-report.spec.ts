@@ -32,6 +32,7 @@ test('the dated blog update and findings screenshot render', async ({ page }) =>
 
   await expect(page.getByRole('heading', { name: 'Update - November 12, 2026' })).toBeVisible();
   const screenshot = page.getByRole('img', { name: /Plausible findings showing mostly placeholders/ });
+  await screenshot.scrollIntoViewIfNeeded();
   await expect(screenshot).toBeVisible();
   await expect(screenshot).toHaveJSProperty('complete', true);
   await expect(screenshot).not.toHaveJSProperty('naturalWidth', 0);
