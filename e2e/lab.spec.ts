@@ -48,3 +48,26 @@ test('Lab switches to direct project links and restores all articles on mobile',
   await page.goBack();
   await expect(page.locator('.side-project-list')).toBeVisible();
 });
+
+test('Side projects includes projects mentioned in articles and every gallery destination once', async ({ page }) => {
+  await page.goto('/lab?q=side-project');
+  const links = page.locator('.side-project-list').getByRole('link');
+  for (const name of [
+    'Tetris Time',
+    'Pong Wars',
+    'Time Flies',
+    'Caffeine',
+    'Pomodori',
+    'React Canvas',
+    'Pelican Gallery'
+  ]) {
+    await expect(links.filter({ hasText: new RegExp(`^${name}$`) })).toHaveCount(1);
+  }
+  const destinations = await links.evaluateAll((elements) =>
+    elements.map((element) => {
+      const url = new URL((element as HTMLAnchorElement).href);
+      return `${url.origin}${url.pathname.replace(/\/$/, '')}`;
+    })
+  );
+  expect(new Set(destinations).size).toBe(destinations.length);
+});

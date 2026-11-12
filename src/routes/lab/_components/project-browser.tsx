@@ -1,3 +1,4 @@
+import { getSideProjects } from '#/cms/side-projects';
 import { Text } from '#/components/ui/Text';
 import { Fragment } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
@@ -15,6 +16,7 @@ type Project = {
   publishedAt: string;
   url?: string;
   projectUrl?: string;
+  projectTitle?: string;
 };
 
 type ProjectBrowserProps = {
@@ -54,14 +56,12 @@ export function ProjectBrowser({ projects }: ProjectBrowserProps) {
             Apps, games, and experiments. Follow a link to explore a project.
           </Text>
           <ul className="side-project-list">
-            {projects
-              .filter((post) => post.tags.includes('side-project') && (post.projectUrl || post.url))
-              .map((post) => (
-                <li key={post.slug}>
-                  <Link href={post.projectUrl || post.url!}>{post.title}</Link>
-                  <Text tone="muted">{post.summary}</Text>
-                </li>
-              ))}
+            {getSideProjects(projects).map((project) => (
+              <li key={project.url}>
+                <Link href={project.url}>{project.title}</Link>
+                <Text tone="muted">{project.summary}</Text>
+              </li>
+            ))}
           </ul>
         </>
       ) : (
