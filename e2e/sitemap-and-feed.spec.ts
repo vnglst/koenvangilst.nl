@@ -23,6 +23,7 @@ test.describe('sitemap.xml', () => {
 
     expect(body).toContain('<loc>https://koenvangilst.nl/</loc>');
     expect(body).toContain('<loc>https://koenvangilst.nl/lab</loc>');
+    expect(body).toContain('<loc>https://koenvangilst.nl/llms.txt</loc>');
     expect(body).toContain('<loc>https://koenvangilst.nl/photography</loc>');
   });
 

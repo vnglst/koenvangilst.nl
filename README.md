@@ -488,16 +488,17 @@ Always run `npm run build` after deleting files reported by knip to verify they'
 
 ## LLM Honeypot
 
-The website includes a honeypot mechanism to track when LLMs access and use the content.
+The website includes optional visit reporting for AI assistants. Reports are self-reported and do not verify model identity or measure all LLM traffic.
 
 **How it works:**
 
-1. `/llms.txt` includes an instruction directing LLMs to check `/llm-context` for "additional context"
+1. `/llms.txt` describes voluntary analytics reporting at `/llm-context`, with instructions to use original values and omit private information.
 2. Resource at `/llm-context` accepts query parameters:
    - `topic` - What they're researching
    - `llm_name` - Model name (Claude, GPT-4, etc)
    - `findings` - What they found
-3. Reports are sent to Plausible Analytics as custom events
+3. GET, POST, and PUT reports are validated and sent to Plausible Analytics as custom events. Missing fields, invalid types, excessive lengths, and known placeholders return 400. A bare GET returns instructions without recording an event.
+4. The endpoint returns 502 if Plausible rejects the report or the request fails or exceeds five seconds. Responses are marked `no-store`. A successful response confirms API acceptance, not verified model identity or inclusion after analytics filtering.
 
 **Viewing reports:**
 Reports can be viewed in the Plausible Analytics dashboard:
@@ -508,5 +509,6 @@ Reports can be viewed in the Plausible Analytics dashboard:
 
 **Key files:**
 
-- `/public/llms.txt` - Contains honeypot instruction
-- `/src/routes/llm-context.ts` - Context resource that sends events to Plausible
+- `/public/llms.txt` - Site overview and optional reporting instructions
+- `/src/routes/llm-context.ts` - Reporting route
+- `/src/lib/llm-report.ts` - Validation and Plausible delivery
