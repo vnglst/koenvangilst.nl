@@ -5,7 +5,7 @@ for (const width of [320, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/lab');
     await expect(page.getByText(/^\d+ entr(?:y|ies)$/)).toHaveCount(0);
-    await page.getByRole('button', { name: 'snippets', exact: true }).click();
+    await page.goto('/lab?q=snippet');
     await expect(page.getByText(/^\d+ entr(?:y|ies)$/)).toHaveCount(0);
     await page.goto('/lab/two-uncomfortably-exciting-conference-talks');
     await expect(page.locator('.page-header a[href^="/tag/"]')).toHaveCount(0);

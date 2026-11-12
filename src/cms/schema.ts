@@ -4,6 +4,7 @@ export const PostMeta = z
   .object({
     slug: z.string(),
     url: z.string().optional(),
+    projectUrl: z.string().optional(),
     title: z.string(),
     summary: z.string(),
     publishedAt: z.string(),

@@ -31,7 +31,7 @@ for (const width of [320, 1440]) {
       expect(contrast(color, canvas), selector).toBeGreaterThanOrEqual(7);
     }
     const selected = await page
-      .getByRole('button', { name: 'All', exact: true })
+      .getByRole('button', { name: 'All articles', exact: true })
       .evaluate((el) => getComputedStyle(el).color);
     expect(contrast(selected, canvas)).toBeGreaterThanOrEqual(5.5);
     await page.goto('/design-system');

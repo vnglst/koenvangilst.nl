@@ -35,14 +35,13 @@ for (const width of [320, 768, 1440, 1920]) {
 }
 
 test('Lab has category filters without a search field', async ({ page }) => {
-  await page.goto('/lab');
+  await page.goto('/lab?q=snippet');
   await expect(page.getByRole('searchbox')).toHaveCount(0);
-  await page.getByRole('button', { name: 'snippets', exact: true }).click();
   await expect(page).toHaveURL(/q=snippet/);
   await expect(page.locator('.post-title').filter({ hasText: 'My gitconfig' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('button', { name: 'snippets', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'All articles', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'All articles', exact: true }).click();
   await expect(page.locator('.post-link').first()).toBeVisible();
 });
 

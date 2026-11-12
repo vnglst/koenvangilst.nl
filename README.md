@@ -100,6 +100,8 @@ image:
 ---
 ```
 
+Articles use the `article` tag, including short tips with a `snippet` topic tag. Side projects use `side-project` and link directly to their destination via `url`. A project write-up uses `article` and can also appear in Side projects by adding `side-project` and `projectUrl`, keeping its article URL separate.
+
 ### Custom MDX Components
 
 - **Images**: Responsive images with automatic sizing
