@@ -12,15 +12,38 @@ type ProjectPost = {
 
 type SideProject = { title: string; summary: string; url: string; publishedAt: string };
 
+// Summaries verified against each project's own README, page metadata, or implementation.
+// Keep these grounded in the linked sources when editing.
 const artSummaries: Record<string, string> = {
-  'voronoi-virus': 'A generative animation exploring Voronoi patterns.',
-  'dancing-mosquitoes': 'A swarm of dancing particles.',
-  'pong-wars': 'An endless game of Pong between two competing sides.',
-  'purple-rain': 'A generative rain animation.',
-  'particle-life': 'Emergent patterns from interacting particles.',
-  'time-flies': 'A playful visualization of passing time.',
-  aarde: 'An animated view of our planet.',
-  'rock-paper-scissors': 'A simulation of rock, paper, scissors.'
+  // content/stacked-game-of-life.mdx
+  'stacked-game-of-life':
+    "A 3D visualization of Conway's Game of Life where dead cells sink into a glowing history stack.",
+  // content/tetris-time.mdx
+  'tetris-time':
+    'A countdown and clock visualized with falling Tetris blocks. Each minute is built from falling tetrominoes using Tetris game mechanics.',
+  // https://github.com/vnglst/vonoroi-virus/blob/main/README.md
+  'voronoi-virus':
+    'An animated Voronoi diagram built with D3 and canvas. A moving point continually reshapes the surrounding cells, creating a shifting geometric pattern.',
+  // https://github.com/vnglst/dancing-mosquitoes/blob/main/index.html
+  'dancing-mosquitoes':
+    'A flocking simulation of mosquitoes dancing against a sunset. Each follows simple rules for alignment, cohesion, and separation, creating coordinated movement across the canvas.',
+  // https://github.com/vnglst/pong-wars/blob/main/index.html
+  'pong-wars':
+    'An endless battle between day and night, played out by two bouncing balls. Each ball changes the color of the squares it hits, gradually claiming territory for its side.',
+  // https://github.com/vnglst/purple-rain/blob/main/index.html
+  'purple-rain':
+    'A colorful animation of falling raindrops, built with JavaScript and canvas. The drops fall at different speeds and drift with a changing wind.',
+  // https://github.com/vnglst/particle-life/blob/main/index.html
+  'particle-life':
+    'A recreation of Jeffrey Ventrella’s Particle Life, where interactions between colored particles produce shifting patterns. Randomize the interactions to explore different behaviors, and share a configuration through its URL.',
+  // https://github.com/vnglst/time-flies/blob/main/index.html
+  'time-flies':
+    'A clock made from a swarm of animated flies that gather to form the current time. Click or touch the canvas to scatter them, then watch them find their way back into the digits.',
+  aarde:
+    'An artificial life simulation inspired by Tierra, exploring evolution through small programs running in shared memory. Watch the instructions execute and adjust the speed to follow the simulation.',
+  // https://github.com/vnglst/rock-paper-scissors/blob/main/index.html
+  'rock-paper-scissors':
+    'A cellular automaton based on rock, paper, scissors, with colored cells competing across a grid. Each state can overtake one rival and lose to another, creating an evolving pattern of territories.'
 };
 
 // Repository creation dates for gallery projects without their own dated post.
@@ -42,25 +65,31 @@ const additionalProjects: SideProject[] = [
     title: project.title,
     url: project.url,
     publishedAt: artDates[project.slug],
-    summary: artSummaries[project.slug] ?? 'An interactive generative art experiment.'
+    summary: artSummaries[project.slug]
   })),
   {
+    // content/software-for-one.mdx
     title: 'Caffeine',
     publishedAt: '2026-03-01',
     url: 'https://github.com/vnglst/Caffeine',
-    summary: 'A small Mac menu bar app that keeps your computer awake.'
+    summary:
+      'A small Mac menu bar app that prevents your computer from going to sleep. Built for presentations and long-running coding sessions, with the source available to build it yourself.'
   },
   {
+    // content/software-for-one.mdx
     title: 'Pomodori',
     publishedAt: '2026-03-01',
     url: 'https://github.com/vnglst/Pomodori',
-    summary: 'A Mac menu bar timer for 25-minute focus sessions.'
+    summary:
+      'A Mac menu bar app for timed focus sessions. A tomato icon counts down 25 minutes and plays a sound when the session ends, keeping the timer close without taking up a window.'
   },
   {
+    // content/react-hooks-with-canvas.mdx
     title: 'React Canvas',
     publishedAt: '2019-03-16',
     url: 'https://han-hooks.netlify.app/',
-    summary: 'A drawing app built with React Hooks, with undo and local storage.'
+    summary:
+      'A canvas drawing app built with React Hooks. Draw in the browser, undo strokes, or clear the canvas, with your drawing saved locally between visits.'
   }
 ];
 
