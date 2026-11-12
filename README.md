@@ -100,7 +100,7 @@ image:
 ---
 ```
 
-Articles use the `article` tag, including short tips with a `snippet` topic tag. Side projects use `side-project` and link directly to their destination via `url`. A project write-up uses `article` and can also appear in Side projects by adding `side-project` and `projectUrl`, keeping its article URL separate. Use `projectTitle` when the project name differs from the article title. `src/cms/side-projects.ts` supplements these entries with projects mentioned in articles and the shared generative art catalog, deduplicating destinations.
+Articles use the `article` tag, including short tips with a `snippet` topic tag. Side projects use `side-project` and link directly to their destination via `url`. A project write-up uses `article` and can also appear in Side projects by adding `side-project` and `projectUrl`, keeping its article URL separate. Use `projectTitle` when the project name differs from the article title. `src/cms/side-projects.ts` supplements these entries with projects mentioned in articles and the shared generative art catalog, deduplicating destinations and sorting newest first. Supplementary projects use their source article date or repository creation date.
 
 ### Custom MDX Components
 
