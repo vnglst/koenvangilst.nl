@@ -19,10 +19,13 @@ for (const width of [390, 1440]) {
       .getByRole('navigation', { name: 'Design system sections' })
       .getByRole('link', { name: 'Components' })
       .click();
-    const filter = page.getByRole('button', { name: 'experiments', exact: true });
+    const filter = page.getByRole('button', { name: 'Side projects', exact: true });
     await filter.click();
     await expect(filter).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.getByRole('button', { name: 'articles', exact: true })).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.getByRole('button', { name: 'All articles', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
     await page.getByText('Show implementation notes', { exact: true }).click();
     await expect(page.getByRole('checkbox', { name: 'Show implementation notes' })).toBeChecked();
     await expect(page.getByText('Reuse the existing Toggle component.')).toBeVisible();

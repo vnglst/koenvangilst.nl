@@ -14,7 +14,10 @@ test.describe('Familiar mobile layout', () => {
     await page.getByRole('button', { name: 'Open navigation' }).click();
     await expect(navigation).toBeVisible();
     await expect(navigation.getByRole('link', { name: 'Lab', exact: true })).toHaveAttribute('aria-current', 'page');
-    await expect(page.getByRole('button', { name: 'snippets', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByRole('button', { name: 'All articles', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
     const menu = await navigation.boundingBox();
     const content = await page.locator('main').boundingBox();
     expect(menu!.y + menu!.height).toBeLessThan(content!.y);

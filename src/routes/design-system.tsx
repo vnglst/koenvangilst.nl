@@ -38,7 +38,7 @@ const palette = [
 ];
 
 function DesignSystem() {
-  const [filter, setFilter] = useState('articles');
+  const [filter, setFilter] = useState('All articles');
   const [checked, setChecked] = useState(false);
   const [year, setYear] = useState(1995);
   const [speed, setSpeed] = useState('1.5');
@@ -183,7 +183,7 @@ function DesignSystem() {
           <div className="ds-example">
             <p className="ds-caption">Filters / selected state is underlined</p>
             <div className="ds-controls">
-              {['articles', 'experiments', 'snippets'].map((label) => (
+              {['All articles', 'Side projects'].map((label) => (
                 <TagButton
                   key={label}
                   variant={filter === label ? 'active' : 'default'}

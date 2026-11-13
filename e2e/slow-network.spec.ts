@@ -44,7 +44,7 @@ test.describe('slow network navigation', () => {
 
     // Destination page should load successfully after the delay.
     await expect(page).toHaveURL(/\/lab/, { timeout: 10_000 });
-    await expect(page.getByRole('heading', { level: 1, name: /articles & experiments/i })).toBeVisible({
+    await expect(page.getByRole('heading', { level: 1, name: /articles & side projects/i })).toBeVisible({
       timeout: 10_000
     });
 

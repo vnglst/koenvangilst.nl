@@ -36,7 +36,7 @@ test.describe('layout shift on blog posts', () => {
 
   test('sidebar is stable during client-side navigation to a blog post', async ({ page }) => {
     await page.goto('/lab');
-    await expect(page.getByRole('heading', { level: 1, name: /articles & experiments/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /articles & side projects/i })).toBeVisible();
 
     // Wait for hydration so TanStack Router is in control.
     await page.waitForFunction(() => typeof (window as any).__TSR_ROUTER__ !== 'undefined');

@@ -10,5 +10,6 @@ export function RecentArticles({ articles }: { articles: RecentArticle[] }) {
       <time className="recent-date" dateTime={article.publishedAt}>{dateFormatter(article.publishedAt)}</time>
       <Link className="recent-link" variant="plain" externalIndicator={false} href={article.url || `/lab/${article.slug}`}>{article.title}</Link>
     </li>)}</ul>
+    <Link href="/lab">All articles</Link>
   </section>;
 }

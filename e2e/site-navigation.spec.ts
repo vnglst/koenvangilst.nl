@@ -30,7 +30,7 @@ for (const width of [390, 1440]) {
     await page.locator('.recent-entry a').first().click();
     await expect(page.locator('.article-body')).not.toBeEmpty();
     for (const [label, destination, heading] of [
-      ['Lab', '/lab', 'Articles & Experiments'],
+      ['Lab', '/lab', 'Articles & Side Projects'],
       ['Photography', '/photography', 'Photography'],
       ['Talks', '/talks', 'Talks'],
       ['About', '/', 'Koen van Gilst']

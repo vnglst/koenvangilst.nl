@@ -1,8 +1,10 @@
+import { getSideProjects } from '#/cms/side-projects';
 import { Text } from '#/components/ui/Text';
 import { Fragment } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
 import { BlogPostLink } from '#/components/ui/PostLink';
+import { Link } from '#/components/ui/Link';
 import { TagButton } from '#/components/ui/Tag';
 import { Button } from '#/components/ui/Button';
 
@@ -13,66 +15,63 @@ type Project = {
   slug: string;
   publishedAt: string;
   url?: string;
+  projectUrl?: string;
+  projectTitle?: string;
 };
 
 type ProjectBrowserProps = {
   projects: Project[];
 };
 
-const FEATURED_TAGS = [
-  { label: 'All', query: '' },
-  { label: 'articles', query: 'article' },
-  { label: 'side projects', query: 'side-project' },
-  { label: 'snippets', query: 'snippet' }
-];
-
 export function ProjectBrowser({ projects }: ProjectBrowserProps) {
   const search = useSearch({ from: '/lab/' });
-  const urlQuery = search.q ?? '';
-  const filteredProjects = filterProjects(projects, urlQuery);
+  const navigate = useNavigate();
+  const query = search.q ?? '';
+  const sideProjects = query === 'side-project';
+  const articles = projects.filter((post) => post.tags.includes('article'));
+  const filteredArticles =
+    !query || query === 'article'
+      ? articles
+      : articles.filter((post) => post.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase())));
 
   return (
     <section>
-      <TagFilter currentQuery={urlQuery} tags={FEATURED_TAGS} />
-      <ProjectsDisplay projects={filteredProjects} />
-    </section>
-  );
-}
-
-function filterProjects(projects: Project[], query: string): Project[] {
-  if (!query) return projects;
-  const lowerQuery = query.toLowerCase();
-  return projects.filter((project) => project.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)));
-}
-
-type TagFilterProps = {
-  currentQuery: string;
-  tags: Array<{ label: string; query: string }>;
-};
-
-function TagFilter({ currentQuery, tags }: TagFilterProps) {
-  const navigate = useNavigate();
-  const search = useSearch({ from: '/lab/' });
-
-  const handleTagClick = (tag: { label: string; query: string }) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    void navigate({
-      to: '/lab',
-      search: { ...search, q: currentQuery === tag.query || !tag.query ? undefined : tag.query }
-    });
-  };
-
-  return (
-    <section className="lab-filters" aria-label="Filter the Lab">
-      {tags.map((tag) => {
-        const isActive = currentQuery === tag.query;
-
-        return (
-          <TagButton key={tag.label} onClick={handleTagClick(tag)} variant={isActive ? 'active' : 'default'}>
-            {tag.label}
-          </TagButton>
-        );
-      })}
+      <nav className="lab-filters" aria-label="Browse the Lab">
+        <TagButton
+          variant={!sideProjects ? 'active' : 'default'}
+          onClick={() => void navigate({ to: '/lab', search: { q: undefined } })}
+        >
+          All articles
+        </TagButton>
+        <TagButton
+          variant={sideProjects ? 'active' : 'default'}
+          onClick={() => void navigate({ to: '/lab', search: { q: 'side-project' } })}
+        >
+          Side projects
+        </TagButton>
+      </nav>
+      {sideProjects ? (
+        <>
+          <Text tone="muted" className="mb-4">
+            Apps, games, and experiments. Follow a link to explore a project.
+          </Text>
+          <ul className="side-project-list">
+            {getSideProjects(projects).map((project) => (
+              <li key={project.url}>
+                <Link href={project.url} variant="plain">
+                  {project.title}
+                </Link>
+                <Text tone="muted">{project.summary}</Text>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          {query && query !== 'article' && <Text className="mb-4">Articles tagged “{query}”</Text>}
+          <ProjectsDisplay projects={filteredArticles} />
+        </>
+      )}
     </section>
   );
 }

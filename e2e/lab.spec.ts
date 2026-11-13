@@ -4,7 +4,7 @@ test.describe('lab and blog content', () => {
   test('lab listing filters content and opens an article plus its tag page', async ({ page }) => {
     await page.goto('/lab?q=article');
 
-    await expect(page.getByRole('heading', { level: 1, name: /articles & experiments/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /articles & side projects/i })).toBeVisible();
     await expect(page).toHaveURL(/\/lab\?q=article$/);
 
     const firstInternalArticleLink = page
@@ -27,22 +27,47 @@ test.describe('lab and blog content', () => {
   });
 });
 
-test('Lab category controls filter entries, restore with Back, and clear the URL', async ({ page }) => {
-  await page.goto('/lab');
-  const entries = page.locator('.post-link');
-  const total = await entries.count();
-  expect(total).toBeGreaterThan(0);
-  const snippets = page.getByRole('button', { name: 'snippets', exact: true });
-  await snippets.click();
-  await expect(page).toHaveURL(/\/lab\?q=snippet$/);
-  await expect(snippets).toHaveAttribute('aria-pressed', 'true');
-  expect(await entries.count()).toBeGreaterThan(0);
-  expect(await entries.count()).toBeLessThan(total);
-  await page.goBack();
-  await expect(page.getByRole('button', { name: 'All', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(entries).toHaveCount(total);
-  await snippets.click();
-  await page.getByRole('button', { name: 'All', exact: true }).click();
+test('Lab switches to direct project links and restores all articles on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/lab?q=snippet');
+  await expect(page.locator('.post-title').filter({ hasText: 'My gitconfig' })).toBeVisible();
+  await page.getByRole('button', { name: 'All articles', exact: true }).click();
   await expect(page).toHaveURL(/\/lab$/);
-  await expect(entries).toHaveCount(total);
+  const total = await page.locator('.post-link').count();
+  await page.getByRole('button', { name: 'Side projects', exact: true }).click();
+  await expect(page).toHaveURL(/q=side-project/);
+  await expect(page.locator('.side-project-list a[href="https://captainslog.koenvangilst.nl/"]')).toBeVisible();
+  await expect(page.locator('.post-link')).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Side projects', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true'
+  );
+  await page.getByRole('button', { name: 'All articles', exact: true }).click();
+  await expect(page.locator('.post-link')).toHaveCount(total);
+  await page.goBack();
+  await expect(page.locator('.side-project-list')).toBeVisible();
+});
+
+test('Side projects includes projects mentioned in articles and every gallery destination once', async ({ page }) => {
+  await page.goto('/lab?q=side-project');
+  const links = page.locator('.side-project-list').getByRole('link');
+  for (const name of [
+    'Tetris Time',
+    'Pong Wars',
+    'Time Flies',
+    'Caffeine',
+    'Pomodori',
+    'React Canvas',
+    'Pelican Gallery'
+  ]) {
+    await expect(links.filter({ hasText: new RegExp(`^${name}$`) })).toHaveCount(1);
+  }
+  const destinations = await links.evaluateAll((elements) =>
+    elements.map((element) => {
+      const url = new URL((element as HTMLAnchorElement).href);
+      return `${url.origin}${url.pathname.replace(/\/$/, '')}`;
+    })
+  );
+  expect(new Set(destinations).size).toBe(destinations.length);
 });

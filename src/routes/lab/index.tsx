@@ -18,14 +18,14 @@ export const Route = createFileRoute('/lab/')({
   loader: () => getLabPosts(),
   head: () => ({
     meta: [
-      { title: 'Labs | Koen van Gilst' },
+      { title: 'Lab | Koen van Gilst' },
       {
         name: 'description',
         content: "Koen van Gilst's coding laboratory, a collection of coding experiments, articles, and side projects."
       },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://koenvangilst.nl/lab' },
-      { property: 'og:title', content: 'Labs | Koen van Gilst' },
+      { property: 'og:title', content: 'Lab | Koen van Gilst' },
       { property: 'og:description', content: 'A collection of coding experiments, articles, and side projects.' },
       { name: 'twitter:card', content: 'summary' }
     ],
@@ -39,11 +39,11 @@ function Labs() {
 
   return (
     <Container>
-      <PageHeader title="Articles & Experiments" />
+      <PageHeader title="Articles & Side Projects" />
       <Prose className="lab-introduction">
         <p>
-          Below, you'll find a collection of coding experiments, blog posts and side projects I've been thinkering with.
-          It's a mix of educational web apps, tutorials, data visualisations and creations just for fun.
+          Articles about software, AI, and things I've learned. Explore Side projects for apps, games, and experiments
+          I've built.
         </p>
       </Prose>
       <ProjectBrowser projects={posts} />
