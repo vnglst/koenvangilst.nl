@@ -23,7 +23,7 @@
       "matchManagers": ["npm"]
     },
     {
-      "description": "Offer every supported Dockerfile version and image digest update as a manually merged PR",
+      "description": "Offer every supported Dockerfile update as a PR; the runner supervisor merges compatible image and same-branch APK patch/revision updates and comments on the PR",
       "matchManagers": ["dockerfile"],
       "enabled": true,
       "pinDigests": true,
