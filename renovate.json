@@ -34,6 +34,11 @@
       "matchManagers": ["dockerfile"],
       "matchDatasources": ["apk"],
       "registryUrls": ["https://dl-cdn.alpinelinux.org/alpine?branch=v3.24&components=main,community&arch=x86_64"]
+    },
+    {
+      "description": "Digest and pin updates have no release timestamp; with minimumReleaseAgeBehaviour=timestamp-required they would stay pending forever, so same-tag rebuilds skip the release-age wait",
+      "matchUpdateTypes": ["digest", "pin", "pinDigest"],
+      "minimumReleaseAge": null
     }
   ]
 }
