@@ -169,6 +169,28 @@
   font-size: 13px;
   color: var(--muted);
 }
+/* Next article: a quiet pointer to keep reading. Hover comes from .post-link, as in the lists. */
+.article-next {
+  margin-top: 40px;
+}
+.article-next-link.plain-link {
+  display: grid;
+  gap: 4px;
+  padding-block: 4px;
+}
+.article-next-label {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.article-next-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
 @media (max-width: 767px) {
   .article-cover {
     margin-bottom: 32px;

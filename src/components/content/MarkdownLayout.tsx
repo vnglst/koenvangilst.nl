@@ -18,9 +18,11 @@ import { ContentImage } from './ContentImage';
 type Props = {
   post: Pick<PostType, 'slug' | 'title' | 'publishedAt' | 'readingTime' | 'tags' | 'image'>;
   Component: React.ComponentType<MDXProps>;
+  /** The next article to read, shown quietly below the article. */
+  nextArticle?: { slug: string; title: string } | null;
 };
 
-export function MarkdownLayout({ post, Component }: Props) {
+export function MarkdownLayout({ post, Component, nextArticle }: Props) {
   const { slug, title, publishedAt, readingTime, tags, image } = post;
   return (
     <Container layout="reading">
@@ -57,6 +59,14 @@ export function MarkdownLayout({ post, Component }: Props) {
           )}
           <Link href={`https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`}>Edit on GitHub</Link>
         </footer>
+        {nextArticle && (
+          <nav className="article-next" aria-label="Next article">
+            <Link href={`/articles/${nextArticle.slug}`} variant="plain" className="post-link article-next-link">
+              <span className="article-next-label">Next article</span>
+              <span className="post-title article-next-title">{nextArticle.title}</span>
+            </Link>
+          </nav>
+        )}
       </article>
     </Container>
   );

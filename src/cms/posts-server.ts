@@ -22,6 +22,11 @@ export function getPosts() {
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
+/** The Articles section: posts tagged 'article', newest first. */
+export function getArticles() {
+  return getPosts().filter((post) => post.tags.includes('article'));
+}
+
 export function getPost(slug: string) {
   const key = `../../content/${slug}.mdx`;
   const mod = (modules as Record<string, (typeof modules)[string] | undefined>)[key];

@@ -10,17 +10,17 @@ import { readOgSource } from '#/lib/og-source';
 const getArticle = createServerFn({ method: 'GET' })
   .validator((data: { slug: string }) => data)
   .handler(async ({ data }) => {
-    const { getPost, getPosts } = await import('#/cms/posts-server');
+    const { getArticles, getPost } = await import('#/cms/posts-server');
     const post = getPost(data.slug);
     if (!post) throw notFound();
     if (post.url?.startsWith('/') && post.url !== `/articles/${post.slug}`) {
       throw redirect({ href: post.url, statusCode: 301 });
     }
 
-    const allPosts = getPosts();
-    const currentIndex = allPosts.findIndex((p) => p.slug === data.slug);
-    const prevPost = allPosts[currentIndex + 1];
-    const nextPost = allPosts[currentIndex - 1];
+    // The Articles list is newest first, so reading on means moving to the older neighbour.
+    const articles = getArticles();
+    const index = articles.findIndex((p) => p.slug === data.slug);
+    const older = index === -1 ? undefined : articles.at(index + 1);
     const ogImage = createPostOgImage({
       slug: post.slug,
       title: post.title,
@@ -39,10 +39,7 @@ const getArticle = createServerFn({ method: 'GET' })
       image: post.image,
       ogImageUrl: ogImage.url,
       url: post.url,
-      // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
-      prevSlug: prevPost?.slug ?? null,
-      // oxlint-disable-next-line typescript/no-unnecessary-condition -- array index may be out of bounds at runtime
-      nextSlug: nextPost?.slug ?? null
+      nextArticle: older ? { slug: older.slug, title: older.title } : null
     };
   });
 
@@ -53,11 +50,8 @@ export const Route = createFileRoute('/articles/$slug')({
     const links: { rel: string; href: string }[] = [];
     if (loaderData) {
       links.push({ rel: 'canonical', href: `https://koenvangilst.nl/articles/${loaderData.slug}` });
-      if (loaderData.prevSlug) {
-        links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/articles/${loaderData.prevSlug}` });
-      }
-      if (loaderData.nextSlug) {
-        links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/articles/${loaderData.nextSlug}` });
+      if (loaderData.nextArticle) {
+        links.push({ rel: 'prefetch', href: `https://koenvangilst.nl/articles/${loaderData.nextArticle.slug}` });
       }
     }
     return {
@@ -113,6 +107,7 @@ function PostPage() {
       {Component && (
         <MarkdownLayout
           post={postMeta}
+          nextArticle={postMeta.nextArticle}
           Component={
             !postMeta.hasContent
               ? () => (

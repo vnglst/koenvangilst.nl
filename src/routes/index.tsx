@@ -9,10 +9,8 @@ import { jsonLdPerson } from '#/lib/json-ld';
 import { createHomeOgImage } from '#/lib/og-image.mjs';
 
 const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getPosts } = await import('#/cms/posts-server');
-  return getPosts()
-    .filter((post) => post.tags.includes('article'))
-    .slice(0, 5);
+  const { getArticles } = await import('#/cms/posts-server');
+  return getArticles().slice(0, 5);
 });
 
 const SITE_URL = 'https://koenvangilst.nl';
