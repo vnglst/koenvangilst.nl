@@ -1,5 +1,6 @@
 import type { MDXProps } from 'mdx/types';
 import { SectionLink } from '#/components/layout/SectionLink';
+import { ARTICLE_TAG } from '#/cms/article-tag';
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
@@ -24,6 +25,8 @@ type Props = {
 
 export function MarkdownLayout({ post, Component, nextArticle }: Props) {
   const { slug, title, publishedAt, readingTime, tags, image } = post;
+  // Every post here is an article, so the section tag adds nothing below one.
+  const topics = tags.filter((tag) => tag !== ARTICLE_TAG);
   return (
     <Container layout="reading">
       <article className="reading-column blog-article">
@@ -48,16 +51,22 @@ export function MarkdownLayout({ post, Component, nextArticle }: Props) {
           </Suspense>
         </Prose>
         <footer className="article-footer">
-          {tags.length > 0 && (
+          {topics.length > 0 && (
             <ul className="article-tags" aria-label="Article topics">
-              {tags.map((tag) => (
+              {topics.map((tag) => (
                 <li key={tag}>
                   <TagLink href={`/tag/${sluggify(tag)}`}>{tag}</TagLink>
                 </li>
               ))}
             </ul>
           )}
-          <Link href={`https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`}>Edit on GitHub</Link>
+          <Link
+            href={`https://github.com/vnglst/koenvangilst.nl/edit/main/content/${slug}.mdx`}
+            variant="plain"
+            className="article-edit"
+          >
+            Edit on GitHub
+          </Link>
         </footer>
         {nextArticle && (
           <nav className="article-next" aria-label="Next article">

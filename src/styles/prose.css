@@ -161,17 +161,32 @@
   font-size: 14px;
 }
 .article-footer {
-  display: grid;
-  gap: 16px;
+  /* Topics and the edit link share one quiet row; they wrap on narrow screens. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 24px;
   margin-top: 48px;
-  padding-top: 16px;
+  padding-top: 4px;
   border-top: 1px solid var(--line);
   font-size: 13px;
   color: var(--muted);
 }
+/* The edit link sits with the topics, in the same muted tone. */
+.article-edit.plain-link {
+  /* Block padding keeps a 44px touch target without splitting the text into flex items. */
+  display: inline-block;
+  padding-block: 12px;
+  line-height: 20px;
+  margin-left: auto;
+  color: var(--muted);
+}
+.article-edit.plain-link:hover {
+  color: var(--accent);
+}
 /* Next article: a quiet pointer to keep reading. Hover comes from .post-link, as in the lists. */
 .article-next {
-  margin-top: 40px;
+  margin-top: 32px;
 }
 .article-next-link.plain-link {
   display: grid;

@@ -1,6 +1,7 @@
 import { Text } from '#/components/ui/Text';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
+import { ARTICLE_TAG } from '#/cms/article-tag';
 import { ArchiveByYear } from '#/components/content/ArchiveByYear';
 import { Button } from '#/components/ui/Button';
 
@@ -16,8 +17,8 @@ type Article = {
 export function ArticleList({ articles }: { articles: Article[] }) {
   const search = useSearch({ from: '/articles/' });
   const navigate = useNavigate();
-  // Every post here is tagged 'article', so that old filter value shows the whole list.
-  const query = search.q && search.q !== 'article' ? search.q : '';
+  // Every post here has the section tag, so that old filter value shows the whole list.
+  const query = search.q && search.q !== ARTICLE_TAG ? search.q : '';
   const filtered = query
     ? articles.filter((post) => post.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase())))
     : articles;

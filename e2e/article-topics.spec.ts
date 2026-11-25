@@ -11,7 +11,8 @@ for (const width of [320, 1440]) {
     await expect(page.locator('.page-header a[href^="/tag/"]')).toHaveCount(0);
     const topics = page.getByRole('list', { name: 'Article topics' });
     await topics.scrollIntoViewIfNeeded();
-    await expect(topics.getByRole('link')).toHaveCount(3);
+    // The 'article' tag is implied by the section, so only the real topics remain.
+    await expect(topics.getByRole('link')).toHaveCount(2);
     const body = await page.locator('.article-body').boundingBox();
     const footer = await page.locator('.article-footer').boundingBox();
     expect(footer!.y).toBeGreaterThan(body!.y + body!.height);

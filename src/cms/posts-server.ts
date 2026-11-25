@@ -1,3 +1,4 @@
+import { ARTICLE_TAG } from './article-tag';
 import { PostMeta } from './schema';
 import { sluggify } from '#/lib/sluggify';
 
@@ -22,9 +23,9 @@ export function getPosts() {
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
-/** The Articles section: posts tagged 'article', newest first. */
+/** The Articles section, newest first. */
 export function getArticles() {
-  return getPosts().filter((post) => post.tags.includes('article'));
+  return getPosts().filter((post) => post.tags.includes(ARTICLE_TAG));
 }
 
 export function getPost(slug: string) {
