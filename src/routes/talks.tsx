@@ -11,7 +11,7 @@ const talks = [
     event: 'Frontmania',
     date: '2026-10-07',
     displayDate: '7 October 2026',
-    recap: '/lab/two-uncomfortably-exciting-conference-talks',
+    recap: '/articles/two-uncomfortably-exciting-conference-talks',
     description:
       'On building creative things with code, what AI means for our skills and creativity, and a future where engineers are enhanced by AI.'
   },
@@ -34,7 +34,7 @@ const talks = [
     event: 'AI Circle',
     date: '2026-03-30',
     displayDate: '30 March 2026',
-    recap: '/lab/ai-and-the-future-of-engineering',
+    recap: '/articles/ai-and-the-future-of-engineering',
     description: 'Vibe coding, AI-assisted development, and how the role of the software engineer is changing.'
   }
 ];

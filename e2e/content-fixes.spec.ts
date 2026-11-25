@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('code-only gitconfig post renders the original code', async ({ page }) => {
-  await page.goto('/lab/gitconfig');
+  await page.goto('/articles/gitconfig');
   await expect(page.locator('.article-body pre')).toContainText('[alias]');
   await expect(page.locator('.article-body pre')).toContainText('autoSetupRemote = true');
   await expect(page.getByRole('button', { name: 'Copy code' })).toBeVisible();
@@ -17,7 +17,7 @@ for (const width of [390, 1440]) {
       'code-doesnt-speak-for-itself',
       'two-uncomfortably-exciting-conference-talks'
     ]) {
-      await page.goto(`/lab/${slug}`);
+      await page.goto(`/articles/${slug}`);
       await expect(page.locator('.article-body')).not.toBeEmpty();
       const body = await page.locator('.article-body').boundingBox();
       const header = await page.locator('.page-header').boundingBox();

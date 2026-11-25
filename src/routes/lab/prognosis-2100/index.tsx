@@ -1,4 +1,4 @@
-import { BackToLab } from '#/components/layout/BackToLab';
+import { SectionLink } from '#/components/layout/SectionLink';
 import { createFileRoute } from '@tanstack/react-router';
 import { Container } from '#/components/layout/Container';
 import { Toolbar } from '#/components/layout/Toolbar';
@@ -41,7 +41,7 @@ function PrognosisToggle() {
 function Prognosis2100() {
   return (
     <Container layout="dashboard">
-      <BackToLab />
+      <SectionLink href="/lab" label="Lab" />
       <Toolbar className="mb-8">
         <Heading level={1} className="mb-0!">
           Prognosis 2100

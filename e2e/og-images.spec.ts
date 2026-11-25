@@ -11,7 +11,7 @@ test.describe('Open Graph metadata', () => {
   });
 
   test('uses content-addressed post and tag image URLs', async ({ page }) => {
-    await page.goto('/lab/progressively-enhanced-dark-mode');
+    await page.goto('/articles/progressively-enhanced-dark-mode');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
       /^https:\/\/koenvangilst\.nl\/og\/progressively-enhanced-dark-mode-[a-f0-9]{12}\.png$/

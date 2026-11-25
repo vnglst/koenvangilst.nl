@@ -7,7 +7,7 @@ for (const width of [320, 768, 1440, 1920]) {
       '/',
       '/lab',
       '/talks',
-      '/lab/two-uncomfortably-exciting-conference-talks',
+      '/articles/two-uncomfortably-exciting-conference-talks',
       '/photography',
       '/lab/gen-art-gallery'
     ]) {
@@ -23,26 +23,26 @@ for (const width of [320, 768, 1440, 1920]) {
         if (dark !== (theme === 'dark')) await page.getByRole('button', { name: /switch to .* mode/i }).click();
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
         if (path !== '/photography')
-          expect((await page.locator('.site-main').boundingBox())!.width).toBeLessThanOrEqual(640);
+          expect((await page.locator('.site-main').boundingBox())!.width).toBeLessThanOrEqual(600);
       }
     }
-    await page.goto('/lab/code-doesnt-speak-for-itself');
-    await expect(page.locator('.article-body')).toHaveCSS('font-size', '17px');
-    await expect(page.locator('.article-body')).toHaveCSS('line-height', '28px');
-    await page.goto('/lab/aranet4-co2-monitor');
+    await page.goto('/articles/code-doesnt-speak-for-itself');
+    await expect(page.locator('.article-body')).toHaveCSS('font-size', '18px');
+    await expect(page.locator('.article-body')).toHaveCSS('line-height', '29.7px');
+    await page.goto('/articles/aranet4-co2-monitor');
     await expect(page.getByRole('heading', { name: 'Requirements', exact: true })).toHaveCSS('font-size', '22px');
   });
 }
 
-test('Lab has category filters without a search field', async ({ page }) => {
-  await page.goto('/lab?q=snippet');
+test('Articles filter by topic without a search field', async ({ page }) => {
+  await page.goto('/articles?q=snippet');
   await expect(page.getByRole('searchbox')).toHaveCount(0);
-  await expect(page).toHaveURL(/q=snippet/);
+  await expect(page.getByText('Articles tagged “snippet”')).toBeVisible();
   await expect(page.locator('.post-title').filter({ hasText: 'My gitconfig' })).toBeVisible();
-  await page.reload();
-  await expect(page.getByRole('button', { name: 'All articles', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  const filtered = await page.locator('.post-link').count();
   await page.getByRole('button', { name: 'All articles', exact: true }).click();
-  await expect(page.locator('.post-link').first()).toBeVisible();
+  await expect(page).toHaveURL(/\/articles$/);
+  expect(await page.locator('.post-link').count()).toBeGreaterThan(filtered);
 });
 
 test('photography preserves natural proportions and staggered columns with aligned theme controls', async ({

@@ -8,15 +8,14 @@ test.describe('Familiar mobile layout', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test('navigation expands above content and closes after following a link', async ({ page }) => {
-    await page.goto('/lab?q=snippet');
+    await page.goto('/articles?q=snippet');
     const navigation = page.getByRole('navigation', { name: 'Main navigation' });
     await expect(navigation).toBeHidden();
     await page.getByRole('button', { name: 'Open navigation' }).click();
     await expect(navigation).toBeVisible();
-    await expect(navigation.getByRole('link', { name: 'Lab', exact: true })).toHaveAttribute('aria-current', 'page');
-    await expect(page.getByRole('button', { name: 'All articles', exact: true })).toHaveAttribute(
-      'aria-pressed',
-      'true'
+    await expect(navigation.getByRole('link', { name: 'Articles', exact: true })).toHaveAttribute(
+      'aria-current',
+      'page'
     );
     const menu = await navigation.boundingBox();
     const content = await page.locator('main').boundingBox();
@@ -24,7 +23,13 @@ test.describe('Familiar mobile layout', () => {
     await navigation.getByRole('link', { name: 'About', exact: true }).click();
     await expect(page.getByText('Recent articles')).toBeVisible();
     await expect(navigation).toBeHidden();
-    for (const path of ['/', '/lab', '/lab/code-doesnt-speak-for-itself', '/photography', '/lab/gen-art-gallery']) {
+    for (const path of [
+      '/',
+      '/lab',
+      '/articles/code-doesnt-speak-for-itself',
+      '/photography',
+      '/lab/gen-art-gallery'
+    ]) {
       await page.goto(path);
       await expect(page.locator('.signature-portrait')).toBeVisible();
       await expect(page.getByRole('button', { name: 'Open navigation' })).toBeVisible();
@@ -47,7 +52,7 @@ test.describe('Familiar mobile layout', () => {
   });
 
   test('code scrolls inside its block without overflowing the page', async ({ page }) => {
-    await page.goto('/lab/jwt-token');
+    await page.goto('/articles/jwt-token');
     await expect(page.getByRole('heading', { name: 'Decoding a JWT token' })).toBeVisible();
     const code = page.locator('pre').first();
     await expect(code).toBeVisible();
@@ -74,7 +79,7 @@ test.describe('Familiar mobile layout', () => {
 
 test('code copying preserves the complete command', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.goto('/lab/jwt-token');
+  await page.goto('/articles/jwt-token');
   const code = page.locator('pre').first();
   await expect(code).toContainText('paste token here');
   const expected = await code.textContent();
@@ -87,7 +92,7 @@ test('historical article and feed URLs work in a direct production preview', asy
   for (const section of ['blog', 'labs', 'projects', 'portfolio', 'clients', 'snippets']) {
     const response = await request.get(`/${section}/jwt-token`, { maxRedirects: 0 });
     expect(response.status()).toBe(301);
-    expect(response.headers().location).toBe('/lab/jwt-token');
+    expect(response.headers().location).toBe('/articles/jwt-token');
   }
   const response = await request.get('/blog/feed', { maxRedirects: 0 });
   expect(response.headers().location).toBe('/feed.xml');
@@ -108,7 +113,7 @@ test('retired CO2 demo leads to the article without sensor polling', async ({ pa
     if (new URL(request.url()).pathname === '/api/co2') sensorRequests.push(request.url());
   });
   await page.goto('/lab/co2');
-  await expect(page).toHaveURL(/\/lab\/aranet4-co2-monitor$/);
+  await expect(page).toHaveURL(/\/articles\/aranet4-co2-monitor$/);
   await expect(
     page.getByRole('heading', { level: 1, name: 'Displaying Aranet4 CO2 readings on my website' })
   ).toBeVisible();
@@ -122,7 +127,7 @@ test('Personal signature retains the portrait and blue active navigation', async
   const portrait = page.locator('.signature-portrait');
   await expect(portrait).toBeVisible();
   await expect(portrait).toHaveAttribute('src', '/avatar.jpg');
-  for (const path of ['/lab', '/lab/code-doesnt-speak-for-itself', '/photography', '/lab/gen-art-gallery']) {
+  for (const path of ['/lab', '/articles/code-doesnt-speak-for-itself', '/photography', '/lab/gen-art-gallery']) {
     await page.goto(path);
     await expect(page.locator('.signature-portrait')).toBeVisible();
     await expect(page.locator('.site-biography')).toHaveCount(0);

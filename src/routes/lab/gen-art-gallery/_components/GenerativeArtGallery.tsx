@@ -1,4 +1,4 @@
-import { BackToLab } from '#/components/layout/BackToLab';
+import { SectionLink } from '#/components/layout/SectionLink';
 import { useEffect, useState } from 'react';
 import { getRouteApi } from '@tanstack/react-router';
 import { Container } from '#/components/layout/Container';
@@ -36,7 +36,7 @@ export function GenerativeArtGallery() {
 
   return (
     <Container wide footer={false} layout="art">
-      <BackToLab />
+      <SectionLink href="/lab" label="Lab" />
       <Heading>Generative Art Gallery</Heading>
       <div
         className="art-toolbar"

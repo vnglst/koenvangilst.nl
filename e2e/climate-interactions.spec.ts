@@ -2,6 +2,9 @@ import { expect, test } from '@playwright/test';
 import type { Locator } from '@playwright/test';
 import path from 'node:path';
 
+// The theme follows the system; start in dark mode so the theme toggle reads 'Switch to light mode'.
+test.use({ colorScheme: 'dark' });
+
 // Fixed KNMI-shaped samples keep chart behavior independent of upstream updates.
 test.beforeEach(async ({ page }) => {
   for (const filename of [
@@ -90,7 +93,7 @@ for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
-    await page.goto('/lab/rising-temperatures');
+    await page.goto('/articles/rising-temperatures');
     await expect(page.getByRole('heading', { level: 1, name: 'Rising Temperatures in The Netherlands' })).toBeVisible();
     const charts = page.locator('.article-body [_echarts_instance_]');
     await expectDrawnCharts(charts, 6);
@@ -139,7 +142,7 @@ for (const width of [390, 1440]) {
     });
     for (const [route, count] of [
       ['/lab/prognosis-2100', 3],
-      ['/lab/rising-temperatures', 6]
+      ['/articles/rising-temperatures', 6]
     ] as const) {
       await page.goto(route);
       const charts = page.locator('[_echarts_instance_]');

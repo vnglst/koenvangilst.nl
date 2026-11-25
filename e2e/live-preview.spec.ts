@@ -76,15 +76,15 @@ test.describe('real local preview integrations', () => {
     for (const route of [
       '/',
       '/lab',
-      '/lab?q=snippet',
+      '/articles?q=snippet',
       '/lab?q=side-project',
-      '/lab/jwt-token',
-      '/lab/code-doesnt-speak-for-itself',
+      '/articles/jwt-token',
+      '/articles/code-doesnt-speak-for-itself',
       '/tag/stoicism',
       '/photography',
       '/lab/ons-land',
       '/lab/prognosis-2100',
-      '/lab/aranet4-co2-monitor'
+      '/articles/aranet4-co2-monitor'
     ]) {
       await page.goto(route);
       await expect(page.getByRole('button', { name: 'Open navigation' })).toBeVisible();

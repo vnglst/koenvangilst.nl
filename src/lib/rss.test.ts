@@ -40,6 +40,17 @@ describe('RSS', () => {
     expect(xml).toContain('<pubDate>');
   });
 
+  it('should keep a stable guid when the link changes', () => {
+    const feed = new RSS({ title: 'Test Feed', site_url: 'https://example.com' });
+    feed.item({ title: 'Moved', url: 'https://example.com/new', guid: 'https://example.com/old', date: '2025-01-01' });
+    feed.item({ title: 'Same', url: 'https://example.com/same', date: '2025-01-01' });
+
+    const xml = feed.xml();
+
+    expect(xml).toContain('<guid isPermaLink="false">https://example.com/old</guid>');
+    expect(xml).toContain('<guid isPermaLink="false">https://example.com/same</guid>');
+  });
+
   it('should handle multiple items', () => {
     const feed = new RSS({
       title: 'Test Feed',

@@ -31,7 +31,7 @@ test.describe('sitemap.xml', () => {
     const response = await request.get('/sitemap.xml');
     const body = await response.text();
 
-    const labUrlPattern = /<loc>https:\/\/koenvangilst\.nl\/lab\/[^<]+<\/loc>/;
+    const labUrlPattern = /<loc>https:\/\/koenvangilst\.nl\/articles\/[^<]+<\/loc>/;
     expect(body).toMatch(labUrlPattern);
 
     const lastmodPattern = /<lastmod>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
@@ -81,7 +81,7 @@ test.describe('feed.xml', () => {
 
     expect(body).toContain('<item>');
     expect(body).toContain('<title>');
-    expect(body).toContain('<link>https://koenvangilst.nl/lab/');
+    expect(body).toContain('<link>https://koenvangilst.nl/articles/');
     expect(body).toContain('<description>');
     expect(body).toContain('<pubDate>');
   });

@@ -4,7 +4,7 @@ for (const width of [390, 1440]) {
   test(`Rhine controls keep both charts synchronized at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/lab/rhine-highs-and-lows');
+    await page.goto('/articles/rhine-highs-and-lows');
 
     const visual = page.getByRole('region', { name: 'The Rhine at Lobith through time' });
     const year = visual.getByRole('slider', { name: 'Year', exact: true });

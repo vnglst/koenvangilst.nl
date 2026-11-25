@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Nginx SSR cache', () => {
-  test.skip(!process.env.BASE_URL, 'Requires the production-like Nginx container');
+  test.skip(!process.env.E2E_NGINX, 'Requires the Nginx container from npm run test:e2e:docker');
 
   test('caches public HTML and bypasses live photography pages', async ({ request }) => {
     const cacheBuster = `ssr-cache-${Date.now()}`;

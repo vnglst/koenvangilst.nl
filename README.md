@@ -35,7 +35,8 @@ Contributor setup, architecture, validation, and deployment are documented below
 │   ├── routes/             # TanStack Router file-based routes
 │   │   ├── __root.tsx     # Root layout with fonts and metadata
 │   │   ├── index.tsx      # Homepage
-│   │   ├── lab/           # Blog posts and projects showcase
+│   │   ├── articles/      # Article listing and individual posts
+│   │   ├── lab/           # Side projects and interactive experiments
 │   │   ├── photography/   # Photography portfolio
 │   │   ├── feed[.]xml.ts  # RSS feed generation
 │   │   └── sitemap[.]xml.ts # Dynamic sitemap generation
@@ -209,8 +210,8 @@ Resolve failures before committing to prevent broken builds from being deployed.
 **E2E for large changes**: When making a large refactor or other broad change — especially routing changes, content rendering changes, image handling changes, shared layout updates, or cross-cutting UI work — ALSO run:
 
 ```bash
-# Terminal 1: build and start the production preview
-npm run build && npm run preview
+# Terminal 1: build and start the production preview with the test photo fixtures
+npm run build && npm run preview:e2e
 
 # Terminal 2: bypass Playwright's automatic dev server
 BASE_URL=http://127.0.0.1:3000 npm run test:e2e
@@ -228,7 +229,7 @@ To smoke-test the production photography container against Zipline, run `npm run
 
 Without `BASE_URL`, `playwright.config.ts` starts `npm run dev` or reuses a server on port 3000. Set `BASE_URL` explicitly for production validation and wait for the preview to be ready. To run a focused spec, use `BASE_URL=http://127.0.0.1:3000 npm run test:e2e -- e2e/layout-shift.spec.ts`.
 
-Use the Playwright suite as a required regression check when a change affects multiple user flows. A Node preview does not include Nginx; use the Docker suite for proxy, CSP, redirects, and cache behavior.
+Use the Playwright suite as a required regression check when a change affects multiple user flows. A Node preview does not include Nginx; use the Docker suite for proxy, CSP, redirects, and cache behavior. Tests that need Nginx, such as `e2e/ssr-cache.spec.ts`, only run in the Docker suite, which sets `E2E_NGINX=1`.
 
 **Husky pre-commit hook**: `.husky/pre-commit` automatically runs `npx lint-staged` (Oxlint + Prettier on staged files) and `npm run type-check`. Unit tests and E2E tests are NOT run automatically by the hook — run them manually before pushing.
 
@@ -302,15 +303,16 @@ The scoped `postcss-selector-parser` override patches Tailwind Typography's buil
 
 - `src/routes/__root.tsx` — root layout, meta tags, FOUC-prevention theme script, Plausible tracking
 - `src/routes/index.tsx` — home page
-- `src/routes/lab/index.tsx` — blog/lab listing with `q` search param (client-side filter)
-- `src/routes/lab/$slug.tsx` — individual MDX posts
+- `src/routes/articles/index.tsx` — article listing with `q` tag filter (client-side)
+- `src/routes/articles/$slug.tsx` — individual MDX posts
+- `src/routes/lab/index.tsx` — side projects by year; `src/routes/lab/$slug.tsx` only redirects old article URLs
 - `src/routes/lab/gen-art-gallery/` — generative art iframe gallery
 - `src/routes/lab/ons-land/` — D3 land-use hexbin chart
 - `src/routes/lab/prognosis-2100/` — ECharts climate dashboard
 - `src/routes/photography/` — photo gallery
 - `src/routes/tag/$slug.tsx` — posts filtered by tag
 - **Server routes** (API): `feed.xml.ts`, `health.ts`, `llm-context.ts`, `og.tsx`, `sitemap[.]xml.ts`
-- **Legacy redirects**: handled by `src/lib/legacy-redirect.ts` through `src/server.ts`, with production redirects also in `nginx/nginx.conf`
+- **Legacy redirects**: handled by `src/lib/legacy-redirect.ts` through `src/server.ts`, with production redirects also in `nginx/nginx.conf`. Articles moved from `/lab/<slug>` to `/articles/<slug>`; old article, section and `?q=` filter URLs reach their current page in one permanent redirect. Keep both files in sync.
 
 TanStack Router generates `src/routeTree.gen.ts` automatically — never edit this file manually. Files/dirs prefixed with a single `_` are treated as non-route components (e.g. `_components/`, `_charts/`).
 
@@ -322,7 +324,7 @@ TanStack Router generates `src/routeTree.gen.ts` automatically — never edit th
 
 **`#/*` path alias**: Cross-module imports use `#/components/...`, `#/lib/...`, etc. The alias is configured in `tsconfig.json` (paths) and `package.json` (imports field). Relative imports are also used; `@/*` is not configured.
 
-**MDX in `lab/$slug`**: The route loader returns serializable metadata. The component uses `import.meta.glob` to re-import the MDX React component by slug client-side (avoids serialising React components over the wire). Custom components are passed through the compiled MDX component's `components` prop.
+**MDX in `articles/$slug`**: The route loader returns serializable metadata. The component uses `import.meta.glob` to re-import the MDX React component by slug client-side (avoids serialising React components over the wire). Custom components are passed through the compiled MDX component's `components` prop.
 
 ### Environment Variables
 
@@ -438,13 +440,13 @@ docker stop koenvangilst-test && docker rm koenvangilst-test
 3. Commit the intended changes and push the deployment branch to origin. Coolify builds and deploys the website on Hetzner; deployment typically takes about five minutes.
 4. Verify these production endpoints after deployment:
 
-   | Endpoint                                                     | Expected result                                        |
-   | ------------------------------------------------------------ | ------------------------------------------------------ |
-   | https://koenvangilst.nl                                      | 200 OK; footer commit hash matches the deployed commit |
-   | https://koenvangilst.nl/lab                                  | 200 OK; listing renders                                |
-   | https://koenvangilst.nl/lab/ai-and-the-future-of-engineering | 200 OK; article renders                                |
-   | https://koenvangilst.nl/feed.xml                             | 200 OK; valid RSS XML                                  |
-   | https://koenvangilst.nl/health                               | 200 OK; health check passes                            |
+   | Endpoint                                                          | Expected result                                        |
+   | ----------------------------------------------------------------- | ------------------------------------------------------ |
+   | https://koenvangilst.nl                                           | 200 OK; footer commit hash matches the deployed commit |
+   | https://koenvangilst.nl/articles                                  | 200 OK; listing renders                                |
+   | https://koenvangilst.nl/articles/ai-and-the-future-of-engineering | 200 OK; article renders                                |
+   | https://koenvangilst.nl/feed.xml                                  | 200 OK; valid RSS XML                                  |
+   | https://koenvangilst.nl/health                                    | 200 OK; health check passes                            |
 
 If verification fails, inspect the deployment and application logs, fix the issue locally, repeat validation, and redeploy.
 

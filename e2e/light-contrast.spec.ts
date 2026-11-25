@@ -30,10 +30,6 @@ for (const width of [320, 1440]) {
         .evaluate((el) => getComputedStyle(el).color);
       expect(contrast(color, canvas), selector).toBeGreaterThanOrEqual(7);
     }
-    const selected = await page
-      .getByRole('button', { name: 'All articles', exact: true })
-      .evaluate((el) => getComputedStyle(el).color);
-    expect(contrast(selected, canvas)).toBeGreaterThanOrEqual(5.5);
     await page.goto('/design-system');
     const primary = page.locator('.editorial-button-primary').first();
     const colors = await primary.evaluate((el) => ({

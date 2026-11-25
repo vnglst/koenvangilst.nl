@@ -1,5 +1,5 @@
 import type { MDXProps } from 'mdx/types';
-import { BackToLab } from '#/components/layout/BackToLab';
+import { SectionLink } from '#/components/layout/SectionLink';
 import type { PostType } from '#/cms/schema';
 
 import { sluggify } from '#/lib/sluggify';
@@ -25,10 +25,9 @@ export function MarkdownLayout({ post, Component }: Props) {
   return (
     <Container layout="reading">
       <article className="reading-column blog-article">
-        <BackToLab />
+        <SectionLink href="/articles" label="Articles" />
         <PageHeader title={title}>
           <ArticleMetadata publishedAt={publishedAt} readingTimeText={readingTime.minutes > 0 ? readingTime.text : ''} />
-
         </PageHeader>
         {image?.showAsHeader && (
           <ContentImage

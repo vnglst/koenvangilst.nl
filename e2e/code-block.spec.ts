@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 for (const width of [390, 1440]) {
   test(`single-line code stays compact at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto('/lab/captains-log');
+    await page.goto('/articles/captains-log');
     const block = page.locator('.code-block').first();
     const pre = block.locator('pre');
     const copy = block.getByRole('button', { name: 'Copy code' });

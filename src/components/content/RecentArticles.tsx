@@ -8,8 +8,8 @@ export function RecentArticles({ articles }: { articles: RecentArticle[] }) {
     <Heading level={2} size={3} id="recent-articles-title" className="recent-heading">Recent articles</Heading>
     <ul className="recent-list">{articles.map((article) => <li key={article.slug} className="recent-entry">
       <time className="recent-date" dateTime={article.publishedAt}>{dateFormatter(article.publishedAt)}</time>
-      <Link className="recent-link" variant="plain" externalIndicator={false} href={article.url || `/lab/${article.slug}`}>{article.title}</Link>
+      <Link className="recent-link" variant="plain" externalIndicator={false} href={article.url || `/articles/${article.slug}`}>{article.title}</Link>
     </li>)}</ul>
-    <Link href="/lab">All articles</Link>
+    <Link href="/articles">All articles</Link>
   </section>;
 }
