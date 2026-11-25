@@ -161,24 +161,23 @@
   font-size: 14px;
 }
 .article-footer {
-  /* Topics and the edit link share one quiet row; they wrap on narrow screens. */
+  /* Topics and the edit link share one quiet row, spaced like the topics themselves. */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 24px;
+  gap: 4px 18px;
   margin-top: 48px;
   padding-top: 4px;
   border-top: 1px solid var(--line);
   font-size: 13px;
   color: var(--muted);
 }
-/* The edit link sits with the topics, in the same muted tone. */
+/* The edit link continues the row of topics, in the same muted tone. */
 .article-edit.plain-link {
   /* Block padding keeps a 44px touch target without splitting the text into flex items. */
   display: inline-block;
   padding-block: 12px;
   line-height: 20px;
-  margin-left: auto;
   color: var(--muted);
 }
 .article-edit.plain-link:hover {
