@@ -1,4 +1,4 @@
-import { BackToLab } from '#/components/layout/BackToLab';
+import { SectionLink } from '#/components/layout/SectionLink';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 
@@ -67,13 +67,13 @@ function TagPage() {
           __html: JSON.stringify(
             jsonLdBreadcrumb([
               { name: 'Home', url: '/' },
-              { name: 'Lab', url: '/lab' },
+              { name: 'Articles', url: '/articles' },
               { name: tag, url: `/tag/${slug}` }
             ])
           )
         }}
       />
-      <BackToLab />
+      <SectionLink href="/articles" label="Articles" />
       <PageHeader title={`Posts about ${tag}`} />
       <section className="mb-4 flex w-full flex-col gap-6">
         <Text tone="muted" className="mt-6">

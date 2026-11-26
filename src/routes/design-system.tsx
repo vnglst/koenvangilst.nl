@@ -161,11 +161,11 @@ function DesignSystem() {
             </div>
             <div>
               <dt>Reading column</dt>
-              <dd>640px maximum</dd>
+              <dd>600px maximum</dd>
             </div>
             <div>
               <dt>Home biography</dt>
-              <dd>640px maximum</dd>
+              <dd>600px maximum</dd>
             </div>
           </dl>
         </section>
@@ -178,7 +178,7 @@ function DesignSystem() {
           </p>
           <div className="ds-example">
             <p className="ds-caption">Links</p>
-            <Link href="/lab/code-doesnt-speak-for-itself">Read Code Doesn’t Speak for Itself</Link>
+            <Link href="/articles/code-doesnt-speak-for-itself">Read Code Doesn’t Speak for Itself</Link>
           </div>
           <div className="ds-example">
             <p className="ds-caption">Filters / selected state is underlined</p>
@@ -319,7 +319,7 @@ function DesignSystem() {
             </div>
             <div>
               <dt>
-                <Link href="/lab">Archive</Link>
+                <Link href="/articles">Archive</Link>
               </dt>
               <dd>
                 Text filters and year groups. Desktop pairs dates with semibold titles and summaries. Mobile stacks each
@@ -328,10 +328,10 @@ function DesignSystem() {
             </div>
             <div>
               <dt>
-                <Link href="/lab/code-doesnt-speak-for-itself">Reading</Link>
+                <Link href="/articles/code-doesnt-speak-for-itself">Reading</Link>
               </dt>
               <dd>
-                A single 640px column, quiet metadata, and 17px text with 28px leading. Titles, body, and images share
+                A single 600px column, quiet metadata, and 18px text with 1.65 leading. Titles, body, and images share
                 one left edge.
               </dd>
             </div>

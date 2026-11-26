@@ -34,7 +34,7 @@ test.describe('slow network navigation', () => {
     // mouse simulation dispatching mouseover/mouseenter events that would
     // trigger TanStack Router's intent-based preloading before the click fires.
     await page
-      .locator('a[href="/lab"]')
+      .locator('a[href="/articles"]')
       .first()
       .evaluate((el: HTMLAnchorElement) => el.click());
 
@@ -43,8 +43,8 @@ test.describe('slow network navigation', () => {
     await expect(progressBar).toBeVisible({ timeout: 3000 });
 
     // Destination page should load successfully after the delay.
-    await expect(page).toHaveURL(/\/lab/, { timeout: 10_000 });
-    await expect(page.getByRole('heading', { level: 1, name: /articles & side projects/i })).toBeVisible({
+    await expect(page).toHaveURL(/\/articles/, { timeout: 10_000 });
+    await expect(page.getByRole('heading', { level: 1, name: 'Articles' })).toBeVisible({
       timeout: 10_000
     });
 
@@ -58,7 +58,7 @@ test.describe('slow network navigation', () => {
 const pages = [
   { path: '/', resourceBudget: 670_000, fontBudget: 170_000 },
   { path: '/lab', resourceBudget: 680_000, fontBudget: 170_000 },
-  { path: '/lab/ai-and-the-future-of-engineering', resourceBudget: 800_000, fontBudget: 240_000 }
+  { path: '/articles/ai-and-the-future-of-engineering', resourceBudget: 800_000, fontBudget: 240_000 }
 ];
 
 for (const { path, resourceBudget, fontBudget } of pages) {
@@ -158,7 +158,7 @@ for (const { path, resourceBudget, fontBudget } of pages) {
 
 // Decoded script bytes are stable across machines and work with both the Node
 // preview and Nginx gzip. Wall-clock timings are recorded, not used as flaky gates.
-for (const route of ['/', '/lab', '/lab/clean-code-is-a-phase', '/lab/prognosis-2100']) {
+for (const route of ['/', '/lab', '/articles/clean-code-is-a-phase', '/lab/prognosis-2100']) {
   test(`JavaScript loading budget: ${route}`, async ({ page }, testInfo) => {
     for (const filename of [
       'yearly-weather-data.json',

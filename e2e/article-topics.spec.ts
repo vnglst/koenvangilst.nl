@@ -5,13 +5,14 @@ for (const width of [320, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/lab');
     await expect(page.getByText(/^\d+ entr(?:y|ies)$/)).toHaveCount(0);
-    await page.goto('/lab?q=snippet');
+    await page.goto('/articles?q=snippet');
     await expect(page.getByText(/^\d+ entr(?:y|ies)$/)).toHaveCount(0);
-    await page.goto('/lab/two-uncomfortably-exciting-conference-talks');
+    await page.goto('/articles/two-uncomfortably-exciting-conference-talks');
     await expect(page.locator('.page-header a[href^="/tag/"]')).toHaveCount(0);
     const topics = page.getByRole('list', { name: 'Article topics' });
     await topics.scrollIntoViewIfNeeded();
-    await expect(topics.getByRole('link')).toHaveCount(3);
+    // The 'article' tag is implied by the section, so only the real topics remain.
+    await expect(topics.getByRole('link')).toHaveCount(2);
     const body = await page.locator('.article-body').boundingBox();
     const footer = await page.locator('.article-footer').boundingBox();
     expect(footer!.y).toBeGreaterThan(body!.y + body!.height);

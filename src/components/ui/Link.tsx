@@ -16,7 +16,7 @@ type BaseProps = {
 type LinkProps = BaseProps & Omit<ComponentProps<'a'>, keyof BaseProps>;
 
 function ExternalLinkContent({ children }: { children: React.ReactNode }) {
-  const icon = <Icon icon="external-link" className="ml-1 inline h-4 w-4 align-text-bottom" />;
+  const icon = <Icon icon="external-link" className="external-mark" />;
 
   if (typeof children === 'string') {
     const lastSpace = children.lastIndexOf(' ');

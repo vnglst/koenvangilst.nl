@@ -10,7 +10,7 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
     let railTop: number | undefined;
     for (const path of [
       '/lab',
-      '/lab/code-doesnt-speak-for-itself',
+      '/articles/code-doesnt-speak-for-itself',
       '/tag/stoicism',
       '/photography',
       '/lab/gen-art-gallery',
@@ -59,14 +59,14 @@ for (const width of [1100, 1440, 1920, 2560, 3440]) {
       expect(Math.abs(geometry.gutter - geometry.rightGutter), path).toBeLessThan(1);
       expect(geometry.overflow, path).toBe(false);
       if (path === '/') {
-        expect(geometry.width).toBeLessThanOrEqual(640);
+        expect(geometry.width).toBeLessThanOrEqual(600);
         expect(geometry.top).toBeLessThanOrEqual(240);
       } else {
         expect(geometry.top, path).toBe(width >= 1700 ? 128 : 112);
         expect(Math.abs(geometry.heading - headingSize), path).toBeLessThan(0.1);
       }
-      if (['/lab', '/lab/code-doesnt-speak-for-itself', '/tag/stoicism'].includes(path))
-        expect(geometry.width, path).toBeLessThanOrEqual(640);
+      if (['/lab', '/articles/code-doesnt-speak-for-itself', '/tag/stoicism'].includes(path))
+        expect(geometry.width, path).toBeLessThanOrEqual(600);
       if (width >= 1920) expect(geometry.left - geometry.gutter, path).toBeLessThanOrEqual(416);
     }
   });

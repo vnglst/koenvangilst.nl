@@ -4,6 +4,7 @@ import { ThemeToggleText } from '../theme/ThemeToggleText';
 
 const navItems = [
   { href: '/', label: 'About' },
+  { href: '/articles', label: 'Articles' },
   { href: '/lab', label: 'Lab' },
   { href: '/talks', label: 'Talks' },
   { href: '/photography', label: 'Photography' }

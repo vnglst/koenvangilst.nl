@@ -6,13 +6,13 @@ test.describe('flagship lab projects', () => {
 
     await expect(page).toHaveTitle(/Prognosis 2100/i);
     await expect(page.getByRole('heading', { level: 1, name: /prognosis 2100/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /back to lab/i })).toBeVisible();
+    await expect(page.locator('main .section-link', { hasText: 'Lab' })).toBeVisible();
 
     const toggle = page.getByRole('checkbox', { name: /show prognosis/i });
     await expect(toggle).not.toBeChecked();
     await toggle.setChecked(true, { force: true });
     await expect(toggle).toBeChecked();
-    await page.getByRole('link', { name: /back to lab/i }).click();
+    await page.locator('main .section-link', { hasText: 'Lab' }).click();
     await expect(page).toHaveURL(/\/lab$/);
   });
 
@@ -48,7 +48,7 @@ test.describe('flagship lab projects', () => {
     await page.goto('/lab/gen-art-gallery');
 
     await expect(page).toHaveTitle(/Generative Art Gallery/i);
-    await expect(page.getByRole('link', { name: /back to lab/i })).toBeVisible();
+    await expect(page.locator('main .section-link', { hasText: 'Lab' })).toBeVisible();
     await expect(page.getByRole('button', { name: /next/i })).toBeVisible();
     await page.getByRole('button', { name: /next/i }).click();
     await expect(page.getByRole('heading', { name: 'Tetris Time' })).toBeVisible();

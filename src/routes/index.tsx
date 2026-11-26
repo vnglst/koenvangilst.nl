@@ -9,10 +9,8 @@ import { jsonLdPerson } from '#/lib/json-ld';
 import { createHomeOgImage } from '#/lib/og-image.mjs';
 
 const getRecentArticles = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getPosts } = await import('#/cms/posts-server');
-  return getPosts()
-    .filter((post) => post.tags.includes('article'))
-    .slice(0, 5);
+  const { getArticles } = await import('#/cms/posts-server');
+  return getArticles().slice(0, 5);
 });
 
 const SITE_URL = 'https://koenvangilst.nl';
@@ -58,12 +56,13 @@ function Home() {
       <Heading level={1} className="home-title">
         Koen van Gilst
       </Heading>
-      <Prose className="mb-4">
+      <Prose className="home-intro mb-4">
         <p>
           I'm a software engineer with a philosophy degree and a lifelong passion for creating software. I started
-          programming at an early age using GW-Basic and Turbo Pascal, and even though I've had many more interests, my
-          fascination for making computers do "cool stuff" has never left me. After many years as a web developer, I'm
-          now in a technical leadership role helping teams build AI solutions for Rabobank.
+          programming at an early age using <span className="whitespace-nowrap">GW-Basic</span> and Turbo Pascal, and
+          even though I've had many more interests, my fascination for making computers do "cool stuff" has never left
+          me. After many years as a web developer, I'm now in a technical leadership role helping teams build AI
+          solutions for Rabobank.
         </p>
       </Prose>
 

@@ -1,7 +1,9 @@
 .site-shell .prose {
+  /* Reading text everywhere: slightly larger, with more room between lines. */
+  font-size: 18px;
+  line-height: 1.65;
+  hanging-punctuation: first;
   color: var(--ink);
-  font-size: 17px;
-  line-height: var(--leading-body);
   --tw-prose-body: var(--ink);
   --tw-prose-headings: var(--ink);
   --tw-prose-bold: var(--ink);
@@ -23,12 +25,6 @@
 }
 .site-shell .prose a {
   color: var(--ink);
-  text-underline-offset: 4px;
-}
-.site-shell .prose blockquote {
-  color: var(--muted);
-  border-left: 1px solid var(--line);
-  font-weight: 400;
 }
 .site-shell .prose :is(strong, code) {
   color: var(--ink);
@@ -108,15 +104,9 @@
 .blog-article > .page-header {
   margin-bottom: 32px;
 }
-.site-shell-reading .site-main {
-  max-width: 40rem;
-}
 .article-cover {
   width: 100%;
   margin: 0 0 40px;
-}
-.site-shell .article-body > p {
-  margin-block: 0 24px;
 }
 .site-shell .article-body :is(h2, h3, h4, h5, h6) {
   font-weight: 600;
@@ -144,7 +134,7 @@
 }
 .article-body > :is(img, figure, video, iframe, .article-media, .code-block, .editorial-note, table),
 .article-body > p:has(> img:only-child) {
-  margin-block: 32px;
+  margin-block: 40px;
 }
 .article-body :is(img, video, iframe) {
   max-width: 100%;
@@ -156,43 +146,67 @@
   width: 100%;
 }
 .article-body figcaption {
-  max-width: 40rem;
   font-size: 13px;
-  line-height: 1.6;
   color: var(--muted);
 }
 .site-shell .article-body blockquote {
-  padding-left: 24px;
   font-style: normal;
 }
 .site-shell .article-body blockquote p::before,
 .site-shell .article-body blockquote p::after {
   content: none;
 }
-.site-shell .article-body .footnotes p {
-  margin-block: 8px;
-}
-.article-body .footnotes {
-  margin-top: 48px;
-  padding-top: 16px;
-}
 .article-waypoint {
   margin-block: 32px;
   font-size: 14px;
 }
 .article-footer {
-  display: grid;
-  gap: 16px;
+  /* Topics and the edit link share one quiet row, spaced like the topics themselves. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
   margin-top: 48px;
-  padding-top: 16px;
+  padding-top: 4px;
   border-top: 1px solid var(--line);
   font-size: 13px;
   color: var(--muted);
 }
+/* The edit link closes the row on the right, in the same muted tone and baseline as the topics. */
+.article-edit.plain-link {
+  /* Block padding keeps a 44px touch target without splitting the text into flex items. */
+  display: inline-block;
+  padding-block: 12px;
+  line-height: 20px;
+  margin-left: auto;
+  color: var(--muted);
+}
+.article-edit.plain-link:hover {
+  color: var(--accent);
+}
+/* Next article: a quiet pointer to keep reading. Hover comes from .post-link, as in the lists. */
+.article-next {
+  margin-top: 32px;
+}
+.article-next-link.plain-link {
+  display: grid;
+  gap: 4px;
+  padding-block: 4px;
+}
+.article-next-label {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.article-next-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
 @media (max-width: 767px) {
-  .site-shell .prose {
-    line-height: var(--leading-body);
-  }
   .article-cover {
     margin-bottom: 32px;
   }
@@ -226,4 +240,50 @@
 .article-tags .text-tag {
   font-size: 13px;
   line-height: 20px;
+}
+
+/* Homepage introduction: set like an article subtitle, but in the main text colour. */
+.site-shell .home-intro {
+  font-size: 19px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* Article typography: a calmer reading rhythm with quieter links and notes. */
+.blog-article .article-metadata {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-shell .article-body > p {
+  margin-block: 0 1.1em;
+}
+
+/* Quotes: indented and set in the main text colour, like a quoted passage. */
+.site-shell .prose blockquote {
+  margin-block: 32px;
+  padding-left: 20px;
+  border-left: 2px solid var(--line);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* One divider is enough: drop rules that would sit right below another one. */
+.blog-article:has(.footnotes:not(.has-sidenotes)) .article-footer {
+  border-top: 0;
+}
+@media (max-width: 1279px) {
+  .blog-article:has(.footnotes) .article-footer {
+    border-top: 0;
+  }
+}
+@media (max-width: 767px) {
+  /* The mobile top bar already draws a line above the page's first section label. */
+  .site-shell :is(.recent-heading, .project-list > .archive-year:first-child) {
+    border-top: 0;
+    padding-top: 0;
+  }
 }

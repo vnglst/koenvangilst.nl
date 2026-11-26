@@ -24,12 +24,12 @@ for (const width of [320, 1440]) {
       .locator('.talk-entry')
       .filter({ hasText: 'Frontmania' })
       .getByRole('link', { name: 'Read the recap' });
-    await expect(recap).toHaveAttribute('href', '/lab/two-uncomfortably-exciting-conference-talks');
+    await expect(recap).toHaveAttribute('href', '/articles/two-uncomfortably-exciting-conference-talks');
     const aiCircleRecap = page
       .locator('.talk-entry')
       .filter({ hasText: 'AI Circle' })
       .getByRole('link', { name: 'Read the recap' });
-    await expect(aiCircleRecap).toHaveAttribute('href', '/lab/ai-and-the-future-of-engineering');
+    await expect(aiCircleRecap).toHaveAttribute('href', '/articles/ai-and-the-future-of-engineering');
     await expect(page.getByRole('heading', { name: 'The Future of Software Engineering' })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     await recap.click();

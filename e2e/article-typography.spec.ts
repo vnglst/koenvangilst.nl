@@ -15,7 +15,7 @@ for (const width of [390, 1440]) {
     test.setTimeout(90_000);
     await page.setViewportSize({ width, height: 1000 });
     for (const slug of posts) {
-      await page.goto(`/lab/${slug}`);
+      await page.goto(`/articles/${slug}`);
       const body = page.locator('.article-body');
       await expect(body).not.toBeEmpty();
       for (const theme of ['dark', 'light']) {
@@ -37,15 +37,15 @@ for (const width of [390, 1440]) {
 }
 
 test('cover dimensions and caption spacing preserve the article rhythm', async ({ page }) => {
-  await page.goto('/lab/two-uncomfortably-exciting-conference-talks');
+  await page.goto('/articles/two-uncomfortably-exciting-conference-talks');
   const cover = page.locator('.article-cover');
   await expect(cover).toHaveAttribute('loading', 'eager');
   await expect(cover).toHaveAttribute('width', '2048');
   await expect(cover).toHaveAttribute('height', '1413');
   await expect(cover).toHaveCSS('margin-bottom', '40px');
   await expect(page.locator('.article-metadata time')).toHaveAttribute('datetime', '2026-10-10');
-  await page.goto('/lab/tetris-time');
+  await page.goto('/articles/tetris-time');
   const figure = page.locator('.article-body figure');
   await expect(figure.locator('figcaption')).toBeVisible();
-  await expect(figure).toHaveCSS('margin-bottom', '32px');
+  await expect(figure).toHaveCSS('margin-bottom', '40px');
 });

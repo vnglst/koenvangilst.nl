@@ -7,16 +7,17 @@ This is my personal website. Articles express my own views. Check each article's
 ## About
 
 - [Homepage](https://koenvangilst.nl/): Background and recent writing
-- [Blog & Projects](https://koenvangilst.nl/lab): Browse and search articles and side projects
+- [Articles](https://koenvangilst.nl/articles): Browse articles by topic
+- [Lab](https://koenvangilst.nl/lab): Side projects, apps, games and experiments
 - [Talks](https://koenvangilst.nl/talks): Conference talks and presentations
 - [Photography](https://koenvangilst.nl/photography): Photography portfolio with EXIF data
 
 ## Selected Writing
 
-- [AI and the Future of Engineering](https://koenvangilst.nl/lab/ai-and-the-future-of-engineering): Thoughts on AI and software engineering
-- [Software for One](https://koenvangilst.nl/lab/software-for-one): Building software for personal use
-- [Two Uncomfortably Exciting Conference Talks](https://koenvangilst.nl/lab/two-uncomfortably-exciting-conference-talks): Recent conference experiences
-- [Adding llms.txt (and a honeypot) to my website](https://koenvangilst.nl/lab/llms-txt-honeypot): The reporting experiment and its limitations
+- [AI and the Future of Engineering](https://koenvangilst.nl/articles/ai-and-the-future-of-engineering): Thoughts on AI and software engineering
+- [Software for One](https://koenvangilst.nl/articles/software-for-one): Building software for personal use
+- [Two Uncomfortably Exciting Conference Talks](https://koenvangilst.nl/articles/two-uncomfortably-exciting-conference-talks): Recent conference experiences
+- [Adding llms.txt (and a honeypot) to my website](https://koenvangilst.nl/articles/llms-txt-honeypot): The reporting experiment and its limitations
 
 ## Key Projects
 

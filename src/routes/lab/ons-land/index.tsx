@@ -1,4 +1,4 @@
-import { BackToLab } from '#/components/layout/BackToLab';
+import { SectionLink } from '#/components/layout/SectionLink';
 import { Suspense, lazy } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { ArticleMetadata } from '#/components/content/ArticleMetadata';
@@ -36,7 +36,7 @@ function OnsLandPage() {
   return (
     <Container layout="map">
       <article className="land-use-page">
-        <BackToLab />
+        <SectionLink href="/lab" label="Lab" />
         <Heading level={1}>Land Use in The Netherlands</Heading>
         <ArticleMetadata publishedAt="06-05-2024" readingTimeText="1 minute" />
         <Suspense fallback={<div className="land-use-chart" />}>

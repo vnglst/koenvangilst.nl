@@ -18,7 +18,7 @@ test.describe('layout shift on blog posts', () => {
     });
 
     // Use a stable, well-known post slug.
-    await page.goto('/lab/clean-code-is-a-phase');
+    await page.goto('/articles/clean-code-is-a-phase');
 
     await expect(page.getByRole('heading', { level: 1, name: /clean code/i })).toBeVisible();
     await expect(page.getByRole('navigation', { name: /main navigation/i })).toBeVisible();
@@ -35,8 +35,8 @@ test.describe('layout shift on blog posts', () => {
   });
 
   test('sidebar is stable during client-side navigation to a blog post', async ({ page }) => {
-    await page.goto('/lab');
-    await expect(page.getByRole('heading', { level: 1, name: /articles & side projects/i })).toBeVisible();
+    await page.goto('/articles');
+    await expect(page.getByRole('heading', { level: 1, name: 'Articles' })).toBeVisible();
 
     // Wait for hydration so TanStack Router is in control.
     await page.waitForFunction(() => typeof (window as any).__TSR_ROUTER__ !== 'undefined');
@@ -65,11 +65,11 @@ test.describe('layout shift on blog posts', () => {
 
     // Navigate to a specific post via JS click.
     await page
-      .locator('a[href="/lab/clean-code-is-a-phase"]')
+      .locator('a[href="/articles/clean-code-is-a-phase"]')
       .first()
       .evaluate((el: HTMLAnchorElement) => el.click());
 
-    await expect(page).toHaveURL(/\/lab\/clean-code-is-a-phase$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/\/articles\/clean-code-is-a-phase$/, { timeout: 10_000 });
     await expect(page.getByRole('heading', { level: 1, name: /clean code/i })).toBeVisible({
       timeout: 10_000
     });
@@ -100,7 +100,7 @@ test.describe('layout shift on blog posts', () => {
       observer.observe({ type: 'layout-shift', buffered: true });
     });
 
-    await page.goto('/lab/clean-code-is-a-phase');
+    await page.goto('/articles/clean-code-is-a-phase');
     await expect(page.getByRole('heading', { level: 1, name: /clean code/i })).toBeVisible();
 
     // Allow a short settle period.

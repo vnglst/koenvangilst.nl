@@ -46,6 +46,8 @@ function getChartTheme(element: HTMLElement) {
 
   return {
     darkMode: document.documentElement.classList.contains('dark'),
+    // Draw the final chart at once for visitors who ask for less motion.
+    animation: !matchMedia('(prefers-reduced-motion: reduce)').matches,
     backgroundColor: token('page'),
     color: [token('accent'), '#c05050', '#7eb00a', '#f5994e'],
     textStyle: { color: ink, fontFamily, fontSize: 13 },

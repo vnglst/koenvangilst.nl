@@ -13,6 +13,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { remarkWordCount } from './src/lib/remark-word-count.ts';
+import { rehypeSidenotes } from './src/lib/rehype-sidenotes.ts';
 
 /** Reuse environment-independent MDX output across the client and SSR builds.
  * The cache lives for one Vite invocation and keys on source as well as module
@@ -89,7 +90,8 @@ const config = defineConfig({
           rehypeSlug,
           rehypeCodeTitles,
           rehypePrismPlus,
-          [rehypeAutolinkHeadings, { properties: { className: ['anchor'] } }]
+          [rehypeAutolinkHeadings, { properties: { className: ['anchor'] } }],
+          rehypeSidenotes
         ]
       })
     ),

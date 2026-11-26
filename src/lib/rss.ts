@@ -13,6 +13,8 @@ type RSSOptions = {
 type RSSItem = {
   title: string;
   url: string;
+  /** Stable id for feed readers when `url` changes; defaults to `url`. */
+  guid?: string;
   date: Date | string;
   description?: string;
   enclosure?: { url: string };
@@ -41,7 +43,7 @@ export class RSS {
           ? `${newline}${indentStr}${indentStr}<enclosure url="${escapeXml(item.enclosure.url)}" />`
           : '';
 
-        return `${indentStr}<item>${newline}${indentStr}${indentStr}<title>${escapeXml(item.title)}</title>${newline}${indentStr}${indentStr}<link>${escapeXml(item.url)}</link>${newline}${indentStr}${indentStr}<pubDate>${pubDate}</pubDate>${item.description ? `${newline}${indentStr}${indentStr}<description>${escapeXml(item.description)}</description>` : ''}${enclosureXml}${newline}${indentStr}</item>`;
+        return `${indentStr}<item>${newline}${indentStr}${indentStr}<title>${escapeXml(item.title)}</title>${newline}${indentStr}${indentStr}<link>${escapeXml(item.url)}</link>${newline}${indentStr}${indentStr}<guid isPermaLink="false">${escapeXml(item.guid ?? item.url)}</guid>${newline}${indentStr}${indentStr}<pubDate>${pubDate}</pubDate>${item.description ? `${newline}${indentStr}${indentStr}<description>${escapeXml(item.description)}</description>` : ''}${enclosureXml}${newline}${indentStr}</item>`;
       })
       .join(newline);
 

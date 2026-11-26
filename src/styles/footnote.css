@@ -1,18 +1,100 @@
-.footnotes {
-  font-size: smaller;
-  color: var(--muted);
+/* Footnote markers: small raised numbers without brackets or underlines. */
+.prose [data-footnote-ref] {
+  margin-left: 0.1em;
+  padding-inline: 0.1em;
+  color: var(--accent);
+  font-size: 0.75em;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+.prose sup {
+  line-height: 0;
+}
+
+/* Notes section: labelled, smaller and set in a hanging list. */
+.site-shell .prose .footnotes {
+  margin-top: 56px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.prose .footnotes::before {
+  content: 'Notes';
+  display: block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-shell .prose .footnotes ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+.site-shell .prose .footnotes li {
+  margin-block: 0 8px;
+  padding-left: 0.25em;
+}
+.site-shell .prose .footnotes li::marker {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.site-shell .prose .footnotes p {
+  margin-block: 0;
+}
+.prose [data-footnote-backref] {
+  margin-left: 0.25em;
+  color: var(--muted);
+  text-decoration: none;
+}
+.prose [data-footnote-backref]:hover {
+  color: var(--accent);
 }
 
-.footnotes li > p {
-  margin-block: 0.25rem;
+/*
+ * Sidenotes: copies of the notes placed beside their references when the window leaves
+ * room to the right of the reading column. Narrower windows keep the notes section.
+ */
+.sidenote {
+  display: none;
 }
-
-/* Place `[` and `]` around footnote references. */
-[data-footnote-ref]::before {
-  content: '[';
-}
-
-[data-footnote-ref]::after {
-  content: ']';
+@media (min-width: 1280px) {
+  .site-shell .prose .sidenote {
+    display: block;
+    float: right;
+    clear: right;
+    position: relative;
+    --sidenote-width: 200px;
+    width: var(--sidenote-width);
+    /* Hang the note in the margin, 32px clear of the reading column. */
+    margin: 0.35em calc(-1 * (var(--sidenote-width) + 32px)) 16px 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    text-wrap: pretty;
+  }
+  .sidenote-number {
+    margin-right: 0.15em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .site-shell .prose .sidenote .content-link {
+    color: inherit;
+  }
+  /* The notes section stays available to screen readers but is not shown twice. */
+  .site-shell .prose .footnotes.has-sidenotes {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .prose:has(.footnotes.has-sidenotes) [data-footnote-ref] {
+    pointer-events: none;
+  }
 }

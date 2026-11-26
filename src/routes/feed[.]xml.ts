@@ -18,9 +18,12 @@ export const Route = createFileRoute('/feed.xml')({
         });
 
         posts.forEach((post) => {
+          const local = post.url?.startsWith('/') ? post.url : undefined;
           feed.item({
             title: post.title,
-            url: `https://koenvangilst.nl${post.url?.startsWith('/') ? post.url : `/lab/${post.slug}`}`,
+            url: `https://koenvangilst.nl${local ?? `/articles/${post.slug}`}`,
+            // Articles used to live under /lab; keep their old link as the id so readers don't see them as new.
+            guid: `https://koenvangilst.nl${local ?? `/lab/${post.slug}`}`,
             date: post.publishedAt,
             description: post.summary
           });

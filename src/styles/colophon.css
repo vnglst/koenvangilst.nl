@@ -219,10 +219,6 @@ h6 {
   display: grid;
 }
 .archive-year {
-  font:
-    600 15px/24px var(--font-sans),
-    sans-serif;
-  color: var(--muted);
   margin: 28px 0 8px;
 }
 .post-entry {
@@ -260,11 +256,22 @@ h6 {
   line-height: 24px;
 }
 .recent-heading {
-  font-size: 22px;
-  margin: 40px 0 16px;
+  margin: 48px 0 8px;
+}
+/* Small capital labels for section names, matching the article date line. */
+.site-shell :is(.recent-heading, .archive-year) {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font:
+    400 12px/1.6 var(--font-sans),
+    sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 .recent-list {
   display: grid;
+  margin-bottom: 16px;
 }
 .recent-entry {
   display: grid;
@@ -277,6 +284,7 @@ h6 {
   color: var(--muted);
   font-size: 13px;
   line-height: 20px;
+  font-variant-numeric: tabular-nums;
 }
 .recent-entry .recent-link {
   color: var(--ink);
@@ -445,12 +453,30 @@ h6 {
 }
 .content-link {
   color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
   font-weight: 400;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+  transition:
+    color 150ms,
+    text-decoration-color 150ms;
 }
 .content-link:hover {
   color: var(--accent);
+  text-decoration-color: currentColor;
+}
+/* A small arrow that sits beside lowercase letters instead of floating above the line. */
+.external-mark {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.1em;
+  vertical-align: 0.1em;
+  opacity: 0.6;
+}
+.content-link:hover .external-mark {
+  opacity: 1;
 }
 .editorial-note {
   border-left: 2px solid var(--line);
@@ -586,21 +612,19 @@ h6 {
   cursor: not-allowed;
   opacity: 0.5;
 }
-.page-back-link {
+.section-link.plain-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   min-height: 44px;
-  margin: -12px 0 16px;
+  margin: -12px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
-.page-back-link.plain-link:hover {
+.section-link.plain-link:hover {
+  color: var(--accent);
   text-decoration: none;
-}
-.page-back-link:hover .page-back-label {
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 .talk-list {
   list-style: none;
@@ -615,14 +639,19 @@ h6 {
   gap: 4px 20px;
   margin-bottom: 12px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 .talk-context time {
   margin-left: auto;
 }
 .talk-entry .editorial-heading {
   margin: 0 0 12px;
+}
+.talk-entry p + p {
+  margin-top: 8px;
 }
 .talk-entry p {
   color: var(--muted);
@@ -823,7 +852,9 @@ html:has(.photo-viewer) {
   margin: 20px 0;
 }
 .content-figure figcaption {
-  margin-top: 12px;
+  margin-top: 10px;
+  line-height: 1.5;
+  text-wrap: pretty;
 }
 .editorial-loading {
   display: grid;
@@ -1078,21 +1109,4 @@ html:has(.photo-viewer) {
   min-width: 640px;
   width: 100%;
   height: 320px;
-}
-
-.side-project-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 24px;
-}
-.side-project-list > li > a {
-  font-weight: 600;
-}
-.side-project-list > li > a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.side-project-list p {
-  margin-top: 6px;
 }

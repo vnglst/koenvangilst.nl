@@ -14,7 +14,7 @@ function Bleed({ children }: { children: React.ReactNode }) {
 function Waypoint({ href }: { href: string }) {
   return (
     <div className="article-waypoint">
-      <Icon icon="external-link" className="ml-1 inline h-4 w-4" />{' '}
+      <Icon icon="external-link" className="ml-1 inline h-3 w-3" />{' '}
       <Link href={href} className="ml-2" externalIndicator={false}>
         Commit on Github
       </Link>

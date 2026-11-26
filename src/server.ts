@@ -7,7 +7,8 @@ const handleRequest = createStartHandler(defaultStreamHandler);
 // also handled here so direct Node previews retain links in historical content.
 export default {
   fetch(request: Request) {
-    const redirect = getLegacyRedirect(new URL(request.url).pathname);
+    const { pathname, search } = new URL(request.url);
+    const redirect = getLegacyRedirect(pathname, search);
     if (redirect) return new Response(null, { status: redirect.status, headers: { Location: redirect.location } });
     return handleRequest(request);
   }

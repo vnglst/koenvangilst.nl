@@ -13,7 +13,8 @@ test.describe('complete local content audit', () => {
     const paths = new Set(
       [...(await sitemap.text()).matchAll(/<loc>(.*?)<\/loc>/g)]
         .map((match) => new URL(match[1]).pathname)
-        .filter((path) => !path.startsWith('/photography/'))
+        // Photo pages and plain files such as /llms.txt have their own tests.
+        .filter((path) => !path.startsWith('/photography/') && !/\.\w+$/.test(path))
     );
     for (const path of ['/lab/ons-land', '/lab/prognosis-2100', '/lab/gen-art-gallery']) paths.add(path);
     const errors: string[] = [];
@@ -25,10 +26,7 @@ test.describe('complete local content audit', () => {
       await expect(page.locator('main h1'), path).toHaveCount(1);
       await expect(page.getByRole('navigation', { name: 'Main navigation', includeHidden: true }), path).toHaveCount(1);
       // Wait for lazy MDX and its CSS before measuring the actual content.
-      if (
-        path.startsWith('/lab/') &&
-        !['/lab/ons-land', '/lab/prognosis-2100', '/lab/gen-art-gallery'].includes(path)
-      ) {
+      if (path.startsWith('/articles/')) {
         await expect(page.locator('.reading-column .prose'), path).not.toBeEmpty();
       }
       for (const href of await page
@@ -63,7 +61,7 @@ test.describe('complete local content audit', () => {
     const sitemap = await request.get('/sitemap.xml');
     const paths = [...(await sitemap.text()).matchAll(/<loc>(.*?)<\/loc>/g)]
       .map((match) => new URL(match[1]).pathname)
-      .filter((path) => path.startsWith('/lab/'));
+      .filter((path) => path.startsWith('/articles/'));
     const assets = new Set<string>();
     for (const path of paths) {
       await page.goto(path, { waitUntil: 'domcontentloaded' });

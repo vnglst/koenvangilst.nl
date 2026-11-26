@@ -32,7 +32,7 @@ ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser && \
-    apk add --no-cache ca-certificates=20261020-r0 su-exec=0.3-r0 nginx=1.30.7-r0 && \
+    apk add --no-cache ca-certificates=20261020-r0 su-exec=0.3-r0 nginx=1.30.8-r0 && \
     mkdir -p /run/nginx /var/cache/nginx/ssr && \
     chown -R nginx:nginx /var/cache/nginx
 

@@ -38,7 +38,7 @@ async function runTests() {
   return new Promise((resolve) => {
     const proc = spawn('npm', ['run', 'test:e2e', '--', '--workers=1'], {
       stdio: 'inherit',
-      env: { ...process.env, BASE_URL }
+      env: { ...process.env, BASE_URL, E2E_NGINX: '1' }
     });
     proc.on('close', (code) => resolve(code ?? 1));
   });

@@ -28,7 +28,7 @@ test('copied placeholders are rejected', async ({ request }) => {
 });
 
 test('the dated blog update and findings screenshot render', async ({ page }) => {
-  await page.goto('/lab/llms-txt-honeypot');
+  await page.goto('/articles/llms-txt-honeypot');
 
   await expect(page.getByRole('heading', { name: 'Update - November 12, 2026' })).toBeVisible();
   const screenshot = page.getByRole('img', { name: /Plausible findings showing mostly placeholders/ });

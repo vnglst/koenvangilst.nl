@@ -17,6 +17,8 @@ import { Route as LlmContextRouteImport } from './routes/llm-context'
 import { Route as OgRouteImport } from './routes/og'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TalksRouteImport } from './routes/talks'
+import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
+import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 import { Route as LabIndexRouteImport } from './routes/lab/index'
 import { Route as LabSlugRouteImport } from './routes/lab/$slug'
 import { Route as PhotographyIndexRouteImport } from './routes/photography/index'
@@ -64,6 +66,16 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const TalksRoute = TalksRouteImport.update({
   id: '/talks',
   path: '/talks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabIndexRoute = LabIndexRouteImport.update({
@@ -116,9 +128,11 @@ export interface FileRoutesByFullPath {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talks': typeof TalksRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
@@ -134,9 +148,11 @@ export interface FileRoutesByTo {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talks': typeof TalksRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
+  '/articles': typeof ArticlesIndexRoute
   '/lab': typeof LabIndexRoute
   '/photography': typeof PhotographyIndexRoute
   '/lab/gen-art-gallery': typeof LabGenArtGalleryIndexRoute
@@ -153,9 +169,11 @@ export interface FileRoutesById {
   '/og': typeof OgRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talks': typeof TalksRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/lab/$slug': typeof LabSlugRoute
   '/photography/$photo': typeof PhotographyPhotoRoute
   '/tag/$slug': typeof TagSlugRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/lab/': typeof LabIndexRoute
   '/photography/': typeof PhotographyIndexRoute
   '/lab/gen-art-gallery/': typeof LabGenArtGalleryIndexRoute
@@ -173,9 +191,11 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/talks'
+    | '/articles/$slug'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
+    | '/articles/'
     | '/lab/'
     | '/photography/'
     | '/lab/gen-art-gallery/'
@@ -191,9 +211,11 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/talks'
+    | '/articles/$slug'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
+    | '/articles'
     | '/lab'
     | '/photography'
     | '/lab/gen-art-gallery'
@@ -209,9 +231,11 @@ export interface FileRouteTypes {
     | '/og'
     | '/sitemap.xml'
     | '/talks'
+    | '/articles/$slug'
     | '/lab/$slug'
     | '/photography/$photo'
     | '/tag/$slug'
+    | '/articles/'
     | '/lab/'
     | '/photography/'
     | '/lab/gen-art-gallery/'
@@ -228,9 +252,11 @@ export interface RootRouteChildren {
   OgRoute: typeof OgRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TalksRoute: typeof TalksRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
   LabSlugRoute: typeof LabSlugRoute
   PhotographyPhotoRoute: typeof PhotographyPhotoRoute
   TagSlugRoute: typeof TagSlugRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
   LabIndexRoute: typeof LabIndexRoute
   PhotographyIndexRoute: typeof PhotographyIndexRoute
   LabGenArtGalleryIndexRoute: typeof LabGenArtGalleryIndexRoute
@@ -294,6 +320,20 @@ declare module '@tanstack/react-router' {
       path: '/talks'
       fullPath: '/talks'
       preLoaderRoute: typeof TalksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/': {
@@ -364,9 +404,11 @@ const rootRouteChildren: RootRouteChildren = {
   OgRoute: OgRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TalksRoute: TalksRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
   LabSlugRoute: LabSlugRoute,
   PhotographyPhotoRoute: PhotographyPhotoRoute,
   TagSlugRoute: TagSlugRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
   LabIndexRoute: LabIndexRoute,
   PhotographyIndexRoute: PhotographyIndexRoute,
   LabGenArtGalleryIndexRoute: LabGenArtGalleryIndexRoute,

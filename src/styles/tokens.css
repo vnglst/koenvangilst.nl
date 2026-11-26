@@ -1,7 +1,7 @@
 /* Familiar, refined: shared theme, type and spacing foundations. */
 :root {
   --control-target: 44px;
-  --reading-width: 640px;
+  --reading-width: 600px;
   --viewer-page: #090909;
   --viewer-ink: #f4f4f1;
   --viewer-muted: #c5c5be;

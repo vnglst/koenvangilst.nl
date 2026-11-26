@@ -11,7 +11,7 @@ type BlogPostLinkProps = {
   url?: string;
 };
 export function BlogPostLink({ title, summary, url, slug, publishedAt }: BlogPostLinkProps) {
-  const href = url || `/lab/${slug}`;
+  const href = url || `/articles/${slug}`;
   const content = (
     <article className="post-entry">
       <time dateTime={publishedAt}>{dateFormatter(publishedAt)}</time>

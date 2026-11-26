@@ -23,14 +23,15 @@ test.describe('site shell', () => {
 });
 
 for (const width of [390, 1440]) {
-  test(`main navigation connects About, Lab, Photography and Talks at ${width}px`, async ({ page }) => {
+  test(`main navigation connects About, Articles, Lab, Photography and Talks at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     await expect(page.locator('main')).toContainText("I'm a software engineer with a philosophy degree");
     await page.locator('.recent-entry a').first().click();
     await expect(page.locator('.article-body')).not.toBeEmpty();
     for (const [label, destination, heading] of [
-      ['Lab', '/lab', 'Articles & Side Projects'],
+      ['Articles', '/articles', 'Articles'],
+      ['Lab', '/lab', 'Lab'],
       ['Photography', '/photography', 'Photography'],
       ['Talks', '/talks', 'Talks'],
       ['About', '/', 'Koen van Gilst']
