@@ -26,15 +26,15 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 const variantClasses = {
   primary: 'editorial-button-primary',
   secondary: 'editorial-button-secondary',
-  ghost: 'editorial-button-ghost',
+  ghost: '',
   outline: 'editorial-button-outline',
   bare: ''
 };
 
 const sizeClasses = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-base',
-  lg: 'px-6 py-3 text-lg'
+  sm: 'px-3 py-1.5',
+  md: 'px-4 py-2',
+  lg: 'px-6 py-3'
 };
 
 export function Button(props: ButtonProps) {

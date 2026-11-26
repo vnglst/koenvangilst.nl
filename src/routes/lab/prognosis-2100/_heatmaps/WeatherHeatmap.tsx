@@ -36,7 +36,7 @@ const DATA_URL = 'https://raw.githubusercontent.com/vnglst/dutch-climate-data/ma
 export function WeatherHeatmap({ type }: { type: 'rain' | 'sunshine' | 'temperature' }) {
   const { data, error } = useQuery({ queryKey: [DATA_URL], queryFn: () => fetch(DATA_URL).then((r) => r.json()) });
 
-  if (error) return <div className="text-sm text-red-500">Failed to load heatmap data</div>;
+  if (error) return <div className="chart-error">Failed to load heatmap data</div>;
   if (!data) return <div className="aspect-[3/1] animate-pulse bg-[var(--surface)]" />;
 
   const parsed = Data.safeParse(data);

@@ -165,7 +165,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px 18px;
+  gap: 4px 16px;
   margin-top: 48px;
   padding-top: 4px;
   border-top: 1px solid var(--line);
@@ -210,12 +210,6 @@
   .article-cover {
     margin-bottom: 32px;
   }
-  .site-shell .article-body h2 {
-    font-size: 22px;
-  }
-  .site-shell .article-body h3 {
-    font-size: 20px;
-  }
 }
 
 .article-metadata {
@@ -232,7 +226,7 @@
 .article-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  gap: 4px 16px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -242,10 +236,8 @@
   line-height: 20px;
 }
 
-/* Homepage introduction: set like an article subtitle, but in the main text colour. */
+/* Homepage introduction: a full paragraph, so it uses the reading size rather than a lead size. */
 .site-shell .home-intro {
-  font-size: 19px;
-  line-height: 1.6;
   text-wrap: pretty;
 }
 

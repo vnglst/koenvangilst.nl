@@ -16,7 +16,7 @@ export function WeatherAnomaly({ type, look = 'blog' }: AnomalyProps) {
 
   const className = look === 'blog' ? 'my-4 aspect-[1/1]' : 'dashboard-chart';
 
-  if (error) return <div className="text-sm text-red-500">Failed to load weather data</div>;
+  if (error) return <div className="chart-error">Failed to load weather data</div>;
   if (!data) return <div className={`${className} animate-pulse bg-[var(--surface)]`} />;
 
   const parsed = Data.safeParse(data);

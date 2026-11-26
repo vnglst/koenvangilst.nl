@@ -15,6 +15,7 @@ import { Link } from '#/components/ui/Link';
 import { Range } from '#/components/forms/Range';
 import { Select } from '#/components/forms/Select';
 import { Toggle } from '#/components/forms/Toggle';
+import tokens from '#/styles/tokens.css?raw';
 import '#/styles/design-system.css';
 
 export const Route = createFileRoute('/design-system')({
@@ -27,15 +28,33 @@ export const Route = createFileRoute('/design-system')({
   component: DesignSystem
 });
 
+// Read swatch values from the theme itself so this reference cannot drift from tokens.css.
+const parseTokens = (block: string) =>
+  Object.fromEntries([...block.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(([, name, value]) => [name, value.trim()]));
+const [lightBlock, darkBlock] = tokens.split(':root.dark');
+const lightValues = parseTokens(lightBlock);
+const darkValues = { ...lightValues, ...parseTokens(darkBlock) };
+const tokenValue = (values: Record<string, string>, token: string) => {
+  const value = values[token];
+  return value.startsWith('var(--') ? values[value.slice(6, -1)] : value;
+};
+
 const palette = [
-  ['page', 'Canvas', '#020617', '#ffffff'],
-  ['ink', 'Text & headings', '#e5e7eb', '#111827'],
-  ['muted', 'Secondary text', '#9ca3af', '#4b5563'],
-  ['line', 'Hairline dividers', '#1e293b', '#d1d5db'],
-  ['surface', 'Code & controls', '#111827', '#eef2f6'],
-  ['accent', 'Selected navigation', '#42a5f5', '#1565c0'],
-  ['control-line', 'Interactive borders', '#1e293b', '#7c8898']
-];
+  ['page', 'Canvas'],
+  ['ink', 'Text & headings'],
+  ['muted', 'Secondary text'],
+  ['line', 'Hairline dividers'],
+  ['surface', 'Code & controls'],
+  ['accent', 'Selected navigation'],
+  ['control-line', 'Interactive borders'],
+  ['action', 'Primary buttons'],
+  ['error', 'Error messages']
+].map(([token, role]) => ({
+  token,
+  role,
+  dark: tokenValue(darkValues, token),
+  light: tokenValue(lightValues, token)
+}));
 
 function DesignSystem() {
   const [filter, setFilter] = useState('All articles');
@@ -70,7 +89,7 @@ function DesignSystem() {
             Navy, white, and the original blue. Use the theme control above to see every specimen in dark or light mode.
           </p>
           <div className="ds-palette">
-            {palette.map(([token, role, dark, light]) => (
+            {palette.map(({ token, role, dark, light }) => (
               <div className="ds-color" key={token}>
                 <span className="ds-swatch" style={{ background: `var(--${token})` }} />
                 <div>
@@ -99,12 +118,30 @@ function DesignSystem() {
             <p className="editorial-heading editorial-heading-1">Code Doesn’t Speak for Itself</p>
             <p className="ds-caption">Section title / IBM Plex Sans semibold / 22px</p>
             <p className="editorial-heading editorial-heading-2">Articles &amp; Experiments</p>
-            <p className="ds-caption">Body / IBM Plex Sans / 17px, 28px leading</p>
+            <p className="ds-caption">Reading text / IBM Plex Sans / 18px, 1.65 leading</p>
             <Prose as="div">
               <p>I'm a software engineer with a philosophy degree and a lifelong passion for creating software.</p>
             </Prose>
-            <p className="ds-caption">Navigation / 14px · Dates & captions / 13px</p>
           </div>
+          <dl className="ds-facts">
+            {[
+              ['Page title', '32px · 28px mobile'],
+              ['Section title', '22px'],
+              ['Subsection, archive title', '20px · 19px mobile'],
+              ['Minor heading', '19px'],
+              ['Reading text, introduction', '18px'],
+              ['Interface text, quotes', '17px'],
+              ['Summaries, notes', '16px'],
+              ['Navigation, controls', '14px · 16px mobile menu'],
+              ['Dates, captions, tags', '13px'],
+              ['Uppercase labels', '12px']
+            ].map(([role, size]) => (
+              <div key={role}>
+                <dt>{role}</dt>
+                <dd>{size}</dd>
+              </div>
+            ))}
+          </dl>
           <div className="blog-article ds-specimen">
             <Prose as="div" className="article-body">
               <h2>Writing with room for images</h2>
@@ -364,7 +401,7 @@ function DesignSystem() {
         <section id="behavior" className="ds-section">
           <Heading level={2}>Behavior &amp; care</Heading>
           <ul className="ds-rules">
-            <li>Dark is the default. Light is an explicit choice that persists between visits.</li>
+            <li>The theme follows the system setting. Choosing light or dark persists between visits.</li>
             <li>
               Keyboard focus uses a visible 2px outline, offset by 4px. Selected states also use semantic attributes.
             </li>

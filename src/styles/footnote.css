@@ -3,11 +3,12 @@
   margin-left: 0.1em;
   padding-inline: 0.1em;
   color: var(--accent);
-  font-size: 0.75em;
   font-variant-numeric: tabular-nums;
   text-decoration: none;
 }
+/* The one size reduction for markers; the link inside inherits it rather than shrinking again. */
 .prose sup {
+  font-size: 0.75em;
   line-height: 0;
 }
 
@@ -17,8 +18,8 @@
   padding-top: 20px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: var(--type-summary);
+  line-height: 24px;
 }
 .prose .footnotes::before {
   content: 'Notes';

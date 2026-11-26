@@ -67,7 +67,7 @@ export function NavigationProgress() {
       aria-label="Page loading"
       aria-valuemin={0}
       aria-valuemax={100}
-      className="bg-primary fixed top-0 left-0 z-[200] h-[3px]"
+      className="fixed top-0 left-0 z-[200] h-[3px] bg-[var(--accent)]"
       style={{ display: 'none', width: '0%' }}
     />
   );

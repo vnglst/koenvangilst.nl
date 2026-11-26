@@ -6,6 +6,7 @@
   --viewer-ink: #f4f4f1;
   --viewer-muted: #c5c5be;
   --viewer-overlay: rgb(9 9 9 / 78%);
+  --viewer-accent: #6ca8d6;
   --page: #ffffff;
   --ink: #111827;
   --muted: #4b5563;
@@ -15,6 +16,7 @@
   --control-line: #7c8898;
   --action: #1565c0;
   --action-hover: #0d47a1;
+  --error: #b91c1c;
   --font-display: 'Nimbus Sans Extended', var(--font-sans), sans-serif;
   --type-body: 17px;
   --leading-body: 28px;
@@ -31,5 +33,6 @@
   --control-line: var(--line);
   --action: #1976d2;
   --action-hover: #1565c0;
+  --error: #f87171;
   color-scheme: dark;
 }

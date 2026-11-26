@@ -178,7 +178,7 @@ h6 {
 .editorial-heading-4,
 .editorial-heading-5,
 .editorial-heading-6 {
-  font-size: 18px;
+  font-size: 19px;
   margin: 28px 0 12px;
 }
 .text-tag {
@@ -423,7 +423,7 @@ h6 {
 .art-stage {
   position: relative;
   aspect-ratio: 4/3;
-  background: #090909;
+  background: var(--viewer-page);
 }
 .art-viewport {
   display: block;
@@ -437,8 +437,8 @@ h6 {
   top: 12px;
   left: 12px;
   padding: 8px 12px;
-  color: #e5e7eb;
-  background: rgb(9 9 9 / 80%);
+  color: var(--viewer-ink);
+  background: var(--viewer-overlay);
   pointer-events: none;
   font-size: 13px;
 }
@@ -693,7 +693,7 @@ h6 {
   background: var(--ink);
 }
 .peer:focus-visible + .editorial-switch {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 .code-block {
@@ -712,9 +712,7 @@ h6 {
   min-height: 40px;
   width: 88px;
   padding: 0 8px;
-  font:
-    12px var(--font-sans),
-    sans-serif;
+  font-family: var(--font-sans), sans-serif;
   color: var(--muted);
   background: var(--surface);
   cursor: pointer;
@@ -803,7 +801,6 @@ html:has(.photo-viewer) {
 }
 .photo-caption time {
   color: var(--viewer-muted);
-  font-size: 12px;
 }
 .photo-viewer-controls {
   position: absolute;
@@ -824,7 +821,7 @@ html:has(.photo-viewer) {
   cursor: default;
 }
 .photo-viewer :focus-visible {
-  outline-color: #6ca8d6;
+  outline-color: var(--viewer-accent);
 }
 
 /* Library primitives: shared by the app and the live reference. */
@@ -863,7 +860,7 @@ html:has(.photo-viewer) {
   margin: 20px 0;
 }
 .content-figure figcaption {
-  margin-top: 10px;
+  margin-top: 12px;
   line-height: 1.5;
   text-wrap: pretty;
 }
@@ -993,7 +990,7 @@ html:has(.photo-viewer) {
     gap: 0 24px;
     width: 100%;
     margin: 8px 0 0;
-    font-size: 15px;
+    font-size: 16px;
   }
   .site-colophon nav.is-expanded {
     display: grid;
@@ -1004,7 +1001,7 @@ html:has(.photo-viewer) {
   .editorial-heading-1 {
     font-size: 28px;
     line-height: 1.22;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
   .post-entry {
     display: block;
@@ -1104,6 +1101,11 @@ html:has(.photo-viewer) {
   .prognosis-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+.chart-error {
+  color: var(--error);
+  font-size: 14px;
+  line-height: 20px;
 }
 .data-chart {
   background: var(--page);

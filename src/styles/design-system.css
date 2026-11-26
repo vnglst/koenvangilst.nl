@@ -113,7 +113,7 @@
 .ds-patterns dt {
   margin-bottom: 8px;
   font-family: var(--font-sans), sans-serif;
-  font-size: 23px;
+  font-size: 20px;
 }
 .ds-patterns dd {
   color: var(--muted);
