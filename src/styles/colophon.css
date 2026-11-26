@@ -307,6 +307,17 @@ h6 {
   font-size: 13px;
   line-height: 20px;
 }
+/* About page: keep the footer below the fold, so the first screen is only the introduction.
+   The content fills the screen below the shell's top margin (112px); the footer's own margin
+   then places it just past the bottom edge. */
+.site-shell-home .site-content {
+  min-height: calc(100svh - 112px);
+}
+@media (max-width: 767px) {
+  .site-shell-home .site-content {
+    min-height: 100svh;
+  }
+}
 .site-footer-links {
   display: flex;
   flex-wrap: wrap;

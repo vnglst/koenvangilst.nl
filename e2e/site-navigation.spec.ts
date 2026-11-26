@@ -46,3 +46,19 @@ for (const width of [390, 1440]) {
     }
   });
 }
+
+for (const viewport of [
+  { width: 390, height: 844 },
+  { width: 768, height: 1024 },
+  { width: 1440, height: 900 },
+  { width: 1280, height: 1400 }
+]) {
+  test(`the About page keeps its footer below the fold at ${viewport.width}x${viewport.height}`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const footer = page.locator('.site-footer');
+    expect((await footer.boundingBox())!.y).toBeGreaterThanOrEqual(viewport.height);
+    await footer.scrollIntoViewIfNeeded();
+    await expect(footer.getByRole('link', { name: 'github' })).toBeVisible();
+  });
+}
